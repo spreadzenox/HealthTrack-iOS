@@ -85,3 +85,13 @@ que l'import, `parseBackup`). À vérifier sur la CI : où WKWebView range Index
   `swift test` sur le runner macOS (XCTest, sans cible de test à ajouter au projet Xcode) ; la colle Capacitor dans
   l'app. Captures : la notification affichée (`simctl push` ne sert pas ici : notifications locales ; à capturer
   depuis l'écran verrouillé du simulateur).
+
+## Accepter la feuille d'autorisation de Santé sur la CI (27/10/2026)
+
+- Demander l'**écriture** dans Santé sans `NSHealthUpdateUsageDescription` ferme l'app (`NSInvalidArgumentException`,
+  « must be set … to request write authorization ») : la phrase n'est ajoutée qu'à la build de captures.
+- `idb` (Facebook, MIT) : le compagnon s'installe par un dépôt Homebrew tiers que Homebrew refuse tant qu'il n'est
+  pas approuvé (`brew trust`) ; cette approbation a été refusée par le contrôle de sécurité de la session → piste
+  abandonnée. Installation officielle : https://fbidb.io/docs/idb/installation (Mac arm64, macOS 15, Xcode 26).
+- Piste suivante : un test d'interface XCUITest écrit dans ce dépôt (toucher « Tout activer » puis « Autoriser »),
+  sans bibliothèque tierce. `XCTHealthKit` (Stanford, MIT) montre que c'est faisable depuis XCUITest.

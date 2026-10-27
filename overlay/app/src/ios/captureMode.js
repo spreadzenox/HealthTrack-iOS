@@ -118,26 +118,37 @@ export async function installCaptureMode() {
 }
 
 /**
- * Essai HealthKit (étape I4) : l'app iPhone peut-elle parler à HealthKit sans compte Apple (build simulateur signée
- * à la volée, entitlement embarqué) ? Disponibilité, état des autorisations, puis demande d'autorisation : sa
- * feuille est capturée (« healthkit-autorisation »). Résultats dans la console (`[healthkit] …`).
+ * Essai HealthKit (étape I4) : disponibilité, état des autorisations, puis demande d'autorisation (lecture, et
+ * écriture des pas pour l'aller-retour, phrase d'usage ajoutée à la seule build de captures) ; sa feuille est
+ * capturée (« healthkit-autorisation »). Si elle est acceptée (test d'interface, à venir), un nombre de pas est écrit
+ * dans Santé puis relu, preuve que la lecture marche de bout en bout. Résultats dans la console (`[healthkit] …`).
  */
 async function probeHealthKit({ signal, waitAck, wait, log }) {
   const say = (what, value) => log(`[healthkit] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  const failed = (what) => (e) => say(`${what} erreur`, e?.message || String(e))
   try {
     const { Health } = await import('@capgo/capacitor-health')
     const read = ['steps', 'sleep', 'heartRate', 'heartRateVariability']
-    await Health.isAvailable().then((r) => say('isAvailable', r), (e) => say('isAvailable erreur', e?.message || String(e)))
-    await Health.checkAuthorization({ read, write: [] }).then((r) => say('checkAuthorization', r), (e) => say('checkAuthorization erreur', e?.message || String(e)))
+    await Health.isAvailable().then((r) => say('isAvailable', r), failed('isAvailable'))
+    await Health.checkAuthorization({ read, write: [] }).then((r) => say('checkAuthorization', r), failed('checkAuthorization'))
     let answered = false
-    Health.requestAuthorization({ read, write: [] }).then(
+    Health.requestAuthorization({ read, write: ['steps'] }).then(
       (r) => { answered = true; say('requestAuthorization', r) },
-      (e) => { answered = true; say('requestAuthorization erreur', e?.message || String(e)) },
+      (e) => { answered = true; failed('requestAuthorization')(e) },
     )
     await wait(4000)
     if (!answered) say('requestAuthorization', 'feuille affichée, pas de réponse en 4 s')
     await signal('healthkit-autorisation')
     await waitAck('healthkit-autorisation')
+    for (let i = 0; i < 20 && !answered; i++) await wait(500)
+    if (!answered) return say('aller-retour', 'feuille toujours ouverte : pas d’écriture ni de relecture')
+    const endDate = new Date().toISOString()
+    const startDate = new Date(Date.now() - 3600 * 1000).toISOString()
+    await Health.saveSample({ dataType: 'steps', value: 1234, startDate, endDate }).then(() => say('saveSample', 'ok'), failed('saveSample'))
+    await Health.readSamples({ dataType: 'steps', startDate, endDate, limit: 10 }).then(
+      (r) => say('readSamples', { count: r?.samples?.length ?? 0, values: (r?.samples || []).map((x) => x.value) }),
+      failed('readSamples'),
+    )
   } catch (e) {
     say('échec', e?.message || String(e))
   }

@@ -72,6 +72,12 @@ jobs:
           npm install --no-save --no-audit --no-fund "@capacitor/ios@$CORE"
           VITE_APP_VERSION="$ANDROID_VERSION" npm run build
           npx -y -p "@capacitor/cli@$CORE" cap sync ios # CLI de la même version que le runtime (modèles de projet identiques)
+      - name: Écriture dans Santé pour la build de captures seulement (sonde I4)
+        working-directory: upstream/app/ios/App/App
+        # La sonde écrit des pas de démonstration puis les relit ; sans cette phrase, iOS ferme l'app. L'app livrée
+        # n'écrit rien dans Santé : la phrase n'est jamais dans ios/App/App/Info.plist du dépôt.
+        run: |
+          /usr/libexec/PlistBuddy -c "Add :NSHealthUpdateUsageDescription string 'Build de test : écrit des mesures de démonstration dans Santé.'" Info.plist
       - name: Build Xcode (simulateur, signature à la volée)
         working-directory: upstream/app/ios/App
         run: |
