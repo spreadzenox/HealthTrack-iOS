@@ -51,6 +51,10 @@ run_device() { # <udid> <nom>
     sleep 0.3
   done
   [ "$(cat "$data/Documents/capture/ready.txt" 2>/dev/null)" = fin ] || echo "::warning::$name : parcours des pages inachevé ($seen capture(s))"
+  # Données (I3) : la copie de secours s'écrit 10 s après le dernier chargement ; où WKWebView range IndexedDB
+  sleep 12
+  { echo "== Documents"; ls -la "$data/Documents"; echo "== Library/WebKit"; find "$data/Library/WebKit" -maxdepth 6 2>/dev/null | sed "s|$data/||" | head -60; } > "$OUT/$dev-donnees.txt" 2>&1
+  grep -q "Halcya-copie-de-secours.json" "$OUT/$dev-donnees.txt" && echo "copie de secours : présente" || echo "::warning::$name : pas de copie de secours dans Documents"
   xcrun simctl terminate "$udid" "$BUNDLE" 2>/dev/null || true
   sleep 1; kill "$pid" 2>/dev/null || true
   xcrun simctl shutdown "$udid" || true
