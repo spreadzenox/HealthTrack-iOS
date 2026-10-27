@@ -16,18 +16,28 @@ const SEEDED_KEY = 'halcya_ios_capture_seeded'
 export const ROUTES = ['/', '/journal', '/tendances', '/food', '/nutrition', '/data', '/connectors', '/recommendations',
   '/settings', '/plus', '/montre', '/premium', '/bien-etre', '/reintroduction']
 export const DARK_ROUTES = ['/', '/journal', '/recommendations']
+// Pages longues : écrans suivants, défilés d'environ 80 % de l'écran chacun (`-2`, `-3`…)
+export const SCROLLS = { '/connectors': 2, '/data': 1, '/settings': 1 }
 
 const pageName = (route) => route.replace(/^\//, '') || 'accueil'
 
-export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES) {
+export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS) {
+  const light = (route) => {
+    const base = { name: `demo-clair-${pageName(route)}`, route, data: 'demo', theme: 'light' }
+    const more = Array.from({ length: scrolls[route] || 0 }, (_, k) => ({ ...base, name: `${base.name}-${k + 2}`, scroll: k + 1 }))
+    return [base, ...more]
+  }
   return [
     { name: 'vierge-onboarding', route: null, data: null, theme: null },
-    ...routes.map((route) => ({ name: `demo-clair-${pageName(route)}`, route, data: 'demo', theme: 'light' })),
+    // 3e écran de l'onboarding (choix de la montre), avant que les données de démo ne le marquent fait
+    { name: 'vierge-onboarding-montre', route: '/bienvenue', data: null, theme: null, onboarding: { goal: 'energy', step: 2 } },
+    ...routes.flatMap(light),
     ...darkRoutes.map((route) => ({ name: `demo-sombre-${pageName(route)}`, route, data: 'demo', theme: 'dark' })),
   ]
 }
 
 async function prepare(step, { storage, demoEntries, latestChangelogId, localStorage }) {
+  if (step.onboarding) localStorage.setItem('healthtrack_onboarding', JSON.stringify(step.onboarding))
   if (step.data === 'demo' && !localStorage.getItem(SEEDED_KEY)) {
     await storage.upsertEntries(demoEntries())
     localStorage.setItem(SEEDED_KEY, '1')
@@ -40,11 +50,15 @@ async function prepare(step, { storage, demoEntries, latestChangelogId, localSto
 
 /** Une étape par chargement de page : annonce la page courante, puis passe à la suivante. */
 export async function runCaptureStep(plan, deps, { settleMs = 5000 } = {}) {
-  const { localStorage, go, log, wait, signal, waitAck } = deps
+  const { localStorage, go, log, wait, signal, waitAck, scroll } = deps
   const index = Number(localStorage.getItem(STEP_KEY) ?? 0)
   const step = plan[index]
   if (!step) return
   await wait(settleMs)
+  if (step.scroll) {
+    scroll(step.scroll)
+    await wait(800)
+  }
   log(`[capture] page ${step.name}`)
   await signal(step.name)
   if (!(await waitAck(step.name))) log(`[capture] pas d'accusé pour ${step.name}, on continue`)
@@ -78,6 +92,7 @@ export async function installCaptureMode() {
       latestChangelogId: changelog.ALL_CHANGELOG[0]?.id ?? null,
       localStorage: window.localStorage,
       go: (path) => window.location.assign(path),
+      scroll: (screens) => window.scrollTo({ top: screens * Math.round(window.innerHeight * 0.8), behavior: 'instant' }),
       log: (message) => console.log(message),
       wait: sleep,
       signal: (name) => Filesystem.writeFile({ ...file, path: READY, data: name, recursive: true }),
