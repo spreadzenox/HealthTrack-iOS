@@ -1,8 +1,8 @@
 diff --git a/app/src/connectors/HealthConnectConnector.js b/app/src/connectors/HealthConnectConnector.js
-index 61dc74d..1630d71 100644
+index 61dc74d..1122c0a 100644
 --- a/app/src/connectors/HealthConnectConnector.js
 +++ b/app/src/connectors/HealthConnectConnector.js
-@@ -54,6 +54,13 @@ const EXTRA_READ_TYPES = [
+@@ -54,6 +54,14 @@ const EXTRA_READ_TYPES = [
  
  export const READ_TYPES = [...CORE_READ_TYPES, ...EXTRA_READ_TYPES]
  
@@ -11,12 +11,13 @@ index 61dc74d..1630d71 100644
 +// pas encore séparées dans la norme personnelle → ni demandée ni lue sur iPhone.
 +const IOS_ASKED_KEY = 'halcya_ios_healthkit_asked'
 +const isIos = () => getPlatformSync() === 'ios'
-+const readTypes = () => (isIos() ? READ_TYPES.filter((t) => t !== 'heartRateVariability') : READ_TYPES)
++// VFC : SDNN sur iOS (HealthKit) contre RMSSD sur Android : lue, mais rangée à part (heartRateVariabilitySdnn)
++const HRV_SUBTYPE = () => (isIos() ? 'heartRateVariabilitySdnn' : 'heartRateVariability')
 +
  /** Libellés français des types Health Connect (écran Connecteurs). */
  export const READ_TYPE_LABELS = {
    steps: 'pas',
-@@ -345,12 +352,13 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -345,12 +353,13 @@ export class HealthConnectConnector extends BaseConnector {
    constructor() {
      super({
        id: 'health_connect',
@@ -34,7 +35,7 @@ index 61dc74d..1630d71 100644
        dataTypes: ['steps', 'sleep', 'heart_rate', 'activity', 'calories', 'respiratory_rate', 'body_temperature', 'blood_pressure', 'blood_glucose', 'weight', 'body_composition'],
      })
      /** Tout ce que la carte peut importer, replié sous « Ce qui est importé ». */
-@@ -399,6 +407,11 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -399,6 +408,11 @@ export class HealthConnectConnector extends BaseConnector {
      // Using sync here avoids any risk of deadlocking the WebView bridge thread.
      const platform = getPlatformSync()
      debugInfo(TAG, `Plateforme détectée (sync) : ${platform}`)
@@ -46,7 +47,7 @@ index 61dc74d..1630d71 100644
  
      // Collect device info early so it is logged even if something below hangs
      const deviceInfo = await collectDeviceInfo()
-@@ -678,6 +691,10 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -678,6 +692,10 @@ export class HealthConnectConnector extends BaseConnector {
        return 'not_asked'
      }
      const platform = getPlatformSync()
@@ -57,12 +58,10 @@ index 61dc74d..1630d71 100644
      const hasCheckAuth = typeof Health.checkAuthorization === 'function'
      debugInfo(TAG, 'Vérification méthode Health.checkAuthorization', { hasCheckAuth, platform })
      if (!hasCheckAuth) {
-@@ -726,7 +743,11 @@ export class HealthConnectConnector extends BaseConnector {
-     }
+@@ -727,6 +745,10 @@ export class HealthConnectConnector extends BaseConnector {
      try {
        debugInfo(TAG, 'Appel Health.requestAuthorization()…')
--      await Health.requestAuthorization({ read: READ_TYPES, write: [] })
-+      await Health.requestAuthorization({ read: readTypes(), write: [] })
+       await Health.requestAuthorization({ read: READ_TYPES, write: [] })
 +      if (isIos()) {
 +        localStorage.setItem(IOS_ASKED_KEY, '1')
 +        return 'granted'
@@ -70,15 +69,15 @@ index 61dc74d..1630d71 100644
        debugInfo(TAG, 'requestAuthorization() terminé, vérification du résultat…')
        return await this.checkPermissions()
      } catch (e) {
-@@ -778,7 +799,7 @@ export class HealthConnectConnector extends BaseConnector {
-     } catch (e) {
-       debugWarn(TAG, `checkAuthorization avant synchro échouée (non bloquant) : ${e?.message || e}`)
-     }
--    const canRead = (dataType) => !authorizedTypes || authorizedTypes.has(dataType)
-+    const canRead = (dataType) => !(isIos() && dataType === 'heartRateVariability') && (!authorizedTypes || authorizedTypes.has(dataType))
- 
-     const order = [...SYNC_ORDER, ...POINT_READERS.map((r) => r.dataType)]
-     let done = 0
+@@ -1008,7 +1030,7 @@ export class HealthConnectConnector extends BaseConnector {
+         payload: {
+           value: s.value,
+           unit: s.unit,
+-          subtype: 'heartRateVariability',
++          subtype: HRV_SUBTYPE(),
+           platformId: s.platformId,
+           sourceName: s.sourceName,
+           connector: 'health_connect',
 diff --git a/app/src/pages/Connectors.jsx b/app/src/pages/Connectors.jsx
 index defa964..28b7e58 100644
 --- a/app/src/pages/Connectors.jsx

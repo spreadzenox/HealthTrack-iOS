@@ -142,19 +142,20 @@ export async function installCaptureMode() {
  * Essai HealthKit (étape I4) : disponibilité, état des autorisations, puis demande d'autorisation (lecture, et
  * écriture des pas pour l'aller-retour, phrase d'usage ajoutée à la seule build de captures) ; sa feuille est
  * capturée (« healthkit-autorisation »), puis le test d'interface du dépôt (uitests/) l'accepte avant que le script
- * réponde : jusqu'à 3 min d'attente. Acceptée, un nombre de pas est écrit dans Santé, relu, puis relu par le
- * connecteur de l'app : preuve que l'import marche de bout en bout. Résultats dans la console (`[healthkit] …`).
+ * réponde : jusqu'à 3 min d'attente. Acceptée, des pas et une VFC sont écrits dans Santé, relus, puis relus par le
+ * connecteur de l'app (VFC rangée en SDNN) : preuve que l'import marche de bout en bout. Résultats dans la console
+ * (`[healthkit] …`).
  */
 export async function probeHealthKit({ signal, waitAck, wait, log, health, connector }) {
   const say = (what, value) => log(`[healthkit] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   const failed = (what) => (e) => say(`${what} erreur`, e?.message || String(e))
   try {
     const Health = health ?? (await import('@capgo/capacitor-health')).Health
-    const read = ['steps', 'sleep', 'heartRate'] // pas la VFC : SDNN sur iOS, comme le connecteur
+    const read = ['steps', 'sleep', 'heartRate', 'heartRateVariability'] // comme le connecteur (VFC lue en SDNN)
     await Health.isAvailable().then((r) => say('isAvailable', r), failed('isAvailable'))
     await Health.checkAuthorization({ read, write: [] }).then((r) => say('checkAuthorization', r), failed('checkAuthorization'))
     let answered = false
-    Health.requestAuthorization({ read, write: ['steps'] }).then(
+    Health.requestAuthorization({ read, write: ['steps', 'heartRateVariability'] }).then(
       (r) => { answered = true; say('requestAuthorization', r) },
       (e) => { answered = true; failed('requestAuthorization')(e) },
     )
@@ -167,6 +168,8 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health, conne
     const endDate = new Date().toISOString()
     const startDate = new Date(Date.now() - 3600 * 1000).toISOString()
     await Health.saveSample({ dataType: 'steps', value: 1234, startDate, endDate }).then(() => say('saveSample', 'ok'), failed('saveSample'))
+    // VFC de démonstration : HealthKit la donne en SDNN, que le connecteur doit ranger à part de la RMSSD d'Android
+    await Health.saveSample({ dataType: 'heartRateVariability', value: 48, startDate, endDate }).then(() => say('saveSample VFC', 'ok'), failed('saveSample VFC'))
     await Health.readSamples({ dataType: 'steps', startDate, endDate, limit: 10 }).then(
       (r) => say('readSamples', { count: r?.samples?.length ?? 0, values: (r?.samples || []).map((x) => x.value) }),
       failed('readSamples'),
@@ -179,6 +182,9 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health, conne
         synced: r?.synced,
         errors: r?.errors,
         pas: imported.filter((e) => e.type === 'steps').map((e) => ({ value: e.payload?.value, source: e.payload?.sourceName })),
+        vfc: imported
+          .filter((e) => e.type === 'heart_rate' && /^heartRateVariability/.test(e.payload?.subtype || ''))
+          .map((e) => ({ value: e.payload?.value, subtype: e.payload?.subtype })),
       }),
       failed('connecteur'),
     )

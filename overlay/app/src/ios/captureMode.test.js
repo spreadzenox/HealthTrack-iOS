@@ -202,8 +202,12 @@ describe('sonde HealthKit (I4)', () => {
     const [name, tries] = waitAck.mock.calls[0]
     expect(name).toBe('healthkit-autorisation')
     expect(tries * 300).toBeGreaterThanOrEqual(120_000)
-    expect(h.api.requestAuthorization).toHaveBeenCalledWith({ read: expect.not.arrayContaining(['heartRateVariability']), write: ['steps'] })
+    expect(h.api.requestAuthorization).toHaveBeenCalledWith({
+      read: expect.arrayContaining(['steps', 'heartRateVariability']),
+      write: ['steps', 'heartRateVariability'],
+    })
     expect(h.api.saveSample).toHaveBeenCalledWith(expect.objectContaining({ dataType: 'steps', value: 1234 }))
+    expect(h.api.saveSample).toHaveBeenCalledWith(expect.objectContaining({ dataType: 'heartRateVariability', value: 48 }))
     expect(logs.join('\n')).toMatch(/\[healthkit\] readSamples \{"count":1,"values":\[1234\]\}/)
   })
 
@@ -211,7 +215,12 @@ describe('sonde HealthKit (I4)', () => {
     const h = health({ acceptOnAck: true })
     const logs = []
     const sync = vi.fn(async ({ writer }) => {
-      await writer([{ type: 'steps', source: 'health_connect', payload: { value: 1234, sourceName: 'Halcya' } }, { type: 'sleep', payload: {} }])
+      await writer([
+        { type: 'steps', source: 'health_connect', payload: { value: 1234, sourceName: 'Halcya' } },
+        { type: 'sleep', payload: {} },
+        { type: 'heart_rate', payload: { value: 48, subtype: 'heartRateVariabilitySdnn' } },
+        { type: 'heart_rate', payload: { bpm: 70, subtype: 'heartRate' } },
+      ])
       return { synced: 2, skipped: 0, errors: [] }
     })
     const waitAck = async () => {
@@ -221,7 +230,9 @@ describe('sonde HealthKit (I4)', () => {
     await probeHealthKit({ signal: async () => {}, waitAck, wait: async () => {}, log: (m) => logs.push(m), health: h.api, connector: { sync } })
     const { since, until } = sync.mock.calls[0][0]
     expect(until.getTime() - since.getTime()).toBeGreaterThanOrEqual(3600 * 1000)
-    expect(logs.join('\n')).toMatch(/\[healthkit\] connecteur \{"synced":2,"errors":\[\],"pas":\[\{"value":1234,"source":"Halcya"\}\]\}/)
+    expect(logs.join('\n')).toContain(
+      '[healthkit] connecteur {"synced":2,"errors":[],"pas":[{"value":1234,"source":"Halcya"}],"vfc":[{"value":48,"subtype":"heartRateVariabilitySdnn"}]}',
+    )
   })
 
   it('feuille jamais acceptée : le dit et n’écrit rien', async () => {
