@@ -14,6 +14,21 @@
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 23 % (11 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
+**👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
+- **A1** — quand il le décide : adhérer à l'Apple Developer Program (payant, à l'année ; voir §8). C'est ce qui
+  débloque l'installation sur un vrai iPhone, TestFlight et l'App Store.
+- (facultatif) Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS).
+
+**Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
+(taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
+
+**Ce qui ne pourra pas marcher pareil sur iPhone** (à confirmer, détail dans `PARITE.md`)
+- Lecture du visage **au déverrouillage** : iOS ne laisse pas une app utiliser la caméra en arrière-plan → lecture à
+  l'ouverture de l'app (comme la version Google Play actuelle), raccourci ou widget à étudier.
+- **Temps d'écran** du téléphone : Apple ne laisse pas une app lire ces chiffres → à l'étude (I8).
+- **Montre Huawei en direct** : sur iPhone, pas de Bluetooth « classique » pour les apps → passer par l'app Santé
+  d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
+
 **Ce qui a changé cette semaine**
 - **27/10 17:20 — une copie de secours de vos données sur iPhone** (PR #6) : sur iPhone, le système peut effacer
   la base d'une app quand le téléphone manque de place. Halcya y tiendra donc à jour une copie de toutes vos
@@ -35,11 +50,6 @@
   le dépôt Android sans jamais y écrire. Rien ne change pour la version Google Play ni pour sa routine.
 - **26–27/10 — mise en place** avec le propriétaire : charte, liste de parité de départ, backlog I0 → I9, script qui
   récupère le code Android au commit suivi.
-
-**👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **A1** — quand il le décide : adhérer à l'Apple Developer Program (payant, à l'année ; voir §8). C'est ce qui
-  débloque l'installation sur un vrai iPhone, TestFlight et l'App Store.
-- (facultatif) Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS).
 
 **Téléphone de test** (A0, réponse du propriétaire le 26/10) : l'**iPhone 12** de sa compagne, première testeuse
 via TestFlight.
