@@ -12,7 +12,7 @@
 |---|---|---|
 | Dernière version | v522 en test interne (27/10 15:48) | v522 sur iPhone simulé (27/10, PR #3) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | audit en cours (étape I2, PR #3) |
+| Parité des fonctions | référence | 20 % (9 fonctions vérifiées sur 45 faisables ; audit I2 en cours) |
 
 **Ce qui a changé cette semaine**
 - **27/10 16:05 — toutes les pages photographiées sur iPhone simulé** : à chaque changement, 18 captures par iPhone

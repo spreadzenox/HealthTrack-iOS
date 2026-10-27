@@ -8,8 +8,10 @@
 Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) · 🟡 partiel ou pas encore vérifié ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
-**Parité** : _à calculer en I2_ = ✅ / (toutes les lignes sauf ⛔ et —).
-**Dernière version Android suivie** : v521 (commit `27124b0`, 27/10/2026), voir `upstream.json`.
+**Parité** : **20 %** au 27/10 16:50 (9 ✅ sur 45 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
+des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
+vérifié sur iOS.
+**Dernière version Android suivie** : v522 (commit `efcdb21`, 27/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -28,16 +30,16 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 | Écran | État | Notes |
 |---|---|---|
 | Onboarding (objectif, sources, autorisations, paywall passable) | 🟡 | autorisations iOS : HealthKit, caméra, notifications, Bluetooth |
-| Accueil « Aujourd'hui » (bien-être estimé, tuiles, ventre, boutons, pistes) | 🟡 | |
-| Journal (derniers jours, repas, galerie, tendances) | 🟡 | |
+| Accueil « Aujourd'hui » (bien-être estimé, tuiles, ventre, boutons, pistes) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, clair et sombre), gestes à confirmer sur l'iPhone 12 |
+| Journal (derniers jours, repas, galerie, tendances) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, clair et sombre), gestes à confirmer sur l'iPhone 12 |
 | Photo du repas + analyse IA (relais) | 🟡 | caméra / photothèque dans WKWebView, divulgation |
-| Nutrition (Ciqual) | 🟡 | |
-| Analyses (pistes repas → ventre, délais) | 🟡 | |
-| Réintroduction FODMAP guidée | 🟡 | rappel de portion : voir §3 |
+| Nutrition (Ciqual) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, en clair), gestes à confirmer sur l'iPhone 12 |
+| Analyses (pistes repas → ventre, délais) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, clair et sombre), gestes à confirmer sur l'iPhone 12 |
+| Réintroduction FODMAP guidée | ✅ | rappel de portion : voir §3 ; 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, en clair), gestes à confirmer sur l'iPhone 12 |
 | Rapport PDF médecin | 🟡 | partage / enregistrement du fichier sur iOS : `saveAndShareReport` n'écrit dans Documents + feuille de partage que sur Android ; sur iOS il tente un téléchargement web (à vérifier, sinon correctif I2) |
 | Sources (détection automatique) | 🟡 | sources iOS différentes : Santé (HealthKit) au lieu de Health Connect ; 27/10 : `canOpenURL` appelé avec des noms de paquets Android, refusés par iOS ; carte « Lecture du visage » en erreur (plugin absent) → I2 |
 | Données (export / import JSON et CSV) | 🟡 | partage de fichier iOS (`@capacitor/filesystem` + feuille de partage) ; 27/10 : hors Android, l'export passe par un lien de téléchargement que WKWebView ignore → I2/I3 ; texte « sauvegarde Google » retiré (PR #3) |
-| Paramètres, mode diagnostic caché (7 touches) | 🟡 | |
+| Paramètres, mode diagnostic caché (7 touches) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, en clair), gestes à confirmer sur l'iPhone 12 |
 | Premium / paywall | ❌ | prix lus dans StoreKit, jamais codés en dur ; 27/10 : affiche « L'abonnement se prend depuis la version Google Play de l'app » (texte de la sideload) → PR #3 : « Sur iPhone, l'abonnement par l'App Store arrive bientôt » |
 | Nouveautés | 🟡 | `variants: ["appstore"]`, historique iOS depuis le lancement iOS |
 | Confidentialité, conditions | 🟡 | textes à rendre exacts pour iOS (iCloud au lieu de la sauvegarde Android, HealthKit) |
