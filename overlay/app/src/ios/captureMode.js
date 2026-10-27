@@ -65,6 +65,7 @@ export async function runCaptureStep(plan, deps, { settleMs = 5000 } = {}) {
   const next = plan[index + 1]
   localStorage.setItem(STEP_KEY, String(index + 1))
   if (!next) {
+    if (deps.probe) await deps.probe({ signal, waitAck, wait, log })
     log('[capture] fin')
     await signal('fin')
     return
@@ -96,6 +97,7 @@ export async function installCaptureMode() {
       log: (message) => console.log(message),
       wait: sleep,
       signal: (name) => Filesystem.writeFile({ ...file, path: READY, data: name, recursive: true }),
+      probe: probeHealthKit,
       // Jusqu'à 30 s : le temps que le script capture l'écran et réponde
       waitAck: async (name) => {
         for (let i = 0; i < 100; i++) {
@@ -112,5 +114,31 @@ export async function installCaptureMode() {
     })
   } catch (e) {
     console.error('[capture] échec :', e)
+  }
+}
+
+/**
+ * Essai HealthKit (étape I4) : l'app iPhone peut-elle parler à HealthKit sans compte Apple (build simulateur signée
+ * à la volée, entitlement embarqué) ? Disponibilité, état des autorisations, puis demande d'autorisation : sa
+ * feuille est capturée (« healthkit-autorisation »). Résultats dans la console (`[healthkit] …`).
+ */
+async function probeHealthKit({ signal, waitAck, wait, log }) {
+  const say = (what, value) => log(`[healthkit] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  try {
+    const { Health } = await import('@capgo/capacitor-health')
+    const read = ['steps', 'sleep', 'heartRate', 'heartRateVariability']
+    await Health.isAvailable().then((r) => say('isAvailable', r), (e) => say('isAvailable erreur', e?.message || String(e)))
+    await Health.checkAuthorization({ read, write: [] }).then((r) => say('checkAuthorization', r), (e) => say('checkAuthorization erreur', e?.message || String(e)))
+    let answered = false
+    Health.requestAuthorization({ read, write: [] }).then(
+      (r) => { answered = true; say('requestAuthorization', r) },
+      (e) => { answered = true; say('requestAuthorization erreur', e?.message || String(e)) },
+    )
+    await wait(4000)
+    if (!answered) say('requestAuthorization', 'feuille affichée, pas de réponse en 4 s')
+    await signal('healthkit-autorisation')
+    await waitAck('healthkit-autorisation')
+  } catch (e) {
+    say('échec', e?.message || String(e))
   }
 }

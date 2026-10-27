@@ -116,4 +116,21 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
     await runCaptureStep(plan, d)
     expect(order.slice(3)).toEqual(['signal demo-clair-accueil', 'ack demo-clair-accueil', 'signal fin'])
   })
+
+  it('après la dernière page : la sonde HealthKit passe avant « fin », avec les mêmes signal et accusé', async () => {
+    const plan = buildPlan(['/'], [], {})
+    const local = memoryStorage({ [STEP_KEY]: '2' })
+    const order = []
+    const d = deps(local, {
+      signal: vi.fn(async (name) => order.push(`signal ${name}`)),
+      probe: vi.fn(async ({ signal, waitAck }) => {
+        await signal('healthkit-autorisation')
+        await waitAck('healthkit-autorisation')
+      }),
+    })
+    await runCaptureStep(plan, d)
+    expect(d.probe).toHaveBeenCalledTimes(1)
+    expect(order).toEqual(['signal demo-clair-accueil', 'signal healthkit-autorisation', 'signal fin'])
+  })
 })
+
