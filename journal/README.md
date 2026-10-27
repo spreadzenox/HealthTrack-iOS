@@ -10,11 +10,14 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v522 en test interne (27/10 15:48) | v522 (build 522.26) sur iPhone simulé (27/10 17:02) |
+| Dernière version | v524 en test interne (27/10 16:53) | v524 sur iPhone simulé (27/10, PR #5) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 19 % (9 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **Ce qui a changé cette semaine**
+- **27/10 17:20 — une copie de secours de vos données sur iPhone** (PR #6) : sur iPhone, le système peut effacer
+  la base d'une app quand le téléphone manque de place. Halcya y tiendra donc à jour une copie de toutes vos
+  données dans l'app Fichiers (dossier Halcya), restaurable en un geste par « Importer ».
 - **27/10 17:05 — sur iPhone, plus rien ne renvoie vers Android** (PR #4) : les montres passent
   par l'app Santé d'Apple (lecture dans une prochaine version), la sauvegarde et le rapport PDF s'envoient par la
   feuille de partage et se retrouvent dans l'app Fichiers, et les réglages qui dépendent d'Android (rappels du
@@ -50,6 +53,7 @@ via TestFlight.
 | 27/10 14:05 | I1 captures | parcours de 18 pages sans erreur JavaScript, mais captures décalées : PR laissée ouverte, synchronisation à fiabiliser | #2 (ouverte) |
 | 27/10 15:40 | I1 captures (suite) | synchronisation par fichier + accusé : les 36 captures correspondent à leur page ; projet iOS prioritaire (runs pleins) ; I2 : 7 replis iPhone et phrases d'usage | #2, #3 (ouverte) |
 | 27/10 16:22 | I2 Santé | suivi d'Android v522 ; PR #3 mergée ; sur iPhone, plus de Health Connect ni de montre Huawei en direct, sauvegarde et PDF par la feuille de partage, 8 services à plugin absent repliés ; parité 19 % | #3, #4 |
+| 27/10 17:10 | I2 captures, I3 copie de secours | suivi d'Android v524 ; captures des pages longues et du choix de la montre ; IndexedDB non durable sur iOS → copie de secours automatique | #5, #6 |
 
 ---
 
