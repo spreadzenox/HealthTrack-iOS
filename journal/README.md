@@ -15,7 +15,8 @@
 | Parité des fonctions | référence | 23 % (11 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **A1** — quand il le décide : adhérer à l'Apple Developer Program (payant, à l'année ; voir §8). C'est ce qui
+- **A1** — quand il le décide : adhérer à l'Apple Developer Program (payant, à l'année ; marche à suivre en 5 étapes
+  au §8, « A1 pas à pas »). C'est ce qui
   débloque l'installation sur un vrai iPhone, TestFlight et l'App Store.
 - (à transmettre à la routine Android si vous êtes d'accord) Avant de rendre bloquante la vérification Play
   Integrity du serveur d'analyse IA, laisser passer l'app iPhone (détail dans `DEMANDES.md`).
@@ -214,12 +215,30 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 | | Action | Débloque | État |
 |---|---|---|---|
 | A0 | Téléphone de test | tests sur un vrai téléphone | ✅ 26/10 : iPhone 12 de sa compagne (version d'iOS à préciser) |
-| A1 | Adhérer à l'Apple Developer Program (individuel, payant à l'année ; tarif et statut de professionnel UE à vérifier par la routine) | signature, TestFlight, App Store | à décider |
+| A1 | Adhérer à l'Apple Developer Program (individuel, payant à l'année ; pas à pas ci-dessous) | signature, TestFlight, App Store | à décider |
 | A2 | Créer une clé API App Store Connect (rôle exact précisé par la routine) et l'enregistrer en secrets GitHub Actions de ce dépôt, dans un environnement `appstore` réservé à `main` | builds signées et envoi TestFlight automatiques | après A1 |
 | A3 | Créer la fiche de l'app dans App Store Connect (nom, langue principale français, bundle id, SKU) | envoi TestFlight, fiche | après A1 |
 | A4 | Contrat « Paid Applications », coordonnées bancaires et fiscales | abonnement App Store | après A1 |
 | A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/` | examen Apple | avant la 1re soumission |
 | A6 | Inviter les testeurs (d'abord sa compagne : interne via « Utilisateurs et accès » ou externe avec l'examen bêta, la routine dira), soumettre à l'examen, publier | testeurs, production | lui seul |
+
+#### A1 pas à pas (préparé le 27/10/2026)
+
+1. **Compte Apple** : celui du propriétaire, avec l'identification à deux facteurs activée (obligatoire), au nom
+   légal exact (il apparaîtra comme « vendeur » sur l'App Store).
+2. **S'inscrire** : sur https://developer.apple.com/programs/enroll/ (ou depuis l'app « Apple Developer » sur
+   iPhone, qui propose aussi l'inscription). Choisir **« Individu / entreprise individuelle »** : l'app paraîtra
+   sous le nom du propriétaire. Le type « organisation » demande une société avec un numéro D-U-N-S, plus long.
+3. **Payer la cotisation annuelle** : 99 USD par an, montant en euros (TVA comprise) affiché par Apple à ce moment-là
+   — c'est la seule dépense, et elle revient chaque année (sans renouvellement, l'app quitte l'App Store).
+4. **Attendre la validation** (souvent un ou deux jours, parfois une vérification d'identité), puis le dire à la
+   routine en une ligne dans cette conversation. Elle prépare alors A2 (clé API, rôle exact) et A3 (fiche de l'app,
+   avec les valeurs à recopier).
+5. **À savoir avant de publier dans l'UE (Digital Services Act)** : App Store Connect demandera si vous êtes un
+   « commerçant ». Avec un abonnement payant, la réponse est oui : une adresse (une boîte postale est acceptée), un
+   téléphone et un e-mail seront affichés sur la page de l'app dans l'UE. Rien à faire avant A3 ; mieux vaut
+   choisir ces coordonnées à l'avance. Source : aide d'App Store Connect, « Manage EU Digital Services Act compliance
+   information » (lue le 27/10/2026).
 
 ### 9. Outillage
 
