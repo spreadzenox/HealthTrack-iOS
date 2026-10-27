@@ -173,9 +173,10 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 - **Vérification visuelle web** : dans `upstream/app`, `npm run visual` (options en tête de
   `scripts/visual/visual-check.mjs`), avec `VITE_DISTRIBUTION=appstore` ; pour iOS, captures du simulateur produites
   par le workflow iOS (clair et sombre, données vierges et de démo).
-- **Mécanique** : une routine claude.ai « Halcya iOS — parité avec Android », avec les deux dépôts attachés, lance
-  toutes les heures (à :59, heure de Paris, 30 min après la routine Android) une session neuve avec le prompt de
-  [`PROMPT-ROUTINE.md`](PROMPT-ROUTINE.md). Chaque run est indépendant : sa seule mémoire est ce dossier.
+- **Mécanique** : la tâche planifiée « Halcya iOS — parité avec Android » se déclenche toutes les heures (à :59, heure
+  de Paris, 30 min après la routine Android) dans la session claude.ai « Halcya iOS — routine », qui a les deux dépôts
+  attachés, avec le prompt de [`PROMPT-ROUTINE.md`](PROMPT-ROUTINE.md). La conversation est résumée au fil du temps :
+  la seule mémoire fiable est ce dossier. Ne pas archiver cette session.
 
 ### Modèle de compte rendu
 
