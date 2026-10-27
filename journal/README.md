@@ -12,13 +12,14 @@
 |---|---|---|
 | Dernière version | v521 en test interne (27/10 15:24) | v521 (build 521.10) sur iPhone simulé (27/10 15:50) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | audit à faire (étape I2) |
+| Parité des fonctions | référence | audit en cours (étape I2, PR #3) |
 
 **Ce qui a changé cette semaine**
 - **27/10 16:05 — toutes les pages photographiées sur iPhone simulé** : à chaque changement, 18 captures par iPhone
   (onboarding, 14 pages avec les données de démonstration, 3 en thème sombre), sur la taille de l'iPhone 12 et sur un
   iPhone récent. Elles ont montré ce qui parle encore d'Android sur iPhone (abonnement « Google Play », lecture du
-  visage, sauvegarde Google, Health Connect) : c'est le travail de l'étape suivante (I2), déjà commencé.
+  visage, sauvegarde Google, Health Connect) : l'étape suivante (I2) les corrige, première partie en relecture
+  (PR #3) ; elle ajoute aussi les phrases d'autorisation Bluetooth et Santé sans lesquelles iOS fermerait l'app.
 - **27/10 13:45 — Halcya démarre sur iPhone (simulé)** : projet iOS (nom, icône « H nuit », écran de démarrage),
   construit automatiquement à chaque changement ; sur un iPhone de la taille de l'iPhone 12, l'onboarding puis
   l'Accueil s'affichent correctement. Même numéro que la version Play (516). La version Android n'est pas touchée :
@@ -43,7 +44,7 @@ via TestFlight.
 | 27/10 12:30 | mise en place | dépôt iOS, charte, parité, backlog, `scripts/upstream.sh` | (commit initial) |
 | 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, build simulateur + captures (onboarding et Accueil OK) | #1 |
 | 27/10 14:05 | I1 captures | parcours de 18 pages sans erreur JavaScript, mais captures décalées : PR laissée ouverte, synchronisation à fiabiliser | #2 (ouverte) |
-| 27/10 15:40 | I1 captures (suite) | synchronisation par fichier + accusé : les 36 captures correspondent à leur page ; projet iOS prioritaire (runs pleins) ; I2 commencée (branche) | #2 |
+| 27/10 15:40 | I1 captures (suite) | synchronisation par fichier + accusé : les 36 captures correspondent à leur page ; projet iOS prioritaire (runs pleins) ; I2 : 7 replis iPhone et phrases d'usage | #2, #3 (ouverte) |
 
 ---
 
@@ -93,7 +94,8 @@ priorité du propriétaire** : runs pleins (jusqu'à 50 min), étapes enchaîné
    `versionCode` suivi, puis `npx cap sync ios`, puis `xcodebuild` sur les runners macOS.
 
 Règles des adaptations :
-- **Correctif** (`patches/NN-sujet.patch`, produit par `git -C upstream diff`) pour modifier un fichier Android ;
+- **Correctif** (`patches/NN-sujet.patch`, produit par `git -C upstream diff HEAD -- <fichiers>` : **HEAD** obligatoire,
+  car `git apply --3way` met les correctifs déjà appliqués dans l'index) pour modifier un fichier Android ;
   le plus petit possible, un sujet par fichier, pour qu'il survive aux changements d'Android. Un correctif qui ne
   s'applique plus fait échouer le script : le refaire sur le nouveau code (c'est le travail normal du suivi).
 - **Fichier ajouté** (`overlay/<chemin>`) pour du code nouveau propre à iOS (ex. `overlay/app/src/services/appStoreBilling.js`).
@@ -104,7 +106,9 @@ Règles des adaptations :
 ### 4. Version
 
 - **Numéro de version iOS** (`CFBundleShortVersionString`) = le `versionCode` Android suivi (ex. `514`) : le même
-  nombre que sur Google Play, affiché aussi dans Paramètres (`VITE_APP_VERSION`).
+  nombre que sur Google Play, affiché aussi dans Paramètres (`VITE_APP_VERSION`). Depuis le 27/10 (Android #437),
+  la variante play affiche ce nombre (`versionName` = commits de `main`) mais envoie à Google Play un `versionCode`
+  de 100000 + ce nombre ; `upstream.json` garde le nombre affiché, qui reste celui d'iOS.
 - **Numéro de build** (`CFBundleVersion`) = `<versionCode Android>.<nombre de commits de ce dépôt>` (ex. `514.12`) :
   toujours croissant, même quand seul le code iOS change.
 - **Même version** = la dernière build iOS publiée suit le dernier commit envoyé sur Google Play, et `PARITE.md`

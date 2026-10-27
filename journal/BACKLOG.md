@@ -9,7 +9,7 @@
 - [x] **I0 — Mise en place** (27/10, session de configuration avec le propriétaire) : dépôt `HealthTrack-iOS`
   public, charte, parité de départ, `upstream.json` + `scripts/upstream.sh` (testé : récupère Android v514, applique
   les correctifs, échoue clairement si l'un ne s'applique plus).
-- [ ] **I1 — Socle iOS sur simulateur**
+- [x] **I1 — Socle iOS sur simulateur** (27/10, PR #1 et #2)
   - [x] Variante `appstore` (27/10) : correctif de `app/src/config/distribution.js` (comme play : relais IA, pas
     d'auto-mise à jour, abonnement App Store) ; les tests d'Android passent avec le correctif.
   - [x] `@capacitor/ios` 8.2 installé par le workflow (`npm install --no-save`, pas de correctif de `package.json`),
@@ -24,13 +24,15 @@
     les données de démo d'Android en clair, 3 en sombre, onboarding d'une installation vierge ; parcours piloté par
     l'app (`captureMode.js`), synchronisé par fichier (`Documents/capture/ready.txt` → capture → `ack.txt`) : les 36
     images de la PR #2 correspondent à leur page ; poussées sur la branche `captures/pr-<n>` ou `captures/main`.
-  - [ ] Reste pour plus tard : états vides de chaque page ; faire échouer la build sur erreur JavaScript (le bruit
-    « ack.txt absent » est supprimé le 27/10 16:05, à confirmer sur une CI propre).
+  - [ ] Reste pour plus tard : états vides de chaque page ; faire échouer la build sur erreur JavaScript (plus de
+    bruit depuis le 27/10 16:18 : 0 erreur sur la CI de la PR #2).
 - [ ] **I2 — Audit de parité et replis propres** (déjà repérés le 27/10 : texte Premium « Google Play », détection
-  des apps par noms de paquets Android, carte « Lecture du visage » en erreur — ces trois-là traités sur la branche
-  `claude/ios-i2-replis` ; restent : « Vos données » parle de la sauvegarde Google et d'Android, « Vos sources »
-  conseille Health Connect dans Gadgetbridge, « Mes appareils » dit « Dans l'app Android… », `saveAndShareReport`
-  ne prévoit le natif que pour Android) : compléter `PARITE.md` fonction par fonction (changelog depuis le
+  des apps par noms de paquets Android, carte « Lecture du visage » en erreur — traités dans la PR #3 avec « Vos
+  données », « Mes appareils », montre Huawei, temps d'écran et les phrases d'usage Bluetooth et Santé
+  d'`Info.plist` ; restent, dans l'ordre : carte Santé (Health Connect) sur iPhone, où `Health.isAvailable()`
+  répondra vrai sans rien de branché ; export des données, journal de la montre et rapport PDF par la feuille de
+  partage (le lien de téléchargement ne fait rien dans WKWebView) ; « Vos sources » qui conseille Health Connect
+  dans Gadgetbridge ; captures défilées pour les pages longues) : compléter `PARITE.md` fonction par fonction (changelog depuis le
   lancement play, `journal/PRODUIT.md`, écrans) ; sur iOS, chaque service qui appelle un plugin Android absent
   retombe proprement (pas d'erreur, pas de carte cassée, pas d'interrupteur qui ne fait rien) ; % de parité.
 - [ ] **I3 — Données** : durabilité d'IndexedDB dans WKWebView, sauvegarde iCloud, export / import JSON par la feuille

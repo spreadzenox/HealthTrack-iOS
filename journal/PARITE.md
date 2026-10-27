@@ -36,9 +36,9 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 | Réintroduction FODMAP guidée | 🟡 | rappel de portion : voir §3 |
 | Rapport PDF médecin | 🟡 | partage / enregistrement du fichier sur iOS : `saveAndShareReport` n'écrit dans Documents + feuille de partage que sur Android ; sur iOS il tente un téléchargement web (à vérifier, sinon correctif I2) |
 | Sources (détection automatique) | 🟡 | sources iOS différentes : Santé (HealthKit) au lieu de Health Connect ; 27/10 : `canOpenURL` appelé avec des noms de paquets Android, refusés par iOS ; carte « Lecture du visage » en erreur (plugin absent) → I2 |
-| Données (export / import JSON et CSV) | 🟡 | partage de fichier iOS (`@capacitor/filesystem` + feuille de partage) |
+| Données (export / import JSON et CSV) | 🟡 | partage de fichier iOS (`@capacitor/filesystem` + feuille de partage) ; 27/10 : hors Android, l'export passe par un lien de téléchargement que WKWebView ignore → I2/I3 ; texte « sauvegarde Google » retiré (PR #3) |
 | Paramètres, mode diagnostic caché (7 touches) | 🟡 | |
-| Premium / paywall | ❌ | prix lus dans StoreKit, jamais codés en dur ; 27/10 : affiche « L'abonnement se prend depuis la version Google Play de l'app » (texte de la sideload) → I2 |
+| Premium / paywall | ❌ | prix lus dans StoreKit, jamais codés en dur ; 27/10 : affiche « L'abonnement se prend depuis la version Google Play de l'app » (texte de la sideload) → PR #3 : « Sur iPhone, l'abonnement par l'App Store arrive bientôt » |
 | Nouveautés | 🟡 | `variants: ["appstore"]`, historique iOS depuis le lancement iOS |
 | Confidentialité, conditions | 🟡 | textes à rendre exacts pour iOS (iCloud au lieu de la sauvegarde Android, HealthKit) |
 
@@ -67,7 +67,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 | Persistance des données locales | IndexedDB (WebView Android) | IndexedDB (WKWebView) | 🔬 | I3 : risque d'effacement à étudier |
 | Ouvrir une autre app | `@capacitor/app-launcher` | idem (iOS supporté) | 🟡 | |
 | Fichiers (export) | `@capacitor/filesystem` | idem (iOS supporté) | 🟡 | |
-| BLE générique | `@capacitor-community/bluetooth-le` | idem (iOS supporté) | 🟡 | `NSBluetoothAlwaysUsageDescription` |
+| BLE générique | `@capacitor-community/bluetooth-le` | idem (iOS supporté) | 🟡 | phrase `NSBluetoothAlwaysUsageDescription` ajoutée (PR #3) ; la carte « Capteurs Bluetooth » est active sur iPhone, à essayer sur l'iPhone 12 (A1) |
 | Mise à jour par APK | `AppUpdatePlugin`, `@m430/capacitor-app-install` | — | — | sideload seulement |
 
 ## 4. Store et conformité
@@ -88,6 +88,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 27/10 16:25 | #437 (v522) | versionCode Play = 100000 + commits (le numéro affiché reste 522) : sans objet sur iOS, qui suit le numéro affiché (charte §4) ; lecture au déverrouillage rallumée en test interne : Android seul (⛔ sur iOS) | — |
 | 27/10 15:40 | #434 à #436 (v521) | #436 « pas de rapport PDF vide dans Analyses » : code web partagé, arrive tel quel ; à noter pour I2 : `saveAndShareReport` ne prévoit le natif que pour Android (sur iOS, téléchargement web, à vérifier dans WKWebView) ; #434 et #435 : scripts Play et journal, sans objet | 🟡 |
 | 27/10 14:05 | #432, #433 (v518) | #433 « lecture au déverrouillage dans les versions de test interne » : workflow et scripts Play seulement, sans objet sur iOS (lecture au déverrouillage ⛔) ; #432 journal seul | — |
 | 27/10 13:00 | #430, #431 (v516) | #431 « pas et kcal du jour : une source par heure » : code web partagé, arrive tel quel (vaudra aussi pour les sources Santé d'iOS) ; la partie kcal de la montre Huawei attend I8 ; #430 journal seul | 🟡 à vérifier en capture |
