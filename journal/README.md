@@ -33,6 +33,14 @@
   d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
 
 **Ce qui a changé cette semaine**
+- **27/10 23:20 — un guide des montres pensé pour l'iPhone** (PR #14) : dans Sources, « Votre montre n'apparaît
+  pas ? » explique maintenant comment faire arriver dans l'app Santé les mesures d'une Apple Watch, d'une Garmin,
+  d'une Huawei, d'une Xiaomi ou d'autres marques, et prévient que les Galaxy Watch récentes ne marchent pas avec un
+  iPhone. Plus aucun renvoi vers Android.
+- **27/10 22:40 — Halcya lit vraiment l'app Santé (sur iPhone simulé)** (PR #12) : un test automatique accepte la
+  fenêtre d'autorisation, puis Halcya écrit 1234 pas dans l'app Santé et les relit. C'est la preuve que l'import
+  marche de bout en bout, avant même d'avoir l'iPhone 12. Prochaines versions : ces mesures affichées « App Santé »
+  dans le Journal, et un guide des montres pensé pour l'iPhone (Apple Watch, Garmin, Huawei, Xiaomi…).
 - **27/10 19:10 — Halcya sait lire l'app Santé sur iPhone** (PR #9) : la carte « App Santé » de Sources et
   l'onboarding demandent l'accès à l'app Santé d'Apple, comme Health Connect sur Android. La VFC n'est pas encore
   lue (l'iPhone la mesure autrement qu'Android). À confirmer avec de vraies mesures.
@@ -77,6 +85,8 @@ via TestFlight.
 | 27/10 19:00 | I4 Santé | essai HealthKit mergé ; Halcya lit l'app Santé sur iPhone (à vérifier avec de vraies données) ; PR #8 réparée | #7, #8, #9 |
 | 27/10 20:00 | finitions I2/I3 | suivi d'Android v527 ; plus d'erreur de console liée à la copie de secours ; « Mes appareils » parle de l'app Santé | #10 |
 | 27/10 21:00 | essai d'import Santé | plantage de la build de test expliqué et corrigé (écriture dans Santé sans phrase d'usage) ; l'outil qui devait accepter la fenêtre Santé sur la CI est bloqué par une protection (non contournée) → test d'interface à écrire ; marche à suivre de l'adhésion Apple (A1) prête | #11 (ouverte) |
+| 27/10 22:00 | I4 Santé (suite) | **Halcya écrit et relit une mesure de l'app Santé sur iPhone simulé** (test d'interface qui accepte la fenêtre, #12) ; mesures importées affichées « App Santé » (#13, un test à reprendre) ; guide des montres réécrit pour l'iPhone (#14) | #11, #12, #13, #14, #15 (ouvertes : #13 à #15) |
+| 27/10 23:00 | I4 Santé (fin de vérification) | guide des montres pour l'iPhone mergé et photographié (#14) ; pas écrits dans Santé relus aussi par le connecteur de l'app (1 iPhone sur 2 : le test d'interface a raté un toucher sur l'autre, corrigé) ; un test d'Android capricieux signalé (`DEMANDES.md`) | #14 ; #13, #15 (ouvertes) |
 
 ---
 

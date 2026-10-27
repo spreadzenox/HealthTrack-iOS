@@ -95,3 +95,27 @@ que l'import, `parseBackup`). À vérifier sur la CI : où WKWebView range Index
   abandonnée. Installation officielle : https://fbidb.io/docs/idb/installation (Mac arm64, macOS 15, Xcode 26).
 - Piste suivante : un test d'interface XCUITest écrit dans ce dépôt (toucher « Tout activer » puis « Autoriser »),
   sans bibliothèque tierce. `XCTHealthKit` (Stanford, MIT) montre que c'est faisable depuis XCUITest.
+- 27/10 22:05 : test écrit (`uitests/`, PR #12) : projet Xcode à part, cible de tests d'interface **sans app hôte**
+  (`XCUIApplication(bundleIdentifier: "fr.jpesquet.sante")`, `activate()` sans relancer l'app), construit par
+  `build-for-testing` et lancé par `test-without-building -xctestrun` sur le simulateur des captures, pendant que
+  l'app attend l'accusé du script (jusqu'à 3 min).
+
+## Montres sur iPhone : qui écrit dans l'app Santé (recherche du 27/10/2026, pour le guide « Votre montre n'apparaît pas ? »)
+
+Le guide d'Android renvoie partout à Health Connect (et, pour Huawei, à la connexion Bluetooth directe ou à
+Gadgetbridge) : sur iPhone, il faut le réécrire autour de l'app Santé. Sources secondaires pour la plupart : à
+formuler prudemment (« une partie de vos mesures ») et à confirmer sur l'iPhone 12 quand c'est possible.
+- **Samsung Galaxy Watch** : les modèles Wear OS (Watch4 et suivants, Watch9, Ultra 2) **ne fonctionnent pas avec
+  un iPhone** ; seules d'anciennes montres Tizen (Watch, Active, Active2, Watch3) s'appairaient. Source : pages
+  d'assistance de Samsung (ae, ca, uk), consultées le 27/10/2026.
+- **Huawei Santé (iOS)** : partage vers l'app Santé (pas, fréquence cardiaque, sommeil, entraînements d'après un
+  intégrateur ; la fiche App Store ne parlait que des pas et des courses) ; activé à la première ouverture ou dans
+  Santé › Partage › Apps. Sources : sahha.ai/integrations/huawei-health, netzwelt.de (consultés le 27/10/2026).
+- **Mi Fitness (Xiaomi, Redmi)** : Profil › Données tierces › Santé ; FAQ officielle de Xiaomi (Smart Band 9 Active,
+  Smart Band 10) : mi.com/global/support/faq/details/KA-592800, KA-517375.
+- **Garmin Connect** : partage vers Santé (pas, entraînements, FC, sommeil ; phases de sommeil depuis la v4.71
+  d'après Notebookcheck) ; les données ne partent que quand Garmin Connect est ouvert au premier plan.
+- **Fitbit** : d'après la presse (TechRepublic, août 2026), l'app Google Health (qui a remplacé l'app Fitbit en mai
+  2026) écrit exercice, sommeil, pas et signes vitaux dans Santé depuis la version 5.05 (Profil › Apps partenaires ›
+  Apple Health, iOS 16.4 ou plus) : à confirmer dans une source de Google avant de l'écrire dans l'app.
+- **Apple Watch** : écrit directement dans Santé, rien à faire (atout de la version iOS).

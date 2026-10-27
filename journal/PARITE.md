@@ -58,7 +58,7 @@ analyses, journal, Accueil) : ils arrivent avec `upstream.json` et sont couverts
 
 | Fonction (play) | Android | iOS (piste) | État | Notes |
 |---|---|---|---|---|
-| Santé : imports et historique | Health Connect (`@capgo/capacitor-health`, patch Android) | HealthKit par le même plugin et le même connecteur (code iOS du plugin vérifié le 27/10) | 🟡 | 27/10 : entitlement et phrase d'usage en place ; HealthKit disponible et feuille d'autorisation affichée sur simulateur (PR #7) ; connecteur branché sur HealthKit avec ses textes iPhone (PR #9) ; VFC (SDNN) pas encore lue ; import réel à vérifier (données de santé du simulateur vides, feuille à accepter : test d'interface ou iPhone 12) |
+| Santé : imports et historique | Health Connect (`@capgo/capacitor-health`, patch Android) | HealthKit par le même plugin et le même connecteur (code iOS du plugin vérifié le 27/10) | 🟡 | 27/10 : entitlement et phrase d'usage en place ; HealthKit disponible et feuille d'autorisation affichée sur simulateur (PR #7) ; connecteur branché sur HealthKit avec ses textes iPhone (PR #9) ; VFC (SDNN) pas encore lue ; 27/10 22:40 : feuille acceptée par un test d'interface, 1234 pas écrits puis relus sur simulateur (PR #12) ; reste : relecture par le connecteur (PR #15), affichage dans le Journal, iPhone 12 |
 | Abonnement | `PlayBillingPlugin` (play) | StoreKit 2 (plugin Swift) | ❌ | I6 ; mêmes formules, essai 14 j |
 | Vérification des achats par le relais | Play Developer API, RTDN | JWS signés par Apple vérifiés par le relais, App Store Server Notifications V2 | ❌ | I6 ; le relais est dans HealthTrack : `DEMANDES.md` |
 | Anti-abus des crédits IA | `PlayIntegrityPlugin` | App Attest (DeviceCheck) | ❌ | I6 ; vérification côté relais : `DEMANDES.md`. 27/10 : le relais est en `INTEGRITY_MODE=observe` (`relay-deploy.yml`), l'analyse des repas passe donc sans jeton depuis l'iPhone ; en `enforce`, elle serait refusée (403) tant qu'App Attest n'est pas accepté |
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 27/10 22:05 | #443 (pas de nouvelle version) | journal seul (idées « bord à bord » et R8 prêtes à coder) : rien à faire tant que ce n'est pas codé ; le « bord à bord » touchera peut-être les marges du code web partagé → à revérifier en captures (zones sûres de l'iPhone) quand il arrivera | — |
 | 27/10 20:05 | #441, #442 (v527) | tuiles « hier », repas sur une ligne, une seule piste « calories » dans Analyses : code web partagé, arrive tel quel | — |
 | 27/10 18:05 | #440 (v525) | « hier à 10:19 », plus de « Health Connect » dans un titre d'Analyses : code web partagé, arrive tel quel (bon pour iOS aussi) | — |
 | 27/10 17:15 | #438, #439 (v524) | #439 « Accueil vierge sans montre supposée ; « Tester un groupe FODMAP » lisible » : code web partagé, arrive tel quel (à voir sur les captures) ; #438 journal seul | — |
