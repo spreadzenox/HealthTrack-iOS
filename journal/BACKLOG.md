@@ -31,7 +31,7 @@
   données », « Mes appareils », montre Huawei, temps d'écran et les phrases d'usage Bluetooth et Santé
   d'`Info.plist` ; carte Santé, Sources et onboarding sans Health Connect ni montre
   Huawei en direct, sauvegarde et rapport PDF par la feuille de partage, huit services à plugin Android absent qui
-  retombent proprement : PR #4 ;
+  retombent proprement : PR #4, mergée le 27/10 ;
   restent, dans l'ordre : « Vos sources » qui conseille Health Connect
   dans Gadgetbridge ; captures défilées pour les pages longues) : compléter `PARITE.md` fonction par fonction (changelog depuis le
   lancement play, `journal/PRODUIT.md`, écrans) ; sur iOS, chaque service qui appelle un plugin Android absent
