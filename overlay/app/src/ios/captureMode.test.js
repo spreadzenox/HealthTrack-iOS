@@ -202,7 +202,7 @@ describe('sonde HealthKit (I4)', () => {
     const [name, tries] = waitAck.mock.calls[0]
     expect(name).toBe('healthkit-autorisation')
     expect(tries * 300).toBeGreaterThanOrEqual(120_000)
-    expect(h.api.requestAuthorization).toHaveBeenCalledWith({ read: expect.not.arrayContaining(['heartRateVariability']), write: ['steps'] })
+    expect(h.api.requestAuthorization).toHaveBeenCalledWith({ read: expect.arrayContaining(['steps', 'heartRateVariability']), write: ['steps'] })
     expect(h.api.saveSample).toHaveBeenCalledWith(expect.objectContaining({ dataType: 'steps', value: 1234 }))
     expect(logs.join('\n')).toMatch(/\[healthkit\] readSamples \{"count":1,"values":\[1234\]\}/)
   })

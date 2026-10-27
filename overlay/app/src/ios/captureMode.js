@@ -150,7 +150,7 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health, conne
   const failed = (what) => (e) => say(`${what} erreur`, e?.message || String(e))
   try {
     const Health = health ?? (await import('@capgo/capacitor-health')).Health
-    const read = ['steps', 'sleep', 'heartRate'] // pas la VFC : SDNN sur iOS, comme le connecteur
+    const read = ['steps', 'sleep', 'heartRate', 'heartRateVariability'] // comme le connecteur (VFC lue en SDNN)
     await Health.isAvailable().then((r) => say('isAvailable', r), failed('isAvailable'))
     await Health.checkAuthorization({ read, write: [] }).then((r) => say('checkAuthorization', r), failed('checkAuthorization'))
     let answered = false

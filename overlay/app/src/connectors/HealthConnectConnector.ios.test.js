@@ -2,7 +2,8 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 
 // Version iOS (HealthTrack-iOS) : le même connecteur lit HealthKit (même plugin @capgo/capacitor-health, I4).
 // HealthKit ne dit jamais si la lecture est accordée : « accordé » dès que la demande a été faite sur cet appareil.
-// VFC : SDNN sur iOS contre RMSSD sur Android, pas encore séparées → ni demandée ni lue sur iPhone.
+// VFC : SDNN sur iOS contre RMSSD sur Android → lue sur iPhone, mais rangée à part (`heartRateVariabilitySdnn`),
+// jamais mêlée à la RMSSD (`heartRateVariability`) des analyses, des normes et du radar.
 vi.mock('@capgo/capacitor-health', () => ({
   Health: {
     isAvailable: vi.fn(),
@@ -50,16 +51,21 @@ describe('HealthConnectConnector sur iPhone (HealthKit)', () => {
     expect(connector.missingReadTypes).toEqual([])
   })
 
-  it('ne demande ni ne lit la VFC (SDNN sur iOS, pas comparable à la RMSSD d’Android)', async () => {
+  it('demande la VFC et la range à part, en SDNN (pas comparable à la RMSSD d’Android)', async () => {
     const connector = new HealthConnectConnector()
     await connector.requestPermissions()
-    const asked = Health.requestAuthorization.mock.calls[0][0].read
-    expect(asked).toContain('steps')
-    expect(asked).not.toContain('heartRateVariability')
-    await connector.sync({ since: new Date('2026-10-01T00:00:00Z'), until: new Date('2026-10-02T00:00:00Z'), writer: async () => {} })
-    const read = [...Health.readSamples.mock.calls, ...Health.queryAggregated.mock.calls].map((c) => c[0].dataType)
-    expect(read.length).toBeGreaterThan(0)
-    expect(read).not.toContain('heartRateVariability')
+    expect(Health.requestAuthorization.mock.calls[0][0].read).toContain('heartRateVariability')
+    Health.readSamples.mockImplementation(async ({ dataType }) => ({
+      samples: dataType === 'heartRateVariability'
+        ? [{ value: 52, unit: 'millisecond', startDate: '2026-10-01T03:00:00Z', endDate: '2026-10-01T03:01:00Z', sourceName: 'Apple Watch' }]
+        : [],
+    }))
+    const written = []
+    await connector.sync({ since: new Date('2026-10-01T00:00:00Z'), until: new Date('2026-10-02T00:00:00Z'), writer: async (e) => written.push(...e) })
+    const hrv = written.filter((e) => e.type === 'heart_rate')
+    expect(hrv).toHaveLength(1)
+    expect(hrv[0].payload).toMatchObject({ value: 52, subtype: 'heartRateVariabilitySdnn', sourceName: 'Apple Watch' })
+    expect(written.some((e) => e.payload?.subtype === 'heartRateVariability')).toBe(false)
   })
 
   it('carte de Sources : nom et description de l’app Santé, sans Health Connect', () => {
