@@ -39,10 +39,34 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
   })
 
   it('plan : les pages longues ont aussi leurs écrans suivants, défilés', () => {
-    const plan = buildPlan(['/connectors'], [], { '/connectors': 2 })
+    const plan = buildPlan(['/connectors'], [], { '/connectors': 2 }, {})
     expect(plan.slice(2).map((s) => [s.name, s.scroll ?? 0])).toEqual([
       ['demo-clair-connectors', 0], ['demo-clair-connectors-2', 1], ['demo-clair-connectors-3', 2],
     ])
+  })
+
+  it('plan : un volet replié peut être ouvert puis capturé (guide des montres sous « Ajouter une source »)', () => {
+    const reveal = { name: 'guides', click: 'Ajouter une source', open: 'guide-garmin', target: 'watch-guides-title' }
+    const plan = buildPlan(['/connectors', '/data'], [], { '/connectors': 1 }, { '/connectors': [reveal] })
+    expect(plan.slice(2).map((s) => s.name)).toEqual([
+      'demo-clair-connectors', 'demo-clair-connectors-2', 'demo-clair-connectors-guides', 'demo-clair-data',
+    ])
+    expect(plan[4]).toMatchObject({ route: '/connectors', data: 'demo', theme: 'light', reveal })
+    // par défaut : le guide des montres de Sources
+    expect(buildPlan().map((s) => s.name)).toContain('demo-clair-connectors-guides')
+  })
+
+  it('volet à ouvrir : ouvert avant que la page soit signalée', async () => {
+    const reveal = { name: 'guides', click: 'Ajouter une source', open: 'guide-garmin', target: 'watch-guides-title' }
+    const plan = buildPlan(['/connectors'], [], {}, { '/connectors': [reveal] })
+    const local = memoryStorage({ [STEP_KEY]: '3' })
+    const order = []
+    const d = deps(local, {
+      reveal: vi.fn(async (r) => order.push(`reveal ${r.click}`)),
+      signal: vi.fn(async (name) => order.push(`signal ${name}`)),
+    })
+    await runCaptureStep(plan, d)
+    expect(order).toEqual(['reveal Ajouter une source', 'signal demo-clair-connectors-guides', 'signal fin'])
   })
 
   it('écran de choix de la montre : l’onboarding reprend à son 3e écran', async () => {
@@ -56,7 +80,7 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
   })
 
   it('écran défilé : la page descend avant d’être signalée', async () => {
-    const plan = buildPlan(['/connectors'], [], { '/connectors': 1 })
+    const plan = buildPlan(['/connectors'], [], { '/connectors': 1 }, {})
     const local = memoryStorage({ [STEP_KEY]: '3' })
     const order = []
     const d = deps(local, {
