@@ -29,6 +29,13 @@
 - Remarque sur les captures : une bannière système du simulateur (« Prêt pour Apple Intelligence ») couvre parfois
   le haut d'une capture ; sans effet sur l'app.
 
+## Merges
+- **PR #14 mergée** (1e8f772) : CI verte sur la branche remise sur `main`, 52 captures, 0 erreur JavaScript ; guide
+  des montres capturé et regardé (Garmin ouvert, liste des marques) ; feuille Santé acceptée sur les deux iPhone
+  (le toucher perdu de la PR #15 ne s'est pas reproduit ici).
+- PR #13 et #15 remises sur `main` (PR #14) aussitôt, suite repassée (2645 et 2643 ✅, code de sortie 0) → CI ; merge
+  au run suivant si elles ne finissent pas avant la fin de celui-ci.
+
 ## Vérifications
 - Suite d'Android avec les correctifs, code de sortie vérifié à chaque fois : PR #13 2641 ✅, PR #14 2642 ✅,
   PR #15 2639 ✅ (44 ignorés) · build web `appstore` ✅.

@@ -53,10 +53,10 @@
     l'iPhone 16e, toucher du test fiabilisé) ; ensuite les montrer dans le Journal ; à refaire sur l'iPhone 12.
   - [~] Textes Santé sur iPhone : source « App Santé » des mesures importées (Journal, tuiles, rapport), résumé du
     premier import, confirmation de suppression (PR #13).
-  - [~] Guide « Votre montre n'apparaît pas ? » réécrit pour l'iPhone (Health Connect, Gadgetbridge et Bluetooth
+  - [x] Guide « Votre montre n'apparaît pas ? » réécrit pour l'iPhone (Health Connect, Gadgetbridge et Bluetooth
     direct n'y ont pas cours) : Apple Watch, Huawei Health, Mi Fitness et Zepp, Garmin, autres marques, Galaxy
-    Watch récentes incompatibles ; recherche du 27/10 (`RECHERCHE.md`) ; PR #14. Menus de Huawei Health, Zepp et
-    Garmin Connect à confirmer sur l'iPhone 12.
+    Watch récentes incompatibles ; recherche du 27/10 (`RECHERCHE.md`) ; PR #14, mergée le 27/10. Menus de Huawei
+    Health, Zepp et Garmin Connect à confirmer sur l'iPhone 12.
   - [ ] VFC SDNN : type ou source à part, libellé, norme personnelle distincte de la RMSSD ; puis la lire. Plan
     (27/10) : sur iPhone, le connecteur lit la VFC et la range sous un **type d'entrée à part** (pas `heart_rate` :
     `dailyJournal.js` range une sous-catégorie inconnue de `heart_rate` dans la fréquence cardiaque, elle s'y
