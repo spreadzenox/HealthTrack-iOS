@@ -32,10 +32,12 @@ run_device() { # <udid> <nom>
   xcrun simctl bootstatus "$udid" -b >/dev/null
   xcrun simctl ui "$udid" appearance light
   xcrun simctl install "$udid" "$APP"
-  xcrun simctl launch --console-pty --terminate-running-process "$udid" "$BUNDLE" > "$log" 2>&1 &
-  pid=$!
+  # Accusé vide créé d'avance : sans lui, chaque lecture de l'app en attente remplit la console d'erreurs « fichier absent »
   data="$(xcrun simctl get_app_container "$udid" "$BUNDLE" data)"
   mkdir -p "$data/Documents/capture"
+  : > "$data/Documents/capture/ack.txt"
+  xcrun simctl launch --console-pty --terminate-running-process "$udid" "$BUNDLE" > "$log" 2>&1 &
+  pid=$!
   deadline=$((SECONDS + 600)); last=""
   while [ "$SECONDS" -lt "$deadline" ]; do
     page="$(cat "$data/Documents/capture/ready.txt" 2>/dev/null || true)"
