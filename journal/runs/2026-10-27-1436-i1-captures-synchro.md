@@ -1,6 +1,6 @@
 # 2026-10-27 14:36 UTC — I1 : captures synchronisées par fichier et accusé
 
-**Étape** : I1 (suite, PR #2)  ·  **PR** : #2  ·  **Android suivi** : v521  ·  **iOS** : 521.<n> (simulateur)  ·  **Parité** : à calculer (I2)
+**Étape** : I1 (suite, PR #2)  ·  **PR** : #2  ·  **Android suivi** : v521  ·  **iOS** : 521.10 (simulateur)  ·  **Parité** : à calculer (I2)
 
 ## Message du propriétaire (27/10 vers 15:30)
 - « Tu peux setup la routine pour une fois toutes les heures, le projet d'adaptation iOS est prio » : le déclenchement
@@ -21,4 +21,17 @@
 
 ## Vérifications
 - `scripts/upstream.sh` ✅ (2 correctifs) · Tests d'Android avec correctifs : 2573 ✅ (44 ignorés) · Build web appstore
-  avec mode captures ✅ · Build iOS et captures : CI de la PR #2.
+  avec mode captures ✅ · Build iOS et captures : CI de la PR #2 ✅ sur `b58d624`.
+- Captures (branche `captures/pr-2`, 36 images) regardées une à une : chaque image correspond enfin à sa page, sur
+  les deux simulateurs ; thème sombre correct sur les 3 pages prévues.
+- `js-errors.txt` : uniquement des « readFile … ack.txt does not exist » (l'app qui attend l'accusé avant qu'il
+  existe). Corrigé : le script crée un accusé vide avant le lancement (`dae4bc6`), CI relancée.
+
+## Défauts iOS vus sur les captures (pour I2)
+- Déjà traités sur la branche `claude/ios-i2-replis` : Premium « Google Play », carte « Lecture du visage » en
+  erreur, détection des apps par noms de paquets Android.
+- Nouveaux : « Vos données » parle de la sauvegarde Google du téléphone et d'Android ; « Vos sources » conseille
+  Health Connect dans Gadgetbridge ; textes à adapter à iOS (I2) ou à remplacer par HealthKit (I4).
+
+## Suite
+- Merger la PR #2, puis ouvrir la PR d'I2 (1re tranche) rebasée sur `main`.
