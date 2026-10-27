@@ -1,6 +1,6 @@
 # 2026-10-27 20:59 UTC — Test d'interface pour la feuille Santé (PR #12), source « App Santé » (PR #13)
 
-**Étape** : I4 (vérification de l'import, textes Santé)  ·  **PR** : #11 (mergée), #12, #13  ·  **Android suivi** : v527  ·  **iOS** : 527 (simulateur)  ·  **Parité** : 23 % (11/47)
+**Étape** : I4 (vérification de l'import, textes Santé)  ·  **PR** : #11 et #12 (mergées), #13, #14, #15  ·  **Android suivi** : v527  ·  **iOS** : 527 (simulateur)  ·  **Parité** : 23 % (11/47)
 
 ## Déclenchement
 - Tâche planifiée de 20:59 UTC, à l'heure. `main` vert ; PR #11 ouverte (travail en cours, à finir d'abord).
@@ -37,3 +37,21 @@
   PR #13 2638 ✅, PR #14 2637 ✅ (44 ignorés) · build web `appstore` ✅.
 - Un passage de la suite (PR #14) a vu échouer `UpdateBanner.test.jsx` (test d'Android de la mise à jour hors
   store, sensible au temps sous charge, non touché par iOS) : il passe seul trois fois, puis dans la suite relancée.
+
+## Résultats de la CI
+- **PR #12 verte (run 41) : la preuve est faite.** Test construit (`TEST BUILD SUCCEEDED`), passé en 8 s sur les deux
+  iPhone ; console : lecture et écriture accordées, `saveSample ok`, `readSamples {"count":1,"values":[1234]}` ;
+  feuille fermée et app revenue (capture `healthkit-apres`) ; 50 captures, 0 erreur JavaScript. Branche sur `main`
+  → mergée (f91cb0f).
+- PR #13 : build iOS et captures vertes (48 captures, 0 erreur JavaScript), mais **Vitest rouge** à cause de mon
+  test : le clic sur « Supprimer toutes mes données » appelle `countAllEntries()`, que mon mock rendait indéfini
+  (rejet non rattrapé). Mon filtre local (`grep "Tests |FAIL"`) cachait la ligne « Errors 1 error ». Corrigé et
+  repoussé ; désormais je regarde aussi le **code de sortie** de `npm run test`.
+- PR #14 : CI en cours à la fin du run.
+- PR #15 (ouverte en fin de run) : la sonde relit aussi les pas par le connecteur de l'app (celui de Sources et de
+  l'onboarding), avec un enregistreur qui ne garde rien ; plus ce compte rendu.
+
+## Suite
+- Merger #13 et #14 une fois vertes (branches à remettre sur `main`), puis #15 : pas relus par le connecteur.
+- Montrer les pas importés dans le Journal (capture), puis la VFC en SDNN (type d'entrée à part, voir `BACKLOG.md`).
+- I5 : notifications en Swift (plan dans `RECHERCHE.md`).
