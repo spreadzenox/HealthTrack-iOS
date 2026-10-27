@@ -49,7 +49,8 @@ via TestFlight.
 Porter Halcya sur iPhone et **maintenir la version iOS au même niveau d'avancement et au même numéro de version que
 la version Google Play**, sans jamais gêner, ralentir ni casser la version Android et son développement. La routine
 Android (« HealthTrack — amélioration autonome », PR `[Auto]` dans HealthTrack) mène le produit ; la routine iOS
-(« Halcya iOS — parité avec Android », dans ce dépôt) suit.
+(« Halcya iOS — parité avec Android », dans ce dépôt) suit. **Depuis le 27/10 (vers 15:30), le projet iOS est la
+priorité du propriétaire** : runs pleins (jusqu'à 50 min), étapes enchaînées ; HealthTrack reste en lecture seule.
 
 - **Référence = la variante play** : même parcours, mêmes écrans, mêmes textes, mêmes fonctions, même modèle
   économique (abonnement par les achats intégrés d'Apple au lieu de Google Play Billing), même relais IA (Vertex AI,
