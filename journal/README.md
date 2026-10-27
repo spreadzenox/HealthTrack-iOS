@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v521 en test interne (27/10 15:24) | v521 (build 521.10) sur iPhone simulé (27/10 15:50) |
+| Dernière version | v522 en test interne (27/10 15:48) | v522 sur iPhone simulé (27/10, PR #3) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | audit en cours (étape I2, PR #3) |
 
@@ -45,6 +45,7 @@ via TestFlight.
 | 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, build simulateur + captures (onboarding et Accueil OK) | #1 |
 | 27/10 14:05 | I1 captures | parcours de 18 pages sans erreur JavaScript, mais captures décalées : PR laissée ouverte, synchronisation à fiabiliser | #2 (ouverte) |
 | 27/10 15:40 | I1 captures (suite) | synchronisation par fichier + accusé : les 36 captures correspondent à leur page ; projet iOS prioritaire (runs pleins) ; I2 : 7 replis iPhone et phrases d'usage | #2, #3 (ouverte) |
+| 27/10 16:22 | I2 Santé | suivi d'Android v522 ; sur iPhone, plus de Health Connect ni de montre Huawei en direct (Sources, onboarding) en attendant l'app Santé | #3, #4 |
 
 ---
 
