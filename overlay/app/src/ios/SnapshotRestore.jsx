@@ -20,13 +20,16 @@ export default function SnapshotRestore({ onChoose, read = readDeviceSnapshot, n
   }, [read])
 
   if (!snapshot) return null
+  // `.actions` (App.css d'Android) : l'écart sous « Choisir un fichier à importer », sans feuille de style en plus
   return (
-    <button
-      type="button"
-      className="btn btn-secondary"
-      onClick={() => onChoose({ name: SNAPSHOT_FILE, text: async () => snapshot.text })}
-    >
-      {`Restaurer la copie de secours (${formatAgo(snapshot.savedAt, now || new Date())})`}
-    </button>
+    <div className="actions">
+      <button
+        type="button"
+        className="btn btn-secondary"
+        onClick={() => onChoose({ name: SNAPSHOT_FILE, text: async () => snapshot.text })}
+      >
+        {`Restaurer la copie de secours (${formatAgo(snapshot.savedAt, now || new Date())})`}
+      </button>
+    </div>
   )
 }
