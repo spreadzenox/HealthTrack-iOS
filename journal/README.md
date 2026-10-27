@@ -10,14 +10,15 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v516 en test interne (27/10 12:57) | v516 sur simulateur, en cours (27/10 13:05) |
-| Où l'installer | Play Store, test fermé | — (simulateur d'abord, TestFlight quand le compte Apple existera) |
+| Dernière version | v516 en test interne (27/10 12:57) | v516 (build 516.9) sur iPhone simulé (27/10 13:45) |
+| Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | audit à faire (étape I2) |
 
 **Ce qui a changé cette semaine**
-- **27/10 13:05 — premier projet iPhone** : Halcya a maintenant un projet iOS (nom, icône « H nuit », écran de
-  démarrage), construit automatiquement pour un iPhone simulé à chaque changement, avec des captures d'écran à la
-  taille de l'iPhone 12. La version Android n'est pas touchée : ses 2 563 tests passent avec les adaptations iOS.
+- **27/10 13:45 — Halcya démarre sur iPhone (simulé)** : projet iOS (nom, icône « H nuit », écran de démarrage),
+  construit automatiquement à chaque changement ; sur un iPhone de la taille de l'iPhone 12, l'onboarding puis
+  l'Accueil s'affichent correctement. Même numéro que la version Play (516). La version Android n'est pas touchée :
+  ses 2 563 tests passent avec les adaptations iOS.
 - **27/10 — dépôt iOS séparé** : la version iOS vit dans son propre dépôt, `spreadzenox/HealthTrack-iOS`, qui suit
   le dépôt Android sans jamais y écrire. Rien ne change pour la version Google Play ni pour sa routine.
 - **26–27/10 — mise en place** avec le propriétaire : charte, liste de parité de départ, backlog I0 → I9, script qui
@@ -36,7 +37,7 @@ via TestFlight.
 | Date (Paris) | Run | Ce qui a été fait | PR |
 |---|---|---|---|
 | 27/10 12:30 | mise en place | dépôt iOS, charte, parité, backlog, `scripts/upstream.sh` | (commit initial) |
-| 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, workflow build simulateur + captures | PR I1 |
+| 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, build simulateur + captures (onboarding et Accueil OK) | #1 |
 
 ---
 
@@ -175,6 +176,9 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 
 - **GitHub** : outils `mcp__github__*` s'ils sont présents, sinon `gh api` en REST (pas de GraphQL). Artefacts d'un
   run : `gh api repos/spreadzenox/HealthTrack-iOS/actions/runs/<id>/artifacts` puis `…/artifacts/<id>/zip`.
+- **Captures iOS** : le workflow les pousse sur la branche `captures/pr-<N>` (PR) ou `captures/main` ; les lire avec
+  `git fetch origin captures/pr-<N>:refs/remotes/origin/captures/pr-<N>` puis `git show origin/captures/pr-<N>:<fichier>`
+  (le téléchargement des artefacts peut être bloqué par le réseau de la session).
 - **Attendre la CI** sans boucle active : outil Monitor (`until` sur les check-runs) ou abonnement à la PR.
 - **Vérification visuelle web** : dans `upstream/app`, `npm run visual` (options en tête de
   `scripts/visual/visual-check.mjs`), avec `VITE_DISTRIBUTION=appstore` ; pour iOS, captures du simulateur produites

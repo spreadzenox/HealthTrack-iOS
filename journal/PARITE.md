@@ -15,12 +15,12 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 
 | Fonction (play) | Android | iOS | État | Notes |
 |---|---|---|---|---|
-| Projet natif | `app/android` (Capacitor 8) | `ios/` de ce dépôt (Capacitor iOS 8.2, Swift Package Manager, 6 plugins iOS), copié dans `upstream/app/ios` | 🟡 | créé le 27/10 ; build à confirmer par la CI |
-| Build CI | `Play — AAB` (signé, `main`) | `ios-build.yml` : tests d'Android avec correctifs (Ubuntu) + build simulateur et captures (macOS) | 🟡 | I1 ; signé en I9 |
+| Projet natif | `app/android` (Capacitor 8) | `ios/` de ce dépôt (Capacitor iOS 8.2, Swift Package Manager, 6 plugins iOS), copié dans `upstream/app/ios` | ✅ | créé le 27/10 ; build Xcode 26.6 ✅ (PR #1) |
+| Build CI | `Play — AAB` (signé, `main`) | `ios-build.yml` : tests d'Android avec correctifs (Ubuntu) + build simulateur et captures (macOS, branche `captures/…`) | ✅ | simulateur (PR #1) ; signé en I9 |
 | Numéro de version | `git rev-list --count HEAD` | même nombre en `CFBundleShortVersionString` (`MARKETING_VERSION`), build `<android>.<ios>` (`CURRENT_PROJECT_VERSION`) | 🟡 | passés à `xcodebuild` par le workflow ; affichage à vérifier en capture |
 | Nom « Halcya », icône « H nuit », écran de démarrage | ✅ | `CFBundleDisplayName` Halcya, AppIcon 1024 opaque et écran de démarrage encre générés depuis le glyphe d'Android (`scripts/ios-icons.mjs`) | 🟡 | à vérifier sur l'écran d'accueil d'un simulateur |
 | Variante de distribution | `play` | `appstore` (`patches/01-variante-appstore.patch`) | ✅ | comme play (relais IA, visage à l'ouverture, pas d'auto-mise à jour), sans abonnement jusqu'à I6 ; tests `overlay/…/distribution.appstore.test.js` |
-| Zones sûres, barres système | `SystemBarsPlugin`, `--safe-top/--safe-bottom` | encoche / Dynamic Island / indicateur d'accueil | ❌ | à vérifier en captures |
+| Zones sûres, barres système | `SystemBarsPlugin`, `--safe-top/--safe-bottom` | encoche / Dynamic Island / indicateur d'accueil | 🟡 | onboarding et Accueil corrects sur 16e et 17 Pro (27/10) ; thème sombre et bas de l'onboarding sur 390 × 844 à revoir (I2) |
 | Mise à jour de l'app | Play Store | App Store | — | pas de bandeau de mise à jour |
 
 ## 2. Écrans (code web partagé : arrivent avec le socle, à vérifier en captures)
