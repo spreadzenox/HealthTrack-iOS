@@ -20,12 +20,14 @@
   - [~] Workflow `ios-build.yml` (27/10 : build + captures ; 27/10 14:05 : chaque page avec les données de démo
     d'Android, en clair et quelques-unes en sombre, onboarding d'une installation vierge, parcours piloté par l'app
     elle-même (`captureMode.js`), console JavaScript relayée dans `js-errors.txt` ; reste : états vides de chaque page, et faire échouer la build sur erreur JavaScript une fois
-    le bruit connu) (PR, push `main`, `workflow_dispatch`) : `scripts/upstream.sh`, `npm ci`,
+    le bruit connu)
+  - [ ] Captures synchronisées par fichier + accusé (PR #2 ouverte : captures décalées le 27/10, voir le compte rendu) (PR, push `main`, `workflow_dispatch`) : `scripts/upstream.sh`, `npm ci`,
     `npm run test`, build web (`VITE_DISTRIBUTION=appstore`), `cap sync ios`, `xcodebuild` pour le simulateur sans
     signature, lancement sur deux simulateurs (390 × 844 points comme l'iPhone 12 de test, et un récent), captures de
     chaque page (clair / sombre, données vierges / démo) en artefact, échec sur erreur JS ; `concurrency` qui annule
     les runs dépassés d'une même PR.
-- [ ] **I2 — Audit de parité et replis propres** : compléter `PARITE.md` fonction par fonction (changelog depuis le
+- [ ] **I2 — Audit de parité et replis propres** (déjà repérés le 27/10 : texte Premium « Google Play », détection
+  des apps par noms de paquets Android, carte « Lecture du visage » en erreur) : compléter `PARITE.md` fonction par fonction (changelog depuis le
   lancement play, `journal/PRODUIT.md`, écrans) ; sur iOS, chaque service qui appelle un plugin Android absent
   retombe proprement (pas d'erreur, pas de carte cassée, pas d'interrupteur qui ne fait rien) ; % de parité.
 - [ ] **I3 — Données** : durabilité d'IndexedDB dans WKWebView, sauvegarde iCloud, export / import JSON par la feuille

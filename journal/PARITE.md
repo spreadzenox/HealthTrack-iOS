@@ -35,10 +35,10 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 | Analyses (pistes repas → ventre, délais) | 🟡 | |
 | Réintroduction FODMAP guidée | 🟡 | rappel de portion : voir §3 |
 | Rapport PDF médecin | 🟡 | partage / enregistrement du fichier sur iOS |
-| Sources (détection automatique) | 🟡 | sources iOS différentes : Santé (HealthKit) au lieu de Health Connect |
+| Sources (détection automatique) | 🟡 | sources iOS différentes : Santé (HealthKit) au lieu de Health Connect ; 27/10 : `canOpenURL` appelé avec des noms de paquets Android, refusés par iOS ; carte « Lecture du visage » en erreur (plugin absent) → I2 |
 | Données (export / import JSON et CSV) | 🟡 | partage de fichier iOS (`@capacitor/filesystem` + feuille de partage) |
 | Paramètres, mode diagnostic caché (7 touches) | 🟡 | |
-| Premium / paywall | ❌ | prix lus dans StoreKit, jamais codés en dur |
+| Premium / paywall | ❌ | prix lus dans StoreKit, jamais codés en dur ; 27/10 : affiche « L'abonnement se prend depuis la version Google Play de l'app » (texte de la sideload) → I2 |
 | Nouveautés | 🟡 | `variants: ["appstore"]`, historique iOS depuis le lancement iOS |
 | Confidentialité, conditions | 🟡 | textes à rendre exacts pour iOS (iCloud au lieu de la sauvegarde Android, HealthKit) |
 

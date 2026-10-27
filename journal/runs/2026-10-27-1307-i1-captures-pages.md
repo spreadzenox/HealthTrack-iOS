@@ -1,6 +1,6 @@
 # 2026-10-27 13:07 UTC — I1 : captures de chaque page sur iPhone simulé
 
-**Étape** : I1 (suite)  ·  **PR** : #2  ·  **Android suivi** : v518  ·  **iOS** : 518.<n> (simulateur)  ·  **Parité** : à calculer (I2)
+**Étape** : I1 (suite)  ·  **PR** : #2 (ouverte, pas mergée : captures décalées)  ·  **Android suivi** : v518  ·  **iOS** : 518.<n> (simulateur)  ·  **Parité** : à calculer (I2)
 
 ## Ce qu'Android a livré depuis le run précédent
 - #432 (journal) et #433 « lecture au déverrouillage dans les versions de test interne » (workflow et scripts Play
@@ -24,10 +24,30 @@
 - `scripts/upstream.sh` ✅ (2 correctifs) · Tests d'Android avec correctifs : 2571 ✅ (44 ignorés) · Build web appstore
   avec et sans mode captures ✅ · Build iOS et captures : CI de la PR (voir la suite).
 
+## Captures regardées (branche `captures/pr-2`, build 518.7) — résultat partiel
+- Le parcours marche (18 pages annoncées sur chaque iPhone, **aucune erreur JavaScript**), mais **les captures sont
+  décalées** : « accueil » montre le Journal, « food » la page Sources, et « nutrition », « data », « connectors »,
+  « recommendations » et « settings » montrent toutes les Paramètres. Cause probable : la console relayée par
+  `simctl launch --console-pty` arrive par paquets, la capture part trop tard. Pas de merge tant que ce n'est pas
+  fiable.
+- Ce que montrent quand même les captures, à traiter en I2 :
+  - **Premium** : « L'abonnement se prend depuis la version Google Play de l'app » : texte faux sur iPhone (la
+    variante appstore n'a pas encore d'abonnement, elle tombe sur le texte prévu pour la sideload).
+  - **Sources** : la détection des apps installées appelle `canOpenURL` avec des noms de paquets Android
+    (`com.huawei.health`, `com.garmin.android.apps.connectmobile`…), refusés par iOS (« Invalid input URL ») ; il
+    faudra des schémas iOS déclarés dans `LSApplicationQueriesSchemes`, ou masquer la détection.
+  - **Sources, carte « Lecture du visage »** : « Le module de lecture du visage ne répond pas » (plugin natif absent
+    sur iOS) : repli propre attendu en I2, la vraie lecture en I7.
+  - Bien : Accueil en sombre, Tendances, Données de la montre, Historique du bien-être, Réintroduction guidée et
+    Réglages s'affichent proprement sur 390 × 844 (zones sûres, barre d'onglets, polices).
+
 ## Apprentissages / décisions
 - La capture « sombre » du run précédent était en clair parce que Halcya est en clair par défaut et que le sombre est
   un réglage de l'app (`healthtrack_theme`), comme sur Android : pas un défaut iOS.
 
-## Suite proposée
-- Regarder les captures de chaque page, noter les défauts propres à iOS dans `PARITE.md`, puis I2 (replis des
-  plugins Android absents) en commençant par les pages qui montrent une erreur.
+## Suite proposée (prochain run, sur cette même PR #2)
+- Synchronisation fiable : l'app écrit « page prête : <nom> » dans un fichier de ses Documents
+  (`@capacitor/filesystem`, déjà présent) ; le script lit ce fichier dans le conteneur de l'app sur le Mac
+  (`xcrun simctl get_app_container <udid> fr.jpesquet.sante data`), capture, puis écrit un accusé que l'app attend
+  avant de passer à la page suivante. Ensuite regarder chaque capture, merger, et attaquer I2 par les trois défauts
+  ci-dessus.
