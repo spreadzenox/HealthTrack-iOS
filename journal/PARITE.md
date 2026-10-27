@@ -8,7 +8,7 @@
 Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) · 🟡 partiel ou pas encore vérifié ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
-**Parité** : **20 %** au 27/10 16:45 (9 ✅ sur 45 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
+**Parité** : **19 %** au 27/10 16:55 (9 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
 **Dernière version Android suivie** : v522 (commit `efcdb21`, 27/10/2026), voir `upstream.json`.
@@ -41,8 +41,18 @@ vérifié sur iOS.
 | Données (export / import JSON et CSV) | 🟡 | partage de fichier iOS (`@capacitor/filesystem` + feuille de partage) ; 27/10 : hors Android, l'export passe par un lien de téléchargement que WKWebView ignore → I2/I3 ; texte « sauvegarde Google » retiré (PR #3) |
 | Paramètres, mode diagnostic caché (7 touches) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, en clair), gestes à confirmer sur l'iPhone 12 |
 | Premium / paywall | ❌ | prix lus dans StoreKit, jamais codés en dur ; 27/10 : affiche « L'abonnement se prend depuis la version Google Play de l'app » (texte de la sideload) → PR #3 : « Sur iPhone, l'abonnement par l'App Store arrive bientôt » |
+| Période de lancement (premium offert jusqu'au 20/11, Nouveautés du 24 et 25/10) | 🟡 | sur iPhone, `premium = !FEATURES.billing || …` ouvre déjà tout le premium tant que l'abonnement App Store n'existe pas (I6) ; après le 20/11, Android le fera payer et iOS non : à aligner en I6 |
+| « Donnez-nous votre avis » (Nouveautés du 25/10) | 🟡 | code web partagé, lien à essayer depuis l'iPhone |
 | Nouveautés | 🟡 | `variants: ["appstore"]`, historique iOS depuis le lancement iOS |
 | Confidentialité, conditions | 🟡 | textes à rendre exacts pour iOS (iCloud au lieu de la sauvegarde Android, HealthKit) |
+
+**Nouveautés d'Android (206 entrées au 27/10, toutes visibles dans la variante play)** : 77 touchent au natif.
+Elles se rangent dans les lignes de §3 : montre Huawei en direct (≈ 35 entrées, 11→25/10), capteurs Bluetooth
+(12/10), temps d'écran et sommeil estimé du téléphone (12/10), lecture du visage (≈ 12 entrées, 18→23/10),
+notifications (note du soir 19/10, bilan du ventre 26/10, rappel de portion 26/10, fin d'essai 24/10), abonnement
+et premium (23→27/10), sauvegarde du téléphone (10 et 24/10), Health Connect (23/10), mise à jour en un clic (20/10,
+sideload : —), diagnostic de la voix (20/10). Les 129 autres sont du code web partagé (repas, nutrition, FODMAP,
+analyses, journal, Accueil) : ils arrivent avec `upstream.json` et sont couverts par les lignes d'écrans de §2.
 
 ## 3. Natif : plugins et services
 
@@ -51,7 +61,7 @@ vérifié sur iOS.
 | Santé : imports et historique | Health Connect (`@capgo/capacitor-health`, patch Android) | HealthKit (le même plugin annonce le support iOS — à vérifier type par type) | ❌ | I4 ; capacité HealthKit, textes `NSHealthShareUsageDescription` |
 | Abonnement | `PlayBillingPlugin` (play) | StoreKit 2 (plugin Swift) | ❌ | I6 ; mêmes formules, essai 14 j |
 | Vérification des achats par le relais | Play Developer API, RTDN | JWS signés par Apple vérifiés par le relais, App Store Server Notifications V2 | ❌ | I6 ; le relais est dans HealthTrack : `DEMANDES.md` |
-| Anti-abus des crédits IA | `PlayIntegrityPlugin` | App Attest (DeviceCheck) | ❌ | I6 ; vérification côté relais : `DEMANDES.md` |
+| Anti-abus des crédits IA | `PlayIntegrityPlugin` | App Attest (DeviceCheck) | ❌ | I6 ; vérification côté relais : `DEMANDES.md`. 27/10 : le relais est en `INTEGRITY_MODE=observe` (`relay-deploy.yml`), l'analyse des repas passe donc sans jeton depuis l'iPhone ; en `enforce`, elle serait refusée (403) tant qu'App Attest n'est pas accepté |
 | Rappel de fin d'essai | `TrialReminderPlugin` | notification locale | ❌ | I5/I6 |
 | Bilan du ventre du soir (notification à actions) | `GutEveningPlugin` | `UNNotificationCategory` + actions, réponse rangée à l'ouverture | ❌ | I5 |
 | Note du soir | `EveningNotePlugin` | idem | ❌ | I5 |
