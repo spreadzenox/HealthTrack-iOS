@@ -23,3 +23,5 @@
 ## Vérifications
 - `scripts/upstream.sh` ✅ (14 correctifs) · suite d'Android avec les correctifs : 2635 ✅ (44 ignorés) · build web
   `appstore` ✅ · build iOS et captures : CI de la PR #10.
+- PR #10 : CI ✅ sur `880fae5` (2635 tests, 48 captures, **0 erreur JavaScript**) ; « Mes appareils » : « … activez
+  ce partage vers l'app Santé dans … », bouton de restauration toujours présent → mergée.
