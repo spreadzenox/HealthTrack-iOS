@@ -88,6 +88,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 27/10 16:25 | #437 (v522) | versionCode Play = 100000 + commits (le numéro affiché reste 522) : sans objet sur iOS, qui suit le numéro affiché (charte §4) ; lecture au déverrouillage rallumée en test interne : Android seul (⛔ sur iOS) | — |
 | 27/10 15:40 | #434 à #436 (v521) | #436 « pas de rapport PDF vide dans Analyses » : code web partagé, arrive tel quel ; à noter pour I2 : `saveAndShareReport` ne prévoit le natif que pour Android (sur iOS, téléchargement web, à vérifier dans WKWebView) ; #434 et #435 : scripts Play et journal, sans objet | 🟡 |
 | 27/10 14:05 | #432, #433 (v518) | #433 « lecture au déverrouillage dans les versions de test interne » : workflow et scripts Play seulement, sans objet sur iOS (lecture au déverrouillage ⛔) ; #432 journal seul | — |
 | 27/10 13:00 | #430, #431 (v516) | #431 « pas et kcal du jour : une source par heure » : code web partagé, arrive tel quel (vaudra aussi pour les sources Santé d'iOS) ; la partie kcal de la montre Huawei attend I8 ; #430 journal seul | 🟡 à vérifier en capture |

@@ -106,7 +106,9 @@ Règles des adaptations :
 ### 4. Version
 
 - **Numéro de version iOS** (`CFBundleShortVersionString`) = le `versionCode` Android suivi (ex. `514`) : le même
-  nombre que sur Google Play, affiché aussi dans Paramètres (`VITE_APP_VERSION`).
+  nombre que sur Google Play, affiché aussi dans Paramètres (`VITE_APP_VERSION`). Depuis le 27/10 (Android #437),
+  la variante play affiche ce nombre (`versionName` = commits de `main`) mais envoie à Google Play un `versionCode`
+  de 100000 + ce nombre ; `upstream.json` garde le nombre affiché, qui reste celui d'iOS.
 - **Numéro de build** (`CFBundleVersion`) = `<versionCode Android>.<nombre de commits de ce dépôt>` (ex. `514.12`) :
   toujours croissant, même quand seul le code iOS change.
 - **Même version** = la dernière build iOS publiée suit le dernier commit envoyé sur Google Play, et `PARITE.md`
