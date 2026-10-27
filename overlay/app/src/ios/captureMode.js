@@ -18,14 +18,20 @@ export const ROUTES = ['/', '/journal', '/tendances', '/food', '/nutrition', '/d
 export const DARK_ROUTES = ['/', '/journal', '/recommendations']
 // Pages longues : écrans suivants, défilés d'environ 80 % de l'écran chacun (`-2`, `-3`…)
 export const SCROLLS = { '/connectors': 2, '/data': 1, '/settings': 1 }
+// Volets repliés à ouvrir puis capturer : bouton touché (`click`, texte exact), `<details>` ouvert (`open`, id),
+// élément amené en haut de l'écran (`target`, id)
+export const REVEALS = {
+  '/connectors': [{ name: 'guides', click: 'Ajouter une source', open: 'guide-garmin', target: 'watch-guides-title' }],
+}
 
 const pageName = (route) => route.replace(/^\//, '') || 'accueil'
 
-export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS) {
+export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS, reveals = REVEALS) {
   const light = (route) => {
     const base = { name: `demo-clair-${pageName(route)}`, route, data: 'demo', theme: 'light' }
     const more = Array.from({ length: scrolls[route] || 0 }, (_, k) => ({ ...base, name: `${base.name}-${k + 2}`, scroll: k + 1 }))
-    return [base, ...more]
+    const opened = (reveals[route] || []).map((reveal) => ({ ...base, name: `${base.name}-${reveal.name}`, reveal }))
+    return [base, ...more, ...opened]
   }
   return [
     { name: 'vierge-onboarding', route: null, data: null, theme: null },
@@ -57,6 +63,10 @@ export async function runCaptureStep(plan, deps, { settleMs = 5000 } = {}) {
   await wait(settleMs)
   if (step.scroll) {
     scroll(step.scroll)
+    await wait(800)
+  }
+  if (step.reveal) {
+    await deps.reveal(step.reveal)
     await wait(800)
   }
   log(`[capture] page ${step.name}`)
@@ -110,6 +120,12 @@ export async function installCaptureMode() {
       localStorage: window.localStorage,
       go: (path) => window.location.assign(path),
       scroll: (screens) => window.scrollTo({ top: screens * Math.round(window.innerHeight * 0.8), behavior: 'instant' }),
+      reveal: async ({ click, open, target }) => {
+        ;[...document.querySelectorAll('button')].find((b) => b.textContent.trim() === click)?.click()
+        await sleep(800) // le volet s'affiche au rendu suivant
+        document.getElementById(open)?.setAttribute('open', '')
+        document.getElementById(target)?.scrollIntoView({ block: 'start', behavior: 'instant' })
+      },
       log: (message) => console.log(message),
       wait: sleep,
       signal: (name) => Filesystem.writeFile({ ...file, path: READY, data: name, recursive: true }),
