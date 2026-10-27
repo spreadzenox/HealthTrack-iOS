@@ -1,0 +1,26 @@
+diff --git a/app/src/main.jsx b/app/src/main.jsx
+index b846d1f..ced8e02 100644
+--- a/app/src/main.jsx
++++ b/app/src/main.jsx
+@@ -15,6 +15,8 @@ import { getLang } from './i18n/locale.js'
+ initTheme()
+ // Version iOS : mode « captures » du simulateur (HealthTrack-iOS, VITE_IOS_CAPTURE=1), absent de toute autre build
+ if (import.meta.env.VITE_IOS_CAPTURE === '1') import('./ios/captureMode.js').then((m) => m.installCaptureMode())
++// Version iOS : copie de secours de la base (IndexedDB n'est pas durable dans WKWebView), absente de toute autre build
++if (import.meta.env.VITE_DISTRIBUTION === 'appstore') import('./ios/snapshot.js').then((m) => m.startSnapshots())
+ // Langue du document (lecteurs d'écran, césure) : « fr » sauf si l'anglais est choisi (jalon 9)
+ document.documentElement.lang = getLang()
+ 
+diff --git a/app/src/pages/Data.jsx b/app/src/pages/Data.jsx
+index cfa2106..e9f0803 100644
+--- a/app/src/pages/Data.jsx
++++ b/app/src/pages/Data.jsx
+@@ -207,7 +207,7 @@ export default function Data() {
+       <p className="page-intro">
+         Vos données restent <strong>sur cet appareil</strong> et survivent aux mises à jour.{' '}
+         {FEATURES.iosStore ? (
+-          'Avant de réinstaller ou de changer de téléphone, exportez-les.'
++          `Une copie de secours est tenue à jour dans l’app Fichiers › Sur mon iPhone › ${APP_NAME} ; avant de réinstaller ou de changer de téléphone, exportez-les aussi.`
+         ) : (
+           <>
+             Si la sauvegarde Google du téléphone est activée, elles y sont incluses (chiffrées, gérées par Android,

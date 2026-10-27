@@ -21,5 +21,7 @@ describe('Vos données sur iPhone (variante appstore)', () => {
     const intro = screen.getByText(/survivent aux mises à jour/)
     expect(intro).toHaveTextContent(/changer de téléphone, exportez-les/)
     expect(intro).not.toHaveTextContent(/Google|Android/)
+    // Copie de secours tenue à jour par l'app (overlay/app/src/ios/snapshot.js)
+    expect(intro).toHaveTextContent(/copie de secours est tenue à jour dans l’app Fichiers › Sur mon iPhone › Halcya/)
   })
 })
