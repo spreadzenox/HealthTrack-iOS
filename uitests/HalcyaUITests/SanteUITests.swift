@@ -17,11 +17,15 @@ final class SanteUITests: XCTestCase {
             XCTFail("« Tout activer » introuvable sur la feuille de l'app Santé")
             return
         }
-        toutActiver.tap()
-
         let autoriser = halcya.buttons["Autoriser"]
-        XCTAssertTrue(autoriser.waitForExistence(timeout: 10), "bouton « Autoriser » absent")
-        attendre(autoriser, "isEnabled == true", 10)
+        // Un toucher pendant l'animation de la feuille peut se perdre (CI du 27/10, iPhone 17 Pro) : on retouche
+        // « Tout activer » tant qu'« Autoriser » reste grisé, trois fois au plus
+        var actif = false
+        for _ in 1...3 where !actif {
+            if toutActiver.exists { toutActiver.tap() } // une fois pris, le libellé peut changer
+            actif = XCTWaiter().wait(for: [condition(autoriser, "isEnabled == true")], timeout: 5) == .completed
+        }
+        XCTAssertTrue(actif, "« Autoriser » toujours grisé après trois touchers sur « Tout activer »")
         autoriser.tap()
         attendre(autoriser, "exists == false", 15)
     }
@@ -31,8 +35,12 @@ final class SanteUITests: XCTestCase {
         halcya.descendants(matching: .any).matching(NSPredicate(format: "label == %@", label)).firstMatch
     }
 
-    private func attendre(_ element: XCUIElement, _ condition: String, _ timeout: TimeInterval) {
-        let attente = XCTNSPredicateExpectation(predicate: NSPredicate(format: condition), object: element)
-        XCTAssertEqual(XCTWaiter().wait(for: [attente], timeout: timeout), .completed, "« \(condition) » non atteint")
+    private func condition(_ element: XCUIElement, _ predicate: String) -> XCTNSPredicateExpectation {
+        XCTNSPredicateExpectation(predicate: NSPredicate(format: predicate), object: element)
+    }
+
+    private func attendre(_ element: XCUIElement, _ predicate: String, _ timeout: TimeInterval) {
+        let atteint = XCTWaiter().wait(for: [condition(element, predicate)], timeout: timeout)
+        XCTAssertEqual(atteint, .completed, "« \(predicate) » non atteint")
     }
 }
