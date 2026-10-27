@@ -8,7 +8,7 @@
 Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) · 🟡 partiel ou pas encore vérifié ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
-**Parité** : **19 %** au 27/10 16:55 (9 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
+**Parité** : **23 %** au 27/10 17:45 (11 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
 **Dernière version Android suivie** : v524 (commit `f56660a`, 27/10/2026), voir `upstream.json`.
@@ -19,10 +19,10 @@ vérifié sur iOS.
 |---|---|---|---|---|
 | Projet natif | `app/android` (Capacitor 8) | `ios/` de ce dépôt (Capacitor iOS 8.2, Swift Package Manager, 6 plugins iOS), copié dans `upstream/app/ios` | ✅ | créé le 27/10 ; build Xcode 26.6 ✅ (PR #1) |
 | Build CI | `Play — AAB` (signé, `main`) | `ios-build.yml` : tests d'Android avec correctifs (Ubuntu) + build simulateur et captures (macOS, branche `captures/…`) | ✅ | simulateur (PR #1) ; signé en I9 |
-| Numéro de version | `git rev-list --count HEAD` | même nombre en `CFBundleShortVersionString` (`MARKETING_VERSION`), build `<android>.<ios>` (`CURRENT_PROJECT_VERSION`) | 🟡 | passés à `xcodebuild` par le workflow ; affichage à vérifier en capture |
+| Numéro de version | `git rev-list --count HEAD` | même nombre en `CFBundleShortVersionString` (`MARKETING_VERSION`), build `<android>.<ios>` (`CURRENT_PROJECT_VERSION`) | ✅ | passés à `xcodebuild` par le workflow ; affichage à vérifier en capture ; 27/10 : « Version 524 » affiché en bas de Paramètres sur iPhone simulé (captures défilées, PR #5) |
 | Nom « Halcya », icône « H nuit », écran de démarrage | ✅ | `CFBundleDisplayName` Halcya, AppIcon 1024 opaque et écran de démarrage encre générés depuis le glyphe d'Android (`scripts/ios-icons.mjs`) | 🟡 | à vérifier sur l'écran d'accueil d'un simulateur |
 | Variante de distribution | `play` | `appstore` (`patches/01-variante-appstore.patch`) | ✅ | comme play (relais IA, visage à l'ouverture, pas d'auto-mise à jour), sans abonnement jusqu'à I6 ; tests `overlay/…/distribution.appstore.test.js` |
-| Zones sûres, barres système | `SystemBarsPlugin`, `--safe-top/--safe-bottom` | encoche / Dynamic Island / indicateur d'accueil | 🟡 | onboarding et Accueil corrects sur 16e et 17 Pro (27/10) ; bas de l'onboarding sur 390 × 844 à revoir (I2). Thème : clair par défaut comme Android, le sombre est un réglage de l'app (pas un défaut) |
+| Zones sûres, barres système | `SystemBarsPlugin`, `--safe-top/--safe-bottom` | encoche / Dynamic Island / indicateur d'accueil | ✅ | onboarding et Accueil corrects sur 16e et 17 Pro (27/10) ; bas de l'onboarding sur 390 × 844 à revoir (I2). Thème : clair par défaut comme Android, le sombre est un réglage de l'app (pas un défaut) ; 27/10 : en-tête sous la barre d'état et la Dynamic Island, barre d'onglets au-dessus de l'indicateur d'accueil, icônes de la barre d'état lisibles en sombre (captures iPhone 16e et 17 Pro, PR #5) ; geste de retour à vérifier sur l'iPhone 12 |
 | Mise à jour de l'app | Play Store | App Store | — | pas de bandeau de mise à jour |
 
 ## 2. Écrans (code web partagé : arrivent avec le socle, à vérifier en captures)
@@ -37,7 +37,7 @@ vérifié sur iOS.
 | Analyses (pistes repas → ventre, délais) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, clair et sombre), gestes à confirmer sur l'iPhone 12 |
 | Réintroduction FODMAP guidée | ✅ | rappel de portion : voir §3 ; 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, en clair), gestes à confirmer sur l'iPhone 12 |
 | Rapport PDF médecin | 🟡 | partage / enregistrement du fichier sur iOS : `saveAndShareReport` n'écrit dans Documents + feuille de partage que sur Android ; sur iOS il tente un téléchargement web (à vérifier, sinon correctif I2) |
-| Sources (détection automatique) | 🟡 | sources iOS différentes : Santé (HealthKit) au lieu de Health Connect ; 27/10 : `canOpenURL` appelé avec des noms de paquets Android, refusés par iOS ; carte « Lecture du visage » en erreur (plugin absent) → I2 |
+| Sources (détection automatique) | 🟡 | sources iOS différentes : Santé (HealthKit) au lieu de Health Connect ; 27/10 : `canOpenURL` appelé avec des noms de paquets Android, refusés par iOS ; carte « Lecture du visage » en erreur (plugin absent) → I2 ; 27/10 (captures défilées) : la carte Health Connect garde sa description Android (« Importe ce que vos apps santé écrivent dans Health Connect… ») → I4 (HealthKit) |
 | Données (export / import JSON et CSV) | 🟡 | partage de fichier iOS (`@capacitor/filesystem` + feuille de partage) ; 27/10 : hors Android, l'export passe par un lien de téléchargement que WKWebView ignore → I2/I3 ; texte « sauvegarde Google » retiré (PR #3) |
 | Paramètres, mode diagnostic caché (7 touches) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, en clair), gestes à confirmer sur l'iPhone 12 |
 | Premium / paywall | ❌ | prix lus dans StoreKit, jamais codés en dur ; 27/10 : affiche « L'abonnement se prend depuis la version Google Play de l'app » (texte de la sideload) → PR #3 : « Sur iPhone, l'abonnement par l'App Store arrive bientôt » |

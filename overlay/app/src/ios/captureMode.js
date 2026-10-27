@@ -17,7 +17,7 @@ export const ROUTES = ['/', '/journal', '/tendances', '/food', '/nutrition', '/d
   '/settings', '/plus', '/montre', '/premium', '/bien-etre', '/reintroduction']
 export const DARK_ROUTES = ['/', '/journal', '/recommendations']
 // Pages longues : écrans suivants, défilés d'environ 80 % de l'écran chacun (`-2`, `-3`…)
-export const SCROLLS = { '/connectors': 3, '/data': 2, '/settings': 2 }
+export const SCROLLS = { '/connectors': 2, '/data': 1, '/settings': 1 }
 
 const pageName = (route) => route.replace(/^\//, '') || 'accueil'
 
