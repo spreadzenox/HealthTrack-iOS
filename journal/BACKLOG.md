@@ -42,7 +42,8 @@
   de partage (y compris d'un téléphone Android vers un iPhone), secrets dans le Trousseau (ThisDeviceOnly).
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS
   vérifié, mêmes méthodes et types que le connecteur ; **VFC en SDNN sur iOS contre RMSSD sur Android**, à ne pas
-  mélanger ; voir `RECHERCHE.md`) :
+  mélanger ; voir `RECHERCHE.md`. 27/10 : **HealthKit marche sur simulateur sans compte Apple** (build signée à la
+  volée, feuille d'autorisation capturée, PR #7) : I4 peut avancer avant A1) :
   mêmes types que Health Connect, historique, autorisations au bon moment avec divulgation.
 - [ ] **I5 — Notifications** : bilan du ventre du soir, note du soir, rappel de portion, rappel de fin d'essai ;
   actions dans la notification, réponse rangée à l'ouverture suivante.

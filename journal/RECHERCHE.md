@@ -54,3 +54,19 @@ que l'import, `parseBackup`). À vérifier sur la CI : où WKWebView range Index
   distincts, libellé « VFC (SDNN) », tests sur les vecteurs du modèle de bien-être).
 - Autorisations : sans entitlement `com.apple.developer.healthkit`, HealthKit refuse ; une build simulateur signée
   à la volée (`CODE_SIGN_IDENTITY=-`) devrait embarquer l'entitlement sans compte Apple — essai à faire sur la CI.
+
+## Essai : HealthKit sur simulateur sans compte Apple (CI de la PR #7, 27/10/2026)
+
+- Build simulateur signée à la volée (`CODE_SIGN_IDENTITY=-`, `CODE_SIGN_ENTITLEMENTS=App/App.entitlements` avec
+  `com.apple.developer.healthkit`) : **réussie**, sans équipe ni profil.
+- Sonde en fin de parcours (`@capgo/capacitor-health`), identique sur l'iPhone 16e et l'iPhone 17 Pro :
+  `isAvailable` → `{"available":true,"platform":"ios"}` ; `checkAuthorization` → tout en `readDenied` (HealthKit ne
+  dit jamais si la lecture est accordée, c'est attendu avant la demande) ; `requestAuthorization` → pas d'erreur
+  d'entitlement, la feuille « Health Access — "Halcya" would like to access… » s'affiche (capturée sur l'iPhone
+  16e : fréquence cardiaque, VFC, sommeil…).
+- `codesign -d --entitlements` ne montre rien (`[Dict]`) : pour le simulateur, Xcode range les entitlements dans
+  une section du binaire et non dans la signature ; c'est bien ce qui compte pour HealthKit d'après le résultat.
+- **Conséquence** : I4 (lecture de l'app Santé) peut se développer et se vérifier sur simulateur avant A1. Les
+  données de santé du simulateur sont vides : il faudra en écrire (plugin `saveSample` ou données de démo) pour
+  tester les imports.
+- La feuille est en anglais car le simulateur l'est : passer les simulateurs en français pour des captures fidèles.
