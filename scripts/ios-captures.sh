@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Installe l'app (build simulateur avec VITE_IOS_CAPTURE=1) sur deux simulateurs : un iPhone de 390 × 844 points
 # comme l'iPhone 12 de test, et un iPhone récent. L'app parcourt elle-même ses pages (overlay/app/src/ios/
-# captureMode.js) et écrit « [capture] page <nom> » dans sa console : on capture l'écran à chaque annonce, jusqu'à
-# « [capture] fin ». La console est enregistrée ; ses erreurs JavaScript sont résumées dans js-errors.txt.
+# captureMode.js) : quand une page est prête, elle écrit son nom dans Documents/capture/ready.txt de son conteneur ;
+# on capture l'écran, puis on répond dans Documents/capture/ack.txt, et l'app passe à la suite, jusqu'à « fin ».
+# La console est enregistrée ; ses erreurs JavaScript sont résumées dans js-errors.txt.
 #   scripts/ios-captures.sh <chemin/App.app> <dossier de sortie>
 set -euo pipefail
 APP="$1"; OUT="$2"; BUNDLE="fr.jpesquet.sante"
@@ -33,20 +34,21 @@ run_device() { # <udid> <nom>
   xcrun simctl install "$udid" "$APP"
   xcrun simctl launch --console-pty --terminate-running-process "$udid" "$BUNDLE" > "$log" 2>&1 &
   pid=$!
-  deadline=$((SECONDS + 600))
+  data="$(xcrun simctl get_app_container "$udid" "$BUNDLE" data)"
+  mkdir -p "$data/Documents/capture"
+  deadline=$((SECONDS + 600)); last=""
   while [ "$SECONDS" -lt "$deadline" ]; do
-    # (pas de mapfile : le bash de macOS peut être la 3.2)
-    count="$(grep -cE '\[capture\] page [a-z0-9-]+' "$log" || true)"
-    while [ "$seen" -lt "${count:-0}" ]; do
-      page="$(grep -oE '\[capture\] page [a-z0-9-]+' "$log" | sed -n "$((seen + 1))p" | awk '{print $3}')"
+    page="$(cat "$data/Documents/capture/ready.txt" 2>/dev/null || true)"
+    if [ -n "$page" ] && [ "$page" != "$last" ]; then
+      [ "$page" = fin ] && break
       xcrun simctl io "$udid" screenshot "$OUT/$dev-$page.png" >/dev/null
       echo "capture : $dev-$page.png"
-      seen=$((seen + 1))
-    done
-    grep -q '\[capture\] fin' "$log" && break
-    sleep 0.5
+      seen=$((seen + 1)); last="$page"
+      printf '%s' "$page" > "$data/Documents/capture/ack.txt"
+    fi
+    sleep 0.3
   done
-  grep -q '\[capture\] fin' "$log" || echo "::warning::$name : parcours des pages inachevé ($seen capture(s))"
+  [ "$(cat "$data/Documents/capture/ready.txt" 2>/dev/null)" = fin ] || echo "::warning::$name : parcours des pages inachevé ($seen capture(s))"
   xcrun simctl terminate "$udid" "$BUNDLE" 2>/dev/null || true
   sleep 1; kill "$pid" 2>/dev/null || true
   xcrun simctl shutdown "$udid" || true

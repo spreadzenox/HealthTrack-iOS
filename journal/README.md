@@ -39,6 +39,7 @@ via TestFlight.
 | 27/10 12:30 | mise en place | dépôt iOS, charte, parité, backlog, `scripts/upstream.sh` | (commit initial) |
 | 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, build simulateur + captures (onboarding et Accueil OK) | #1 |
 | 27/10 14:05 | I1 captures | parcours de 18 pages sans erreur JavaScript, mais captures décalées : PR laissée ouverte, synchronisation à fiabiliser | #2 (ouverte) |
+| 27/10 15:40 | I1 captures (suite) | synchronisation par fichier + accusé ; projet iOS prioritaire (runs pleins) | #2 |
 
 ---
 

@@ -21,6 +21,8 @@ function deps(local, overrides = {}) {
     go: vi.fn(),
     log: vi.fn(),
     wait: async () => {},
+    signal: vi.fn(async () => {}),
+    waitAck: vi.fn(async () => true),
     ...overrides,
   }
 }
@@ -63,5 +65,23 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
     expect(d.go).not.toHaveBeenCalled()
     await runCaptureStep(plan, d)
     expect(d.go).not.toHaveBeenCalled()
+  })
+
+  it('chaque page est signalée au script, et l’app attend son accusé avant de passer à la suivante', async () => {
+    const plan = buildPlan(['/'], [])
+    const local = memoryStorage()
+    const order = []
+    const d = deps(local, {
+      signal: vi.fn(async (name) => order.push(`signal ${name}`)),
+      waitAck: vi.fn(async (name) => {
+        order.push(`ack ${name}`)
+        return true
+      }),
+      go: vi.fn((route) => order.push(`go ${route}`)),
+    })
+    await runCaptureStep(plan, d)
+    expect(order).toEqual(['signal vierge-onboarding', 'ack vierge-onboarding', 'go /'])
+    await runCaptureStep(plan, d)
+    expect(order.slice(3)).toEqual(['signal demo-clair-accueil', 'ack demo-clair-accueil', 'signal fin'])
   })
 })

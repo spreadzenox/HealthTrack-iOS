@@ -21,7 +21,8 @@
     d'Android, en clair et quelques-unes en sombre, onboarding d'une installation vierge, parcours piloté par l'app
     elle-même (`captureMode.js`), console JavaScript relayée dans `js-errors.txt` ; reste : états vides de chaque page, et faire échouer la build sur erreur JavaScript une fois
     le bruit connu)
-  - [ ] Captures synchronisées par fichier + accusé (PR #2 ouverte : captures décalées le 27/10, voir le compte rendu) (PR, push `main`, `workflow_dispatch`) : `scripts/upstream.sh`, `npm ci`,
+  - [~] Captures synchronisées par fichier + accusé (27/10 15:40 : `Documents/capture/ready.txt` → capture →
+    `ack.txt` ; à confirmer par la CI de la PR #2) (PR, push `main`, `workflow_dispatch`) : `scripts/upstream.sh`, `npm ci`,
     `npm run test`, build web (`VITE_DISTRIBUTION=appstore`), `cap sync ios`, `xcodebuild` pour le simulateur sans
     signature, lancement sur deux simulateurs (390 × 844 points comme l'iPhone 12 de test, et un récent), captures de
     chaque page (clair / sombre, données vierges / démo) en artefact, échec sur erreur JS ; `concurrency` qui annule

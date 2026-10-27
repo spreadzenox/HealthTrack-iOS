@@ -9,7 +9,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
 **Parité** : _à calculer en I2_ = ✅ / (toutes les lignes sauf ⛔ et —).
-**Dernière version Android suivie** : v518 (commit `288c641`, 27/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v521 (commit `27124b0`, 27/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -34,7 +34,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 | Nutrition (Ciqual) | 🟡 | |
 | Analyses (pistes repas → ventre, délais) | 🟡 | |
 | Réintroduction FODMAP guidée | 🟡 | rappel de portion : voir §3 |
-| Rapport PDF médecin | 🟡 | partage / enregistrement du fichier sur iOS |
+| Rapport PDF médecin | 🟡 | partage / enregistrement du fichier sur iOS : `saveAndShareReport` n'écrit dans Documents + feuille de partage que sur Android ; sur iOS il tente un téléchargement web (à vérifier, sinon correctif I2) |
 | Sources (détection automatique) | 🟡 | sources iOS différentes : Santé (HealthKit) au lieu de Health Connect ; 27/10 : `canOpenURL` appelé avec des noms de paquets Android, refusés par iOS ; carte « Lecture du visage » en erreur (plugin absent) → I2 |
 | Données (export / import JSON et CSV) | 🟡 | partage de fichier iOS (`@capacitor/filesystem` + feuille de partage) |
 | Paramètres, mode diagnostic caché (7 touches) | 🟡 | |
@@ -88,6 +88,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 27/10 15:40 | #434 à #436 (v521) | #436 « pas de rapport PDF vide dans Analyses » : code web partagé, arrive tel quel ; à noter pour I2 : `saveAndShareReport` ne prévoit le natif que pour Android (sur iOS, téléchargement web, à vérifier dans WKWebView) ; #434 et #435 : scripts Play et journal, sans objet | 🟡 |
 | 27/10 14:05 | #432, #433 (v518) | #433 « lecture au déverrouillage dans les versions de test interne » : workflow et scripts Play seulement, sans objet sur iOS (lecture au déverrouillage ⛔) ; #432 journal seul | — |
 | 27/10 13:00 | #430, #431 (v516) | #431 « pas et kcal du jour : une source par heure » : code web partagé, arrive tel quel (vaudra aussi pour les sources Santé d'iOS) ; la partie kcal de la montre Huawei attend I8 ; #430 journal seul | 🟡 à vérifier en capture |
 | 27/10 | jusqu'à #429 (v514) | point de départ : tout ce qui précède est couvert par les tableaux ci-dessus (à compléter en I2, notamment les livraisons du 26/10 au soir et du 27/10 : FODMAP par sous-groupe, i18n…) | — |
