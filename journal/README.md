@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v524 en test interne (27/10 16:53) | v524 sur iPhone simulé (27/10, PR #5) |
+| Dernière version | v525 en test interne (27/10 17:53) | v525 sur iPhone simulé (27/10, PR #6) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 23 % (11 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -54,6 +54,7 @@ via TestFlight.
 | 27/10 15:40 | I1 captures (suite) | synchronisation par fichier + accusé : les 36 captures correspondent à leur page ; projet iOS prioritaire (runs pleins) ; I2 : 7 replis iPhone et phrases d'usage | #2, #3 (ouverte) |
 | 27/10 16:22 | I2 Santé | suivi d'Android v522 ; PR #3 mergée ; sur iPhone, plus de Health Connect ni de montre Huawei en direct, sauvegarde et PDF par la feuille de partage, 8 services à plugin absent repliés ; parité 19 % | #3, #4 |
 | 27/10 17:10 | I2 captures, I3 copie de secours | suivi d'Android v524 ; captures des pages longues et du choix de la montre ; IndexedDB non durable sur iOS → copie de secours automatique | #5, #6 |
+| 27/10 18:00 | I3 (fin de la PR #6), essai I4 | suivi d'Android v525 ; lecture de l'app Santé : le module d'Android sert aussi sur iPhone, VFC à ne pas mélanger (SDNN contre RMSSD) ; essai HealthKit sur simulateur | #6, #7 |
 
 ---
 
