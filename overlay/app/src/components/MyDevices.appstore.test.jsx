@@ -15,4 +15,13 @@ describe('Mes appareils sur iPhone (variante appstore)', () => {
     expect(await screen.findByText(/Sur iPhone, Halcya lira bientôt vos mesures dans l’app Santé d’Apple/)).toBeInTheDocument()
     expect(screen.queryByText(/app Android/)).not.toBeInTheDocument()
   })
+
+  it('mesures jamais reçues : conseille le partage vers l’app Santé, pas vers Health Connect', async () => {
+    const at = new Date(Date.now() - 3600 * 1000).toISOString()
+    const hc = (type) => ({ source: 'health_connect', at, type, payload: { sourceName: 'Garmin Connect' } })
+    render(<MyDevices detect={async () => null} loadEntries={async () => [hc('sleep'), hc('heart_rate')]} />)
+    expect(await screen.findByText(/activez ce partage vers l’app Santé dans Garmin Connect/)).toBeInTheDocument()
+    expect(screen.queryByText(/Health Connect/)).not.toBeInTheDocument()
+  })
 })
+
