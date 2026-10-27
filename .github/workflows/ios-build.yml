@@ -41,6 +41,8 @@ jobs:
     name: Build iOS (simulateur) et captures
     runs-on: macos-latest
     timeout-minutes: 45
+    permissions:
+      contents: write # publication des captures sur la branche captures/<pr-N | main>
     steps:
       - uses: actions/checkout@v4
         with:
@@ -89,6 +91,22 @@ jobs:
             echo
             ls captures 2>/dev/null | sed 's/^/- /' || echo "Pas de capture."
           } >> "$GITHUB_STEP_SUMMARY"
+      # Les sessions de la routine ne peuvent pas toujours télécharger les artefacts (hébergement bloqué par leur
+      # réseau) : les captures sont aussi poussées, seules, sur une branche dédiée qu'on lit avec git.
+      - name: Publier les captures sur une branche dédiée
+        if: always() && hashFiles('captures/*.png') != ''
+        env:
+          BRANCH: captures/${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.ref_name }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cd captures
+          git init -q -b "$BRANCH"
+          git add -A
+          git -c user.name="ios-build" -c user.email="ios-build@users.noreply.github.com" \
+            commit -qm "Captures de ${GITHUB_SHA::7} (Android v$ANDROID_VERSION, build $IOS_BUILD)"
+          git -c http.extraheader="AUTHORIZATION: basic $(printf 'x-access-token:%s' "$GH_TOKEN" | base64)" \
+            push -qf "https://github.com/$GITHUB_REPOSITORY.git" "HEAD:refs/heads/$BRANCH"
+          echo "Captures : branche $BRANCH" >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
         with:
