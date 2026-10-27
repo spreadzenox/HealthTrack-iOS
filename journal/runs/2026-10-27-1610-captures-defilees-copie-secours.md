@@ -1,6 +1,6 @@
 # 2026-10-27 16:10 UTC — Captures défilées (I2), copie de secours de la base (I3)
 
-**Étape** : I2 (audit) puis I3 (données)  ·  **PR** : #5, #6  ·  **Android suivi** : v524  ·  **iOS** : 524 (simulateur)  ·  **Parité** : 19 % (9/47)
+**Étape** : I2 (audit) puis I3 (données)  ·  **PR** : #5, #6  ·  **Android suivi** : v524  ·  **iOS** : 524 (simulateur)  ·  **Parité** : 21 % (10/47)
 
 ## Déclenchement
 - Tâche planifiée de 15:59 UTC arrivée à 16:10. `main` vert après le merge de la PR #4 (run 18 ✅).
@@ -13,7 +13,10 @@
 ## Ce qui a été fait
 - PR #5 (I2) : le mode captures photographie aussi les écrans suivants des pages longues (Sources ×4, Vos données
   et Paramètres ×3, défilés d'environ 80 % de l'écran) et le 3e écran de l'onboarding vierge (choix de la montre) :
-  26 captures par iPhone au lieu de 18. Tests du plan écrits d'abord.
+  22 captures par iPhone au lieu de 18 (1re CI : derniers écrans en double et limite de 10 min atteinte sur
+  l'iPhone 16e → défilement réduit, limite à 15 min). Tests du plan écrits d'abord. Les captures défilées
+  montrent « Version 524 » en bas de Paramètres (numéro de version ✅, parité 21 %) et, dans Sources, la carte
+  Health Connect qui garde sa description Android (→ I4).
 - Recherche (I3) : IndexedDB n'est pas durable dans WKWebView (guide « Data Storage » de Capacitor ; politique de
   stockage de WebKit 2023 ; `navigator.storage.persist()` peu fiable) : sources et plan dans `RECHERCHE.md`.
 - PR #6 (I3, 1re partie) : `overlay/app/src/ios/snapshot.js` + correctif `11-copie-de-secours-iphone.patch`. Dans

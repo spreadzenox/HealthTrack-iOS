@@ -12,7 +12,7 @@
 |---|---|---|
 | Dernière version | v524 en test interne (27/10 16:53) | v524 sur iPhone simulé (27/10, PR #5) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | 19 % (9 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
+| Parité des fonctions | référence | 21 % (10 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **Ce qui a changé cette semaine**
 - **27/10 17:20 — une copie de secours de vos données sur iPhone** (PR #6) : sur iPhone, le système peut effacer
