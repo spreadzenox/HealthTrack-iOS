@@ -72,7 +72,7 @@ jobs:
           npm install --no-save --no-audit --no-fund "@capacitor/ios@$CORE"
           VITE_APP_VERSION="$ANDROID_VERSION" npm run build
           npx -y -p "@capacitor/cli@$CORE" cap sync ios # CLI de la même version que le runtime (modèles de projet identiques)
-      - name: Build Xcode (simulateur, sans signature)
+      - name: Build Xcode (simulateur, signature à la volée)
         working-directory: upstream/app/ios/App
         run: |
           set -o pipefail
@@ -80,8 +80,15 @@ jobs:
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath "$RUNNER_TEMP/dd" \
             MARKETING_VERSION="$ANDROID_VERSION" CURRENT_PROJECT_VERSION="$IOS_BUILD" \
-            CODE_SIGNING_ALLOWED=NO build 2>&1 | tee "$RUNNER_TEMP/xcodebuild.log" | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= PROVISIONING_PROFILE_SPECIFIER= \
+            CODE_SIGN_ENTITLEMENTS=App/App.entitlements \
+            build 2>&1 | tee "$RUNNER_TEMP/xcodebuild.log" | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" "$RUNNER_TEMP/xcodebuild.log"
+      - name: Entitlements embarqués (essai HealthKit, I4)
+        run: |
+          mkdir -p captures
+          codesign -d --entitlements - "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" > captures/entitlements.txt 2>&1 || true
+          cat captures/entitlements.txt
       - name: Captures sur simulateur
         run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures
       - name: Résumé
