@@ -38,6 +38,7 @@ via TestFlight.
 |---|---|---|---|
 | 27/10 12:30 | mise en place | dépôt iOS, charte, parité, backlog, `scripts/upstream.sh` | (commit initial) |
 | 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, build simulateur + captures (onboarding et Accueil OK) | #1 |
+| 27/10 14:05 | I1 captures | chaque page capturée sur iPhone simulé avec les données de démo, console JavaScript relevée | #2 |
 
 ---
 

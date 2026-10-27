@@ -1,0 +1,13 @@
+diff --git a/app/src/main.jsx b/app/src/main.jsx
+index d954d0d..b846d1f 100644
+--- a/app/src/main.jsx
++++ b/app/src/main.jsx
+@@ -13,6 +13,8 @@ import { checkRestore } from './services/restoreGuard'
+ import { getLang } from './i18n/locale.js'
+ 
+ initTheme()
++// Version iOS : mode « captures » du simulateur (HealthTrack-iOS, VITE_IOS_CAPTURE=1), absent de toute autre build
++if (import.meta.env.VITE_IOS_CAPTURE === '1') import('./ios/captureMode.js').then((m) => m.installCaptureMode())
+ // Langue du document (lecteurs d'écran, césure) : « fr » sauf si l'anglais est choisi (jalon 9)
+ document.documentElement.lang = getLang()
+ 
