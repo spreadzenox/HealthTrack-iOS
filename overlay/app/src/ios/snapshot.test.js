@@ -58,13 +58,19 @@ describe('copie de secours de la base sur iPhone', () => {
 })
 
 describe('lecture de la copie de secours', () => {
-  it('rend son contenu et sa date, ou null sans copie', async () => {
+  it('rend son contenu et sa date, trouvés en listant Documents', async () => {
     const { readSnapshot } = await import('./snapshot.js')
     const fs = {
-      stat: vi.fn(async () => ({ mtime: Date.parse('2026-10-27T10:00:00Z') })),
+      list: vi.fn(async () => [{ name: 'autre.json', mtime: 1 }, { name: SNAPSHOT_FILE, mtime: Date.parse('2026-10-27T10:00:00Z') }]),
       readFile: vi.fn(async () => ({ data: '{"entries":[1]}' })),
     }
     expect(await readSnapshot(fs)).toEqual({ text: '{"entries":[1]}', savedAt: '2026-10-27T10:00:00.000Z' })
-    expect(await readSnapshot({ ...fs, stat: vi.fn(async () => { throw new Error('absent') }) })).toBeNull()
+  })
+
+  it('pas de copie : null, sans lire de fichier absent (Capacitor l’écrirait en erreur dans la console)', async () => {
+    const { readSnapshot } = await import('./snapshot.js')
+    const fs = { list: vi.fn(async () => [{ name: 'capture', mtime: 1 }]), readFile: vi.fn() }
+    expect(await readSnapshot(fs)).toBeNull()
+    expect(fs.readFile).not.toHaveBeenCalled()
   })
 })

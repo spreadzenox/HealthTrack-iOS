@@ -70,3 +70,18 @@ que l'import, `parseBackup`). À vérifier sur la CI : où WKWebView range Index
   données de santé du simulateur sont vides : il faudra en écrire (plugin `saveSample` ou données de démo) pour
   tester les imports.
 - La feuille est en anglais car le simulateur l'est : passer les simulateurs en français pour des captures fidèles.
+
+## Notifications à actions (I5) : plan (27/10/2026)
+
+- Android : trois plugins maison (`GutEvening`, `EveningNote`, `PortionReminder`, ≈ 800 lignes de Java) avec la même
+  interface vue du code partagé : `configure`, `status`, `list`, `remove`, `requestNotifications` (+ `schedule` et
+  `takeOpen` pour le rappel de portion). La réponse donnée depuis la notification est rangée côté natif (boîte de
+  réception) et vidée par l'app à l'ouverture suivante (`drainNativeInbox`).
+- iOS : mêmes noms de plugins et mêmes méthodes en Swift, dans le projet `ios/` (le code partagé ne change pas ;
+  `missingOnIos` les laisse revenir dès qu'ils existent). `UNUserNotificationCenter` : notification quotidienne
+  (`UNCalendarNotificationTrigger`), catégorie à actions (Calme / Gêne / Douleur…), réponses rangées dans
+  `UserDefaults` par le délégué de l'app, même sans ouvrir l'app (actions sans `.foreground`).
+- Tests : la logique (heure de la prochaine notification, boîte de réception) dans un paquet Swift local testé par
+  `swift test` sur le runner macOS (XCTest, sans cible de test à ajouter au projet Xcode) ; la colle Capacitor dans
+  l'app. Captures : la notification affichée (`simctl push` ne sert pas ici : notifications locales ; à capturer
+  depuis l'écran verrouillé du simulateur).

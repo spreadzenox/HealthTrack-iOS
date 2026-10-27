@@ -15,7 +15,7 @@ vi.mock('@capacitor/core', async (importOriginal) => ({
 vi.mock('@capacitor/filesystem', () => ({
   Filesystem: {
     writeFile: vi.fn().mockResolvedValue({ uri: 'file:///Documents/sauvegarde.json' }),
-    stat: vi.fn().mockRejectedValue(new Error('absent')),
+    readdir: vi.fn().mockResolvedValue({ files: [] }),
     readFile: vi.fn(),
   },
   Directory: { Documents: 'DOCUMENTS' },
@@ -45,7 +45,7 @@ describe('Sauvegarde sur iPhone', () => {
 
 describe('Restauration de la copie de secours sur iPhone', () => {
   it('la copie passe par le même aperçu que « Importer »', async () => {
-    Filesystem.stat.mockResolvedValue({ mtime: Date.now() - 2 * 3600 * 1000 })
+    Filesystem.readdir.mockResolvedValue({ files: [{ name: 'Halcya-copie-de-secours.json', mtime: Date.now() - 2 * 3600 * 1000 }] })
     Filesystem.readFile.mockResolvedValue({ data: '{"copie":true}' })
     parseBackup.mockReturnValue({
       entries: [{}, {}], invalid: 0, exportedAt: null, firstAt: '2026-10-01T08:00:00Z', lastAt: '2026-10-27T08:00:00Z',
