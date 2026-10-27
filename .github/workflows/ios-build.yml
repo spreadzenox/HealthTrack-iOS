@@ -65,6 +65,7 @@ jobs:
         working-directory: upstream/app
         env:
           VITE_DISTRIBUTION: appstore
+          VITE_IOS_CAPTURE: "1" # build simulateur : mode « captures » (overlay/app/src/ios/captureMode.js), jamais en TestFlight
         run: |
           npm ci --no-audit --no-fund
           CORE="$(node -p "require('@capacitor/core/package.json').version")"
@@ -89,7 +90,10 @@ jobs:
           {
             echo "## iOS — Android v${ANDROID_VERSION:-?} · build ${IOS_BUILD:-?}"
             echo
-            ls captures 2>/dev/null | sed 's/^/- /' || echo "Pas de capture."
+            echo "$(ls captures/*.png 2>/dev/null | wc -l | tr -d ' ') capture(s) ; erreurs JavaScript : $(cat captures/js-errors.txt 2>/dev/null | wc -l | tr -d ' ') ligne(s)"
+            echo '```'
+            head -20 captures/js-errors.txt 2>/dev/null || true
+            echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
       # Les sessions de la routine ne peuvent pas toujours télécharger les artefacts (hébergement bloqué par leur
       # réseau) : les captures sont aussi poussées, seules, sur une branche dédiée qu'on lit avec git.

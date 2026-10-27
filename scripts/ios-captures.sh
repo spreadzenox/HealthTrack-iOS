@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
-# Installe l'app sur deux simulateurs (un iPhone de 390 × 844 points comme l'iPhone 12 de test, et un iPhone récent),
-# la lance en thème clair puis sombre et enregistre une capture de chaque, plus le journal de l'app.
+# Installe l'app (build simulateur avec VITE_IOS_CAPTURE=1) sur deux simulateurs : un iPhone de 390 × 844 points
+# comme l'iPhone 12 de test, et un iPhone récent. L'app parcourt elle-même ses pages (overlay/app/src/ios/
+# captureMode.js) : quand une page est prête, elle écrit son nom dans Documents/capture/ready.txt de son conteneur ;
+# on capture l'écran, puis on répond dans Documents/capture/ack.txt, et l'app passe à la suite, jusqu'à « fin ».
+# La console est enregistrée ; ses erreurs JavaScript sont résumées dans js-errors.txt.
 #   scripts/ios-captures.sh <chemin/App.app> <dossier de sortie>
 set -euo pipefail
 APP="$1"; OUT="$2"; BUNDLE="fr.jpesquet.sante"
@@ -20,28 +23,42 @@ SMALL="$(pick "iPhone 16e" "iPhone 14" "iPhone 13" "iPhone 12" || true)"
 LARGE="$(pick "iPhone 17 Pro" "iPhone 17" "iPhone 16 Pro" "iPhone 16" "iPhone 15 Pro" || true)"
 [ -n "$SMALL$LARGE" ] || { echo "::error::Aucun simulateur iPhone disponible"; xcrun simctl list devices available; exit 1; }
 
-capture() { # <udid> <nom> <thème>
-  local udid="$1" name="$2" theme="$3" slug
-  slug="$(echo "$name" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')-$theme"
-  xcrun simctl ui "$udid" appearance "$theme"
-  xcrun simctl terminate "$udid" "$BUNDLE" 2>/dev/null || true
-  xcrun simctl launch "$udid" "$BUNDLE" >/dev/null
-  sleep 15
-  xcrun simctl io "$udid" screenshot "$OUT/$slug.png" >/dev/null
-  echo "capture : $slug.png"
-}
-
-for dev in "$SMALL" "$LARGE"; do
-  [ -n "$dev" ] || continue
-  udid="${dev%% *}"; name="${dev#* }"
+run_device() { # <udid> <nom>
+  local udid="$1" name="$2" dev log pid seen=0 deadline
+  dev="$(echo "$name" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"
+  log="$OUT/$dev-console.txt"
   echo "== $name ($udid)"
   xcrun simctl boot "$udid" 2>/dev/null || true
   xcrun simctl bootstatus "$udid" -b >/dev/null
+  xcrun simctl ui "$udid" appearance light
   xcrun simctl install "$udid" "$APP"
-  capture "$udid" "$name" light
-  capture "$udid" "$name" dark
-  # Journal de l'app (console JavaScript relayée par Capacitor, erreurs WebKit) pour la relecture
-  xcrun simctl spawn "$udid" log show --last 3m --style compact \
-    --predicate 'process == "App" OR subsystem CONTAINS "WebKit"' > "$OUT/$(echo "$name" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')-log.txt" 2>&1 || true
+  # Accusé vide créé d'avance : sans lui, chaque lecture de l'app en attente remplit la console d'erreurs « fichier absent »
+  data="$(xcrun simctl get_app_container "$udid" "$BUNDLE" data)"
+  mkdir -p "$data/Documents/capture"
+  : > "$data/Documents/capture/ack.txt"
+  xcrun simctl launch --console-pty --terminate-running-process "$udid" "$BUNDLE" > "$log" 2>&1 &
+  pid=$!
+  deadline=$((SECONDS + 600)); last=""
+  while [ "$SECONDS" -lt "$deadline" ]; do
+    page="$(cat "$data/Documents/capture/ready.txt" 2>/dev/null || true)"
+    if [ -n "$page" ] && [ "$page" != "$last" ]; then
+      [ "$page" = fin ] && break
+      xcrun simctl io "$udid" screenshot "$OUT/$dev-$page.png" >/dev/null
+      echo "capture : $dev-$page.png"
+      seen=$((seen + 1)); last="$page"
+      printf '%s' "$page" > "$data/Documents/capture/ack.txt"
+    fi
+    sleep 0.3
+  done
+  [ "$(cat "$data/Documents/capture/ready.txt" 2>/dev/null)" = fin ] || echo "::warning::$name : parcours des pages inachevé ($seen capture(s))"
+  xcrun simctl terminate "$udid" "$BUNDLE" 2>/dev/null || true
+  sleep 1; kill "$pid" 2>/dev/null || true
   xcrun simctl shutdown "$udid" || true
-done
+}
+
+[ -z "$SMALL" ] || run_device "${SMALL%% *}" "${SMALL#* }"
+[ -z "$LARGE" ] || run_device "${LARGE%% *}" "${LARGE#* }"
+
+# Erreurs JavaScript relayées par Capacitor (« ⚡️  [error] - … ») et exceptions non rattrapées
+grep -hE "\[error\]|Unhandled|TypeError|ReferenceError|SyntaxError" "$OUT"/*-console.txt > "$OUT/js-errors.txt" || true
+echo "erreurs JavaScript : $(wc -l < "$OUT/js-errors.txt" | tr -d ' ') ligne(s) (js-errors.txt)"

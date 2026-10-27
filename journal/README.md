@@ -10,11 +10,15 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v516 en test interne (27/10 12:57) | v516 (build 516.9) sur iPhone simulé (27/10 13:45) |
+| Dernière version | v521 en test interne (27/10 15:24) | v521 (build 521.10) sur iPhone simulé (27/10 15:50) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | audit à faire (étape I2) |
 
 **Ce qui a changé cette semaine**
+- **27/10 16:05 — toutes les pages photographiées sur iPhone simulé** : à chaque changement, 18 captures par iPhone
+  (onboarding, 14 pages avec les données de démonstration, 3 en thème sombre), sur la taille de l'iPhone 12 et sur un
+  iPhone récent. Elles ont montré ce qui parle encore d'Android sur iPhone (abonnement « Google Play », lecture du
+  visage, sauvegarde Google, Health Connect) : c'est le travail de l'étape suivante (I2), déjà commencé.
 - **27/10 13:45 — Halcya démarre sur iPhone (simulé)** : projet iOS (nom, icône « H nuit », écran de démarrage),
   construit automatiquement à chaque changement ; sur un iPhone de la taille de l'iPhone 12, l'onboarding puis
   l'Accueil s'affichent correctement. Même numéro que la version Play (516). La version Android n'est pas touchée :
@@ -38,6 +42,8 @@ via TestFlight.
 |---|---|---|---|
 | 27/10 12:30 | mise en place | dépôt iOS, charte, parité, backlog, `scripts/upstream.sh` | (commit initial) |
 | 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, build simulateur + captures (onboarding et Accueil OK) | #1 |
+| 27/10 14:05 | I1 captures | parcours de 18 pages sans erreur JavaScript, mais captures décalées : PR laissée ouverte, synchronisation à fiabiliser | #2 (ouverte) |
+| 27/10 15:40 | I1 captures (suite) | synchronisation par fichier + accusé : les 36 captures correspondent à leur page ; projet iOS prioritaire (runs pleins) ; I2 commencée (branche) | #2 |
 
 ---
 
@@ -48,7 +54,8 @@ via TestFlight.
 Porter Halcya sur iPhone et **maintenir la version iOS au même niveau d'avancement et au même numéro de version que
 la version Google Play**, sans jamais gêner, ralentir ni casser la version Android et son développement. La routine
 Android (« HealthTrack — amélioration autonome », PR `[Auto]` dans HealthTrack) mène le produit ; la routine iOS
-(« Halcya iOS — parité avec Android », dans ce dépôt) suit.
+(« Halcya iOS — parité avec Android », dans ce dépôt) suit. **Depuis le 27/10 (vers 15:30), le projet iOS est la
+priorité du propriétaire** : runs pleins (jusqu'à 50 min), étapes enchaînées ; HealthTrack reste en lecture seule.
 
 - **Référence = la variante play** : même parcours, mêmes écrans, mêmes textes, mêmes fonctions, même modèle
   économique (abonnement par les achats intégrés d'Apple au lieu de Google Play Billing), même relais IA (Vertex AI,

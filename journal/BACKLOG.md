@@ -17,13 +17,20 @@
     nom « Halcya », icône et écran de démarrage générés depuis le glyphe d'Android (27/10).
   - [x] Version : `MARKETING_VERSION` = `versionCode` de `upstream.json`, `CURRENT_PROJECT_VERSION` =
     `<versionCode>.<commits de ce dépôt>`, passés à `xcodebuild` par le workflow (27/10).
-  - [~] Workflow `ios-build.yml` (27/10 : build + captures de l'écran d'ouverture en clair et sombre ; reste les captures
-    de chaque page avec données vierges et de démo, et l'échec sur erreur JS) (PR, push `main`, `workflow_dispatch`) : `scripts/upstream.sh`, `npm ci`,
-    `npm run test`, build web (`VITE_DISTRIBUTION=appstore`), `cap sync ios`, `xcodebuild` pour le simulateur sans
-    signature, lancement sur deux simulateurs (390 × 844 points comme l'iPhone 12 de test, et un récent), captures de
-    chaque page (clair / sombre, données vierges / démo) en artefact, échec sur erreur JS ; `concurrency` qui annule
-    les runs dépassés d'une même PR.
-- [ ] **I2 — Audit de parité et replis propres** : compléter `PARITE.md` fonction par fonction (changelog depuis le
+  - [x] Workflow `ios-build.yml` (PR, push `main`, `workflow_dispatch`) : `scripts/upstream.sh`, `npm ci`, tests
+    d'Android avec les correctifs, build web (`VITE_DISTRIBUTION=appstore`), `cap sync ios`, `xcodebuild` pour le
+    simulateur sans signature, `concurrency` qui annule les runs dépassés (27/10).
+  - [x] Captures (27/10) : deux simulateurs (390 × 844 points comme l'iPhone 12 de test, et un récent), 14 pages avec
+    les données de démo d'Android en clair, 3 en sombre, onboarding d'une installation vierge ; parcours piloté par
+    l'app (`captureMode.js`), synchronisé par fichier (`Documents/capture/ready.txt` → capture → `ack.txt`) : les 36
+    images de la PR #2 correspondent à leur page ; poussées sur la branche `captures/pr-<n>` ou `captures/main`.
+  - [ ] Reste pour plus tard : états vides de chaque page ; faire échouer la build sur erreur JavaScript (le bruit
+    « ack.txt absent » est supprimé le 27/10 16:05, à confirmer sur une CI propre).
+- [ ] **I2 — Audit de parité et replis propres** (déjà repérés le 27/10 : texte Premium « Google Play », détection
+  des apps par noms de paquets Android, carte « Lecture du visage » en erreur — ces trois-là traités sur la branche
+  `claude/ios-i2-replis` ; restent : « Vos données » parle de la sauvegarde Google et d'Android, « Vos sources »
+  conseille Health Connect dans Gadgetbridge, « Mes appareils » dit « Dans l'app Android… », `saveAndShareReport`
+  ne prévoit le natif que pour Android) : compléter `PARITE.md` fonction par fonction (changelog depuis le
   lancement play, `journal/PRODUIT.md`, écrans) ; sur iOS, chaque service qui appelle un plugin Android absent
   retombe proprement (pas d'erreur, pas de carte cassée, pas d'interrupteur qui ne fait rien) ; % de parité.
 - [ ] **I3 — Données** : durabilité d'IndexedDB dans WKWebView, sauvegarde iCloud, export / import JSON par la feuille
