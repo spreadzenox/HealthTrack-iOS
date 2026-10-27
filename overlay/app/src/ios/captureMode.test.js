@@ -29,23 +29,55 @@ function deps(local, overrides = {}) {
 
 describe('mode captures iOS : parcours des pages piloté par l’app', () => {
   it('plan : installation vierge, puis chaque page en clair avec les données de démo, puis quelques-unes en sombre', () => {
-    const plan = buildPlan(['/', '/journal'], ['/'])
-    expect(plan.map((s) => s.name)).toEqual(['vierge-onboarding', 'demo-clair-accueil', 'demo-clair-journal', 'demo-sombre-accueil'])
-    expect(plan[1]).toMatchObject({ route: '/', data: 'demo', theme: 'light' })
-    expect(plan[3]).toMatchObject({ route: '/', data: 'demo', theme: 'dark' })
+    const plan = buildPlan(['/', '/journal'], ['/'], {})
+    expect(plan.map((s) => s.name)).toEqual([
+      'vierge-onboarding', 'vierge-onboarding-montre', 'demo-clair-accueil', 'demo-clair-journal', 'demo-sombre-accueil',
+    ])
+    expect(plan[1]).toMatchObject({ route: '/bienvenue', data: null, onboarding: { goal: 'energy', step: 2 } })
+    expect(plan[2]).toMatchObject({ route: '/', data: 'demo', theme: 'light' })
+    expect(plan[4]).toMatchObject({ route: '/', data: 'demo', theme: 'dark' })
+  })
+
+  it('plan : les pages longues ont aussi leurs écrans suivants, défilés', () => {
+    const plan = buildPlan(['/connectors'], [], { '/connectors': 2 })
+    expect(plan.slice(2).map((s) => [s.name, s.scroll ?? 0])).toEqual([
+      ['demo-clair-connectors', 0], ['demo-clair-connectors-2', 1], ['demo-clair-connectors-3', 2],
+    ])
+  })
+
+  it('écran de choix de la montre : l’onboarding reprend à son 3e écran', async () => {
+    const plan = buildPlan(['/'], [], {})
+    const local = memoryStorage()
+    const d = deps(local)
+    await runCaptureStep(plan, d) // vierge → choix de la montre
+    expect(JSON.parse(local.data.healthtrack_onboarding)).toEqual({ goal: 'energy', step: 2 })
+    expect(d.storage.upsertEntries).not.toHaveBeenCalled()
+    expect(d.go).toHaveBeenLastCalledWith('/bienvenue')
+  })
+
+  it('écran défilé : la page descend avant d’être signalée', async () => {
+    const plan = buildPlan(['/connectors'], [], { '/connectors': 1 })
+    const local = memoryStorage({ [STEP_KEY]: '3' })
+    const order = []
+    const d = deps(local, {
+      scroll: vi.fn((n) => order.push(`scroll ${n}`)),
+      signal: vi.fn(async (name) => order.push(`signal ${name}`)),
+    })
+    await runCaptureStep(plan, d)
+    expect(order).toEqual(['scroll 1', 'signal demo-clair-connectors-2', 'signal fin'])
   })
 
   it('annonce la page prête, puis prépare la suivante (données une seule fois, thème) et y va', async () => {
-    const plan = buildPlan(['/', '/journal'], ['/'])
-    const local = memoryStorage()
+    const plan = buildPlan(['/', '/journal'], ['/'], {})
+    const local = memoryStorage({ [STEP_KEY]: '1' })
     const d = deps(local)
-    await runCaptureStep(plan, d) // vierge → accueil
-    expect(d.log).toHaveBeenCalledWith('[capture] page vierge-onboarding')
+    await runCaptureStep(plan, d) // choix de la montre → accueil
+    expect(d.log).toHaveBeenCalledWith('[capture] page vierge-onboarding-montre')
     expect(d.storage.upsertEntries).toHaveBeenCalledTimes(1)
     expect(JSON.parse(local.data.healthtrack_onboarding)).toMatchObject({ done: true })
     expect(local.data['healthtrack-whats-new-last-seen']).toBe('x')
     expect(local.data.healthtrack_theme).toBe('light')
-    expect(local.data[STEP_KEY]).toBe('1')
+    expect(local.data[STEP_KEY]).toBe('2')
     expect(d.go).toHaveBeenLastCalledWith('/')
 
     await runCaptureStep(plan, d) // accueil → journal
@@ -56,8 +88,8 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
   })
 
   it('après la dernière page : « fin », plus aucune navigation', async () => {
-    const plan = buildPlan(['/'], [])
-    const local = memoryStorage({ [STEP_KEY]: '1' })
+    const plan = buildPlan(['/'], [], {})
+    const local = memoryStorage({ [STEP_KEY]: '2' })
     const d = deps(local)
     await runCaptureStep(plan, d)
     expect(d.log).toHaveBeenCalledWith('[capture] page demo-clair-accueil')
@@ -68,8 +100,8 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
   })
 
   it('chaque page est signalée au script, et l’app attend son accusé avant de passer à la suivante', async () => {
-    const plan = buildPlan(['/'], [])
-    const local = memoryStorage()
+    const plan = buildPlan(['/'], [], {})
+    const local = memoryStorage({ [STEP_KEY]: '1' })
     const order = []
     const d = deps(local, {
       signal: vi.fn(async (name) => order.push(`signal ${name}`)),
@@ -80,7 +112,7 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
       go: vi.fn((route) => order.push(`go ${route}`)),
     })
     await runCaptureStep(plan, d)
-    expect(order).toEqual(['signal vierge-onboarding', 'ack vierge-onboarding', 'go /'])
+    expect(order).toEqual(['signal vierge-onboarding-montre', 'ack vierge-onboarding-montre', 'go /'])
     await runCaptureStep(plan, d)
     expect(order.slice(3)).toEqual(['signal demo-clair-accueil', 'ack demo-clair-accueil', 'signal fin'])
   })
