@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **23 %** au 27/10 17:45 (11 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v527 (commit `a6d9dc5`, 27/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v530 (commit `08c5104`, 27/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 28/10 00:05 | #444, #445 (v530) | #444 « bord à bord » sous Android 8 à 14 : natif Android seulement (`MainActivity`, `SystemBarsPlugin.java`), sans objet sur iOS (l'app y est déjà sous les barres, zones sûres vérifiées en captures) ; sa note « Plein écran aussi sous Android 8 à 14 » n'a pas de `variants` et s'afficherait dans les Nouveautés sur iPhone (→ `DEMANDES.md`) ; #445 une seule piste « mouvement » dans Analyses : code web partagé, arrive tel quel | — |
 | 27/10 22:05 | #443 (pas de nouvelle version) | journal seul (idées « bord à bord » et R8 prêtes à coder) : rien à faire tant que ce n'est pas codé ; le « bord à bord » touchera peut-être les marges du code web partagé → à revérifier en captures (zones sûres de l'iPhone) quand il arrivera | — |
 | 27/10 20:05 | #441, #442 (v527) | tuiles « hier », repas sur une ligne, une seule piste « calories » dans Analyses : code web partagé, arrive tel quel | — |
 | 27/10 18:05 | #440 (v525) | « hier à 10:19 », plus de « Health Connect » dans un titre d'Analyses : code web partagé, arrive tel quel (bon pour iOS aussi) | — |
