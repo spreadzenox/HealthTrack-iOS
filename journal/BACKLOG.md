@@ -18,8 +18,8 @@
   - [x] Version : `MARKETING_VERSION` = `versionCode` de `upstream.json`, `CURRENT_PROJECT_VERSION` =
     `<versionCode>.<commits de ce dépôt>`, passés à `xcodebuild` par le workflow (27/10).
   - [~] Workflow `ios-build.yml` (27/10 : build + captures ; 27/10 14:05 : chaque page avec les données de démo
-    d'Android, en clair et quelques-unes en sombre, onboarding d'une installation vierge, console JavaScript relayée
-    dans `js-errors.txt` ; reste : états vides de chaque page, et faire échouer la build sur erreur JavaScript une fois
+    d'Android, en clair et quelques-unes en sombre, onboarding d'une installation vierge, parcours piloté par l'app
+    elle-même (`captureMode.js`), console JavaScript relayée dans `js-errors.txt` ; reste : états vides de chaque page, et faire échouer la build sur erreur JavaScript une fois
     le bruit connu) (PR, push `main`, `workflow_dispatch`) : `scripts/upstream.sh`, `npm ci`,
     `npm run test`, build web (`VITE_DISTRIBUTION=appstore`), `cap sync ios`, `xcodebuild` pour le simulateur sans
     signature, lancement sur deux simulateurs (390 × 844 points comme l'iPhone 12 de test, et un récent), captures de

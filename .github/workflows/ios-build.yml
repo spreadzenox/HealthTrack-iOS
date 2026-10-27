@@ -76,10 +76,6 @@ jobs:
         working-directory: upstream/app/ios/App
         run: |
           set -o pipefail
-          # Schéma halcya-capture:// pour piloter les captures : ajouté à la copie du projet, jamais au dépôt
-          /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes array" -c "Add :CFBundleURLTypes:0 dict" \
-            -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes array" \
-            -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string halcya-capture" App/Info.plist
           xcodebuild -project App.xcodeproj -scheme App -configuration Debug \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath "$RUNNER_TEMP/dd" \

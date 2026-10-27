@@ -8,15 +8,17 @@
 
 ## Ce qui a été fait
 - `overlay/app/src/ios/captureMode.js` (+ tests, écrits d'abord) : en build simulateur seulement (`VITE_IOS_CAPTURE=1`),
-  l'app écoute des liens `halcya-capture://go?route=…&data=demo&theme=…` : données de démo d'Android ajoutées une fois
-  (`scripts/visual/demoData.mjs`, comme `npm run visual`), onboarding et nouveautés notés vus, thème de l'app, page.
+  l'app parcourt elle-même un plan de pages : installation vierge (onboarding), puis les 14 pages de `npm run visual`
+  avec les données de démo d'Android (`scripts/visual/demoData.mjs`, ajoutées une fois ; onboarding et nouveautés
+  notés vus) en clair, puis 3 pages en sombre ; à chaque page elle écrit « [capture] page <nom> » dans sa console.
+- Premier essai abandonné : piloter l'app par des liens `halcya-capture://` (`simctl openurl`) ; le simulateur
+  iOS 26 affiche « Open in "Halcya"? » à chaque lien et la page ne change jamais (toutes les captures montraient ce
+  dialogue).
 - `patches/02-mode-captures.patch` : une ligne dans `main.jsx`, conditionnée à `VITE_IOS_CAPTURE` (vérifié : aucun
   morceau « captureMode » dans une build sans cette variable).
-- Le schéma `halcya-capture://` est ajouté par le workflow à la copie du projet (PlistBuddy), jamais au dépôt.
-- `scripts/ios-captures.sh` : onboarding d'une installation vierge, puis les 14 pages de `npm run visual` avec les
-  données de démo en clair sur l'iPhone de 390 × 844 points, 3 pages sur l'iPhone récent, 3 pages en sombre ; console
-  de l'app (`simctl launch --console-pty`) et résumé des erreurs JavaScript (`js-errors.txt`, affiché dans le résumé
-  du job, pas encore bloquant).
+- `scripts/ios-captures.sh` : lance l'app avec sa console (`simctl launch --console-pty`) sur les deux iPhone simulés,
+  capture l'écran à chaque « [capture] page … » jusqu'à « [capture] fin », résume les erreurs JavaScript
+  (`js-errors.txt`, affiché dans le résumé du job, pas encore bloquant).
 
 ## Vérifications
 - `scripts/upstream.sh` ✅ (2 correctifs) · Tests d'Android avec correctifs : 2571 ✅ (44 ignorés) · Build web appstore
