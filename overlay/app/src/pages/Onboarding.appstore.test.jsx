@@ -30,7 +30,7 @@ describe('Onboarding sur iPhone (variante appstore)', () => {
     hc.checkPermissions.mockResolvedValue('not_asked')
   })
 
-  it('montres de l’app Santé, puis « arrive dans une prochaine version », sans Health Connect ni Huawei', async () => {
+  it('montres de l’app Santé ; app Santé absente : on le dit et on continue, sans Health Connect ni Huawei', async () => {
     saveOnboarding({ goal: 'energy', step: 2 })
     render(
       <MemoryRouter initialEntries={['/bienvenue']}>
@@ -44,8 +44,22 @@ describe('Onboarding sur iPhone (variante appstore)', () => {
     fireEvent.click(screen.getByRole('radio', { name: /écrit dans l’app Santé/ }))
     fireEvent.click(cont())
     expect(screen.getByRole('heading', { name: 'Vos données de l’app Santé' })).toBeInTheDocument()
-    expect(await screen.findByText(/Sur iPhone, la lecture de l’app Santé arrive dans une prochaine version/)).toBeInTheDocument()
+    expect(await screen.findByText(/L’app Santé n’est pas disponible sur cet appareil/)).toBeInTheDocument()
     expect(screen.queryByText(/Health Connect/)).not.toBeInTheDocument()
     expect(cont()).toBeEnabled()
+  })
+
+  it('app Santé disponible : « Autoriser l’app Santé »', async () => {
+    hc.availabilityDetails.mockResolvedValue({ available: true, platform: 'ios' })
+    saveOnboarding({ goal: 'energy', watch: 'health_connect', step: 3 })
+    render(
+      <MemoryRouter initialEntries={['/bienvenue']}>
+        <Routes>
+          <Route path="/bienvenue" element={<Onboarding />} />
+        </Routes>
+      </MemoryRouter>,
+    )
+    expect(await screen.findByRole('button', { name: 'Autoriser l’app Santé' })).toBeInTheDocument()
+    expect(screen.queryByText(/Health Connect/)).not.toBeInTheDocument()
   })
 })

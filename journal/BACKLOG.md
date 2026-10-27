@@ -45,6 +45,12 @@
   mélanger ; voir `RECHERCHE.md`. 27/10 : **HealthKit marche sur simulateur sans compte Apple** (build signée à la
   volée, feuille d'autorisation capturée, PR #7) : I4 peut avancer avant A1) :
   mêmes types que Health Connect, historique, autorisations au bon moment avec divulgation.
+  - [~] Connecteur sur HealthKit (PR #9) : disponibilité de HealthKit, « accordé » une fois la demande faite (HealthKit
+    ne révèle pas la lecture), VFC ni demandée ni lue, textes iPhone (carte de Sources, onboarding, divulgation).
+  - [ ] Vérifier l'import réel : données de démo écrites dans l'app Santé du simulateur et feuille acceptée par un
+    test d'interface (XCUITest), ou sur l'iPhone 12 après A1.
+  - [ ] VFC SDNN : type ou source à part, libellé, norme personnelle distincte de la RMSSD ; puis la lire.
+  - [ ] Simulateurs en français pour les captures (feuilles d'iOS en anglais aujourd'hui).
 - [ ] **I5 — Notifications** : bilan du ventre du soir, note du soir, rappel de portion, rappel de fin d'essai ;
   actions dans la notification, réponse rangée à l'ouverture suivante.
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,

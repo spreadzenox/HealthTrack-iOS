@@ -30,6 +30,9 @@
   d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
 
 **Ce qui a changé cette semaine**
+- **27/10 19:10 — Halcya sait lire l'app Santé sur iPhone** (PR #9) : la carte « App Santé » de Sources et
+  l'onboarding demandent l'accès à l'app Santé d'Apple, comme Health Connect sur Android. La VFC n'est pas encore
+  lue (l'iPhone la mesure autrement qu'Android). À confirmer avec de vraies mesures.
 - **27/10 18:30 — la lecture de l'app Santé pourra se préparer sans attendre l'abonnement Apple** (PR #7) : sur
   l'iPhone simulé, Halcya obtient déjà la fenêtre d'autorisation de l'app Santé. L'étape « montres et santé » (I4)
   peut donc avancer avant votre adhésion à l'Apple Developer Program, qui reste nécessaire pour l'iPhone 12.
@@ -68,6 +71,7 @@ via TestFlight.
 | 27/10 16:22 | I2 Santé | suivi d'Android v522 ; PR #3 mergée ; sur iPhone, plus de Health Connect ni de montre Huawei en direct, sauvegarde et PDF par la feuille de partage, 8 services à plugin absent repliés ; parité 19 % | #3, #4 |
 | 27/10 17:10 | I2 captures, I3 copie de secours | suivi d'Android v524 ; captures des pages longues et du choix de la montre ; IndexedDB non durable sur iOS → copie de secours automatique | #5, #6 |
 | 27/10 18:00 | I3 (fin de la PR #6), essai I4 | suivi d'Android v525 ; lecture de l'app Santé : le module d'Android sert aussi sur iPhone, VFC à ne pas mélanger (SDNN contre RMSSD) ; essai HealthKit sur simulateur | #6, #7, #8 |
+| 27/10 19:00 | I4 Santé | essai HealthKit mergé ; Halcya lit l'app Santé sur iPhone (à vérifier avec de vraies données) ; PR #8 réparée | #7, #8, #9 |
 
 ---
 

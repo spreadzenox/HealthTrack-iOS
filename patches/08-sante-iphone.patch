@@ -1,30 +1,86 @@
 diff --git a/app/src/connectors/HealthConnectConnector.js b/app/src/connectors/HealthConnectConnector.js
-index 61dc74d..1e1a012 100644
+index 61dc74d..1630d71 100644
 --- a/app/src/connectors/HealthConnectConnector.js
 +++ b/app/src/connectors/HealthConnectConnector.js
-@@ -220,6 +220,12 @@ function getCachedHealthPlugin() {
- async function ensureHealthPlugin() {
-   // Already loaded (including null = "unavailable"). Nothing to do.
-   if (_healthPluginCache !== undefined) return
-+  // Version iOS (HealthTrack-iOS) : Health Connect est propre à Android, HealthKit arrive à l'étape I4 ;
-+  // d'ici là, le plugin n'est jamais appelé (pas d'autorisation HealthKit à moitié branchée)
-+  if (getPlatformSync() === 'ios') {
-+    _healthPluginCache = null
-+    return
-+  }
+@@ -54,6 +54,13 @@ const EXTRA_READ_TYPES = [
  
-   // Load already in flight — wait for it, then return (not the cache value!).
-   if (_healthPluginCachePromise !== null) {
-@@ -399,6 +405,7 @@ export class HealthConnectConnector extends BaseConnector {
+ export const READ_TYPES = [...CORE_READ_TYPES, ...EXTRA_READ_TYPES]
+ 
++// Version iOS (HealthTrack-iOS) : HealthKit par le même plugin (I4). HealthKit ne dit jamais si la lecture est
++// accordée : « accordé » dès que la demande a été faite sur cet appareil. VFC : SDNN sur iOS, RMSSD sur Android,
++// pas encore séparées dans la norme personnelle → ni demandée ni lue sur iPhone.
++const IOS_ASKED_KEY = 'halcya_ios_healthkit_asked'
++const isIos = () => getPlatformSync() === 'ios'
++const readTypes = () => (isIos() ? READ_TYPES.filter((t) => t !== 'heartRateVariability') : READ_TYPES)
++
+ /** Libellés français des types Health Connect (écran Connecteurs). */
+ export const READ_TYPE_LABELS = {
+   steps: 'pas',
+@@ -345,12 +352,13 @@ export class HealthConnectConnector extends BaseConnector {
+   constructor() {
+     super({
+       id: 'health_connect',
+-      name: 'Health Connect (montre, bague, balance…)',
++      name: isIos() ? 'App Santé (montre, bague, balance…)' : 'Health Connect (montre, bague, balance…)',
+       // VC-27 : une phrase avec des marques connues du public ; la liste complète des types vit au chevron
+       // « Ce qui est importé » de la carte (`importedList`, ci-dessous)
+-      description:
+-        'Importe ce que vos apps santé écrivent dans Health Connect (Samsung Health, Garmin, Withings, ' +
+-        'Oura…) : sommeil, cœur, pas, poids…',
++      description: isIos()
++        ? 'Importe ce que votre montre et vos apps santé écrivent dans l’app Santé (Apple Watch, Garmin, Withings, Oura…) : sommeil, cœur, pas, poids…'
++        : 'Importe ce que vos apps santé écrivent dans Health Connect (Samsung Health, Garmin, Withings, ' +
++          'Oura…) : sommeil, cœur, pas, poids…',
+       dataTypes: ['steps', 'sleep', 'heart_rate', 'activity', 'calories', 'respiratory_rate', 'body_temperature', 'blood_pressure', 'blood_glucose', 'weight', 'body_composition'],
+     })
+     /** Tout ce que la carte peut importer, replié sous « Ce qui est importé ». */
+@@ -399,6 +407,11 @@ export class HealthConnectConnector extends BaseConnector {
      // Using sync here avoids any risk of deadlocking the WebView bridge thread.
      const platform = getPlatformSync()
      debugInfo(TAG, `Plateforme détectée (sync) : ${platform}`)
-+    if (platform === 'ios') return { available: false, reason: 'ios', platform }
++    if (platform === 'ios') {
++      await ensureHealthPlugin()
++      const result = await getCachedHealthPlugin()?.isAvailable?.().catch(() => null)
++      return result?.available === true ? { available: true, platform } : { available: false, reason: 'ios', platform }
++    }
  
      // Collect device info early so it is logged even if something below hangs
      const deviceInfo = await collectDeviceInfo()
+@@ -678,6 +691,10 @@ export class HealthConnectConnector extends BaseConnector {
+       return 'not_asked'
+     }
+     const platform = getPlatformSync()
++    if (platform === 'ios') {
++      this.missingReadTypes = []
++      return localStorage.getItem(IOS_ASKED_KEY) ? 'granted' : 'not_asked'
++    }
+     const hasCheckAuth = typeof Health.checkAuthorization === 'function'
+     debugInfo(TAG, 'Vérification méthode Health.checkAuthorization', { hasCheckAuth, platform })
+     if (!hasCheckAuth) {
+@@ -726,7 +743,11 @@ export class HealthConnectConnector extends BaseConnector {
+     }
+     try {
+       debugInfo(TAG, 'Appel Health.requestAuthorization()…')
+-      await Health.requestAuthorization({ read: READ_TYPES, write: [] })
++      await Health.requestAuthorization({ read: readTypes(), write: [] })
++      if (isIos()) {
++        localStorage.setItem(IOS_ASKED_KEY, '1')
++        return 'granted'
++      }
+       debugInfo(TAG, 'requestAuthorization() terminé, vérification du résultat…')
+       return await this.checkPermissions()
+     } catch (e) {
+@@ -778,7 +799,7 @@ export class HealthConnectConnector extends BaseConnector {
+     } catch (e) {
+       debugWarn(TAG, `checkAuthorization avant synchro échouée (non bloquant) : ${e?.message || e}`)
+     }
+-    const canRead = (dataType) => !authorizedTypes || authorizedTypes.has(dataType)
++    const canRead = (dataType) => !(isIos() && dataType === 'heartRateVariability') && (!authorizedTypes || authorizedTypes.has(dataType))
+ 
+     const order = [...SYNC_ORDER, ...POINT_READERS.map((r) => r.dataType)]
+     let done = 0
 diff --git a/app/src/pages/Connectors.jsx b/app/src/pages/Connectors.jsx
-index defa964..a961666 100644
+index defa964..28b7e58 100644
 --- a/app/src/pages/Connectors.jsx
 +++ b/app/src/pages/Connectors.jsx
 @@ -24,6 +24,7 @@ import { getPhoneUsageSettings } from '../services/phoneUsageSync'
@@ -39,13 +95,13 @@ index defa964..a961666 100644
  
  /** Message affiché quand Health Connect est indisponible, selon la raison remontée par le natif. */
  const UNAVAILABLE_MESSAGES = {
-+  // Version iOS (HealthTrack-iOS) : raison « ios » du connecteur, jusqu'à HealthKit (étape I4)
++  // Version iOS (HealthTrack-iOS) : raison « ios » du connecteur, HealthKit absent de l'appareil
 +  ios: {
-+    title: 'Pas sur iPhone.',
++    title: 'L’app Santé n’est pas disponible sur cet appareil.',
 +    body: (
 +      <>
-+        Health Connect est propre à Android. {APP_NAME} lira bientôt l’app Santé d’Apple, où écrivent l’Apple Watch
-+        et beaucoup de montres et de bagues.
++        {APP_NAME} lit vos mesures dans l’app Santé d’Apple, où écrivent l’Apple Watch et beaucoup de montres et de
++        bagues ; vos notes et vos repas fonctionnent sans elle.
 +      </>
 +    ),
 +    settings: false,
@@ -70,7 +126,7 @@ index defa964..a961666 100644
                </div>
              )
 diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
-index aa4e5fe..7a3481a 100644
+index aa4e5fe..57c7399 100644
 --- a/app/src/pages/Onboarding.jsx
 +++ b/app/src/pages/Onboarding.jsx
 @@ -26,6 +26,11 @@ const WATCHES = [
@@ -103,15 +159,32 @@ index aa4e5fe..7a3481a 100644
        <p className="onb-lead">
          Sommeil, pas, cœur, VFC et activité de vos 30 derniers jours, lus sur le téléphone. Rien n’est envoyé.
        </p>
-@@ -227,8 +232,9 @@ function HealthStep({ health, onHealth }) {
+@@ -227,13 +232,16 @@ function HealthStep({ health, onHealth }) {
        )}
        {health === 'unavailable' && (
          <p className="onb-note" role="status">
 -          Health Connect n’est pas disponible sur ce téléphone pour l’instant. Vous pourrez le relier plus tard depuis
 -          l’onglet Sources.
 +          {FEATURES.iosStore
-+            ? 'Sur iPhone, la lecture de l’app Santé arrive dans une prochaine version. En attendant, vos notes suffisent pour commencer.'
++            ? 'L’app Santé n’est pas disponible sur cet appareil. Vos notes suffisent pour commencer.'
 +            : 'Health Connect n’est pas disponible sur ce téléphone pour l’instant. Vous pourrez le relier plus tard depuis l’onglet Sources.'}
          </p>
        )}
        {health !== 'granted' && health !== 'unavailable' && (
+         <button type="button" className="btn btn-secondary onb-action" onClick={allow} disabled={busy || !connector}>
+-          {busy ? 'Health Connect est ouvert…' : 'Autoriser Health Connect'}
++          {FEATURES.iosStore
++            ? busy ? 'L’app Santé est ouverte…' : 'Autoriser l’app Santé'
++            : busy ? 'Health Connect est ouvert…' : 'Autoriser Health Connect'}
+         </button>
+       )}
+     </>
+@@ -298,7 +306,7 @@ function AhaStep({ imported, onImported, onReady }) {
+         <div
+           className="onb-import-bar"
+           role="progressbar"
+-          aria-label="Import Health Connect"
++          aria-label={FEATURES.iosStore ? 'Import de l’app Santé' : 'Import Health Connect'}
+           aria-valuemin={0}
+           aria-valuemax={progress?.total || 1}
+           aria-valuenow={progress?.done || 0}

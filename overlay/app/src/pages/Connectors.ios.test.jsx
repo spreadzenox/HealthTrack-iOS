@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
-// Version iOS (HealthTrack-iOS) : la carte Health Connect dit pourquoi elle est indisponible sur iPhone,
+// Version iOS (HealthTrack-iOS) : la carte Santé dit pourquoi elle est indisponible (HealthKit absent de l'appareil),
 // sans renvoyer vers les réglages d'Android ni proposer de revérifier
 vi.mock('../connectors/connectorRegistry', () => ({
   CONNECTORS: [
@@ -34,11 +34,11 @@ vi.mock('../devices/phoneApps', () => ({
 
 import Connectors from './Connectors'
 
-describe('Carte Health Connect sur iPhone', () => {
-  it('annonce l’app Santé d’Apple, sans réglages Android ni bouton « Revérifier »', async () => {
+describe('Carte Santé sur iPhone', () => {
+  it('app Santé absente de l’appareil : le dit, sans réglages Android ni bouton « Revérifier »', async () => {
     render(<MemoryRouter><Connectors /></MemoryRouter>)
-    expect(await screen.findByText(/Health Connect est propre à Android/)).toBeInTheDocument()
-    expect(screen.getByText(/Halcya lira bientôt l’app Santé d’Apple/)).toBeInTheDocument()
+    expect(await screen.findByText('L’app Santé n’est pas disponible sur cet appareil.')).toBeInTheDocument()
+    expect(screen.getByText(/Halcya lit vos mesures dans l’app Santé d’Apple/)).toBeInTheDocument()
     expect(screen.queryByText(/Mises à jour du système Google/)).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /Revérifier la disponibilité/ })).not.toBeInTheDocument()
     expect(screen.queryByRole('button', { name: /Ouvrir les paramètres Health Connect/ })).not.toBeInTheDocument()
