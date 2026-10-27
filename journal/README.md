@@ -10,11 +10,15 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v521 en test interne (27/10 15:24) | v521 (build 521.10) sur iPhone simulé (27/10 15:50) |
+| Dernière version | v522 en test interne (27/10 15:48) | v522 (build 522.26) sur iPhone simulé (27/10 17:02) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | audit en cours (étape I2, PR #3) |
+| Parité des fonctions | référence | 19 % (9 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **Ce qui a changé cette semaine**
+- **27/10 17:05 — sur iPhone, plus rien ne renvoie vers Android** (PR #4) : les montres passent
+  par l'app Santé d'Apple (lecture dans une prochaine version), la sauvegarde et le rapport PDF s'envoient par la
+  feuille de partage et se retrouvent dans l'app Fichiers, et les réglages qui dépendent d'Android (rappels du
+  soir, voix) n'apparaissent plus tant que leur version iPhone n'existe pas. Parité mesurée : 19 %.
 - **27/10 16:05 — toutes les pages photographiées sur iPhone simulé** : à chaque changement, 18 captures par iPhone
   (onboarding, 14 pages avec les données de démonstration, 3 en thème sombre), sur la taille de l'iPhone 12 et sur un
   iPhone récent. Elles ont montré ce qui parle encore d'Android sur iPhone (abonnement « Google Play », lecture du
@@ -45,6 +49,7 @@ via TestFlight.
 | 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, build simulateur + captures (onboarding et Accueil OK) | #1 |
 | 27/10 14:05 | I1 captures | parcours de 18 pages sans erreur JavaScript, mais captures décalées : PR laissée ouverte, synchronisation à fiabiliser | #2 (ouverte) |
 | 27/10 15:40 | I1 captures (suite) | synchronisation par fichier + accusé : les 36 captures correspondent à leur page ; projet iOS prioritaire (runs pleins) ; I2 : 7 replis iPhone et phrases d'usage | #2, #3 (ouverte) |
+| 27/10 16:22 | I2 Santé | suivi d'Android v522 ; PR #3 mergée ; sur iPhone, plus de Health Connect ni de montre Huawei en direct, sauvegarde et PDF par la feuille de partage, 8 services à plugin absent repliés ; parité 19 % | #3, #4 |
 
 ---
 
@@ -95,7 +100,9 @@ priorité du propriétaire** : runs pleins (jusqu'à 50 min), étapes enchaîné
 
 Règles des adaptations :
 - **Correctif** (`patches/NN-sujet.patch`, produit par `git -C upstream diff HEAD -- <fichiers>` : **HEAD** obligatoire,
-  car `git apply --3way` met les correctifs déjà appliqués dans l'index) pour modifier un fichier Android ;
+  car `git apply --3way` met les correctifs déjà appliqués dans l'index ; exception : un nouveau correctif sur un
+  fichier qu'un correctif précédent touche déjà se tire de `git -C upstream diff -- <fichiers>`, sans HEAD, juste
+  après `scripts/upstream.sh`, pour ne garder que la nouvelle modification) pour modifier un fichier Android ;
   le plus petit possible, un sujet par fichier, pour qu'il survive aux changements d'Android. Un correctif qui ne
   s'applique plus fait échouer le script : le refaire sur le nouveau code (c'est le travail normal du suivi).
 - **Fichier ajouté** (`overlay/<chemin>`) pour du code nouveau propre à iOS (ex. `overlay/app/src/services/appStoreBilling.js`).

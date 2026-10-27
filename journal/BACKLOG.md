@@ -29,9 +29,10 @@
 - [ ] **I2 — Audit de parité et replis propres** (déjà repérés le 27/10 : texte Premium « Google Play », détection
   des apps par noms de paquets Android, carte « Lecture du visage » en erreur — traités dans la PR #3 avec « Vos
   données », « Mes appareils », montre Huawei, temps d'écran et les phrases d'usage Bluetooth et Santé
-  d'`Info.plist` ; restent, dans l'ordre : carte Santé (Health Connect) sur iPhone, où `Health.isAvailable()`
-  répondra vrai sans rien de branché ; export des données, journal de la montre et rapport PDF par la feuille de
-  partage (le lien de téléchargement ne fait rien dans WKWebView) ; « Vos sources » qui conseille Health Connect
+  d'`Info.plist` ; carte Santé, Sources et onboarding sans Health Connect ni montre
+  Huawei en direct, sauvegarde et rapport PDF par la feuille de partage, huit services à plugin Android absent qui
+  retombent proprement : PR #4, mergée le 27/10 ;
+  restent, dans l'ordre : « Vos sources » qui conseille Health Connect
   dans Gadgetbridge ; captures défilées pour les pages longues) : compléter `PARITE.md` fonction par fonction (changelog depuis le
   lancement play, `journal/PRODUIT.md`, écrans) ; sur iOS, chaque service qui appelle un plugin Android absent
   retombe proprement (pas d'erreur, pas de carte cassée, pas d'interrupteur qui ne fait rien) ; % de parité.
