@@ -8,7 +8,7 @@
 Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) · 🟡 partiel ou pas encore vérifié ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
-**Parité** : **21 %** au 27/10 17:40 (10 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
+**Parité** : **23 %** au 27/10 17:45 (11 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
 **Dernière version Android suivie** : v524 (commit `f56660a`, 27/10/2026), voir `upstream.json`.
@@ -22,7 +22,7 @@ vérifié sur iOS.
 | Numéro de version | `git rev-list --count HEAD` | même nombre en `CFBundleShortVersionString` (`MARKETING_VERSION`), build `<android>.<ios>` (`CURRENT_PROJECT_VERSION`) | ✅ | passés à `xcodebuild` par le workflow ; affichage à vérifier en capture ; 27/10 : « Version 524 » affiché en bas de Paramètres sur iPhone simulé (captures défilées, PR #5) |
 | Nom « Halcya », icône « H nuit », écran de démarrage | ✅ | `CFBundleDisplayName` Halcya, AppIcon 1024 opaque et écran de démarrage encre générés depuis le glyphe d'Android (`scripts/ios-icons.mjs`) | 🟡 | à vérifier sur l'écran d'accueil d'un simulateur |
 | Variante de distribution | `play` | `appstore` (`patches/01-variante-appstore.patch`) | ✅ | comme play (relais IA, visage à l'ouverture, pas d'auto-mise à jour), sans abonnement jusqu'à I6 ; tests `overlay/…/distribution.appstore.test.js` |
-| Zones sûres, barres système | `SystemBarsPlugin`, `--safe-top/--safe-bottom` | encoche / Dynamic Island / indicateur d'accueil | 🟡 | onboarding et Accueil corrects sur 16e et 17 Pro (27/10) ; bas de l'onboarding sur 390 × 844 à revoir (I2). Thème : clair par défaut comme Android, le sombre est un réglage de l'app (pas un défaut) |
+| Zones sûres, barres système | `SystemBarsPlugin`, `--safe-top/--safe-bottom` | encoche / Dynamic Island / indicateur d'accueil | ✅ | onboarding et Accueil corrects sur 16e et 17 Pro (27/10) ; bas de l'onboarding sur 390 × 844 à revoir (I2). Thème : clair par défaut comme Android, le sombre est un réglage de l'app (pas un défaut) ; 27/10 : en-tête sous la barre d'état et la Dynamic Island, barre d'onglets au-dessus de l'indicateur d'accueil, icônes de la barre d'état lisibles en sombre (captures iPhone 16e et 17 Pro, PR #5) ; geste de retour à vérifier sur l'iPhone 12 |
 | Mise à jour de l'app | Play Store | App Store | — | pas de bandeau de mise à jour |
 
 ## 2. Écrans (code web partagé : arrivent avec le socle, à vérifier en captures)
