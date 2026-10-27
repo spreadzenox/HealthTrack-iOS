@@ -10,11 +10,15 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v514 en test interne (27/10 11:58) | — (pas encore de build) |
-| Où l'installer | Play Store, test fermé | — (simulateur d'abord, TestFlight quand le compte Apple existera) |
+| Dernière version | v516 en test interne (27/10 12:57) | v516 (build 516.9) sur iPhone simulé (27/10 13:45) |
+| Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | audit à faire (étape I2) |
 
 **Ce qui a changé cette semaine**
+- **27/10 13:45 — Halcya démarre sur iPhone (simulé)** : projet iOS (nom, icône « H nuit », écran de démarrage),
+  construit automatiquement à chaque changement ; sur un iPhone de la taille de l'iPhone 12, l'onboarding puis
+  l'Accueil s'affichent correctement. Même numéro que la version Play (516). La version Android n'est pas touchée :
+  ses 2 563 tests passent avec les adaptations iOS.
 - **27/10 — dépôt iOS séparé** : la version iOS vit dans son propre dépôt, `spreadzenox/HealthTrack-iOS`, qui suit
   le dépôt Android sans jamais y écrire. Rien ne change pour la version Google Play ni pour sa routine.
 - **26–27/10 — mise en place** avec le propriétaire : charte, liste de parité de départ, backlog I0 → I9, script qui
@@ -33,6 +37,7 @@ via TestFlight.
 | Date (Paris) | Run | Ce qui a été fait | PR |
 |---|---|---|---|
 | 27/10 12:30 | mise en place | dépôt iOS, charte, parité, backlog, `scripts/upstream.sh` | (commit initial) |
+| 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, build simulateur + captures (onboarding et Accueil OK) | #1 |
 
 ---
 
@@ -73,7 +78,8 @@ Android (« HealthTrack — amélioration autonome », PR `[Auto]` dans HealthTr
 1. `upstream.json` fixe le commit Android suivi et son numéro (`versionCode` = `git rev-list --count` de ce commit,
    comme l'AAB play).
 2. `scripts/upstream.sh` récupère ce commit dans `upstream/` (ignoré par git), applique `patches/*.patch` dans
-   l'ordre de leurs noms, copie `overlay/` par-dessus, et lie `ios/` (le projet Xcode) dans `upstream/app/ios`.
+   l'ordre de leurs noms, copie `overlay/` par-dessus, et copie `ios/` (le projet Xcode) dans `upstream/app/ios`
+   (une copie, pas un lien : le `Package.swift` régénéré par `cap sync ios` pointe en relatif vers `app/node_modules`).
    `scripts/upstream.sh --latest` avance d'abord `upstream.json` sur le **dernier commit de main dont « Play — AAB »
    a réussi** : la dernière version réellement envoyée sur Google Play.
 3. La build web se fait dans `upstream/app` avec `VITE_DISTRIBUTION=appstore` et `VITE_APP_VERSION` = le
@@ -109,9 +115,10 @@ Règles des adaptations :
   lit leurs logs, télécharge leurs artefacts et **regarde** les captures du simulateur.
 - **Xcode / SDK** : la version d'Xcode la plus récente des runners ; vérifier l'exigence courante d'Apple sur le SDK
   minimal pour publier, avec sa source, dans `RECHERCHE.md`.
-- **Projet** : Capacitor iOS de la même majeure que `@capacitor/core` d'Android (8.x au 27/10 ; la CLI d'Android est
-  en 7.6 : utiliser au besoin `npx -p @capacitor/cli@8 cap …` dans les workflows), Swift Package Manager si
-  possible, bundle id `fr.jpesquet.sante` (comme le package play, à confirmer avec A3), nom « Halcya », icône
+- **Projet** : Capacitor iOS et CLI de **la même version exacte** que `@capacitor/core` d'Android (8.2.0 au 27/10 ;
+  `npx -p @capacitor/cli@<version> cap …`, Node 22 exigé) : une CLI plus récente génère un projet qui ne compile pas
+  avec le runtime (constaté le 27/10 : `SceneDelegateProxy` introuvable avec la CLI 8.5 et le runtime 8.2). Quand
+  Android monte `@capacitor/core`, régénérer ou mettre à jour le projet iOS en conséquence. Swift Package Manager, bundle id `fr.jpesquet.sante` (comme le package play, à confirmer avec A3), nom « Halcya », icône
   « H nuit » (`journal/DESIGN.md` d'Android).
 - **Téléphone de test : iPhone 12** (6,1", 390 × 844 points, encoche, puce A14, 4 Go). Cible de déploiement qui
   couvre sa version d'iOS ; captures sur un simulateur de cette taille en plus d'un iPhone récent ; fluidité à
@@ -169,6 +176,9 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 
 - **GitHub** : outils `mcp__github__*` s'ils sont présents, sinon `gh api` en REST (pas de GraphQL). Artefacts d'un
   run : `gh api repos/spreadzenox/HealthTrack-iOS/actions/runs/<id>/artifacts` puis `…/artifacts/<id>/zip`.
+- **Captures iOS** : le workflow les pousse sur la branche `captures/pr-<N>` (PR) ou `captures/main` ; les lire avec
+  `git fetch origin captures/pr-<N>:refs/remotes/origin/captures/pr-<N>` puis `git show origin/captures/pr-<N>:<fichier>`
+  (le téléchargement des artefacts peut être bloqué par le réseau de la session).
 - **Attendre la CI** sans boucle active : outil Monitor (`until` sur les check-runs) ou abonnement à la PR.
 - **Vérification visuelle web** : dans `upstream/app`, `npm run visual` (options en tête de
   `scripts/visual/visual-check.mjs`), avec `VITE_DISTRIBUTION=appstore` ; pour iOS, captures du simulateur produites

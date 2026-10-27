@@ -10,15 +10,15 @@
   public, charte, parité de départ, `upstream.json` + `scripts/upstream.sh` (testé : récupère Android v514, applique
   les correctifs, échoue clairement si l'un ne s'applique plus).
 - [ ] **I1 — Socle iOS sur simulateur**
-  - [ ] Variante `appstore` : correctif de `app/src/config/distribution.js` (comme play : relais IA, pas
+  - [x] Variante `appstore` (27/10) : correctif de `app/src/config/distribution.js` (comme play : relais IA, pas
     d'auto-mise à jour, abonnement App Store) ; les tests d'Android passent avec le correctif.
-  - [ ] `@capacitor/ios` de la même majeure que `@capacitor/core` (installé par le workflow, ou correctif de
-    `package.json` si c'est plus propre), `cap add ios` → projet versionné dans `ios/` (Swift Package Manager si
-    possible), bundle id `fr.jpesquet.sante`, nom « Halcya », icône et écran de démarrage (`journal/DESIGN.md`
-    d'Android).
-  - [ ] Version écrite dans le projet : `CFBundleShortVersionString` = `versionCode` de `upstream.json`,
-    `CFBundleVersion` = `<versionCode>.<commits de ce dépôt>`.
-  - [ ] Workflow `ios-build.yml` (PR, push `main`, `workflow_dispatch`) : `scripts/upstream.sh`, `npm ci`,
+  - [x] `@capacitor/ios` 8.2 installé par le workflow (`npm install --no-save`, pas de correctif de `package.json`),
+    `cap add ios` (CLI 8 via `npx -p`) → projet dans `ios/` (Swift Package Manager), bundle id `fr.jpesquet.sante`,
+    nom « Halcya », icône et écran de démarrage générés depuis le glyphe d'Android (27/10).
+  - [x] Version : `MARKETING_VERSION` = `versionCode` de `upstream.json`, `CURRENT_PROJECT_VERSION` =
+    `<versionCode>.<commits de ce dépôt>`, passés à `xcodebuild` par le workflow (27/10).
+  - [~] Workflow `ios-build.yml` (27/10 : build + captures de l'écran d'ouverture en clair et sombre ; reste les captures
+    de chaque page avec données vierges et de démo, et l'échec sur erreur JS) (PR, push `main`, `workflow_dispatch`) : `scripts/upstream.sh`, `npm ci`,
     `npm run test`, build web (`VITE_DISTRIBUTION=appstore`), `cap sync ios`, `xcodebuild` pour le simulateur sans
     signature, lancement sur deux simulateurs (390 × 844 points comme l'iPhone 12 de test, et un récent), captures de
     chaque page (clair / sombre, données vierges / démo) en artefact, échec sur erreur JS ; `concurrency` qui annule
