@@ -80,6 +80,12 @@ run_device() { # <udid> <nom>
       seen=$((seen + 1)); last="$page"
       printf '%s' "$page" > "$data/Documents/capture/ack.txt"
     fi
+    # L'app s'est arrêtée (plantage) : inutile d'attendre la limite, la cause est dans la console
+    if ! kill -0 "$pid" 2>/dev/null; then
+      echo "::warning::$name : l'app s'est arrêtée en cours de parcours (voir $dev-console.txt)"
+      grep -a -m1 "Terminating app" "$log" || true
+      break
+    fi
     sleep 0.3
   done
   [ "$(cat "$data/Documents/capture/ready.txt" 2>/dev/null)" = fin ] || echo "::warning::$name : parcours des pages inachevé ($seen capture(s))"
