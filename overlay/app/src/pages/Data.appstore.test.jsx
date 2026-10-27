@@ -8,7 +8,7 @@ vi.mock('../config/distribution', async (importOriginal) => {
   return { ...actual, DISTRIBUTION: 'appstore', FEATURES: actual.featuresFor('appstore') }
 })
 vi.mock('../storage/localHealthStorage', () => ({
-  exportToJson: vi.fn(), importFromJson: vi.fn(), parseBackup: vi.fn(), countAllEntries: vi.fn(),
+  exportToJson: vi.fn(), importFromJson: vi.fn(), parseBackup: vi.fn(), countAllEntries: vi.fn(async () => 12),
 }))
 vi.mock('../components/DoctorReportCard', () => ({ default: () => null }))
 vi.mock('../services/deleteAllData', () => ({ deleteAllMyData: vi.fn() }))
