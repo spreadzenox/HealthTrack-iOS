@@ -119,9 +119,9 @@ export async function installCaptureMode() {
 
 /**
  * Essai HealthKit (étape I4) : disponibilité, état des autorisations, puis demande d'autorisation (lecture, et
- * écriture des pas pour l'aller-retour) ; sa feuille est capturée (« healthkit-autorisation ») et, si la CI sait
- * toucher l'écran (idb), acceptée par scripts/ios-captures.sh. Accordée : un nombre de pas est écrit dans Santé puis
- * relu, preuve que la lecture marche de bout en bout. Résultats dans la console (`[healthkit] …`).
+ * écriture des pas pour l'aller-retour, phrase d'usage ajoutée à la seule build de captures) ; sa feuille est
+ * capturée (« healthkit-autorisation »). Si elle est acceptée (test d'interface, à venir), un nombre de pas est écrit
+ * dans Santé puis relu, preuve que la lecture marche de bout en bout. Résultats dans la console (`[healthkit] …`).
  */
 async function probeHealthKit({ signal, waitAck, wait, log }) {
   const say = (what, value) => log(`[healthkit] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)

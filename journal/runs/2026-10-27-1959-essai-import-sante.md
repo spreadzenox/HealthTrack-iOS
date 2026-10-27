@@ -26,7 +26,17 @@
   « Terminating app » de la console, au lieu d'attendre la limite.
 - Journal de l'installation d'`idb` affiché en cas d'échec.
 
+## 2e CI de la PR #11 (verte)
+- Plus de plantage : la sonde va jusqu'au bout (« feuille toujours ouverte : pas d'écriture ni de relecture »),
+  feuille capturée sur les deux iPhone, 0 erreur JavaScript, captures en 21 min.
+- `idb` toujours inutilisable : Homebrew refuse le dépôt tiers de Facebook tant qu'il n'est pas approuvé
+  (« Refusing to load formula facebook/fb/idb-companion from untrusted tap facebook/fb. Run `brew trust …` »), et le
+  client cherche son compagnon dans `/usr/local/bin`. L'approbation (`brew trust facebook/fb`) a été **refusée par
+  le contrôle de sécurité de la session** (intégration de code non approuvé) : c'est une protection de Homebrew, je
+  ne la contourne pas. Étapes `idb` retirées de la CI et du script.
+
 ## Suite
-- Selon la 2e CI : si `idb` s'installe, vérifier « Tout activer » / « Autoriser » puis `saveSample` /
-  `readSamples` (1234 pas). Sinon, piste XCUITest : `XCTHealthKit` (Stanford, licence MIT) sait accepter la feuille
-  d'autorisation depuis un test d'interface ; la cible de test serait ajoutée au projet par la CI (gem `xcodeproj`).
+- Accepter la feuille par un test d'interface XCUITest écrit ici (sans bibliothèque tierce : toucher « Tout
+  activer » puis « Autoriser » dans l'app), cible de test ajoutée au projet ; puis `saveSample` / `readSamples`
+  (1234 pas) et l'import par le connecteur jusqu'au Journal.
+- Merger la PR #11 après sa 3e CI : phrase d'écriture limitée à la build de captures, arrêt sur plantage, sonde.

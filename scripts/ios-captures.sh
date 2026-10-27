@@ -23,30 +23,6 @@ SMALL="$(pick "iPhone 16e" "iPhone 14" "iPhone 13" "iPhone 12" || true)"
 LARGE="$(pick "iPhone 17 Pro" "iPhone 17" "iPhone 16 Pro" "iPhone 16" "iPhone 15 Pro" || true)"
 [ -n "$SMALL$LARGE" ] || { echo "::error::Aucun simulateur iPhone disponible"; xcrun simctl list devices available; exit 1; }
 
-accept_health_sheet() { # <udid> <dev> : « Tout activer » puis « Autoriser » sur la feuille de l'app Santé (idb, I4)
-  local udid="$1" dev="$2" label xy
-  for label in "Tout activer" "Autoriser"; do
-    idb ui describe-all --udid "$udid" --json > "$OUT/$dev-healthkit-ui.json" 2>"$OUT/$dev-healthkit-idb.txt" || return 0
-    xy="$(python3 - "$OUT/$dev-healthkit-ui.json" "$label" <<'PY'
-import json, sys
-items = json.load(open(sys.argv[1]))
-for it in items if isinstance(items, list) else []:
-    if (it.get('AXLabel') or '').strip() == sys.argv[2] and it.get('enabled', True):
-        f = it['frame']
-        print(int(f['x'] + f['width'] / 2), int(f['y'] + f['height'] / 2))
-        break
-PY
-)"
-    if [ -n "$xy" ]; then
-      idb ui tap --udid "$udid" $xy && echo "feuille Santé : « $label » touché ($xy)"
-    else
-      echo "feuille Santé : « $label » introuvable"
-    fi
-    sleep 1.5
-  done
-  xcrun simctl io "$udid" screenshot "$OUT/$dev-healthkit-apres.png" >/dev/null
-}
-
 run_device() { # <udid> <nom>
   local udid="$1" name="$2" dev log pid seen=0 deadline
   dev="$(echo "$name" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"
@@ -76,7 +52,6 @@ run_device() { # <udid> <nom>
       [ "$page" = fin ] && break
       xcrun simctl io "$udid" screenshot "$OUT/$dev-$page.png" >/dev/null
       echo "capture : $dev-$page.png"
-      if [ "$page" = healthkit-autorisation ] && command -v idb >/dev/null; then accept_health_sheet "$udid" "$dev"; fi
       seen=$((seen + 1)); last="$page"
       printf '%s' "$page" > "$data/Documents/capture/ack.txt"
     fi

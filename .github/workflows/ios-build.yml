@@ -95,13 +95,6 @@ jobs:
           mkdir -p captures
           codesign -d --entitlements - "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" > captures/entitlements.txt 2>&1 || true
           cat captures/entitlements.txt
-      - name: Outil de toucher du simulateur (idb, pour accepter la feuille de l'app Santé)
-        continue-on-error: true
-        run: |
-          brew tap facebook/fb > "$RUNNER_TEMP/idb.log" 2>&1 && brew install idb-companion >> "$RUNNER_TEMP/idb.log" 2>&1 || { echo "::warning::idb-companion non installé"; tail -25 "$RUNNER_TEMP/idb.log"; }
-          pipx install fb-idb >/dev/null 2>&1 || python3 -m pip install --quiet --break-system-packages fb-idb || echo "::warning::fb-idb non installé"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-          command -v idb_companion && (command -v idb || ls "$HOME/.local/bin")
       - name: Captures sur simulateur
         run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures
       - name: Résumé
