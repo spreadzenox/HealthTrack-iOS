@@ -13,18 +13,24 @@ vi.mock('@capacitor/core', async (importOriginal) => ({
   Capacitor: { isNativePlatform: () => true, getPlatform: () => 'ios' },
 }))
 vi.mock('@capacitor/filesystem', () => ({
-  Filesystem: { writeFile: vi.fn().mockResolvedValue({ uri: 'file:///Documents/sauvegarde.json' }) },
+  Filesystem: {
+    writeFile: vi.fn().mockResolvedValue({ uri: 'file:///Documents/sauvegarde.json' }),
+    stat: vi.fn().mockRejectedValue(new Error('absent')),
+    readFile: vi.fn(),
+  },
   Directory: { Documents: 'DOCUMENTS' },
+  Encoding: { UTF8: 'utf8' },
 }))
 vi.mock('@capacitor/share', () => ({ Share: { share: vi.fn().mockResolvedValue({}) } }))
 vi.mock('../storage/localHealthStorage', () => ({
-  exportToJson: vi.fn().mockResolvedValue('{"entries":[]}'), importFromJson: vi.fn(), parseBackup: vi.fn(), countAllEntries: vi.fn(),
+  exportToJson: vi.fn().mockResolvedValue('{"entries":[]}'), importFromJson: vi.fn(), parseBackup: vi.fn(), countAllEntries: vi.fn(async () => 0),
 }))
 vi.mock('../components/DoctorReportCard', () => ({ default: () => null }))
 vi.mock('../services/deleteAllData', () => ({ deleteAllMyData: vi.fn() }))
 
 import { Filesystem } from '@capacitor/filesystem'
 import { Share } from '@capacitor/share'
+import { parseBackup } from '../storage/localHealthStorage'
 import Data from './Data'
 
 describe('Sauvegarde sur iPhone', () => {
@@ -34,5 +40,20 @@ describe('Sauvegarde sur iPhone', () => {
     expect(await screen.findByText(/est aussi dans l’app Fichiers › Sur mon iPhone › Halcya/)).toBeInTheDocument()
     expect(Filesystem.writeFile).toHaveBeenCalledWith(expect.objectContaining({ directory: 'DOCUMENTS' }))
     expect(Share.share).toHaveBeenCalledWith(expect.objectContaining({ files: ['file:///Documents/sauvegarde.json'] }))
+  })
+})
+
+describe('Restauration de la copie de secours sur iPhone', () => {
+  it('la copie passe par le même aperçu que « Importer »', async () => {
+    Filesystem.stat.mockResolvedValue({ mtime: Date.now() - 2 * 3600 * 1000 })
+    Filesystem.readFile.mockResolvedValue({ data: '{"copie":true}' })
+    parseBackup.mockReturnValue({
+      entries: [{}, {}], invalid: 0, exportedAt: null, firstAt: '2026-10-01T08:00:00Z', lastAt: '2026-10-27T08:00:00Z',
+      byType: { food: 1, steps: 1 },
+    })
+    render(<MemoryRouter><Data /></MemoryRouter>)
+    fireEvent.click(await screen.findByRole('button', { name: 'Restaurer la copie de secours (il y a 2 h)' }))
+    expect(await screen.findByText('Halcya-copie-de-secours.json')).toBeInTheDocument()
+    expect(parseBackup).toHaveBeenCalledWith('{"copie":true}')
   })
 })

@@ -20,6 +20,34 @@ export async function saveSnapshot({ countAllEntries, exportToJson, writeFile })
   }
 }
 
+/**
+ * La copie de secours (`{ text, savedAt }`), ou null s'il n'y en a pas. `fs` : stat et readFile de
+ * @capacitor/filesystem, déjà placés dans Documents. Ne lève jamais.
+ */
+export async function readSnapshot(fs) {
+  try {
+    const { mtime } = await fs.stat(SNAPSHOT_FILE)
+    const { data } = await fs.readFile(SNAPSHOT_FILE)
+    return { text: String(data), savedAt: new Date(mtime).toISOString() }
+  } catch {
+    return null
+  }
+}
+
+/** Lecture réelle, dans l'app iPhone seulement. */
+export async function readDeviceSnapshot() {
+  try {
+    const [{ Capacitor }, { Filesystem, Directory, Encoding }] = await Promise.all([import('@capacitor/core'), import('@capacitor/filesystem')])
+    if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== 'ios') return null
+    return readSnapshot({
+      stat: (path) => Filesystem.stat({ path, directory: Directory.Documents }),
+      readFile: (path) => Filesystem.readFile({ path, directory: Directory.Documents, encoding: Encoding.UTF8 }),
+    })
+  } catch {
+    return null
+  }
+}
+
 /** Dans l'app iPhone : stockage persistant demandé, copie au démarrage puis à chaque passage en arrière-plan. */
 export async function installSnapshots(deps) {
   if (deps.platform !== 'ios') return
