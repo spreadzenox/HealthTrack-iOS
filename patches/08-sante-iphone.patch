@@ -1,0 +1,117 @@
+diff --git a/app/src/connectors/HealthConnectConnector.js b/app/src/connectors/HealthConnectConnector.js
+index 61dc74d..1e1a012 100644
+--- a/app/src/connectors/HealthConnectConnector.js
++++ b/app/src/connectors/HealthConnectConnector.js
+@@ -220,6 +220,12 @@ function getCachedHealthPlugin() {
+ async function ensureHealthPlugin() {
+   // Already loaded (including null = "unavailable"). Nothing to do.
+   if (_healthPluginCache !== undefined) return
++  // Version iOS (HealthTrack-iOS) : Health Connect est propre à Android, HealthKit arrive à l'étape I4 ;
++  // d'ici là, le plugin n'est jamais appelé (pas d'autorisation HealthKit à moitié branchée)
++  if (getPlatformSync() === 'ios') {
++    _healthPluginCache = null
++    return
++  }
+ 
+   // Load already in flight — wait for it, then return (not the cache value!).
+   if (_healthPluginCachePromise !== null) {
+@@ -399,6 +405,7 @@ export class HealthConnectConnector extends BaseConnector {
+     // Using sync here avoids any risk of deadlocking the WebView bridge thread.
+     const platform = getPlatformSync()
+     debugInfo(TAG, `Plateforme détectée (sync) : ${platform}`)
++    if (platform === 'ios') return { available: false, reason: 'ios', platform }
+ 
+     // Collect device info early so it is logged even if something below hangs
+     const deviceInfo = await collectDeviceInfo()
+diff --git a/app/src/pages/Connectors.jsx b/app/src/pages/Connectors.jsx
+index defa964..a961666 100644
+--- a/app/src/pages/Connectors.jsx
++++ b/app/src/pages/Connectors.jsx
+@@ -24,6 +24,7 @@ import { getPhoneUsageSettings } from '../services/phoneUsageSync'
+ import { getWatchAutoSyncState } from '../services/watchAutoSync'
+ import { detectPhoneApps } from '../devices/phoneApps'
+ import useDisclosure from '../hooks/useDisclosure'
++import { APP_NAME } from '../config/brand'
+ import './Connectors.css'
+ import { appLocale } from '../i18n/locale.js'
+ 
+@@ -76,6 +77,18 @@ const SYSTEM_UPDATE = (
+ 
+ /** Message affiché quand Health Connect est indisponible, selon la raison remontée par le natif. */
+ const UNAVAILABLE_MESSAGES = {
++  // Version iOS (HealthTrack-iOS) : raison « ios » du connecteur, jusqu'à HealthKit (étape I4)
++  ios: {
++    title: 'Pas sur iPhone.',
++    body: (
++      <>
++        Health Connect est propre à Android. {APP_NAME} lira bientôt l’app Santé d’Apple, où écrivent l’Apple Watch
++        et beaucoup de montres et de bagues.
++      </>
++    ),
++    settings: false,
++    recheck: false,
++  },
+   provider_update_required: {
+     title: 'Health Connect nécessite une mise à jour.',
+     body: (
+@@ -320,9 +333,11 @@ function ConnectorCard({ connector }) {
+                       Ouvrir les paramètres Health Connect
+                     </button>
+                   )}
+-                  <button type="button" className="btn btn-secondary connector-btn" onClick={recheckAvailability}>
+-                    Revérifier la disponibilité
+-                  </button>
++                  {msg.recheck !== false && (
++                    <button type="button" className="btn btn-secondary connector-btn" onClick={recheckAvailability}>
++                      Revérifier la disponibilité
++                    </button>
++                  )}
+                 </div>
+               </div>
+             )
+diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
+index aa4e5fe..7a3481a 100644
+--- a/app/src/pages/Onboarding.jsx
++++ b/app/src/pages/Onboarding.jsx
+@@ -26,6 +26,11 @@ const WATCHES = [
+   { id: 'huawei', label: 'Une montre compatible Huawei', hint: 'reliée directement en Bluetooth' },
+   { id: 'none', label: 'Pas de montre', hint: 'le téléphone et vos notes suffisent pour commencer' },
+ ]
++// Version iOS (HealthTrack-iOS) : les montres passent par l'app Santé d'Apple (étape I4), pas de montre Huawei en direct
++const WATCHES_IOS = [
++  { id: 'health_connect', label: 'Une montre ou une bague qui écrit dans l’app Santé', hint: 'Apple Watch, Garmin, Oura, Withings…' },
++  ...WATCHES.filter((w) => w.id === 'none'),
++]
+ 
+ /**
+  * Écrans dans l'ordre (jalon 4a : 1 à 3 ; 4b : Health Connect puis import et « aha », seulement avec une montre
+@@ -147,7 +152,7 @@ function WatchStep({ watch, onWatch }) {
+       <p className="onb-lead">Rien n’est demandé à cette étape : vous choisirez ce que l’app peut lire juste après.</p>
+       <fieldset className="onb-choices">
+         <legend className="onb-sr">Votre montre</legend>
+-        {WATCHES.map((w) => (
++        {(FEATURES.iosStore ? WATCHES_IOS : WATCHES).map((w) => (
+           <Choice
+             key={w.id}
+             type="radio"
+@@ -211,7 +216,7 @@ function HealthStep({ health, onHealth }) {
+   return (
+     <>
+       {disclosure}
+-      <h1 className="onb-title">Vos données Health Connect</h1>
++      <h1 className="onb-title">{FEATURES.iosStore ? 'Vos données de l’app Santé' : 'Vos données Health Connect'}</h1>
+       <p className="onb-lead">
+         Sommeil, pas, cœur, VFC et activité de vos 30 derniers jours, lus sur le téléphone. Rien n’est envoyé.
+       </p>
+@@ -227,8 +232,9 @@ function HealthStep({ health, onHealth }) {
+       )}
+       {health === 'unavailable' && (
+         <p className="onb-note" role="status">
+-          Health Connect n’est pas disponible sur ce téléphone pour l’instant. Vous pourrez le relier plus tard depuis
+-          l’onglet Sources.
++          {FEATURES.iosStore
++            ? 'Sur iPhone, la lecture de l’app Santé arrive dans une prochaine version. En attendant, vos notes suffisent pour commencer.'
++            : 'Health Connect n’est pas disponible sur ce téléphone pour l’instant. Vous pourrez le relier plus tard depuis l’onglet Sources.'}
+         </p>
+       )}
+       {health !== 'granted' && health !== 'unavailable' && (
