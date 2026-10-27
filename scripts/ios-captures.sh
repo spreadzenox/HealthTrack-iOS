@@ -38,7 +38,7 @@ run_device() { # <udid> <nom>
   : > "$data/Documents/capture/ack.txt"
   xcrun simctl launch --console-pty --terminate-running-process "$udid" "$BUNDLE" > "$log" 2>&1 &
   pid=$!
-  deadline=$((SECONDS + 600)); last=""
+  deadline=$((SECONDS + 900)); last=""
   while [ "$SECONDS" -lt "$deadline" ]; do
     page="$(cat "$data/Documents/capture/ready.txt" 2>/dev/null || true)"
     if [ -n "$page" ] && [ "$page" != "$last" ]; then
