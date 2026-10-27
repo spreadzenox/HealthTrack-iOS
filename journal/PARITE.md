@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 27/10 22:05 | #443 (pas de nouvelle version) | journal seul (idées « bord à bord » et R8 prêtes à coder) : rien à faire tant que ce n'est pas codé ; le « bord à bord » touchera peut-être les marges du code web partagé → à revérifier en captures (zones sûres de l'iPhone) quand il arrivera | — |
 | 27/10 20:05 | #441, #442 (v527) | tuiles « hier », repas sur une ligne, une seule piste « calories » dans Analyses : code web partagé, arrive tel quel | — |
 | 27/10 18:05 | #440 (v525) | « hier à 10:19 », plus de « Health Connect » dans un titre d'Analyses : code web partagé, arrive tel quel (bon pour iOS aussi) | — |
 | 27/10 17:15 | #438, #439 (v524) | #439 « Accueil vierge sans montre supposée ; « Tester un groupe FODMAP » lisible » : code web partagé, arrive tel quel (à voir sur les captures) ; #438 journal seul | — |
