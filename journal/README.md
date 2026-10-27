@@ -15,6 +15,10 @@
 | Parité des fonctions | référence | 20 % (9 fonctions vérifiées sur 45 faisables ; audit I2 en cours) |
 
 **Ce qui a changé cette semaine**
+- **27/10 16:45 — sur iPhone, plus rien ne renvoie vers Android** (en relecture, PR #4) : les montres passent
+  par l'app Santé d'Apple (lecture dans une prochaine version), la sauvegarde et le rapport PDF s'envoient par la
+  feuille de partage et se retrouvent dans l'app Fichiers, et les réglages qui dépendent d'Android (rappels du
+  soir, voix) n'apparaissent plus tant que leur version iPhone n'existe pas. Parité mesurée : 20 %.
 - **27/10 16:05 — toutes les pages photographiées sur iPhone simulé** : à chaque changement, 18 captures par iPhone
   (onboarding, 14 pages avec les données de démonstration, 3 en thème sombre), sur la taille de l'iPhone 12 et sur un
   iPhone récent. Elles ont montré ce qui parle encore d'Android sur iPhone (abonnement « Google Play », lecture du
@@ -45,7 +49,7 @@ via TestFlight.
 | 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, build simulateur + captures (onboarding et Accueil OK) | #1 |
 | 27/10 14:05 | I1 captures | parcours de 18 pages sans erreur JavaScript, mais captures décalées : PR laissée ouverte, synchronisation à fiabiliser | #2 (ouverte) |
 | 27/10 15:40 | I1 captures (suite) | synchronisation par fichier + accusé : les 36 captures correspondent à leur page ; projet iOS prioritaire (runs pleins) ; I2 : 7 replis iPhone et phrases d'usage | #2, #3 (ouverte) |
-| 27/10 16:22 | I2 Santé | suivi d'Android v522 ; sur iPhone, plus de Health Connect ni de montre Huawei en direct (Sources, onboarding) en attendant l'app Santé | #3, #4 |
+| 27/10 16:22 | I2 Santé | suivi d'Android v522 ; PR #3 mergée ; sur iPhone, plus de Health Connect ni de montre Huawei en direct, sauvegarde et PDF par la feuille de partage, 8 services à plugin absent repliés ; parité 20 % | #3, #4 (ouverte) |
 
 ---
 
