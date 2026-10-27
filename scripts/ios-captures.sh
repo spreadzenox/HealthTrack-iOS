@@ -30,6 +30,13 @@ run_device() { # <udid> <nom>
   echo "== $name ($udid)"
   xcrun simctl boot "$udid" 2>/dev/null || true
   xcrun simctl bootstatus "$udid" -b >/dev/null
+  # iPhone en français (feuilles et boutons d'iOS comme chez un utilisateur français) : réglage global, puis
+  # redémarrage du simulateur pour que les processus d'iOS le prennent
+  xcrun simctl spawn "$udid" defaults write -g AppleLanguages -array fr-FR
+  xcrun simctl spawn "$udid" defaults write -g AppleLocale -string fr_FR
+  xcrun simctl shutdown "$udid"
+  xcrun simctl boot "$udid"
+  xcrun simctl bootstatus "$udid" -b >/dev/null
   xcrun simctl ui "$udid" appearance light
   xcrun simctl install "$udid" "$APP"
   # Accusé vide créé d'avance : sans lui, chaque lecture de l'app en attente remplit la console d'erreurs « fichier absent »
