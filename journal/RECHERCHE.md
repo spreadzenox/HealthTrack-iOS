@@ -37,3 +37,20 @@ elle-même. Piste retenue pour I3, sans toucher au schéma ni au chemin Android 
 arrière-plan ; (3) au démarrage, base vide alors qu'un instantané existe → proposer de le restaurer (même aperçu
 que l'import, `parseBackup`). À vérifier sur la CI : où WKWebView range IndexedDB dans le conteneur
 (`Library/WebKit/WebsiteData/…`) et si iCloud l'inclut.
+
+## HealthKit par `@capgo/capacitor-health` 8.4.5 (lu dans le paquet le 27/10/2026, pour I4)
+
+- Licence MPL-2.0 : dépendance utilisée sans modification côté iOS, compatible avec une app commerciale (les
+  obligations de la MPL portent sur les fichiers du paquet modifiés ; le correctif d'Android ne touche que son code
+  Android).
+- Code iOS fourni (`ios/Sources/HealthPlugin/Health.swift`, HealthKit) avec les mêmes méthodes que celles
+  qu'appelle `HealthConnectConnector` : `isAvailable`, `checkAuthorization`, `requestAuthorization`, `readSamples`,
+  `queryAggregated`, `queryWorkouts` (plus `openHealthConnectSettings`, sans objet sur iOS). Les mêmes noms de types
+  (`steps`, `sleep`, `heartRate`, `restingHeartRate`, `heartRateVariability`, `oxygenSaturation`,
+  `respiratoryRate`, `bodyTemperature`, `workouts`…) : le connecteur peut servir tel quel, avec ses textes adaptés.
+- **VFC : pas la même mesure.** Sur iOS, `heartRateVariability` lit `HKQuantityTypeIdentifier.heartRateVariabilitySDNN`
+  (SDNN) ; Health Connect fournit le RMSSD. Les deux ne se comparent pas : la norme personnelle de VFC ne doit pas
+  mélanger des valeurs d'un Android importé (RMSSD) et de HealthKit (SDNN) ; à traiter en I4 (type ou source
+  distincts, libellé « VFC (SDNN) », tests sur les vecteurs du modèle de bien-être).
+- Autorisations : sans entitlement `com.apple.developer.healthkit`, HealthKit refuse ; une build simulateur signée
+  à la volée (`CODE_SIGN_IDENTITY=-`) devrait embarquer l'entitlement sans compte Apple — essai à faire sur la CI.
