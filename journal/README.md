@@ -76,7 +76,7 @@ via TestFlight.
 | 27/10 18:00 | I3 (fin de la PR #6), essai I4 | suivi d'Android v525 ; lecture de l'app Santé : le module d'Android sert aussi sur iPhone, VFC à ne pas mélanger (SDNN contre RMSSD) ; essai HealthKit sur simulateur | #6, #7, #8 |
 | 27/10 19:00 | I4 Santé | essai HealthKit mergé ; Halcya lit l'app Santé sur iPhone (à vérifier avec de vraies données) ; PR #8 réparée | #7, #8, #9 |
 | 27/10 20:00 | finitions I2/I3 | suivi d'Android v527 ; plus d'erreur de console liée à la copie de secours ; « Mes appareils » parle de l'app Santé | #10 |
-| 27/10 21:00 | essai d'import Santé | l'essai de la PR #11 a fait planter l'app (écriture dans Santé sans phrase d'usage) : corrigé pour la seule build de test ; outil de toucher à réinstaller | #11 (ouverte) |
+| 27/10 21:00 | essai d'import Santé | plantage de la build de test expliqué et corrigé (écriture dans Santé sans phrase d'usage) ; l'outil qui devait accepter la fenêtre Santé sur la CI est bloqué par une protection (non contournée) → test d'interface à écrire ; marche à suivre de l'adhésion Apple (A1) prête | #11 (ouverte) |
 
 ---
 
