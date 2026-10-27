@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Récupère le code de HealthTrack (version Android, dépôt en lecture seule) au commit suivi par upstream.json,
 # puis y applique les adaptations iOS de ce dépôt : patches/*.patch (dans l'ordre des noms), overlay/ (fichiers
-# ajoutés) et ios/ (projet natif, lié dans upstream/app/ios).
+# ajoutés) et ios/ (projet natif, copié dans upstream/app/ios).
 #
 #   scripts/upstream.sh            prépare upstream/ au commit de upstream.json
 #   scripts/upstream.sh --latest   met d'abord upstream.json sur le dernier commit de main dont « Play — AAB » a réussi
@@ -60,8 +60,10 @@ done
 if [ -d "$ROOT/overlay" ]; then
   cp -R "$ROOT/overlay/." "$DEST/"
 fi
+# Projet natif copié (pas lié) : le Package.swift que `cap sync ios` régénère pointe vers app/node_modules en relatif
+rm -rf "$DEST/app/ios"
 if [ -d "$ROOT/ios" ]; then
-  ln -sfn "$ROOT/ios" "$DEST/app/ios"
+  cp -R "$ROOT/ios" "$DEST/app/ios"
 fi
 
 echo "upstream/ prêt : Android v$COUNT ($SHA), ${#PATCHES[@]} correctif(s)"

@@ -1,0 +1,99 @@
+# Version iOS de Halcya : code Android suivi (upstream.json) + adaptations iOS, build pour le simulateur sans signature,
+# captures sur deux iPhone simulés (taille de l'iPhone 12 de test, et un récent), en clair et en sombre.
+# Le dépôt est public : les minutes macOS sont gratuites, mais on évite les builds inutiles (journal seul ignoré,
+# runs dépassés d'une même PR annulés).
+name: iOS — build simulateur
+
+on:
+  pull_request:
+    branches: [main]
+    paths-ignore: ["journal/**", "**.md"]
+  push:
+    branches: [main]
+    paths-ignore: ["journal/**", "**.md"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-build-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    name: Tests d'Android avec les correctifs iOS (Vitest)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.19"
+      - name: Code Android suivi + adaptations iOS
+        run: scripts/upstream.sh
+      - name: Tests
+        working-directory: upstream/app
+        run: |
+          npm ci --no-audit --no-fund
+          npm run test
+
+  ios:
+    name: Build iOS (simulateur) et captures
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # numéro de build = <version Android>.<nombre de commits de ce dépôt>
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.19"
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Code Android suivi + adaptations iOS
+        run: scripts/upstream.sh
+      - name: Numéros de version
+        run: |
+          ANDROID="$(node -p "require('./upstream.json').versionCode")"
+          echo "ANDROID_VERSION=$ANDROID" >> "$GITHUB_ENV"
+          echo "IOS_BUILD=$ANDROID.$(git rev-list --count HEAD)" >> "$GITHUB_ENV"
+          xcodebuild -version
+      - name: Build web (variante appstore) et synchronisation Capacitor
+        working-directory: upstream/app
+        env:
+          VITE_DISTRIBUTION: appstore
+        run: |
+          npm ci --no-audit --no-fund
+          CORE="$(node -p "require('@capacitor/core/package.json').version")"
+          npm install --no-save --no-audit --no-fund "@capacitor/ios@$CORE"
+          VITE_APP_VERSION="$ANDROID_VERSION" npm run build
+          npx -y -p "@capacitor/cli@${CORE%%.*}" cap sync ios
+      - name: Build Xcode (simulateur, sans signature)
+        working-directory: upstream/app/ios/App
+        run: |
+          set -o pipefail
+          xcodebuild -project App.xcodeproj -scheme App -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/dd" \
+            MARKETING_VERSION="$ANDROID_VERSION" CURRENT_PROJECT_VERSION="$IOS_BUILD" \
+            CODE_SIGNING_ALLOWED=NO build 2>&1 | tee "$RUNNER_TEMP/xcodebuild.log" | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
+          grep -q "BUILD SUCCEEDED" "$RUNNER_TEMP/xcodebuild.log"
+      - name: Captures sur simulateur
+        run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures
+      - name: Résumé
+        if: always()
+        run: |
+          {
+            echo "## iOS — Android v${ANDROID_VERSION:-?} · build ${IOS_BUILD:-?}"
+            echo
+            ls captures 2>/dev/null | sed 's/^/- /' || echo "Pas de capture."
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ios-captures
+          path: |
+            captures/
+            ${{ runner.temp }}/xcodebuild.log
+          if-no-files-found: warn

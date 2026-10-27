@@ -10,11 +10,14 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v514 en test interne (27/10 11:58) | — (pas encore de build) |
+| Dernière version | v516 en test interne (27/10 12:57) | v516 sur simulateur, en cours (27/10 13:05) |
 | Où l'installer | Play Store, test fermé | — (simulateur d'abord, TestFlight quand le compte Apple existera) |
 | Parité des fonctions | référence | audit à faire (étape I2) |
 
 **Ce qui a changé cette semaine**
+- **27/10 13:05 — premier projet iPhone** : Halcya a maintenant un projet iOS (nom, icône « H nuit », écran de
+  démarrage), construit automatiquement pour un iPhone simulé à chaque changement, avec des captures d'écran à la
+  taille de l'iPhone 12. La version Android n'est pas touchée : ses 2 563 tests passent avec les adaptations iOS.
 - **27/10 — dépôt iOS séparé** : la version iOS vit dans son propre dépôt, `spreadzenox/HealthTrack-iOS`, qui suit
   le dépôt Android sans jamais y écrire. Rien ne change pour la version Google Play ni pour sa routine.
 - **26–27/10 — mise en place** avec le propriétaire : charte, liste de parité de départ, backlog I0 → I9, script qui
@@ -33,6 +36,7 @@ via TestFlight.
 | Date (Paris) | Run | Ce qui a été fait | PR |
 |---|---|---|---|
 | 27/10 12:30 | mise en place | dépôt iOS, charte, parité, backlog, `scripts/upstream.sh` | (commit initial) |
+| 27/10 13:05 | I1 socle | variante appstore, projet Xcode, icône, workflow build simulateur + captures | PR I1 |
 
 ---
 
@@ -73,7 +77,8 @@ Android (« HealthTrack — amélioration autonome », PR `[Auto]` dans HealthTr
 1. `upstream.json` fixe le commit Android suivi et son numéro (`versionCode` = `git rev-list --count` de ce commit,
    comme l'AAB play).
 2. `scripts/upstream.sh` récupère ce commit dans `upstream/` (ignoré par git), applique `patches/*.patch` dans
-   l'ordre de leurs noms, copie `overlay/` par-dessus, et lie `ios/` (le projet Xcode) dans `upstream/app/ios`.
+   l'ordre de leurs noms, copie `overlay/` par-dessus, et copie `ios/` (le projet Xcode) dans `upstream/app/ios`
+   (une copie, pas un lien : le `Package.swift` régénéré par `cap sync ios` pointe en relatif vers `app/node_modules`).
    `scripts/upstream.sh --latest` avance d'abord `upstream.json` sur le **dernier commit de main dont « Play — AAB »
    a réussi** : la dernière version réellement envoyée sur Google Play.
 3. La build web se fait dans `upstream/app` avec `VITE_DISTRIBUTION=appstore` et `VITE_APP_VERSION` = le

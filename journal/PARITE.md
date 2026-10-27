@@ -9,17 +9,17 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
 **Parité** : _à calculer en I2_ = ✅ / (toutes les lignes sauf ⛔ et —).
-**Dernière version Android suivie** : v514 (commit `5084fc0`, 27/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v516 (commit `1e4f44d`, 27/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
 | Fonction (play) | Android | iOS | État | Notes |
 |---|---|---|---|---|
-| Projet natif | `app/android` (Capacitor 8) | `ios/` de ce dépôt, lié dans `upstream/app/ios` (Capacitor iOS, même majeure que `@capacitor/core`) | ❌ | I1 |
-| Build CI | `Play — AAB` (signé, `main`) | workflow de ce dépôt sur macOS (simulateur, puis signé) | ❌ | I1 puis I9 |
-| Numéro de version | `git rev-list --count HEAD` | même nombre en `CFBundleShortVersionString`, build `<android>.<ios>` | 🟡 | `upstream.json` + `scripts/upstream.sh` faits ; reste à l'écrire dans le projet Xcode (I1) |
-| Nom « Halcya », icône « H nuit », écran de démarrage | ✅ | AppIcon 1024, écran de démarrage | ❌ | `config/brand.js`, `journal/DESIGN.md` |
-| Variante de distribution | `play` | `appstore` dans `distribution.js` | ❌ | comme play : relais IA, pas d'auto-mise à jour |
+| Projet natif | `app/android` (Capacitor 8) | `ios/` de ce dépôt (Capacitor iOS 8.2, Swift Package Manager, 6 plugins iOS), copié dans `upstream/app/ios` | 🟡 | créé le 27/10 ; build à confirmer par la CI |
+| Build CI | `Play — AAB` (signé, `main`) | `ios-build.yml` : tests d'Android avec correctifs (Ubuntu) + build simulateur et captures (macOS) | 🟡 | I1 ; signé en I9 |
+| Numéro de version | `git rev-list --count HEAD` | même nombre en `CFBundleShortVersionString` (`MARKETING_VERSION`), build `<android>.<ios>` (`CURRENT_PROJECT_VERSION`) | 🟡 | passés à `xcodebuild` par le workflow ; affichage à vérifier en capture |
+| Nom « Halcya », icône « H nuit », écran de démarrage | ✅ | `CFBundleDisplayName` Halcya, AppIcon 1024 opaque et écran de démarrage encre générés depuis le glyphe d'Android (`scripts/ios-icons.mjs`) | 🟡 | à vérifier sur l'écran d'accueil d'un simulateur |
+| Variante de distribution | `play` | `appstore` (`patches/01-variante-appstore.patch`) | ✅ | comme play (relais IA, visage à l'ouverture, pas d'auto-mise à jour), sans abonnement jusqu'à I6 ; tests `overlay/…/distribution.appstore.test.js` |
 | Zones sûres, barres système | `SystemBarsPlugin`, `--safe-top/--safe-bottom` | encoche / Dynamic Island / indicateur d'accueil | ❌ | à vérifier en captures |
 | Mise à jour de l'app | Play Store | App Store | — | pas de bandeau de mise à jour |
 
@@ -88,4 +88,5 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 27/10 13:00 | #430, #431 (v516) | #431 « pas et kcal du jour : une source par heure » : code web partagé, arrive tel quel (vaudra aussi pour les sources Santé d'iOS) ; la partie kcal de la montre Huawei attend I8 ; #430 journal seul | 🟡 à vérifier en capture |
 | 27/10 | jusqu'à #429 (v514) | point de départ : tout ce qui précède est couvert par les tableaux ci-dessus (à compléter en I2, notamment les livraisons du 26/10 au soir et du 27/10 : FODMAP par sous-groupe, i18n…) | — |
