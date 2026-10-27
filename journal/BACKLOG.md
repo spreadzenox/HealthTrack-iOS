@@ -30,8 +30,8 @@
   des apps par noms de paquets Android, carte « Lecture du visage » en erreur — traités dans la PR #3 avec « Vos
   données », « Mes appareils », montre Huawei, temps d'écran et les phrases d'usage Bluetooth et Santé
   d'`Info.plist` ; carte Santé, Sources et onboarding sans Health Connect ni montre
-  Huawei en direct : branche `claude/ios-i2-sante` (PR #4) ; restent, dans l'ordre : export des données, journal de la montre et rapport PDF par la feuille de
-  partage (le lien de téléchargement ne fait rien dans WKWebView) ; « Vos sources » qui conseille Health Connect
+  Huawei en direct, sauvegarde et rapport PDF par la feuille de partage : branche `claude/ios-i2-sante` (PR #4) ;
+  restent, dans l'ordre : « Vos sources » qui conseille Health Connect
   dans Gadgetbridge ; captures défilées pour les pages longues) : compléter `PARITE.md` fonction par fonction (changelog depuis le
   lancement play, `journal/PRODUIT.md`, écrans) ; sur iOS, chaque service qui appelle un plugin Android absent
   retombe proprement (pas d'erreur, pas de carte cassée, pas d'interrupteur qui ne fait rien) ; % de parité.

@@ -96,7 +96,9 @@ priorité du propriétaire** : runs pleins (jusqu'à 50 min), étapes enchaîné
 
 Règles des adaptations :
 - **Correctif** (`patches/NN-sujet.patch`, produit par `git -C upstream diff HEAD -- <fichiers>` : **HEAD** obligatoire,
-  car `git apply --3way` met les correctifs déjà appliqués dans l'index) pour modifier un fichier Android ;
+  car `git apply --3way` met les correctifs déjà appliqués dans l'index ; exception : un nouveau correctif sur un
+  fichier qu'un correctif précédent touche déjà se tire de `git -C upstream diff -- <fichiers>`, sans HEAD, juste
+  après `scripts/upstream.sh`, pour ne garder que la nouvelle modification) pour modifier un fichier Android ;
   le plus petit possible, un sujet par fichier, pour qu'il survive aux changements d'Android. Un correctif qui ne
   s'applique plus fait échouer le script : le refaire sur le nouveau code (c'est le travail normal du suivi).
 - **Fichier ajouté** (`overlay/<chemin>`) pour du code nouveau propre à iOS (ex. `overlay/app/src/services/appStoreBilling.js`).
