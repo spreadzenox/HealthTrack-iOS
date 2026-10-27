@@ -4,9 +4,11 @@
 # captureMode.js) : quand une page est prête, elle écrit son nom dans Documents/capture/ready.txt de son conteneur ;
 # on capture l'écran, puis on répond dans Documents/capture/ack.txt, et l'app passe à la suite, jusqu'à « fin ».
 # La console est enregistrée ; ses erreurs JavaScript sont résumées dans js-errors.txt.
-#   scripts/ios-captures.sh <chemin/App.app> <dossier de sortie>
+# Sur la feuille « Accès à Santé » (I4), le test d'interface du dépôt (uitests/, déjà construit : fichier .xctestrun)
+# touche « Tout activer » puis « Autoriser » avant l'accusé ; sans lui, la feuille reste ouverte.
+#   scripts/ios-captures.sh <chemin/App.app> <dossier de sortie> [<fichier .xctestrun>]
 set -euo pipefail
-APP="$1"; OUT="$2"; BUNDLE="fr.jpesquet.sante"
+APP="$1"; OUT="$2"; XCTESTRUN="${3:-}"; BUNDLE="fr.jpesquet.sante"
 mkdir -p "$OUT"
 
 # Premier simulateur disponible dont le nom correspond, dans l'ordre de préférence donné
@@ -22,6 +24,23 @@ pick() {
 SMALL="$(pick "iPhone 16e" "iPhone 14" "iPhone 13" "iPhone 12" || true)"
 LARGE="$(pick "iPhone 17 Pro" "iPhone 17" "iPhone 16 Pro" "iPhone 16" "iPhone 15 Pro" || true)"
 [ -n "$SMALL$LARGE" ] || { echo "::error::Aucun simulateur iPhone disponible"; xcrun simctl list devices available; exit 1; }
+
+# Feuille de l'app Santé acceptée par le test d'interface, puis capture de l'écran qui suit (feuille fermée)
+accept_health() { # <udid> <préfixe des fichiers>
+  if [ -z "$XCTESTRUN" ] || [ ! -f "$XCTESTRUN" ]; then
+    echo "::warning::test d'interface absent : feuille de l'app Santé laissée ouverte"
+    return 0
+  fi
+  if xcodebuild test-without-building -xctestrun "$XCTESTRUN" -destination "id=$1" \
+      -only-testing:HalcyaUITests/SanteUITests/testAccepterLaFeuilleSante > "$OUT/$2-test-interface.txt" 2>&1; then
+    echo "test d'interface : feuille de l'app Santé acceptée"
+  else
+    echo "::warning::$2 : test d'interface en échec (voir $2-test-interface.txt)"
+    grep -E "error:|failed|introuvable|absent|non atteint" "$OUT/$2-test-interface.txt" | head -8 || true
+  fi
+  sleep 2
+  xcrun simctl io "$1" screenshot "$OUT/$2-healthkit-apres.png" >/dev/null || true
+}
 
 run_device() { # <udid> <nom>
   local udid="$1" name="$2" dev log pid seen=0 deadline
@@ -53,6 +72,7 @@ run_device() { # <udid> <nom>
       xcrun simctl io "$udid" screenshot "$OUT/$dev-$page.png" >/dev/null
       echo "capture : $dev-$page.png"
       seen=$((seen + 1)); last="$page"
+      [ "$page" != healthkit-autorisation ] || accept_health "$udid" "$dev"
       printf '%s' "$page" > "$data/Documents/capture/ack.txt"
     fi
     # L'app s'est arrêtée (plantage) : inutile d'attendre la limite, la cause est dans la console
