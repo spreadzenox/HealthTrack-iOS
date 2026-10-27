@@ -77,6 +77,22 @@ export async function runCaptureStep(plan, deps, { settleMs = 5000 } = {}) {
 const READY = 'capture/ready.txt'
 const ACK = 'capture/ack.txt'
 
+/**
+ * Attend que le script ait répondu `name` dans ack.txt, relu toutes les 300 ms ; 100 essais (30 s) suffisent pour
+ * une capture. Rend faux si la réponse ne vient pas.
+ */
+export async function waitForAck({ readAck, sleep }, name, tries = 100) {
+  for (let i = 0; i < tries; i++) {
+    try {
+      if (String(await readAck()).trim() === name) return true
+    } catch {
+      // pas encore de réponse
+    }
+    await sleep(300)
+  }
+  return false
+}
+
 export async function installCaptureMode() {
   try {
     const [storage, demo, changelog, { Filesystem, Directory, Encoding }] = await Promise.all([
@@ -98,19 +114,8 @@ export async function installCaptureMode() {
       wait: sleep,
       signal: (name) => Filesystem.writeFile({ ...file, path: READY, data: name, recursive: true }),
       probe: probeHealthKit,
-      // Jusqu'à 30 s : le temps que le script capture l'écran et réponde
-      waitAck: async (name) => {
-        for (let i = 0; i < 100; i++) {
-          try {
-            const { data } = await Filesystem.readFile({ ...file, path: ACK })
-            if (String(data).trim() === name) return true
-          } catch {
-            // pas encore de réponse
-          }
-          await sleep(300)
-        }
-        return false
-      },
+      waitAck: (name, tries) =>
+        waitForAck({ readAck: async () => (await Filesystem.readFile({ ...file, path: ACK })).data, sleep }, name, tries),
     })
   } catch (e) {
     console.error('[capture] échec :', e)
@@ -120,15 +125,16 @@ export async function installCaptureMode() {
 /**
  * Essai HealthKit (étape I4) : disponibilité, état des autorisations, puis demande d'autorisation (lecture, et
  * écriture des pas pour l'aller-retour, phrase d'usage ajoutée à la seule build de captures) ; sa feuille est
- * capturée (« healthkit-autorisation »). Si elle est acceptée (test d'interface, à venir), un nombre de pas est écrit
- * dans Santé puis relu, preuve que la lecture marche de bout en bout. Résultats dans la console (`[healthkit] …`).
+ * capturée (« healthkit-autorisation »), puis le test d'interface du dépôt (uitests/) l'accepte avant que le script
+ * réponde : jusqu'à 3 min d'attente. Acceptée, un nombre de pas est écrit dans Santé puis relu, preuve que la
+ * lecture marche de bout en bout. Résultats dans la console (`[healthkit] …`).
  */
-async function probeHealthKit({ signal, waitAck, wait, log }) {
+export async function probeHealthKit({ signal, waitAck, wait, log, health }) {
   const say = (what, value) => log(`[healthkit] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   const failed = (what) => (e) => say(`${what} erreur`, e?.message || String(e))
   try {
-    const { Health } = await import('@capgo/capacitor-health')
-    const read = ['steps', 'sleep', 'heartRate', 'heartRateVariability']
+    const Health = health ?? (await import('@capgo/capacitor-health')).Health
+    const read = ['steps', 'sleep', 'heartRate'] // pas la VFC : SDNN sur iOS, comme le connecteur
     await Health.isAvailable().then((r) => say('isAvailable', r), failed('isAvailable'))
     await Health.checkAuthorization({ read, write: [] }).then((r) => say('checkAuthorization', r), failed('checkAuthorization'))
     let answered = false
@@ -139,7 +145,7 @@ async function probeHealthKit({ signal, waitAck, wait, log }) {
     await wait(4000)
     if (!answered) say('requestAuthorization', 'feuille affichée, pas de réponse en 4 s')
     await signal('healthkit-autorisation')
-    await waitAck('healthkit-autorisation')
+    if (!(await waitAck('healthkit-autorisation', 600))) say('aller-retour', 'pas d’accusé du script en 3 min')
     for (let i = 0; i < 20 && !answered; i++) await wait(500)
     if (!answered) return say('aller-retour', 'feuille toujours ouverte : pas d’écriture ni de relecture')
     const endDate = new Date().toISOString()

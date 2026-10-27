@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -134,3 +134,60 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
   })
 })
 
+describe('accusé du script (waitForAck)', () => {
+  it('rend vrai dès que l’accusé porte le nom attendu, faux après le nombre d’essais donné', async () => {
+    const reads = ['', 'autre', 'page']
+    const readAck = vi.fn(async () => reads.shift() ?? '')
+    const sleep = vi.fn(async () => {})
+    expect(await waitForAck({ readAck, sleep }, 'page', 10)).toBe(true)
+    expect(readAck).toHaveBeenCalledTimes(3)
+    const never = vi.fn(async () => {
+      throw new Error('absent')
+    })
+    expect(await waitForAck({ readAck: never, sleep }, 'page', 4)).toBe(false)
+    expect(never).toHaveBeenCalledTimes(4)
+  })
+})
+
+describe('sonde HealthKit (I4)', () => {
+  function health({ acceptOnAck }) {
+    let accept
+    const answer = new Promise((resolve) => {
+      accept = resolve
+    })
+    return {
+      accept,
+      api: {
+        isAvailable: vi.fn(async () => ({ available: true })),
+        checkAuthorization: vi.fn(async () => ({ readAuthorized: [] })),
+        requestAuthorization: vi.fn(() => (acceptOnAck ? answer : new Promise(() => {}))),
+        saveSample: vi.fn(async () => {}),
+        readSamples: vi.fn(async () => ({ samples: [{ value: 1234 }] })),
+      },
+    }
+  }
+
+  it('laisse au script le temps du test d’interface (au moins 2 min), puis écrit et relit des pas', async () => {
+    const h = health({ acceptOnAck: true })
+    const logs = []
+    const waitAck = vi.fn(async () => {
+      h.accept({ readAuthorized: ['steps'] }) // le test d'interface a touché « Autoriser » avant l'accusé
+      return true
+    })
+    await probeHealthKit({ signal: vi.fn(async () => {}), waitAck, wait: async () => {}, log: (m) => logs.push(m), health: h.api })
+    const [name, tries] = waitAck.mock.calls[0]
+    expect(name).toBe('healthkit-autorisation')
+    expect(tries * 300).toBeGreaterThanOrEqual(120_000)
+    expect(h.api.requestAuthorization).toHaveBeenCalledWith({ read: expect.not.arrayContaining(['heartRateVariability']), write: ['steps'] })
+    expect(h.api.saveSample).toHaveBeenCalledWith(expect.objectContaining({ dataType: 'steps', value: 1234 }))
+    expect(logs.join('\n')).toMatch(/\[healthkit\] readSamples \{"count":1,"values":\[1234\]\}/)
+  })
+
+  it('feuille jamais acceptée : le dit et n’écrit rien', async () => {
+    const h = health({ acceptOnAck: false })
+    const logs = []
+    await probeHealthKit({ signal: async () => {}, waitAck: async () => true, wait: async () => {}, log: (m) => logs.push(m), health: h.api })
+    expect(h.api.saveSample).not.toHaveBeenCalled()
+    expect(logs.join('\n')).toMatch(/feuille toujours ouverte/)
+  })
+})
