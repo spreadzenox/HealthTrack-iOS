@@ -82,6 +82,7 @@ via TestFlight.
 | 27/10 20:00 | finitions I2/I3 | suivi d'Android v527 ; plus d'erreur de console liée à la copie de secours ; « Mes appareils » parle de l'app Santé | #10 |
 | 27/10 21:00 | essai d'import Santé | plantage de la build de test expliqué et corrigé (écriture dans Santé sans phrase d'usage) ; l'outil qui devait accepter la fenêtre Santé sur la CI est bloqué par une protection (non contournée) → test d'interface à écrire ; marche à suivre de l'adhésion Apple (A1) prête | #11 (ouverte) |
 | 27/10 22:00 | I4 Santé (suite) | **Halcya écrit et relit une mesure de l'app Santé sur iPhone simulé** (test d'interface qui accepte la fenêtre, #12) ; mesures importées affichées « App Santé » (#13, un test à reprendre) ; guide des montres réécrit pour l'iPhone (#14) | #11, #12, #13, #14, #15 (ouvertes : #13 à #15) |
+| 27/10 23:00 | I4 Santé (fin de vérification) | pas écrits dans Santé relus aussi par le connecteur de l'app (1 iPhone sur 2 : le test d'interface a raté un toucher sur l'autre, corrigé) ; guide des montres photographié ; un test d'Android capricieux signalé (`DEMANDES.md`) | #13, #14, #15 |
 
 ---
 
