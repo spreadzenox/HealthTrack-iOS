@@ -183,6 +183,23 @@ describe('sonde HealthKit (I4)', () => {
     expect(logs.join('\n')).toMatch(/\[healthkit\] readSamples \{"count":1,"values":\[1234\]\}/)
   })
 
+  it('acceptée : les pas écrits repassent par le connecteur de l’app (celui de Sources), sans rien enregistrer', async () => {
+    const h = health({ acceptOnAck: true })
+    const logs = []
+    const sync = vi.fn(async ({ writer }) => {
+      await writer([{ type: 'steps', source: 'health_connect', payload: { value: 1234, sourceName: 'Halcya' } }, { type: 'sleep', payload: {} }])
+      return { synced: 2, skipped: 0, errors: [] }
+    })
+    const waitAck = async () => {
+      h.accept({})
+      return true
+    }
+    await probeHealthKit({ signal: async () => {}, waitAck, wait: async () => {}, log: (m) => logs.push(m), health: h.api, connector: { sync } })
+    const { since, until } = sync.mock.calls[0][0]
+    expect(until.getTime() - since.getTime()).toBeGreaterThanOrEqual(3600 * 1000)
+    expect(logs.join('\n')).toMatch(/\[healthkit\] connecteur \{"synced":2,"errors":\[\],"pas":\[\{"value":1234,"source":"Halcya"\}\]\}/)
+  })
+
   it('feuille jamais acceptée : le dit et n’écrit rien', async () => {
     const h = health({ acceptOnAck: false })
     const logs = []

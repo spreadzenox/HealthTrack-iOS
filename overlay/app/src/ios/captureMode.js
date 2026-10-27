@@ -126,10 +126,10 @@ export async function installCaptureMode() {
  * Essai HealthKit (étape I4) : disponibilité, état des autorisations, puis demande d'autorisation (lecture, et
  * écriture des pas pour l'aller-retour, phrase d'usage ajoutée à la seule build de captures) ; sa feuille est
  * capturée (« healthkit-autorisation »), puis le test d'interface du dépôt (uitests/) l'accepte avant que le script
- * réponde : jusqu'à 3 min d'attente. Acceptée, un nombre de pas est écrit dans Santé puis relu, preuve que la
- * lecture marche de bout en bout. Résultats dans la console (`[healthkit] …`).
+ * réponde : jusqu'à 3 min d'attente. Acceptée, un nombre de pas est écrit dans Santé, relu, puis relu par le
+ * connecteur de l'app : preuve que l'import marche de bout en bout. Résultats dans la console (`[healthkit] …`).
  */
-export async function probeHealthKit({ signal, waitAck, wait, log, health }) {
+export async function probeHealthKit({ signal, waitAck, wait, log, health, connector }) {
   const say = (what, value) => log(`[healthkit] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   const failed = (what) => (e) => say(`${what} erreur`, e?.message || String(e))
   try {
@@ -154,6 +154,17 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health }) {
     await Health.readSamples({ dataType: 'steps', startDate, endDate, limit: 10 }).then(
       (r) => say('readSamples', { count: r?.samples?.length ?? 0, values: (r?.samples || []).map((x) => x.value) }),
       failed('readSamples'),
+    )
+    // Même lecture que l'app (Sources, onboarding) : le connecteur, avec un enregistreur qui ne garde rien
+    const imported = []
+    const sync = connector ?? new (await import('../connectors/HealthConnectConnector.js')).HealthConnectConnector()
+    await sync.sync({ since: new Date(startDate), until: new Date(), writer: async (entries) => imported.push(...entries) }).then(
+      (r) => say('connecteur', {
+        synced: r?.synced,
+        errors: r?.errors,
+        pas: imported.filter((e) => e.type === 'steps').map((e) => ({ value: e.payload?.value, source: e.payload?.sourceName })),
+      }),
+      failed('connecteur'),
     )
   } catch (e) {
     say('échec', e?.message || String(e))
