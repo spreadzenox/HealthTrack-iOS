@@ -33,6 +33,9 @@
   d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
 
 **Ce qui a changé cette semaine**
+- **28/10 00:40 — la variabilité cardiaque (VFC) de l'app Santé arrive sur iPhone** (PR #16) : l'iPhone la mesure
+  autrement qu'Android ; Halcya la lit, la montre à part dans le Journal (« VFC (SDNN) ») et ne la mélange jamais
+  avec celle d'Android dans les analyses. Les mesures venues de l'app Santé y sont présentées comme telles (PR #13).
 - **27/10 23:20 — un guide des montres pensé pour l'iPhone** (PR #14) : dans Sources, « Votre montre n'apparaît
   pas ? » explique maintenant comment faire arriver dans l'app Santé les mesures d'une Apple Watch, d'une Garmin,
   d'une Huawei, d'une Xiaomi ou d'autres marques, et prévient que les Galaxy Watch récentes ne marchent pas avec un
@@ -87,7 +90,7 @@ via TestFlight.
 | 27/10 21:00 | essai d'import Santé | plantage de la build de test expliqué et corrigé (écriture dans Santé sans phrase d'usage) ; l'outil qui devait accepter la fenêtre Santé sur la CI est bloqué par une protection (non contournée) → test d'interface à écrire ; marche à suivre de l'adhésion Apple (A1) prête | #11 (ouverte) |
 | 27/10 22:00 | I4 Santé (suite) | **Halcya écrit et relit une mesure de l'app Santé sur iPhone simulé** (test d'interface qui accepte la fenêtre, #12) ; mesures importées affichées « App Santé » (#13, un test à reprendre) ; guide des montres réécrit pour l'iPhone (#14) | #11, #12, #13, #14, #15 (ouvertes : #13 à #15) |
 | 27/10 23:00 | I4 Santé (fin de vérification) | guide des montres pour l'iPhone mergé et photographié (#14) ; pas écrits dans Santé relus aussi par le connecteur de l'app (1 iPhone sur 2 : le test d'interface a raté un toucher sur l'autre, corrigé) ; un test d'Android capricieux signalé (`DEMANDES.md`) | #14, #15 ; #13 (ouverte) |
-| 28/10 00:00 | suivi d'Android v530, I4 VFC | suivi d'Android v530 (plein écran Android : sans objet sur iPhone ; une seule piste « bouger ») ; mesures affichées « App Santé » (#13) ; la VFC de l'app Santé est lue sur iPhone, rangée à part de celle d'Android (mesurée autrement) et montrée dans le Journal (#16) | #13, #16 |
+| 28/10 00:00 | suivi d'Android v530, I4 VFC | suivi d'Android v530 (plein écran Android : sans objet sur iPhone ; une seule piste « bouger ») ; mesures affichées « App Santé » (#13) ; la VFC de l'app Santé est lue sur iPhone, rangée à part de celle d'Android (mesurée autrement) et montrée dans le Journal (#16) | #13, #16 (mergées) |
 
 ---
 

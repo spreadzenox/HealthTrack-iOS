@@ -52,8 +52,8 @@
     1234 pas écrits puis relus sur les deux iPhone simulés) ; pas relus par le connecteur de l'app (PR #15 : vu sur
     l'iPhone 16e, toucher du test fiabilisé ; mergée, vu sur les deux iPhone) ; ensuite les montrer dans le Journal ;
     à refaire sur l'iPhone 12.
-  - [~] Textes Santé sur iPhone : source « App Santé » des mesures importées (Journal, tuiles, rapport), résumé du
-    premier import, confirmation de suppression (PR #13).
+  - [x] Textes Santé sur iPhone : source « App Santé » des mesures importées (Journal, tuiles, rapport), résumé du
+    premier import, confirmation de suppression (PR #13, mergée le 28/10).
   - [x] Guide « Votre montre n'apparaît pas ? » réécrit pour l'iPhone (Health Connect, Gadgetbridge et Bluetooth
     direct n'y ont pas cours) : Apple Watch, Huawei Health, Mi Fitness et Zepp, Garmin, autres marques, Galaxy
     Watch récentes incompatibles ; recherche du 27/10 (`RECHERCHE.md`) ; PR #14, mergée le 27/10. Menus de Huawei
@@ -65,7 +65,7 @@
     nouveau type ; l'afficher « VFC (SDNN) » dans le Journal ; norme personnelle SDNN ensuite. 27/10 23:10 :
     `analysisEngine.js` et `dailyAggregates.js` testent chaque sous-catégorie de `heart_rate` ; seul
     `dailyJournal.js` tombe par défaut dans la fréquence cardiaque → une sous-catégorie à part
-    (`heartRateVariabilitySdnn`) plus un correctif de `dailyJournal.js` suffiraient. 28/10 : fait ainsi (PR #16 :
+    (`heartRateVariabilitySdnn`) plus un correctif de `dailyJournal.js` suffiraient. 28/10 : fait ainsi (PR #16, mergée :
     correctifs 08 et 13 refaits, 17 ajouté ; pastille « VFC (SDNN) » ; sonde qui écrit 48 ms et vérifie la
     sous-catégorie). Reste : norme personnelle SDNN (baselines.js), radar ; « Mes appareils » ne compte pas encore la
     VFC SDNN parmi les mesures d'une app (`healthApps.js`).
