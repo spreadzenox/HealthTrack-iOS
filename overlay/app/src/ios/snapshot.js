@@ -21,14 +21,16 @@ export async function saveSnapshot({ countAllEntries, exportToJson, writeFile })
 }
 
 /**
- * La copie de secours (`{ text, savedAt }`), ou null s'il n'y en a pas. `fs` : stat et readFile de
- * @capacitor/filesystem, déjà placés dans Documents. Ne lève jamais.
+ * La copie de secours (`{ text, savedAt }`), ou null s'il n'y en a pas. `fs.list()` rend les fichiers de Documents
+ * (`{ name, mtime }`) : on n'interroge jamais un fichier absent, que Capacitor écrirait en erreur dans la console.
+ * Ne lève jamais.
  */
 export async function readSnapshot(fs) {
   try {
-    const { mtime } = await fs.stat(SNAPSHOT_FILE)
+    const entry = (await fs.list()).find((f) => f.name === SNAPSHOT_FILE)
+    if (!entry) return null
     const { data } = await fs.readFile(SNAPSHOT_FILE)
-    return { text: String(data), savedAt: new Date(mtime).toISOString() }
+    return { text: String(data), savedAt: new Date(entry.mtime).toISOString() }
   } catch {
     return null
   }
@@ -40,7 +42,7 @@ export async function readDeviceSnapshot() {
     const [{ Capacitor }, { Filesystem, Directory, Encoding }] = await Promise.all([import('@capacitor/core'), import('@capacitor/filesystem')])
     if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== 'ios') return null
     return readSnapshot({
-      stat: (path) => Filesystem.stat({ path, directory: Directory.Documents }),
+      list: async () => (await Filesystem.readdir({ path: '', directory: Directory.Documents })).files,
       readFile: (path) => Filesystem.readFile({ path, directory: Directory.Documents, encoding: Encoding.UTF8 }),
     })
   } catch {

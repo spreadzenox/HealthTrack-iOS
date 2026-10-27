@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **23 %** au 27/10 17:45 (11 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v525 (commit `2a57616`, 27/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v527 (commit `a6d9dc5`, 27/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 27/10 20:05 | #441, #442 (v527) | tuiles « hier », repas sur une ligne, une seule piste « calories » dans Analyses : code web partagé, arrive tel quel | — |
 | 27/10 18:05 | #440 (v525) | « hier à 10:19 », plus de « Health Connect » dans un titre d'Analyses : code web partagé, arrive tel quel (bon pour iOS aussi) | — |
 | 27/10 17:15 | #438, #439 (v524) | #439 « Accueil vierge sans montre supposée ; « Tester un groupe FODMAP » lisible » : code web partagé, arrive tel quel (à voir sur les captures) ; #438 journal seul | — |
 | 27/10 16:25 | #437 (v522) | versionCode Play = 100000 + commits (le numéro affiché reste 522) : sans objet sur iOS, qui suit le numéro affiché (charte §4) ; lecture au déverrouillage rallumée en test interne : Android seul (⛔ sur iOS) | — |
