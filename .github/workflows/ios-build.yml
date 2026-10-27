@@ -90,13 +90,29 @@ jobs:
             CODE_SIGN_ENTITLEMENTS=App/App.entitlements \
             build 2>&1 | tee "$RUNNER_TEMP/xcodebuild.log" | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" "$RUNNER_TEMP/xcodebuild.log"
+      # Test d'interface du dépôt (uitests/, sans bibliothèque tierce) qui accepte la feuille de l'app Santé pendant
+      # les captures. Encore à l'essai : s'il ne se construit pas, les captures se font quand même, feuille ouverte.
+      - name: Build du test d'interface (feuille de l'app Santé, I4)
+        continue-on-error: true
+        run: |
+          set -o pipefail
+          xcodebuild -project uitests/HalcyaUITests.xcodeproj -scheme HalcyaUITests -configuration Debug \
+            -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath "$RUNNER_TEMP/dd-tests" \
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= PROVISIONING_PROFILE_SPECIFIER= \
+            build-for-testing > "$RUNNER_TEMP/xcodebuild-tests.log" 2>&1 || true
+          # Erreurs relues depuis la branche des captures (les artefacts ne sont pas toujours accessibles)
+          mkdir -p captures
+          grep -E "error:|SUCCEEDED|FAILED" "$RUNNER_TEMP/xcodebuild-tests.log" | tee captures/test-interface-build.txt
+          XCTESTRUN="$(ls "$RUNNER_TEMP"/dd-tests/Build/Products/*.xctestrun | head -1)"
+          echo "XCTESTRUN=$XCTESTRUN" >> "$GITHUB_ENV"
       - name: Entitlements embarqués (essai HealthKit, I4)
         run: |
           mkdir -p captures
           codesign -d --entitlements - "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" > captures/entitlements.txt 2>&1 || true
           cat captures/entitlements.txt
       - name: Captures sur simulateur
-        run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures
+        run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures "${XCTESTRUN:-}"
       - name: Résumé
         if: always()
         run: |
@@ -131,4 +147,5 @@ jobs:
           path: |
             captures/
             ${{ runner.temp }}/xcodebuild.log
+            ${{ runner.temp }}/xcodebuild-tests.log
           if-no-files-found: warn
