@@ -130,6 +130,11 @@ Règles des adaptations :
   le plus petit possible, un sujet par fichier, pour qu'il survive aux changements d'Android. Un correctif qui ne
   s'applique plus fait échouer le script : le refaire sur le nouveau code (c'est le travail normal du suivi).
 - **Fichier ajouté** (`overlay/<chemin>`) pour du code nouveau propre à iOS (ex. `overlay/app/src/services/appStoreBilling.js`).
+  Pas de nouvelle feuille CSS dans `overlay/` : le test `bundleGuard` d'Android exige que toute feuille soit
+  chargée d'emblée par `src/pageStyles.js` ; réutiliser les classes d'Android (ex. `.actions`) ou, à défaut, un
+  correctif de `pageStyles.js`.
+- **Avant chaque push de code** : la suite complète d'Android avec les correctifs (`npx vitest run` dans
+  `upstream/app`), pas seulement les tests ciblés (leçon du 27/10 : PR #8 rouge sur `bundleGuard`).
 - Jamais de copie d'un fichier Android entier dans `overlay/` : elle effacerait en silence les évolutions d'Android.
 - Les tests d'Android (`npm run test` dans `upstream/app`) doivent passer avec les correctifs appliqués ; les tests
   propres à iOS vont dans `overlay/` (Vitest) ou `ios/` (XCTest).
