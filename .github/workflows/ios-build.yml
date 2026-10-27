@@ -68,7 +68,7 @@ jobs:
           CORE="$(node -p "require('@capacitor/core/package.json').version")"
           npm install --no-save --no-audit --no-fund "@capacitor/ios@$CORE"
           VITE_APP_VERSION="$ANDROID_VERSION" npm run build
-          npx -y -p "@capacitor/cli@${CORE%%.*}" cap sync ios
+          npx -y -p "@capacitor/cli@$CORE" cap sync ios # CLI de la même version que le runtime (modèles de projet identiques)
       - name: Build Xcode (simulateur, sans signature)
         working-directory: upstream/app/ios/App
         run: |

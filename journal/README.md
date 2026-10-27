@@ -114,9 +114,10 @@ Règles des adaptations :
   lit leurs logs, télécharge leurs artefacts et **regarde** les captures du simulateur.
 - **Xcode / SDK** : la version d'Xcode la plus récente des runners ; vérifier l'exigence courante d'Apple sur le SDK
   minimal pour publier, avec sa source, dans `RECHERCHE.md`.
-- **Projet** : Capacitor iOS de la même majeure que `@capacitor/core` d'Android (8.x au 27/10 ; la CLI d'Android est
-  en 7.6 : utiliser au besoin `npx -p @capacitor/cli@8 cap …` dans les workflows), Swift Package Manager si
-  possible, bundle id `fr.jpesquet.sante` (comme le package play, à confirmer avec A3), nom « Halcya », icône
+- **Projet** : Capacitor iOS et CLI de **la même version exacte** que `@capacitor/core` d'Android (8.2.0 au 27/10 ;
+  `npx -p @capacitor/cli@<version> cap …`, Node 22 exigé) : une CLI plus récente génère un projet qui ne compile pas
+  avec le runtime (constaté le 27/10 : `SceneDelegateProxy` introuvable avec la CLI 8.5 et le runtime 8.2). Quand
+  Android monte `@capacitor/core`, régénérer ou mettre à jour le projet iOS en conséquence. Swift Package Manager, bundle id `fr.jpesquet.sante` (comme le package play, à confirmer avec A3), nom « Halcya », icône
   « H nuit » (`journal/DESIGN.md` d'Android).
 - **Téléphone de test : iPhone 12** (6,1", 390 × 844 points, encoche, puce A14, 4 Go). Cible de déploiement qui
   couvre sa version d'iOS ; captures sur un simulateur de cette taille en plus d'un iPhone récent ; fluidité à
