@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { formatAgo } from '../utils/timeAgo'
 import { SNAPSHOT_FILE, readDeviceSnapshot } from './snapshot.js'
+import './SnapshotRestore.css'
 
 /**
  * Version iOS (dépôt HealthTrack-iOS) : bouton « Restaurer la copie de secours » de la page Vos données. La copie
@@ -23,7 +24,7 @@ export default function SnapshotRestore({ onChoose, read = readDeviceSnapshot, n
   return (
     <button
       type="button"
-      className="btn btn-secondary"
+      className="btn btn-secondary snapshot-restore"
       onClick={() => onChoose({ name: SNAPSHOT_FILE, text: async () => snapshot.text })}
     >
       {`Restaurer la copie de secours (${formatAgo(snapshot.savedAt, now || new Date())})`}
