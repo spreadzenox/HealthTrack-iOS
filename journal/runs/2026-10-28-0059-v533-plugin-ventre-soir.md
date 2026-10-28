@@ -26,6 +26,14 @@
 - Suite d'Android avec les correctifs (code de sortie vérifié) : v533 + 17 correctifs 2653 ✅ ; PR #20 2649 ✅.
 - PR #20, 1re CI : `swift test` ✅, build Xcode de l'app avec le plugin ✅ du premier coup.
 
+## Résultats de la CI et merges
+- **PR #19 mergée** (620d45d) : CI verte, 52 captures, 0 erreur JavaScript ; « Stress montre 37 · normal » dans le
+  Journal (v533).
+- PR #20, 1re CI (sur l'ancienne base) : `swift test` ✅, build ✅, 52 captures, 0 erreur JavaScript, aucun plantage ;
+  le code partagé appelle le plugin natif (`GutEvening list`, `configure` dans la console) et **Paramètres montre
+  maintenant le réglage « Bilan du ventre le soir, d'un geste depuis une notification » sur iPhone**. Branche
+  remise sur `main` (PR #19) → CI ; merge au run suivant.
+
 ## Suite
 - Merger #19 puis #20 (remise sur `main`), captures de Paramètres regardées (réglage « Bilan du ventre le soir »).
 - Capturer la notification et le geste sur simulateur (autorisation des notifications acceptée par le test
