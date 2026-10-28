@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v544 (28/10) | v544 sur iPhone simulé (28/10, PR #26) |
+| Dernière version | v545 (28/10) | v544 sur iPhone simulé (28/10, PR #26) ; v545 prêt (PR #27) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 30 % (14 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -116,6 +116,7 @@ via TestFlight.
 | 28/10 06:00 | suivi d'Android v542, I5 (note du soir, rappel de portion) | Android v542 sans effet sur iPhone (signalement des appareils de test de Google) ; **réponse « Gêne » d'un geste vérifiée sur les deux iPhone simulés** (#23 mergée) ; la note du soir d'un geste (0 à 5) et le rappel de la portion du jour existent sur iPhone, à vérifier en capture : iOS n'affiche peut-être que 4 boutons sur 6 | #23 (mergée), #24 |
 | 28/10 07:00 | I5 (note du soir, rappel de portion), I4 | **note du soir (les 6 notes s'affichent) et rappel de portion vérifiés sur les deux iPhone simulés** ; le rappel touché ne rouvrait pas la réintroduction sur iPhone (le toucher arrive plus tard que sur Android) → corrigé ; la VFC de l'app Santé comptée dans « Mes appareils » | #24 (mergée), #25 |
 | 28/10 08:00 | suivi d'Android v544, I5, I4 | **les trois rappels (bilan du ventre, note du soir, rappel de portion) vérifiés de bout en bout sur iPhone simulé** : geste depuis la notification, réponse rangée puis entrée dans l'historique (**parité 30 %**) ; norme personnelle de la VFC de l'app Santé ; Android v544 (onglets du Journal plus lisibles, vérifiés sur la taille de l'iPhone 12) ; radar avec la VFC de l'app Santé en relecture | #25, #26 (mergées), #27 |
+| 28/10 09:00 | suivi d'Android v545, I4 | Android v545 : un écart à votre norme n'est plus affiché comme une alerte (aussi sur iPhone) ; radar avec la variabilité cardiaque de l'app Santé en relecture | #27 |
 
 ---
 
