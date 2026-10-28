@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v533 en test interne (28/10 01:29) | v533 sur iPhone simulé (28/10, PR #19) |
+| Dernière version | v536 en test interne (28/10) | v534 sur iPhone simulé (28/10, PR #21) ; v536 prêt |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 23 % (11 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -33,10 +33,10 @@
   d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
 
 **Ce qui a changé cette semaine**
-- **28/10 02:30 — le bilan du ventre du soir arrive sur iPhone** (PR #20, en relecture) : dans Paramètres, le réglage
+- **28/10 02:30 — le bilan du ventre du soir arrive sur iPhone** (PR #20, mergée ; notification capturée par la PR #21) : dans Paramètres, le réglage
   « Bilan du ventre le soir, d'un geste depuis une notification » apparaît ; le soir, une notification discrète
-  propose Calme / Gêne / Douleur, et la réponse est rangée sans ouvrir l'app, comme sur Android. Reste à la voir
-  s'afficher en capture.
+  propose Calme / Gêne / Douleur, et la réponse est rangée sans ouvrir l'app, comme sur Android. La notification
+  s'affiche bien sur iPhone simulé ; le geste lui-même reste à vérifier (sur l'iPhone 12 au plus tard).
 - **28/10 00:40 — la variabilité cardiaque (VFC) de l'app Santé arrive sur iPhone** (PR #16) : l'iPhone la mesure
   autrement qu'Android ; Halcya la lit, la montre à part dans le Journal (« VFC (SDNN) ») et ne la mélange jamais
   avec celle d'Android dans les analyses. Les mesures venues de l'app Santé y sont présentées comme telles (PR #13).
@@ -97,6 +97,8 @@ via TestFlight.
 | 28/10 00:00 | suivi d'Android v530, I4 VFC | suivi d'Android v530 (plein écran Android : sans objet sur iPhone ; une seule piste « bouger ») ; mesures affichées « App Santé » (#13) ; la VFC de l'app Santé est lue sur iPhone, rangée à part de celle d'Android (mesurée autrement) et montrée dans le Journal (#16) | #13, #16 (mergées) |
 | 28/10 01:00 | suivi d'Android v531, I5 (début) | suivi d'Android v531 (une seule question le soir sur la carte ventre) ; un test d'Android tombé en panne à minuit (date figée) réparé côté iOS et signalé (`DEMANDES.md`) ; premières règles des rappels du soir en Swift, testées (#18) | #17, #18 |
 | 28/10 02:00 | suivi d'Android v533, I5 (bilan du soir) | suivi d'Android v533 : Android a repris nos deux demandes (tests réparés) ; le bilan du ventre du soir par notification existe sur iPhone (plugin en Swift, à vérifier en capture) | #19, #20 |
+| 28/10 03:00 | suivi d'Android v534, I5 (notification) | sur iPhone simulé, l'autorisation des notifications est accordée et la notification du bilan du soir s'affiche (première version ratée par une erreur de ma part, corrigée) | #21 |
+| 28/10 04:00 | I5 (notification, suite) | notification du soir visible dans le centre de notifications (capturée) ; la réponse d'un geste reste à automatiser ; Android v536 préparé | #21 |
 
 ---
 

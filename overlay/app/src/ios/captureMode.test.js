@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, waitForAck } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -241,5 +241,43 @@ describe('sonde HealthKit (I4)', () => {
     await probeHealthKit({ signal: async () => {}, waitAck: async () => true, wait: async () => {}, log: (m) => logs.push(m), health: h.api })
     expect(h.api.saveSample).not.toHaveBeenCalled()
     expect(logs.join('\n')).toMatch(/feuille toujours ouverte/)
+  })
+})
+
+describe('sonde du bilan du ventre du soir (I5)', () => {
+  function gutEvening({ granted = true } = {}) {
+    let notes = []
+    return {
+      requestNotifications: vi.fn(async () => ({ asked: true, notifications: granted })),
+      testNotification: vi.fn(async () => {}),
+      list: vi.fn(async () => ({ notes })),
+      answer: (level) => {
+        notes = [{ name: 'gut-1', json: `{"v":1,"level":"${level}","at":1}` }]
+      },
+    }
+  }
+
+  it('autorisation acceptée par le test d’interface, notification d’essai, « Gêne » retrouvé dans la boîte', async () => {
+    const plugin = gutEvening()
+    const order = []
+    const logs = []
+    const waitAck = vi.fn(async (name) => {
+      order.push(`ack ${name}`)
+      if (name === 'notification-bilan') plugin.answer('discomfort') // geste du test d'interface
+      return true
+    })
+    await probeGutEvening({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin })
+    expect(order).toEqual(['signal notification-autorisation', 'ack notification-autorisation', 'signal notification-bilan', 'ack notification-bilan'])
+    expect(waitAck.mock.calls.every(([, tries]) => tries * 300 >= 120_000)).toBe(true)
+    expect(plugin.testNotification).toHaveBeenCalledTimes(1)
+    expect(logs.join('\n')).toContain('[notification] boîte {"count":1,"levels":["discomfort"]}')
+  })
+
+  it('notifications refusées : le dit et ne déclenche rien', async () => {
+    const plugin = gutEvening({ granted: false })
+    const logs = []
+    await probeGutEvening({ signal: async () => {}, waitAck: async () => true, wait: async () => {}, log: (m) => logs.push(m), plugin })
+    expect(plugin.testNotification).not.toHaveBeenCalled()
+    expect(logs.join('\n')).toMatch(/notifications refusées/)
   })
 })

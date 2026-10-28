@@ -44,3 +44,67 @@ final class SanteUITests: XCTestCase {
         XCTAssertEqual(atteint, .completed, "« \(predicate) » non atteint")
     }
 }
+
+/// Tests d'interface du bilan du ventre du soir (étape I5), lancés par scripts/ios-captures.sh pendant le parcours des
+/// captures : autoriser les notifications, puis répondre « Gêne » à la notification d'essai depuis le centre de
+/// notifications, sans ouvrir l'app. L'arbre d'accessibilité est écrit dans le journal du test en cas d'échec.
+final class NotificationsUITests: XCTestCase {
+    private let halcya = XCUIApplication(bundleIdentifier: "fr.jpesquet.sante")
+    private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+    private let titre = "Et votre ventre aujourd’hui ?"
+
+    /// Alerte « “Halcya” souhaite vous envoyer des notifications » : « Autoriser ».
+    func testAutoriserLesNotifications() throws {
+        halcya.activate()
+        let autoriser = springboard.alerts.buttons["Autoriser"]
+        guard autoriser.waitForExistence(timeout: 20) else {
+            print(springboard.debugDescription)
+            XCTFail("alerte des notifications introuvable")
+            return
+        }
+        autoriser.tap()
+    }
+
+    /// Ouvre le centre de notifications (glissé depuis le haut de l'écran) et y attend la notification d'essai ; le
+    /// script capture l'écran ensuite.
+    func testOuvrirLeCentreDeNotifications() throws {
+        let haut = springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.001))
+        let bas = springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.7))
+        haut.press(forDuration: 0.1, thenDragTo: bas)
+        guard notification().waitForExistence(timeout: 15) else {
+            print(springboard.debugDescription)
+            XCTFail("notification « \(titre) » absente du centre de notifications")
+            return
+        }
+    }
+
+    /// Appui long sur la notification elle-même (pas sur sa cellule de liste, essai du 28/10), puis « Gêne » ; retour à
+    /// Halcya.
+    func testRepondreGeneDepuisLaNotification() throws {
+        let carte = springboard.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier == %@ AND label CONTAINS %@", "NotificationShortLookView", titre))
+            .firstMatch
+        let note = carte.waitForExistence(timeout: 10) ? carte : notification()
+        guard note.exists else {
+            print(springboard.debugDescription)
+            XCTFail("notification « \(titre) » introuvable")
+            return
+        }
+        note.press(forDuration: 2.0)
+        sleep(1)
+        print(springboard.debugDescription) // ce qu'affiche la notification dépliée, pour le journal du test
+        let gene = springboard.descendants(matching: .any).matching(NSPredicate(format: "label == %@", "Gêne")).firstMatch
+        guard gene.waitForExistence(timeout: 10) else {
+            print(springboard.debugDescription)
+            XCTFail("bouton « Gêne » absent de la notification")
+            return
+        }
+        gene.tap()
+        XCUIDevice.shared.press(.home)
+        halcya.activate()
+    }
+
+    private func notification() -> XCUIElement {
+        springboard.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", titre)).firstMatch
+    }
+}
