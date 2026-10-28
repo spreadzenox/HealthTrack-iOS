@@ -88,8 +88,8 @@ analyses, journal, Accueil) : ils arrivent avec `upstream.json` et sont couverts
 |---|---|---|---|---|
 | Piste de test interne automatique | test interne Play à chaque version | TestFlight interne à chaque version | ❌ | après A1–A3 |
 | Test fermé | piste Alpha + groupe | TestFlight externe (examen bêta d'Apple) | ❌ | A6 |
-| Fiche du Store fr-FR (titre, textes, captures, icône) | `app/store/`, `Play — fiche du Store` | `store/app-store/` de ce dépôt | 🟡 | 28/10 (PR #35) : brouillon des textes (nom, sous-titre, texte promotionnel, description, mots-clés) réécrits pour l'iPhone, limites et directive 2.3.10 vérifiées par `store-check.yml` ; restent captures 6,9" (iPhone 17 Pro Max simulé), catégorie, âge, URL propres à l'iPhone |
-| Sécurité des données | `app/store/data-safety` | « Confidentialité de l'app » (A5) + `PrivacyInfo.xcprivacy` | ❌ | |
+| Fiche du Store fr-FR (titre, textes, captures, icône) | `app/store/`, `Play — fiche du Store` | `store/app-store/` de ce dépôt | 🟡 | 28/10 (PR #35, mergée) : brouillon des textes (nom, sous-titre, texte promotionnel, description, mots-clés) réécrits pour l'iPhone, limites et directive 2.3.10 vérifiées par `store-check.yml` ; restent captures 6,9" (iPhone 17 Pro Max simulé), catégorie, âge, URL propres à l'iPhone |
+| Sécurité des données | `app/store/data-safety` | « Confidentialité de l'app » (A5) + `PrivacyInfo.xcprivacy` | 🟡 | 28/10 (PR #39) : les mêmes 5 types que la déclaration Google Play d'Android (position approximative, photos, autre contenu, identifiant de l'appareil, historique d'achats), usage « fonctionnalités de l'app », jamais de pistage ; dans le manifeste et dans `store/app-store/confidentialite.md` ; un test vérifie que les deux listes restent identiques à celle d'Android ; reste le geste du propriétaire (A5) |
 | Déclarations santé, âge 18+ | Contenu de l'app | classification par âge, directives santé d'Apple | ❌ | |
 | Chiffrement à l'export | — | `ITSAppUsesNonExemptEncryption` | ❌ | |
 | Production | « Promouvoir la version » (propriétaire) | « Soumettre pour examen » puis publier (propriétaire) | — | A6 |

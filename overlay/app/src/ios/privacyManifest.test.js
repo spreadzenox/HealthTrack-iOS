@@ -25,3 +25,54 @@ describe('manifeste de confidentialité et chiffrement (App Store)', () => {
     expect(plistValue(xml, 'ITSAppUsesNonExemptEncryption')).toBe('<false/>')
   })
 })
+
+/** Types de données collectées du manifeste : `{ type: { linked, tracking, purposes } }`. */
+function collectedTypes(xml) {
+  const block = xml.match(/<key>NSPrivacyCollectedDataTypes<\/key>\s*<array>([\s\S]*?)<\/array>\s*<key>NSPrivacyAccessedAPITypes/)?.[1] ?? ''
+  const types = {}
+  for (const dict of block.split('</dict>')) {
+    const type = dict.match(/<key>NSPrivacyCollectedDataType<\/key>\s*<string>([^<]+)<\/string>/)?.[1]
+    if (!type) continue
+    const flag = (key) => dict.match(new RegExp(`<key>${key}</key>\\s*<(true|false)/>`))?.[1] === 'true'
+    const purposes = [...(dict.match(/<key>NSPrivacyCollectedDataTypePurposes<\/key>\s*<array>([\s\S]*?)<\/array>/)?.[1] ?? '').matchAll(/<string>([^<]+)<\/string>/g)].map((m) => m[1])
+    types[type] = { linked: flag('NSPrivacyCollectedDataTypeLinked'), tracking: flag('NSPrivacyCollectedDataTypeTracking'), purposes }
+  }
+  return types
+}
+
+// « Confidentialité de l'app » (A5) : les mêmes données que la « Sécurité des données » de Google Play d'Android
+// (app/store/data-safety/answers.mjs), dans les catégories d'Apple. Santé et forme n'y sont pas : elles restent
+// sur le téléphone et ne partent jamais à l'IA.
+const PLAY_TO_APPLE = {
+  PSL_APPROX_LOCATION: 'NSPrivacyCollectedDataTypeCoarseLocation',
+  PSL_PHOTOS: 'NSPrivacyCollectedDataTypePhotosorVideos',
+  PSL_USER_GENERATED_CONTENT: 'NSPrivacyCollectedDataTypeOtherUserContent',
+  PSL_DEVICE_ID: 'NSPrivacyCollectedDataTypeDeviceID',
+  PSL_PURCHASE_HISTORY: 'NSPrivacyCollectedDataTypePurchaseHistory',
+}
+
+describe('données collectées déclarées à Apple (A5)', () => {
+  const types = () => collectedTypes(readFileSync(app('PrivacyInfo.xcprivacy'), 'utf8'))
+
+  it('les mêmes types que la déclaration de Google Play d’Android, rien de plus', async () => {
+    const { DECLARED_DATA_TYPES } = await import('../../store/data-safety/answers.mjs')
+    expect(Object.keys(types()).sort()).toEqual(DECLARED_DATA_TYPES.map((t) => PLAY_TO_APPLE[t]).sort())
+  })
+
+  it('jamais de pistage, seulement pour faire fonctionner l’app ; la position arrondie n’est liée à rien', () => {
+    for (const [type, use] of Object.entries(types())) {
+      expect(use.tracking, type).toBe(false)
+      expect(use.purposes, type).toEqual(['NSPrivacyCollectedDataTypePurposeAppFunctionality'])
+    }
+    expect(types().NSPrivacyCollectedDataTypeCoarseLocation.linked).toBe(false)
+    // Envoyés au relais avec l'identifiant d'installation : liés à l'installation (choix prudent)
+    for (const t of ['PhotosorVideos', 'OtherUserContent', 'DeviceID', 'PurchaseHistory']) {
+      expect(types()[`NSPrivacyCollectedDataType${t}`].linked, t).toBe(true)
+    }
+  })
+
+  it('ni santé ni forme : ces données ne quittent pas le téléphone', () => {
+    expect(Object.keys(types())).not.toContain('NSPrivacyCollectedDataTypeHealth')
+    expect(Object.keys(types())).not.toContain('NSPrivacyCollectedDataTypeFitness')
+  })
+})
