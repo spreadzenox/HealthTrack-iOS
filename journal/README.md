@@ -202,6 +202,9 @@ Règles des adaptations :
   fichier de test rendu illisible par la fusion disparaît du total sans faire échouer la suite (28/10, #40).
   Plusieurs PR vertes à la fois : chaque merge oblige les autres à repasser la CI ; regrouper dans une seule PR
   celles qui touchent les mêmes fichiers (#38 dans #37, 28/10).
+- **Calcul natif d'Android réécrit en Swift** (I7, 28/10) : paquet Swift pur, mêmes cas et mêmes tolérances que les
+  tests JVM d'Android, vecteurs et portraits lus dans `upstream/` (jamais copiés) ; arrondis et tris de Java reproduits
+  (`Math.round`, `%.4f`, tri stable) ; modèles téléchargés en CI avec les empreintes d'Android (`scripts/face-models.sh`).
 - Jamais de copie d'un fichier Android entier dans `overlay/` : elle effacerait en silence les évolutions d'Android.
 - Les tests d'Android (`npm run test` dans `upstream/app`) doivent passer avec les correctifs appliqués ; les tests
   propres à iOS vont dans `overlay/` (Vitest) ou `ios/` (XCTest).
