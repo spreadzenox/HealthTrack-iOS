@@ -143,3 +143,25 @@ formuler prudemment (« une partie de vos mesures ») et à confirmer sur l'iPho
   (essai à faire sur la CI, comme HealthKit en I4). À trancher ensuite : un plugin iOS au même nom et à la même forme
   que `PlayBilling` (aucun changement du code partagé, mais un nom trompeur) ou un service `appStoreBilling.js` en
   `overlay/` branché par un correctif minimal là où `playBilling.js` est appelé.
+- **Précisé le 28/10 13:30** (doc Apple de `SKTestSession`, lue le 28/10/2026 ; fil des forums développeurs Apple) :
+  - `init(configurationFileNamed:)` lit un fichier `.storekit` **inclus dans le bundle de l'app** ;
+    `init(contentsOf:)` le lit depuis une URL ;
+  - `disableDialogs = true` évite la feuille d'achat de test ;
+  - `buyProduct(identifier:options:)` simule un achat (options `appAccountToken` comprises) et rend la transaction ;
+  - `clearTransactions()` repart de zéro ;
+  - un seul environnement de test pour toutes les sessions : tests en série.
+  - Un fil des forums rapporte une erreur « Sandbox restriction » quand la session est créée depuis un test d'interface
+    (XCUITest, autre processus). D'où le plan : une **cible de tests unitaires hébergée par l'app** (`TEST_HOST` = Halcya),
+    avec le `.storekit` (deux produits `halcya_premium_annuel` P1Y avec essai gratuit P2W, `halcya_premium_mensuel` P1M,
+    un groupe, vitrine FRA, prix d'essai fictifs), qui vérifie :
+    1. `Product.products(for:)` ;
+    2. la conversion de `BillingRule` sur les vrais `Product` ;
+    3. un achat par `buyProduct` puis `Transaction.currentEntitlements` (avec `appAccountToken`).
+
+    Format du `.storekit` : JSON produit par Xcode (`subscriptionGroups[].subscriptions[]` avec `productID`,
+    `recurringSubscriptionPeriod`, `introductoryOffer`, `type: RecurringSubscription`…). Aucun schéma publié : partir
+    d'un fichier d'exemple et laisser la CI le valider.
+  - Sources :
+    - <https://developer.apple.com/documentation/storekittest/sktestsession> ;
+    - <https://swiftwithmajid.com/2024/01/09/storekit-testing-in-swift/> ;
+    - fil des forums développeurs Apple sur « Sandbox restriction » (UI tests).
