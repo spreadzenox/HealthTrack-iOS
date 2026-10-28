@@ -16,7 +16,7 @@ public class GutEveningPlugin: CAPPlugin, CAPBridgedPlugin {
     public let pluginMethods: [CAPPluginMethod] = GutEveningPlugin.methods
 
     private static var methods: [CAPPluginMethod] {
-        var methods = [
+        var methods: [CAPPluginMethod] = [
             CAPPluginMethod(name: "status", returnType: CAPPluginReturnPromise),
             CAPPluginMethod(name: "configure", returnType: CAPPluginReturnPromise),
             CAPPluginMethod(name: "list", returnType: CAPPluginReturnPromise),

@@ -26,3 +26,14 @@
 
 ## Vérifications
 - Suite d'Android avec les 17 correctifs, sur v534 : 2659 ✅ (44 ignorés, code de sortie 0) · build web `appstore` ✅.
+
+## Résultat de la 1re CI de la PR #21 (rouge, ma faute)
+- Build Xcode en échec : `cannot convert return expression of type '[CAPPluginMethod?]' to return type
+  '[CAPPluginMethod]'` : l'initialiseur Objective-C de `CAPPluginMethod` rend un optionnel implicite, que seul un
+  tableau typé convertit. Corrigé (`var methods: [CAPPluginMethod]`) et repoussé à 02:48.
+- **Erreur de méthode** : la CI a échoué à 02:08, mais je ne l'ai vue qu'à 02:46 (j'attendais la branche des
+  captures, qui n'arrive pas quand la build échoue). Désormais, après chaque push de Swift, je regarde l'étape de
+  build quelques minutes plus tard au lieu d'attendre les captures seulement.
+
+## Suite
+- Reprendre la PR #21 au run suivant : CI de la correction, captures de la notification et du geste « Gêne ».
