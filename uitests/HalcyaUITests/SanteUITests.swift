@@ -78,14 +78,14 @@ final class NotificationsUITests: XCTestCase {
         }
     }
 
-    /// Attend la bannière de la notification d'essai (jusqu'à 45 s : elle part 20 s après le signal), appui long pour
+    /// Attend la bannière de la notification d'essai (jusqu'à 90 s : elle part 45 s après le signal), appui long pour
     /// la déplier, puis « Gêne ». Méthode courante des tests d'interface de notifications ; l'appui long dans le centre
     /// de notifications ne la dépliait pas (essais du 28/10).
     func testRepondreGeneDepuisLaBanniere() throws {
         let banniere = springboard.descendants(matching: .any)
             .matching(NSPredicate(format: "identifier == %@ AND label CONTAINS %@", "NotificationShortLookView", titre))
             .firstMatch
-        guard banniere.waitForExistence(timeout: 45) else {
+        guard banniere.waitForExistence(timeout: 90) else {
             print(springboard.debugDescription)
             XCTFail("bannière « \(titre) » jamais apparue")
             return

@@ -269,9 +269,10 @@ describe('sonde du bilan du ventre du soir (I5)', () => {
     await probeGutEvening({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin })
     expect(order).toEqual(['signal notification-autorisation', 'ack notification-autorisation', 'signal notification-bilan', 'ack notification-bilan'])
     expect(waitAck.mock.calls.every(([, tries]) => tries * 300 >= 120_000)).toBe(true)
-    // notification d'essai en bannière, assez tard pour que le test d'interface l'attende déjà
+    // notification d'essai en bannière, assez tard pour que le test d'interface l'attende déjà : xcodebuild met
+    // jusqu'à ~30 s à lancer le test (iPhone 16e, 28/10), la bannière ne reste que quelques secondes
     expect(plugin.testNotification).toHaveBeenCalledWith({ delay: expect.any(Number), banner: true })
-    expect(plugin.testNotification.mock.calls[0][0].delay).toBeGreaterThanOrEqual(15)
+    expect(plugin.testNotification.mock.calls[0][0].delay).toBeGreaterThanOrEqual(40)
     expect(logs.join('\n')).toContain('[notification] boîte {"count":1,"levels":["discomfort"]}')
   })
 
