@@ -1,0 +1,25 @@
+# 2026-10-28 08:59 UTC — Android v548, manifeste de confidentialité (PR #28)
+
+**Étape** : suivi d'Android, I9  ·  **PR** : #28  ·  **Android suivi** : v548  ·  **iOS** : 545 sur `main` (548 avec #28)  ·  **Parité** : 30 % (14/47)
+
+## Déclenchement
+- Tâche planifiée de 08:59 UTC, à l'heure. `main` : d8b19fe (#27), CI de push en cours (run 96). PR #28 ouverte à
+  08:39 : Vitest ✅, tests Swift ✅, build ✅, **manifeste de confidentialité et chiffrement vérifiés dans l'app
+  construite** ✅, captures en cours.
+
+## Ce qu'Android a livré depuis le run précédent (v545 → v548)
+- #463 : une piste « avec / sans » (alcool, sport le soir, écran tard…) n'est dite « solide » qu'à partir de 8 jours
+  de chaque côté (`statistics.js`, `behaviorTags.js`) : analyse partagée, arrive telle quelle ; note de Nouveautés
+  vraie sur iPhone.
+- #461, #462 : journal d'Android (dont un audit écran par écran de la version Play, POL-PLAY-21 à 28 : à relire pour
+  la parité des écrans).
+- Les 21 correctifs s'appliquent ; suite : 2690 ✅ (code de sortie 0) ; build `appstore` ✅.
+
+## Ce qui a été fait
+- PR #28 : suivi de v548 ajouté (un cycle de CI au lieu de deux).
+
+## Suite
+- CI de #28 : merger.
+- Relire l'audit écran par écran d'Android (POL-PLAY-21 à 28) pour la parité des écrans (§2 de `PARITE.md`).
+- I3 : import d'un export Android sur iPhone par le sélecteur de fichiers (test d'interface) ; I6 : essai de
+  StoreKit 2 sur simulateur avec un fichier de configuration StoreKit.
