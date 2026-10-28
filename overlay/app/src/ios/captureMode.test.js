@@ -510,7 +510,8 @@ describe('sonde de la copie proposée à l’onboarding après une restauration 
         count = 0
       }),
     }
-    const local = memoryStorage({ healthtrack_onboarding: '{"done":true}' })
+    const local = memoryStorage({ healthtrack_onboarding: '{"done":true}', healthtrack_theme: 'dark' })
+    local.removeItem = (k) => delete local.data[k]
     const signal = vi.fn(async (name) => calls.push(`capture ${name}`))
     const logs = []
     await probeSnapshotWelcome({
@@ -525,12 +526,13 @@ describe('sonde de la copie proposée à l’onboarding après une restauration 
       clickRestore: () => {
         calls.push('reprendre')
         count = 3
+        local.setItem('healthtrack_theme', 'dark') // rétabli par la copie
         return true
       },
     })
     expect(calls).toEqual(['copie écrite', 'base vidée', 'page /bienvenue', 'capture restauration-onboarding', 'reprendre', 'capture restauration-reprise'])
     expect(JSON.parse(local.data.healthtrack_onboarding)).toMatchObject({ done: true })
-    expect(logs).toEqual(['[restauration] avant {"count":3,"copie":true,"vidée":0}', '[restauration] après {"bouton":true,"count":3}'])
+    expect(logs).toEqual(['[restauration] avant {"count":3,"copie":true,"vidée":0}', '[restauration] après {"bouton":true,"count":3,"réglages":true}'])
   })
 })
 

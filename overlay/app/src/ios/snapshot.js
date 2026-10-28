@@ -9,14 +9,46 @@
  */
 export const SNAPSHOT_FILE = 'Halcya-copie-de-secours.json'
 
+/**
+ * Réglages gardés dans la copie (champ `iosSettings`, ignoré par l'import) : la sauvegarde iCloud n'emporte pas le
+ * localStorage de WKWebView (mesuré le 28/10), alors que la sauvegarde Android les ramène. Des préférences seulement :
+ * jamais un secret ni un état propre au téléphone (`DEVICE_BOUND_KEYS` de `restoreGuard.js`, appairages, jetons,
+ * abonnement, consentement à l'IA redemandé sur le nouveau téléphone) ; l'identifiant d'installation non plus.
+ */
+export const SNAPSHOT_SETTINGS = ['healthtrack_theme', 'healthtrack_evening_note', 'healthtrack_gut_evening', 'healthtrack_weather']
+
+function pickSettings(storage) {
+  const settings = {}
+  for (const key of SNAPSHOT_SETTINGS) {
+    const value = storage?.getItem(key)
+    if (value != null) settings[key] = value
+  }
+  return Object.keys(settings).length ? settings : null
+}
+
 /** Écrit la copie si la base contient quelque chose. Rend `true` si elle a été écrite ; ne lève jamais. */
-export async function saveSnapshot({ countAllEntries, exportToJson, writeFile }) {
+export async function saveSnapshot({ countAllEntries, exportToJson, writeFile, storage }) {
   try {
     if ((await countAllEntries()) === 0) return false
-    await writeFile(SNAPSHOT_FILE, await exportToJson())
+    const json = await exportToJson()
+    const settings = pickSettings(storage)
+    await writeFile(SNAPSHOT_FILE, settings ? JSON.stringify({ ...JSON.parse(json), iosSettings: settings }, null, 2) : json)
     return true
   } catch {
     return false
+  }
+}
+
+/** Rétablit les réglages de la liste trouvés dans une copie ; rend leurs clés. Ne lève jamais. */
+export function restoreSnapshotSettings(text, storage = globalThis.localStorage) {
+  try {
+    const settings = JSON.parse(text)?.iosSettings
+    if (!settings || typeof settings !== 'object') return []
+    const restored = SNAPSHOT_SETTINGS.filter((key) => typeof settings[key] === 'string')
+    for (const key of restored) storage.setItem(key, settings[key])
+    return restored
+  } catch {
+    return []
   }
 }
 
@@ -109,6 +141,7 @@ export async function startSnapshots() {
       wait: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
       countAllEntries: storage.countAllEntries,
       exportToJson: storage.exportToJson,
+      storage: window.localStorage,
       writeFile: (path, data) => Filesystem.writeFile({ path, data, directory: Directory.Documents, encoding: Encoding.UTF8 }),
     })
   } catch {
