@@ -50,6 +50,35 @@ export async function readDeviceSnapshot() {
   }
 }
 
+/**
+ * « Supprimer toutes mes données » : la copie contient toutes les entrées et le profil, et part dans la sauvegarde
+ * iCloud ; elle est effacée aussi (les sauvegardes exportées par la personne restent). Rend `true` si elle l'a été ;
+ * ne lève jamais.
+ */
+export async function deleteSnapshot(fs) {
+  try {
+    if (!(await fs.list()).some((f) => f.name === SNAPSHOT_FILE)) return false
+    await fs.deleteFile(SNAPSHOT_FILE)
+    return true
+  } catch {
+    return false
+  }
+}
+
+/** Effacement réel, dans l'app iPhone seulement. */
+export async function deleteDeviceSnapshot() {
+  try {
+    const [{ Capacitor }, { Filesystem, Directory }] = await Promise.all([import('@capacitor/core'), import('@capacitor/filesystem')])
+    if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== 'ios') return false
+    return deleteSnapshot({
+      list: async () => (await Filesystem.readdir({ path: '', directory: Directory.Documents })).files,
+      deleteFile: (path) => Filesystem.deleteFile({ path, directory: Directory.Documents }),
+    })
+  } catch {
+    return false
+  }
+}
+
 /** Dans l'app iPhone : stockage persistant demandé, copie au démarrage puis à chaque passage en arrière-plan. */
 export async function installSnapshots(deps) {
   if (deps.platform !== 'ios') return

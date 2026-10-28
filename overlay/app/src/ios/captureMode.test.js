@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, waitForAck } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeDeleteAll, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -470,5 +470,31 @@ describe('sonde de la sauvegarde du téléphone (I3)', () => {
     await probeBackup({ log: (m) => logs.push(m), plugin: { backupStatus: async () => { throw new Error('absent') } }, checkRestore })
     expect(logs.join('\n')).toContain('[sauvegarde] échec absent')
     expect(logs.join('\n')).toContain('[sauvegarde] repère échec lecture impossible')
+  })
+})
+
+describe('sonde de « Supprimer toutes mes données » (I3)', () => {
+  it('vide la base et efface la copie de secours qui partirait dans la sauvegarde iCloud', async () => {
+    let count = 3
+    let copie = { text: '{}', savedAt: 'x' }
+    const storage = { countAllEntries: vi.fn(async () => count) }
+    const deleteAll = vi.fn(async () => {
+      const entries = count
+      count = 0
+      copie = null
+      return { entries }
+    })
+    const logs = []
+    await probeDeleteAll({ log: (m) => logs.push(m), storage, readSnapshot: async () => copie, deleteAll })
+    expect(logs).toEqual(['[suppression] avant {"count":3,"copie":true}', '[suppression] après {"entries":3,"count":0,"copie":false}'])
+  })
+
+  it('un échec est dit, sans lever', async () => {
+    const logs = []
+    const deleteAll = async () => {
+      throw new Error('base fermée')
+    }
+    await probeDeleteAll({ log: (m) => logs.push(m), storage: { countAllEntries: async () => 1 }, readSnapshot: async () => null, deleteAll })
+    expect(logs.join('\n')).toContain('[suppression] échec base fermée')
   })
 })

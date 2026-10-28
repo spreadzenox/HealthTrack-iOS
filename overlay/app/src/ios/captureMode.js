@@ -136,6 +136,7 @@ export async function installCaptureMode() {
         await probePortionReminder({ ...d, location: window.location })
         await probeDataRoundtrip(d)
         await probeBackup(d)
+        await probeDeleteAll(d) // en dernier : vide la base
       },
       waitAck: (name, tries) =>
         waitForAck({ readAck: async () => (await Filesystem.readFile({ ...file, path: ACK })).data, sleep }, name, tries),
@@ -372,5 +373,24 @@ export async function probeBackup({ log, plugin, checkRestore }) {
     say('repère', await check())
   } catch (e) {
     say('repère échec', e?.message || String(e))
+  }
+}
+
+/**
+ * Essai de « Supprimer toutes mes données » (étape I3), en tout dernier : la base est vidée, et la copie de secours de
+ * Documents (toutes les entrées et le profil, qui partiraient dans la sauvegarde iCloud) effacée aussi (correctif 22).
+ * Résultats dans la console (`[suppression] …`).
+ */
+export async function probeDeleteAll({ log, storage, readSnapshot, deleteAll }) {
+  const say = (what, value) => log(`[suppression] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  try {
+    const db = storage ?? (await import('../storage/localHealthStorage'))
+    const read = readSnapshot ?? (await import('./snapshot.js')).readDeviceSnapshot
+    const wipe = deleteAll ?? (await import('../services/deleteAllData')).deleteAllMyData
+    say('avant', { count: await db.countAllEntries(), copie: Boolean(await read()) })
+    const { entries } = await wipe()
+    say('après', { entries, count: await db.countAllEntries(), copie: Boolean(await read()) })
+  } catch (e) {
+    say('échec', e?.message || String(e))
   }
 }

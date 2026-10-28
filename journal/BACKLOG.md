@@ -42,10 +42,13 @@
   de partage (y compris d'un téléphone Android vers un iPhone), secrets dans le Trousseau (ThisDeviceOnly).
   - [x] Aller-retour des données vérifié en capture (PR #29, mergée le 28/10) : 1924 mesures exportées, écrites dans
     un fichier, relues, réimportées sans doublon sur les deux iPhone simulés.
-  - [~] Sauvegarde du téléphone (PR #30) : `BackupMarker` en Swift (repère hors sauvegarde, lu par `restoreGuard.js`
-    comme sur Android ; règle `DeviceMarker` testée par XCTest) ; sonde Debug `CaptureProbe` qui relève ce que la
-    sauvegarde iCloud emporterait. Reste : lire la sonde sur la CI (base et copie de secours non exclues, repère
-    exclu, `restored: false` sans `unavailable`).
+  - [x] Sauvegarde du téléphone mesurée (PR #30, mergée le 28/10) : `BackupMarker` en Swift (repère hors
+    sauvegarde, lu par `restoreGuard.js` : `restored: false`) ; sonde Debug `CaptureProbe` : **WebKit exclut la base
+    IndexedDB de la sauvegarde iCloud**, Documents (copie de secours) est sauvegardé.
+  - [~] « Supprimer toutes mes données » efface aussi la copie de secours (correctif 22, PR #31 ; elle gardait toutes
+    les entrées et le profil, et partait dans la sauvegarde iCloud) ; sonde `[suppression]` en dernier.
+  - [ ] Après une restauration (base vide, copie présente) : proposer la copie d'emblée, à l'Accueil ou dans
+    l'onboarding (aujourd'hui seulement dans « Vos données »).
   - [ ] Gestes réels : export par la feuille de partage, import par le sélecteur de fichiers (test d'interface),
     fichier exporté d'Android réimporté sur iPhone.
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS
