@@ -55,6 +55,9 @@ jobs:
           xcode-version: latest-stable
       - name: Code Android suivi + adaptations iOS
         run: scripts/upstream.sh
+      # Règles des rappels du soir (I5) : paquet Swift du dépôt, testé seul (XCTest), avant toute build de l'app
+      - name: Tests Swift des rappels du soir (XCTest)
+        run: swift test --package-path ios/HalcyaRules
       - name: Numéros de version
         run: |
           ANDROID="$(node -p "require('./upstream.json').versionCode")"
