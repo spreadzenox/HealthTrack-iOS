@@ -36,6 +36,10 @@
 - PR #25 : VFC SDNN comptée dans « qui envoie quoi » (« Mes appareils ») sous « VFC (SDNN) », **correctif 19**
   (`healthApps.js`, 1 ligne), sans drapeau « montre » (sinon une montre Android la réclamerait : deux tests
   d'Android l'ont signalé) ; test `overlay` écrit d'abord. Suite : 2680 ✅ (code de sortie 0) ; build `appstore` ✅.
+- PR #25, suite (I5) : les sondes du ventre et de la note du soir lancent ensuite l'import de l'app
+  (`importPendingGutEvenings`, `importPendingEveningNotes`, comme à l'ouverture suivante) et relèvent
+  `[… ] import {imported, inserted, …, left}` : la réponse doit entrer dans l'historique et la boîte se vider. Tests
+  des sondes mis à jour d'abord.
 - Leçon : un correctif se régénère par `git diff HEAD` (depuis le code d'Android) quand aucun autre ne touche le
   fichier, jamais par rapport à sa propre version appliquée.
 
@@ -46,5 +50,6 @@
 ## Suite
 - Merger #25 après sa CI. Puis I4 : norme personnelle SDNN (`baselines.js` : l'ajouter à `BASELINE_METRICS`
   casserait un test d'Android qui attend deux mesures → passer par une liste propre à iOS), radar.
-- I5 restant : vérifier l'import des réponses à l'ouverture suivante (boîte vidée dans l'historique) ; rappel de
-  fin d'essai avec I6 (il dépend de la facturation).
+- I5 : lire `[notification] import` et `[note] import` dans les captures de #25 (attendu `inserted 1`, `left 0`) ;
+  si c'est le cas, bilan du ventre, note du soir et rappel de portion passent ✅ dans `PARITE.md` (vérifiés sur
+  iPhone simulé, gestes à refaire sur l'iPhone 12). Rappel de fin d'essai avec I6 (il dépend de la facturation).
