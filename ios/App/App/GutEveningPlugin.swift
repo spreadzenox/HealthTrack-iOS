@@ -13,13 +13,21 @@ import UserNotifications
 public class GutEveningPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "GutEveningPlugin"
     public let jsName = "GutEvening"
-    public let pluginMethods: [CAPPluginMethod] = [
-        CAPPluginMethod(name: "status", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "configure", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "list", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "remove", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "requestNotifications", returnType: CAPPluginReturnPromise),
-    ]
+    public let pluginMethods: [CAPPluginMethod] = GutEveningPlugin.methods
+
+    private static var methods: [CAPPluginMethod] {
+        var methods = [
+            CAPPluginMethod(name: "status", returnType: CAPPluginReturnPromise),
+            CAPPluginMethod(name: "configure", returnType: CAPPluginReturnPromise),
+            CAPPluginMethod(name: "list", returnType: CAPPluginReturnPromise),
+            CAPPluginMethod(name: "remove", returnType: CAPPluginReturnPromise),
+            CAPPluginMethod(name: "requestNotifications", returnType: CAPPluginReturnPromise),
+        ]
+        #if DEBUG
+        methods.append(CAPPluginMethod(name: "testNotification", returnType: CAPPluginReturnPromise))
+        #endif
+        return methods
+    }
 
     private let store = GutEveningNotifications.store
 
@@ -48,6 +56,23 @@ public class GutEveningPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         call.resolve(["removed": store.remove(names: names)])
     }
+
+    #if DEBUG
+    /// Build de captures seulement (configuration Debug, jamais livrée) : la notification du soir dans 3 s, pour la
+    /// capturer et y répondre sur simulateur (`src/ios/captureMode.js` › `probeGutEvening`).
+    @objc func testNotification(_ call: CAPPluginCall) {
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        let request = UNNotificationRequest(identifier: GutEveningNotifications.requestPrefix + "essai",
+                                            content: GutEveningNotifications.content(), trigger: trigger)
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error {
+                call.reject(error.localizedDescription)
+            } else {
+                call.resolve()
+            }
+        }
+    }
+    #endif
 
     /// Demande l'autorisation des notifications (une seule fois, iOS ne la redemande plus) ; rend { asked, notifications }.
     @objc func requestNotifications(_ call: CAPPluginCall) {
@@ -82,6 +107,16 @@ enum GutEveningNotifications {
         settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional
     }
 
+    /// « Et votre ventre aujourd'hui ? », discrète comme le canal « bas » d'Android, avec Calme / Gêne / Douleur.
+    static func content() -> UNMutableNotificationContent {
+        let content = UNMutableNotificationContent()
+        content.title = "Et votre ventre aujourd’hui ?"
+        content.body = "Dans l’ensemble, d’un geste."
+        content.categoryIdentifier = category
+        content.interruptionLevel = .passive
+        return content
+    }
+
     /// Retire les soirs programmés, puis programme ceux de `store.plan` (rien si éteint).
     static func reschedule(_ done: @escaping () -> Void) {
         let center = UNUserNotificationCenter.current()
@@ -92,15 +127,10 @@ enum GutEveningNotifications {
             let dates = store.plan(now: Date(), calendar: calendar)
             store.nextAt = dates.first.map { $0.timeIntervalSince1970 * 1000 } ?? 0
             for date in dates {
-                let content = UNMutableNotificationContent()
-                content.title = "Et votre ventre aujourd’hui ?"
-                content.body = "Dans l’ensemble, d’un geste."
-                content.categoryIdentifier = category
-                content.interruptionLevel = .passive // discrète, comme le canal « bas » d'Android
                 let parts = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: date)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: parts, repeats: false)
                 let id = requestPrefix + EveningRule.dayKey(date, calendar: calendar)
-                center.add(UNNotificationRequest(identifier: id, content: content, trigger: trigger))
+                center.add(UNNotificationRequest(identifier: id, content: content(), trigger: trigger))
             }
             done()
         }

@@ -129,7 +129,10 @@ export async function installCaptureMode() {
       log: (message) => console.log(message),
       wait: sleep,
       signal: (name) => Filesystem.writeFile({ ...file, path: READY, data: name, recursive: true }),
-      probe: probeHealthKit,
+      probe: async (d) => {
+        await probeHealthKit(d)
+        await probeGutEvening(d)
+      },
       waitAck: (name, tries) =>
         waitForAck({ readAck: async () => (await Filesystem.readFile({ ...file, path: ACK })).data, sleep }, name, tries),
     })
@@ -192,3 +195,44 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health, conne
     say('échec', e?.message || String(e))
   }
 }
+
+/**
+ * Essai du bilan du ventre du soir (étape I5) : autorisation des notifications (alerte acceptée par le test
+ * d'interface du dépôt), puis notification d'essai (`testNotification`, build de captures seulement) à laquelle le
+ * test d'interface répond « Gêne » depuis le centre de notifications ; la réponse doit être dans la boîte du plugin,
+ * sans que l'app ait été ouverte. Résultats dans la console (`[notification] …`).
+ */
+export async function probeGutEvening({ signal, waitAck, wait, log, plugin }) {
+  const say = (what, value) => log(`[notification] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  try {
+    const GutEvening = plugin ?? (await import('@capacitor/core')).registerPlugin('GutEvening')
+    let answer = null
+    GutEvening.requestNotifications().then(
+      (r) => { answer = r ?? {} },
+      (e) => { answer = { error: e?.message || String(e) } },
+    )
+    await wait(2000)
+    await signal('notification-autorisation')
+    if (!(await waitAck('notification-autorisation', 600))) say('autorisation', 'pas d’accusé du script en 3 min')
+    for (let i = 0; i < 20 && !answer; i++) await wait(500)
+    say('requestNotifications', answer ?? 'pas de réponse')
+    if (!answer?.notifications) return say('essai', 'notifications refusées : pas de notification d’essai')
+    await GutEvening.testNotification() // notification réelle du soir, dans 3 s
+    await wait(4000)
+    await signal('notification-bilan')
+    if (!(await waitAck('notification-bilan', 600))) say('bilan', 'pas d’accusé du script en 3 min')
+    await wait(1000)
+    const notes = (await GutEvening.list())?.notes || []
+    const levels = notes.map((n) => {
+      try {
+        return JSON.parse(n.json).level
+      } catch {
+        return null
+      }
+    })
+    say('boîte', { count: notes.length, levels })
+  } catch (e) {
+    say('échec', e?.message || String(e))
+  }
+}
+
