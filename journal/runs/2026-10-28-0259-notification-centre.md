@@ -21,6 +21,15 @@
   (`NotificationShortLookView`). Correction poussée à 03:16 (appui de 2 s sur la notification, « Gêne » cherché sous
   toutes ses formes, arbre écrit après l'appui).
 
+## PR #21 : 3e CI (verte) et décision
+- Appui long de 2 s sur la notification elle-même (`NotificationShortLookView`) : toujours pas dépliée, ni
+  « Gêne », ni boîte remplie. Le dépliage d'une notification par XCUITest ne marche pas sur ce simulateur ; le
+  chemin du geste (délégué, boîte) reste prouvé par les tests XCTest de `GutEveningStore`, pas encore à l'écran.
+- **Mergée pour ce qu'elle prouve** (titre et description corrigés) : autorisation des notifications accordée,
+  notification du bilan du soir affichée dans le centre de notifications avec le bon contenu, sur les deux iPhone.
+  Le test du geste reste dans le parcours (avertissement, non bloquant) avec son arbre d'accessibilité, en
+  attendant une autre approche (BACKLOG) ; à refaire de toute façon sur l'iPhone 12 après A1.
+
 ## Vérifications
 - Suite d'Android avec les 17 correctifs : v534 2659 ✅, v536 2661 ✅ (code de sortie 0).
 
