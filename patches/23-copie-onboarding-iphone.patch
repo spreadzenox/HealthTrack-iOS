@@ -1,0 +1,20 @@
+diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
+index 57c7399..1d6e1dc 100644
+--- a/app/src/pages/Onboarding.jsx
++++ b/app/src/pages/Onboarding.jsx
+@@ -16,6 +16,7 @@ import LineIcon from '../components/LineIcon'
+ import { APP_NAME } from '../config/brand'
+ import './Onboarding.css'
+ import { appLocale } from '../i18n/locale.js'
++import SnapshotWelcome from '../ios/SnapshotWelcome' // Version iOS (HealthTrack-iOS)
+ 
+ const WATCHES = [
+   {
+@@ -615,6 +616,7 @@ export default function Onboarding() {
+       </div>
+ 
+       <main className="onb-body">
++        {state.step === 0 && <SnapshotWelcome /> /* iPhone : copie de secours trouvée après une restauration */}
+         {step === 'goal' && (
+           <GoalStep goal={state.goal} onGoal={(goal) => update({ goal, tracks: state.goal === goal ? state.tracks : null })} />
+         )}
