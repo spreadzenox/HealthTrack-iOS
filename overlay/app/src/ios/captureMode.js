@@ -137,6 +137,7 @@ export async function installCaptureMode() {
         await probeDataRoundtrip(d)
         await probeBackup(d)
         await probeFileImport(d)
+        await probeShareExport(d)
         await probeSnapshotWelcome({ ...d, localStorage: window.localStorage })
         await probeDeleteAll(d) // en dernier : vide la base
       },
@@ -447,6 +448,43 @@ export async function probeFileImport({ log, signal, waitAck, wait, storage, fil
     say('échec', e?.message || String(e))
   } finally {
     await disk?.remove(IMPORT_TEST_FILE)?.catch?.(() => {})
+  }
+}
+
+/**
+ * Essai de l'export par la feuille de partage d'iOS (étape I3), le geste réel : Vos données s'ouvre sans recharger
+ * la page ; le test d'interface (`DonneesUITests/testEnregistrerLaSauvegardeDansFichiers`) touche « Télécharger la
+ * sauvegarde » (fichier écrit dans Documents puis feuille de partage), « Enregistrer dans Fichiers », le dossier
+ * Halcya, « Enregistrer » puis « Garder les deux » : une 2e copie apparaît dans Documents. La sonde compte les
+ * fichiers `healthtrack-export-*` avant et après (+2 attendus). Résultats dans la console (`[export] …`).
+ */
+export async function probeShareExport({ log, signal, waitAck, wait, navigate, reveal, list }) {
+  const say = (what, value) => log(`[export] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  try {
+    const names =
+      list ??
+      (async () => {
+        const { Filesystem, Directory } = await import('@capacitor/filesystem')
+        return (await Filesystem.readdir({ path: '', directory: Directory.Documents })).files.map((f) => f.name)
+      })
+    const exports = async () => (await names()).filter((n) => n.startsWith('healthtrack-export-')).length
+    const go =
+      navigate ??
+      ((path) => {
+        window.history.pushState({}, '', path)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      })
+    const avant = await exports()
+    go('/data')
+    await wait(3000)
+    const bouton = (reveal ?? revealButton)('Télécharger la sauvegarde')
+    await wait(800)
+    await signal('export-partage') // le test d'interface exporte, partage et enregistre, puis la feuille est capturée
+    await waitAck('export-partage', 600) // test d'interface : jusqu'à 3 min
+    await wait(2000)
+    say('partage', { bouton, avant, après: await exports() })
+  } catch (e) {
+    say('échec', e?.message || String(e))
   }
 }
 

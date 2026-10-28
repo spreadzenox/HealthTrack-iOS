@@ -188,6 +188,47 @@ final class DonneesUITests: XCTestCase {
         }
     }
 
+    /// Export par la feuille de partage : « Télécharger la sauvegarde » (le fichier est écrit dans Documents, puis
+    /// partagé), « Enregistrer dans Fichiers », dossier Halcya, « Enregistrer », puis « Garder les deux » puisque le
+    /// fichier y est déjà. La sonde compte ensuite les exports dans Documents.
+    func testEnregistrerLaSauvegardeDansFichiers() throws {
+        halcya.activate()
+        let exporter = element("Télécharger la sauvegarde")
+        guard exporter.waitForExistence(timeout: 30) else {
+            print(halcya.debugDescription)
+            XCTFail("« Télécharger la sauvegarde » introuvable")
+            return
+        }
+        exporter.tap()
+        let fichiers = lieu("Enregistrer dans Fichiers")
+        guard fichiers.waitForExistence(timeout: 20) else {
+            print(halcya.debugDescription)
+            XCTFail("feuille de partage sans « Enregistrer dans Fichiers »")
+            return
+        }
+        fichiers.tap()
+        let enregistrer = halcya.buttons["Enregistrer"]
+        guard enregistrer.waitForExistence(timeout: 20) else {
+            print(halcya.debugDescription)
+            XCTFail("« Enregistrer » introuvable après « Enregistrer dans Fichiers »")
+            return
+        }
+        // Le dernier dossier utilisé peut déjà être ouvert : on repasse par Sur mon iPhone › Halcya
+        for etape in ["Sur mon iPhone", "Halcya"] {
+            let suivant = lieu(etape)
+            if suivant.waitForExistence(timeout: 3) { suivant.tap() } else { print("étape « \(etape) » absente") }
+        }
+        print(halcya.debugDescription)
+        enregistrer.tap()
+        let garder = element("Garder les deux")
+        if garder.waitForExistence(timeout: 5) { garder.tap() }
+        let ferme = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: enregistrer)
+        if XCTWaiter().wait(for: [ferme], timeout: 15) != .completed {
+            print(halcya.debugDescription)
+            XCTFail("la feuille d'enregistrement ne s'est pas fermée")
+        }
+    }
+
     /// Premier élément dont le libellé est exactement `label`, quel que soit son type.
     private func element(_ label: String) -> XCUIElement {
         halcya.descendants(matching: .any).matching(NSPredicate(format: "label == %@", label)).firstMatch
