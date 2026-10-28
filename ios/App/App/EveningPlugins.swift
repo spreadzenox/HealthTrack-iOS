@@ -74,12 +74,23 @@ public class EveningPlugin: CAPPlugin {
     }
     #endif
 
-    /// Demande l'autorisation des notifications (une seule fois, iOS ne la redemande plus) ; rend { asked, notifications }.
     @objc func requestNotifications(_ call: CAPPluginCall) {
+        NotificationAuthorization.request(call)
+    }
+}
+
+/// Autorisation des notifications de Halcya, partagée par les rappels du soir et le rappel de portion.
+enum NotificationAuthorization {
+    static func allowed(_ settings: UNNotificationSettings) -> Bool {
+        settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional
+    }
+
+    /// Demande l'autorisation (une seule fois, iOS ne la redemande plus) ; rend { asked, notifications }.
+    static func request(_ call: CAPPluginCall) {
         let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { settings in
             guard settings.authorizationStatus == .notDetermined else {
-                call.resolve(["asked": false, "notifications": EveningNotifications.allowed(settings)])
+                call.resolve(["asked": false, "notifications": allowed(settings)])
                 return
             }
             center.requestAuthorization(options: [.alert]) { granted, _ in
@@ -144,10 +155,6 @@ final class EveningNotifications {
         return UNNotificationCategory(identifier: category, actions: buttons, intentIdentifiers: [], options: [])
     }
 
-    static func allowed(_ settings: UNNotificationSettings) -> Bool {
-        settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional
-    }
-
     /// Discrète comme le canal « bas » d'Android, avec les réponses en actions.
     func content() -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
@@ -192,7 +199,7 @@ final class EveningNotifications {
                 "enabled": store.enabled,
                 "minuteOfDay": store.minuteOfDay,
                 "nextAt": store.nextAt,
-                "notifications": Self.allowed(settings),
+                "notifications": NotificationAuthorization.allowed(settings),
                 "pending": store.inbox().count,
                 "answers": store.answers,
                 "noteDay": store.noteDay ?? NSNull(),
@@ -212,6 +219,7 @@ final class HalcyaNotificationHandler: NSObject, UNUserNotificationCenterDelegat
     }
 
     func didReceive(response: UNNotificationResponse) {
+        if PortionReminderNotifications.opened(response) { return }
         _ = EveningNotifications.all.contains { $0.answer(response) }
     }
 
