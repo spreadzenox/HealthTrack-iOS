@@ -48,8 +48,11 @@
   - [x] « Supprimer toutes mes données » efface aussi la copie de secours (correctif 22, PR #31, mergée le 28/10 ;
     elle gardait toutes les entrées et le profil, et partait dans la sauvegarde iCloud) ; sonde `[suppression]` :
     `après {"entries":1925,"count":0,"copie":false}` sur les deux iPhone simulés.
-  - [~] Après une restauration (base vide, copie présente) : proposer la copie d'emblée (aujourd'hui seulement dans
-    « Vos données ») — PR #32 (`SnapshotWelcome`, correctif 23, sonde `[restauration]`). Plan (28/10 11:40) : **dans l'onboarding, au premier écran**, pas à l'Accueil. Après une
+  - [x] Après une restauration (base vide, copie présente) : la copie proposée d'emblée au premier écran de
+    l'onboarding (PR #32, mergée le 28/10 : `SnapshotWelcome`, correctif 23 ; « Reprendre » rend les 1925 mesures sur
+    les deux iPhone simulés, captures regardées).
+  - [ ] Réglages dans la copie de secours (objectif, suivis, rappels : ce que la sauvegarde Android ramène et pas
+    iCloud), jamais les secrets propres au téléphone (`DEVICE_BOUND_KEYS`). Plan (28/10 11:40) : **dans l'onboarding, au premier écran**, pas à l'Accueil. Après une
     restauration iCloud ou un effacement par iOS, le localStorage est perdu lui aussi, donc l'onboarding revient.
     À l'Accueil, la synchro Santé autorisée pendant l'onboarding remplirait la base avant l'offre (« base vide »
     serait faux). Carte « Reprendre vos données ? Copie de secours du … (n mesures) » [Reprendre mes données]
@@ -58,8 +61,9 @@
     composant dans `overlay/app/src/ios/`. Capture : une étape du plan qui vide la base (`deleteAllEntries`, sans
     toucher la copie), remet l'onboarding à zéro et ouvre `/bienvenue`, puis la sonde touche « Reprendre » et
     compte.
-  - [ ] Gestes réels : export par la feuille de partage, import par le sélecteur de fichiers (test d'interface),
-    fichier exporté d'Android réimporté sur iPhone.
+  - [~] Gestes réels : import par le sélecteur de fichiers d'un ancien fichier (tableau nu) — PR #34 (sonde
+    `[import]`, test d'interface `DonneesUITests`, premier essai sur la CI) ; puis export par la feuille de partage ;
+    fichier exporté d'Android réimporté sur iPhone (même format, déjà couvert par l'aller-retour de #29).
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS
   vérifié, mêmes méthodes et types que le connecteur ; **VFC en SDNN sur iOS contre RMSSD sur Android**, à ne pas
   mélanger ; voir `RECHERCHE.md`. 27/10 : **HealthKit marche sur simulateur sans compte Apple** (build signée à la
