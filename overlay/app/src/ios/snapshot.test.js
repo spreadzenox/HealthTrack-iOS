@@ -105,3 +105,63 @@ describe('« Supprimer toutes mes données » efface aussi la copie de secours',
     expect(await deleteDeviceSnapshot()).toBe(false)
   })
 })
+
+function memory(initial = {}) {
+  const data = { ...initial }
+  return { getItem: (k) => (k in data ? data[k] : null), setItem: (k, v) => (data[k] = String(v)), data }
+}
+
+describe('réglages dans la copie de secours (ce que la sauvegarde Android ramène et iCloud non)', () => {
+  it('la copie garde les réglages de la liste, jamais un secret ni un état propre au téléphone', async () => {
+    const storage = memory({
+      healthtrack_theme: 'dark',
+      healthtrack_evening_note: '{"enabled":true,"minute":1260}',
+      healthtrack_withings_tokens: '{"access":"secret"}',
+      halcya_purchase_token: 'jeton',
+      halcya_device_marker: 'repère',
+    })
+    const d = deps({ storage })
+    expect(await saveSnapshot(d)).toBe(true)
+    const written = JSON.parse(d.writeFile.mock.calls[0][1])
+    expect(written.entries).toEqual([1])
+    expect(written.iosSettings).toEqual({ healthtrack_theme: 'dark', healthtrack_evening_note: '{"enabled":true,"minute":1260}' })
+  })
+
+  it('sans réglage, la copie reste exactement le JSON de l’export', async () => {
+    const d = deps({ storage: memory({ healthtrack_withings_tokens: 'secret' }) })
+    await saveSnapshot(d)
+    expect(d.writeFile).toHaveBeenCalledWith(SNAPSHOT_FILE, '{"entries":[1]}')
+  })
+
+  it('à la reprise, seuls les réglages de la liste sont rétablis, même si le fichier en contient d’autres', async () => {
+    const { restoreSnapshotSettings, SNAPSHOT_SETTINGS } = await import('./snapshot.js')
+    const storage = memory({ healthtrack_theme: 'light' })
+    const text = JSON.stringify({
+      entries: [],
+      iosSettings: { healthtrack_theme: 'dark', healthtrack_weather: '{"city":"Lyon"}', healthtrack_withings_tokens: 'volé' },
+    })
+    expect(restoreSnapshotSettings(text, storage)).toEqual(['healthtrack_theme', 'healthtrack_weather'])
+    expect(storage.data).toEqual({ healthtrack_theme: 'dark', healthtrack_weather: '{"city":"Lyon"}' })
+    expect(SNAPSHOT_SETTINGS).not.toContain('halcya_install_id')
+  })
+
+  it('un export ordinaire ou un fichier illisible : rien n’est touché', async () => {
+    const { restoreSnapshotSettings } = await import('./snapshot.js')
+    const storage = memory({ healthtrack_theme: 'light' })
+    expect(restoreSnapshotSettings('{"entries":[]}', storage)).toEqual([])
+    expect(restoreSnapshotSettings('pas du json', storage)).toEqual([])
+    expect(storage.data).toEqual({ healthtrack_theme: 'light' })
+  })
+})
+
+describe('la copie avec ses réglages reste une sauvegarde valide', () => {
+  it('l’import (le même sur Android) ignore le champ iosSettings', async () => {
+    const { parseBackup } = await import('../storage/localHealthStorage')
+    const text = JSON.stringify({
+      version: 1,
+      entries: [{ type: 'food', source: 'app', at: '2026-10-01T12:00:00Z', payload: { name: 'pâtes' } }],
+      iosSettings: { healthtrack_theme: 'dark' },
+    })
+    expect(parseBackup(text)).toMatchObject({ entries: [expect.objectContaining({ type: 'food' })], invalid: 0 })
+  })
+})

@@ -14,6 +14,7 @@ function setup(overrides = {}) {
     count: vi.fn(async () => 0),
     parse,
     importBackup: vi.fn(async () => ({ imported: 3, skipped: 0, invalid: 0, profileRestored: true })),
+    restoreSettings: vi.fn(() => []),
     now,
     ...overrides,
   }
@@ -59,5 +60,14 @@ describe('copie de secours proposée au premier écran de l’onboarding', () =>
     setup({ importBackup: vi.fn(async () => { throw new Error('fichier illisible') }) })
     fireEvent.click(await screen.findByRole('button', { name: 'Reprendre mes données' }))
     expect(await screen.findByRole('status')).toHaveTextContent('La copie n’a pas pu être reprise (fichier illisible)')
+  })
+})
+
+describe('réglages repris avec la copie', () => {
+  it('« Reprendre » rétablit aussi les réglages gardés dans la copie, et le dit', async () => {
+    const { props } = setup({ restoreSettings: vi.fn(() => ['healthtrack_theme', 'healthtrack_evening_note']) })
+    fireEvent.click(await screen.findByRole('button', { name: 'Reprendre mes données' }))
+    expect(await screen.findByRole('status')).toHaveTextContent('3 mesures reprises, avec votre profil et vos réglages.')
+    expect(props.restoreSettings).toHaveBeenCalledWith(copie.text)
   })
 })

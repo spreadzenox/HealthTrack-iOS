@@ -10,9 +10,9 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v559 (28/10) | v559 sur iPhone simulé (28/10, PR #35) |
+| Dernière version | v563 (28/10) | v559 sur iPhone simulé (28/10, PR #35) ; v563 en vérification (PR #37) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | 30 % (14 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
+| Parité des fonctions | référence | 32 % (15 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
 - **A1** — quand il le décide : adhérer à l'Apple Developer Program (payant, à l'année ; marche à suivre en 5 étapes
@@ -125,6 +125,7 @@ via TestFlight.
 | 28/10 14:05 | I6, I9, I3 | partie iPhone de l'abonnement App Store mise en place (éteinte tant que le serveur ne vérifie pas les achats d'Apple) ; brouillon de la fiche App Store en français (nom, sous-titre, description, mots-clés) ; choix d'un fichier dans l'app Fichiers : 1er essai raté (le bouton s'appelle « Explorer » sous iOS 26), corrigé et relancé | #33 (mergée), #34, #35 |
 | 28/10 15:00 | suivi d'Android v559, I3, I6, I9 | vérifié : choisir un fichier de sauvegarde dans l'app Fichiers puis l'ajouter à vos données marche sur iPhone (un ancien fichier compris) ; Android v559 : boutons arrondis partout (aussi sur iPhone) ; achat d'abonnement d'essai sur simulateur : premier essai à corriger (erreur de compilation), relancé | #34 (mergée), #35, #36 |
 | 28/10 16:00 | I9, I3, I6 | iPhone au niveau d'Android v559 (boutons arrondis vérifiés) ; fiche App Store en français prête en brouillon ; réponses du questionnaire « Confidentialité de l'app » préparées pour vous (les mêmes que pour Google Play) ; export par la feuille de partage : réussi sur un iPhone, l'autre relancé ; achat d'abonnement d'essai : 2e essai en cours | #35 (mergée), #36, #37, #38, #39 |
+| 28/10 17:00 | suivi d'Android v563, I3, I9, I6 | réponses « Confidentialité de l'app » en place (PR #39 mergée) ; vos données s'exportent, s'importent et reviennent après une restauration sur iPhone, réglages compris (vérifié) : la fonction « Données » est au niveau d'Android (parité 32 %) ; Android v563 : textes plus justes sur où vont vos données (aussi sur iPhone, deux adaptations refaites) ; achat d'abonnement d'essai : bloqué par un bogue d'Apple sur iOS 26.5, 3e essai sur un iPhone simulé plus ancien | #39 (mergée), #36, #37 |
 
 ---
 
