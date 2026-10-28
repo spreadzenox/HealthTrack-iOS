@@ -29,8 +29,11 @@
     - Mêmes cas et mêmes tolérances que `FaceGeometryTest.java`, dont la fusion pondérée et « garder le plus grand visage » ; le tri d'Android est stable, d'où le départage par index.
     - Rejoué en Python sur les deux portraits : écart max 2e-6.
 
+  - 2e essai en CI (run de `db8c722`) : les 11 tests Swift du visage passent sur le runner macOS, contre les vecteurs d'Android.
+  - Étape 3, début : indices par unités d'action, contrôle qualité, médianes et mobilité de la rafale (`FaceIndices`, 7 tests repris de `FaceIndicesTest.java`). Les moyennes gauche / droite s'additionnent en Float avant la division, comme en Java.
+
 ## Suite
-- CI de #43 : les 11 tests Swift du visage doivent passer. Ensuite, étape 3 (indices, rafale, `FaceRecord`).
+- CI de #43 (tests Swift du visage, dont les indices). Ensuite, la rafale complète (`FacePipeline` avec modèles figés, 13 scénarios) et `FaceRecord` (JSON identique à Android).
 - CI de #42 → regarder l'accueil (carte vide sans lien vers Sources) et Sources (conseil Apple Watch), puis merger.
 - Ensuite, un lancement manuel sur `main` avec `devices="iPhone 17 Pro Max"` pour les captures de la fiche ; en choisir 3 à 10.
 - À « A1 fait » : A3 puis A2 avec le propriétaire, et sa décision sur la signature.

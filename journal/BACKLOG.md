@@ -153,9 +153,9 @@
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : mêmes modèles qu'Android, mêmes scores sur ses vecteurs de référence.
   Étude du 28/10 (`RECHERCHE.md`) : ni Vision ni ARKit, qui changeraient les scores. Valence et éveil (HSEmotion, poids
   AffectNet) éteints tant que la licence n'est pas tranchée (`DEMANDES.md`). Étapes :
-  - [ ] 1. Paquet Swift pur `ios/HalcyaFace` (`swift test`) : ancres, letterbox et recadrage du détecteur, testés sur les portraits d'Android (entrées ±1e-5). 28/10 20:30 : écrit (PR #43) ; l'algorithme, rejoué en Python sur les portraits, retrouve les entrées d'Android à 5e-7.
-  - [ ] 2. Décodage BlazeFace, zone du visage, points, sous-ensemble de 146 points, zone suivante (tolérances d'Android). 28/10 20:30 : écrit (PR #43, 7 tests) ; rejoué en Python : écart max 2e-6.
-  - [ ] 3. Indices, rafale et `FaceRecord` (scénarios de `FacePipelineTest`, JSON identique, accepté par `parseFaceBurst`).
+  - [x] 1. Paquet Swift pur `ios/HalcyaFace` (`swift test`) : ancres, letterbox et recadrage du détecteur, testés sur les portraits d'Android (entrées ±1e-5). 28/10 : passés sur le runner macOS (PR #43).
+  - [x] 2. Décodage BlazeFace, zone du visage, points, sous-ensemble de 146 points, zone suivante (tolérances d'Android). 28/10 : 7 tests passés sur le runner macOS (PR #43).
+  - [ ] 3. Indices (28/10 : écrits, 7 tests, PR #43), rafale et `FaceRecord` (scénarios de `FacePipelineTest`, JSON identique, accepté par `parseFaceBurst`).
   - [ ] 4. Moteur des 3 `.tflite` (TFLite C ou conversion ONNX), modèles téléchargés en CI et SHA-256 vérifiés, sorties aux tolérances de `FaceModelsTest`.
   - [ ] 5. YUV → RVB (BT.601 plein écart, 4 rotations), puis plugin `FaceSense` en Swift avec images injectables (pas de caméra sur simulateur), puis l'iPhone 12.
 - [ ] **I8 — Le reste du natif** (28/10 : sonde vocale `VoiceProbe` en Swift, PR #40) : voix, temps d'écran, montre Huawei (BLE), détection des sources : étude honnête
