@@ -273,8 +273,9 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 | A2 | Créer une clé API App Store Connect (rôle exact précisé par la routine) et l'enregistrer en secrets GitHub Actions de ce dépôt, dans un environnement `appstore` réservé à `main` | builds signées et envoi TestFlight automatiques | après A1 |
 | A3 | Créer la fiche de l'app dans App Store Connect (nom, langue principale français, bundle id, SKU) | envoi TestFlight, fiche | après A1 |
 | A4 | Contrat « Paid Applications », coordonnées bancaires et fiscales | abonnement App Store | après A1 |
-| A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/` | examen Apple | avant la 1re soumission |
+| A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/app-store/confidentialite.md` | examen Apple | avant la 1re soumission |
 | A6 | Inviter les testeurs (d'abord sa compagne : interne via « Utilisateurs et accès » ou externe avec l'examen bêta, la routine dira), soumettre à l'examen, publier | testeurs, production | lui seul |
+| A7 | (facultatif, quand la routine le proposera) Demander à Apple le droit « Family Controls (Distribution) » pour Halcya : formulaire d'Apple, motif « temps d'écran approché pour les analyses de bien-être, données gardées sur le téléphone » | tuile « Écran » sur iPhone (temps d'écran approché, `RECHERCHE.md`) | après A1 |
 
 #### A1 pas à pas (préparé le 27/10/2026)
 
