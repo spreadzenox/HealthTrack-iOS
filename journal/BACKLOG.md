@@ -45,10 +45,11 @@
   - [x] Sauvegarde du téléphone mesurée (PR #30, mergée le 28/10) : `BackupMarker` en Swift (repère hors
     sauvegarde, lu par `restoreGuard.js` : `restored: false`) ; sonde Debug `CaptureProbe` : **WebKit exclut la base
     IndexedDB de la sauvegarde iCloud**, Documents (copie de secours) est sauvegardé.
-  - [~] « Supprimer toutes mes données » efface aussi la copie de secours (correctif 22, PR #31 ; elle gardait toutes
-    les entrées et le profil, et partait dans la sauvegarde iCloud) ; sonde `[suppression]` en dernier.
-  - [ ] Après une restauration (base vide, copie présente) : proposer la copie d'emblée (aujourd'hui seulement dans
-    « Vos données »). Plan (28/10 11:40) : **dans l'onboarding, au premier écran**, pas à l'Accueil. Après une
+  - [x] « Supprimer toutes mes données » efface aussi la copie de secours (correctif 22, PR #31, mergée le 28/10 ;
+    elle gardait toutes les entrées et le profil, et partait dans la sauvegarde iCloud) ; sonde `[suppression]` :
+    `après {"entries":1925,"count":0,"copie":false}` sur les deux iPhone simulés.
+  - [~] Après une restauration (base vide, copie présente) : proposer la copie d'emblée (aujourd'hui seulement dans
+    « Vos données ») — PR #32 (`SnapshotWelcome`, correctif 23, sonde `[restauration]`). Plan (28/10 11:40) : **dans l'onboarding, au premier écran**, pas à l'Accueil. Après une
     restauration iCloud ou un effacement par iOS, le localStorage est perdu lui aussi, donc l'onboarding revient.
     À l'Accueil, la synchro Santé autorisée pendant l'onboarding remplirait la base avant l'offre (« base vide »
     serait faux). Carte « Reprendre vos données ? Copie de secours du … (n mesures) » [Reprendre mes données]

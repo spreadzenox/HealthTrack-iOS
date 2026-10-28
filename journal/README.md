@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v551 (28/10) | v548 sur iPhone simulé (28/10, PR #30) ; v551 en vérification (PR #31) |
+| Dernière version | v553 (28/10) | v551 sur iPhone simulé (28/10, PR #31) ; v553 en vérification (PR #32) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 30 % (14 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -19,7 +19,8 @@
   au §8, « A1 pas à pas »). C'est ce qui
   débloque l'installation sur un vrai iPhone, TestFlight et l'App Store.
 - ✅ Fait le 28/10 : vous avez transmis à la routine Android les 4 demandes de `DEMANDES.md` (iPhone au contrôle
-  d'intégrité, abonnement App Store sur le serveur, Nouveautés propres à Android, textes de sauvegarde neutres).
+  d'intégrité, abonnement App Store sur le serveur, Nouveautés propres à Android, textes de sauvegarde neutres) ;
+  elle les a reprises le jour même (v553) : trois faites, l'abonnement App Store noté pour plus tard.
 - (facultatif) Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS).
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
@@ -119,6 +120,7 @@ via TestFlight.
 | 28/10 09:00 | suivi d'Android v545, I4, I9 | Android v545 : un écart à votre norme n'est plus affiché comme une alerte (aussi sur iPhone) ; radar avec la variabilité cardiaque de l'app Santé ; déclaration de confidentialité exigée par l'App Store préparée ; ce qu'il faudra au serveur pour l'abonnement sur iPhone précisé (`DEMANDES.md`) | #27 (mergée), #28 |
 | 28/10 10:00 | suivi d'Android v548, I9, I3 | Android v548 : une piste n'est dite « solide » qu'avec assez de jours (aussi sur iPhone) ; déclaration de confidentialité exigée par l'App Store en place ; vos données exportées puis réimportées sur iPhone sans perte ni doublon ; après une restauration sur un nouvel iPhone, l'app retirera les codes propres à l'ancien téléphone, comme sur Android (en vérification) | #28, #29 (mergées), #30 |
 | 28/10 11:00 | suivi d'Android v551, I3 | Android v551 : l'Accueil annonce vos pistes, Analyses dit chaque lien en une phrase (aussi sur iPhone) ; mesuré : la sauvegarde iCloud de l'iPhone n'emporte pas la base de l'app, seulement sa copie de secours, qui se restaure depuis « Vos données » ; corrigé : « Supprimer toutes mes données » laissait cette copie sur l'iPhone, elle est maintenant effacée aussi | #30 (mergée), #31 |
+| 28/10 12:00 | suivi d'Android v553, I3 | « Supprimer toutes mes données » efface maintenant aussi la copie de secours sur iPhone (vérifié) ; Android v553 a repris vos 4 demandes (l'iPhone ne sera pas bloqué par le contrôle d'intégrité, notes propres à Android cachées sur iPhone) ; après une restauration iCloud, l'iPhone proposera de reprendre vos données dès le premier écran (en vérification) | #31 (mergée), #32 |
 
 ---
 
