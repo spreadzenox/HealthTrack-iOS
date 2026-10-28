@@ -74,10 +74,14 @@
   actions dans la notification, réponse rangée à l'ouverture suivante.
   - [x] Règles du soir en Swift, testées par XCTest (`ios/HalcyaRules`, PR #18, mergée) : soirs programmés d'avance (iOS ne
     réveille pas l'app pour décider), geste après minuit rattaché au soir demandé.
-  - [~] Plugin `GutEvening` en Swift (`configure`, `status`, `list`, `remove`, `requestNotifications`, PR #20), branché par une
+  - [x] Plugin `GutEvening` en Swift (`configure`, `status`, `list`, `remove`, `requestNotifications`, PR #20), branché par une
     sous-classe de `CAPBridgeViewController` ; catégorie à actions Calme / Gêne / Douleur sans ouvrir l'app ; retirer
     `GutEvening` de `missingOnIos` ; capture de la notification.
-  - [ ] `EveningNote` (note du soir), puis `PortionReminder` (rappel de portion de la réintroduction).
+  - [~] Sur simulateur (PR #21) : autorisation accordée et notification affichée dans le centre de notifications ✅ ;
+    réponse « Gêne » depuis la notification pas encore automatisée (l'appui long par XCUITest ne la déplie pas) :
+    essayer un glissé ou un appui sur l'écran verrouillé, sinon la vérifier sur l'iPhone 12 après A1.
+  - [ ] `EveningNote` (note du soir, six boutons : combien iOS en montre ?), puis `PortionReminder` (rappel de
+    portion de la réintroduction).
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
   transactions signées par Apple, notifications serveur V2, App Attest, mêmes crédits IA, même période de lancement.

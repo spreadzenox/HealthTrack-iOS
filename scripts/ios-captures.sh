@@ -4,8 +4,8 @@
 # captureMode.js) : quand une page est prête, elle écrit son nom dans Documents/capture/ready.txt de son conteneur ;
 # on capture l'écran, puis on répond dans Documents/capture/ack.txt, et l'app passe à la suite, jusqu'à « fin ».
 # La console est enregistrée ; ses erreurs JavaScript sont résumées dans js-errors.txt.
-# Sur la feuille « Accès à Santé » (I4), le test d'interface du dépôt (uitests/, déjà construit : fichier .xctestrun)
-# touche « Tout activer » puis « Autoriser » avant l'accusé ; sans lui, la feuille reste ouverte.
+# Sur la feuille « Accès à Santé » (I4) et les étapes des notifications du soir (I5), les tests d'interface du dépôt
+# (uitests/, déjà construits : fichier .xctestrun) touchent les boutons avant l'accusé (voir ui_steps).
 #   scripts/ios-captures.sh <chemin/App.app> <dossier de sortie> [<fichier .xctestrun>]
 set -euo pipefail
 APP="$1"; OUT="$2"; XCTESTRUN="${3:-}"; BUNDLE="fr.jpesquet.sante"
@@ -25,21 +25,37 @@ SMALL="$(pick "iPhone 16e" "iPhone 14" "iPhone 13" "iPhone 12" || true)"
 LARGE="$(pick "iPhone 17 Pro" "iPhone 17" "iPhone 16 Pro" "iPhone 16" "iPhone 15 Pro" || true)"
 [ -n "$SMALL$LARGE" ] || { echo "::error::Aucun simulateur iPhone disponible"; xcrun simctl list devices available; exit 1; }
 
-# Feuille de l'app Santé acceptée par le test d'interface, puis capture de l'écran qui suit (feuille fermée)
-accept_health() { # <udid> <préfixe des fichiers>
+# Tests d'interface du dépôt (uitests/, fichier .xctestrun) lancés sur certaines pages, avant l'accusé : chacun suivi
+# d'une capture de l'écran qu'il laisse. Sans eux, les feuilles et alertes restent ouvertes.
+ui_steps() { # <page> → lignes « <Classe/test> <suffixe de capture> »
+  case "$1" in
+    healthkit-autorisation) echo "SanteUITests/testAccepterLaFeuilleSante healthkit-apres" ;;
+    notification-autorisation) echo "NotificationsUITests/testAutoriserLesNotifications notification-autorisee" ;;
+    notification-bilan)
+      echo "NotificationsUITests/testOuvrirLeCentreDeNotifications notification-centre"
+      echo "NotificationsUITests/testRepondreGeneDepuisLaNotification notification-apres" ;;
+  esac
+}
+
+run_ui_steps() { # <udid> <préfixe des fichiers> <page>
+  local steps test suffix
+  steps="$(ui_steps "$3")"
+  [ -n "$steps" ] || return 0
   if [ -z "$XCTESTRUN" ] || [ ! -f "$XCTESTRUN" ]; then
-    echo "::warning::test d'interface absent : feuille de l'app Santé laissée ouverte"
+    echo "::warning::test d'interface absent : $3 laissée telle quelle"
     return 0
   fi
-  if xcodebuild test-without-building -xctestrun "$XCTESTRUN" -destination "id=$1" \
-      -only-testing:HalcyaUITests/SanteUITests/testAccepterLaFeuilleSante > "$OUT/$2-test-interface.txt" 2>&1; then
-    echo "test d'interface : feuille de l'app Santé acceptée"
-  else
-    echo "::warning::$2 : test d'interface en échec (voir $2-test-interface.txt)"
-    grep -E "error:|failed|introuvable|absent|non atteint" "$OUT/$2-test-interface.txt" | head -8 || true
-  fi
-  sleep 2
-  xcrun simctl io "$1" screenshot "$OUT/$2-healthkit-apres.png" >/dev/null || true
+  while read -r test suffix; do
+    if xcodebuild test-without-building -xctestrun "$XCTESTRUN" -destination "id=$1" \
+        -only-testing:"HalcyaUITests/$test" < /dev/null > "$OUT/$2-$suffix-test.txt" 2>&1; then
+      echo "test d'interface : $test ✓"
+    else
+      echo "::warning::$2 : $test en échec (voir $2-$suffix-test.txt)"
+      grep -E "error:|failed|introuvable|absent|non atteint" "$OUT/$2-$suffix-test.txt" | head -8 || true
+    fi
+    sleep 2
+    xcrun simctl io "$1" screenshot "$OUT/$2-$suffix.png" >/dev/null || true
+  done <<< "$steps"
 }
 
 run_device() { # <udid> <nom>
@@ -72,7 +88,7 @@ run_device() { # <udid> <nom>
       xcrun simctl io "$udid" screenshot "$OUT/$dev-$page.png" >/dev/null
       echo "capture : $dev-$page.png"
       seen=$((seen + 1)); last="$page"
-      [ "$page" != healthkit-autorisation ] || accept_health "$udid" "$dev"
+      run_ui_steps "$udid" "$dev" "$page"
       printf '%s' "$page" > "$data/Documents/capture/ack.txt"
     fi
     # L'app s'est arrêtée (plantage) : inutile d'attendre la limite, la cause est dans la console
