@@ -83,7 +83,15 @@ que l'import, `parseBackup`). À vérifier sur la CI : où WKWebView range Index
   `UserDefaults` par le délégué de l'app, même sans ouvrir l'app (actions sans `.foreground`).
 - Tests : la logique (heure de la prochaine notification, boîte de réception) dans un paquet Swift local testé par
   `swift test` sur le runner macOS (XCTest, sans cible de test à ajouter au projet Xcode) ; la colle Capacitor dans
-  l'app. Captures : la notification affichée (`simctl push` ne sert pas ici : notifications locales ; à capturer
+  l'app.
+- 28/10 : règles faites (`ios/HalcyaRules`, PR #18, `swift test` vert du premier coup). **iOS ne réveille pas l'app
+  le soir** pour décider comme l'alarme d'Android : les 7 prochains soirs sont programmés d'avance
+  (`UNCalendarNotificationTrigger` non répétée, une par soir, identifiants `gut-evening-AAAA-MM-JJ`) et
+  reprogrammés à chaque `configure` (ouverture de l'app, bilan donné). Branchement prévu : `XCLocalSwiftPackageReference`
+  `../HalcyaRules` dans `App.xcodeproj` (même forme que `CapApp-SPM`), plugin `GutEveningPlugin.swift`
+  (`CAPBridgedPlugin`) enregistré par une sous-classe de `CAPBridgeViewController` (`capacitorDidLoad`,
+  `bridge?.registerPluginInstance`) que `Main.storyboard` désigne ; délégué `UNUserNotificationCenter` dans
+  `AppDelegate` (actions sans `.foreground` : réponse rangée sans ouvrir l'app). Captures : la notification affichée (`simctl push` ne sert pas ici : notifications locales ; à capturer
   depuis l'écran verrouillé du simulateur).
 
 ## Accepter la feuille d'autorisation de Santé sur la CI (27/10/2026)
