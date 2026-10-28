@@ -166,6 +166,11 @@ Règles des adaptations :
   correctif de `pageStyles.js`.
 - **Avant chaque push de code** : la suite complète d'Android avec les correctifs (`npx vitest run` dans
   `upstream/app`), pas seulement les tests ciblés (leçon du 27/10 : PR #8 rouge sur `bundleGuard`).
+- **CI et commits de journal** (leçons du 28/10) : sur une PR, le filtre de chemins porte sur tout le diff de la
+  PR ; un commit de journal seul relance donc la CI et annule celle en cours → le pousser avec le code ou en fin de
+  run. Un `[skip ci]` en tête de PR la laisse sans CI. Après un merge, vérifier que la CI de `main` a bien démarré
+  (celle de #22 n'est jamais partie : relancée par `workflow_dispatch`). Après un push de Swift, regarder l'étape de
+  build quelques minutes plus tard.
 - Jamais de copie d'un fichier Android entier dans `overlay/` : elle effacerait en silence les évolutions d'Android.
 - Les tests d'Android (`npm run test` dans `upstream/app`) doivent passer avec les correctifs appliqués ; les tests
   propres à iOS vont dans `overlay/` (Vitest) ou `ios/` (XCTest).
