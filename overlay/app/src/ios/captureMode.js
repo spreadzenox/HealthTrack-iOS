@@ -136,6 +136,7 @@ export async function installCaptureMode() {
         await probePortionReminder({ ...d, location: window.location })
         await probeDataRoundtrip(d)
         await probeBackup(d)
+        await probeVoice(d)
         await probeFileImport(d)
         await probeSnapshotWelcome({ ...d, localStorage: window.localStorage })
         await probeDeleteAll(d) // en dernier : vide la base
@@ -501,4 +502,15 @@ export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage
   } finally {
     if (onboarding) localStorage.setItem('healthtrack_onboarding', onboarding)
   }
+}
+
+/**
+ * Sonde vocale (étape I8) : `VoiceProbe` en Swift répond comme celui d'Android ; le verdict est celui de
+ * `voiceProbe.js` (`on_device_fr` si le français se reconnaît sur le téléphone). Aucun micro, aucun son. Résultat dans
+ * la console (`[voix] …`).
+ */
+export async function probeVoice({ log, plugin }) {
+  const { probeVoice: probe, voiceVerdict, voiceProbePlugin } = await import('../services/voiceProbe')
+  const p = await probe(plugin ?? voiceProbePlugin())
+  log(`[voix] sonde ${JSON.stringify(p ? { verdict: voiceVerdict(p), available: p.available, onDevice: p.onDevice } : { verdict: null })}`)
 }
