@@ -35,9 +35,13 @@
     - Ordre des champs d'Android : la rafale garde l'ordre d'export de son `LinkedHashMap`.
     - Rejets triés comme le `TreeMap` de Java.
     - `%.4f` de Java : l'écriture décimale la plus courte, arrondie avec les milieux loin de zéro (`0.03125` → `0.0313`, alors que `printf` donne `0.0312`). C'est un écart possible au 4e chiffre seulement, sans effet sur les scores.
+  - En CI (run de `51a58fb`) : indices et `FaceRecord` passent sur le runner macOS. L'arrondi « à la Java » par `Decimal` fonctionne.
+  - `FacePipeline` : la chaîne d'une image et d'une rafale, modèles injectés (protocole `FaceModel`). Image suivante suivie sans détecteur, rejets, lumière des seules images valides, ordre d'export d'Android.
+    - 8 des 13 scénarios de `FacePipelineTest.java`. Les 5 autres portent sur la valence et l'éveil, éteints sur iPhone.
 
 ## Suite
-- CI de #43 : tests Swift du visage, avec les indices et `FaceRecord`. Ensuite, la rafale complète (`FacePipeline` avec modèles figés, 13 scénarios de `FacePipelineTest`).
+- CI de #43 : les tests de `FacePipeline` doivent passer, puis toute la build. Merger après #42.
+- I7 étape 4 : moteur des 3 `.tflite` sur iPhone. Choix entre TFLite C (`binaryTarget` SPM) et une conversion ONNX en CI, à étudier, avec la licence et la télémétrie de chaque option. Modèles téléchargés en CI, SHA-256 vérifiés, sorties aux tolérances de `FaceModelsTest`.
 - CI de #42 → regarder l'accueil (carte vide sans lien vers Sources) et Sources (conseil Apple Watch), puis merger.
 - Ensuite, un lancement manuel sur `main` avec `devices="iPhone 17 Pro Max"` pour les captures de la fiche ; en choisir 3 à 10.
 - À « A1 fait » : A3 puis A2 avec le propriétaire, et sa décision sur la signature.
