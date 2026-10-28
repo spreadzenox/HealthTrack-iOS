@@ -33,6 +33,10 @@
   d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
 
 **Ce qui a changé cette semaine**
+- **28/10 02:30 — le bilan du ventre du soir arrive sur iPhone** (PR #20, en relecture) : dans Paramètres, le réglage
+  « Bilan du ventre le soir, d'un geste depuis une notification » apparaît ; le soir, une notification discrète
+  propose Calme / Gêne / Douleur, et la réponse est rangée sans ouvrir l'app, comme sur Android. Reste à la voir
+  s'afficher en capture.
 - **28/10 00:40 — la variabilité cardiaque (VFC) de l'app Santé arrive sur iPhone** (PR #16) : l'iPhone la mesure
   autrement qu'Android ; Halcya la lit, la montre à part dans le Journal (« VFC (SDNN) ») et ne la mélange jamais
   avec celle d'Android dans les analyses. Les mesures venues de l'app Santé y sont présentées comme telles (PR #13).
