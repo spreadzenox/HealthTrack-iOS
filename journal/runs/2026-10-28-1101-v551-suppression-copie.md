@@ -28,9 +28,18 @@
   - nouvelle clé `healthtrack_pistes_summary`, déjà dans la liste effacée par « Supprimer toutes mes données ».
 - Suite d'Android avec les 22 correctifs : **2713 passés** ; build `appstore` ✅.
 
+- Préparé ensuite (branche `claude/ios-i3-copie-onboarding`, empilée sur #31, poussée sans PR) : **la copie de
+  secours proposée au premier écran de l'onboarding** (`SnapshotWelcome.jsx` en `overlay/`, correctif 23 :
+  2 lignes d'`Onboarding.jsx`) — l'onboarding revient après une restauration iCloud (le localStorage n'y est pas
+  non plus), alors qu'à l'Accueil la synchro Santé remplirait la base avant l'offre. « Reprendre mes données » =
+  import « ajouter » (entrées et profil) ; « Commencer sans ». Sonde `[restauration]` (base vidée, copie gardée,
+  onboarding rouvert sans recharger, captures `restauration-onboarding` et `restauration-reprise`). 5 + 1 tests
+  écrits d'abord ; suite : 2719 ✅ ; builds `appstore` et captures ✅.
+
 ## Suite
 - CI de #31 :
   - captures Accueil et Analyses (v551) à regarder ;
   - `[suppression]` attendu : `avant {"count":1925,"copie":true}`, `après {"entries":1925,"count":0,"copie":false}` → merger.
-- Puis, étape I3 : proposer la copie de secours d'emblée quand la base est vide (Accueil ou onboarding).
+- Puis : `main` fusionnée dans `claude/ios-i3-copie-onboarding`, PR ; regarder les deux captures de restauration
+  (zones sûres, texte) et `[restauration] après {"bouton":true,"count":1925}`.
 - Ensuite : import réel par le sélecteur de fichiers (« Sur mon iPhone › Halcya » est visible dans Fichiers : `UIFileSharingEnabled`) ; puis I6 StoreKit 2 (`.storekit` + `SKTestSession`).

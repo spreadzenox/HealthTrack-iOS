@@ -22,7 +22,7 @@ index 2576449..a02fe38 100644
        ) : (
          <>
 diff --git a/app/src/pages/Data.jsx b/app/src/pages/Data.jsx
-index 57f4d53..4aa8d76 100644
+index 40ca6d5..37822e7 100644
 --- a/app/src/pages/Data.jsx
 +++ b/app/src/pages/Data.jsx
 @@ -5,6 +5,7 @@ import { fixWatchKcalOnce } from '../services/watchKcalFix'
@@ -38,14 +38,14 @@ index 57f4d53..4aa8d76 100644
        <h2 className="page-title">Vos données</h2>
        <p className="page-intro">
 -        Vos données restent <strong>sur cet appareil</strong> et survivent aux mises à jour. Si la sauvegarde
--        Google du téléphone est activée, elles y sont incluses (chiffrées, gérées par Android,
+-        du téléphone est activée, elles y sont incluses (chiffrées, gérées par le système,
 -        jamais lues par {APP_NAME}). Avant de réinstaller ou de changer de téléphone, exportez-les aussi.
 +        Vos données restent <strong>sur cet appareil</strong> et survivent aux mises à jour.{' '}
 +        {FEATURES.iosStore ? (
 +          'Avant de réinstaller ou de changer de téléphone, exportez-les.'
 +        ) : (
 +          <>
-+            Si la sauvegarde Google du téléphone est activée, elles y sont incluses (chiffrées, gérées par Android,
++            Si la sauvegarde du téléphone est activée, elles y sont incluses (chiffrées, gérées par le système,
 +            jamais lues par {APP_NAME}). Avant de réinstaller ou de changer de téléphone, exportez-les aussi.
 +          </>
 +        )}
