@@ -12,7 +12,7 @@ Reprises de la « Sécurité des données » de Google Play d'Android (`app/stor
 | Localisation (Location) | Localisation approximative (Coarse Location) | ville choisie ou position arrondie à ~10 km, envoyée à Open-Meteo pour la météo |
 | Contenu de l'utilisateur (User Content) | Photos ou vidéos (Photos or Videos) | photo du repas, réduite et sans métadonnées, envoyée au relais Halcya (analyse par Vertex AI, UE) seulement quand la personne lance l'analyse |
 | Contenu de l'utilisateur (User Content) | Autre contenu de l'utilisateur (Other User Content) | description écrite d'un repas, même chemin |
-| Identifiants (Identifiers) | Identifiant de l'appareil (Device ID) | identifiant aléatoire créé par l'app (pas l'identifiant publicitaire), envoyé au relais avec chaque analyse et chaque vérification d'abonnement : crédits IA et plafond contre les abus |
+| Identifiants (Identifiers) | Identifiant de l'appareil (Device ID) | identifiant aléatoire créé par l'app (pas l'identifiant publicitaire), envoyé au relais avec chaque analyse et chaque vérification d'abonnement : crédits IA et plafond contre les abus ; le relais n'en garde qu'un compteur d'analyses sous une empreinte, effacé 13 mois après la dernière analyse (Android v570) |
 | Achats (Purchases) | Historique des achats (Purchase History) | transaction App Store envoyée au relais pour vérifier l'abonnement (dès que l'abonnement iPhone est actif, I6) |
 
 3. **Pour chacun de ces types** :

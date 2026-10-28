@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v567 (28/10) | v567 sur iPhone simulé (28/10, PR #41) |
+| Dernière version | v571 (28/10) | v567 sur iPhone simulé (28/10, PR #41) ; v571 en vérification (PR #44) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 32 % (15 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -132,7 +132,8 @@ via TestFlight.
 | 28/10 18:00 | suivi d'Android v565, I3, I6, I8 | vos données : export, import et restauration avec vos réglages, vérifiés et en place (PR #37 mergée) ; premier achat d'abonnement d'essai réussi sur iPhone simulé, sans compte Apple ; l'iPhone sait dire s'il reconnaît le français sur le téléphone (préalable de la dictée du soir) ; Android v565 : carte de Sources au titre court (aussi sur iPhone, « App Santé ») | #37 (mergée), #36, #40 |
 | 28/10 19:00 | A1, I8, I6, I9, suivi d'Android v567 | votre inscription chez Apple est en cours (A1), la suite (A3 puis A2) est prête pas à pas ; achat d'abonnement d'essai et préalable de la dictée du soir en place sur iPhone (PR #40 mergée) ; captures en taille 6,9" pour la fiche App Store, fidèles à l'iPhone (plus de « Gadgetbridge » ni de montre Huawei, qui n'existent que sur Android) ; Android v567 : carte « Votre ventre » plus compacte (aussi sur iPhone) | #40, #41 (mergées) |
 | 28/10 20:00 | I9, I7 | sur iPhone, l'accueil et l'historique du bien-être ne proposent plus d'activer la lecture du visage, qui n'y existe pas encore : ils invitent à noter soi-même ; pour une Apple Watch, Sources renvoie à l'app Watch de l'iPhone. Lecture du visage commencée : le calcul donne déjà les mêmes résultats qu'Android sur ses images de test ; restent la caméra et les modèles. Point à trancher plus tard par vous : une partie des modèles d'Android (humeur « valence / éveil ») a une licence réservée à la recherche, éteinte sur iPhone en attendant | #42 (mergée), #43 |
-| 28/10 21:00 | I7 | textes justes sur iPhone en place (PR #42 mergée) ; lecture du visage : premier essai des vrais modèles sur iPhone simulé, avec le même moteur qu'Android pour garder les mêmes résultats | #42 (mergée), #43, #44 |
+| 28/10 21:00 | I7 | textes justes sur iPhone en place (PR #42 mergée) ; lecture du visage : premier essai des vrais modèles sur iPhone simulé, avec le même moteur qu'Android pour garder les mêmes résultats | #42, #43 (mergées), #44 |
+| 28/10 22:00 | I7, suivi d'Android v571 | lecture du visage : le calcul est en place (PR #43 mergée) ; les vrais modèles tournent sur iPhone simulé et donnent les mêmes résultats qu'Android, en un dixième de seconde par image environ ; restent la caméra et l'écran. Android v570 et v571 : textes plus honnêtes sur ce que garde le serveur d'analyse IA (un simple compteur, effacé après 13 mois), pistes présentées comme un lien (« Nuits plus longues → meilleur bien-être ») et non comme un ordre ; aussi sur iPhone | #43 (mergée), #44 |
 
 ---
 
