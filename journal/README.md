@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v555 (28/10) | v553 sur iPhone simulé (28/10, PR #32) ; v555 en vérification (PR #34) |
+| Dernière version | v559 (28/10) | v555 sur iPhone simulé (28/10, PR #34) ; v559 en vérification (PR #35) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 30 % (14 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -123,6 +123,7 @@ via TestFlight.
 | 28/10 12:00 | suivi d'Android v553, I3 | « Supprimer toutes mes données » efface maintenant aussi la copie de secours sur iPhone (vérifié) ; Android v553 a repris vos 4 demandes (l'iPhone ne sera pas bloqué par le contrôle d'intégrité, notes propres à Android cachées sur iPhone) ; après une restauration iCloud, l'iPhone proposera de reprendre vos données dès le premier écran (en vérification) | #31 (mergée), #32 |
 | 28/10 13:20 | suivi d'Android v555, I3, I6 | après une restauration iCloud, l'iPhone propose dès le premier écran de reprendre vos données (vérifié : toutes reprises d'un geste) ; Android v555 : historique du bien-être plus lisible (aussi sur iPhone) ; l'abonnement App Store est prêt côté iPhone mais reste éteint tant que le serveur ne sait pas vérifier les achats d'Apple ; en essai : choisir un fichier de sauvegarde dans l'app Fichiers | #32 (mergée), #33, #34 |
 | 28/10 14:05 | I6, I9, I3 | partie iPhone de l'abonnement App Store mise en place (éteinte tant que le serveur ne vérifie pas les achats d'Apple) ; brouillon de la fiche App Store en français (nom, sous-titre, description, mots-clés) ; choix d'un fichier dans l'app Fichiers : 1er essai raté (le bouton s'appelle « Explorer » sous iOS 26), corrigé et relancé | #33 (mergée), #34, #35 |
+| 28/10 15:00 | suivi d'Android v559, I3, I6, I9 | vérifié : choisir un fichier de sauvegarde dans l'app Fichiers puis l'ajouter à vos données marche sur iPhone (un ancien fichier compris) ; Android v559 : boutons arrondis partout (aussi sur iPhone) ; achat d'abonnement d'essai sur simulateur : premier essai à corriger (erreur de compilation), relancé | #34 (mergée), #35, #36 |
 
 ---
 

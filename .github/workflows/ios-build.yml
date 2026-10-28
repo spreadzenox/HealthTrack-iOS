@@ -1,16 +1,16 @@
 # Version iOS de Halcya : code Android suivi (upstream.json) + adaptations iOS, build pour le simulateur sans signature,
 # captures sur deux iPhone simulés (taille de l'iPhone 12 de test, et un récent), en clair et en sombre.
-# Le dépôt est public : les minutes macOS sont gratuites, mais on évite les builds inutiles (journal seul ignoré,
-# runs dépassés d'une même PR annulés).
+# Le dépôt est public : les minutes macOS sont gratuites, mais on évite les builds inutiles (journal et fiche App Store
+# seuls ignorés : la fiche a son propre contrôle, store-check.yml ; runs dépassés d'une même PR annulés).
 name: iOS — build simulateur
 
 on:
   pull_request:
     branches: [main]
-    paths-ignore: ["journal/**", "**.md"]
+    paths-ignore: ["journal/**", "**.md", "store/**"]
   push:
     branches: [main]
-    paths-ignore: ["journal/**", "**.md"]
+    paths-ignore: ["journal/**", "**.md", "store/**"]
   workflow_dispatch:
 
 permissions:
