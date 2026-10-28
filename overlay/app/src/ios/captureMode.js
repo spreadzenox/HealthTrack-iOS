@@ -217,10 +217,12 @@ export async function probeGutEvening({ signal, waitAck, wait, log, plugin }) {
     for (let i = 0; i < 20 && !answer; i++) await wait(500)
     say('requestNotifications', answer ?? 'pas de réponse')
     if (!answer?.notifications) return say('essai', 'notifications refusées : pas de notification d’essai')
-    await GutEvening.testNotification() // notification réelle du soir, dans 3 s
-    await wait(4000)
+    // Notification réelle du soir, en bannière dans 45 s : le test d'interface, lancé dès le signal (xcodebuild met
+    // jusqu'à ~30 s à le démarrer), l'attend déjà ; l'appui long dans le centre de notifications ne la déplie pas
+    // (essais du 28/10)
+    await GutEvening.testNotification({ delay: 45, banner: true })
     await signal('notification-bilan')
-    if (!(await waitAck('notification-bilan', 600))) say('bilan', 'pas d’accusé du script en 3 min')
+    if (!(await waitAck('notification-bilan', 900))) say('bilan', 'pas d’accusé du script en 4 min 30')
     await wait(1000)
     const notes = (await GutEvening.list())?.notes || []
     const levels = notes.map((n) => {

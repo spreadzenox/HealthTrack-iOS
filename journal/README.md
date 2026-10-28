@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v536 en test interne (28/10) | v534 sur iPhone simulé (28/10, PR #21) ; v536 prêt |
+| Dernière version | v540 (28/10) | v540 sur iPhone simulé (28/10, PR #22) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 23 % (11 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -99,6 +99,7 @@ via TestFlight.
 | 28/10 02:00 | suivi d'Android v533, I5 (bilan du soir) | suivi d'Android v533 : Android a repris nos deux demandes (tests réparés) ; le bilan du ventre du soir par notification existe sur iPhone (plugin en Swift, à vérifier en capture) | #19, #20 |
 | 28/10 03:00 | suivi d'Android v534, I5 (notification) | sur iPhone simulé, l'autorisation des notifications est accordée et la notification du bilan du soir s'affiche (première version ratée par une erreur de ma part, corrigée) | #21 |
 | 28/10 04:00 | I5 (notification, suite) | notification du soir visible dans le centre de notifications (capturée) ; la réponse d'un geste reste à automatiser ; Android v536 préparé | #21 |
+| 28/10 05:00 | suivi d'Android v540, I5 (réponse d'un geste) | iOS à jour d'Android v540 (un correctif refait) ; **sur iPhone simulé, la réponse « Gêne » donnée depuis la notification est rangée sans ouvrir l'app** (1 iPhone sur 2 : l'autre a manqué la bannière, délai corrigé) | #22 (mergée), #23 |
 
 ---
 

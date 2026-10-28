@@ -58,12 +58,15 @@ public class GutEveningPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     #if DEBUG
-    /// Build de captures seulement (configuration Debug, jamais livrée) : la notification du soir dans 3 s, pour la
-    /// capturer et y répondre sur simulateur (`src/ios/captureMode.js` › `probeGutEvening`).
+    /// Build de captures seulement (configuration Debug, jamais livrée) : la notification du soir dans `delay` s (3 par
+    /// défaut), en bannière si `banner` (sinon discrète comme la vraie), pour la capturer et y répondre sur simulateur
+    /// (`src/ios/captureMode.js` › `probeGutEvening`).
     @objc func testNotification(_ call: CAPPluginCall) {
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(call.getInt("delay") ?? 3), repeats: false)
+        let content = GutEveningNotifications.content()
+        if call.getBool("banner") ?? false { content.interruptionLevel = .active }
         let request = UNNotificationRequest(identifier: GutEveningNotifications.requestPrefix + "essai",
-                                            content: GutEveningNotifications.content(), trigger: trigger)
+                                            content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { error in
             if let error {
                 call.reject(error.localizedDescription)
