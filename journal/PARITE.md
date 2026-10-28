@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **23 %** au 27/10 17:45 (11 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v534 (commit `77c48e7`, 28/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v540 (commit `5de107c`, 28/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,8 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 28/10 05:05 | #453, #455 (v540) | #453 table Ciqual embarquée une seule fois, plugin d'installation d'APK retiré : code partagé, arrive tel quel ; #455 montre Huawei « À reconnecter » après une restauration de la sauvegarde Android (`restoreGuard.js`) : sans objet sur iPhone (pas de `BackupMarker`, pas de montre Huawei en direct), mais sa note de Nouveautés parle de la sauvegarde Android (même demande que pour #444) ; le correctif 10 ne s'appliquait plus (import ajouté au même endroit) : refait, mêmes changements | — |
+| 28/10 04:05 | #451 (v536) | le relais IA reçoit, sans jeton Play Integrity, la raison de son absence (`X-Integrity-Status`) : sur iPhone, `no_plugin` (pas de plugin Play Integrity), indiscernable d'un Android sans plugin → précisé dans `DEMANDES.md` | — |
 | 28/10 03:05 | #449 (v534) | R8 (optimisation et obscurcissement) de la version Play : natif Android et CI seulement, sans objet sur iOS | — |
 | 28/10 02:05 | #447, #448 (v533) | #447 textes plus clairs (stress de la montre en mots dans le Journal, Analyses, Paramètres) : code web partagé, arrive tel quel (le correctif 17 de `journalChips.js` s'applique toujours) ; #448 répare les tests `UpdateBanner` et Réintroduction (même correction que le correctif 18 d'iOS, retiré) | — |
 | 28/10 01:05 | #446 (v531) | « Votre ventre » le soir : une seule question à l'Accueil (`TodayCards`) : code web partagé, arrive tel quel ; à revoir en capture le soir quand la version iOS aura ses notifications du soir (I5) | — |
