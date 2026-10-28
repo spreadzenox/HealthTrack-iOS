@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v553 (28/10) | v551 sur iPhone simulé (28/10, PR #31) ; v553 en vérification (PR #32) |
+| Dernière version | v555 (28/10) | v553 sur iPhone simulé (28/10, PR #32) ; v555 en vérification (PR #34) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 30 % (14 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -121,6 +121,8 @@ via TestFlight.
 | 28/10 10:00 | suivi d'Android v548, I9, I3 | Android v548 : une piste n'est dite « solide » qu'avec assez de jours (aussi sur iPhone) ; déclaration de confidentialité exigée par l'App Store en place ; vos données exportées puis réimportées sur iPhone sans perte ni doublon ; après une restauration sur un nouvel iPhone, l'app retirera les codes propres à l'ancien téléphone, comme sur Android (en vérification) | #28, #29 (mergées), #30 |
 | 28/10 11:00 | suivi d'Android v551, I3 | Android v551 : l'Accueil annonce vos pistes, Analyses dit chaque lien en une phrase (aussi sur iPhone) ; mesuré : la sauvegarde iCloud de l'iPhone n'emporte pas la base de l'app, seulement sa copie de secours, qui se restaure depuis « Vos données » ; corrigé : « Supprimer toutes mes données » laissait cette copie sur l'iPhone, elle est maintenant effacée aussi | #30 (mergée), #31 |
 | 28/10 12:00 | suivi d'Android v553, I3 | « Supprimer toutes mes données » efface maintenant aussi la copie de secours sur iPhone (vérifié) ; Android v553 a repris vos 4 demandes (l'iPhone ne sera pas bloqué par le contrôle d'intégrité, notes propres à Android cachées sur iPhone) ; après une restauration iCloud, l'iPhone proposera de reprendre vos données dès le premier écran (en vérification) | #31 (mergée), #32 |
+| 28/10 13:20 | suivi d'Android v555, I3, I6 | après une restauration iCloud, l'iPhone propose dès le premier écran de reprendre vos données (vérifié : toutes reprises d'un geste) ; Android v555 : historique du bien-être plus lisible (aussi sur iPhone) ; l'abonnement App Store est prêt côté iPhone mais reste éteint tant que le serveur ne sait pas vérifier les achats d'Apple ; en essai : choisir un fichier de sauvegarde dans l'app Fichiers | #32 (mergée), #33, #34 |
+| 28/10 14:05 | I6, I9, I3 | partie iPhone de l'abonnement App Store mise en place (éteinte tant que le serveur ne vérifie pas les achats d'Apple) ; brouillon de la fiche App Store en français (nom, sous-titre, description, mots-clés) ; choix d'un fichier dans l'app Fichiers : 1er essai raté (le bouton s'appelle « Explorer » sous iOS 26), corrigé et relancé | #33 (mergée), #34, #35 |
 
 ---
 
