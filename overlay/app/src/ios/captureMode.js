@@ -529,6 +529,7 @@ export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage
     say('avant', { count, copie, vidée: await db.countAllEntries() })
     localStorage.setItem('healthtrack_onboarding', JSON.stringify({ step: 0 }))
     go('/bienvenue')
+    window.scrollTo?.({ top: 0, behavior: 'instant' }) // la page d'avant (Vos données) était défilée
     await wait(3000) // la copie est lue, la carte s'affiche
     await signal('restauration-onboarding')
     await waitAck('restauration-onboarding')
