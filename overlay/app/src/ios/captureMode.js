@@ -201,10 +201,11 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health, conne
 /**
  * Essai du bilan du ventre du soir (étape I5) : autorisation des notifications (alerte acceptée par le test
  * d'interface du dépôt), puis notification d'essai (`testNotification`, build de captures seulement) à laquelle le
- * test d'interface répond « Gêne » depuis le centre de notifications ; la réponse doit être dans la boîte du plugin,
- * sans que l'app ait été ouverte. Résultats dans la console (`[notification] …`).
+ * test d'interface répond « Gêne » depuis la bannière dépliée ; la réponse doit être dans la boîte du plugin,
+ * sans que l'app ait été ouverte, puis entrer dans l'historique par l'import de l'app (comme à l'ouverture suivante).
+ * Résultats dans la console (`[notification] …`).
  */
-export async function probeGutEvening({ signal, waitAck, wait, log, plugin }) {
+export async function probeGutEvening({ signal, waitAck, wait, log, plugin, importInbox }) {
   const say = (what, value) => log(`[notification] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   try {
     const GutEvening = plugin ?? (await import('@capacitor/core')).registerPlugin('GutEvening')
@@ -235,6 +236,10 @@ export async function probeGutEvening({ signal, waitAck, wait, log, plugin }) {
       }
     })
     say('boîte', { count: notes.length, levels })
+    // Comme à l'ouverture suivante : l'app range les bilans de la boîte dans l'historique, la boîte se vide
+    const importer = importInbox ?? (await import('../services/gutEvening')).importPendingGutEvenings
+    const result = await importer({ plugin: GutEvening })
+    say('import', { ...result, left: ((await GutEvening.list())?.notes || []).length })
   } catch (e) {
     say('échec', e?.message || String(e))
   }
@@ -246,7 +251,7 @@ export async function probeGutEvening({ signal, waitAck, wait, log, plugin }) {
  * et en touche une. La note doit être dans la boîte du plugin, sans que l'app ait été ouverte. Résultats dans la
  * console (`[note] …`) et dans le journal du test d'interface (actions visibles).
  */
-export async function probeEveningNote({ signal, waitAck, wait, log, plugin }) {
+export async function probeEveningNote({ signal, waitAck, wait, log, plugin, importInbox }) {
   const say = (what, value) => log(`[note] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   try {
     const EveningNote = plugin ?? (await import('@capacitor/core')).registerPlugin('EveningNote')
@@ -265,6 +270,10 @@ export async function probeEveningNote({ signal, waitAck, wait, log, plugin }) {
       }
     })
     say('boîte', { count: notes.length, scores })
+    // Comme à l'ouverture suivante : l'app range les notes de la boîte dans l'historique, la boîte se vide
+    const importer = importInbox ?? (await import('../services/eveningNote')).importPendingEveningNotes
+    const result = await importer({ plugin: EveningNote })
+    say('import', { ...result, left: ((await EveningNote.list())?.notes || []).length })
   } catch (e) {
     say('échec', e?.message || String(e))
   }

@@ -254,6 +254,9 @@ describe('sonde du bilan du ventre du soir (I5)', () => {
       answer: (level) => {
         notes = [{ name: 'gut-1', json: `{"v":1,"level":"${level}","at":1}` }]
       },
+      drain: () => {
+        notes = []
+      },
     }
   }
 
@@ -266,7 +269,11 @@ describe('sonde du bilan du ventre du soir (I5)', () => {
       if (name === 'notification-bilan') plugin.answer('discomfort') // geste du test d'interface
       return true
     })
-    await probeGutEvening({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin })
+    const importInbox = vi.fn(async () => {
+      plugin.drain()
+      return { imported: 1, inserted: 1, dropped: 0, kept: 0 }
+    })
+    await probeGutEvening({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin, importInbox })
     expect(order).toEqual(['signal notification-autorisation', 'ack notification-autorisation', 'signal notification-bilan', 'ack notification-bilan'])
     expect(waitAck.mock.calls.every(([, tries]) => tries * 300 >= 120_000)).toBe(true)
     // notification d'essai en bannière, assez tard pour que le test d'interface l'attende déjà : xcodebuild met
@@ -274,6 +281,9 @@ describe('sonde du bilan du ventre du soir (I5)', () => {
     expect(plugin.testNotification).toHaveBeenCalledWith({ delay: expect.any(Number), banner: true })
     expect(plugin.testNotification.mock.calls[0][0].delay).toBeGreaterThanOrEqual(40)
     expect(logs.join('\n')).toContain('[notification] boîte {"count":1,"levels":["discomfort"]}')
+    // puis l'import de l'app (comme à l'ouverture suivante) : le bilan entre dans l'historique, la boîte se vide
+    expect(importInbox).toHaveBeenCalledWith({ plugin })
+    expect(logs.join('\n')).toContain('[notification] import {"imported":1,"inserted":1,"dropped":0,"kept":0,"left":0}')
   })
 
   it('notifications refusées : le dit et ne déclenche rien', async () => {
@@ -295,6 +305,9 @@ describe('sonde de la note du soir (I5)', () => {
       answer: (score) => {
         notes = [{ name: 'note-1', json: `{"v":1,"score":${score},"at":1}` }]
       },
+      drain: () => {
+        notes = []
+      },
     }
   }
 
@@ -307,12 +320,18 @@ describe('sonde de la note du soir (I5)', () => {
       if (name === 'note-du-soir') plugin.answer(4) // geste du test d'interface
       return true
     })
-    await probeEveningNote({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin })
+    const importInbox = vi.fn(async () => {
+      plugin.drain()
+      return { imported: 1, inserted: 1, dropped: 0, kept: 0 }
+    })
+    await probeEveningNote({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin, importInbox })
     expect(order).toEqual(['signal note-du-soir', 'ack note-du-soir'])
     expect(waitAck.mock.calls.every(([, tries]) => tries * 300 >= 240_000)).toBe(true)
     expect(plugin.testNotification).toHaveBeenCalledWith({ delay: expect.any(Number), banner: true })
     expect(plugin.testNotification.mock.calls[0][0].delay).toBeGreaterThanOrEqual(40)
     expect(logs.join('\n')).toContain('[note] boîte {"count":1,"scores":[4]}')
+    expect(importInbox).toHaveBeenCalledWith({ plugin })
+    expect(logs.join('\n')).toContain('[note] import {"imported":1,"inserted":1,"dropped":0,"kept":0,"left":0}')
   })
 
   it('notifications non autorisées : le dit et ne déclenche rien', async () => {
