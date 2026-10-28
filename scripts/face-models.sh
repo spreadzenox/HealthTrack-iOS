@@ -52,7 +52,30 @@ if [ ! -d "$DEST/TensorFlowLiteC.xcframework" ]; then
     exit 1
   fi
   tar -xzf "$TMP/tflite.tar.gz" -C "$TMP"
-  cp -R "$(find "$TMP" -type d -name TensorFlowLiteC.xcframework | head -1)" "$DEST/"
+  SRC="$(find "$TMP" -type d -name TensorFlowLiteC.xcframework | head -1)"
+  # Le pod livre des frameworks statiques sans Info.plist : en binaryTarget, Xcode les embarquerait dans l'app (refusé).
+  # On en fait un .xcframework de bibliothèques statiques (même code, mêmes en-têtes), lié sans être embarqué.
+  ARGS=()
+  for slice in "$SRC"/*/; do
+    fw="${slice%/}/TensorFlowLiteC.framework"
+    [ -d "$fw" ] || continue
+    name="$(basename "${slice%/}")"
+    echo "TensorFlow Lite C, $name : $(file -b "$fw/TensorFlowLiteC" | cut -c1-60)"
+    inc="$TMP/lib/$name/include"
+    mkdir -p "$inc/TensorFlowLiteC"
+    cp "$fw"/Headers/*.h "$inc/TensorFlowLiteC/"
+    umbrella="$(sed -n 's/.*umbrella header "\(.*\)".*/\1/p' "$fw/Modules/module.modulemap" 2>/dev/null | head -1)"
+    if [ -z "$umbrella" ]; then
+      umbrella="TensorFlowLiteC-all.h"
+      (cd "$inc/TensorFlowLiteC" && for h in *.h; do echo "#include \"$h\""; done) > "$TMP/all.h"
+      mv "$TMP/all.h" "$inc/TensorFlowLiteC/$umbrella"
+    fi
+    printf 'module TensorFlowLiteC {\n  umbrella header "TensorFlowLiteC/%s"\n  export *\n  link "c++"\n}\n' "$umbrella" > "$inc/module.modulemap"
+    cp "$fw/TensorFlowLiteC" "$TMP/lib/$name/libTensorFlowLiteC.a"
+    ARGS+=(-library "$TMP/lib/$name/libTensorFlowLiteC.a" -headers "$inc")
+  done
+  [ "${#ARGS[@]}" -gt 0 ] || { echo "face-models.sh : aucun framework dans l'archive de TensorFlow Lite C" >&2; exit 1; }
+  xcodebuild -create-xcframework "${ARGS[@]}" -output "$DEST/TensorFlowLiteC.xcframework" > /dev/null
 fi
 echo "TensorFlow Lite C : $(ls "$DEST/TensorFlowLiteC.xcframework" | tr '\n' ' ')"
 
