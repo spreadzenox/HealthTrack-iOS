@@ -32,3 +32,9 @@
 - Relire l'audit écran par écran d'Android (POL-PLAY-21 à 28) pour la parité des écrans (§2 de `PARITE.md`).
 - I3 : import d'un export Android sur iPhone par le sélecteur de fichiers (test d'interface) ; I6 : essai de
   StoreKit 2 sur simulateur avec un fichier de configuration StoreKit.
+
+## Fin du run (09:35 UTC)
+- CI de #28 verte (run 98 ; 68 captures, 0 erreur JavaScript ; les trois rappels toujours vérifiés jusqu'à
+  l'historique ; manifeste et chiffrement vérifiés dans l'app construite) ; page Analyses regardée (v548).
+  **PR #28 mergée** (1697b08). Branche de la sonde des données remise sur `main` et ouverte en PR #29.
+
