@@ -8,10 +8,10 @@
 Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) · 🟡 partiel ou pas encore vérifié ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
-**Parité** : **28 %** au 28/10 08:10 (13 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
+**Parité** : **30 %** au 28/10 08:55 (14 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v544 (commit `84a97a9`, 28/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v545 (commit `5a43fb8`, 28/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -64,7 +64,7 @@ analyses, journal, Accueil) : ils arrivent avec `upstream.json` et sont couverts
 | Anti-abus des crédits IA | `PlayIntegrityPlugin` | App Attest (DeviceCheck) | ❌ | I6 ; vérification côté relais : `DEMANDES.md`. 27/10 : le relais est en `INTEGRITY_MODE=observe` (`relay-deploy.yml`), l'analyse des repas passe donc sans jeton depuis l'iPhone ; en `enforce`, elle serait refusée (403) tant qu'App Attest n'est pas accepté |
 | Rappel de fin d'essai | `TrialReminderPlugin` | notification locale | ❌ | I5/I6 |
 | Bilan du ventre du soir (notification à actions) | `GutEveningPlugin` | `UNNotificationCategory` + actions, réponse rangée à l'ouverture | ✅ | I5 : plugin en Swift (PR #20), soirs programmés d'avance ; sur les deux iPhone simulés : notification affichée, « Gêne » touché depuis la bannière dépliée et rangé sans ouvrir l'app (PR #23), puis entré dans l'historique par l'import de l'app (PR #25 : inserted 1, boîte vide) ; geste à refaire sur l'iPhone 12 |
-| Note du soir | `EveningNotePlugin` | idem | 🟡 | I5 : plugin en Swift (PR #24) ; sur les deux iPhone simulés, les 6 notes s'affichent dans la notification dépliée et la note touchée est rangée sans ouvrir l'app ; import à l'ouverture suivante à vérifier (PR #26 : l'essai de la PR #25 a été faussé par une reprogrammation) |
+| Note du soir | `EveningNotePlugin` | idem | ✅ | I5 : plugin en Swift (PR #24) ; sur les deux iPhone simulés, les 6 notes s'affichent dans la notification dépliée, la note touchée est rangée sans ouvrir l'app puis entre dans l'historique par l'import de l'app (PR #26 : inserted 1, boîte vide) ; geste à refaire sur l'iPhone 12 |
 | Rappel de la portion du jour | `PortionReminderPlugin` | notifications locales programmées d'avance, toucher retenu (`takeOpen`) | ✅ | I5 : plugin en Swift (PR #24) ; sur les deux iPhone simulés, rappel programmé par `schedule`, bannière touchée app en arrière-plan → la réintroduction s'ouvre (signal du natif + correctif 18 ; PR #24 et #25) ; vrai rappel du jour à voir sur l'iPhone 12 |
 | Bien-être par le visage, à l'ouverture de l'app | `FaceSensePlugin`, ONNX / LiteRT | Vision + ONNX Runtime iOS ou Core ML ; mêmes scores sur `journal/protocoles/visage-*.py` | ❌ | I7 |
 | Bien-être par le visage, au déverrouillage | `FaceSenseService` (service caméra de premier plan) | — | ⛔ à confirmer | iOS n'autorise pas la caméra en arrière-plan ; alternative : ouverture de l'app, widget, raccourci |
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 28/10 09:05 | #460 (v545) | écart à la norme (FC repos, VFC) en gris au lieu d'orange, la norme en vert (`BaselineCards.css`) : CSS partagé, vaut aussi pour la carte « VFC (SDNN) » d'iPhone ; note de Nouveautés vraie sur iPhone ; le correctif 20 s'applique toujours | — |
 | 28/10 08:05 | #458, #459 (v544) | #459 onglets du Journal lisibles sur petit écran (`TabBar.css` : largeur selon le libellé, marge, police réduite sous 380 px) : CSS partagé, vaut aussi pour l'iPhone 12 (390 points) ; sa note de Nouveautés est vraie sur iPhone ; contrôle « texte qui déborde » ajouté au script visuel d'Android (Android seulement) ; #458 journal d'Android | — |
 | 28/10 06:05 | #456, #457 (v542) | #457 « robots du rapport de pré-lancement comptés à part » : l'app signale au relais un appareil de test de Google (Firebase Test Lab, `isTestDevice`, en-tête `X-Test-Device`) ; sur iPhone, `loadIntegrityPlugin` rend `null` hors Android → jamais signalé, rien à faire (pas d'équivalent des robots de Google chez Apple) ; ajout à la politique de confidentialité sur ces appareils de test (Google seulement) ; #456 journal d'Android | — |
 | 28/10 05:05 | #453, #455 (v540) | #453 table Ciqual embarquée une seule fois, plugin d'installation d'APK retiré : code partagé, arrive tel quel ; #455 montre Huawei « À reconnecter » après une restauration de la sauvegarde Android (`restoreGuard.js`) : sans objet sur iPhone (pas de `BackupMarker`, pas de montre Huawei en direct), mais sa note de Nouveautés parle de la sauvegarde Android (même demande que pour #444) ; le correctif 10 ne s'appliquait plus (import ajouté au même endroit) : refait, mêmes changements | — |
