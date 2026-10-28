@@ -240,6 +240,9 @@ export async function probeGutEvening({ signal, waitAck, wait, log, plugin, impo
     const importer = importInbox ?? (await import('../services/gutEvening')).importPendingGutEvenings
     const result = await importer({ plugin: GutEvening })
     say('import', { ...result, left: ((await GutEvening.list())?.notes || []).length })
+    // l'import prévient l'app, qui reprogramme ses rappels du soir et de portion : la laisser finir avant l'essai
+    // suivant (28/10 : la reprogrammation de la note du soir retirait sa notification d'essai)
+    await wait(3000)
   } catch (e) {
     say('échec', e?.message || String(e))
   }
@@ -274,6 +277,9 @@ export async function probeEveningNote({ signal, waitAck, wait, log, plugin, imp
     const importer = importInbox ?? (await import('../services/eveningNote')).importPendingEveningNotes
     const result = await importer({ plugin: EveningNote })
     say('import', { ...result, left: ((await EveningNote.list())?.notes || []).length })
+    // l'import prévient l'app, qui reprogramme ses rappels du soir et de portion : la laisser finir avant l'essai
+    // suivant (28/10 : la reprogrammation de la note du soir retirait sa notification d'essai)
+    await wait(3000)
   } catch (e) {
     say('échec', e?.message || String(e))
   }

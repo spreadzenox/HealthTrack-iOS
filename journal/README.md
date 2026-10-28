@@ -10,9 +10,9 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v542 (28/10) | v542 sur iPhone simulé (28/10, PR #23) |
+| Dernière version | v544 (28/10) | v542 sur iPhone simulé (28/10) ; v544 prêt (PR #26) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | 23 % (11 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
+| Parité des fonctions | référence | 28 % (13 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
 - **A1** — quand il le décide : adhérer à l'Apple Developer Program (payant, à l'année ; marche à suivre en 5 étapes
@@ -111,6 +111,7 @@ via TestFlight.
 | 28/10 05:00 | suivi d'Android v540, I5 (réponse d'un geste) | iOS à jour d'Android v540 (un correctif refait) ; **sur iPhone simulé, la réponse « Gêne » donnée depuis la notification est rangée sans ouvrir l'app** (1 iPhone sur 2 : l'autre a manqué la bannière, délai corrigé) | #22 (mergée), #23 |
 | 28/10 06:00 | suivi d'Android v542, I5 (note du soir, rappel de portion) | Android v542 sans effet sur iPhone (signalement des appareils de test de Google) ; **réponse « Gêne » d'un geste vérifiée sur les deux iPhone simulés** (#23 mergée) ; la note du soir d'un geste (0 à 5) et le rappel de la portion du jour existent sur iPhone, à vérifier en capture : iOS n'affiche peut-être que 4 boutons sur 6 | #23 (mergée), #24 |
 | 28/10 07:00 | I5 (note du soir, rappel de portion), I4 | **note du soir (les 6 notes s'affichent) et rappel de portion vérifiés sur les deux iPhone simulés** ; le rappel touché ne rouvrait pas la réintroduction sur iPhone (le toucher arrive plus tard que sur Android) → corrigé ; la VFC de l'app Santé comptée dans « Mes appareils » | #24 (mergée), #25 |
+| 28/10 08:00 | suivi d'Android v544, I5, I4 | réponse au bilan du ventre vérifiée jusqu'à l'historique ; bilan du ventre et rappel de portion comptés comme faits sur iPhone (**parité 28 %**) ; norme personnelle de la VFC de l'app Santé préparée ; Android v544 (onglets du Journal plus lisibles) | #25 (mergée), #26 |
 
 ---
 

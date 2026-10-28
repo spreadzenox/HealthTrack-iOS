@@ -273,7 +273,8 @@ describe('sonde du bilan du ventre du soir (I5)', () => {
       plugin.drain()
       return { imported: 1, inserted: 1, dropped: 0, kept: 0 }
     })
-    await probeGutEvening({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin, importInbox })
+    const waits = []
+    await probeGutEvening({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async (ms) => waits.push(ms), log: (m) => logs.push(m), plugin, importInbox })
     expect(order).toEqual(['signal notification-autorisation', 'ack notification-autorisation', 'signal notification-bilan', 'ack notification-bilan'])
     expect(waitAck.mock.calls.every(([, tries]) => tries * 300 >= 120_000)).toBe(true)
     // notification d'essai en bannière, assez tard pour que le test d'interface l'attende déjà : xcodebuild met
@@ -284,6 +285,9 @@ describe('sonde du bilan du ventre du soir (I5)', () => {
     // puis l'import de l'app (comme à l'ouverture suivante) : le bilan entre dans l'historique, la boîte se vide
     expect(importInbox).toHaveBeenCalledWith({ plugin })
     expect(logs.join('\n')).toContain('[notification] import {"imported":1,"inserted":1,"dropped":0,"kept":0,"left":0}')
+    // l'import prévient l'app, qui reprogramme ses rappels : on la laisse finir avant l'essai suivant (28/10 : la
+    // reprogrammation de la note du soir retirait sa notification d'essai)
+    expect(waits.at(-1)).toBeGreaterThanOrEqual(2000)
   })
 
   it('notifications refusées : le dit et ne déclenche rien', async () => {
@@ -324,7 +328,8 @@ describe('sonde de la note du soir (I5)', () => {
       plugin.drain()
       return { imported: 1, inserted: 1, dropped: 0, kept: 0 }
     })
-    await probeEveningNote({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin, importInbox })
+    const waits = []
+    await probeEveningNote({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async (ms) => waits.push(ms), log: (m) => logs.push(m), plugin, importInbox })
     expect(order).toEqual(['signal note-du-soir', 'ack note-du-soir'])
     expect(waitAck.mock.calls.every(([, tries]) => tries * 300 >= 240_000)).toBe(true)
     expect(plugin.testNotification).toHaveBeenCalledWith({ delay: expect.any(Number), banner: true })
@@ -332,6 +337,7 @@ describe('sonde de la note du soir (I5)', () => {
     expect(logs.join('\n')).toContain('[note] boîte {"count":1,"scores":[4]}')
     expect(importInbox).toHaveBeenCalledWith({ plugin })
     expect(logs.join('\n')).toContain('[note] import {"imported":1,"inserted":1,"dropped":0,"kept":0,"left":0}')
+    expect(waits.at(-1)).toBeGreaterThanOrEqual(2000)
   })
 
   it('notifications non autorisées : le dit et ne déclenche rien', async () => {

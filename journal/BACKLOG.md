@@ -67,8 +67,8 @@
     `dailyJournal.js` tombe par défaut dans la fréquence cardiaque → une sous-catégorie à part
     (`heartRateVariabilitySdnn`) plus un correctif de `dailyJournal.js` suffiraient. 28/10 : fait ainsi (PR #16, mergée :
     correctifs 08 et 13 refaits, 17 ajouté ; pastille « VFC (SDNN) » ; sonde qui écrit 48 ms et vérifie la
-    sous-catégorie). « Mes appareils » compte la VFC SDNN (correctif 19, PR #25). Reste : norme personnelle SDNN
-    (`baselines.js` : par une liste propre à iOS, un test d'Android attend exactement deux mesures), radar.
+    sous-catégorie). « Mes appareils » compte la VFC SDNN (correctif 19, PR #25). Norme personnelle SDNN prête
+    (correctif 20, `src/ios/sdnnBaseline.js`, branche `claude/ios-i4-norme-sdnn`, PR après #25). Reste : radar.
   - [x] Simulateurs en français pour les captures (PR #9).
 - [ ] **I5 — Notifications** : bilan du ventre du soir, note du soir, rappel de portion, rappel de fin d'essai ;
   actions dans la notification, réponse rangée à l'ouverture suivante.
@@ -86,7 +86,8 @@
   - [x] `PortionReminder` en Swift (PR #24, mergée) : rappels restants programmés d'avance ; bannière touchée app
     en arrière-plan → la réintroduction s'ouvre (le natif signale le toucher, transmis par iOS après le retour au
     premier plan : correctif 18) ; vérifié sur les deux iPhone simulés.
-  - [ ] Import des réponses à l'ouverture suivante vérifié en capture (boîte vidée dans l'historique) ; gestes sur
+  - [~] Import des réponses à l'ouverture suivante vérifié en capture : bilan du ventre ✅ (PR #25 : inserted 1,
+    boîte vide) ; note du soir à revoir (essai faussé par une reprogrammation, sonde corrigée en PR #26) ; gestes sur
     l'iPhone 12 après A1.
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des

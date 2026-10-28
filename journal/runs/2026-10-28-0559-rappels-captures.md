@@ -48,8 +48,12 @@
   portion dans la page Réintroduction : rien de neuf dans Paramètres (captures regardées).
 
 ## Suite
-- Merger #25 après sa CI. Puis I4 : norme personnelle SDNN (`baselines.js` : l'ajouter à `BASELINE_METRICS`
-  casserait un test d'Android qui attend deux mesures → passer par une liste propre à iOS), radar.
+- Merger #25 après sa CI.
+- Préparé et poussé sans PR (branche `claude/ios-i4-norme-sdnn`, empilée sur #25, pas de CI tant que #25 n'est pas
+  mergée) : **norme personnelle de la VFC SDNN** sur iPhone — `src/ios/sdnnBaseline.js` (même méthode que la VFC
+  d'Android, échelle log, seulement dans la variante appstore : les tests d'Android ne la voient pas) et
+  **correctif 20** (`BaselineCards.jsx`, 4 lignes) ; 4 tests écrits d'abord (dont un rendu de la carte
+  « VFC (SDNN) ») ; suite : 2684 ✅ ; build `appstore` ✅. À ouvrir en PR au prochain run, après #25. Radar ensuite.
 - I5 : lire `[notification] import` et `[note] import` dans les captures de #25 (attendu `inserted 1`, `left 0`) ;
   si c'est le cas, bilan du ventre, note du soir et rappel de portion passent ✅ dans `PARITE.md` (vérifiés sur
   iPhone simulé, gestes à refaire sur l'iPhone 12). Rappel de fin d'essai avec I6 (il dépend de la facturation).
