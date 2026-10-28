@@ -72,6 +72,12 @@
   - [x] Simulateurs en français pour les captures (PR #9).
 - [ ] **I5 — Notifications** : bilan du ventre du soir, note du soir, rappel de portion, rappel de fin d'essai ;
   actions dans la notification, réponse rangée à l'ouverture suivante.
+  - [~] Règles du soir en Swift, testées par XCTest (`ios/HalcyaRules`, PR #18) : soirs programmés d'avance (iOS ne
+    réveille pas l'app pour décider), geste après minuit rattaché au soir demandé.
+  - [ ] Plugin `GutEvening` en Swift (`configure`, `status`, `list`, `remove`, `requestNotifications`), branché par une
+    sous-classe de `CAPBridgeViewController` ; catégorie à actions Calme / Gêne / Douleur sans ouvrir l'app ; retirer
+    `GutEvening` de `missingOnIos` ; capture de la notification.
+  - [ ] `EveningNote` (note du soir), puis `PortionReminder` (rappel de portion de la réintroduction).
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
   transactions signées par Apple, notifications serveur V2, App Attest, mêmes crédits IA, même période de lancement.
