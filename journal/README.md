@@ -18,8 +18,8 @@
 - **A1** — quand il le décide : adhérer à l'Apple Developer Program (payant, à l'année ; marche à suivre en 5 étapes
   au §8, « A1 pas à pas »). C'est ce qui
   débloque l'installation sur un vrai iPhone, TestFlight et l'App Store.
-- (à transmettre à la routine Android si vous êtes d'accord) Avant de rendre bloquante la vérification Play
-  Integrity du serveur d'analyse IA, laisser passer l'app iPhone (détail dans `DEMANDES.md`).
+- ✅ Fait le 28/10 : vous avez transmis à la routine Android les 4 demandes de `DEMANDES.md` (iPhone au contrôle
+  d'intégrité, abonnement App Store sur le serveur, Nouveautés propres à Android, textes de sauvegarde neutres).
 - (facultatif) Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS).
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement

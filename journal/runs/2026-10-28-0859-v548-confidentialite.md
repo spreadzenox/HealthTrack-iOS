@@ -37,4 +37,7 @@
 - CI de #28 verte (run 98 ; 68 captures, 0 erreur JavaScript ; les trois rappels toujours vérifiés jusqu'à
   l'historique ; manifeste et chiffrement vérifiés dans l'app construite) ; page Analyses regardée (v548).
   **PR #28 mergée** (1697b08). Branche de la sonde des données remise sur `main` et ouverte en PR #29.
+- Message du propriétaire (≈ 09:45 UTC) : « j'ai transmis le tout » — les 4 demandes en attente de `DEMANDES.md`
+  (intégrité, abonnement App Store, variantes des Nouveautés, textes de sauvegarde) sont transmises à la routine
+  Android ; état mis à jour, à suivre dans ses livraisons (suivi d'Android à chaque run).
 
