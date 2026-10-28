@@ -31,9 +31,13 @@
 
   - 2e essai en CI (run de `db8c722`) : les 11 tests Swift du visage passent sur le runner macOS, contre les vecteurs d'Android.
   - Étape 3, début : indices par unités d'action, contrôle qualité, médianes et mobilité de la rafale (`FaceIndices`, 7 tests repris de `FaceIndicesTest.java`). Les moyennes gauche / droite s'additionnent en Float avant la division, comme en Java.
+  - `FaceRecord` : le JSON d'une rafale, au caractère près comme Android (5 tests repris de `FaceRecordTest.java`, plus l'arrondi).
+    - Ordre des champs d'Android : la rafale garde l'ordre d'export de son `LinkedHashMap`.
+    - Rejets triés comme le `TreeMap` de Java.
+    - `%.4f` de Java : l'écriture décimale la plus courte, arrondie avec les milieux loin de zéro (`0.03125` → `0.0313`, alors que `printf` donne `0.0312`). C'est un écart possible au 4e chiffre seulement, sans effet sur les scores.
 
 ## Suite
-- CI de #43 (tests Swift du visage, dont les indices). Ensuite, la rafale complète (`FacePipeline` avec modèles figés, 13 scénarios) et `FaceRecord` (JSON identique à Android).
+- CI de #43 : tests Swift du visage, avec les indices et `FaceRecord`. Ensuite, la rafale complète (`FacePipeline` avec modèles figés, 13 scénarios de `FacePipelineTest`).
 - CI de #42 → regarder l'accueil (carte vide sans lien vers Sources) et Sources (conseil Apple Watch), puis merger.
 - Ensuite, un lancement manuel sur `main` avec `devices="iPhone 17 Pro Max"` pour les captures de la fiche ; en choisir 3 à 10.
 - À « A1 fait » : A3 puis A2 avec le propriétaire, et sa décision sur la signature.

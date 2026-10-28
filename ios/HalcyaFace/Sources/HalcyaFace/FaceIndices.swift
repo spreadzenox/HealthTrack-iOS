@@ -77,11 +77,26 @@ public enum FaceIndices {
         bs[jawOpen] > maxJawOpen ? .talking : nil
     }
 
-    /// Résultat d'une rafale : médiane de chaque indice sur les images valides, plus n et la mobilité.
+    /// Résultat d'une rafale : médiane de chaque indice sur les images valides, plus n et la mobilité. `keys` garde
+    /// l'ordre d'export (celui du `LinkedHashMap` d'Android) : les indices, puis `mobility`, puis ce qu'on ajoute.
     public struct Burst {
-        public let values: [String: Double]
+        public private(set) var values: [String: Double]
+        public private(set) var keys: [String]
         public let valid: Int
         public let frames: Int
+
+        init(values: [String: Double], keys: [String], valid: Int, frames: Int) {
+            self.values = values
+            self.keys = keys
+            self.valid = valid
+            self.frames = frames
+        }
+
+        /// Ajoute (ou remplace) une valeur, à la fin de l'ordre d'export si elle est nouvelle.
+        public mutating func set(_ key: String, _ value: Double) {
+            if values[key] == nil { keys.append(key) }
+            values[key] = value
+        }
     }
 
     /// Agrège une rafale. `indices` / `blendshapes` = images valides seulement, dans l'ordre de capture ; `frames` =
@@ -89,16 +104,16 @@ public enum FaceIndices {
     /// 2 images valides). nil si aucune image valide.
     public static func burst(indices: [[String: Double]], blendshapes bs: [[Float]], frames: Int) -> Burst? {
         if indices.isEmpty { return nil }
-        var out = [String: Double]()
-        for name in names { out[name] = median(indices.map { $0[name]! }) }
+        var out = Burst(values: [:], keys: [], valid: indices.count, frames: frames)
+        for name in names { out.set(name, median(indices.map { $0[name]! })) }
         if bs.count >= 2 {
             var sum = 0.0
             for i in 1..<bs.count {
                 for k in 0..<blendshapes { sum += Double(abs(bs[i - 1][k] - bs[i][k])) }
             }
-            out["mobility"] = sum / (Double(bs.count - 1) * Double(blendshapes))
+            out.set("mobility", sum / (Double(bs.count - 1) * Double(blendshapes)))
         }
-        return Burst(values: out, valid: indices.count, frames: frames)
+        return out
     }
 
     static func median(_ v: [Double]) -> Double {
