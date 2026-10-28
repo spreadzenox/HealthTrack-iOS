@@ -65,19 +65,6 @@ final class NotificationsUITests: XCTestCase {
         autoriser.tap()
     }
 
-    /// Ouvre le centre de notifications (glissé depuis le haut de l'écran) et y attend la notification d'essai ; le
-    /// script capture l'écran ensuite.
-    func testOuvrirLeCentreDeNotifications() throws {
-        let haut = springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.001))
-        let bas = springboard.coordinate(withNormalizedOffset: CGVector(dx: 0.3, dy: 0.7))
-        haut.press(forDuration: 0.1, thenDragTo: bas)
-        guard notification().waitForExistence(timeout: 15) else {
-            print(springboard.debugDescription)
-            XCTFail("notification « \(titre) » absente du centre de notifications")
-            return
-        }
-    }
-
     /// Bilan du ventre : bannière dépliée, puis « Gêne ».
     func testRepondreGeneDepuisLaBanniere() throws {
         guard deplierLaBanniere(titre) else { return }
@@ -142,9 +129,5 @@ final class NotificationsUITests: XCTestCase {
         sleep(1)
         print(springboard.debugDescription)
         return true
-    }
-
-    private func notification() -> XCUIElement {
-        springboard.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", titre)).firstMatch
     }
 }

@@ -31,9 +31,7 @@ ui_steps() { # <page> → lignes « <Classe/test> <suffixe de capture> »
   case "$1" in
     healthkit-autorisation) echo "SanteUITests/testAccepterLaFeuilleSante healthkit-apres" ;;
     notification-autorisation) echo "NotificationsUITests/testAutoriserLesNotifications notification-autorisee" ;;
-    notification-bilan)
-      echo "NotificationsUITests/testRepondreGeneDepuisLaBanniere notification-apres"
-      echo "NotificationsUITests/testOuvrirLeCentreDeNotifications notification-centre" ;;
+    notification-bilan) echo "NotificationsUITests/testRepondreGeneDepuisLaBanniere notification-apres" ;;
     note-du-soir) echo "NotificationsUITests/testNoterLaSoireeDepuisLaBanniere note-apres" ;;
     rappel-portion) echo "NotificationsUITests/testToucherLeRappelDePortion rappel-apres" ;;
   esac

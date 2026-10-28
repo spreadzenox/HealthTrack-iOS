@@ -33,6 +33,14 @@ public class PortionReminderPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func takeOpen(_ call: CAPPluginCall) {
         call.resolve(["open": PortionReminderNotifications.store.takeOpen()])
     }
+
+    /// iOS transmet le toucher après le retour de l'app au premier plan, quand la page a déjà vérifié : on le lui
+    /// signale (`src/ios/portionOpen.js`), elle refait la même vérification.
+    override public func load() {
+        PortionReminderNotifications.onOpen = { [weak self] in
+            self?.bridge?.triggerWindowJSEvent(eventName: "halcya-portion-open")
+        }
+    }
 }
 
 /// Notifications du rappel de portion : une par rappel à venir, sans action (le toucher ouvre l'app).
@@ -40,6 +48,8 @@ enum PortionReminderNotifications {
     static let category = "portion-reminder"
     static let requestPrefix = "portion-reminder-"
     static let store = PortionStore(defaults: UserDefaults.standard)
+    /// Signal à la page qu'un toucher vient d'être retenu (posé par le plugin une fois Capacitor chargé).
+    static var onOpen: (() -> Void)?
 
     static func schedule(_ items: [PortionRule.Item], _ done: @escaping (Bool) -> Void) {
         let center = UNUserNotificationCenter.current()
@@ -71,7 +81,10 @@ enum PortionReminderNotifications {
     /// Toucher sur la notification : l'app ouvrira la réintroduction. Vrai s'il s'agissait de ce rappel.
     static func opened(_ response: UNNotificationResponse) -> Bool {
         guard response.notification.request.content.categoryIdentifier == category else { return false }
-        if response.actionIdentifier == UNNotificationDefaultActionIdentifier { store.markOpen() }
+        if response.actionIdentifier == UNNotificationDefaultActionIdentifier {
+            store.markOpen()
+            DispatchQueue.main.async { onOpen?() }
+        }
         return true
     }
 }
