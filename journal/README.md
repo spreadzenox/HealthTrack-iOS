@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v548 (28/10) | v548 sur iPhone simulé (28/10, PR #28) |
+| Dernière version | v548 (28/10) | v548 sur iPhone simulé (28/10, PR #29) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 30 % (14 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -117,7 +117,7 @@ via TestFlight.
 | 28/10 07:00 | I5 (note du soir, rappel de portion), I4 | **note du soir (les 6 notes s'affichent) et rappel de portion vérifiés sur les deux iPhone simulés** ; le rappel touché ne rouvrait pas la réintroduction sur iPhone (le toucher arrive plus tard que sur Android) → corrigé ; la VFC de l'app Santé comptée dans « Mes appareils » | #24 (mergée), #25 |
 | 28/10 08:00 | suivi d'Android v544, I5, I4 | **les trois rappels (bilan du ventre, note du soir, rappel de portion) vérifiés de bout en bout sur iPhone simulé** : geste depuis la notification, réponse rangée puis entrée dans l'historique (**parité 30 %**) ; norme personnelle de la VFC de l'app Santé ; Android v544 (onglets du Journal plus lisibles, vérifiés sur la taille de l'iPhone 12) ; radar avec la VFC de l'app Santé en relecture | #25, #26 (mergées), #27 |
 | 28/10 09:00 | suivi d'Android v545, I4, I9 | Android v545 : un écart à votre norme n'est plus affiché comme une alerte (aussi sur iPhone) ; radar avec la variabilité cardiaque de l'app Santé ; déclaration de confidentialité exigée par l'App Store préparée ; ce qu'il faudra au serveur pour l'abonnement sur iPhone précisé (`DEMANDES.md`) | #27 (mergée), #28 |
-| 28/10 10:00 | suivi d'Android v548, I9, I3 | Android v548 : une piste n'est dite « solide » qu'avec assez de jours (aussi sur iPhone) ; déclaration de confidentialité exigée par l'App Store en place ; essai de l'export puis réimport de vos données sur iPhone en relecture | #28 (mergée), #29 |
+| 28/10 10:00 | suivi d'Android v548, I9, I3 | Android v548 : une piste n'est dite « solide » qu'avec assez de jours (aussi sur iPhone) ; déclaration de confidentialité exigée par l'App Store en place ; vos données exportées puis réimportées sur iPhone sans perte ni doublon ; après une restauration sur un nouvel iPhone, l'app retirera les codes propres à l'ancien téléphone, comme sur Android (en vérification) | #28, #29 (mergées), #30 |
 
 ---
 

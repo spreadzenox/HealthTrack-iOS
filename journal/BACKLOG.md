@@ -40,6 +40,14 @@
   plan dans `RECHERCHE.md` : `persist()`, instantané automatique en fichier natif, restauration proposée si la base
   est vide ; 27/10 : copie de secours automatique, PR #6), sauvegarde iCloud, export / import JSON par la feuille
   de partage (y compris d'un téléphone Android vers un iPhone), secrets dans le Trousseau (ThisDeviceOnly).
+  - [x] Aller-retour des données vérifié en capture (PR #29, mergée le 28/10) : 1924 mesures exportées, écrites dans
+    un fichier, relues, réimportées sans doublon sur les deux iPhone simulés.
+  - [~] Sauvegarde du téléphone (PR #30) : `BackupMarker` en Swift (repère hors sauvegarde, lu par `restoreGuard.js`
+    comme sur Android ; règle `DeviceMarker` testée par XCTest) ; sonde Debug `CaptureProbe` qui relève ce que la
+    sauvegarde iCloud emporterait. Reste : lire la sonde sur la CI (base et copie de secours non exclues, repère
+    exclu, `restored: false` sans `unavailable`).
+  - [ ] Gestes réels : export par la feuille de partage, import par le sélecteur de fichiers (test d'interface),
+    fichier exporté d'Android réimporté sur iPhone.
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS
   vérifié, mêmes méthodes et types que le connecteur ; **VFC en SDNN sur iOS contre RMSSD sur Android**, à ne pas
   mélanger ; voir `RECHERCHE.md`. 27/10 : **HealthKit marche sur simulateur sans compte Apple** (build signée à la
@@ -86,8 +94,8 @@
   - [x] `PortionReminder` en Swift (PR #24, mergée) : rappels restants programmés d'avance ; bannière touchée app
     en arrière-plan → la réintroduction s'ouvre (le natif signale le toucher, transmis par iOS après le retour au
     premier plan : correctif 18) ; vérifié sur les deux iPhone simulés.
-  - [~] Import des réponses à l'ouverture suivante vérifié en capture : bilan du ventre ✅ (PR #25 : inserted 1,
-    boîte vide) ; note du soir à revoir (essai faussé par une reprogrammation, sonde corrigée en PR #26) ; gestes sur
+  - [x] Import des réponses à l'ouverture suivante vérifié en capture : bilan du ventre (PR #25 : inserted 1,
+    boîte vide), note du soir (PR #26 : inserted 1, boîte vide), toujours vrai à chaque CI depuis ; gestes sur
     l'iPhone 12 après A1.
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
