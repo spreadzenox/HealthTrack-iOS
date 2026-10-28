@@ -67,8 +67,8 @@
     `dailyJournal.js` tombe par défaut dans la fréquence cardiaque → une sous-catégorie à part
     (`heartRateVariabilitySdnn`) plus un correctif de `dailyJournal.js` suffiraient. 28/10 : fait ainsi (PR #16, mergée :
     correctifs 08 et 13 refaits, 17 ajouté ; pastille « VFC (SDNN) » ; sonde qui écrit 48 ms et vérifie la
-    sous-catégorie). Reste : norme personnelle SDNN (baselines.js), radar ; « Mes appareils » ne compte pas encore la
-    VFC SDNN parmi les mesures d'une app (`healthApps.js`).
+    sous-catégorie). « Mes appareils » compte la VFC SDNN (correctif 19, PR #25). Reste : norme personnelle SDNN
+    (`baselines.js` : par une liste propre à iOS, un test d'Android attend exactement deux mesures), radar.
   - [x] Simulateurs en français pour les captures (PR #9).
 - [ ] **I5 — Notifications** : bilan du ventre du soir, note du soir, rappel de portion, rappel de fin d'essai ;
   actions dans la notification, réponse rangée à l'ouverture suivante.
@@ -80,12 +80,14 @@
   - [~] Sur simulateur (PR #21) : autorisation accordée et notification affichée dans le centre de notifications ✅ ;
     réponse « Gêne » depuis la bannière dépliée, rangée sans ouvrir l'app ✅ sur les deux iPhone simulés (PR #23,
     mergée) ; reste : import à l'ouverture suivante vérifié, geste réel sur l'iPhone 12 après A1.
-  - [~] `EveningNote` en Swift (PR #24) : plugin, boîte commune avec le ventre (`EveningStore`), tests XCTest ✅ ;
-    reste la sonde sur simulateur : iOS en montrerait 4 au plus sur 6 (sources non officielles), sinon extension de
-    contenu de notification.
-  - [~] `PortionReminder` en Swift (PR #24) : rappels restants programmés d'avance, toucher retenu pour `takeOpen`,
-    tests XCTest ✅ ; sur simulateur, toucher retenu ✅ mais réintroduction pas ouverte (toucher transmis après le
-    retour au premier plan) → signal du natif + correctif 18 (PR #24), à revérifier.
+  - [x] `EveningNote` en Swift (PR #24, mergée) : plugin, boîte commune avec le ventre (`EveningStore`), tests
+    XCTest ; sur les deux iPhone simulés, les 6 notes s'affichent dans la notification dépliée et « 4 » est rangé
+    sans ouvrir l'app.
+  - [x] `PortionReminder` en Swift (PR #24, mergée) : rappels restants programmés d'avance ; bannière touchée app
+    en arrière-plan → la réintroduction s'ouvre (le natif signale le toucher, transmis par iOS après le retour au
+    premier plan : correctif 18) ; vérifié sur les deux iPhone simulés.
+  - [ ] Import des réponses à l'ouverture suivante vérifié en capture (boîte vidée dans l'historique) ; gestes sur
+    l'iPhone 12 après A1.
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
   transactions signées par Apple, notifications serveur V2, App Attest, mêmes crédits IA, même période de lancement.
