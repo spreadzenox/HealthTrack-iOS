@@ -62,18 +62,18 @@ index 7b6adec..b2f05aa 100644
  
  /** Choix de la personne (allumé / éteint), indépendant de l'objectif. */
 diff --git a/app/src/services/restoreGuard.js b/app/src/services/restoreGuard.js
-index 9b13300..7dc36d7 100644
+index 1d8d50a..351fb52 100644
 --- a/app/src/services/restoreGuard.js
 +++ b/app/src/services/restoreGuard.js
-@@ -10,6 +10,7 @@
-  */
+@@ -11,6 +11,7 @@
  import { registerPlugin } from '@capacitor/core'
  import { withTimeout } from '../utils/withTimeout'
+ import { markWatchRestored } from './watchAutoSync'
 +import { missingOnIos } from '../ios/nativePlugins.js' // Version iOS (HealthTrack-iOS)
  
  const NativeMarker = registerPlugin('BackupMarker')
  
-@@ -28,7 +29,7 @@ const isNative = () => typeof window !== 'undefined' && window?.Capacitor?.isNat
+@@ -29,7 +30,7 @@ const isNative = () => typeof window !== 'undefined' && window?.Capacitor?.isNat
  
  export function markerPlugin() {
    if (typeof window !== 'undefined' && window.__healthtrackFakeBackupMarker) return window.__healthtrackFakeBackupMarker
