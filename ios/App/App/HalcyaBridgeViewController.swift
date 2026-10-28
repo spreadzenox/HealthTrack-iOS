@@ -7,6 +7,9 @@ class HalcyaBridgeViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(GutEveningPlugin())
         bridge?.registerPluginInstance(EveningNotePlugin())
         bridge?.registerPluginInstance(PortionReminderPlugin())
+        #if DEBUG
+        bridge?.registerPluginInstance(CaptureProbePlugin()) // build de captures seulement
+        #endif
         // Capacitor devient le délégué des notifications : il relaie les gestes à ce gestionnaire
         bridge?.notificationRouter.localNotificationHandler = HalcyaNotificationHandler.shared
     }

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, waitForAck } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -440,5 +440,28 @@ describe('sonde des données : export, fichier, réimport (I3)', () => {
     const logs = []
     await probeDataRoundtrip({ log: (m) => logs.push(m), storage, files: fakeFiles() })
     expect(logs.join('\n')).toContain('[données] échec base fermée')
+  })
+})
+
+describe('sonde de la sauvegarde du téléphone (I3)', () => {
+  it('relève ce que la sauvegarde iCloud emporterait : dossiers, base, copie de secours', async () => {
+    const plugin = {
+      backupStatus: vi.fn(async () => ({
+        items: [
+          { path: 'Documents', excluded: false, bytes: 790000, files: 1 },
+          { path: 'Library/WebKit/WebsiteData/Default/x/IndexedDB', excluded: false, bytes: 1200000, files: 4 },
+        ],
+      })),
+    }
+    const logs = []
+    await probeBackup({ log: (m) => logs.push(m), plugin })
+    expect(logs.join('\n')).toContain('[sauvegarde] Documents {"excluded":false,"bytes":790000,"files":1}')
+    expect(logs.join('\n')).toContain('[sauvegarde] Library/WebKit/WebsiteData/Default/x/IndexedDB {"excluded":false,"bytes":1200000,"files":4}')
+  })
+
+  it('un échec est dit, sans lever', async () => {
+    const logs = []
+    await probeBackup({ log: (m) => logs.push(m), plugin: { backupStatus: async () => { throw new Error('absent') } } })
+    expect(logs.join('\n')).toContain('[sauvegarde] échec absent')
   })
 })

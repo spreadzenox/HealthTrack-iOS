@@ -135,6 +135,7 @@ export async function installCaptureMode() {
         await probeEveningNote(d)
         await probePortionReminder({ ...d, location: window.location })
         await probeDataRoundtrip(d)
+        await probeBackup(d)
       },
       waitAck: (name, tries) =>
         waitForAck({ readAck: async () => (await Filesystem.readFile({ ...file, path: ACK })).data, sleep }, name, tries),
@@ -345,6 +346,23 @@ export async function probeDataRoundtrip({ log, storage, files }) {
     const after = await db.countAllEntries()
     await disk.remove(name)
     say('aller-retour', { count, exported, reread, imported, skipped, after, bytes: json.length })
+  } catch (e) {
+    say('échec', e?.message || String(e))
+  }
+}
+
+/**
+ * Essai de la sauvegarde du téléphone (étape I3) : la sauvegarde iCloud emporte Documents et Library, sauf ce qui est
+ * marqué « exclu de la sauvegarde » (et Library/Caches). La sonde relève, pour la copie de secours (Documents) et la
+ * base de WKWebView (dossiers IndexedDB sous Library/WebKit), cette marque et la taille (plugin `CaptureProbe`, build
+ * de captures seulement). Résultats dans la console (`[sauvegarde] …`).
+ */
+export async function probeBackup({ log, plugin }) {
+  const say = (what, value) => log(`[sauvegarde] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  try {
+    const probe = plugin ?? (await import('@capacitor/core')).registerPlugin('CaptureProbe')
+    const { items = [] } = (await probe.backupStatus()) || {}
+    for (const { path, ...rest } of items) say(path, rest)
   } catch (e) {
     say('échec', e?.message || String(e))
   }
