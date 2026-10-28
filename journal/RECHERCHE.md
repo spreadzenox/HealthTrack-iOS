@@ -199,3 +199,55 @@ formuler prudemment (« une partie de vos mesures ») et à confirmer sur l'iPho
   - <https://developer.apple.com/forums/thread/809823> ;
   - <https://developer.apple.com/forums/thread/736351> (App Group depuis le rapport).
 
+
+## Lecture du visage sur iPhone (I7) : étude du code d'Android (28/10/2026, v567)
+
+Lu sans y toucher (`git show origin/main:…` de HealthTrack, code visage identique à v567). Spécification d'Android :
+`journal/protocoles/visage.md`. Rien de GPL ou d'AGPL dans la chaîne : du Java maison et des bibliothèques Apache / MIT.
+
+**Contrat du plugin** à reproduire sous le même nom, `FaceSense`. Aucun événement Capacitor.
+- Méthodes : `status`, `start`, `stop`, `stopUnlock`, `test`, `readNow`, `prepareAffect`, `list`, `remove`. `requestBatteryExemption` et `openNeverSleep` répondent par un refus, comme dans la variante play.
+- Mode `app_open` seulement (pas de service au déverrouillage, ⛔ sur iOS).
+- Une rafale est rendue en JSON `FaceRecord` v1 : `v, at, trigger, frames, valid, values{…}, rejected, ms`. Le JS en fait l'entrée `face_burst` (`faceBursts.js`) et calcule l'estimation (`mood/faceMood.js`).
+- `status` ne rend jamais un score, seulement des compteurs, des temps et des raisons.
+
+**Chaîne, toute en natif jusqu'au JSON.**
+1. Caméra frontale, YUV ≥ 320 × 240 (≈ 240 × 320 en portrait). 450 ms d'exposition, puis 3 images espacées d'au moins 350 ms, en 4 s au plus.
+2. BlazeFace (`face_detector.tflite`, 128², valeurs dans [−1, 1]).
+3. Zone du visage : côté × 1,5, tournée selon l'axe des yeux.
+4. Maillage de 478 points (`face_landmarks_detector.tflite`, 256², valeurs dans [0, 1]).
+5. Qualité : présence ≥ 0,9, visage ≥ 80 px, lacet ≤ 30°, luminance dans [0,15 ; 0,9], bouche ouverte ≤ 0,5.
+6. Blendshapes (`face_blendshapes.tflite`) : 146 points en entrée, 52 coefficients en sortie, d'où 9 indices et leurs médianes sur la rafale.
+7. Valence et éveil, en option (HSEmotion B0 224² et MobileFaceNet 112², ONNX Runtime 1.22.0).
+
+Moteurs d'Android : LiteRT 1.4.2 et ONNX Runtime 1.22.0, ORT ≥ 1.27 étant écarté pour sa télémétrie. MediaPipe Tasks et ML Kit sont écartés aussi pour leur télémétrie.
+
+**Modèles et licences.**
+- Les 3 `.tflite` sortent de `face_landmarker.task` de MediaPipe, sous Apache-2.0. Android le télécharge au build et vérifie les SHA-256.
+- Les 2 ONNX HSEmotion (16 Mo et 8 Mo) sont téléchargés par le téléphone, avec vérification du SHA-256.
+- ⚠️ **Les poids HSEmotion n'ont pas de licence propre et ont été appris sur AffectNet**, dont l'accord réserve les images à la recherche non commerciale.
+  - Android le sait : son idée **I73** est un « visage sans poids AffectNet », pas encore tranchée.
+  - Son argument « gratuit et personnel » ne vaut pas pour une app vendue sur l'App Store, et Halcya a un Premium payant.
+  - **Décision sur iOS** : la valence et l'éveil restent **éteints** tant que le propriétaire n'a pas tranché (`DEMANDES.md`).
+  - Sans eux, `faceMood.js` retombe déjà sur l'a priori tiré des blendshapes de MediaPipe (Apache-2.0) : c'est la première version iOS visée.
+
+**Ce qu'iOS ne peut pas remplacer sans changer les scores.**
+- Vision (`VNDetectFaceLandmarksRequest`) donne 65 ou 76 points en 2D, sans profondeur ni iris : il ne fournit pas les 146 points des blendshapes.
+- ARKit (`ARFaceAnchor`) donne 52 blendshapes aux mêmes noms, mais calculés autrement (caméra TrueDepth) : ils ne sont pas comparables aux données d'Android.
+- → Garder **les mêmes modèles**. Deux moteurs possibles :
+  - (a) TensorFlow Lite C, emballé comme `binaryTarget` SPM ;
+  - (b) les 3 `.tflite` convertis en ONNX en CI (`tf2onnx`), avec ONNX Runtime pour iOS par SPM (`microsoft/onnxruntime-swift-package-manager`, MIT), figé à 1.22.0, sur CPU, sans l'EP Core ML.
+  - Licence et télémétrie de la version retenue sont à vérifier avant de choisir.
+
+**Parité vérifiable sans caméra.**
+- Ressources de test d'Android (`app/android/app/src/test/resources/face/`, lues dans `upstream/` sans copie) : deux portraits PNG du domaine public, et les vecteurs `face-*.json` et `affect-vectors*.json` attendus à chaque étape.
+- Tolérances d'Android : entrées ±1e-5, zone ±1e-3 px, points ±2e-3 ; avec les vrais modèles, points < 0,05 px en médiane et blendshapes ±2e-3.
+- Pièges notés :
+  - le seuil de 80 px est absolu, donc dépend de la résolution de capture ;
+  - la matrice BT.601 plein écart, le miroir et la rotation doivent être fixés explicitement ;
+  - `Math.round` de Java n'est pas `rounded()` de Swift ;
+  - le tri Java est stable, il faut départager par index ;
+  - `%.4f` de Java peut différer de Swift ;
+  - les PNG doivent être lus en octets bruts, sans correction colorimétrique.
+
+**Confidentialité (comme Android).** Les images restent en mémoire et sont vidées après l'inférence. Ne sont gardés ni image ni points, seulement le JSON des scores, retiré après l'import.

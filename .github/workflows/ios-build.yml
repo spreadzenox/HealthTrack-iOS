@@ -63,6 +63,9 @@ jobs:
       # Règles des rappels du soir (I5) : paquet Swift du dépôt, testé seul (XCTest), avant toute build de l'app
       - name: Tests Swift des rappels du soir (XCTest)
         run: swift test --package-path ios/HalcyaRules
+      # Lecture du visage (I7) : calculs comparés aux vecteurs de référence d'Android, lus dans upstream/
+      - name: Tests Swift de la lecture du visage (XCTest, vecteurs d'Android)
+        run: swift test --package-path ios/HalcyaFace
       - name: Numéros de version
         run: |
           ANDROID="$(node -p "require('./upstream.json').versionCode")"
