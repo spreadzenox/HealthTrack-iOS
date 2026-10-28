@@ -155,14 +155,14 @@ final class DonneesUITests: XCTestCase {
             element(menu).tap()
             break
         }
-        let cible = lieu(fichier)
+        let cible = dossier(fichier)
         if !cible.waitForExistence(timeout: 8) {
             // Pas dans « Récents » : onglet « Explorer » (iOS 26 ; « Parcourir » avant), puis Sur mon iPhone › Halcya
             // (essai du 28/10 : sélecteur ouvert sur « Récents », onglets Récents / Partagé / Explorer)
             let onglet = ["Explorer", "Parcourir"].map(element).first { $0.waitForExistence(timeout: 3) }
             onglet?.tap()
             for etape in ["Sur mon iPhone", "Halcya"] where !cible.exists {
-                let suivant = lieu(etape)
+                let suivant = dossier(etape)
                 if suivant.waitForExistence(timeout: 8) {
                     suivant.tap()
                 } else {
@@ -215,7 +215,7 @@ final class DonneesUITests: XCTestCase {
         }
         // Le dernier dossier utilisé peut déjà être ouvert : on repasse par Sur mon iPhone › Halcya
         for etape in ["Sur mon iPhone", "Halcya"] {
-            let suivant = lieu(etape)
+            let suivant = dossier(etape)
             if suivant.waitForExistence(timeout: 3) { suivant.tap() } else { print("étape « \(etape) » absente") }
         }
         print(halcya.debugDescription)
@@ -234,8 +234,17 @@ final class DonneesUITests: XCTestCase {
         halcya.descendants(matching: .any).matching(NSPredicate(format: "label == %@", label)).firstMatch
     }
 
-    /// Lieu, dossier ou fichier du sélecteur (cellule ou bouton) dont le libellé contient `label`
-    /// (« halcya-essai-import, json, … ») ; les textes de la page de l'app derrière le sélecteur ne comptent pas.
+    /// Lieu, dossier ou fichier du sélecteur : une cellule dont le libellé ou l'identifiant contient `label`
+    /// (identifiant « halcya-essai-import.json, json » dans un dossier, essai du 28/10 sur l'iPhone 16e). Pas de
+    /// bouton : « Halcya, Menu d'actions », le titre du dossier ouvert, ouvrirait un menu.
+    private func dossier(_ label: String) -> XCUIElement {
+        halcya.descendants(matching: .cell)
+            .matching(NSPredicate(format: "label CONTAINS %@ OR identifier CONTAINS %@", label, label))
+            .firstMatch
+    }
+
+    /// Action d'une feuille (cellule ou bouton) dont le libellé contient `label` (« Enregistrer dans Fichiers ») ; les
+    /// textes de la page de l'app derrière la feuille ne comptent pas.
     private func lieu(_ label: String) -> XCUIElement {
         let types = [XCUIElement.ElementType.cell, .button].map { NSNumber(value: $0.rawValue) }
         return halcya.descendants(matching: .any)
