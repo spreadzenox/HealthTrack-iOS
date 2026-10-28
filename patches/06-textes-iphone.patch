@@ -1,5 +1,5 @@
 diff --git a/app/src/components/MyDevices.jsx b/app/src/components/MyDevices.jsx
-index 2576449..a02fe38 100644
+index 2576449..8a86949 100644
 --- a/app/src/components/MyDevices.jsx
 +++ b/app/src/components/MyDevices.jsx
 @@ -11,6 +11,7 @@ import { detectPhoneApps, openPhoneApp } from '../devices/phoneApps'
@@ -16,7 +16,7 @@ index 2576449..a02fe38 100644
          <p className="my-devices-intro">
 -          {`Dans l’app Android, ${APP_NAME} repère tout seul vos apps de montre et de santé (Huawei Health, Samsung Health, Garmin…) et vous dit comment les brancher.`}
 +          {FEATURES.iosStore
-+            ? `Sur iPhone, ${APP_NAME} lira bientôt vos mesures dans l’app Santé d’Apple (montre, sommeil, pas…).`
++            ? `Sur iPhone, ${APP_NAME} lit vos mesures dans l’app Santé d’Apple (montre, sommeil, pas…) : rien reçu ces 30 derniers jours. Voir la carte « App Santé » plus bas.`
 +            : `Dans l’app Android, ${APP_NAME} repère tout seul vos apps de montre et de santé (Huawei Health, Samsung Health, Garmin…) et vous dit comment les brancher.`}
          </p>
        ) : (

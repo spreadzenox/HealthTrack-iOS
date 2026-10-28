@@ -10,14 +10,14 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v565 (28/10) | v563 sur iPhone simulé (28/10, PR #37) ; v565 en vérification (PR #40) |
+| Dernière version | v567 (28/10) | v565 sur iPhone simulé (28/10, PR #40) ; v567 en vérification (PR #41) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 32 % (15 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **A1** — quand il le décide : adhérer à l'Apple Developer Program (payant, à l'année ; marche à suivre en 5 étapes
-  au §8, « A1 pas à pas »). C'est ce qui
-  débloque l'installation sur un vrai iPhone, TestFlight et l'App Store.
+- **A1 — en cours (28/10 vers 18:50 UTC)** : inscription faite sur le web, cotisation de 99 € en paiement. Il reste à
+  attendre l'e-mail de confirmation d'Apple (jusqu'à 48 h), puis me dire « A1 fait ». La suite, A3 puis A2, est
+  préparée pas à pas au §8, avec une décision à prendre sur la signature (A2, point 2).
 - ✅ Fait le 28/10 : vous avez transmis à la routine Android les 4 demandes de `DEMANDES.md` (iPhone au contrôle
   d'intégrité, abonnement App Store sur le serveur, Nouveautés propres à Android, textes de sauvegarde neutres) ;
   elle les a reprises le jour même (v553) : trois faites, l'abonnement App Store noté pour plus tard.
@@ -34,6 +34,9 @@
   d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
 
 **Ce qui a changé cette semaine**
+- **28/10 19:00 — abonnement d'essai et captures de la fiche App Store** (PR #40, mergée ; PR #41) : sur iPhone
+  simulé, un abonnement d'essai s'achète et reste actif, sans compte Apple ; les captures en taille 6,9" pour la fiche
+  sont prêtes et ne montrent que ce que l'iPhone fait vraiment (montre Apple Watch, pas d'app Android).
 - **28/10 08:55 — les rappels du soir et de portion sont prêts sur iPhone** (PR #23 à #26) : sur les deux iPhone
   simulés, répondre d'un geste au bilan du ventre ou à la note du soir range la réponse sans ouvrir l'app, et elle
   apparaît dans l'historique à l'ouverture suivante ; le rappel de portion rouvre la réintroduction. Votre norme
@@ -127,6 +130,7 @@ via TestFlight.
 | 28/10 16:00 | I9, I3, I6 | iPhone au niveau d'Android v559 (boutons arrondis vérifiés) ; fiche App Store en français prête en brouillon ; réponses du questionnaire « Confidentialité de l'app » préparées pour vous (les mêmes que pour Google Play) ; export par la feuille de partage : réussi sur un iPhone, l'autre relancé ; achat d'abonnement d'essai : 2e essai en cours | #35 (mergée), #36, #37, #38, #39 |
 | 28/10 17:00 | suivi d'Android v563, I3, I9, I6 | réponses « Confidentialité de l'app » en place (PR #39 mergée) ; vos données s'exportent, s'importent et reviennent après une restauration sur iPhone, réglages compris (vérifié) : la fonction « Données » est au niveau d'Android (parité 32 %) ; Android v563 : textes plus justes sur où vont vos données (aussi sur iPhone, deux adaptations refaites) ; achat d'abonnement d'essai : bloqué par un bogue d'Apple sur iOS 26.5, 3e essai sur un iPhone simulé plus ancien | #39 (mergée), #36, #37 |
 | 28/10 18:00 | suivi d'Android v565, I3, I6, I8 | vos données : export, import et restauration avec vos réglages, vérifiés et en place (PR #37 mergée) ; premier achat d'abonnement d'essai réussi sur iPhone simulé, sans compte Apple ; l'iPhone sait dire s'il reconnaît le français sur le téléphone (préalable de la dictée du soir) ; Android v565 : carte de Sources au titre court (aussi sur iPhone, « App Santé ») | #37 (mergée), #36, #40 |
+| 28/10 19:00 | A1, I8, I6, I9, suivi d'Android v567 | votre inscription chez Apple est en cours (A1), la suite (A3 puis A2) est prête pas à pas ; achat d'abonnement d'essai et préalable de la dictée du soir en place sur iPhone (PR #40 mergée) ; captures en taille 6,9" pour la fiche App Store, fidèles à l'iPhone (plus de « Gadgetbridge » ni de montre Huawei, qui n'existent que sur Android) ; Android v567 : carte « Votre ventre » plus compacte (aussi sur iPhone) | #40 (mergée), #41 |
 
 ---
 
@@ -273,19 +277,21 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 | | Action | Débloque | État |
 |---|---|---|---|
 | A0 | Téléphone de test | tests sur un vrai téléphone | ✅ 26/10 : iPhone 12 de sa compagne (version d'iOS à préciser) |
-| A1 | Adhérer à l'Apple Developer Program (individuel, payant à l'année ; pas à pas ci-dessous) | signature, TestFlight, App Store | à décider |
-| A2 | Créer une clé API App Store Connect (rôle exact précisé par la routine) et l'enregistrer en secrets GitHub Actions de ce dépôt, dans un environnement `appstore` réservé à `main` | builds signées et envoi TestFlight automatiques | après A1 |
+| A1 | Adhérer à l'Apple Developer Program (individuel, payant à l'année ; pas à pas ci-dessous) | signature, TestFlight, App Store | en cours : inscription sur le web et paiement le 28/10 vers 18:50 UTC, confirmation d'Apple attendue |
+| A2 | Créer une clé API App Store Connect (rôle Admin ; pas à pas « A2 et A3 » ci-dessous) et l'enregistrer en secrets GitHub Actions de ce dépôt, dans un environnement `appstore` réservé à `main` | builds signées et envoi TestFlight automatiques | après A1 |
 | A3 | Créer la fiche de l'app dans App Store Connect (nom, langue principale français, bundle id, SKU) | envoi TestFlight, fiche | après A1 |
 | A4 | Contrat « Paid Applications », coordonnées bancaires et fiscales | abonnement App Store | après A1 |
-| A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/` | examen Apple | avant la 1re soumission |
+| A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/app-store/confidentialite.md` | examen Apple | avant la 1re soumission |
 | A6 | Inviter les testeurs (d'abord sa compagne : interne via « Utilisateurs et accès » ou externe avec l'examen bêta, la routine dira), soumettre à l'examen, publier | testeurs, production | lui seul |
+| A7 | (facultatif, quand la routine le proposera) Demander à Apple le droit « Family Controls (Distribution) » pour Halcya : formulaire d'Apple, motif « temps d'écran approché pour les analyses de bien-être, données gardées sur le téléphone » | tuile « Écran » sur iPhone (temps d'écran approché, `RECHERCHE.md`) | après A1 |
 
 #### A1 pas à pas (préparé le 27/10/2026)
 
 1. **Compte Apple** : celui du propriétaire, avec l'identification à deux facteurs activée (obligatoire), au nom
    légal exact (il apparaîtra comme « vendeur » sur l'App Store).
 2. **S'inscrire** : sur https://developer.apple.com/programs/enroll/ (ou depuis l'app « Apple Developer » sur
-   iPhone, qui propose aussi l'inscription). Choisir **« Individu / entreprise individuelle »** : l'app paraîtra
+   iPhone, qui propose aussi l'inscription). Sans Mac ni iPhone : lien « Continue enrollment on the web » en bas de
+   la page (fait ainsi le 28/10). Choisir **« Individu / entreprise individuelle »** : l'app paraîtra
    sous le nom du propriétaire. Le type « organisation » demande une société avec un numéro D-U-N-S, plus long.
 3. **Payer la cotisation annuelle** : 99 USD par an, montant en euros (TVA comprise) affiché par Apple à ce moment-là
    — c'est la seule dépense, et elle revient chaque année (sans renouvellement, l'app quitte l'App Store).
@@ -297,6 +303,44 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
    téléphone et un e-mail seront affichés sur la page de l'app dans l'UE. Rien à faire avant A3 ; mieux vaut
    choisir ces coordonnées à l'avance. Source : aide d'App Store Connect, « Manage EU Digital Services Act compliance
    information » (lue le 27/10/2026).
+
+#### A2 et A3 pas à pas (préparés le 28/10/2026, à faire après l'e-mail de confirmation d'A1)
+
+**A3 d'abord : l'identifiant et la fiche de l'app** (sur un ordinateur, navigateur suffisant)
+1. https://developer.apple.com/account → **Certificates, Identifiers & Profiles** → **Identifiers** → « + ».
+   Choisir **App IDs** puis **App**.
+   - Description : `Halcya`.
+   - Bundle ID : **Explicit**, `fr.jpesquet.sante` (celui du projet iOS).
+   - Capabilities : cocher **HealthKit**. « In-App Purchase » est déjà inclus. Rien d'autre pour l'instant : pas de
+     Push Notifications, car les rappels sont des notifications locales.
+   - Continue → Register.
+2. https://appstoreconnect.apple.com → **Apps** → « + » → **Nouvelle app** :
+   - Plateforme : iOS ;
+   - Nom : `Halcya — ventre et bien-être` (30 caractères au plus ; s'il est déjà pris, `Halcya : ventre et bien-être`) ;
+   - Langue principale : Français (France) ;
+   - Identifiant de lot : `fr.jpesquet.sante` ;
+   - SKU : `halcya-ios` ;
+   - Accès utilisateur : Accès complet.
+
+**A2 ensuite : la clé API pour que la CI envoie l'app sur TestFlight**
+1. App Store Connect → **Utilisateurs et accès** → **Intégrations** → **API App Store Connect**. La première fois,
+   cliquer « Demander l'accès » et accepter.
+2. **Clés d'équipe** → « + ».
+   - Nom : `Halcya CI`.
+   - Accès : **Admin**. D'après les forums développeurs, c'est le seul rôle qui laisse la CI signer sans Mac, avec un
+     certificat de distribution géré par Apple : la clé privée du certificat reste chez Apple, aucun fichier à garder.
+     Avec ce rôle, **la CI créera ce certificat dans votre compte** : c'est votre accord, à me confirmer en une ligne
+     (« A2 : signature par Apple d'accord »). Sinon, autre voie possible mais plus longue sans Mac : vous créez vous-même
+     le certificat avec OpenSSL et le déposez en secret GitHub ; je vous la détaillerai.
+3. **Télécharger la clé** : un fichier `AuthKey_XXXXXXXXXX.p8`, téléchargeable **une seule fois**. Noter le **Key ID**
+   et l'**Issuer ID** affichés au-dessus du tableau.
+4. Sur GitHub, dépôt `spreadzenox/HealthTrack-iOS` → Settings → **Environments** → New environment → nom `appstore`.
+   - **Deployment branches** : Selected branches → `main` seulement.
+   - **Environment secrets** :
+     - `ASC_KEY_ID` = le Key ID ;
+     - `ASC_ISSUER_ID` = l'Issuer ID ;
+     - `ASC_KEY_P8` = tout le contenu du fichier `.p8`, ouvert avec le Bloc-notes, lignes BEGIN / END comprises.
+5. Me dire « A2 fait ». Je n'ai jamais besoin de voir la clé : ne la collez pas dans la conversation.
 
 ### 9. Outillage
 

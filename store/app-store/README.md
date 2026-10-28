@@ -20,7 +20,7 @@ Reste à préparer, au moment des actions A3 et A5 du propriétaire :
 - **Catégorie** : Santé et forme (principale) ; pas « Médecine » : Halcya n'est pas un dispositif médical.
 - **Âge** : 18 ans et plus, comme sur Google Play. Questionnaire d'App Store Connect à remplir ; prendre un âge plus élevé que celui qu'il calcule s'il le permet.
 - **URL** : assistance et politique de confidentialité. Celles publiées pour Android parlent d'Android et de Google (#468), il en faudra une version iPhone.
-- **Captures** : iPhone 6,9 pouces (1320 × 2868) exigées par App Store Connect, à produire par la CI sur un iPhone 17 Pro Max simulé, avec les données de démo.
+- **Captures** : iPhone 6,9 pouces (1320 × 2868), exigées par App Store Connect. Le workflow « iOS — build simulateur » les produit à la demande : lancement manuel (`workflow_dispatch`) avec `devices` = « iPhone 17 Pro Max ». Toutes les pages du parcours sont prises avec les données de démo et publiées sur la branche `captures/store`, sans toucher aux captures des PR. Reste à choisir les 3 à 10 captures de la fiche.
 - **Notes pour l'examen** :
   - pas de compte à créer ;
   - l'analyse IA d'un repas passe par le relais Halcya, sans clé dans l'app ;

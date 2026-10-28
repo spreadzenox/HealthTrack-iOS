@@ -12,7 +12,7 @@ import MyDevices from './MyDevices'
 describe('Mes appareils sur iPhone (variante appstore)', () => {
   it('annonce la lecture de l’app Santé à venir, sans parler de l’app Android', async () => {
     render(<MyDevices detect={async () => null} loadEntries={async () => []} />)
-    expect(await screen.findByText(/Sur iPhone, Halcya lira bientôt vos mesures dans l’app Santé d’Apple/)).toBeInTheDocument()
+    expect(await screen.findByText(/Sur iPhone, Halcya lit vos mesures dans l’app Santé d’Apple .* rien reçu ces 30 derniers jours\. Voir la carte « App Santé » plus bas\./)).toBeInTheDocument()
     expect(screen.queryByText(/app Android/)).not.toBeInTheDocument()
   })
 

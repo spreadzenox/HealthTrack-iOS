@@ -23,6 +23,12 @@ pick() {
 
 SMALL="$(pick "iPhone 16e" "iPhone 14" "iPhone 13" "iPhone 12" || true)"
 LARGE="$(pick "iPhone 17 Pro" "iPhone 17" "iPhone 16 Pro" "iPhone 16" "iPhone 15 Pro" || true)"
+# Fiche App Store (I9) : CAPTURE_DEVICES (« iPhone 17 Pro Max », ou plusieurs noms séparés par des virgules, par
+# ordre de préférence) remplace les deux simulateurs habituels par le premier trouvé, pour les captures 6,9 pouces
+if [ -n "${CAPTURE_DEVICES:-}" ]; then
+  IFS=',' read -ra WANTED <<< "$CAPTURE_DEVICES"
+  SMALL="$(pick "${WANTED[@]}" || true)"; LARGE=""
+fi
 [ -n "$SMALL$LARGE" ] || { echo "::error::Aucun simulateur iPhone disponible"; xcrun simctl list devices available; exit 1; }
 
 # Tests d'interface du dépôt (uitests/, fichier .xctestrun) lancés sur certaines pages, avant l'accusé : chacun suivi
@@ -75,6 +81,11 @@ run_device() { # <udid> <nom>
   xcrun simctl boot "$udid"
   xcrun simctl bootstatus "$udid" -b >/dev/null
   xcrun simctl ui "$udid" appearance light
+  # Fiche App Store : barre d'état propre, comme sur les captures d'Apple (9:41, batterie pleine, réseau plein)
+  if [ -n "${CAPTURE_DEVICES:-}" ]; then
+    xcrun simctl status_bar "$udid" override --time "9:41" --batteryState charged --batteryLevel 100 \
+      --wifiMode active --wifiBars 3 --cellularMode active --cellularBars 4 || true
+  fi
   xcrun simctl install "$udid" "$APP"
   # Accusé vide créé d'avance : sans lui, chaque lecture de l'app en attente remplit la console d'erreurs « fichier absent »
   data="$(xcrun simctl get_app_container "$udid" "$BUNDLE" data)"
