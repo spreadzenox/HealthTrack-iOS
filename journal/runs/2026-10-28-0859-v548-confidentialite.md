@@ -18,8 +18,17 @@
 ## Ce qui a été fait
 - PR #28 : suivi de v548 ajouté (un cycle de CI au lieu de deux).
 
+- Audit écran par écran d'Android (POL-PLAY-21 à 28) relu : **POL-PLAY-25** (textes « tout reste sur cet appareil »
+  à rendre honnêtes, sauvegarde Google) vaut aussi pour l'iPhone (sauvegarde iCloud du téléphone) : quand Android
+  réécrira ces textes, vérifier qu'ils restent justes sur iPhone (formule neutre ou variante) ; POL-PLAY-28 (titre
+  « Health Connect ») déjà remplacé par « App Santé » sur iPhone ; les autres points sont du code partagé.
+- Préparé pendant la CI (branche `claude/ios-i3-donnees`, empilée sur #28, poussée sans PR) : **sonde des données**
+  (`probeDataRoundtrip`) : toute la base exportée comme par « Exporter », écrite dans Documents comme le fait l'app,
+  relue, réimportée en fusion (rien ne doit s'ajouter), fichier d'essai retiré ; 2 tests écrits d'abord ; suite :
+  2692 ✅.
+
 ## Suite
-- CI de #28 : merger.
+- CI de #28 : merger ; puis ouvrir la PR de `claude/ios-i3-donnees`.
 - Relire l'audit écran par écran d'Android (POL-PLAY-21 à 28) pour la parité des écrans (§2 de `PARITE.md`).
 - I3 : import d'un export Android sur iPhone par le sélecteur de fichiers (test d'interface) ; I6 : essai de
   StoreKit 2 sur simulateur avec un fichier de configuration StoreKit.
