@@ -1,6 +1,6 @@
-# 2026-10-28 05:59 UTC — Rappels de la note du soir et de la portion sur simulateur (PR #24)
+# 2026-10-28 05:59 UTC — Note du soir et rappel de portion vérifiés sur simulateur (PR #24 mergée), VFC SDNN dans « Mes appareils » (PR #25)
 
-**Étape** : I5  ·  **PR** : #24  ·  **Android suivi** : v542 (inchangé)  ·  **iOS** : 542 (simulateur)  ·  **Parité** : 23 % (11/47)
+**Étape** : I5, I4  ·  **PR** : #24, #25  ·  **Android suivi** : v542 (inchangé)  ·  **iOS** : 542 (simulateur)  ·  **Parité** : 23 % (11/47)
 
 ## Déclenchement
 - Tâche planifiée de 05:59 UTC, à l'heure. `main` vert (753d77e, #23 ; run 83). PR #24 : CI verte (run 86),
@@ -25,11 +25,31 @@
   notification, et laissait le centre ouvert pour l'étape suivante).
 - Suite d'Android avec les 18 correctifs : 2678 ✅ (code de sortie 0) ; build web `appstore` ✅.
 
+## Résultats (CI de la PR #24, run 87, deux iPhone ; 68 captures, 0 erreur JavaScript)
+- **Note du soir : les 6 notes s'affichent** dans la notification dépliée (`actions visibles : 0 1 2 3 4 5 (6 sur 6)`,
+  boutons en liste verticale) ; « 4 » touché, rangé sans ouvrir l'app (`[note] boîte {"count":1,"scores":[4]}`).
+  Les sources non officielles (« 4 actions au plus ») ne valent plus : rien à changer côté présentation.
+- **Rappel de portion : la réintroduction s'ouvre** au toucher, app en arrière-plan (`{"page":"/reintroduction",
+  "open":false}`, capture regardée).
+- Bilan du ventre : toujours rangé (`count 1`).
+- **PR #24 mergée** (5337325).
+- PR #25 : VFC SDNN comptée dans « qui envoie quoi » (« Mes appareils ») sous « VFC (SDNN) », **correctif 19**
+  (`healthApps.js`, 1 ligne), sans drapeau « montre » (sinon une montre Android la réclamerait : deux tests
+  d'Android l'ont signalé) ; test `overlay` écrit d'abord. Suite : 2680 ✅ (code de sortie 0) ; build `appstore` ✅.
+- PR #25, suite (I5) : les sondes du ventre et de la note du soir lancent ensuite l'import de l'app
+  (`importPendingGutEvenings`, `importPendingEveningNotes`, comme à l'ouverture suivante) et relèvent
+  `[… ] import {imported, inserted, …, left}` : la réponse doit entrer dans l'historique et la boîte se vider. Tests
+  des sondes mis à jour d'abord.
+- Leçon : un correctif se régénère par `git diff HEAD` (depuis le code d'Android) quand aucun autre ne touche le
+  fichier, jamais par rapport à sa propre version appliquée.
+
 ## À savoir
 - Le réglage de la note du soir est dans la carte bien-être de l'Accueil (`WellbeingPrompt`), celui du rappel de
   portion dans la page Réintroduction : rien de neuf dans Paramètres (captures regardées).
 
 ## Suite
-- CI de #24 : « actions visibles » de la note du soir (bannière cette fois), `[portion] après le toucher`
-  attendu `{"page":"/reintroduction","open":false}` ; merger #24 si c'est le cas.
-- Si iOS coupe les actions de la note : extension de contenu de notification ou autre présentation (à décider).
+- Merger #25 après sa CI. Puis I4 : norme personnelle SDNN (`baselines.js` : l'ajouter à `BASELINE_METRICS`
+  casserait un test d'Android qui attend deux mesures → passer par une liste propre à iOS), radar.
+- I5 : lire `[notification] import` et `[note] import` dans les captures de #25 (attendu `inserted 1`, `left 0`) ;
+  si c'est le cas, bilan du ventre, note du soir et rappel de portion passent ✅ dans `PARITE.md` (vérifiés sur
+  iPhone simulé, gestes à refaire sur l'iPhone 12). Rappel de fin d'essai avec I6 (il dépend de la facturation).
