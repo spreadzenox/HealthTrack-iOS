@@ -583,6 +583,9 @@ describe('sonde vocale (I8)', () => {
     const logs = []
     await probeVoice({ log: (m) => logs.push(m), plugin: { probe: async () => { throw new Error('absent') } } })
     expect(logs).toEqual(['[voix] sonde {"verdict":null}'])
+  })
+})
+
 describe('sonde de l’export par la feuille de partage (I3)', () => {
   it('ouvre Vos données ; le test d’interface touche « Télécharger la sauvegarde » puis l’enregistre dans Fichiers', async () => {
     let names = ['Halcya-copie-de-secours.json', 'healthtrack-export-2026-10-27.json']

@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v563 (28/10) | v559 sur iPhone simulé (28/10, PR #35) ; v563 en vérification (PR #37) |
+| Dernière version | v565 (28/10) | v563 sur iPhone simulé (28/10, PR #37) ; v565 en vérification (PR #40) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 32 % (15 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -126,6 +126,7 @@ via TestFlight.
 | 28/10 15:00 | suivi d'Android v559, I3, I6, I9 | vérifié : choisir un fichier de sauvegarde dans l'app Fichiers puis l'ajouter à vos données marche sur iPhone (un ancien fichier compris) ; Android v559 : boutons arrondis partout (aussi sur iPhone) ; achat d'abonnement d'essai sur simulateur : premier essai à corriger (erreur de compilation), relancé | #34 (mergée), #35, #36 |
 | 28/10 16:00 | I9, I3, I6 | iPhone au niveau d'Android v559 (boutons arrondis vérifiés) ; fiche App Store en français prête en brouillon ; réponses du questionnaire « Confidentialité de l'app » préparées pour vous (les mêmes que pour Google Play) ; export par la feuille de partage : réussi sur un iPhone, l'autre relancé ; achat d'abonnement d'essai : 2e essai en cours | #35 (mergée), #36, #37, #38, #39 |
 | 28/10 17:00 | suivi d'Android v563, I3, I9, I6 | réponses « Confidentialité de l'app » en place (PR #39 mergée) ; vos données s'exportent, s'importent et reviennent après une restauration sur iPhone, réglages compris (vérifié) : la fonction « Données » est au niveau d'Android (parité 32 %) ; Android v563 : textes plus justes sur où vont vos données (aussi sur iPhone, deux adaptations refaites) ; achat d'abonnement d'essai : bloqué par un bogue d'Apple sur iOS 26.5, 3e essai sur un iPhone simulé plus ancien | #39 (mergée), #36, #37 |
+| 28/10 18:00 | suivi d'Android v565, I3, I6, I8 | vos données : export, import et restauration avec vos réglages, vérifiés et en place (PR #37 mergée) ; premier achat d'abonnement d'essai réussi sur iPhone simulé, sans compte Apple ; l'iPhone sait dire s'il reconnaît le français sur le téléphone (préalable de la dictée du soir) ; Android v565 : carte de Sources au titre court (aussi sur iPhone, « App Santé ») | #37 (mergée), #36, #40 |
 
 ---
 
@@ -191,7 +192,10 @@ Règles des adaptations :
   PR ; un commit de journal seul relance donc la CI et annule celle en cours → le pousser avec le code ou en fin de
   run. Un `[skip ci]` en tête de PR la laisse sans CI. Après un merge, vérifier que la CI de `main` a bien démarré
   (celle de #22 n'est jamais partie : relancée par `workflow_dispatch`). Après un push de Swift, regarder l'étape de
-  build quelques minutes plus tard.
+  build quelques minutes plus tard. Après une fusion avec conflits, comparer le nombre de tests avant / après : un
+  fichier de test rendu illisible par la fusion disparaît du total sans faire échouer la suite (28/10, #40).
+  Plusieurs PR vertes à la fois : chaque merge oblige les autres à repasser la CI ; regrouper dans une seule PR
+  celles qui touchent les mêmes fichiers (#38 dans #37, 28/10).
 - Jamais de copie d'un fichier Android entier dans `overlay/` : elle effacerait en silence les évolutions d'Android.
 - Les tests d'Android (`npm run test` dans `upstream/app`) doivent passer avec les correctifs appliqués ; les tests
   propres à iOS vont dans `overlay/` (Vitest) ou `ios/` (XCTest).
