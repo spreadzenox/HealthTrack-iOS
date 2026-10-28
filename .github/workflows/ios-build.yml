@@ -131,12 +131,22 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p "$GITHUB_WORKSPACE/captures"
-          DEVICE="$(xcrun simctl list devices available | grep -oE 'iPhone 1[67][^(]*' | head -1 | sed 's/ *$//')"
+          # Bogue d'Apple FB22237318 (forums développeurs, fil 826971) : avec le simulateur iOS 26.5, `xcodebuild test`
+          # ne transmet pas le fichier .storekit à storekitd ; le contournement connu est un simulateur iOS 26.1.
+          { echo "Simulateurs iOS installés :"; xcrun simctl list runtimes available | grep -E '^iOS'; } | tee "$GITHUB_WORKSPACE/captures/achat-essai.txt"
+          UDID="$(xcrun simctl list devices available | awk '/^-- iOS 26\.1/{f=1;next} /^--/{f=0} f && /iPhone/' | grep -oE '[0-9A-F-]{36}' | head -1)"
+          if [ -n "$UDID" ]; then
+            DEST="platform=iOS Simulator,id=$UDID"
+          else
+            echo "::warning::pas de simulateur iOS 26.1 : achat d'essai sans doute bloqué par le bogue FB22237318" | tee -a "$GITHUB_WORKSPACE/captures/achat-essai.txt"
+            DEST="platform=iOS Simulator,name=$(xcrun simctl list devices available | grep -oE 'iPhone 1[67][^(]*' | head -1 | sed 's/ *$//')"
+          fi
+          echo "Destination : $DEST" | tee -a "$GITHUB_WORKSPACE/captures/achat-essai.txt"
           xcodebuild -project App.xcodeproj -scheme App -configuration Debug \
-            -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath "$RUNNER_TEMP/dd-unit" \
+            -destination "$DEST" -derivedDataPath "$RUNNER_TEMP/dd-unit" \
             CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= PROVISIONING_PROFILE_SPECIFIER= \
             -only-testing:AppTests test 2>&1 | tee "$RUNNER_TEMP/xcodebuild-unit.log" \
-            | grep -E "error:|Test Case|Executed|StoreKit|TEST (SUCCEEDED|FAILED)" | tee "$GITHUB_WORKSPACE/captures/achat-essai.txt"
+            | grep -E "error:|Test Case|Executed|StoreKit Test :|TEST (SUCCEEDED|FAILED)" | tee -a "$GITHUB_WORKSPACE/captures/achat-essai.txt"
       - name: Résumé
         if: always()
         run: |
