@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v531 en test interne (27/10 23:55) | v531 sur iPhone simulé (28/10, PR #17) |
+| Dernière version | v533 en test interne (28/10 01:29) | v533 sur iPhone simulé (28/10, PR #19) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 23 % (11 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -92,6 +92,7 @@ via TestFlight.
 | 27/10 23:00 | I4 Santé (fin de vérification) | guide des montres pour l'iPhone mergé et photographié (#14) ; pas écrits dans Santé relus aussi par le connecteur de l'app (1 iPhone sur 2 : le test d'interface a raté un toucher sur l'autre, corrigé) ; un test d'Android capricieux signalé (`DEMANDES.md`) | #14, #15 ; #13 (ouverte) |
 | 28/10 00:00 | suivi d'Android v530, I4 VFC | suivi d'Android v530 (plein écran Android : sans objet sur iPhone ; une seule piste « bouger ») ; mesures affichées « App Santé » (#13) ; la VFC de l'app Santé est lue sur iPhone, rangée à part de celle d'Android (mesurée autrement) et montrée dans le Journal (#16) | #13, #16 (mergées) |
 | 28/10 01:00 | suivi d'Android v531, I5 (début) | suivi d'Android v531 (une seule question le soir sur la carte ventre) ; un test d'Android tombé en panne à minuit (date figée) réparé côté iOS et signalé (`DEMANDES.md`) ; premières règles des rappels du soir en Swift, testées (#18) | #17, #18 |
+| 28/10 02:00 | suivi d'Android v533, I5 (bilan du soir) | suivi d'Android v533 : Android a repris nos deux demandes (tests réparés) ; le bilan du ventre du soir par notification existe sur iPhone (plugin en Swift, à vérifier en capture) | #19, #20 |
 
 ---
 
