@@ -134,6 +134,7 @@ export async function installCaptureMode() {
         await probeGutEvening(d)
         await probeEveningNote(d)
         await probePortionReminder({ ...d, location: window.location })
+        await probeDataRoundtrip(d)
       },
       waitAck: (name, tries) =>
         waitForAck({ readAck: async () => (await Filesystem.readFile({ ...file, path: ACK })).data, sleep }, name, tries),
@@ -309,5 +310,42 @@ export async function probePortionReminder({ signal, waitAck, wait, log, plugin,
     say('échec', e?.message || String(e))
   } finally {
     await PortionReminder?.schedule?.({ items: [] })?.catch?.(() => {})
+  }
+}
+
+/** Fichiers de l'app dans Documents, écrits et relus comme le fait « Exporter » (`Data.jsx`). */
+async function documentsFiles() {
+  const { Filesystem, Directory, Encoding } = await import('@capacitor/filesystem')
+  return {
+    write: (name, text) =>
+      Filesystem.writeFile({ path: name, data: btoa(unescape(encodeURIComponent(text))), directory: Directory.Documents }),
+    read: async (name) => (await Filesystem.readFile({ path: name, directory: Directory.Documents, encoding: Encoding.UTF8 })).data,
+    remove: (name) => Filesystem.deleteFile({ path: name, directory: Directory.Documents }),
+  }
+}
+
+/**
+ * Essai des données (étape I3) : toute la base exportée comme par « Exporter » (même JSON que sur Android), écrite
+ * dans Documents comme le fait l'app sur iPhone, relue, puis réimportée en fusion (« sans doublon ») : rien ne doit
+ * s'ajouter. Le fichier d'essai est retiré ensuite. Résultats dans la console (`[données] …`).
+ */
+export async function probeDataRoundtrip({ log, storage, files }) {
+  const say = (what, value) => log(`[données] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  const name = 'halcya-essai-export.json'
+  try {
+    const db = storage ?? (await import('../storage/localHealthStorage'))
+    const disk = files ?? (await documentsFiles())
+    const count = await db.countAllEntries()
+    const json = await db.exportToJson()
+    const exported = db.parseBackup(json).entries.length
+    await disk.write(name, json)
+    const text = await disk.read(name)
+    const reread = db.parseBackup(text).entries.length
+    const { imported, skipped } = await db.importFromJson(text, { merge: true })
+    const after = await db.countAllEntries()
+    await disk.remove(name)
+    say('aller-retour', { count, exported, reread, imported, skipped, after, bytes: json.length })
+  } catch (e) {
+    say('échec', e?.message || String(e))
   }
 }

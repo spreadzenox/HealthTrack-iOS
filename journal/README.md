@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v548 (28/10) | v545 sur iPhone simulé (28/10, PR #27) ; v548 prêt (PR #28) |
+| Dernière version | v548 (28/10) | v548 sur iPhone simulé (28/10, PR #28) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 30 % (14 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -18,8 +18,8 @@
 - **A1** — quand il le décide : adhérer à l'Apple Developer Program (payant, à l'année ; marche à suivre en 5 étapes
   au §8, « A1 pas à pas »). C'est ce qui
   débloque l'installation sur un vrai iPhone, TestFlight et l'App Store.
-- (à transmettre à la routine Android si vous êtes d'accord) Avant de rendre bloquante la vérification Play
-  Integrity du serveur d'analyse IA, laisser passer l'app iPhone (détail dans `DEMANDES.md`).
+- ✅ Fait le 28/10 : vous avez transmis à la routine Android les 4 demandes de `DEMANDES.md` (iPhone au contrôle
+  d'intégrité, abonnement App Store sur le serveur, Nouveautés propres à Android, textes de sauvegarde neutres).
 - (facultatif) Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS).
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
@@ -117,7 +117,7 @@ via TestFlight.
 | 28/10 07:00 | I5 (note du soir, rappel de portion), I4 | **note du soir (les 6 notes s'affichent) et rappel de portion vérifiés sur les deux iPhone simulés** ; le rappel touché ne rouvrait pas la réintroduction sur iPhone (le toucher arrive plus tard que sur Android) → corrigé ; la VFC de l'app Santé comptée dans « Mes appareils » | #24 (mergée), #25 |
 | 28/10 08:00 | suivi d'Android v544, I5, I4 | **les trois rappels (bilan du ventre, note du soir, rappel de portion) vérifiés de bout en bout sur iPhone simulé** : geste depuis la notification, réponse rangée puis entrée dans l'historique (**parité 30 %**) ; norme personnelle de la VFC de l'app Santé ; Android v544 (onglets du Journal plus lisibles, vérifiés sur la taille de l'iPhone 12) ; radar avec la VFC de l'app Santé en relecture | #25, #26 (mergées), #27 |
 | 28/10 09:00 | suivi d'Android v545, I4, I9 | Android v545 : un écart à votre norme n'est plus affiché comme une alerte (aussi sur iPhone) ; radar avec la variabilité cardiaque de l'app Santé ; déclaration de confidentialité exigée par l'App Store préparée ; ce qu'il faudra au serveur pour l'abonnement sur iPhone précisé (`DEMANDES.md`) | #27 (mergée), #28 |
-| 28/10 10:00 | suivi d'Android v548, I9 | Android v548 : une piste n'est dite « solide » qu'avec assez de jours (aussi sur iPhone) ; déclaration de confidentialité vérifiée dans l'app construite | #28 |
+| 28/10 10:00 | suivi d'Android v548, I9, I3 | Android v548 : une piste n'est dite « solide » qu'avec assez de jours (aussi sur iPhone) ; déclaration de confidentialité exigée par l'App Store en place ; essai de l'export puis réimport de vos données sur iPhone en relecture | #28 (mergée), #29 |
 
 ---
 

@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, waitForAck } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -397,5 +397,48 @@ describe('sonde du rappel de portion (I5)', () => {
     expect(signal).not.toHaveBeenCalled()
     expect(plugin.schedule).toHaveBeenLastCalledWith({ items: [] })
     expect(logs.join('\n')).toMatch(/\[portion\] essai notifications non autorisées/)
+  })
+})
+
+describe('sonde des données : export, fichier, réimport (I3)', () => {
+  function fakeStorage(entries) {
+    let db = [...entries]
+    return {
+      countAllEntries: vi.fn(async () => db.length),
+      exportToJson: vi.fn(async () => JSON.stringify({ version: 1, entries: db })),
+      parseBackup: (json) => ({ entries: JSON.parse(json).entries }),
+      importFromJson: vi.fn(async (json, { merge }) => {
+        const incoming = JSON.parse(json).entries
+        const fresh = merge ? incoming.filter((e) => !db.some((d) => d.id === e.id)) : incoming
+        db = merge ? [...db, ...fresh] : fresh
+        return { imported: fresh.length, skipped: incoming.length - fresh.length }
+      }),
+    }
+  }
+  function fakeFiles() {
+    const disk = new Map()
+    return {
+      disk,
+      write: vi.fn(async (name, text) => disk.set(name, text)),
+      read: vi.fn(async (name) => disk.get(name)),
+      remove: vi.fn(async (name) => disk.delete(name)),
+    }
+  }
+
+  it('exporte toute la base, l’écrit et la relit comme l’app, la réimporte sans doublon, ne laisse rien', async () => {
+    const storage = fakeStorage([{ id: 'a' }, { id: 'b' }, { id: 'c' }])
+    const files = fakeFiles()
+    const logs = []
+    await probeDataRoundtrip({ log: (m) => logs.push(m), storage, files })
+    expect(storage.importFromJson).toHaveBeenCalledWith(expect.any(String), { merge: true })
+    expect(files.disk.size).toBe(0)
+    expect(logs.join('\n')).toMatch(/\[données\] aller-retour \{"count":3,"exported":3,"reread":3,"imported":0,"skipped":3,"after":3,"bytes":\d+\}/)
+  })
+
+  it('un échec est dit, sans lever', async () => {
+    const storage = { ...fakeStorage([]), exportToJson: vi.fn(async () => { throw new Error('base fermée') }) }
+    const logs = []
+    await probeDataRoundtrip({ log: (m) => logs.push(m), storage, files: fakeFiles() })
+    expect(logs.join('\n')).toContain('[données] échec base fermée')
   })
 })
