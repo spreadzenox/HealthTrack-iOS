@@ -12,6 +12,11 @@ on:
     branches: [main]
     paths-ignore: ["journal/**", "**.md", "store/**"]
   workflow_dispatch:
+    inputs:
+      devices:
+        description: "Simulateurs à capturer à la place des deux habituels (ex. « iPhone 17 Pro Max » : captures 6,9 pouces de la fiche App Store, publiées sur captures/store)"
+        required: false
+        default: ""
 
 permissions:
   contents: read
@@ -122,6 +127,8 @@ jobs:
           /usr/libexec/PlistBuddy -c 'Print :NSPrivacyAccessedAPITypes:0:NSPrivacyAccessedAPIType' "$APP/PrivacyInfo.xcprivacy" | grep -qx NSPrivacyAccessedAPICategoryUserDefaults
           /usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP/Info.plist" | grep -qx false
       - name: Captures sur simulateur
+        env:
+          CAPTURE_DEVICES: ${{ inputs.devices }}
         run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures "${XCTESTRUN:-}"
       - name: Résumé
         if: always()
@@ -139,7 +146,7 @@ jobs:
       - name: Publier les captures sur une branche dédiée
         if: always() && hashFiles('captures/*.png') != ''
         env:
-          BRANCH: captures/${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || github.ref_name }}
+          BRANCH: captures/${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || inputs.devices != '' && 'store' || github.ref_name }}
           GH_TOKEN: ${{ github.token }}
         run: |
           cd captures
