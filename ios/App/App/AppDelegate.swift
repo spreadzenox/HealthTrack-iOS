@@ -1,5 +1,6 @@
 import UIKit
 import Capacitor
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -7,7 +8,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        // Rappels du soir (I5) : catégorie à actions, et délégué posé avant la fin du lancement (un geste sur la
+        // notification peut lancer l'app en arrière-plan avant que Capacitor ne soit chargé)
+        let center = UNUserNotificationCenter.current()
+        center.setNotificationCategories([GutEveningNotifications.notificationCategory])
+        center.delegate = HalcyaNotificationHandler.shared
         return true
     }
 
