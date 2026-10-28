@@ -63,7 +63,8 @@ public class EveningPlugin: CAPPlugin {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(call.getInt("delay") ?? 3), repeats: false)
         let content = evening.content()
         if call.getBool("banner") ?? false { content.interruptionLevel = .active }
-        let request = UNNotificationRequest(identifier: evening.requestPrefix + "essai", content: content, trigger: trigger)
+        // hors du préfixe des soirs programmés : une reprogrammation (`reschedule`) ne la retire pas
+        let request = UNNotificationRequest(identifier: "essai-" + evening.category, content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { error in
             if let error {
                 call.reject(error.localizedDescription)
