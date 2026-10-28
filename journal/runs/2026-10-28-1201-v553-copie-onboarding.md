@@ -45,7 +45,9 @@
   - plugin Swift `AppStoreBilling` (StoreKit 2 : formules, achat, abonnements en cours, achats arrivés hors du
     parcours) enregistré mais inactif côté JS, tant que le relais ne vérifie pas les achats d'Apple.
 
-  Swift pas encore compilé : il le sera par la CI de sa PR.
+  Correctif 24 (`loadBillingPlugin()` de `playBilling.js`) : sur iPhone, ce plugin à la place de rien. **PR #33**
+  ouverte en parallèle pour compiler tôt : `swift test` (dont `BillingRule`) ✅ et build Xcode avec StoreKit ✅
+  (run 108, 12:28) ; captures en cours. Suite : 2716 ✅.
 
 ## Suite
 - CI de #32 :
@@ -54,5 +56,5 @@
   - `[suppression]` toujours bon ;
   - si tout est vert → merger, « Sauvegarde du téléphone » reste 🟡 (réglages non repris) mais la reprise devient un geste.
 - Ensuite : `main` fusionnée dans `claude/ios-i3-import-fichier`, PR ; lire `[import] fichier` (attendu `après = avant + 2`)
-  et la capture `import-apres` ; puis PR d'I6 (`claude/ios-i6-storekit`) : compiler, puis fichier `.storekit` et
-  `SKTestSession` pour un achat d'essai sur simulateur, sans compte Apple.
+  et la capture `import-apres` ; puis #33 (I6) : captures inchangées → merger après
+  #32 (`main` fusionnée d'abord) ; ensuite fichier `.storekit` et `SKTestSession` pour un achat d'essai sur simulateur.
