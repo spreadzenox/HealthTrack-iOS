@@ -1,0 +1,478 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /Users/runner/work/_temp/dd-tests/Build/Products/HalcyaUITests_iphonesimulator26.5-arm64-x86_64.xctestrun -destination id=582B068E-2ACA-440E-8D01-417AEDF26981 "-only-testing:HalcyaUITests/NotificationsUITests/testRepondreGeneDepuisLaNotification"
+
+2026-10-28 03:26:57.648 xcodebuild[27223:83896] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-28 03:26:57.675 xcodebuild[27223:83896] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:582B068E-2ACA-440E-8D01-417AEDF26981, OS:26.2, name:iPhone 16e }
+{ platform:iOS Simulator, arch:x86_64, id:582B068E-2ACA-440E-8D01-417AEDF26981, OS:26.2, name:iPhone 16e }
+2026-10-28 03:27:02.472 xcodebuild[27223:83896] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-28 03:27:05.713759+0000 HalcyaUITests-Runner[27586:84925] [Default] Running tests...
+2026-10-28 03:27:05.831317+0000 HalcyaUITests-Runner[27586:85395] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+    t =      nans Interface orientation changed to Portrait
+2026-10-28 03:27:06.794001+0000 HalcyaUITests-Runner[27586:85401] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+Test Suite 'Selected tests' started at 2026-10-28 03:27:06.907.
+Test Suite 'HalcyaUITests.xctest' started at 2026-10-28 03:27:06.907.
+Test Suite 'NotificationsUITests' started at 2026-10-28 03:27:06.907.
+Test Case '-[HalcyaUITests.NotificationsUITests testRepondreGeneDepuisLaNotification]' started.
+    t =     0.00s Start Test at 2026-10-28 03:27:06.909
+    t =     0.18s Set Up
+    t =     0.18s Waiting 10.0s for Any (First Match) to exist
+    t =     1.19s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     1.20s         Checking existence of `Any (First Match)`
+    t =     1.31s Checking existence of `Any (First Match)`
+    t =     1.38s Press Any (First Match) for 2.0 seconds
+    t =     1.38s     Wait for com.apple.springboard to idle
+    t =     1.38s     Find the Any (First Match)
+    t =     1.43s     Check for interrupting elements affecting "NotificationShortLookView" BannerNotification
+    t =     1.47s         Wait for fr.jpesquet.sante to idle
+    t =     1.55s     Synthesize event
+    t =     3.80s     Wait for com.apple.springboard to idle
+    t =     4.80s Requesting snapshot of accessibility hierarchy for app with pid 13058
+    t =     5.17s Requesting snapshot of accessibility hierarchy for app with pid 13058
+Attributes: Application, 0x105738700, pid: 13058, label: ' '
+Element subtree:
+ →Application, 0x105738700, pid: 13058, label: ' '
+    Window, 0x10565b360, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x105646920, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x1056467d0, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x1056454d0, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x1056472a0, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x105646e20, {{0.0, 0.0}, {390.0, 844.0}}
+            Other, 0x105646f40, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105647060, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105647180, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x1056473c0, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x1056474e0, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105647600, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105647720, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105647b10, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105647c30, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x105647d50, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x105647e70, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x105647f90, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x105941810, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x10593f5a0, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x10593f900, {{0.0, 0.0}, {130.0, 281.3}}
+      Other, 0x10593ffa0, {{0.0, 0.0}, {130.0, 281.3}}
+        Other, 0x10593fc50, {{0.0, 0.0}, {130.0, 281.3}}
+    Window (Main), 0x105940690, {{0.0, 0.0}, {390.0, 844.0}}, identifier: 'SBCoverSheetWindow'
+      Other, 0x105940330, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x105941100, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x1059409e0, {{0.0, 0.0}, {390.0, 844.0}}
+            Other, 0x105943310, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x105940d60, {{0.0, 1688.0}, {390.0, 1688.0}}
+        Other, 0x105946a80, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x105943690, {{0.0, 0.0}, {390.0, 1688.0}}
+            Other, 0x105946700, {{0.0, 0.0}, {390.0, 1688.0}}
+              Other, 0x1059463b0, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x105945ce0, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x105945960, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x105946050, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x1059455f0, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x105944110, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105945260, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x105944b80, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x105944ef0, {{0.0, 0.0}, {390.0, 100.0}}
+                Other, 0x105944820, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x105943a20, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x105942540, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x105943d70, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x105944490, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x105942fa0, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x1059428a0, {{-140.7, 351.7}, {671.3, 633.0}}
+                  Other, 0x105942c20, {{0.0, 0.0}, {390.0, 844.0}}
+                  ScrollView, 0x105941470, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x1059421e0, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x105941ea0, {{0.0, 0.0}, {390.0, 844.0}}
+                        Other, 0x10595c7c0, {{0.0, 0.0}, {390.0, 844.0}}
+                          Other, 0x10595d780, {{0.0, 0.0}, {390.0, 844.0}}
+                            Other, 0x10595d8a0, {{0.0, 0.0}, {390.0, 844.0}}
+                            ScrollView, 0x10595d9c0, {{0.0, 0.0}, {390.0, 844.0}}
+                              ScrollView, 0x10595dae0, {{10.0, -0.0}, {370.0, 227.3}}
+                                ScrollView, 0x10595dc00, {{10.0, -0.0}, {370.0, 227.3}}
+                                  Button, 0x10595dd20, {{10.0, 0.2}, {370.0, 227.0}}, identifier: 'ListCell'
+                                    Other, 0x10595e450, {{10.0, 0.2}, {370.0, 227.0}}, identifier: 'ListCell.ContentView'
+                                      Other, 0x10595e570, {{10.0, 0.2}, {370.0, 227.0}}
+                                        Other, 0x10595e690, {{10.0, 0.2}, {370.0, 227.0}}
+                                          Other, 0x10595e7b0, {{10.0, 0.2}, {370.0, 227.0}}
+                                          Other, 0x10595e8d0, {{10.0, 0.2}, {370.0, 227.0}}
+                                          Other, 0x10595e9f0, {{10.0, 0.2}, {370.0, 227.0}}
+                                            Other, 0x10595eb10, {{10.0, 0.2}, {370.0, 227.0}}
+                                  Other, 0x10595ec30, {{347.0, 37.3}, {30.0, 190.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x10595ed50, {{374.0, 50.0}, {3.0, 174.3}}
+                                  Other, 0x10595ee70, {{347.0, 37.3}, {30.0, 190.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x10595ef90, {{374.0, 50.0}, {3.0, 174.3}}
+                                Other, 0x10595f440, {{347.0, 37.3}, {30.0, 190.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x10595f560, {{374.0, 50.0}, {3.0, 174.3}}
+                                Other, 0x10595f680, {{347.0, 37.3}, {30.0, 190.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x10595f7a0, {{374.0, 50.0}, {3.0, 174.3}}
+                              ScrollView, 0x10595f8c0, {{10.0, 605.3}, {370.0, 110.7}}
+                                ScrollView, 0x10595f9e0, {{10.0, 605.3}, {370.0, 78.7}}
+                                  Button, 0x10595fb00, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ListCell', label: 'RÉGLAGES, maintenant, Prêt pour Apple Intelligence, Découvrez le nouveau système d’intelligence personnelle.'
+                                    Other, 0x10595fc20, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ListCell.ContentView'
+                                      Other, 0x10595fd40, {{10.0, 605.3}, {370.0, 78.7}}
+                                        Other, 0x10595fe60, {{10.0, 605.3}, {370.0, 78.7}}
+                                          BannerNotification, 0x105960160, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'NotificationShortLookView', label: 'RÉGLAGES, maintenant, Prêt pour Apple Intelligence, Découvrez le nouveau système d’intelligence personnelle.'
+                                            Other, 0x105960280, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ShortLook.Platter'
+                                              Other, 0x1059603a0, {{10.0, 605.3}, {370.0, 78.7}}
+                                              Other, 0x1059604c0, {{10.0, 605.3}, {370.0, 78.7}}
+                                              Other, 0x1059605e0, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ShortLook.Platter.Content'
+                                                Button, 0x105960700, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ShortLook.Platter.Content.Seamless', label: 'maintenant, Prêt pour Apple Intelligence, Découvrez le nouveau système d’intelligence personnelle.'
+                                                  Other, 0x105960820, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ShortLook.Platter.Content.Seamless.CrossFade'
+                                                    StaticText, 0x105960940, {{74.0, 616.7}, {211.3, 18.0}}, identifier: 'NotificationTitle', label: 'Prêt pour Apple Intelligence'
+                                                    Other, 0x105960a60, {{74.0, 634.7}, {289.0, 36.0}}, identifier: 'NotificationBody.TopAligned.originalMessage'
+                                                      StaticText, 0x105960b80, {{74.0, 634.7}, {289.0, 36.0}}, identifier: 'TextContent.Primary', label: 'Découvrez le nouveau système d’intelligence personnelle.'
+                                                Other, 0x105960ca0, {{10.0, 605.3}, {370.0, 78.7}}
+                                                  Other, 0x105960dc0, {{10.0, 605.3}, {370.0, 78.7}}
+                                                    Other, 0x105960ee0, {{10.0, 605.3}, {370.0, 78.7}}
+                                                      Other, 0x105961000, {{10.0, 605.3}, {370.0, 78.7}}
+                                                        Other, 0x105961120, {{10.0, 605.3}, {370.0, 78.7}}
+                                                          Other, 0x105961240, {{10.0, 605.3}, {370.0, 78.7}}
+                                                      Other, 0x105961360, {{10.0, 605.3}, {370.0, 78.7}}
+                                                        Other, 0x105961480, {{10.0, 605.3}, {370.0, 78.7}}
+                                  Other, 0x1059615a0, {{347.0, 605.3}, {30.0, 78.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x1059616c0, {{374.0, 566.3}, {3.0, 36.0}}
+                                  Other, 0x1059617e0, {{347.0, 605.3}, {30.0, 78.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x105961900, {{374.0, 566.3}, {3.0, 36.0}}
+                                ScrollView, 0x105961a20, {{21.1, 654.0}, {347.8, 62.0}}
+                                  Button, 0x105961b40, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ListCell', label: 'HALCYA, maintenant, Et votre ventre aujourd’hui ?, Dans l’ensemble, d’un geste.'
+                                    Other, 0x105961c60, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ListCell.ContentView'
+                                      Other, 0x105961d80, {{21.1, 654.0}, {347.8, 62.0}}
+                                        Other, 0x105961ea0, {{21.1, 654.0}, {347.8, 62.0}}
+                                          BannerNotification, 0x105961fc0, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'NotificationShortLookView', label: 'HALCYA, maintenant, Et votre ventre aujourd’hui ?, Dans l’ensemble, d’un geste.'
+                                            Other, 0x1059620e0, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ShortLook.Platter'
+                                              Other, 0x105962200, {{21.1, 654.0}, {347.8, 62.0}}
+                                              Other, 0x105962320, {{21.1, 654.0}, {347.8, 62.0}}
+                                              Other, 0x105962440, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ShortLook.Platter.Content'
+                                                Button, 0x105962560, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ShortLook.Platter.Content.Seamless', label: 'maintenant, Et votre ventre aujourd’hui ?, Dans l’ensemble, d’un geste.'
+                                                  Other, 0x105962680, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ShortLook.Platter.Content.Seamless.CrossFade'
+                                                    StaticText, 0x1059627a0, {{81.3, 686.5}, {188.9, 16.9}}, identifier: 'NotificationTitle', label: 'Et votre ventre aujourd’hui ?'
+                                                    Other, 0x1059628c0, {{274.9, 686.5}, {5.0, 16.9}}, identifier: 'NotificationBody.BottomAligned.originalMessage'
+                                                      StaticText, 0x1059629e0, {{274.9, 686.5}, {5.0, 16.9}}, identifier: 'TextContent.Primary', label: 'Dans l’ensemble, d’un geste.'
+                                                Other, 0x105962b00, {{21.1, 654.0}, {347.8, 62.0}}
+                                                  Other, 0x105962c20, {{21.1, 654.0}, {347.8, 62.0}}
+                                                    Other, 0x105962d40, {{21.1, 654.0}, {347.8, 62.0}}
+                                                      Other, 0x105962e60, {{21.1, 654.0}, {347.8, 62.0}}
+                                                        Other, 0x105962f80, {{21.1, 654.0}, {347.8, 62.0}}
+                                                          Other, 0x1059630a0, {{21.1, 654.0}, {347.8, 62.0}}
+                                                      Other, 0x1059631c0, {{21.1, 654.0}, {347.8, 62.0}}
+                                                        Other, 0x1059632e0, {{21.1, 654.0}, {347.8, 62.0}}
+                                  Other, 0x105963400, {{337.9, 654.0}, {28.2, 62.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x105963520, {{363.3, 656.8}, {2.8, 56.4}}
+                                  Other, 0x105963640, {{337.9, 654.0}, {28.2, 62.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x105963760, {{363.3, 656.8}, {2.8, 56.4}}
+                                Other, 0x105963880, {{347.0, 605.3}, {30.0, 110.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x1059639a0, {{374.0, 608.3}, {3.0, 60.0}}
+                                Other, 0x105963ac0, {{347.0, 605.3}, {30.0, 110.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x105963be0, {{374.0, 608.3}, {3.0, 60.0}}
+                              ScrollView, 0x105963d00, {{10.0, 724.2}, {370.0, 65.0}}
+                                Other, 0x105963e20, {{347.0, 724.2}, {30.0, 32.5}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x105963f40, {{374.0, 694.2}, {3.0, 36.0}}
+                                Other, 0x105964060, {{347.0, 724.2}, {30.0, 32.5}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x105964180, {{374.0, 694.2}, {3.0, 36.0}}
+                    Other, 0x1059642a0, {{357.0, 41.3}, {30.0, 760.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                      Other, 0x1059643c0, {{384.0, 50.0}, {3.0, 791.0}}
+                    Other, 0x1059644e0, {{357.0, 41.3}, {30.0, 760.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                      Other, 0x105964600, {{384.0, 50.0}, {3.0, 791.0}}
+                  Other, 0x105964720, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x105964840, {{0.0, 0.0}, {390.0, 1688.0}}
+                    Other, 0x105964960, {{0.0, 0.0}, {390.0, 844.0}}, identifier: 'lockscreen-date-view'
+                      Other, 0x105964a80, {{27.0, 222.0}, {336.0, 72.0}}
+                        Other, 0x105964ba0, {{27.0, 222.0}, {336.0, 72.0}}
+                          Other, 0x105964cc0, {{27.0, 222.0}, {336.0, 72.0}}
+                            Other, 0x105964de0, {{7.0, 202.0}, {376.0, 112.0}}
+                              Other, 0x105964f00, {{7.0, 202.0}, {376.0, 112.0}}
+                      StaticText, 0x105965020, {{16.7, 97.3}, {353.3, 143.3}}, label: '03:27'
+                      StaticText, 0x105965140, {{48.3, 80.0}, {293.7, 36.3}}, label: 'Mercredi 28 octobre'
+                Other, 0x105965260, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x105965380, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x1059654a0, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x1059655c0, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x1059656e0, {{311.0, 39.0}, {47.7, 2.3}}
+                        Other, 0x105965800, {{311.0, 39.0}, {47.7, 2.3}}
+                      Other, 0x105965920, {{311.0, 67.5}, {47.7, 2.3}}
+                    Other, 0x105965a40, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x105965b60, {{0.0, 0.0}, {390.0, 844.0}}
+                        Other, 0x105965c80, {{0.0, 0.0}, {390.0, 844.0}}
+                          Other, 0x105965da0, {{125.7, 831.0}, {139.0, 5.0}}, label: 'Indicateur d’accueil', Disabled
+                            Other, 0x105965ec0, {{125.7, 831.0}, {139.0, 5.0}}
+                              Other, 0x105965fe0, {{125.7, 831.0}, {139.0, 5.0}}
+                                Other, 0x105966100, {{125.7, 831.0}, {139.0, 5.0}}
+                                  Other, 0x105966220, {{125.7, 831.0}, {139.0, 5.0}}
+                                Other, 0x105966340, {{125.7, 831.0}, {139.0, 5.0}}
+                    Other, 0x105966460, {{124.3, 765.3}, {141.3, 34.7}}
+                  Other, 0x105966580, {{58.5, 18.8}, {273.0, 87.5}}
+                    Other, 0x1059666a0, {{58.5, 18.8}, {273.0, 87.5}}
+                Other, 0x1059667c0, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x1059668e0, {{0.0, 0.0}, {390.0, 844.0}}
+      StatusBar, 0x105966a00, {{0.0, 0.0}, {390.0, 47.0}}
+        Other, 0x105966b20, {{0.0, 0.0}, {390.0, 47.0}}
+          Other, 0x105966c40, {{0.0, 0.0}, {390.0, 47.0}}
+            Other, 0x105966d60, {{302.3, 19.0}, {17.0, 11.3}}, label: 'Données cellulaires', value: Aucun signal
+            Other, 0x105966e80, {{324.7, 18.3}, {16.7, 12.0}}, identifier: '3 sur 3 barres Wi-Fi', value: SSID, 3 sur 3 barr...
+            Other, 0x105966fa0, {{346.7, 18.7}, {25.0, 12.0}}, label: 'Charge de la batterie : 100 %', value: Aucune recharge en...
+    Window, 0x1059670c0, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x1059671e0, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x105967300, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x105967420, {{0.0, 0.0}, {390.0, 844.0}}
+Path to element:
+ →Application, 0x105738700, pid: 13058, label: ' '
+Query chain:
+ →Find: Application 'com.apple.springboard'
+  Output: {
+    Application, 0x105735a20, pid: 13058, label: ' '
+  }
+
+    t =     5.25s Waiting 10.0s for Any (First Match) to exist
+    t =     6.27s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     6.27s         Checking existence of `Any (First Match)`
+    t =     6.32s         Capturing element debug description
+    t =     7.26s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     7.26s         Checking existence of `Any (First Match)`
+    t =     7.31s         Capturing element debug description
+    t =     8.26s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     8.26s         Checking existence of `Any (First Match)`
+    t =     8.32s         Capturing element debug description
+    t =     9.26s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     9.26s         Checking existence of `Any (First Match)`
+    t =     9.32s         Capturing element debug description
+    t =    10.26s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    10.26s         Checking existence of `Any (First Match)`
+    t =    10.31s         Capturing element debug description
+    t =    11.26s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    11.26s         Checking existence of `Any (First Match)`
+    t =    11.32s         Capturing element debug description
+    t =    12.26s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    12.26s         Checking existence of `Any (First Match)`
+    t =    12.35s         Capturing element debug description
+    t =    13.28s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    13.28s         Checking existence of `Any (First Match)`
+    t =    13.40s         Capturing element debug description
+    t =    14.34s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    14.34s         Checking existence of `Any (First Match)`
+    t =    14.43s         Capturing element debug description
+    t =    15.26s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    15.26s         Checking existence of `Any (First Match)`
+    t =    15.34s         Capturing element debug description
+    t =    15.34s     Checking existence of `Any (First Match)`
+    t =    15.42s Collecting debug information to assist test failure triage
+    t =    15.42s     Requesting snapshot of accessibility hierarchy for app with pid 13058
+    t =    15.54s Requesting snapshot of accessibility hierarchy for app with pid 13058
+    t =    16.00s Requesting snapshot of accessibility hierarchy for app with pid 13058
+Attributes: Application, 0x10596adf0, pid: 13058, label: ' '
+Element subtree:
+ →Application, 0x10596adf0, pid: 13058, label: ' '
+    Window, 0x105941810, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x105946a80, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x105940330, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x105940690, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x105943690, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x105946700, {{0.0, 0.0}, {390.0, 844.0}}
+            Other, 0x105945260, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105944820, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105941470, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x1059421e0, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105941ea0, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x1056469b0, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x10565b360, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105647240, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x105646e20, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x1056454d0, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x10564ae00, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x10564af20, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x10564b040, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x10564b160, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x10564bc10, {{0.0, 0.0}, {130.0, 281.3}}
+      Other, 0x10564bd30, {{0.0, 0.0}, {130.0, 281.3}}
+        Other, 0x10564be50, {{0.0, 0.0}, {130.0, 281.3}}
+    Window (Main), 0x10564bf70, {{0.0, 0.0}, {390.0, 844.0}}, identifier: 'SBCoverSheetWindow'
+      Other, 0x10564c090, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x10564c1b0, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x10564c2d0, {{0.0, 0.0}, {390.0, 844.0}}
+            Other, 0x105738700, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x105735a20, {{0.0, 1688.0}, {390.0, 1688.0}}
+        Other, 0x10573fea0, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x10573fb10, {{0.0, 0.0}, {390.0, 1688.0}}
+            Other, 0x10573ed80, {{0.0, 0.0}, {390.0, 1688.0}}
+              Other, 0x10573e360, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x10573d5b0, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x10573c4b0, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x10573b040, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x1057424b0, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x105743290, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x1057435f0, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x1057447a0, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x1057440d0, {{0.0, 0.0}, {390.0, 100.0}}
+                Other, 0x105744b20, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x105748c10, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x10574eb90, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x10574ef00, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x105748f80, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x10574e500, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x10574e850, {{-140.7, 351.7}, {671.3, 633.0}}
+                  Other, 0x10574de50, {{0.0, 0.0}, {390.0, 844.0}}
+                  ScrollView, 0x10574e1a0, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x105749300, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x105749670, {{0.0, 0.0}, {390.0, 844.0}}
+                        Other, 0x1057499e0, {{0.0, 0.0}, {390.0, 844.0}}
+                          Other, 0x105749d40, {{0.0, 0.0}, {390.0, 844.0}}
+                            Other, 0x10574a0b0, {{0.0, 0.0}, {390.0, 844.0}}
+                            ScrollView, 0x10574a420, {{0.0, 0.0}, {390.0, 844.0}}
+                              ScrollView, 0x10574ae50, {{10.0, -0.0}, {370.0, 227.3}}
+                                ScrollView, 0x10574c310, {{10.0, -0.0}, {370.0, 227.3}}
+                                  Button, 0x10574c690, {{10.0, 0.2}, {370.0, 227.0}}, identifier: 'ListCell'
+                                    Other, 0x10574c9d0, {{10.0, 0.2}, {370.0, 227.0}}, identifier: 'ListCell.ContentView'
+                                      Other, 0x10574d780, {{10.0, 0.2}, {370.0, 227.0}}
+                                        Other, 0x10574dad0, {{10.0, 0.2}, {370.0, 227.0}}
+                                          Other, 0x10574cd40, {{10.0, 0.2}, {370.0, 227.0}}
+                                          Other, 0x10574d090, {{10.0, 0.2}, {370.0, 227.0}}
+                                          Other, 0x10574d3f0, {{10.0, 0.2}, {370.0, 227.0}}
+                                            Other, 0x10574b1b0, {{10.0, 0.2}, {370.0, 227.0}}
+                                  Other, 0x10574b550, {{347.0, 37.3}, {30.0, 190.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x10574bc50, {{374.0, 50.0}, {3.0, 174.3}}
+                                  Other, 0x10574bfc0, {{347.0, 37.3}, {30.0, 190.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x10574b8e0, {{374.0, 50.0}, {3.0, 174.3}}
+                                Other, 0x10574aad0, {{347.0, 37.3}, {30.0, 190.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x10574a780, {{374.0, 50.0}, {3.0, 174.3}}
+                                Other, 0x105744e70, {{347.0, 37.3}, {30.0, 190.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x105748520, {{374.0, 50.0}, {3.0, 174.3}}
+                              ScrollView, 0x1057488a0, {{10.0, 605.3}, {370.0, 110.7}}
+                                ScrollView, 0x105747e10, {{10.0, 605.3}, {370.0, 78.7}}
+                                  Button, 0x1057481b0, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ListCell', label: 'RÉGLAGES, maintenant, Prêt pour Apple Intelligence, Découvrez le nouveau système d’intelligence personnelle.'
+                                    Other, 0x1057451d0, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ListCell.ContentView'
+                                      Other, 0x105747740, {{10.0, 605.3}, {370.0, 78.7}}
+                                        Other, 0x105747ab0, {{10.0, 605.3}, {370.0, 78.7}}
+                                          BannerNotification, 0x105747070, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'NotificationShortLookView', label: 'RÉGLAGES, maintenant, Prêt pour Apple Intelligence, Découvrez le nouveau système d’intelligence personnelle.'
+                                            Other, 0x1057473e0, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ShortLook.Platter'
+                                              Other, 0x105745550, {{10.0, 605.3}, {370.0, 78.7}}
+                                              Other, 0x1057458b0, {{10.0, 605.3}, {370.0, 78.7}}
+                                              Other, 0x105745c00, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ShortLook.Platter.Content'
+                                                Button, 0x105745f60, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ShortLook.Platter.Content.Seamless', label: 'maintenant, Prêt pour Apple Intelligence, Découvrez le nouveau système d’intelligence personnelle.'
+                                                  Other, 0x1057469b0, {{10.0, 605.3}, {370.0, 78.7}}, identifier: 'ShortLook.Platter.Content.Seamless.CrossFade'
+                                                    StaticText, 0x105746d20, {{74.0, 616.7}, {211.3, 18.0}}, identifier: 'NotificationTitle', label: 'Prêt pour Apple Intelligence'
+                                                    Other, 0x105746650, {{74.0, 634.7}, {289.0, 36.0}}, identifier: 'NotificationBody.TopAligned.originalMessage'
+                                                      StaticText, 0x1057462d0, {{74.0, 634.7}, {289.0, 36.0}}, identifier: 'TextContent.Primary', label: 'Découvrez le nouveau système d’intelligence personnelle.'
+                                                Other, 0x105744450, {{10.0, 605.3}, {370.0, 78.7}}
+                                                  Other, 0x105742ef0, {{10.0, 605.3}, {370.0, 78.7}}
+                                                    Other, 0x105742820, {{10.0, 605.3}, {370.0, 78.7}}
+                                                      Other, 0x105742b80, {{10.0, 605.3}, {370.0, 78.7}}
+                                                        Other, 0x10573ba60, {{10.0, 605.3}, {370.0, 78.7}}
+                                                          Other, 0x10573b3b0, {{10.0, 605.3}, {370.0, 78.7}}
+                                                      Other, 0x105742150, {{10.0, 605.3}, {370.0, 78.7}}
+                                                        Other, 0x105739140, {{10.0, 605.3}, {370.0, 78.7}}
+                                  Other, 0x10573b720, {{347.0, 605.3}, {30.0, 78.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x10573c140, {{374.0, 566.3}, {3.0, 36.0}}
+                                  Other, 0x10573d900, {{347.0, 605.3}, {30.0, 78.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x10573cec0, {{374.0, 566.3}, {3.0, 36.0}}
+                                ScrollView, 0x10573c810, {{21.1, 654.0}, {347.8, 62.0}}
+                                  Button, 0x10573cb60, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ListCell', label: 'HALCYA, Il y a 1 minute, Et votre ventre aujourd’hui ?, Dans l’ensemble, d’un geste.'
+                                    Other, 0x10573d220, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ListCell.ContentView'
+                                      Other, 0x10573dc80, {{21.1, 654.0}, {347.8, 62.0}}
+                                        Other, 0x10573f440, {{21.1, 654.0}, {347.8, 62.0}}
+                                          BannerNotification, 0x10573e000, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'NotificationShortLookView', label: 'HALCYA, Il y a 1 minute, Et votre ventre aujourd’hui ?, Dans l’ensemble, d’un geste.'
+                                            Other, 0x10573f790, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ShortLook.Platter'
+                                              Other, 0x10573f0d0, {{21.1, 654.0}, {347.8, 62.0}}
+                                              Other, 0x105740c50, {{21.1, 654.0}, {347.8, 62.0}}
+                                              Other, 0x105740210, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ShortLook.Platter.Content'
+                                                Button, 0x1057405b0, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ShortLook.Platter.Content.Seamless', label: 'Il y a 1 minute, Et votre ventre aujourd’hui ?, Dans l’ensemble, d’un geste.'
+                                                  Other, 0x105741a50, {{21.1, 654.0}, {347.8, 62.0}}, identifier: 'ShortLook.Platter.Content.Seamless.CrossFade'
+                                                    StaticText, 0x105741dd0, {{81.3, 686.5}, {188.9, 16.9}}, identifier: 'NotificationTitle', label: 'Et votre ventre aujourd’hui ?'
+                                                    Other, 0x10573ea30, {{274.9, 686.5}, {9.7, 16.9}}, identifier: 'NotificationBody.BottomAligned.originalMessage'
+                                                      StaticText, 0x105740fc0, {{274.9, 686.5}, {9.7, 16.9}}, identifier: 'TextContent.Primary', label: 'Dans l’ensemble, d’un geste.'
+                                                Other, 0x105741350, {{21.1, 654.0}, {347.8, 62.0}}
+                                                  Other, 0x105737290, {{21.1, 654.0}, {347.8, 62.0}}
+                                                    Other, 0x105735330, {{21.1, 654.0}, {347.8, 62.0}}
+                                                      Other, 0x105739810, {{21.1, 654.0}, {347.8, 62.0}}
+                                                        Other, 0x10573a250, {{21.1, 654.0}, {347.8, 62.0}}
+                                                          Other, 0x105739ed0, {{21.1, 654.0}, {347.8, 62.0}}
+                                                      Other, 0x1057416f0, {{21.1, 654.0}, {347.8, 62.0}}
+                                                        Other, 0x10573acb0, {{21.1, 654.0}, {347.8, 62.0}}
+                                  Other, 0x10573e6b0, {{337.9, 654.0}, {28.2, 62.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x105739b70, {{363.3, 656.8}, {2.8, 56.4}}
+                                  Other, 0x105740900, {{337.9, 654.0}, {28.2, 62.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                    Other, 0x10573bdd0, {{363.3, 656.8}, {2.8, 56.4}}
+                                Other, 0x10573a960, {{347.0, 605.3}, {30.0, 110.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x1057394b0, {{374.0, 608.3}, {3.0, 60.0}}
+                                Other, 0x105736f10, {{347.0, 605.3}, {30.0, 110.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x105738dd0, {{374.0, 608.3}, {3.0, 60.0}}
+                              ScrollView, 0x10574f270, {{10.0, 724.2}, {370.0, 65.0}}
+                                Other, 0x10574fc70, {{347.0, 724.2}, {30.0, 32.5}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x10574f5c0, {{374.0, 694.2}, {3.0, 36.0}}
+                                Other, 0x10574f920, {{347.0, 724.2}, {30.0, 32.5}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                  Other, 0x10574ffd0, {{374.0, 694.2}, {3.0, 36.0}}
+                    Other, 0x105750320, {{357.0, 41.3}, {30.0, 760.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                      Other, 0x1057506a0, {{384.0, 50.0}, {3.0, 791.0}}
+                    Other, 0x105750a00, {{357.0, 41.3}, {30.0, 760.7}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                      Other, 0x105750d70, {{384.0, 50.0}, {3.0, 791.0}}
+                  Other, 0x1057510d0, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x105751440, {{0.0, 0.0}, {390.0, 1688.0}}
+                    Other, 0x1057517a0, {{0.0, 0.0}, {390.0, 844.0}}, identifier: 'lockscreen-date-view'
+                      StaticText, 0x105751b30, {{48.3, 80.0}, {293.7, 36.3}}, label: 'Mercredi 28 octobre'
+                      StaticText, 0x105751ec0, {{16.7, 97.3}, {353.3, 143.3}}, label: '03:27'
+                      Other, 0x105752230, {{27.0, 222.0}, {336.0, 72.0}}
+                        Other, 0x105752580, {{27.0, 222.0}, {336.0, 72.0}}
+                          Other, 0x105752920, {{27.0, 222.0}, {336.0, 72.0}}
+                            Other, 0x105752c80, {{7.0, 202.0}, {376.0, 112.0}}
+                              Other, 0x105753000, {{7.0, 202.0}, {376.0, 112.0}}
+                Other, 0x105753370, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x1057536d0, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x105753a50, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x105753da0, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x105754100, {{311.0, 39.0}, {47.7, 2.3}}
+                        Other, 0x105754460, {{311.0, 39.0}, {47.7, 2.3}}
+                      Other, 0x1057547d0, {{311.0, 67.5}, {47.7, 2.3}}
+                    Other, 0x105754b40, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x105754ea0, {{0.0, 0.0}, {390.0, 844.0}}
+                        Other, 0x105755210, {{0.0, 0.0}, {390.0, 844.0}}
+                          Other, 0x1057555a0, {{125.7, 831.0}, {139.0, 5.0}}, label: 'Indicateur d’accueil', Disabled
+                            Other, 0x105755920, {{125.7, 831.0}, {139.0, 5.0}}
+                              Other, 0x105755c90, {{125.7, 831.0}, {139.0, 5.0}}
+                                Other, 0x105755ff0, {{125.7, 831.0}, {139.0, 5.0}}
+                                  Other, 0x105756380, {{125.7, 831.0}, {139.0, 5.0}}
+                                Other, 0x1057566d0, {{125.7, 831.0}, {139.0, 5.0}}
+                    Other, 0x105756a40, {{124.3, 765.3}, {141.3, 34.7}}
+                  Other, 0x105756db0, {{58.5, 18.8}, {273.0, 87.5}}
+                    Other, 0x105757120, {{58.5, 18.8}, {273.0, 87.5}}
+                Other, 0x1057574a0, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x1057577e0, {{0.0, 0.0}, {390.0, 844.0}}
+      StatusBar, 0x105757b30, {{0.0, 0.0}, {390.0, 47.0}}
+        Other, 0x105757ea0, {{0.0, 0.0}, {390.0, 47.0}}
+          Other, 0x105758200, {{0.0, 0.0}, {390.0, 47.0}}
+            Other, 0x105758570, {{302.3, 19.0}, {17.0, 11.3}}, label: 'Données cellulaires', value: Aucun signal
+            Other, 0x1057588f0, {{324.7, 18.3}, {16.7, 12.0}}, identifier: '3 sur 3 barres Wi-Fi', value: SSID, 3 sur 3 barr...
+            Other, 0x105758c50, {{346.7, 18.7}, {25.0, 12.0}}, label: 'Charge de la batterie : 100 %', value: Aucune recharge en...
+    Window, 0x105758fb0, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x105759310, {{0.0, 0.0}, {390.0, 844.0}}
+    Window, 0x105759660, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x1057599f0, {{0.0, 0.0}, {390.0, 844.0}}
+Path to element:
+ →Application, 0x10596adf0, pid: 13058, label: ' '
+Query chain:
+ →Find: Application 'com.apple.springboard'
+  Output: {
+    Application, 0x105759d70, pid: 13058, label: ' '
+  }
+
+/Users/runner/work/HealthTrack-iOS/HealthTrack-iOS/uitests/HalcyaUITests/SanteUITests.swift:99: error: -[HalcyaUITests.NotificationsUITests testRepondreGeneDepuisLaNotification] : failed - bouton « Gêne » absent de la notification
+    t =    16.13s Tear Down
+Test Case '-[HalcyaUITests.NotificationsUITests testRepondreGeneDepuisLaNotification]' failed (16.160 seconds).
+Test Suite 'NotificationsUITests' failed at 2026-10-28 03:27:23.069.
+	 Executed 1 test, with 1 failure (0 unexpected) in 16.160 (16.161) seconds
+Test Suite 'HalcyaUITests.xctest' failed at 2026-10-28 03:27:23.069.
+	 Executed 1 test, with 1 failure (0 unexpected) in 16.160 (16.162) seconds
+Test Suite 'Selected tests' failed at 2026-10-28 03:27:23.069.
+	 Executed 1 test, with 1 failure (0 unexpected) in 16.160 (16.163) seconds
+2026-10-28 03:27:50.421 xcodebuild[27223:83896] [MT] IDETestOperationsObserverDebug: 47.934 elapsed -- Testing started completed.
+2026-10-28 03:27:50.421 xcodebuild[27223:83896] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-28 03:27:50.421 xcodebuild[27223:83896] [MT] IDETestOperationsObserverDebug: 47.934 sec, +47.934 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/HalcyaUITests-dwxjnuxbisvvlvdfoarzajysqjzo/Logs/Test/Test-HalcyaUITests-2026.10.28_03-26-57-+0000.xcresult
+
+Failing tests:
+	NotificationsUITests.testRepondreGeneDepuisLaNotification()
+
+** TEST EXECUTE FAILED **
+
+Testing started
