@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeFileImport, IMPORT_TEST_FILE, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -531,5 +531,40 @@ describe('sonde de la copie proposée à l’onboarding après une restauration 
     expect(calls).toEqual(['copie écrite', 'base vidée', 'page /bienvenue', 'capture restauration-onboarding', 'reprendre', 'capture restauration-reprise'])
     expect(JSON.parse(local.data.healthtrack_onboarding)).toMatchObject({ done: true })
     expect(logs).toEqual(['[restauration] avant {"count":3,"copie":true,"vidée":0}', '[restauration] après {"bouton":true,"count":3}'])
+  })
+})
+
+describe('sonde de l’import par le sélecteur de fichiers (I3)', () => {
+  it('écrit un ancien fichier (tableau nu) dans Documents, ouvre Vos données, le test d’interface le choisit, « Ajouter » l’importe', async () => {
+    let count = 10
+    const calls = []
+    const disk = new Map()
+    const files = {
+      write: vi.fn(async (name, text) => disk.set(name, text)),
+      remove: vi.fn(async (name) => disk.delete(name)),
+    }
+    const logs = []
+    await probeFileImport({
+      log: (m) => logs.push(m),
+      signal: vi.fn(async (name) => calls.push(`capture ${name}`)),
+      waitAck: vi.fn(async () => true),
+      wait: async () => {},
+      storage: { countAllEntries: vi.fn(async () => count) },
+      files,
+      navigate: (path) => calls.push(`page ${path}`),
+      reveal: (label) => calls.push(`montré ${label}`) && true,
+      click: (label) => {
+        calls.push(`touché ${label}`)
+        count = 12
+        return true
+      },
+    })
+    expect(files.write).toHaveBeenCalledWith(IMPORT_TEST_FILE, expect.any(String))
+    const written = JSON.parse(files.write.mock.calls[0][1])
+    expect(Array.isArray(written)).toBe(true) // ancien format : tableau nu, sans version
+    expect(written).toHaveLength(2)
+    expect(calls).toEqual(['page /data', 'montré Choisir un fichier à importer', 'capture import-fichier', 'touché Ajouter à mes données'])
+    expect(disk.size).toBe(0)
+    expect(logs).toEqual(['[import] fichier {"avant":10,"bouton":true,"ajouter":true,"après":12}'])
   })
 })

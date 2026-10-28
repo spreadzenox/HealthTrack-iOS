@@ -28,10 +28,20 @@
 - **Offre de la copie de secours à l'onboarding** : branche préparée au run de 11:01, `main` fusionnée (conflits du journal et de `captureMode` : version de la branche, `main` = contenu de #31), v553 ajouté, PR #32.
 - Suite d'Android avec les 23 correctifs : **2722 passés** ; build `appstore` ✅.
 
+- Préparé ensuite (branche `claude/ios-i3-import-fichier`, empilée sur #32, poussée sans PR) : **import par le
+  sélecteur de fichiers, le geste réel**. La sonde `probeFileImport` :
+  - écrit un ancien fichier de sauvegarde inventé (tableau nu, 2 notes datées de 2020) dans Documents, visible dans Fichiers › Sur mon iPhone › Halcya ;
+  - ouvre Vos données sans recharger ;
+  - laisse le nouveau test d'interface `DonneesUITests/testImporterUnFichierDepuisFichiers` toucher « Choisir un fichier à importer » et choisir le fichier dans le sélecteur ;
+  - touche ensuite « Ajouter à mes données » et recompte la base.
+
+  1 test écrit d'abord ; suite : 2723 ✅. Le test d'interface n'a encore jamais tourné : il imprime l'arbre d'accessibilité à chaque étape manquée, pour l'ajuster au premier essai sur la CI.
+
 ## Suite
 - CI de #32 :
   - captures `restauration-onboarding` (carte au-dessus du premier écran : texte, zones sûres) et `restauration-reprise` ;
   - `[restauration] après {"bouton":true,"count":1925}` ;
   - `[suppression]` toujours bon ;
   - si tout est vert → merger, « Sauvegarde du téléphone » reste 🟡 (réglages non repris) mais la reprise devient un geste.
-- Ensuite : import par le sélecteur de fichiers (geste réel) ; I6 StoreKit 2 (`.storekit` + `SKTestSession`).
+- Ensuite : `main` fusionnée dans `claude/ios-i3-import-fichier`, PR ; lire `[import] fichier` (attendu `après = avant + 2`)
+  et la capture `import-apres` ; puis I6 StoreKit 2 (`.storekit` + `SKTestSession`).

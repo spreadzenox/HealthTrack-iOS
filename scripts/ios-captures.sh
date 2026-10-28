@@ -34,6 +34,7 @@ ui_steps() { # <page> → lignes « <Classe/test> <suffixe de capture> »
     notification-bilan) echo "NotificationsUITests/testRepondreGeneDepuisLaBanniere notification-apres" ;;
     note-du-soir) echo "NotificationsUITests/testNoterLaSoireeDepuisLaBanniere note-apres" ;;
     rappel-portion) echo "NotificationsUITests/testToucherLeRappelDePortion rappel-apres" ;;
+    import-fichier) echo "DonneesUITests/testImporterUnFichierDepuisFichiers import-apres" ;;
   esac
 }
 

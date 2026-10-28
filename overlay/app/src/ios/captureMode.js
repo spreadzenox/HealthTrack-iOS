@@ -136,6 +136,7 @@ export async function installCaptureMode() {
         await probePortionReminder({ ...d, location: window.location })
         await probeDataRoundtrip(d)
         await probeBackup(d)
+        await probeFileImport(d)
         await probeSnapshotWelcome({ ...d, localStorage: window.localStorage })
         await probeDeleteAll(d) // en dernier : vide la base
       },
@@ -393,6 +394,59 @@ export async function probeDeleteAll({ log, storage, readSnapshot, deleteAll }) 
     say('après', { entries, count: await db.countAllEntries(), copie: Boolean(await read()) })
   } catch (e) {
     say('échec', e?.message || String(e))
+  }
+}
+
+export const IMPORT_TEST_FILE = 'halcya-essai-import.json'
+
+/** Ancien format de sauvegarde (tableau nu, sans version) : deux notes inventées, datées de 2020 pour être nouvelles. */
+const OLD_BACKUP = [
+  { type: 'note', source: 'app', at: '2020-01-06T08:00:00.000Z', payload: { text: 'Essai d’import : ancien fichier (1/2)' } },
+  { type: 'note', source: 'app', at: '2020-01-07T08:00:00.000Z', payload: { text: 'Essai d’import : ancien fichier (2/2)' } },
+]
+
+/** Amène au milieu de l'écran le bouton `label`, pour que le test d'interface le touche. */
+function revealButton(label) {
+  const button = [...document.querySelectorAll('button')].find((b) => b.textContent.trim() === label)
+  button?.scrollIntoView({ block: 'center', behavior: 'instant' })
+  return Boolean(button)
+}
+
+/**
+ * Essai de l'import par le sélecteur de fichiers d'iOS (étape I3), le geste réel : un ancien fichier de sauvegarde
+ * (tableau nu, format d'avant la version 1) est écrit dans Documents, visible dans Fichiers › Sur mon iPhone › Halcya
+ * (`UIFileSharingEnabled`) ; Vos données s'ouvre sans recharger la page, le test d'interface
+ * (`DonneesUITests/testImporterUnFichierDepuisFichiers`) touche « Choisir un fichier à importer » et choisit le
+ * fichier dans le sélecteur ; l'aperçu capturé, « Ajouter à mes données » est touché, la base recomptée. Le fichier
+ * d'essai est retiré ensuite. Résultats dans la console (`[import] …`).
+ */
+export async function probeFileImport({ log, signal, waitAck, wait, storage, files, navigate, reveal, click }) {
+  const say = (what, value) => log(`[import] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  let disk
+  try {
+    const db = storage ?? (await import('../storage/localHealthStorage'))
+    disk = files ?? (await documentsFiles())
+    const go =
+      navigate ??
+      ((path) => {
+        window.history.pushState({}, '', path)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      })
+    const avant = await db.countAllEntries()
+    await disk.write(IMPORT_TEST_FILE, JSON.stringify(OLD_BACKUP, null, 2))
+    go('/data')
+    await wait(3000)
+    const bouton = (reveal ?? revealButton)('Choisir un fichier à importer')
+    await wait(800)
+    await signal('import-fichier') // le test d'interface choisit le fichier, puis l'aperçu est capturé
+    await waitAck('import-fichier', 600) // test d'interface : jusqu'à 3 min
+    const ajouter = (click ?? clickButton)('Ajouter à mes données')
+    await wait(3000)
+    say('fichier', { avant, bouton, ajouter, après: await db.countAllEntries() })
+  } catch (e) {
+    say('échec', e?.message || String(e))
+  } finally {
+    await disk?.remove(IMPORT_TEST_FILE)?.catch?.(() => {})
   }
 }
 

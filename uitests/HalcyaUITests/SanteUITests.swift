@@ -131,3 +131,67 @@ final class NotificationsUITests: XCTestCase {
         return true
     }
 }
+
+/// Import d'une sauvegarde par le sélecteur de fichiers d'iOS (étape I3), lancé par scripts/ios-captures.sh pendant le
+/// parcours des captures : le mode captures a écrit un ancien fichier de sauvegarde inventé dans Documents (visible
+/// dans Fichiers › Sur mon iPhone › Halcya) et ouvert Vos données. Le test touche « Choisir un fichier à importer »,
+/// va jusqu'au fichier et le choisit ; l'app montre alors l'aperçu de l'import. L'arbre d'accessibilité est écrit
+/// dans le journal du test à chaque étape manquée.
+final class DonneesUITests: XCTestCase {
+    private let halcya = XCUIApplication(bundleIdentifier: "fr.jpesquet.sante")
+    private let fichier = "halcya-essai-import"
+
+    func testImporterUnFichierDepuisFichiers() throws {
+        halcya.activate()
+        let choisir = element("Choisir un fichier à importer")
+        guard choisir.waitForExistence(timeout: 30) else {
+            print(halcya.debugDescription)
+            XCTFail("« Choisir un fichier à importer » introuvable")
+            return
+        }
+        choisir.tap()
+        // Selon la version d'iOS, WKWebView ouvre le sélecteur directement ou propose d'abord un menu
+        for menu in ["Choisir un fichier", "Choisir des fichiers"] where element(menu).waitForExistence(timeout: 2) {
+            element(menu).tap()
+            break
+        }
+        let cible = cellule(fichier)
+        if !cible.waitForExistence(timeout: 8) {
+            // Pas dans « Récents » : Parcourir › Sur mon iPhone › Halcya
+            for etape in ["Parcourir", "Sur mon iPhone", "Halcya"] where !cible.exists {
+                let suivant = etape == "Parcourir" ? element(etape) : cellule(etape)
+                if suivant.waitForExistence(timeout: 8) {
+                    suivant.tap()
+                } else {
+                    print("étape « \(etape) » absente")
+                    print(halcya.debugDescription)
+                }
+                _ = cible.waitForExistence(timeout: 3)
+            }
+        }
+        guard cible.waitForExistence(timeout: 10) else {
+            print(halcya.debugDescription)
+            XCTFail("« \(fichier) » introuvable dans le sélecteur de fichiers")
+            return
+        }
+        cible.tap()
+        // Selon la version, toucher le fichier l'ouvre, ou il faut encore toucher « Ouvrir »
+        let ouvrir = halcya.buttons["Ouvrir"]
+        if ouvrir.waitForExistence(timeout: 3) { ouvrir.tap() }
+        let apercu = element("Ajouter à mes données")
+        if !apercu.waitForExistence(timeout: 30) {
+            print(halcya.debugDescription)
+            XCTFail("aperçu de l'import jamais affiché")
+        }
+    }
+
+    /// Premier élément dont le libellé est exactement `label`, quel que soit son type.
+    private func element(_ label: String) -> XCUIElement {
+        halcya.descendants(matching: .any).matching(NSPredicate(format: "label == %@", label)).firstMatch
+    }
+
+    /// Cellule du sélecteur dont le libellé contient `label` (« halcya-essai-import, json, … »).
+    private func cellule(_ label: String) -> XCUIElement {
+        halcya.descendants(matching: .cell).matching(NSPredicate(format: "label CONTAINS %@", label)).firstMatch
+    }
+}
