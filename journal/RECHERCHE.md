@@ -165,3 +165,37 @@ formuler prudemment (« une partie de vos mesures ») et à confirmer sur l'iPho
     - <https://developer.apple.com/documentation/storekittest/sktestsession> ;
     - <https://swiftwithmajid.com/2024/01/09/storekit-testing-in-swift/> ;
     - fil des forums développeurs Apple sur « Sandbox restriction » (UI tests).
+- **Essais sur la CI (28/10, PR #36)** :
+  - la cible `AppTests` hébergée par l'app se construit et tourne ;
+  - `SKTestSession(contentsOf:)` ne lève pas, mais `Product.products(for:)` rend une liste vide, même redemandée 5 fois ;
+  - cause trouvée : un **bogue d'Apple connu** (FB22237318, fil 826971 des forums développeurs, lu le 28/10/2026). Avec le simulateur iOS 26.5, `xcodebuild test` en ligne de commande ne transmet pas le fichier `.storekit` à `storekitd` ; StoreKit Test est alors inutilisable en CI, et ça marche depuis Xcode ;
+  - d'après le fil, Apple le dit corrigé dans Xcode 26.6 RC, mais un développeur le reproduit encore avec Xcode 26.6 et iOS 26.5.1 (FB23721564) ;
+  - seul contournement fiable signalé : un simulateur iOS 26.1. L'étape de CI en prend un s'il est installé, sinon elle le dit.
+  - <https://developer.apple.com/forums/thread/826971>
+
+## Temps d'écran sur iPhone (I8) : ce qu'une app peut lire (28/10/2026)
+- Android : `PhoneUsagePlugin` lit les durées d'usage (UsageStats) et les range par jour dans le Journal (tuile
+  « Écran »), pour les analyses.
+- iPhone : l'API Temps d'écran (FamilyControls, DeviceActivity, ManagedSettings) **ne donne pas les durées à
+  l'app**.
+  - L'extension de rapport (`DeviceActivityReport`) affiche l'usage dans une vue fournie par l'app. Elle tourne dans un
+    bac à sable qui l'empêche d'envoyer quoi que ce soit hors d'elle : pas de réseau, pas d'écriture dans le
+    conteneur partagé. La documentation d'Apple le dit : « To protect the user's privacy, your extension runs in a
+    sandbox… ». Les forums développeurs confirment : écritures App Group ignorées.
+  - L'extension de suivi (`DeviceActivityMonitor`), elle, reçoit des **événements de seuil** : « 30 min d'usage
+    atteintes aujourd'hui », etc. Elle peut les écrire dans le conteneur partagé. Avec des seuils réguliers, toutes
+    les 15 min jusqu'à 8 h par exemple, l'app en déduit un temps d'écran approché du jour, au quart d'heure près.
+  - Conditions :
+    - autorisation Temps d'écran de la personne (`AuthorizationCenter.requestAuthorization(for: .individual)`,
+      iOS 16+) ;
+    - droit `com.apple.developer.family-controls`, à demander à Apple pour la distribution : action du
+      propriétaire après A1 ;
+    - deux extensions dans le projet.
+- Verdict : **🔬 faisable de façon approchée**, pas ⛔. Ce n'est pas avant A1 : sans le droit d'Apple, pas de test sur
+  la CI au-delà du simulateur. Alternative si Apple refuse : la tuile « Écran » reste absente sur iPhone, ce qui est
+  le repli actuel.
+- Sources (forums développeurs Apple, lus le 28/10/2026) :
+  - <https://developer.apple.com/forums/thread/818297> (bac à sable du rapport) ;
+  - <https://developer.apple.com/forums/thread/809823> ;
+  - <https://developer.apple.com/forums/thread/736351> (App Group depuis le rapport).
+

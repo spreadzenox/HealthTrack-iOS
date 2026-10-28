@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -568,6 +568,21 @@ describe('sonde de l’import par le sélecteur de fichiers (I3)', () => {
     expect(calls).toEqual(['page /data', 'montré Choisir un fichier à importer', 'capture import-fichier', 'touché Ajouter à mes données'])
     expect(disk.size).toBe(0)
     expect(logs).toEqual(['[import] fichier {"avant":10,"bouton":true,"ajouter":true,"après":12}'])
+  })
+})
+
+describe('sonde vocale (I8)', () => {
+  it('dit si le français se reconnaît sur l’iPhone, avec le verdict d’Android, sans micro ni son', async () => {
+    const logs = []
+    const plugin = { probe: vi.fn(async () => ({ language: 'fr-FR', available: true, onDevice: true, support: { installed: ['fr-FR'], pending: [], supported: [], online: [] } })) }
+    await probeVoice({ log: (m) => logs.push(m), plugin })
+    expect(logs).toEqual(['[voix] sonde {"verdict":"on_device_fr","available":true,"onDevice":true}'])
+  })
+
+  it('sans réponse du plugin : dit qu’il n’y a rien', async () => {
+    const logs = []
+    await probeVoice({ log: (m) => logs.push(m), plugin: { probe: async () => { throw new Error('absent') } } })
+    expect(logs).toEqual(['[voix] sonde {"verdict":null}'])
   })
 })
 

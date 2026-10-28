@@ -70,8 +70,9 @@ describe('HealthConnectConnector sur iPhone (HealthKit)', () => {
 
   it('carte de Sources : nom et description de l’app Santé, sans Health Connect', () => {
     const connector = new HealthConnectConnector()
-    expect(connector.name).toBe('App Santé (montre, bague, balance…)')
-    expect(connector.description).toMatch(/l’app Santé/)
+    // Titre court comme sur Android depuis v565 (POL-PLAY-28) ; « montre, bague, balance » ouvre la description
+    expect(connector.name).toBe('App Santé')
+    expect(connector.description).toMatch(/^Montre, bague, balance : ce que l’Apple Watch et vos apps santé y écrivent/)
     expect(`${connector.name} ${connector.description}`).not.toMatch(/Health Connect/)
   })
 })
