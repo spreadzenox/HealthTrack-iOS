@@ -100,7 +100,7 @@ public class AppStoreBillingPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     /// Achat sous la forme de Play ; `purchaseToken` = la transaction signée par Apple, vérifiée par le relais.
-    private static func purchase(_ result: VerificationResult<Transaction>) -> [String: Any]? {
+    static func purchase(_ result: VerificationResult<Transaction>) -> [String: Any]? {
         guard case .verified(let transaction) = result, BillingRule.storeIds.contains(transaction.productID),
               transaction.revocationDate == nil else { return nil }
         return ["state": "purchased", "products": [BillingRule.productId], "purchaseToken": result.jwsRepresentation]

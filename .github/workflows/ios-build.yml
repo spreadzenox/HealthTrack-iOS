@@ -123,6 +123,20 @@ jobs:
           /usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP/Info.plist" | grep -qx false
       - name: Captures sur simulateur
         run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures "${XCTESTRUN:-}"
+      # Achat d'essai de l'abonnement App Store (I6), sans compte Apple : StoreKit Test (ios/App/AppTests/Halcya.storekit)
+      # dans une cible de tests unitaires hébergée par l'app. Encore à l'essai : n'arrête ni les captures ni la CI.
+      - name: Achat d'essai App Store (StoreKit Test, I6)
+        continue-on-error: true
+        working-directory: upstream/app/ios/App
+        run: |
+          set -o pipefail
+          mkdir -p "$GITHUB_WORKSPACE/captures"
+          DEVICE="$(xcrun simctl list devices available | grep -oE 'iPhone 1[67][^(]*' | head -1 | sed 's/ *$//')"
+          xcodebuild -project App.xcodeproj -scheme App -configuration Debug \
+            -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath "$RUNNER_TEMP/dd-unit" \
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= PROVISIONING_PROFILE_SPECIFIER= \
+            -only-testing:AppTests test 2>&1 | tee "$RUNNER_TEMP/xcodebuild-unit.log" \
+            | grep -E "error:|Test Case|Executed|TEST (SUCCEEDED|FAILED)" | tee "$GITHUB_WORKSPACE/captures/achat-essai.txt"
       - name: Résumé
         if: always()
         run: |
@@ -158,4 +172,5 @@ jobs:
             captures/
             ${{ runner.temp }}/xcodebuild.log
             ${{ runner.temp }}/xcodebuild-tests.log
+            ${{ runner.temp }}/xcodebuild-unit.log
           if-no-files-found: warn
