@@ -1,0 +1,52 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /Users/runner/work/_temp/dd-tests/Build/Products/HalcyaUITests_iphonesimulator26.5-arm64-x86_64.xctestrun -destination id=582B068E-2ACA-440E-8D01-417AEDF26981 "-only-testing:HalcyaUITests/NotificationsUITests/testOuvrirLeCentreDeNotifications"
+
+2026-10-28 04:17:04.429 xcodebuild[29713:88868] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-28 04:17:04.449 xcodebuild[29713:88868] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:582B068E-2ACA-440E-8D01-417AEDF26981, OS:26.2, name:iPhone 16e }
+{ platform:iOS Simulator, arch:x86_64, id:582B068E-2ACA-440E-8D01-417AEDF26981, OS:26.2, name:iPhone 16e }
+2026-10-28 04:17:06.251 xcodebuild[29713:88868] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-28 04:17:09.240056+0000 HalcyaUITests-Runner[30033:89869] [Default] Running tests...
+2026-10-28 04:17:09.333209+0000 HalcyaUITests-Runner[30033:89919] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-28 04:17:10.900.
+Test Suite 'HalcyaUITests.xctest' started at 2026-10-28 04:17:10.900.
+Test Suite 'NotificationsUITests' started at 2026-10-28 04:17:10.901.
+Test Case '-[HalcyaUITests.NotificationsUITests testOuvrirLeCentreDeNotifications]' started.
+    t =     0.00s Start Test at 2026-10-28 04:17:10.903
+    t =     0.05s Set Up
+    t =     0.05s Press Application 'com.apple.springboard'[0.30, 0.00] for 0.1 seconds, then drag to Application 'com.apple.springboard'[0.30, 0.70] with velocity of 500.00 pixels per second, and then hold for 0.0 seconds 
+    t =     0.05s     Wait for com.apple.springboard to idle
+2026-10-28 04:17:10.953483+0000 HalcyaUITests-Runner[30033:89920] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+    t =     0.07s     Find the Application 'com.apple.springboard'
+    t =     0.13s     Check for interrupting elements affecting " " Application
+    t =     0.16s         Wait for fr.jpesquet.sante to idle
+    t =     0.23s     Synthesize event
+    t =     0.24s         Find the Application 'com.apple.springboard'
+    t =     0.27s         Find the Application 'com.apple.springboard'
+    t =     0.30s         Find the Application 'com.apple.springboard'
+    t =     0.34s         Find the Application 'com.apple.springboard'
+    t =     0.39s         Find the Application 'com.apple.springboard'
+    t =     2.15s     Wait for com.apple.springboard to idle
+    t =     2.65s Waiting 15.0s for Any (First Match) to exist
+    t =     3.70s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     3.70s         Checking existence of `Any (First Match)`
+    t =     3.82s Tear Down
+Test Case '-[HalcyaUITests.NotificationsUITests testOuvrirLeCentreDeNotifications]' passed (3.846 seconds).
+Test Suite 'NotificationsUITests' passed at 2026-10-28 04:17:14.749.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.846 (3.848) seconds
+Test Suite 'HalcyaUITests.xctest' passed at 2026-10-28 04:17:14.749.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.846 (3.849) seconds
+Test Suite 'Selected tests' passed at 2026-10-28 04:17:14.750.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.846 (3.851) seconds
+2026-10-28 04:17:15.345 xcodebuild[29713:88868] [MT] IDETestOperationsObserverDebug: 9.087 elapsed -- Testing started completed.
+2026-10-28 04:17:15.345 xcodebuild[29713:88868] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-28 04:17:15.345 xcodebuild[29713:88868] [MT] IDETestOperationsObserverDebug: 9.087 sec, +9.087 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/HalcyaUITests-dargqxnrfwzcivaxdcothjnitkbc/Logs/Test/Test-HalcyaUITests-2026.10.28_04-17-04-+0000.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started
