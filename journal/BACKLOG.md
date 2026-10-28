@@ -84,7 +84,8 @@
     reste la sonde sur simulateur : iOS en montrerait 4 au plus sur 6 (sources non officielles), sinon extension de
     contenu de notification.
   - [~] `PortionReminder` en Swift (PR #24) : rappels restants programmés d'avance, toucher retenu pour `takeOpen`,
-    tests XCTest ✅ ; sonde sur simulateur (bannière touchée app en arrière-plan : la réintroduction s'ouvre-t-elle ?).
+    tests XCTest ✅ ; sur simulateur, toucher retenu ✅ mais réintroduction pas ouverte (toucher transmis après le
+    retour au premier plan) → signal du natif + correctif 18 (PR #24), à revérifier.
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
   transactions signées par Apple, notifications serveur V2, App Attest, mêmes crédits IA, même période de lancement.

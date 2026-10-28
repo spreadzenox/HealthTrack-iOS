@@ -105,6 +105,7 @@ via TestFlight.
 | 28/10 04:00 | I5 (notification, suite) | notification du soir visible dans le centre de notifications (capturée) ; la réponse d'un geste reste à automatiser ; Android v536 préparé | #21 |
 | 28/10 05:00 | suivi d'Android v540, I5 (réponse d'un geste) | iOS à jour d'Android v540 (un correctif refait) ; **sur iPhone simulé, la réponse « Gêne » donnée depuis la notification est rangée sans ouvrir l'app** (1 iPhone sur 2 : l'autre a manqué la bannière, délai corrigé) | #22 (mergée), #23 |
 | 28/10 06:00 | suivi d'Android v542, I5 (note du soir, rappel de portion) | Android v542 sans effet sur iPhone (signalement des appareils de test de Google) ; **réponse « Gêne » d'un geste vérifiée sur les deux iPhone simulés** (#23 mergée) ; la note du soir d'un geste (0 à 5) et le rappel de la portion du jour existent sur iPhone, à vérifier en capture : iOS n'affiche peut-être que 4 boutons sur 6 | #23 (mergée), #24 |
+| 28/10 07:00 | I5 (note du soir, rappel de portion) | essais sur iPhone simulé : le rappel de portion touché ne rouvrait pas la réintroduction sur iPhone (le toucher arrive plus tard que sur Android) → corrigé ; la note du soir s'affiche bien, le nombre de boutons qu'iOS montre reste à compter (essai faussé, corrigé) | #24 |
 
 ---
 
