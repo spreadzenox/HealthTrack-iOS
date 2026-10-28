@@ -74,3 +74,34 @@ describe('lecture de la copie de secours', () => {
     expect(fs.readFile).not.toHaveBeenCalled()
   })
 })
+
+describe('« Supprimer toutes mes données » efface aussi la copie de secours', () => {
+  it('efface la copie trouvée dans Documents, et elle seule (une sauvegarde exportée reste à la personne)', async () => {
+    const { deleteSnapshot } = await import('./snapshot.js')
+    const fs = {
+      list: vi.fn(async () => [{ name: 'Halcya-sauvegarde-2026-10-28.json', mtime: 1 }, { name: SNAPSHOT_FILE, mtime: 2 }]),
+      deleteFile: vi.fn(async () => {}),
+    }
+    expect(await deleteSnapshot(fs)).toBe(true)
+    expect(fs.deleteFile).toHaveBeenCalledTimes(1)
+    expect(fs.deleteFile).toHaveBeenCalledWith(SNAPSHOT_FILE)
+  })
+
+  it('pas de copie : rien à effacer, sans toucher à un fichier absent', async () => {
+    const { deleteSnapshot } = await import('./snapshot.js')
+    const fs = { list: vi.fn(async () => []), deleteFile: vi.fn() }
+    expect(await deleteSnapshot(fs)).toBe(false)
+    expect(fs.deleteFile).not.toHaveBeenCalled()
+  })
+
+  it('une erreur ne remonte jamais', async () => {
+    const { deleteSnapshot } = await import('./snapshot.js')
+    const fs = { list: vi.fn(async () => [{ name: SNAPSHOT_FILE, mtime: 1 }]), deleteFile: vi.fn(async () => { throw new Error('verrouillé') }) }
+    expect(await deleteSnapshot(fs)).toBe(false)
+  })
+
+  it('ailleurs que dans l’app iPhone : rien', async () => {
+    const { deleteDeviceSnapshot } = await import('./snapshot.js')
+    expect(await deleteDeviceSnapshot()).toBe(false)
+  })
+})
