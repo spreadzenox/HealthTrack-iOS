@@ -132,15 +132,17 @@ jobs:
           set -o pipefail
           mkdir -p "$GITHUB_WORKSPACE/captures"
           # Bogue d'Apple FB22237318 (forums développeurs, fil 826971) : avec le simulateur iOS 26.5, `xcodebuild test`
-          # ne transmet pas le fichier .storekit à storekitd ; le contournement connu est un simulateur iOS 26.1.
+          # ne transmet pas le fichier .storekit à storekitd ; contournement signalé : un simulateur plus ancien (26.1).
+          # Le runner n'a que 26.2, 26.4 et 26.5 (28/10) : on prend l'iPhone du simulateur iOS le plus ancien.
           { echo "Simulateurs iOS installés :"; xcrun simctl list runtimes available | grep -E '^iOS'; } | tee "$GITHUB_WORKSPACE/captures/achat-essai.txt"
-          UDID="$(xcrun simctl list devices available | awk '/^-- iOS 26\.1/{f=1;next} /^--/{f=0} f && /iPhone/' | grep -oE '[0-9A-F-]{36}' | head -1)"
+          OLDEST="$(xcrun simctl list devices available | awk '/^-- iOS /{v=$3; next} /^--/{v=""} v && /iPhone/ {print v " " $0}' | sort -V | head -1 || true)"
+          UDID="$(echo "$OLDEST" | grep -oE '[0-9A-F]{8}-[0-9A-F-]{27}' | head -1 || true)"
           if [ -n "$UDID" ]; then
             DEST="platform=iOS Simulator,id=$UDID"
           else
-            echo "::warning::pas de simulateur iOS 26.1 : achat d'essai sans doute bloqué par le bogue FB22237318" | tee -a "$GITHUB_WORKSPACE/captures/achat-essai.txt"
-            DEST="platform=iOS Simulator,name=$(xcrun simctl list devices available | grep -oE 'iPhone 1[67][^(]*' | head -1 | sed 's/ *$//')"
+            DEST="platform=iOS Simulator,name=$(xcrun simctl list devices available | grep -oE 'iPhone 1[67][^(]*' | head -1 | sed 's/ *$//' || true)"
           fi
+          echo "Simulateur choisi : ${OLDEST:-aucun ancien, iPhone par défaut}" | tee -a "$GITHUB_WORKSPACE/captures/achat-essai.txt"
           echo "Destination : $DEST" | tee -a "$GITHUB_WORKSPACE/captures/achat-essai.txt"
           xcodebuild -project App.xcodeproj -scheme App -configuration Debug \
             -destination "$DEST" -derivedDataPath "$RUNNER_TEMP/dd-unit" \
