@@ -77,6 +77,20 @@ public struct FaceModels {
     public static let landmarksFile = "face_landmarks_detector.tflite"
     public static let blendshapesFile = "face_blendshapes.tflite"
 
+    /// Les 3 modèles vérifiés que la build embarque (`Models/`, rempli par scripts/face-models.sh), ou nil s'il en manque.
+    public static var bundledDirectory: URL? {
+        guard let dir = Bundle.module.url(forResource: "Models", withExtension: nil) else { return nil }
+        let all = [detectorFile, landmarksFile, blendshapesFile].allSatisfy {
+            FileManager.default.fileExists(atPath: dir.appendingPathComponent($0).path)
+        }
+        return all ? dir : nil
+    }
+
+    /// Modèles absents de la build.
+    public struct Missing: Error {
+        public init() {}
+    }
+
     public let detector: LiteRtModel
     public let landmarks: LiteRtModel
     public let blendshapes: LiteRtModel

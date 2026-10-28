@@ -26,6 +26,10 @@ describe('phrases d’usage de l’iPhone (Info.plist)', () => {
     expect(usage('NSCameraUsageDescription')).toMatch(/caméra.*repas/)
   })
 
+  it('la lecture du visage (plugin FaceSense) : la phrase de la caméra le dit, images gardées sur l’iPhone', () => {
+    expect(usage('NSCameraUsageDescription')).toMatch(/lire votre visage.*restent sur cet iPhone/)
+  })
+
   it('la météo demande la position : phrase d’usage, position approximative seulement', () => {
     expect(code).toMatch(/navigator\.geolocation/)
     expect(usage('NSLocationWhenInUseUsageDescription')).toMatch(/position approximative.*météo/)

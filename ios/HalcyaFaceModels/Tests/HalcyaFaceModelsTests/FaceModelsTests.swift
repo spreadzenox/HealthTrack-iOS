@@ -48,7 +48,7 @@ final class FaceModelsTests: XCTestCase {
     var models: FaceModels!
 
     override func setUpWithError() throws {
-        models = try FaceModels(directory: Self.package.appendingPathComponent("Vendor/face"))
+        models = try FaceModels(directory: try XCTUnwrap(FaceModels.bundledDirectory, "modèles absents : lancer scripts/face-models.sh"))
     }
 
     func testFormesDesModelesConformesALaSpec() {
