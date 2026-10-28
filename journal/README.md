@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v559 (28/10) | v555 sur iPhone simulé (28/10, PR #34) ; v559 en vérification (PR #35) |
+| Dernière version | v559 (28/10) | v559 sur iPhone simulé (28/10, PR #35) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 30 % (14 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -124,6 +124,7 @@ via TestFlight.
 | 28/10 13:20 | suivi d'Android v555, I3, I6 | après une restauration iCloud, l'iPhone propose dès le premier écran de reprendre vos données (vérifié : toutes reprises d'un geste) ; Android v555 : historique du bien-être plus lisible (aussi sur iPhone) ; l'abonnement App Store est prêt côté iPhone mais reste éteint tant que le serveur ne sait pas vérifier les achats d'Apple ; en essai : choisir un fichier de sauvegarde dans l'app Fichiers | #32 (mergée), #33, #34 |
 | 28/10 14:05 | I6, I9, I3 | partie iPhone de l'abonnement App Store mise en place (éteinte tant que le serveur ne vérifie pas les achats d'Apple) ; brouillon de la fiche App Store en français (nom, sous-titre, description, mots-clés) ; choix d'un fichier dans l'app Fichiers : 1er essai raté (le bouton s'appelle « Explorer » sous iOS 26), corrigé et relancé | #33 (mergée), #34, #35 |
 | 28/10 15:00 | suivi d'Android v559, I3, I6, I9 | vérifié : choisir un fichier de sauvegarde dans l'app Fichiers puis l'ajouter à vos données marche sur iPhone (un ancien fichier compris) ; Android v559 : boutons arrondis partout (aussi sur iPhone) ; achat d'abonnement d'essai sur simulateur : premier essai à corriger (erreur de compilation), relancé | #34 (mergée), #35, #36 |
+| 28/10 16:00 | I9, I3, I6 | iPhone au niveau d'Android v559 (boutons arrondis vérifiés) ; fiche App Store en français prête en brouillon ; réponses du questionnaire « Confidentialité de l'app » préparées pour vous (les mêmes que pour Google Play) ; export par la feuille de partage : réussi sur un iPhone, l'autre relancé ; achat d'abonnement d'essai : 2e essai en cours | #35 (mergée), #36, #37, #38, #39 |
 
 ---
 

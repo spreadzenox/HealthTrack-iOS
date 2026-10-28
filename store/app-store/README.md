@@ -26,4 +26,4 @@ Reste à préparer, au moment des actions A3 et A5 du propriétaire :
   - l'analyse IA d'un repas passe par le relais Halcya, sans clé dans l'app ;
   - HealthKit ne sert qu'à importer les mesures que la personne autorise ;
   - abonnement par l'App Store (I6).
-- **Confidentialité de l'app** (A5) : en accord avec `ios/App/App/PrivacyInfo.xcprivacy`.
+- **Confidentialité de l'app** (A5) : réponses prêtes dans `confidentialite.md`, en accord avec `ios/App/App/PrivacyInfo.xcprivacy` et avec la déclaration Google Play d'Android (vérifié par un test).
