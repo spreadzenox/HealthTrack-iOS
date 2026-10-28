@@ -162,8 +162,6 @@
 
 ## Idées et questions ouvertes
 
-- Sources, « Mes appareils » sans mesure reçue : « Sur iPhone, Halcya lira bientôt vos mesures dans l'app Santé »
-  (correctif 06) n'est plus vrai depuis I4 (le connecteur lit Santé) : à réécrire (« activez la carte App Santé »).
 
 - Raccourci ou widget « Lire mon bien-être » pour compenser l'absence de lecture au déverrouillage.
 - Apple Watch : HealthKit couvre déjà sommeil, FC, VFC, pas — atout de la version iOS.
