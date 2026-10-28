@@ -12,12 +12,24 @@ final class AppStoreBillingTests: XCTestCase {
     override func setUpWithError() throws {
         let url = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "Halcya", withExtension: "storekit"))
         session = try SKTestSession(contentsOf: url)
+        session.resetToDefaultState()
         session.disableDialogs = true
         session.clearTransactions()
     }
 
+    /// Le fichier se charge de façon asynchrone : on redemande les formules quelques fois (essai du 28/10 : liste vide)
+    private func formules(_ ids: [String]) async throws -> [Product] {
+        for essai in 1...5 {
+            let products = try await Product.products(for: ids)
+            if !products.isEmpty { return products }
+            print("StoreKit Test : aucune formule (essai \(essai)), transactions : \(session.allTransactions().count)")
+            try await Task.sleep(nanoseconds: 1_000_000_000)
+        }
+        return []
+    }
+
     func testFormulesLuesDansStoreKit() async throws {
-        let products = try await Product.products(for: ["halcya_premium_annuel", "halcya_premium_mensuel"])
+        let products = try await formules(["halcya_premium_annuel", "halcya_premium_mensuel"])
         XCTAssertEqual(Set(products.map(\.id)), ["halcya_premium_annuel", "halcya_premium_mensuel"])
         let annuel = try XCTUnwrap(products.first { $0.id == "halcya_premium_annuel" })
         XCTAssertEqual(annuel.subscription?.subscriptionPeriod.unit, .year)
@@ -28,7 +40,7 @@ final class AppStoreBillingTests: XCTestCase {
 
     func testAchatDEssaiRenduCommeUnAchatPlayEtGardeDansLesAbonnementsEnCours() async throws {
         let compte = try XCTUnwrap(UUID(uuidString: "01234567-89ab-cdef-0123-456789abcdef"))
-        let produits = try await Product.products(for: ["halcya_premium_mensuel"]) // pas d'await dans XCTUnwrap
+        let produits = try await formules(["halcya_premium_mensuel"]) // pas d'await dans XCTUnwrap
         let mensuel = try XCTUnwrap(produits.first)
         guard case .success(let resultat) = try await mensuel.purchase(options: [.appAccountToken(compte)]) else {
             return XCTFail("achat d'essai non abouti")

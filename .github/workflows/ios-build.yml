@@ -136,7 +136,7 @@ jobs:
             -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath "$RUNNER_TEMP/dd-unit" \
             CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= PROVISIONING_PROFILE_SPECIFIER= \
             -only-testing:AppTests test 2>&1 | tee "$RUNNER_TEMP/xcodebuild-unit.log" \
-            | grep -E "error:|Test Case|Executed|TEST (SUCCEEDED|FAILED)" | tee "$GITHUB_WORKSPACE/captures/achat-essai.txt"
+            | grep -E "error:|Test Case|Executed|StoreKit|TEST (SUCCEEDED|FAILED)" | tee "$GITHUB_WORKSPACE/captures/achat-essai.txt"
       - name: Résumé
         if: always()
         run: |
