@@ -1,0 +1,16 @@
+diff --git a/app/src/services/playBilling.js b/app/src/services/playBilling.js
+index 681134c..cce7447 100644
+--- a/app/src/services/playBilling.js
++++ b/app/src/services/playBilling.js
+@@ -113,7 +113,10 @@ export async function loadBillingPlugin() {
+   if (import.meta.env?.DEV && typeof window !== 'undefined' && window.__HT_PLAY_BILLING__) return window.__HT_PLAY_BILLING__
+   try {
+     const { Capacitor, registerPlugin } = await import('@capacitor/core')
+-    if (!Capacitor?.isNativePlatform?.() || Capacitor.getPlatform?.() !== 'android') return null
++    if (!Capacitor?.isNativePlatform?.()) return null
++    // Version iOS (HealthTrack-iOS) : StoreKit 2, même forme que PlayBilling (ios/App/App/AppStoreBillingPlugin.swift)
++    if (Capacitor.getPlatform?.() === 'ios') return Capacitor.isPluginAvailable?.('AppStoreBilling') ? notThenable(registerPlugin('AppStoreBilling')) : null
++    if (Capacitor.getPlatform?.() !== 'android') return null
+     if (Capacitor.isPluginAvailable && !Capacitor.isPluginAvailable('PlayBilling')) return null
+     return notThenable(registerPlugin('PlayBilling'))
+   } catch {

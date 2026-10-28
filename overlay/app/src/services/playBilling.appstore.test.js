@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { describePlans, annualSavingPercent } from './playBilling'
 
 // Version iOS (HealthTrack-iOS), étape I6 : le plugin Swift rend les produits de StoreKit 2 sous la forme des
@@ -35,5 +35,26 @@ describe('formules App Store lues par describePlans (contrat avec BillingRule.sw
 
   it('l’économie de l’annuel se calcule sur les prix de l’App Store, comme sur ceux de Google Play', () => {
     expect(annualSavingPercent(describePlans(fromStoreKit))).toBe(16)
+  })
+})
+
+describe('plugin natif sur iPhone', () => {
+  it('l’app iPhone prend le plugin StoreKit 2 (`AppStoreBilling`), de même forme que PlayBilling', async () => {
+    vi.resetModules()
+    vi.doMock('../config/distribution', async (orig) => ({ ...(await orig()), FEATURES: { billing: true } }))
+    const registered = []
+    vi.doMock('@capacitor/core', () => ({
+      Capacitor: { isNativePlatform: () => true, getPlatform: () => 'ios', isPluginAvailable: (n) => n === 'AppStoreBilling' },
+      registerPlugin: (name) => {
+        registered.push(name)
+        return { getProducts: async () => ({ products: fromStoreKit }) }
+      },
+    }))
+    const { loadBillingPlugin, loadPlans } = await import('./playBilling')
+    const plugin = await loadBillingPlugin()
+    expect(registered).toEqual(['AppStoreBilling'])
+    expect((await loadPlans({ native: plugin })).map((p) => p.basePlanId)).toEqual(['annuel', 'mensuel'])
+    vi.doUnmock('@capacitor/core')
+    vi.doUnmock('../config/distribution')
   })
 })
