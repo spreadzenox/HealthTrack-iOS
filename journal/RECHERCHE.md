@@ -251,3 +251,18 @@ Moteurs d'Android : LiteRT 1.4.2 et ONNX Runtime 1.22.0, ORT ≥ 1.27 étant éc
   - les PNG doivent être lus en octets bruts, sans correction colorimétrique.
 
 **Confidentialité (comme Android).** Les images restent en mémoire et sont vidées après l'inférence. Ne sont gardés ni image ni points, seulement le JSON des scores, retiré après l'import.
+
+**Moteur des 3 modèles MediaPipe sur iPhone (28/10 21:00, I7 étape 4).**
+- **TensorFlow Lite C 2.17.0** est retenu : c'est le même moteur qu'Android (LiteRT), donc les meilleures chances de garder les mêmes scores, et il n'y a pas de conversion à faire.
+  - Pod CocoaPods `TensorFlowLiteC`, Apache-2.0, iOS 12 et plus. Sa fiche, lue dans le dépôt GitHub `CocoaPods/Specs`, donne l'archive `dl.google.com/…/TensorFlowLiteC-2.17.0.tar.gz` et `Frameworks/TensorFlowLiteC.xcframework`.
+  - Google ne publie pas de paquet SPM officiel (son guide iOS de LiteRT ne parle que de CocoaPods et de Bazel). L'`.xcframework` est donc téléchargé en CI et branché en `binaryTarget(path:)`.
+  - L'empreinte SHA-256 de l'archive est à figer après le 1er téléchargement : `dl.google.com` est fermé depuis le conteneur de la routine.
+- **ONNX Runtime** n'est utile qu'à la valence et à l'éveil (éteints, licence) :
+  - le paquet SPM de Microsoft (MIT) n'a que les étiquettes 1.20.0, 1.24.1 et 1.24.2, alors qu'Android est figé à 1.22.0 ;
+  - un `binaryTarget` peut viser directement `download.onnxruntime.ai/pod-archive-onnxruntime-c-1.22.0.zip` ;
+  - la télémétrie de la version retenue reste à vérifier.
+- Sources :
+  - <https://ai.google.dev/edge/litert/build/ios> (lu le 28/10) ;
+  - `CocoaPods/Specs` : `Specs/1/6/0/TensorFlowLiteC/2.17.0/TensorFlowLiteC.podspec.json` ;
+  - <https://github.com/microsoft/onnxruntime-swift-package-manager> (`Package.swift` et étiquettes, lus le 28/10).
+
