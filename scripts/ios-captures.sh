@@ -32,8 +32,8 @@ ui_steps() { # <page> → lignes « <Classe/test> <suffixe de capture> »
     healthkit-autorisation) echo "SanteUITests/testAccepterLaFeuilleSante healthkit-apres" ;;
     notification-autorisation) echo "NotificationsUITests/testAutoriserLesNotifications notification-autorisee" ;;
     notification-bilan)
-      echo "NotificationsUITests/testOuvrirLeCentreDeNotifications notification-centre"
-      echo "NotificationsUITests/testRepondreGeneDepuisLaNotification notification-apres" ;;
+      echo "NotificationsUITests/testRepondreGeneDepuisLaBanniere notification-apres"
+      echo "NotificationsUITests/testOuvrirLeCentreDeNotifications notification-centre" ;;
   esac
 }
 

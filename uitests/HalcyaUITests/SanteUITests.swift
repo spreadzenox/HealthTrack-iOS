@@ -78,29 +78,27 @@ final class NotificationsUITests: XCTestCase {
         }
     }
 
-    /// Appui long sur la notification elle-même (pas sur sa cellule de liste, essai du 28/10), puis « Gêne » ; retour à
-    /// Halcya.
-    func testRepondreGeneDepuisLaNotification() throws {
-        let carte = springboard.descendants(matching: .any)
+    /// Attend la bannière de la notification d'essai (jusqu'à 45 s : elle part 20 s après le signal), appui long pour
+    /// la déplier, puis « Gêne ». Méthode courante des tests d'interface de notifications ; l'appui long dans le centre
+    /// de notifications ne la dépliait pas (essais du 28/10).
+    func testRepondreGeneDepuisLaBanniere() throws {
+        let banniere = springboard.descendants(matching: .any)
             .matching(NSPredicate(format: "identifier == %@ AND label CONTAINS %@", "NotificationShortLookView", titre))
             .firstMatch
-        let note = carte.waitForExistence(timeout: 10) ? carte : notification()
-        guard note.exists else {
+        guard banniere.waitForExistence(timeout: 45) else {
             print(springboard.debugDescription)
-            XCTFail("notification « \(titre) » introuvable")
+            XCTFail("bannière « \(titre) » jamais apparue")
             return
         }
-        note.press(forDuration: 2.0)
+        banniere.press(forDuration: 1.5)
         sleep(1)
-        print(springboard.debugDescription) // ce qu'affiche la notification dépliée, pour le journal du test
+        print(springboard.debugDescription)
         let gene = springboard.descendants(matching: .any).matching(NSPredicate(format: "label == %@", "Gêne")).firstMatch
         guard gene.waitForExistence(timeout: 10) else {
-            print(springboard.debugDescription)
-            XCTFail("bouton « Gêne » absent de la notification")
+            XCTFail("bouton « Gêne » absent de la bannière dépliée")
             return
         }
         gene.tap()
-        XCUIDevice.shared.press(.home)
         halcya.activate()
     }
 

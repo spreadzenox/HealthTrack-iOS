@@ -269,7 +269,9 @@ describe('sonde du bilan du ventre du soir (I5)', () => {
     await probeGutEvening({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin })
     expect(order).toEqual(['signal notification-autorisation', 'ack notification-autorisation', 'signal notification-bilan', 'ack notification-bilan'])
     expect(waitAck.mock.calls.every(([, tries]) => tries * 300 >= 120_000)).toBe(true)
-    expect(plugin.testNotification).toHaveBeenCalledTimes(1)
+    // notification d'essai en bannière, assez tard pour que le test d'interface l'attende déjà
+    expect(plugin.testNotification).toHaveBeenCalledWith({ delay: expect.any(Number), banner: true })
+    expect(plugin.testNotification.mock.calls[0][0].delay).toBeGreaterThanOrEqual(15)
     expect(logs.join('\n')).toContain('[notification] boîte {"count":1,"levels":["discomfort"]}')
   })
 
