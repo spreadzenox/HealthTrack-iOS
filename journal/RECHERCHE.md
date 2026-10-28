@@ -165,3 +165,10 @@ formuler prudemment (« une partie de vos mesures ») et à confirmer sur l'iPho
     - <https://developer.apple.com/documentation/storekittest/sktestsession> ;
     - <https://swiftwithmajid.com/2024/01/09/storekit-testing-in-swift/> ;
     - fil des forums développeurs Apple sur « Sandbox restriction » (UI tests).
+- **Essais sur la CI (28/10, PR #36)** :
+  - la cible `AppTests` hébergée par l'app se construit et tourne ;
+  - `SKTestSession(contentsOf:)` ne lève pas, mais `Product.products(for:)` rend une liste vide, même redemandée 5 fois ;
+  - cause trouvée : un **bogue d'Apple connu** (FB22237318, fil 826971 des forums développeurs, lu le 28/10/2026). Avec le simulateur iOS 26.5, `xcodebuild test` en ligne de commande ne transmet pas le fichier `.storekit` à `storekitd` ; StoreKit Test est alors inutilisable en CI, et ça marche depuis Xcode ;
+  - d'après le fil, Apple le dit corrigé dans Xcode 26.6 RC, mais un développeur le reproduit encore avec Xcode 26.6 et iOS 26.5.1 (FB23721564) ;
+  - seul contournement fiable signalé : un simulateur iOS 26.1. L'étape de CI en prend un s'il est installé, sinon elle le dit.
+  - <https://developer.apple.com/forums/thread/826971>

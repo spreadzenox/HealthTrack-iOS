@@ -123,6 +123,32 @@ jobs:
           /usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP/Info.plist" | grep -qx false
       - name: Captures sur simulateur
         run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures "${XCTESTRUN:-}"
+      # Achat d'essai de l'abonnement App Store (I6), sans compte Apple : StoreKit Test (ios/App/AppTests/Halcya.storekit)
+      # dans une cible de tests unitaires hébergée par l'app. Encore à l'essai : n'arrête ni les captures ni la CI.
+      - name: Achat d'essai App Store (StoreKit Test, I6)
+        continue-on-error: true
+        working-directory: upstream/app/ios/App
+        run: |
+          set -o pipefail
+          mkdir -p "$GITHUB_WORKSPACE/captures"
+          # Bogue d'Apple FB22237318 (forums développeurs, fil 826971) : avec le simulateur iOS 26.5, `xcodebuild test`
+          # ne transmet pas le fichier .storekit à storekitd ; contournement signalé : un simulateur plus ancien (26.1).
+          # Le runner n'a que 26.2, 26.4 et 26.5 (28/10) : on prend l'iPhone du simulateur iOS le plus ancien.
+          { echo "Simulateurs iOS installés :"; xcrun simctl list runtimes available | grep -E '^iOS'; } | tee "$GITHUB_WORKSPACE/captures/achat-essai.txt"
+          OLDEST="$(xcrun simctl list devices available | awk '/^-- iOS /{v=$3; next} /^--/{v=""} v && /iPhone/ {print v " " $0}' | sort -V | head -1 || true)"
+          UDID="$(echo "$OLDEST" | grep -oE '[0-9A-F]{8}-[0-9A-F-]{27}' | head -1 || true)"
+          if [ -n "$UDID" ]; then
+            DEST="platform=iOS Simulator,id=$UDID"
+          else
+            DEST="platform=iOS Simulator,name=$(xcrun simctl list devices available | grep -oE 'iPhone 1[67][^(]*' | head -1 | sed 's/ *$//' || true)"
+          fi
+          echo "Simulateur choisi : ${OLDEST:-aucun ancien, iPhone par défaut}" | tee -a "$GITHUB_WORKSPACE/captures/achat-essai.txt"
+          echo "Destination : $DEST" | tee -a "$GITHUB_WORKSPACE/captures/achat-essai.txt"
+          xcodebuild -project App.xcodeproj -scheme App -configuration Debug \
+            -destination "$DEST" -derivedDataPath "$RUNNER_TEMP/dd-unit" \
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= PROVISIONING_PROFILE_SPECIFIER= \
+            -only-testing:AppTests test 2>&1 | tee "$RUNNER_TEMP/xcodebuild-unit.log" \
+            | grep -E "error:|Test Case|Executed|StoreKit Test :|TEST (SUCCEEDED|FAILED)" | tee -a "$GITHUB_WORKSPACE/captures/achat-essai.txt"
       - name: Résumé
         if: always()
         run: |
@@ -158,4 +184,5 @@ jobs:
             captures/
             ${{ runner.temp }}/xcodebuild.log
             ${{ runner.temp }}/xcodebuild-tests.log
+            ${{ runner.temp }}/xcodebuild-unit.log
           if-no-files-found: warn
