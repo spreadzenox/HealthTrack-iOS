@@ -24,8 +24,13 @@
     - Ses tests XCTest lisent les portraits et vecteurs d'Android dans `upstream/`, sans copie ; nouvelle étape de CI `swift test --package-path ios/HalcyaFace`.
     - L'algorithme, rejoué en Python sur les deux portraits, retrouve les entrées des deux modèles à 5e-7 près (tolérance d'Android : 1e-5).
 
+  - 1er essai en CI (run 148) : compilation et tests des ancres passés. Les vecteurs d'Android étaient cherchés un dossier trop haut (`/Users/runner/work/HealthTrack-iOS/upstream`) : chemin corrigé.
+  - Étape 2 dans la même PR : décodage et fusion des boîtes de BlazeFace, zone du visage, retour des 478 points dans l'image, entrée des blendshapes, taille et lacet.
+    - Mêmes cas et mêmes tolérances que `FaceGeometryTest.java`, dont la fusion pondérée et « garder le plus grand visage » ; le tri d'Android est stable, d'où le départage par index.
+    - Rejoué en Python sur les deux portraits : écart max 2e-6.
+
 ## Suite
-- CI de #43 : l'étape Swift du visage doit passer. Ensuite, étape 2 (décodage BlazeFace, zone du visage, points).
+- CI de #43 : les 11 tests Swift du visage doivent passer. Ensuite, étape 3 (indices, rafale, `FaceRecord`).
 - CI de #42 → regarder l'accueil (carte vide sans lien vers Sources) et Sources (conseil Apple Watch), puis merger.
 - Ensuite, un lancement manuel sur `main` avec `devices="iPhone 17 Pro Max"` pour les captures de la fiche ; en choisir 3 à 10.
 - À « A1 fait » : A3 puis A2 avec le propriétaire, et sa décision sur la signature.

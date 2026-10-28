@@ -154,7 +154,7 @@
   Étude du 28/10 (`RECHERCHE.md`) : ni Vision ni ARKit, qui changeraient les scores. Valence et éveil (HSEmotion, poids
   AffectNet) éteints tant que la licence n'est pas tranchée (`DEMANDES.md`). Étapes :
   - [ ] 1. Paquet Swift pur `ios/HalcyaFace` (`swift test`) : ancres, letterbox et recadrage du détecteur, testés sur les portraits d'Android (entrées ±1e-5). 28/10 20:30 : écrit (PR #43) ; l'algorithme, rejoué en Python sur les portraits, retrouve les entrées d'Android à 5e-7.
-  - [ ] 2. Décodage BlazeFace, zone du visage, points, sous-ensemble de 146 points, zone suivante (tolérances d'Android).
+  - [ ] 2. Décodage BlazeFace, zone du visage, points, sous-ensemble de 146 points, zone suivante (tolérances d'Android). 28/10 20:30 : écrit (PR #43, 7 tests) ; rejoué en Python : écart max 2e-6.
   - [ ] 3. Indices, rafale et `FaceRecord` (scénarios de `FacePipelineTest`, JSON identique, accepté par `parseFaceBurst`).
   - [ ] 4. Moteur des 3 `.tflite` (TFLite C ou conversion ONNX), modèles téléchargés en CI et SHA-256 vérifiés, sorties aux tolérances de `FaceModelsTest`.
   - [ ] 5. YUV → RVB (BT.601 plein écart, 4 rotations), puis plugin `FaceSense` en Swift avec images injectables (pas de caméra sur simulateur), puis l'iPhone 12.

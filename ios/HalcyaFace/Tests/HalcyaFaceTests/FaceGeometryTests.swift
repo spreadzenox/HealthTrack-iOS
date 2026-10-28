@@ -6,9 +6,10 @@ import XCTest
 /// Mêmes vecteurs que `FaceGeometryTest.java` d'Android : portraits du domaine public et entrées attendues des modèles
 /// (`journal/protocoles/visage-vecteurs.py` d'Android), lus dans `upstream/` préparé par `scripts/upstream.sh`, sans copie.
 final class FaceGeometryTests: XCTestCase {
+    // Tests/HalcyaFaceTests/<ce fichier> → racine du dépôt (ios/HalcyaFace/…) → upstream/
     static let fixtures = URL(fileURLWithPath: #filePath)
         .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
-        .deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+        .deletingLastPathComponent().deletingLastPathComponent()
         .appendingPathComponent("upstream/app/android/app/src/test/resources/face")
 
     struct Fixture {
