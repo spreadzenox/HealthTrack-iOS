@@ -28,7 +28,8 @@ final class AppStoreBillingTests: XCTestCase {
 
     func testAchatDEssaiRenduCommeUnAchatPlayEtGardeDansLesAbonnementsEnCours() async throws {
         let compte = try XCTUnwrap(UUID(uuidString: "01234567-89ab-cdef-0123-456789abcdef"))
-        let mensuel = try XCTUnwrap(try await Product.products(for: ["halcya_premium_mensuel"]).first)
+        let produits = try await Product.products(for: ["halcya_premium_mensuel"]) // pas d'await dans XCTUnwrap
+        let mensuel = try XCTUnwrap(produits.first)
         guard case .success(let resultat) = try await mensuel.purchase(options: [.appAccountToken(compte)]) else {
             return XCTFail("achat d'essai non abouti")
         }
