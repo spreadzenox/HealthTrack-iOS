@@ -78,16 +78,22 @@ final class NotificationsUITests: XCTestCase {
         }
     }
 
-    /// Appui long sur la notification, puis « Gêne » ; retour à Halcya.
+    /// Appui long sur la notification elle-même (pas sur sa cellule de liste, essai du 28/10), puis « Gêne » ; retour à
+    /// Halcya.
     func testRepondreGeneDepuisLaNotification() throws {
-        let note = notification()
-        guard note.waitForExistence(timeout: 10) else {
+        let carte = springboard.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier == %@ AND label CONTAINS %@", "NotificationShortLookView", titre))
+            .firstMatch
+        let note = carte.waitForExistence(timeout: 10) ? carte : notification()
+        guard note.exists else {
             print(springboard.debugDescription)
             XCTFail("notification « \(titre) » introuvable")
             return
         }
-        note.press(forDuration: 1.5)
-        let gene = springboard.buttons["Gêne"]
+        note.press(forDuration: 2.0)
+        sleep(1)
+        print(springboard.debugDescription) // ce qu'affiche la notification dépliée, pour le journal du test
+        let gene = springboard.descendants(matching: .any).matching(NSPredicate(format: "label == %@", "Gêne")).firstMatch
         guard gene.waitForExistence(timeout: 10) else {
             print(springboard.debugDescription)
             XCTFail("bouton « Gêne » absent de la notification")
