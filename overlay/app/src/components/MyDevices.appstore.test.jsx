@@ -23,5 +23,12 @@ describe('Mes appareils sur iPhone (variante appstore)', () => {
     expect(await screen.findByText(/activez ce partage vers l’app Santé dans Garmin Connect/)).toBeInTheDocument()
     expect(screen.queryByText(/Health Connect/)).not.toBeInTheDocument()
   })
-})
 
+  it('Apple Watch : la mesure s’active dans l’app Watch de l’iPhone, pas « dans Apple Watch »', async () => {
+    const at = new Date(Date.now() - 3600 * 1000).toISOString()
+    const hc = (type) => ({ source: 'health_connect', at, type, payload: { sourceName: 'Apple Watch de Julie' } })
+    render(<MyDevices detect={async () => null} loadEntries={async () => [hc('sleep'), hc('heart_rate')]} />)
+    expect(await screen.findByText(/Si votre montre en est capable, activez cette mesure dans l’app Watch de l’iPhone\./)).toBeInTheDocument()
+    expect(screen.queryByText(/dans Apple Watch/)).not.toBeInTheDocument()
+  })
+})
