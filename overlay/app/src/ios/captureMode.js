@@ -132,6 +132,7 @@ export async function installCaptureMode() {
       probe: async (d) => {
         await probeHealthKit(d)
         await probeGutEvening(d)
+        await probeEveningNote(d)
       },
       waitAck: (name, tries) =>
         waitForAck({ readAck: async () => (await Filesystem.readFile({ ...file, path: ACK })).data, sleep }, name, tries),
@@ -238,3 +239,32 @@ export async function probeGutEvening({ signal, waitAck, wait, log, plugin }) {
   }
 }
 
+/**
+ * Essai de la note du soir (étape I5), après celui du ventre (notifications déjà autorisées) : notification d'essai
+ * « Votre soirée ? » en bannière, que le test d'interface déplie ; il note les actions qu'iOS affiche (6 demandées)
+ * et en touche une. La note doit être dans la boîte du plugin, sans que l'app ait été ouverte. Résultats dans la
+ * console (`[note] …`) et dans le journal du test d'interface (actions visibles).
+ */
+export async function probeEveningNote({ signal, waitAck, wait, log, plugin }) {
+  const say = (what, value) => log(`[note] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  try {
+    const EveningNote = plugin ?? (await import('@capacitor/core')).registerPlugin('EveningNote')
+    if (!(await EveningNote.status())?.notifications) return say('essai', 'notifications non autorisées : pas de notification d’essai')
+    // même délai que le bilan du ventre : le test d'interface, lancé dès le signal, attend déjà la bannière
+    await EveningNote.testNotification({ delay: 45, banner: true })
+    await signal('note-du-soir')
+    if (!(await waitAck('note-du-soir', 900))) say('note', 'pas d’accusé du script en 4 min 30')
+    await wait(1000)
+    const notes = (await EveningNote.list())?.notes || []
+    const scores = notes.map((n) => {
+      try {
+        return JSON.parse(n.json).score
+      } catch {
+        return null
+      }
+    })
+    say('boîte', { count: notes.length, scores })
+  } catch (e) {
+    say('échec', e?.message || String(e))
+  }
+}

@@ -78,21 +78,9 @@ final class NotificationsUITests: XCTestCase {
         }
     }
 
-    /// Attend la bannière de la notification d'essai (jusqu'à 90 s : elle part 45 s après le signal), appui long pour
-    /// la déplier, puis « Gêne ». Méthode courante des tests d'interface de notifications ; l'appui long dans le centre
-    /// de notifications ne la dépliait pas (essais du 28/10).
+    /// Bilan du ventre : bannière dépliée, puis « Gêne ».
     func testRepondreGeneDepuisLaBanniere() throws {
-        let banniere = springboard.descendants(matching: .any)
-            .matching(NSPredicate(format: "identifier == %@ AND label CONTAINS %@", "NotificationShortLookView", titre))
-            .firstMatch
-        guard banniere.waitForExistence(timeout: 90) else {
-            print(springboard.debugDescription)
-            XCTFail("bannière « \(titre) » jamais apparue")
-            return
-        }
-        banniere.press(forDuration: 1.5)
-        sleep(1)
-        print(springboard.debugDescription)
+        guard deplierLaBanniere(titre) else { return }
         let gene = springboard.descendants(matching: .any).matching(NSPredicate(format: "label == %@", "Gêne")).firstMatch
         guard gene.waitForExistence(timeout: 10) else {
             XCTFail("bouton « Gêne » absent de la bannière dépliée")
@@ -100,6 +88,38 @@ final class NotificationsUITests: XCTestCase {
         }
         gene.tap()
         halcya.activate()
+    }
+
+    /// Note du soir : bannière « Votre soirée ? » dépliée ; les notes qu'iOS affiche (6 demandées) sont écrites dans le
+    /// journal du test, puis « 4 » est touché (ou la dernière affichée si iOS en coupe).
+    func testNoterLaSoireeDepuisLaBanniere() throws {
+        guard deplierLaBanniere("Votre soirée ?") else { return }
+        let visibles = (0...5).map(String.init).filter { springboard.buttons[$0].waitForExistence(timeout: $0 == "0" ? 10 : 1) }
+        print("actions visibles : \(visibles.joined(separator: " ")) (\(visibles.count) sur 6)")
+        guard let choix = visibles.contains("4") ? "4" : visibles.last else {
+            XCTFail("aucune note dans la bannière dépliée")
+            return
+        }
+        springboard.buttons[choix].tap()
+        halcya.activate()
+    }
+
+    /// Attend la bannière d'une notification d'essai (jusqu'à 90 s : elle part 45 s après le signal) et la déplie par
+    /// un appui long, méthode courante des tests d'interface de notifications (l'appui long dans le centre de
+    /// notifications ne la dépliait pas, essais du 28/10). Faux si elle n'est jamais apparue.
+    private func deplierLaBanniere(_ titre: String) -> Bool {
+        let banniere = springboard.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier == %@ AND label CONTAINS %@", "NotificationShortLookView", titre))
+            .firstMatch
+        guard banniere.waitForExistence(timeout: 90) else {
+            print(springboard.debugDescription)
+            XCTFail("bannière « \(titre) » jamais apparue")
+            return false
+        }
+        banniere.press(forDuration: 1.5)
+        sleep(1)
+        print(springboard.debugDescription)
+        return true
     }
 
     private func notification() -> XCUIElement {

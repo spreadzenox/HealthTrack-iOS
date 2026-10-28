@@ -34,6 +34,7 @@ ui_steps() { # <page> → lignes « <Classe/test> <suffixe de capture> »
     notification-bilan)
       echo "NotificationsUITests/testRepondreGeneDepuisLaBanniere notification-apres"
       echo "NotificationsUITests/testOuvrirLeCentreDeNotifications notification-centre" ;;
+    note-du-soir) echo "NotificationsUITests/testNoterLaSoireeDepuisLaBanniere note-apres" ;;
   esac
 }
 
