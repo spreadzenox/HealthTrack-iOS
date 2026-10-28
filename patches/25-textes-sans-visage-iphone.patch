@@ -1,0 +1,73 @@
+diff --git a/app/src/components/MoodEstimateCard.jsx b/app/src/components/MoodEstimateCard.jsx
+index 0655c88..98fb32d 100644
+--- a/app/src/components/MoodEstimateCard.jsx
++++ b/app/src/components/MoodEstimateCard.jsx
+@@ -13,6 +13,8 @@ import DetailsToggle from './DetailsToggle'
+ import LineIcon from './LineIcon'
+ import './MoodEstimateCard.css'
+ import { appLocale } from '../i18n/locale.js'
++import { FEATURES } from '../config/distribution'
++import { isFaceSenseAvailable } from '../services/faceSense'
+ 
+ const pct = (v) => `${(v / 5) * 100}%`
+ 
+@@ -94,8 +96,18 @@ function hourOf(iso) {
+  *   onToggleDetails?: () => void, onAddManual?: () => void, now?: Date }} props
+  *   `data` : undefined pendant la lecture, null sans lecture.
+  */
+-export default function MoodEstimateCard({ data, details = false, onToggleDetails, onAddManual, now }) {
++export default function MoodEstimateCard({ data, details = false, onToggleDetails, onAddManual, now, faceReading = !FEATURES.iosStore || isFaceSenseAvailable() }) {
+   if (data === undefined) return null
++  // Version iOS (HealthTrack-iOS) : tant que la lecture du visage n'est pas sur iPhone (I7), pas de renvoi vers elle
++  if (!data?.est && !faceReading) {
++    return (
++      <section className="today-card mood-estimate is-empty" aria-labelledby="mood-estimate-title">
++        <h3 id="mood-estimate-title" className="today-card-title">Bien-être estimé</h3>
++        <p className="today-card-text">Notez votre bien-être du jour. Son estimation par la lecture du visage arrive bientôt sur iPhone.</p>
++        <ManualNoteButton onClick={onAddManual} />
++      </section>
++    )
++  }
+   if (!data?.est) {
+     return (
+       <section className="today-card mood-estimate is-empty" aria-labelledby="mood-estimate-title">
+diff --git a/app/src/components/MyDevices.jsx b/app/src/components/MyDevices.jsx
+index b4c662a..c7bfb75 100644
+--- a/app/src/components/MyDevices.jsx
++++ b/app/src/components/MyDevices.jsx
+@@ -105,8 +105,10 @@ export default function MyDevices({ detect = detectPhoneApps, loadEntries = defa
+                   ))}
+                   {missing.length > 0 && (
+                     <p className="my-device-meta">
+-                      Jamais reçu en 30 jours : {missing.join(', ')}. Si votre montre en est capable, activez ce partage
+-                      vers {FEATURES.iosStore ? 'l’app Santé' : 'Health Connect'} dans {row.name}.
++                      Jamais reçu en 30 jours : {missing.join(', ')}.{' '}
++                      {FEATURES.iosStore && /apple watch/i.test(row.name)
++                        ? 'Si votre montre en est capable, activez cette mesure dans l’app Watch de l’iPhone.'
++                        : `Si votre montre en est capable, activez ce partage vers ${FEATURES.iosStore ? 'l’app Santé' : 'Health Connect'} dans ${row.name}.`}
+                     </p>
+                   )}
+                   {(showGuide || showOpen) && (
+diff --git a/app/src/components/WellbeingCharts.jsx b/app/src/components/WellbeingCharts.jsx
+index b723f80..d83271e 100644
+--- a/app/src/components/WellbeingCharts.jsx
++++ b/app/src/components/WellbeingCharts.jsx
+@@ -4,6 +4,8 @@ import { seriesByCalendarDay, seriesByHourToday } from '../services/wellbeingSer
+ import { getAnalysis, peekAnalysis } from '../services/analysisRunner'
+ import { pickLabelIndices } from '../utils/format'
+ import { decimalMark } from '../i18n/locale.js'
++import { FEATURES } from '../config/distribution'
++import { isFaceSenseAvailable } from '../services/faceSense'
+ import './WellbeingCharts.css'
+ 
+ const W = 320
+@@ -246,6 +248,9 @@ export default function WellbeingCharts() {
+           maxGap={1}
+           emptyMessage={hasOlderNotes
+             ? `Aucune note ces ${DAYS} derniers jours. Notez votre bien-être pour suivre son évolution.`
++            // Version iOS (HealthTrack-iOS) : pas de lecture du visage à activer tant qu'elle n'est pas sur iPhone (I7)
++            : FEATURES.iosStore && !isFaceSenseAvailable()
++              ? 'Pas encore de bien-être noté. Notez-le avec «\u00a0Noter moi-même\u00a0», dans la carte Bien-être estimé.'
+             : 'Pas encore de bien-être noté. Activez la lecture du visage ou notez-le avec «\u00a0Noter moi-même\u00a0», dans la carte Bien-être estimé.'}
+           predictionPoint={showPredictionOnChart ? { x: DAYS - 1, v: todayPrediction.predicted } : null}
+         />
