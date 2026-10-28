@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, waitForAck } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -282,5 +282,95 @@ describe('sonde du bilan du ventre du soir (I5)', () => {
     await probeGutEvening({ signal: async () => {}, waitAck: async () => true, wait: async () => {}, log: (m) => logs.push(m), plugin })
     expect(plugin.testNotification).not.toHaveBeenCalled()
     expect(logs.join('\n')).toMatch(/notifications refusées/)
+  })
+})
+
+describe('sonde de la note du soir (I5)', () => {
+  function eveningNote({ notifications = true } = {}) {
+    let notes = []
+    return {
+      status: vi.fn(async () => ({ notifications })),
+      testNotification: vi.fn(async () => {}),
+      list: vi.fn(async () => ({ notes })),
+      answer: (score) => {
+        notes = [{ name: 'note-1', json: `{"v":1,"score":${score},"at":1}` }]
+      },
+    }
+  }
+
+  it('notification d’essai en bannière, note touchée par le test d’interface retrouvée dans la boîte', async () => {
+    const plugin = eveningNote()
+    const order = []
+    const logs = []
+    const waitAck = vi.fn(async (name) => {
+      order.push(`ack ${name}`)
+      if (name === 'note-du-soir') plugin.answer(4) // geste du test d'interface
+      return true
+    })
+    await probeEveningNote({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin })
+    expect(order).toEqual(['signal note-du-soir', 'ack note-du-soir'])
+    expect(waitAck.mock.calls.every(([, tries]) => tries * 300 >= 240_000)).toBe(true)
+    expect(plugin.testNotification).toHaveBeenCalledWith({ delay: expect.any(Number), banner: true })
+    expect(plugin.testNotification.mock.calls[0][0].delay).toBeGreaterThanOrEqual(40)
+    expect(logs.join('\n')).toContain('[note] boîte {"count":1,"scores":[4]}')
+  })
+
+  it('notifications non autorisées : le dit et ne déclenche rien', async () => {
+    const plugin = eveningNote({ notifications: false })
+    const logs = []
+    const signal = vi.fn(async () => {})
+    await probeEveningNote({ signal, waitAck: async () => true, wait: async () => {}, log: (m) => logs.push(m), plugin })
+    expect(plugin.testNotification).not.toHaveBeenCalled()
+    expect(signal).not.toHaveBeenCalled()
+    expect(logs.join('\n')).toMatch(/\[note\] essai notifications non autorisées/)
+  })
+})
+
+describe('sonde du rappel de portion (I5)', () => {
+  function portionReminder({ notifications = true } = {}) {
+    let open = false
+    return {
+      schedule: vi.fn(async ({ items }) => ({ count: items.length, notifications })),
+      takeOpen: vi.fn(async () => {
+        const was = open
+        open = false
+        return { open: was }
+      }),
+      touch: () => {
+        open = true
+      },
+    }
+  }
+
+  it('rappel programmé par la vraie méthode, touché par le test d’interface : page et toucher relevés', async () => {
+    const plugin = portionReminder()
+    const order = []
+    const logs = []
+    const location = { pathname: '/settings' }
+    const waitAck = vi.fn(async (name) => {
+      order.push(`ack ${name}`)
+      if (name === 'rappel-portion') plugin.touch() // toucher du test d'interface, l'app ne l'a pas encore lu
+      return true
+    })
+    await probePortionReminder({ signal: async (n) => order.push(`signal ${n}`), waitAck, wait: async () => {}, log: (m) => logs.push(m), plugin, location, now: () => 1_000_000 })
+    expect(order).toEqual(['signal rappel-portion', 'ack rappel-portion'])
+    expect(waitAck.mock.calls.every(([, tries]) => tries * 300 >= 240_000)).toBe(true)
+    const [{ items }] = plugin.schedule.mock.calls[0]
+    expect(items).toHaveLength(1)
+    expect(items[0].at - 1_000_000).toBeGreaterThanOrEqual(40_000)
+    expect(items[0].title).toBe('Votre portion du jour')
+    expect(logs.join('\n')).toContain('[portion] après le toucher {"page":"/settings","open":true}')
+    // l'essai ne laisse aucun rappel derrière lui
+    expect(plugin.schedule).toHaveBeenLastCalledWith({ items: [] })
+  })
+
+  it('notifications non autorisées : le dit, ne signale rien et ne laisse aucun rappel', async () => {
+    const plugin = portionReminder({ notifications: false })
+    const logs = []
+    const signal = vi.fn(async () => {})
+    await probePortionReminder({ signal, waitAck: async () => true, wait: async () => {}, log: (m) => logs.push(m), plugin, location: { pathname: '/' }, now: () => 0 })
+    expect(signal).not.toHaveBeenCalled()
+    expect(plugin.schedule).toHaveBeenLastCalledWith({ items: [] })
+    expect(logs.join('\n')).toMatch(/\[portion\] essai notifications non autorisées/)
   })
 })

@@ -8,21 +8,43 @@ public protocol KeyValueStore: AnyObject {
 
 extension UserDefaults: KeyValueStore {}
 
-/// Mémoire du bilan du ventre du soir sur iPhone, portée de `GutEveningPlugin.java` et `GutEveningNotice.java`
-/// d'Android : l'état reçu de l'app (`configure`), la boîte des bilans donnés depuis la notification (vidée par l'app à
-/// l'ouverture suivante, `src/services/eveningNote.js` › `drainNativeInbox`) et les soirs à programmer d'avance.
-public final class GutEveningStore {
-    /// Bilans gardés au plus en attendant l'ouverture de l'app (comme `INBOX_MAX` d'Android).
+/// Un rappel du soir : où ranger son état, son heure par défaut, ce que la boîte garde d'une réponse.
+public struct EveningKind {
+    /// Préfixe des clés dans `UserDefaults`.
+    public let prefix: String
+    public let defaultMinute: Int
+    /// Début du nom des réponses dans la boîte.
+    public let notePrefix: String
+    /// Réponse (identifiant de l'action, sans préfixe) et heure retenue → JSON de la boîte ; nil si inconnue.
+    public let record: (String, Date) -> String?
+
+    /// Bilan du ventre du soir : Calme / Gêne / Douleur.
+    public static let gut = EveningKind(prefix: "halcya.gutEvening.", defaultMinute: GutEveningRule.defaultMinute,
+                                        notePrefix: "gut") { GutEveningRule.record(level: $0, at: $1) }
+    /// Note du soir : 0 à 5.
+    public static let note = EveningKind(prefix: "halcya.eveningNote.", defaultMinute: EveningNoteRule.defaultMinute,
+                                         notePrefix: "note") { answer, at in
+        Int(answer).flatMap { EveningNoteRule.record(score: $0, at: at) }
+    }
+}
+
+/// Mémoire d'un rappel du soir sur iPhone, portée de `GutEveningPlugin.java`, `EveningNotePlugin.java` et de leurs
+/// `…Notice.java` d'Android : l'état reçu de l'app (`configure`), la boîte des réponses données depuis la notification
+/// (vidée par l'app à l'ouverture suivante, `src/services/eveningNote.js` › `drainNativeInbox`) et les soirs à
+/// programmer d'avance.
+public final class EveningStore {
+    /// Réponses gardées au plus en attendant l'ouverture de l'app (comme `INBOX_MAX` d'Android).
     public static let inboxMax = 60
 
     private let defaults: KeyValueStore
-    private let prefix = "halcya.gutEvening."
+    public let kind: EveningKind
 
-    public init(defaults: KeyValueStore) {
+    public init(defaults: KeyValueStore, kind: EveningKind) {
         self.defaults = defaults
+        self.kind = kind
     }
 
-    private func key(_ name: String) -> String { prefix + name }
+    private func key(_ name: String) -> String { kind.prefix + name }
 
     public private(set) var enabled: Bool {
         get { defaults.object(forKey: key("enabled")) as? Bool ?? false }
@@ -30,11 +52,11 @@ public final class GutEveningStore {
     }
 
     public private(set) var minuteOfDay: Int {
-        get { defaults.object(forKey: key("minuteOfDay")) as? Int ?? GutEveningRule.defaultMinute }
+        get { defaults.object(forKey: key("minuteOfDay")) as? Int ?? kind.defaultMinute }
         set { defaults.set(newValue, forKey: key("minuteOfDay")) }
     }
 
-    /// Jour (AAAA-MM-JJ) du dernier bilan connu, donné dans l'app ou depuis la notification.
+    /// Jour (AAAA-MM-JJ) de la dernière réponse connue, donnée dans l'app ou depuis la notification.
     public private(set) var noteDay: String? {
         get { defaults.object(forKey: key("noteDay")) as? String }
         set { defaults.set(newValue, forKey: key("noteDay")) }
@@ -55,7 +77,7 @@ public final class GutEveningStore {
     /// (le plus récent des deux : un bilan donné depuis la notification n'est peut-être pas encore importé).
     public func configure(enabled: Bool?, minuteOfDay: Int?, noteDay: String?) {
         if let enabled { self.enabled = enabled }
-        if let minuteOfDay { self.minuteOfDay = EveningRule.clampMinute(minuteOfDay, fallback: GutEveningRule.defaultMinute) }
+        if let minuteOfDay { self.minuteOfDay = EveningRule.clampMinute(minuteOfDay, fallback: kind.defaultMinute) }
         if let noteDay, noteDay.range(of: #"^\d{4}-\d{2}-\d{2}$"#, options: .regularExpression) != nil,
            self.noteDay.map({ noteDay > $0 }) ?? true {
             self.noteDay = noteDay
@@ -65,17 +87,18 @@ public final class GutEveningStore {
     /// Soirs à programmer d'avance (voir `EveningRule.plan`).
     public func plan(now: Date, calendar: Calendar) -> [Date] {
         EveningRule.plan(enabled: enabled, doneDay: noteDay, minuteOfDay: minuteOfDay,
-                         fallback: GutEveningRule.defaultMinute, now: now, calendar: calendar)
+                         fallback: kind.defaultMinute, now: now, calendar: calendar)
     }
 
-    /// Geste sur un niveau depuis la notification : rangé dans la boîte, compté comme bilan du soir demandé.
-    /// Faux si le niveau est inconnu.
+    /// Geste depuis la notification (niveau du ventre, note) : rangé dans la boîte, compté comme réponse du soir
+    /// demandé. Faux si la réponse est inconnue.
     @discardableResult
-    public func answer(level: String, answeredAt: Date, askedAt: Date, calendar: Calendar) -> Bool {
+    public func answer(_ answer: String, answeredAt: Date, askedAt: Date, calendar: Calendar) -> Bool {
         let at = EveningRule.answerTime(answeredAt: answeredAt, askedAt: askedAt, calendar: calendar)
-        guard let json = GutEveningRule.record(level: level, at: at) else { return false }
+        guard let json = kind.record(answer, at) else { return false }
         var notes = storedNotes()
-        notes.append(["name": "gut-\(Int64(at.timeIntervalSince1970 * 1000))-\(notes.count + answers)", "json": json])
+        let ms = Int64(at.timeIntervalSince1970 * 1000)
+        notes.append(["name": "\(kind.notePrefix)-\(ms)-\(notes.count + answers)", "json": json])
         defaults.set(Array(notes.suffix(Self.inboxMax)), forKey: key("inbox"))
         let day = EveningRule.dayKey(at, calendar: calendar)
         if noteDay.map({ day > $0 }) ?? true { noteDay = day }
@@ -83,7 +106,7 @@ public final class GutEveningStore {
         return true
     }
 
-    /// Bilans en attente, du plus ancien au plus récent.
+    /// Réponses en attente, de la plus ancienne à la plus récente.
     public func inbox() -> [(name: String, json: String)] {
         storedNotes().compactMap { note in
             guard let name = note["name"], let json = note["json"] else { return nil }
@@ -91,7 +114,7 @@ public final class GutEveningStore {
         }
     }
 
-    /// Retire les bilans importés par l'app ; rend le nombre retirés.
+    /// Retire les réponses importées par l'app ; rend le nombre retirées.
     public func remove(names: [String]) -> Int {
         let notes = storedNotes()
         let kept = notes.filter { !names.contains($0["name"] ?? "") }

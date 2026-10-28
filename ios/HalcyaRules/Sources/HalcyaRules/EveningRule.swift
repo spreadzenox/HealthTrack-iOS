@@ -68,3 +68,19 @@ public enum GutEveningRule {
         return "{\"v\":\(recordVersion),\"level\":\"\(level)\",\"at\":\(ms)}"
     }
 }
+
+/// Note du soir d'un geste (`src/services/eveningNote.js`) : « Votre soirée ? », les 6 notes de bien-être (0 = très
+/// bas, 5 = très bien), comme `mood/EveningNote.java` d'Android.
+public enum EveningNoteRule {
+    public static let defaultMinute = 21 * 60
+    public static let recordVersion = 1
+    /// Les six notes, dans l'ordre des boutons.
+    public static let scores = Array(0...5)
+
+    /// Ce que la boîte garde d'une note : la note et l'heure du geste (ms), rien d'autre ; nil hors échelle.
+    public static func record(score: Int, at: Date) -> String? {
+        guard scores.contains(score) else { return nil }
+        let ms = Int64((at.timeIntervalSince1970 * 1000).rounded())
+        return "{\"v\":\(recordVersion),\"score\":\(score),\"at\":\(ms)}"
+    }
+}

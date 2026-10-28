@@ -1,9 +1,10 @@
 import XCTest
 @testable import HalcyaRules
 
-/// Mémoire du bilan du ventre du soir sur iPhone : mêmes règles que GutEveningPlugin.java d'Android (configure,
-/// boîte des bilans vidée par l'app à l'ouverture), plus les soirs à programmer d'avance.
-final class GutEveningStoreTests: XCTestCase {
+/// Mémoire des rappels du soir sur iPhone (bilan du ventre, note du soir) : mêmes règles que GutEveningPlugin.java et
+/// EveningNotePlugin.java d'Android (configure, boîte vidée par l'app à l'ouverture), plus les soirs à programmer
+/// d'avance.
+final class EveningStoreTests: XCTestCase {
     final class Memory: KeyValueStore {
         var values: [String: Any] = [:]
         func object(forKey key: String) -> Any? { values[key] }
@@ -21,14 +22,14 @@ final class GutEveningStoreTests: XCTestCase {
     }
 
     func testEteintParDefautA20h() {
-        let store = GutEveningStore(defaults: Memory())
+        let store = EveningStore(defaults: Memory(), kind: .gut)
         XCTAssertFalse(store.enabled)
         XCTAssertEqual(store.minuteOfDay, 20 * 60)
         XCTAssertEqual(store.plan(now: date(28, 9), calendar: paris), [])
     }
 
     func testConfigureHeureRameneeEtJourDuBilanLePlusRecent() {
-        let store = GutEveningStore(defaults: Memory())
+        let store = EveningStore(defaults: Memory(), kind: .gut)
         store.configure(enabled: true, minuteOfDay: 7 * 60, noteDay: "2026-10-27")
         XCTAssertTrue(store.enabled)
         XCTAssertEqual(store.minuteOfDay, 18 * 60)
@@ -42,16 +43,16 @@ final class GutEveningStoreTests: XCTestCase {
     }
 
     func testSoirsAProgrammerSansLeJourDuBilan() {
-        let store = GutEveningStore(defaults: Memory())
+        let store = EveningStore(defaults: Memory(), kind: .gut)
         store.configure(enabled: true, minuteOfDay: 20 * 60, noteDay: "2026-10-28")
         XCTAssertEqual(store.plan(now: date(28, 9), calendar: paris).first, date(29, 20))
     }
 
     func testGesteRangeDansLaBoiteEtCompteCommeBilanDuJour() {
-        let store = GutEveningStore(defaults: Memory())
+        let store = EveningStore(defaults: Memory(), kind: .gut)
         store.configure(enabled: true, minuteOfDay: 20 * 60, noteDay: nil)
-        XCTAssertTrue(store.answer(level: "pain", answeredAt: date(28, 20, 5), askedAt: date(28, 20), calendar: paris))
-        XCTAssertFalse(store.answer(level: "terrible", answeredAt: date(28, 20, 6), askedAt: date(28, 20), calendar: paris))
+        XCTAssertTrue(store.answer("pain", answeredAt: date(28, 20, 5), askedAt: date(28, 20), calendar: paris))
+        XCTAssertFalse(store.answer("terrible", answeredAt: date(28, 20, 6), askedAt: date(28, 20), calendar: paris))
         XCTAssertEqual(store.noteDay, "2026-10-28")
         XCTAssertEqual(store.answers, 1)
         let notes = store.inbox()
@@ -62,9 +63,9 @@ final class GutEveningStoreTests: XCTestCase {
     }
 
     func testRetirerLesBilansImportes() {
-        let store = GutEveningStore(defaults: Memory())
-        _ = store.answer(level: "calm", answeredAt: date(27, 20, 1), askedAt: date(27, 20), calendar: paris)
-        _ = store.answer(level: "discomfort", answeredAt: date(28, 20, 1), askedAt: date(28, 20), calendar: paris)
+        let store = EveningStore(defaults: Memory(), kind: .gut)
+        _ = store.answer("calm", answeredAt: date(27, 20, 1), askedAt: date(27, 20), calendar: paris)
+        _ = store.answer("discomfort", answeredAt: date(28, 20, 1), askedAt: date(28, 20), calendar: paris)
         let names = store.inbox().map(\.name)
         XCTAssertEqual(names.count, 2)
         XCTAssertNotEqual(names[0], names[1])
@@ -73,11 +74,36 @@ final class GutEveningStoreTests: XCTestCase {
     }
 
     func testBoiteBornee() {
-        let store = GutEveningStore(defaults: Memory())
-        for i in 0..<(GutEveningStore.inboxMax + 5) {
-            _ = store.answer(level: "calm", answeredAt: Date(timeIntervalSince1970: Double(1_761_000_000 + i * 60)),
+        let store = EveningStore(defaults: Memory(), kind: .gut)
+        for i in 0..<(EveningStore.inboxMax + 5) {
+            _ = store.answer("calm", answeredAt: Date(timeIntervalSince1970: Double(1_761_000_000 + i * 60)),
                              askedAt: Date(timeIntervalSince1970: Double(1_761_000_000 + i * 60)), calendar: paris)
         }
-        XCTAssertEqual(store.inbox().count, GutEveningStore.inboxMax)
+        XCTAssertEqual(store.inbox().count, EveningStore.inboxMax)
+    }
+
+    // Note du soir : mêmes règles, à 21 h, clés et boîte à part de celles du ventre
+
+    func testNoteDuSoirA21hRangeeAPart() {
+        let defaults = Memory()
+        let gut = EveningStore(defaults: defaults, kind: .gut)
+        let note = EveningStore(defaults: defaults, kind: .note)
+        XCTAssertEqual(note.minuteOfDay, 21 * 60)
+        note.configure(enabled: true, minuteOfDay: nil, noteDay: nil)
+        XCTAssertFalse(gut.enabled)
+        XCTAssertTrue(note.answer("4", answeredAt: date(28, 21, 2), askedAt: date(28, 21), calendar: paris))
+        XCTAssertEqual(note.inbox().count, 1)
+        XCTAssertEqual(gut.inbox().count, 0)
+        XCTAssertTrue(note.inbox()[0].json.hasPrefix("{\"v\":1,\"score\":4,"))
+        XCTAssertEqual(note.noteDay, "2026-10-28")
+        XCTAssertNil(gut.noteDay)
+    }
+
+    func testNoteHorsEchelleRefusee() {
+        let note = EveningStore(defaults: Memory(), kind: .note)
+        XCTAssertFalse(note.answer("6", answeredAt: date(28, 21, 2), askedAt: date(28, 21), calendar: paris))
+        XCTAssertFalse(note.answer("calm", answeredAt: date(28, 21, 2), askedAt: date(28, 21), calendar: paris))
+        XCTAssertEqual(note.inbox().count, 0)
+        XCTAssertEqual(note.answers, 0)
     }
 }

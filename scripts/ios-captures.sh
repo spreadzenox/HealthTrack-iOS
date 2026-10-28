@@ -31,9 +31,9 @@ ui_steps() { # <page> → lignes « <Classe/test> <suffixe de capture> »
   case "$1" in
     healthkit-autorisation) echo "SanteUITests/testAccepterLaFeuilleSante healthkit-apres" ;;
     notification-autorisation) echo "NotificationsUITests/testAutoriserLesNotifications notification-autorisee" ;;
-    notification-bilan)
-      echo "NotificationsUITests/testRepondreGeneDepuisLaBanniere notification-apres"
-      echo "NotificationsUITests/testOuvrirLeCentreDeNotifications notification-centre" ;;
+    notification-bilan) echo "NotificationsUITests/testRepondreGeneDepuisLaBanniere notification-apres" ;;
+    note-du-soir) echo "NotificationsUITests/testNoterLaSoireeDepuisLaBanniere note-apres" ;;
+    rappel-portion) echo "NotificationsUITests/testToucherLeRappelDePortion rappel-apres" ;;
   esac
 }
 
@@ -80,7 +80,8 @@ run_device() { # <udid> <nom>
   : > "$data/Documents/capture/ack.txt"
   xcrun simctl launch --console-pty --terminate-running-process "$udid" "$BUNDLE" > "$log" 2>&1 &
   pid=$!
-  deadline=$((SECONDS + 900)); last=""
+  # 25 min par iPhone : le parcours et les trois essais de notifications (bannières attendues 45 s) en prennent ~19
+  deadline=$((SECONDS + 1500)); last=""
   while [ "$SECONDS" -lt "$deadline" ]; do
     page="$(cat "$data/Documents/capture/ready.txt" 2>/dev/null || true)"
     if [ -n "$page" ] && [ "$page" != "$last" ]; then
