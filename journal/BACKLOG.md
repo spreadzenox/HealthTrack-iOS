@@ -78,8 +78,8 @@
     sous-classe de `CAPBridgeViewController` ; catégorie à actions Calme / Gêne / Douleur sans ouvrir l'app ; retirer
     `GutEvening` de `missingOnIos` ; capture de la notification.
   - [~] Sur simulateur (PR #21) : autorisation accordée et notification affichée dans le centre de notifications ✅ ;
-    réponse « Gêne » depuis la bannière dépliée, rangée sans ouvrir l'app ✅ sur l'iPhone 17 Pro (PR #23) ; l'iPhone
-    16e a manqué la bannière (test lancé trop tard), délai allongé, à revérifier ; geste réel sur l'iPhone 12 après A1.
+    réponse « Gêne » depuis la bannière dépliée, rangée sans ouvrir l'app ✅ sur les deux iPhone simulés (PR #23,
+    mergée) ; reste : import à l'ouverture suivante vérifié, geste réel sur l'iPhone 12 après A1.
   - [~] `EveningNote` en Swift (PR #24) : plugin, boîte commune avec le ventre (`EveningStore`), tests XCTest ✅ ;
     reste la sonde sur simulateur : iOS en montrerait 4 au plus sur 6 (sources non officielles), sinon extension de
     contenu de notification.

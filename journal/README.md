@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v542 (28/10) | v540 sur iPhone simulé (28/10, PR #22) ; v542 prêt (PR #23) |
+| Dernière version | v542 (28/10) | v542 sur iPhone simulé (28/10, PR #23) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 23 % (11 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -33,6 +33,10 @@
   d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
 
 **Ce qui a changé cette semaine**
+- **28/10 06:25 — répondre au bilan du ventre d'un geste, vérifié sur iPhone simulé** (PR #23) : sur les deux
+  iPhone simulés, un test automatique déplie la notification du soir et touche « Gêne » ; la réponse est rangée sans
+  ouvrir l'app, comme sur Android. En préparation (PR #24) : la note du soir d'un geste (0 à 5) et le rappel de la
+  portion du jour pendant une réintroduction.
 - **28/10 02:30 — le bilan du ventre du soir arrive sur iPhone** (PR #20, mergée ; notification capturée par la PR #21) : dans Paramètres, le réglage
   « Bilan du ventre le soir, d'un geste depuis une notification » apparaît ; le soir, une notification discrète
   propose Calme / Gêne / Douleur, et la réponse est rangée sans ouvrir l'app, comme sur Android. La notification
@@ -100,7 +104,7 @@ via TestFlight.
 | 28/10 03:00 | suivi d'Android v534, I5 (notification) | sur iPhone simulé, l'autorisation des notifications est accordée et la notification du bilan du soir s'affiche (première version ratée par une erreur de ma part, corrigée) | #21 |
 | 28/10 04:00 | I5 (notification, suite) | notification du soir visible dans le centre de notifications (capturée) ; la réponse d'un geste reste à automatiser ; Android v536 préparé | #21 |
 | 28/10 05:00 | suivi d'Android v540, I5 (réponse d'un geste) | iOS à jour d'Android v540 (un correctif refait) ; **sur iPhone simulé, la réponse « Gêne » donnée depuis la notification est rangée sans ouvrir l'app** (1 iPhone sur 2 : l'autre a manqué la bannière, délai corrigé) | #22 (mergée), #23 |
-| 28/10 06:00 | suivi d'Android v542, I5 (note du soir, rappel de portion) | Android v542 sans effet sur iPhone (signalement des appareils de test de Google) ; la note du soir d'un geste (0 à 5) et le rappel de la portion du jour (réintroduction) existent sur iPhone, à vérifier en capture : iOS n'affiche peut-être que 4 boutons sur 6 | #23, #24 |
+| 28/10 06:00 | suivi d'Android v542, I5 (note du soir, rappel de portion) | Android v542 sans effet sur iPhone (signalement des appareils de test de Google) ; **réponse « Gêne » d'un geste vérifiée sur les deux iPhone simulés** (#23 mergée) ; la note du soir d'un geste (0 à 5) et le rappel de la portion du jour existent sur iPhone, à vérifier en capture : iOS n'affiche peut-être que 4 boutons sur 6 | #23 (mergée), #24 |
 
 ---
 
