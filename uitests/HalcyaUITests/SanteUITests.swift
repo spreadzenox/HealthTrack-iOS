@@ -155,11 +155,14 @@ final class DonneesUITests: XCTestCase {
             element(menu).tap()
             break
         }
-        let cible = cellule(fichier)
+        let cible = lieu(fichier)
         if !cible.waitForExistence(timeout: 8) {
-            // Pas dans « Récents » : Parcourir › Sur mon iPhone › Halcya
-            for etape in ["Parcourir", "Sur mon iPhone", "Halcya"] where !cible.exists {
-                let suivant = etape == "Parcourir" ? element(etape) : cellule(etape)
+            // Pas dans « Récents » : onglet « Explorer » (iOS 26 ; « Parcourir » avant), puis Sur mon iPhone › Halcya
+            // (essai du 28/10 : sélecteur ouvert sur « Récents », onglets Récents / Partagé / Explorer)
+            let onglet = ["Explorer", "Parcourir"].map(element).first { $0.waitForExistence(timeout: 3) }
+            onglet?.tap()
+            for etape in ["Sur mon iPhone", "Halcya"] where !cible.exists {
+                let suivant = lieu(etape)
                 if suivant.waitForExistence(timeout: 8) {
                     suivant.tap()
                 } else {
@@ -190,8 +193,12 @@ final class DonneesUITests: XCTestCase {
         halcya.descendants(matching: .any).matching(NSPredicate(format: "label == %@", label)).firstMatch
     }
 
-    /// Cellule du sélecteur dont le libellé contient `label` (« halcya-essai-import, json, … »).
-    private func cellule(_ label: String) -> XCUIElement {
-        halcya.descendants(matching: .cell).matching(NSPredicate(format: "label CONTAINS %@", label)).firstMatch
+    /// Lieu, dossier ou fichier du sélecteur (cellule ou bouton) dont le libellé contient `label`
+    /// (« halcya-essai-import, json, … ») ; les textes de la page de l'app derrière le sélecteur ne comptent pas.
+    private func lieu(_ label: String) -> XCUIElement {
+        let types = [XCUIElement.ElementType.cell, .button].map { NSNumber(value: $0.rawValue) }
+        return halcya.descendants(matching: .any)
+            .matching(NSPredicate(format: "elementType IN %@ AND label CONTAINS %@", types, label))
+            .firstMatch
     }
 }

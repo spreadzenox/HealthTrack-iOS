@@ -62,7 +62,8 @@
     toucher la copie), remet l'onboarding à zéro et ouvre `/bienvenue`, puis la sonde touche « Reprendre » et
     compte.
   - [~] Gestes réels : import par le sélecteur de fichiers d'un ancien fichier (tableau nu) — PR #34 (sonde
-    `[import]`, test d'interface `DonneesUITests`, premier essai sur la CI) ; puis export par la feuille de partage ;
+    `[import]`, test d'interface `DonneesUITests` ; 1er essai du 28/10 : sélecteur ouvert sur « Récents », l'onglet
+    s'appelle « Explorer » sous iOS 26 et non « Parcourir » → corrigé, 2e essai) ; puis export par la feuille de partage ;
     fichier exporté d'Android réimporté sur iPhone (même format, déjà couvert par l'aller-retour de #29).
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS
   vérifié, mêmes méthodes et types que le connecteur ; **VFC en SDNN sur iOS contre RMSSD sur Android**, à ne pas
@@ -138,13 +139,17 @@
       schéma, la feuille d'achat de test touchée par XCUITest.
   - Propriétaire, après A1 à A4 : créer le groupe et les deux produits dans App Store Connect avec ces ids (valeurs
     exactes préparées le moment venu).
+  - [x] Natif et branchement JS (PR #33, mergée le 28/10) : `BillingRule` (5 tests XCTest), plugin `AppStoreBilling`,
+    correctif 24, contrat avec `describePlans` (Vitest). Inactifs tant que `FEATURES.billing` est faux.
+  - [ ] Achat d'essai sur simulateur : cible de tests unitaires hébergée par l'app + fichier `.storekit` +
+    `SKTestSession` (`RECHERCHE.md`, 28/10 13:30).
   - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
     l'`appAccountToken`.
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : Vision + mêmes modèles (ONNX Runtime iOS ou Core ML),
   mêmes scores qu'Android sur les vecteurs de référence (`journal/protocoles/visage-*.py` d'Android).
 - [ ] **I8 — Le reste du natif** : voix, temps d'écran, montre Huawei (BLE), détection des sources : étude honnête
   (sources datées) puis ce qui est faisable ; ⛔ argumentés dans `PARITE.md`.
-- [ ] **I9 — Publication** (28/10 : `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
+- [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
   CI ; données collectées à compléter avec A5) : signature par la CI (A2), envoi TestFlight interne à chaque version suivie, fiche App
   Store fr-FR (`store/`), captures, `PrivacyInfo.xcprivacy`, réponses « Confidentialité de l'app » (A5), relecture
   des directives d'Apple (santé, abonnement, IA) ; la soumission reste un geste du propriétaire.
