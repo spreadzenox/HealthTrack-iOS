@@ -72,9 +72,9 @@
   - [x] Simulateurs en français pour les captures (PR #9).
 - [ ] **I5 — Notifications** : bilan du ventre du soir, note du soir, rappel de portion, rappel de fin d'essai ;
   actions dans la notification, réponse rangée à l'ouverture suivante.
-  - [~] Règles du soir en Swift, testées par XCTest (`ios/HalcyaRules`, PR #18) : soirs programmés d'avance (iOS ne
+  - [x] Règles du soir en Swift, testées par XCTest (`ios/HalcyaRules`, PR #18, mergée) : soirs programmés d'avance (iOS ne
     réveille pas l'app pour décider), geste après minuit rattaché au soir demandé.
-  - [ ] Plugin `GutEvening` en Swift (`configure`, `status`, `list`, `remove`, `requestNotifications`), branché par une
+  - [~] Plugin `GutEvening` en Swift (`configure`, `status`, `list`, `remove`, `requestNotifications`, PR #20), branché par une
     sous-classe de `CAPBridgeViewController` ; catégorie à actions Calme / Gêne / Douleur sans ouvrir l'app ; retirer
     `GutEvening` de `missingOnIos` ; capture de la notification.
   - [ ] `EveningNote` (note du soir), puis `PortionReminder` (rappel de portion de la réintroduction).
