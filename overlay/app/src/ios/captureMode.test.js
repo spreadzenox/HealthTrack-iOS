@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeDeleteAll, waitForAck } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -496,5 +496,40 @@ describe('sonde de « Supprimer toutes mes données » (I3)', () => {
     }
     await probeDeleteAll({ log: (m) => logs.push(m), storage: { countAllEntries: async () => 1 }, readSnapshot: async () => null, deleteAll })
     expect(logs.join('\n')).toContain('[suppression] échec base fermée')
+  })
+})
+
+describe('sonde de la copie proposée à l’onboarding après une restauration (I3)', () => {
+  it('copie à jour, base vidée, onboarding repris sans recharger ; « Reprendre » rend toute la base', async () => {
+    let count = 3
+    const calls = []
+    const storage = {
+      countAllEntries: vi.fn(async () => count),
+      deleteAllEntries: vi.fn(async () => {
+        calls.push('base vidée')
+        count = 0
+      }),
+    }
+    const local = memoryStorage({ healthtrack_onboarding: '{"done":true}' })
+    const signal = vi.fn(async (name) => calls.push(`capture ${name}`))
+    const logs = []
+    await probeSnapshotWelcome({
+      log: (m) => logs.push(m),
+      signal,
+      waitAck: vi.fn(async () => true),
+      wait: async () => {},
+      storage,
+      localStorage: local,
+      writeSnapshot: vi.fn(async () => calls.push('copie écrite') && true),
+      navigate: (path) => calls.push(`page ${path}`),
+      clickRestore: () => {
+        calls.push('reprendre')
+        count = 3
+        return true
+      },
+    })
+    expect(calls).toEqual(['copie écrite', 'base vidée', 'page /bienvenue', 'capture restauration-onboarding', 'reprendre', 'capture restauration-reprise'])
+    expect(JSON.parse(local.data.healthtrack_onboarding)).toMatchObject({ done: true })
+    expect(logs).toEqual(['[restauration] avant {"count":3,"copie":true,"vidée":0}', '[restauration] après {"bouton":true,"count":3}'])
   })
 })

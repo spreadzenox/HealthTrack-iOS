@@ -136,6 +136,7 @@ export async function installCaptureMode() {
         await probePortionReminder({ ...d, location: window.location })
         await probeDataRoundtrip(d)
         await probeBackup(d)
+        await probeSnapshotWelcome({ ...d, localStorage: window.localStorage })
         await probeDeleteAll(d) // en dernier : vide la base
       },
       waitAck: (name, tries) =>
@@ -392,5 +393,58 @@ export async function probeDeleteAll({ log, storage, readSnapshot, deleteAll }) 
     say('après', { entries, count: await db.countAllEntries(), copie: Boolean(await read()) })
   } catch (e) {
     say('échec', e?.message || String(e))
+  }
+}
+
+/** « Reprendre mes données » de `SnapshotWelcome.jsx`, touché comme le ferait la personne. */
+function clickButton(label) {
+  const button = [...document.querySelectorAll('button')].find((b) => b.textContent.trim() === label)
+  button?.click()
+  return Boolean(button)
+}
+
+/**
+ * Essai de la copie de secours proposée à l'onboarding (étape I3, correctif 23) : ce que voit la personne après une
+ * restauration iCloud (la base n'y est pas, la copie de Documents si). La copie est mise à jour, la base vidée sans
+ * toucher la copie, l'onboarding rouvert sans recharger la page (le mode capture ne reprend pas après un
+ * rechargement), capturé ; puis « Reprendre mes données » est touché et capturé, la base recomptée. L'onboarding est
+ * ensuite noté fait, comme avant. Résultats dans la console (`[restauration] …`).
+ */
+export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage, localStorage, writeSnapshot, navigate, clickRestore }) {
+  const say = (what, value) => log(`[restauration] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  const onboarding = localStorage.getItem('healthtrack_onboarding')
+  try {
+    const db = storage ?? (await import('../storage/localHealthStorage'))
+    const save =
+      writeSnapshot ??
+      (async () => {
+        const [{ saveSnapshot }, { Filesystem, Directory, Encoding }] = await Promise.all([import('./snapshot.js'), import('@capacitor/filesystem')])
+        const writeFile = (path, data) => Filesystem.writeFile({ path, data, directory: Directory.Documents, encoding: Encoding.UTF8 })
+        return saveSnapshot({ countAllEntries: db.countAllEntries, exportToJson: db.exportToJson, writeFile })
+      })
+    const go =
+      navigate ??
+      ((path) => {
+        window.history.pushState({}, '', path)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      })
+    const count = await db.countAllEntries()
+    const copie = await save()
+    await db.deleteAllEntries()
+    say('avant', { count, copie, vidée: await db.countAllEntries() })
+    localStorage.setItem('healthtrack_onboarding', JSON.stringify({ step: 0 }))
+    go('/bienvenue')
+    await wait(3000) // la copie est lue, la carte s'affiche
+    await signal('restauration-onboarding')
+    await waitAck('restauration-onboarding')
+    const bouton = (clickRestore ?? (() => clickButton('Reprendre mes données')))()
+    await wait(5000) // import de toute la base
+    await signal('restauration-reprise')
+    await waitAck('restauration-reprise')
+    say('après', { bouton, count: await db.countAllEntries() })
+  } catch (e) {
+    say('échec', e?.message || String(e))
+  } finally {
+    if (onboarding) localStorage.setItem('healthtrack_onboarding', onboarding)
   }
 }
