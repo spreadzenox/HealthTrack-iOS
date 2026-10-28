@@ -61,9 +61,9 @@
     composant dans `overlay/app/src/ios/`. Capture : une étape du plan qui vide la base (`deleteAllEntries`, sans
     toucher la copie), remet l'onboarding à zéro et ouvre `/bienvenue`, puis la sonde touche « Reprendre » et
     compte.
-  - [~] Gestes réels : import par le sélecteur de fichiers d'un ancien fichier (tableau nu) — PR #34 (sonde
-    `[import]`, test d'interface `DonneesUITests` ; 1er essai du 28/10 : sélecteur ouvert sur « Récents », l'onglet
-    s'appelle « Explorer » sous iOS 26 et non « Parcourir » → corrigé, 2e essai) ; puis export par la feuille de partage ;
+  - [x] Import par le sélecteur de fichiers d'un ancien fichier (tableau nu), geste réel — PR #34, mergée le 28/10
+    (sonde `[import]` : 1926 → 1928 ; test d'interface `DonneesUITests` : Explorer › Sur mon iPhone › Halcya).
+  - [ ] Gestes réels, suite : puis export par la feuille de partage ;
     fichier exporté d'Android réimporté sur iPhone (même format, déjà couvert par l'aller-retour de #29).
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS
   vérifié, mêmes méthodes et types que le connecteur ; **VFC en SDNN sur iOS contre RMSSD sur Android**, à ne pas
