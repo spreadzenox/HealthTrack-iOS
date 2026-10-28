@@ -127,3 +127,19 @@ formuler prudemment (« une partie de vos mesures ») et à confirmer sur l'iPho
   2026) écrit exercice, sommeil, pas et signes vitaux dans Santé depuis la version 5.05 (Profil › Apps partenaires ›
   Apple Health, iOS 16.4 ou plus) : à confirmer dans une source de Google avant de l'écrire dans l'app.
 - **Apple Watch** : écrit directement dans Santé, rien à faire (atout de la version iOS).
+
+## Abonnement sur iPhone (I6) : premières pistes (28/10/2026, lu dans le code d'Android v545)
+- Android : plugin natif `PlayBilling` (Play Billing Library), vu de `src/services/playBilling.js` : `getProducts`
+  (formules et prix lus dans Play, jamais codés en dur ; abonnement unique `halcya_premium`, formules `annuel` et
+  `mensuel`), `purchase` (avec `obfuscatedAccountId`, empreinte de l'identifiant d'installation), `queryPurchases`,
+  écoute `purchasesUpdated`. L'app ne décide jamais seule d'un droit : le jeton d'achat est revérifié par le relais
+  (`entitlement.js`, `relay/src/billing.js` : `subscriptionsv2.get`, accusé de réception, RTDN). `FEATURES.billing`
+  n'est vrai que pour la variante play (`config/distribution.js`).
+- iPhone : StoreKit 2 en Swift (`Product.products(for:)`, `product.purchase(options: [.appAccountToken(uuid)])`,
+  `Transaction.currentEntitlements`, `Transaction.updates`) ; le jeton envoyé au relais serait
+  `Transaction.jwsRepresentation`, vérifié par le relais (demande précisée dans `DEMANDES.md`, 28/10).
+- **Testable sans compte Apple** : un fichier de configuration StoreKit (`.storekit`) décrit l'abonnement et ses
+  formules ; `SKTestSession` (StoreKitTest) l'utilise dans des tests XCTest sur simulateur, sans App Store Connect
+  (essai à faire sur la CI, comme HealthKit en I4). À trancher ensuite : un plugin iOS au même nom et à la même forme
+  que `PlayBilling` (aucun changement du code partagé, mais un nom trompeur) ou un service `appStoreBilling.js` en
+  `overlay/` branché par un correctif minimal là où `playBilling.js` est appelé.
