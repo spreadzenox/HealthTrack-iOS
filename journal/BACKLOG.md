@@ -86,7 +86,8 @@
   - [x] `PortionReminder` en Swift (PR #24, mergée) : rappels restants programmés d'avance ; bannière touchée app
     en arrière-plan → la réintroduction s'ouvre (le natif signale le toucher, transmis par iOS après le retour au
     premier plan : correctif 18) ; vérifié sur les deux iPhone simulés.
-  - [ ] Import des réponses à l'ouverture suivante vérifié en capture (boîte vidée dans l'historique) ; gestes sur
+  - [~] Import des réponses à l'ouverture suivante vérifié en capture : bilan du ventre ✅ (PR #25 : inserted 1,
+    boîte vide) ; note du soir à revoir (essai faussé par une reprogrammation, sonde corrigée en PR #26) ; gestes sur
     l'iPhone 12 après A1.
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
