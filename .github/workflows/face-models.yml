@@ -1,6 +1,7 @@
-# Lecture du visage sur iPhone (I7) : les 3 modèles du Face Landmarker exécutés par TensorFlow Lite C sur un iPhone
-# simulé, comparés aux sorties de référence d'Android (mêmes tolérances que FaceModelsTest.java). À part de la build de
-# l'app : ne tourne que si le visage ou ses modèles changent, en quelques minutes.
+# Lecture du visage sur iPhone (I7) : le calcul (swift test) puis les 3 modèles du Face Landmarker exécutés par
+# TensorFlow Lite C sur un iPhone simulé, comparés aux sorties de référence d'Android (mêmes tolérances que
+# FaceModelsTest.java). À part de la build de l'app : ne tourne que si le visage ou ses modèles changent, en quelques
+# minutes ; lançable à la main sur une branche sans PR (workflow_dispatch).
 name: iOS — modèles du visage
 
 on:
@@ -34,6 +35,9 @@ jobs:
           xcode-version: latest-stable
       - name: Code Android suivi (vecteurs de référence, empreintes des modèles)
         run: scripts/upstream.sh
+      # Calcul du visage sans modèle (paquet pur, aussi dans la build complète) : retour rapide pour toute la chaîne
+      - name: Tests Swift du calcul du visage (XCTest, vecteurs d'Android)
+        run: swift test --package-path ios/HalcyaFace
       - name: Modèles et TensorFlow Lite C, téléchargés et vérifiés
         run: scripts/face-models.sh
       - name: Tests sur iPhone simulé
