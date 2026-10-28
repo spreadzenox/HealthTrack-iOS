@@ -47,8 +47,16 @@
     IndexedDB de la sauvegarde iCloud**, Documents (copie de secours) est sauvegardé.
   - [~] « Supprimer toutes mes données » efface aussi la copie de secours (correctif 22, PR #31 ; elle gardait toutes
     les entrées et le profil, et partait dans la sauvegarde iCloud) ; sonde `[suppression]` en dernier.
-  - [ ] Après une restauration (base vide, copie présente) : proposer la copie d'emblée, à l'Accueil ou dans
-    l'onboarding (aujourd'hui seulement dans « Vos données »).
+  - [ ] Après une restauration (base vide, copie présente) : proposer la copie d'emblée (aujourd'hui seulement dans
+    « Vos données »). Plan (28/10 11:40) : **dans l'onboarding, au premier écran**, pas à l'Accueil. Après une
+    restauration iCloud ou un effacement par iOS, le localStorage est perdu lui aussi, donc l'onboarding revient.
+    À l'Accueil, la synchro Santé autorisée pendant l'onboarding remplirait la base avant l'offre (« base vide »
+    serait faux). Carte « Reprendre vos données ? Copie de secours du … (n mesures) » [Reprendre mes données]
+    [Commencer sans] → `importFromJson` en fusion (entrées et profil), puis l'onboarding continue (autorisations à
+    redonner sur un nouveau téléphone). Correctif minimal d'`Onboarding.jsx` (une ligne au-dessus de `GoalStep`),
+    composant dans `overlay/app/src/ios/`. Capture : une étape du plan qui vide la base (`deleteAllEntries`, sans
+    toucher la copie), remet l'onboarding à zéro et ouvre `/bienvenue`, puis la sonde touche « Reprendre » et
+    compte.
   - [ ] Gestes réels : export par la feuille de partage, import par le sélecteur de fichiers (test d'interface),
     fichier exporté d'Android réimporté sur iPhone.
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS
