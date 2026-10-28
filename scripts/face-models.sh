@@ -8,9 +8,10 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 GRADLE="$ROOT/upstream/app/android/app/face-models.gradle"
 DEST="$ROOT/ios/HalcyaFaceModels/Vendor"
-# TensorFlow Lite C 2.17.0, l'archive du pod CocoaPods TensorFlowLiteC (dernière publiée) ; empreinte relevée en CI
+# TensorFlow Lite C 2.17.0, l'archive du pod CocoaPods TensorFlowLiteC (dernière publiée) ; empreinte relevée en CI le
+# 28/10/2026 (run 40769499312), figée ici : une archive différente arrête le script
 TFLITE_URL="https://dl.google.com/tflite-release/ios/prod/tensorflow/lite/release/ios/release/32/20240729-115310/TensorFlowLiteC/2.17.0/0c10b3543e01f547/TensorFlowLiteC-2.17.0.tar.gz"
-TFLITE_SHA256="${TFLITE_SHA256:-}"
+TFLITE_SHA256="9667b476015f136e5b332ce040e12822c4ac6d5c58947882ddc809cdff0fb99e"
 
 sha() { shasum -a 256 "$1" | cut -d' ' -f1; }
 fetch() { curl -fsSL --retry 3 --retry-delay 2 -o "$2" "$1"; }
@@ -42,9 +43,7 @@ echo "Modèles du visage : 3 fichiers vérifiés (empreintes d'Android)"
 if [ ! -d "$DEST/TensorFlowLiteC.xcframework" ]; then
   fetch "$TFLITE_URL" "$TMP/tflite.tar.gz"
   got="$(sha "$TMP/tflite.tar.gz")"
-  if [ -z "$TFLITE_SHA256" ]; then
-    echo "::warning::TensorFlow Lite C : empreinte $got à figer dans scripts/face-models.sh"
-  elif [ "$got" != "$TFLITE_SHA256" ]; then
+  if [ "$got" != "$TFLITE_SHA256" ]; then
     echo "face-models.sh : empreinte de TensorFlow Lite C inattendue ($got)" >&2
     exit 1
   fi
