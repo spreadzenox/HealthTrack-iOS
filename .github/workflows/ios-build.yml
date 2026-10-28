@@ -114,6 +114,13 @@ jobs:
           mkdir -p captures
           codesign -d --entitlements - "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" > captures/entitlements.txt 2>&1 || true
           cat captures/entitlements.txt
+      - name: Manifeste de confidentialité et chiffrement dans l'app (App Store, I9)
+        run: |
+          APP="$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app"
+          plutil -lint "$APP/PrivacyInfo.xcprivacy"
+          /usr/libexec/PlistBuddy -c 'Print :NSPrivacyTracking' "$APP/PrivacyInfo.xcprivacy" | grep -qx false
+          /usr/libexec/PlistBuddy -c 'Print :NSPrivacyAccessedAPITypes:0:NSPrivacyAccessedAPIType' "$APP/PrivacyInfo.xcprivacy" | grep -qx NSPrivacyAccessedAPICategoryUserDefaults
+          /usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP/Info.plist" | grep -qx false
       - name: Captures sur simulateur
         run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures "${XCTESTRUN:-}"
       - name: Résumé
