@@ -148,6 +148,7 @@ export async function installCaptureMode() {
         await probeDataRoundtrip(d)
         await probeBackup(d)
         await probeVoice(d)
+        await probeFace(d)
         await probeFileImport(d)
         await probeShareExport(d)
         await probeSnapshotWelcome({ ...d, localStorage: window.localStorage })
@@ -563,6 +564,27 @@ export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage
  * `voiceProbe.js` (`on_device_fr` si le français se reconnaît sur le téléphone). Aucun micro, aucun son. Résultat dans
  * la console (`[voix] …`).
  */
+/**
+ * Lecture du visage (I7) : le plugin FaceSense de l'iPhone répond, avec les modèles embarqués, en mode « app_open »,
+ * sans valence ni éveil ; puis une lecture de test. Le simulateur n'a pas de caméra (et la permission n'est jamais
+ * demandée ici) : la lecture s'arrête avant la caméra, ce qui est attendu. Jamais un score dans la console.
+ */
+export async function probeFace({ log, plugin }) {
+  const { faceSensePlugin } = await import('../services/faceSense')
+  const p = plugin === undefined ? faceSensePlugin() : plugin
+  if (!p) {
+    log('[visage] sonde {"plugin":false}')
+    return
+  }
+  try {
+    const s = await p.status()
+    const t = await p.test()
+    log(`[visage] sonde ${JSON.stringify({ plugin: true, models: s.models, mode: s.mode, affect: s.affectModel, outcome: t?.outcome })}`)
+  } catch (e) {
+    log(`[visage] sonde ${JSON.stringify({ plugin: true, error: String(e?.message || e) })}`)
+  }
+}
+
 export async function probeVoice({ log, plugin }) {
   const { probeVoice: probe, voiceVerdict, voiceProbePlugin } = await import('../services/voiceProbe')
   const p = await probe(plugin ?? voiceProbePlugin())
