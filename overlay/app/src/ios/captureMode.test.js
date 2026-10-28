@@ -450,18 +450,25 @@ describe('sonde de la sauvegarde du téléphone (I3)', () => {
         items: [
           { path: 'Documents', excluded: false, bytes: 790000, files: 1 },
           { path: 'Library/WebKit/WebsiteData/Default/x/IndexedDB', excluded: false, bytes: 1200000, files: 4 },
+          { path: 'Library/Application Support/Halcya/device_marker', excluded: true, bytes: 36, files: 1 },
         ],
       })),
     }
     const logs = []
-    await probeBackup({ log: (m) => logs.push(m), plugin })
+    await probeBackup({ log: (m) => logs.push(m), plugin, checkRestore: async () => ({ restored: false }) })
     expect(logs.join('\n')).toContain('[sauvegarde] Documents {"excluded":false,"bytes":790000,"files":1}')
     expect(logs.join('\n')).toContain('[sauvegarde] Library/WebKit/WebsiteData/Default/x/IndexedDB {"excluded":false,"bytes":1200000,"files":4}')
+    expect(logs.join('\n')).toContain('[sauvegarde] Library/Application Support/Halcya/device_marker {"excluded":true,"bytes":36,"files":1}')
+    expect(logs.join('\n')).toContain('[sauvegarde] repère {"restored":false}')
   })
 
   it('un échec est dit, sans lever', async () => {
     const logs = []
-    await probeBackup({ log: (m) => logs.push(m), plugin: { backupStatus: async () => { throw new Error('absent') } } })
+    const checkRestore = async () => {
+      throw new Error('lecture impossible')
+    }
+    await probeBackup({ log: (m) => logs.push(m), plugin: { backupStatus: async () => { throw new Error('absent') } }, checkRestore })
     expect(logs.join('\n')).toContain('[sauvegarde] échec absent')
+    expect(logs.join('\n')).toContain('[sauvegarde] repère échec lecture impossible')
   })
 })

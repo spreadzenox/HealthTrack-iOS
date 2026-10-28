@@ -1,6 +1,7 @@
 #if DEBUG
 import Capacitor
 import Foundation
+import HalcyaRules
 
 /// Build de captures seulement (configuration Debug, jamais livrée) : ce que la sauvegarde iCloud du téléphone
 /// emporterait des données de l'app (`src/ios/captureMode.js` › `probeBackup`). La sauvegarde prend Documents et
@@ -13,8 +14,8 @@ public class CaptureProbePlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "backupStatus", returnType: CAPPluginReturnPromise),
     ]
 
-    /// { items: [{ path, excluded, bytes, files }] } : Documents, Library/WebKit et chaque dossier IndexedDB trouvé
-    /// sous Library (chemins relatifs au conteneur de l'app).
+    /// { items: [{ path, excluded, bytes, files }] } : Documents, Library/WebKit, chaque dossier IndexedDB trouvé
+    /// sous Library et le repère propre au téléphone (`BackupMarkerPlugin`), chemins relatifs au conteneur de l'app.
     @objc func backupStatus(_ call: CAPPluginCall) {
         let fm = FileManager.default
         let home = URL(fileURLWithPath: NSHomeDirectory()).standardizedFileURL
@@ -23,6 +24,7 @@ public class CaptureProbePlugin: CAPPlugin, CAPBridgedPlugin {
         if let walk = fm.enumerator(at: library, includingPropertiesForKeys: [.isDirectoryKey]) {
             for case let url as URL in walk where url.lastPathComponent == "IndexedDB" { targets.append(url) }
         }
+        targets.append(BackupMarkerPlugin.directory.appendingPathComponent(DeviceMarker.fileName))
         let items: [[String: Any]] = targets.filter { fm.fileExists(atPath: $0.path) }.map { url in
             let (bytes, files) = Self.size(of: url)
             return [
@@ -52,6 +54,9 @@ public class CaptureProbePlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     private static func size(of url: URL) -> (Int, Int) {
+        if let values = try? url.resourceValues(forKeys: [.fileSizeKey, .isRegularFileKey]), values.isRegularFile == true {
+            return (values.fileSize ?? 0, 1)
+        }
         guard let walk = FileManager.default.enumerator(at: url, includingPropertiesForKeys: [.fileSizeKey, .isRegularFileKey])
         else { return (0, 0) }
         var bytes = 0, files = 0

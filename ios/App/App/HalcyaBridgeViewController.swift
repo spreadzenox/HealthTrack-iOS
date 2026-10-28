@@ -7,6 +7,7 @@ class HalcyaBridgeViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(GutEveningPlugin())
         bridge?.registerPluginInstance(EveningNotePlugin())
         bridge?.registerPluginInstance(PortionReminderPlugin())
+        bridge?.registerPluginInstance(BackupMarkerPlugin())
         #if DEBUG
         bridge?.registerPluginInstance(CaptureProbePlugin()) // build de captures seulement
         #endif
