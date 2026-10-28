@@ -133,6 +133,7 @@ export async function installCaptureMode() {
         await probeHealthKit(d)
         await probeGutEvening(d)
         await probeEveningNote(d)
+        await probePortionReminder({ ...d, location: window.location })
       },
       waitAck: (name, tries) =>
         waitForAck({ readAck: async () => (await Filesystem.readFile({ ...file, path: ACK })).data, sleep }, name, tries),
@@ -266,5 +267,32 @@ export async function probeEveningNote({ signal, waitAck, wait, log, plugin }) {
     say('boîte', { count: notes.length, scores })
   } catch (e) {
     say('échec', e?.message || String(e))
+  }
+}
+
+/**
+ * Essai du rappel de portion de la réintroduction guidée (étape I5) : un rappel programmé par la vraie méthode
+ * (`schedule`) 45 s après le signal ; le test d'interface met l'app en arrière-plan et touche la bannière, comme le
+ * soir venu. Relevés ensuite : la page ouverte (la réintroduction si le toucher a été lu à l'ouverture, `Layout.jsx`
+ * › `usePortionOpen`) et ce qu'en dit `takeOpen`. L'essai ne laisse aucun rappel derrière lui. Résultats dans la
+ * console (`[portion] …`).
+ */
+export async function probePortionReminder({ signal, waitAck, wait, log, plugin, location, now = Date.now }) {
+  const say = (what, value) => log(`[portion] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  let PortionReminder = plugin
+  try {
+    PortionReminder ??= (await import('@capacitor/core')).registerPlugin('PortionReminder')
+    const items = [{ at: now() + 45_000, title: 'Votre portion du jour', body: 'Essai de la build de captures.' }]
+    const scheduled = await PortionReminder.schedule({ items })
+    say('schedule', scheduled)
+    if (!scheduled?.notifications) return say('essai', 'notifications non autorisées : rien à toucher')
+    await signal('rappel-portion')
+    if (!(await waitAck('rappel-portion', 900))) say('rappel', 'pas d’accusé du script en 4 min 30')
+    await wait(2000)
+    say('après le toucher', { page: location?.pathname, open: (await PortionReminder.takeOpen())?.open === true })
+  } catch (e) {
+    say('échec', e?.message || String(e))
+  } finally {
+    await PortionReminder?.schedule?.({ items: [] })?.catch?.(() => {})
   }
 }

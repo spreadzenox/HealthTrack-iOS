@@ -104,6 +104,28 @@ final class NotificationsUITests: XCTestCase {
         halcya.activate()
     }
 
+    /// Rappel de portion : l'app passe en arrière-plan, la bannière « Votre portion du jour » est touchée comme le soir
+    /// venu ; Halcya doit revenir au premier plan (la sonde relève ensuite la page ouverte).
+    func testToucherLeRappelDePortion() throws {
+        XCUIDevice.shared.press(.home)
+        let banniere = springboard.descendants(matching: .any)
+            .matching(NSPredicate(format: "identifier == %@ AND label CONTAINS %@", "NotificationShortLookView",
+                                  "Votre portion du jour"))
+            .firstMatch
+        guard banniere.waitForExistence(timeout: 90) else {
+            print(springboard.debugDescription)
+            XCTFail("bannière « Votre portion du jour » jamais apparue")
+            halcya.activate()
+            return
+        }
+        banniere.tap()
+        guard halcya.wait(for: .runningForeground, timeout: 15) else {
+            XCTFail("Halcya ne s'est pas ouverte au toucher")
+            halcya.activate()
+            return
+        }
+    }
+
     /// Attend la bannière d'une notification d'essai (jusqu'à 90 s : elle part 45 s après le signal) et la déplie par
     /// un appui long, méthode courante des tests d'interface de notifications (l'appui long dans le centre de
     /// notifications ne la dépliait pas, essais du 28/10). Faux si elle n'est jamais apparue.
