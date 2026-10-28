@@ -153,7 +153,7 @@
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : mêmes modèles qu'Android, mêmes scores sur ses vecteurs de référence.
   Étude du 28/10 (`RECHERCHE.md`) : ni Vision ni ARKit, qui changeraient les scores. Valence et éveil (HSEmotion, poids
   AffectNet) éteints tant que la licence n'est pas tranchée (`DEMANDES.md`). Étapes :
-  - [ ] 1. Paquet Swift pur `ios/HalcyaFace` (`swift test`) : ancres, letterbox et recadrage du détecteur, testés sur les portraits d'Android (entrées ±1e-5).
+  - [ ] 1. Paquet Swift pur `ios/HalcyaFace` (`swift test`) : ancres, letterbox et recadrage du détecteur, testés sur les portraits d'Android (entrées ±1e-5). 28/10 20:30 : écrit (PR #43) ; l'algorithme, rejoué en Python sur les portraits, retrouve les entrées d'Android à 5e-7.
   - [ ] 2. Décodage BlazeFace, zone du visage, points, sous-ensemble de 146 points, zone suivante (tolérances d'Android).
   - [ ] 3. Indices, rafale et `FaceRecord` (scénarios de `FacePipelineTest`, JSON identique, accepté par `parseFaceBurst`).
   - [ ] 4. Moteur des 3 `.tflite` (TFLite C ou conversion ONNX), modèles téléchargés en CI et SHA-256 vérifiés, sorties aux tolérances de `FaceModelsTest`.

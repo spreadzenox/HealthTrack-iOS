@@ -1,6 +1,6 @@
 # 2026-10-28 20:00 UTC — Textes justes sur iPhone : bien-être sans lecture du visage, conseil Apple Watch
 
-**Étape** : I9 (fidélité de l'app et de la fiche), I7 en attente  ·  **PR** : #42 (CI en cours)  ·  **Android suivi** : v567 (aucune nouvelle version publiée depuis le run précédent)  ·  **iOS** : 567 sur `main` (simulateur)  ·  **Parité** : 32 % (15/47)
+**Étape** : I9 (fidélité de l'app et de la fiche), I7 en attente  ·  **PR** : #42 (CI en cours), #43 (I7, première étape)  ·  **Android suivi** : v567 (aucune nouvelle version publiée depuis le run précédent)  ·  **iOS** : 567 sur `main` (simulateur)  ·  **Parité** : 32 % (15/47)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun. A1 reste en cours : il attend l'e-mail de confirmation d'Apple.
@@ -17,7 +17,15 @@
 - Tests (3 nouveaux, variante appstore) : `MoodEstimateCard.appstore.test.jsx`, `WellbeingCharts.appstore.test.jsx`, et un cas Apple Watch dans `MyDevices.appstore.test.jsx`. Suite d'Android : 2759 passés ; build appstore faite.
 - Leçon : un correctif se génère depuis l'état sans lui. Le premier essai, fait après un `upstream.sh` qui l'avait déjà appliqué, ne gardait que le dernier fichier modifié. Refait en mettant le correctif de côté.
 
+- **I7 commencé** (branche `claude/ios-i7-visage`, PR #43, posée sur #42).
+  - Étude du code visage d'Android déléguée à un sous-agent en lecture seule, puis vérifiée ; résumée dans `RECHERCHE.md`.
+  - ⚠️ Poids HSEmotion appris sur AffectNet (recherche non commerciale), idée I73 d'Android non tranchée : valence et éveil restent éteints sur iPhone jusqu'à la décision du propriétaire (`DEMANDES.md`). La première version iOS se contentera de MediaPipe (Apache-2.0).
+  - Étape 1 : paquet Swift `ios/HalcyaFace`, avec les ancres du détecteur, le carré à bandes noires et le recadrage tourné.
+    - Ses tests XCTest lisent les portraits et vecteurs d'Android dans `upstream/`, sans copie ; nouvelle étape de CI `swift test --package-path ios/HalcyaFace`.
+    - L'algorithme, rejoué en Python sur les deux portraits, retrouve les entrées des deux modèles à 5e-7 près (tolérance d'Android : 1e-5).
+
 ## Suite
+- CI de #43 : l'étape Swift du visage doit passer. Ensuite, étape 2 (décodage BlazeFace, zone du visage, points).
 - CI de #42 → regarder l'accueil (carte vide sans lien vers Sources) et Sources (conseil Apple Watch), puis merger.
 - Ensuite, un lancement manuel sur `main` avec `devices="iPhone 17 Pro Max"` pour les captures de la fiche ; en choisir 3 à 10.
 - À « A1 fait » : A3 puis A2 avec le propriétaire, et sa décision sur la signature.
