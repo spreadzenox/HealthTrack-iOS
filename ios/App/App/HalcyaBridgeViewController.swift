@@ -8,6 +8,7 @@ class HalcyaBridgeViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(EveningNotePlugin())
         bridge?.registerPluginInstance(PortionReminderPlugin())
         bridge?.registerPluginInstance(BackupMarkerPlugin())
+        bridge?.registerPluginInstance(AppStoreBillingPlugin()) // inactif côté JS tant que FEATURES.billing est faux
         #if DEBUG
         bridge?.registerPluginInstance(CaptureProbePlugin()) // build de captures seulement
         #endif
