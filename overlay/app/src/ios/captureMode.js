@@ -137,6 +137,7 @@ export async function installCaptureMode() {
         await probeDataRoundtrip(d)
         await probeBackup(d)
         await probeFileImport(d)
+        await probeShareExport(d)
         await probeSnapshotWelcome({ ...d, localStorage: window.localStorage })
         await probeDeleteAll(d) // en dernier : vide la base
       },
@@ -450,6 +451,43 @@ export async function probeFileImport({ log, signal, waitAck, wait, storage, fil
   }
 }
 
+/**
+ * Essai de l'export par la feuille de partage d'iOS (étape I3), le geste réel : Vos données s'ouvre sans recharger
+ * la page ; le test d'interface (`DonneesUITests/testEnregistrerLaSauvegardeDansFichiers`) touche « Télécharger la
+ * sauvegarde » (fichier écrit dans Documents puis feuille de partage), « Enregistrer dans Fichiers », le dossier
+ * Halcya, « Enregistrer » puis « Garder les deux » : une 2e copie apparaît dans Documents. La sonde compte les
+ * fichiers `healthtrack-export-*` avant et après (+2 attendus). Résultats dans la console (`[export] …`).
+ */
+export async function probeShareExport({ log, signal, waitAck, wait, navigate, reveal, list }) {
+  const say = (what, value) => log(`[export] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  try {
+    const names =
+      list ??
+      (async () => {
+        const { Filesystem, Directory } = await import('@capacitor/filesystem')
+        return (await Filesystem.readdir({ path: '', directory: Directory.Documents })).files.map((f) => f.name)
+      })
+    const exports = async () => (await names()).filter((n) => n.startsWith('healthtrack-export-')).length
+    const go =
+      navigate ??
+      ((path) => {
+        window.history.pushState({}, '', path)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      })
+    const avant = await exports()
+    go('/data')
+    await wait(3000)
+    const bouton = (reveal ?? revealButton)('Télécharger la sauvegarde')
+    await wait(800)
+    await signal('export-partage') // le test d'interface exporte, partage et enregistre, puis la feuille est capturée
+    await waitAck('export-partage', 600) // test d'interface : jusqu'à 3 min
+    await wait(2000)
+    say('partage', { bouton, avant, après: await exports() })
+  } catch (e) {
+    say('échec', e?.message || String(e))
+  }
+}
+
 /** « Reprendre mes données » de `SnapshotWelcome.jsx`, touché comme le ferait la personne. */
 function clickButton(label) {
   const button = [...document.querySelectorAll('button')].find((b) => b.textContent.trim() === label)
@@ -461,12 +499,14 @@ function clickButton(label) {
  * Essai de la copie de secours proposée à l'onboarding (étape I3, correctif 23) : ce que voit la personne après une
  * restauration iCloud (la base n'y est pas, la copie de Documents si). La copie est mise à jour, la base vidée sans
  * toucher la copie, l'onboarding rouvert sans recharger la page (le mode capture ne reprend pas après un
- * rechargement), capturé ; puis « Reprendre mes données » est touché et capturé, la base recomptée. L'onboarding est
+ * rechargement), capturé ; puis « Reprendre mes données » est touché et capturé, la base recomptée et le thème
+ * (retiré du localStorage comme sur un nouvel iPhone) vérifié revenu avec la copie. L'onboarding est
  * ensuite noté fait, comme avant. Résultats dans la console (`[restauration] …`).
  */
 export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage, localStorage, writeSnapshot, navigate, clickRestore }) {
   const say = (what, value) => log(`[restauration] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   const onboarding = localStorage.getItem('healthtrack_onboarding')
+  const theme = localStorage.getItem('healthtrack_theme') // un réglage gardé dans la copie, retiré comme sur un nouvel iPhone
   try {
     const db = storage ?? (await import('../storage/localHealthStorage'))
     const save =
@@ -474,7 +514,7 @@ export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage
       (async () => {
         const [{ saveSnapshot }, { Filesystem, Directory, Encoding }] = await Promise.all([import('./snapshot.js'), import('@capacitor/filesystem')])
         const writeFile = (path, data) => Filesystem.writeFile({ path, data, directory: Directory.Documents, encoding: Encoding.UTF8 })
-        return saveSnapshot({ countAllEntries: db.countAllEntries, exportToJson: db.exportToJson, writeFile })
+        return saveSnapshot({ countAllEntries: db.countAllEntries, exportToJson: db.exportToJson, writeFile, storage: localStorage })
       })
     const go =
       navigate ??
@@ -485,9 +525,11 @@ export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage
     const count = await db.countAllEntries()
     const copie = await save()
     await db.deleteAllEntries()
+    localStorage.removeItem('healthtrack_theme')
     say('avant', { count, copie, vidée: await db.countAllEntries() })
     localStorage.setItem('healthtrack_onboarding', JSON.stringify({ step: 0 }))
     go('/bienvenue')
+    window.scrollTo?.({ top: 0, behavior: 'instant' }) // la page d'avant (Vos données) était défilée
     await wait(3000) // la copie est lue, la carte s'affiche
     await signal('restauration-onboarding')
     await waitAck('restauration-onboarding')
@@ -495,10 +537,11 @@ export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage
     await wait(5000) // import de toute la base
     await signal('restauration-reprise')
     await waitAck('restauration-reprise')
-    say('après', { bouton, count: await db.countAllEntries() })
+    say('après', { bouton, count: await db.countAllEntries(), réglages: theme == null || localStorage.getItem('healthtrack_theme') === theme })
   } catch (e) {
     say('échec', e?.message || String(e))
   } finally {
     if (onboarding) localStorage.setItem('healthtrack_onboarding', onboarding)
+    if (theme != null && localStorage.getItem('healthtrack_theme') == null) localStorage.setItem('healthtrack_theme', theme)
   }
 }

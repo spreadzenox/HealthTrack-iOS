@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeFileImport, IMPORT_TEST_FILE, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
+import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -510,7 +510,8 @@ describe('sonde de la copie proposée à l’onboarding après une restauration 
         count = 0
       }),
     }
-    const local = memoryStorage({ healthtrack_onboarding: '{"done":true}' })
+    const local = memoryStorage({ healthtrack_onboarding: '{"done":true}', healthtrack_theme: 'dark' })
+    local.removeItem = (k) => delete local.data[k]
     const signal = vi.fn(async (name) => calls.push(`capture ${name}`))
     const logs = []
     await probeSnapshotWelcome({
@@ -525,12 +526,13 @@ describe('sonde de la copie proposée à l’onboarding après une restauration 
       clickRestore: () => {
         calls.push('reprendre')
         count = 3
+        local.setItem('healthtrack_theme', 'dark') // rétabli par la copie
         return true
       },
     })
     expect(calls).toEqual(['copie écrite', 'base vidée', 'page /bienvenue', 'capture restauration-onboarding', 'reprendre', 'capture restauration-reprise'])
     expect(JSON.parse(local.data.healthtrack_onboarding)).toMatchObject({ done: true })
-    expect(logs).toEqual(['[restauration] avant {"count":3,"copie":true,"vidée":0}', '[restauration] après {"bouton":true,"count":3}'])
+    expect(logs).toEqual(['[restauration] avant {"count":3,"copie":true,"vidée":0}', '[restauration] après {"bouton":true,"count":3,"réglages":true}'])
   })
 })
 
@@ -566,5 +568,28 @@ describe('sonde de l’import par le sélecteur de fichiers (I3)', () => {
     expect(calls).toEqual(['page /data', 'montré Choisir un fichier à importer', 'capture import-fichier', 'touché Ajouter à mes données'])
     expect(disk.size).toBe(0)
     expect(logs).toEqual(['[import] fichier {"avant":10,"bouton":true,"ajouter":true,"après":12}'])
+  })
+})
+
+describe('sonde de l’export par la feuille de partage (I3)', () => {
+  it('ouvre Vos données ; le test d’interface touche « Télécharger la sauvegarde » puis l’enregistre dans Fichiers', async () => {
+    let names = ['Halcya-copie-de-secours.json', 'healthtrack-export-2026-10-27.json']
+    const calls = []
+    const logs = []
+    await probeShareExport({
+      log: (m) => logs.push(m),
+      signal: vi.fn(async (name) => {
+        calls.push(`capture ${name}`)
+        // l'export écrit son fichier, puis « Enregistrer dans Fichiers › Garder les deux » en ajoute une copie
+        names = [...names, 'healthtrack-export-2026-10-28.json', 'healthtrack-export-2026-10-28 2.json']
+      }),
+      waitAck: vi.fn(async () => true),
+      wait: async () => {},
+      navigate: (path) => calls.push(`page ${path}`),
+      reveal: (label) => calls.push(`montré ${label}`) && true,
+      list: async () => names,
+    })
+    expect(calls).toEqual(['page /data', 'montré Télécharger la sauvegarde', 'capture export-partage'])
+    expect(logs).toEqual(['[export] partage {"bouton":true,"avant":1,"après":3}'])
   })
 })

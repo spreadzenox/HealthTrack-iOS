@@ -51,8 +51,11 @@
   - [x] Après une restauration (base vide, copie présente) : la copie proposée d'emblée au premier écran de
     l'onboarding (PR #32, mergée le 28/10 : `SnapshotWelcome`, correctif 23 ; « Reprendre » rend les 1925 mesures sur
     les deux iPhone simulés, captures regardées).
-  - [ ] Réglages dans la copie de secours (objectif, suivis, rappels : ce que la sauvegarde Android ramène et pas
-    iCloud), jamais les secrets propres au téléphone (`DEVICE_BOUND_KEYS`). Plan (28/10 11:40) : **dans l'onboarding, au premier écran**, pas à l'Accueil. Après une
+  - [x] Réglages dans la copie de secours (PR #38, intégrée à #37) : thème, note du soir, bilan du ventre, météo ;
+    jamais un secret, un état propre au téléphone ni le consentement à l'IA.
+  - [ ] Identifiant d'installation (crédits IA) après une restauration iCloud : sur Android, il revient avec la
+    sauvegarde ; sur iPhone, l'app en crée un neuf. Le garder dans la copie (visible dans Fichiers) ou laisser le
+    relais en décider (App Attest, I6) : à trancher. Plan (28/10 11:40) : **dans l'onboarding, au premier écran**, pas à l'Accueil. Après une
     restauration iCloud ou un effacement par iOS, le localStorage est perdu lui aussi, donc l'onboarding revient.
     À l'Accueil, la synchro Santé autorisée pendant l'onboarding remplirait la base avant l'offre (« base vide »
     serait faux). Carte « Reprendre vos données ? Copie de secours du … (n mesures) » [Reprendre mes données]
@@ -63,6 +66,8 @@
     compte.
   - [x] Import par le sélecteur de fichiers d'un ancien fichier (tableau nu), geste réel — PR #34, mergée le 28/10
     (sonde `[import]` : 1926 → 1928 ; test d'interface `DonneesUITests` : Explorer › Sur mon iPhone › Halcya).
+  - [x] Export par la feuille de partage, geste réel (PR #37) : « Enregistrer dans Fichiers », 2 fichiers sur les
+    deux iPhone simulés.
   - [ ] Gestes réels, suite : puis export par la feuille de partage ;
     fichier exporté d'Android réimporté sur iPhone (même format, déjà couvert par l'aller-retour de #29).
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS

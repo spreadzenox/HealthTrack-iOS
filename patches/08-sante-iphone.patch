@@ -79,18 +79,10 @@ index 61dc74d..1122c0a 100644
            sourceName: s.sourceName,
            connector: 'health_connect',
 diff --git a/app/src/pages/Connectors.jsx b/app/src/pages/Connectors.jsx
-index defa964..28b7e58 100644
+index 5e2620d..5ebc920 100644
 --- a/app/src/pages/Connectors.jsx
 +++ b/app/src/pages/Connectors.jsx
-@@ -24,6 +24,7 @@ import { getPhoneUsageSettings } from '../services/phoneUsageSync'
- import { getWatchAutoSyncState } from '../services/watchAutoSync'
- import { detectPhoneApps } from '../devices/phoneApps'
- import useDisclosure from '../hooks/useDisclosure'
-+import { APP_NAME } from '../config/brand'
- import './Connectors.css'
- import { appLocale } from '../i18n/locale.js'
- 
-@@ -76,6 +77,18 @@ const SYSTEM_UPDATE = (
+@@ -76,6 +76,18 @@ const SYSTEM_UPDATE = (
  
  /** Message affiché quand Health Connect est indisponible, selon la raison remontée par le natif. */
  const UNAVAILABLE_MESSAGES = {
@@ -109,7 +101,7 @@ index defa964..28b7e58 100644
    provider_update_required: {
      title: 'Health Connect nécessite une mise à jour.',
      body: (
-@@ -320,9 +333,11 @@ function ConnectorCard({ connector }) {
+@@ -320,9 +332,11 @@ function ConnectorCard({ connector }) {
                        Ouvrir les paramètres Health Connect
                      </button>
                    )}
