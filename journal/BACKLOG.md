@@ -48,8 +48,11 @@
   - [x] « Supprimer toutes mes données » efface aussi la copie de secours (correctif 22, PR #31, mergée le 28/10 ;
     elle gardait toutes les entrées et le profil, et partait dans la sauvegarde iCloud) ; sonde `[suppression]` :
     `après {"entries":1925,"count":0,"copie":false}` sur les deux iPhone simulés.
-  - [~] Après une restauration (base vide, copie présente) : proposer la copie d'emblée (aujourd'hui seulement dans
-    « Vos données ») — PR #32 (`SnapshotWelcome`, correctif 23, sonde `[restauration]`). Plan (28/10 11:40) : **dans l'onboarding, au premier écran**, pas à l'Accueil. Après une
+  - [x] Après une restauration (base vide, copie présente) : la copie proposée d'emblée au premier écran de
+    l'onboarding (PR #32, mergée le 28/10 : `SnapshotWelcome`, correctif 23 ; « Reprendre » rend les 1925 mesures sur
+    les deux iPhone simulés, captures regardées).
+  - [ ] Réglages dans la copie de secours (objectif, suivis, rappels : ce que la sauvegarde Android ramène et pas
+    iCloud), jamais les secrets propres au téléphone (`DEVICE_BOUND_KEYS`). Plan (28/10 11:40) : **dans l'onboarding, au premier écran**, pas à l'Accueil. Après une
     restauration iCloud ou un effacement par iOS, le localStorage est perdu lui aussi, donc l'onboarding revient.
     À l'Accueil, la synchro Santé autorisée pendant l'onboarding remplirait la base avant l'offre (« base vide »
     serait faux). Carte « Reprendre vos données ? Copie de secours du … (n mesures) » [Reprendre mes données]
@@ -58,8 +61,10 @@
     composant dans `overlay/app/src/ios/`. Capture : une étape du plan qui vide la base (`deleteAllEntries`, sans
     toucher la copie), remet l'onboarding à zéro et ouvre `/bienvenue`, puis la sonde touche « Reprendre » et
     compte.
-  - [ ] Gestes réels : export par la feuille de partage, import par le sélecteur de fichiers (test d'interface),
-    fichier exporté d'Android réimporté sur iPhone.
+  - [~] Gestes réels : import par le sélecteur de fichiers d'un ancien fichier (tableau nu) — PR #34 (sonde
+    `[import]`, test d'interface `DonneesUITests` ; 1er essai du 28/10 : sélecteur ouvert sur « Récents », l'onglet
+    s'appelle « Explorer » sous iOS 26 et non « Parcourir » → corrigé, 2e essai) ; puis export par la feuille de partage ;
+    fichier exporté d'Android réimporté sur iPhone (même format, déjà couvert par l'aller-retour de #29).
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS
   vérifié, mêmes méthodes et types que le connecteur ; **VFC en SDNN sur iOS contre RMSSD sur Android**, à ne pas
   mélanger ; voir `RECHERCHE.md`. 27/10 : **HealthKit marche sur simulateur sans compte Apple** (build signée à la
@@ -112,11 +117,39 @@
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
   transactions signées par Apple, notifications serveur V2, App Attest, mêmes crédits IA, même période de lancement.
+  Plan (28/10 12:25, après lecture de `playBilling.js`, `entitlement.js`, `distribution.js` d'Android v553) :
+  - Natif : plugin Swift `AppStoreBilling` (StoreKit 2) qui rend **la même forme que `PlayBilling`**, pour que toute
+    la logique JS d'Android serve telle quelle (`describePlans`, achat, restauration, vérification par le relais).
+    - `getProducts` : deux produits App Store `halcya_premium_annuel` et `halcya_premium_mensuel` (un groupe
+      d'abonnements, pas de « base plans » chez Apple), rendus comme les formules `annuel` / `mensuel` de
+      `halcya_premium`. Pour chacun : `offerToken` = id du produit ; phase d'essai (`priceMicros` 0, `P14D`) si
+      `isEligibleForIntroOffer` ; puis prix (`displayPrice`, micros, devise, `P1Y` / `P1M`).
+    - `purchase` : `product.purchase(options: [.appAccountToken(uuid)])`, où `uuid` est tiré de
+      `obfuscatedAccountId`, déjà une empreinte SHA-256 ; le relais devra faire de même.
+    - `queryPurchases` : `Transaction.currentEntitlements`.
+    - Événement `purchasesUpdated` : `Transaction.updates`.
+    - Le « jeton d'achat » = `jwsRepresentation`.
+  - JS : une ligne de correctif dans `loadBillingPlugin()` (`playBilling.js`) : sur iPhone, l'adaptateur
+    (`overlay/app/src/ios/`). `FEATURES.billing` reste faux pour `appstore` tant que le relais ne vérifie pas les
+    transactions d'Apple. Sinon le premium se fermerait sur iPhone sans moyen de payer.
+  - Essais sans compte Apple :
+    - règle de conversion en Swift dans `HalcyaRules` (XCTest) ;
+    - adaptateur en Vitest ;
+    - achat de bout en bout sur simulateur avec un fichier de configuration StoreKit (`.storekit`) branché au
+      schéma, la feuille d'achat de test touchée par XCUITest.
+  - Propriétaire, après A1 à A4 : créer le groupe et les deux produits dans App Store Connect avec ces ids (valeurs
+    exactes préparées le moment venu).
+  - [x] Natif et branchement JS (PR #33, mergée le 28/10) : `BillingRule` (5 tests XCTest), plugin `AppStoreBilling`,
+    correctif 24, contrat avec `describePlans` (Vitest). Inactifs tant que `FEATURES.billing` est faux.
+  - [ ] Achat d'essai sur simulateur : cible de tests unitaires hébergée par l'app + fichier `.storekit` +
+    `SKTestSession` (`RECHERCHE.md`, 28/10 13:30).
+  - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
+    l'`appAccountToken`.
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : Vision + mêmes modèles (ONNX Runtime iOS ou Core ML),
   mêmes scores qu'Android sur les vecteurs de référence (`journal/protocoles/visage-*.py` d'Android).
 - [ ] **I8 — Le reste du natif** : voix, temps d'écran, montre Huawei (BLE), détection des sources : étude honnête
   (sources datées) puis ce qui est faisable ; ⛔ argumentés dans `PARITE.md`.
-- [ ] **I9 — Publication** (28/10 : `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
+- [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
   CI ; données collectées à compléter avec A5) : signature par la CI (A2), envoi TestFlight interne à chaque version suivie, fiche App
   Store fr-FR (`store/`), captures, `PrivacyInfo.xcprivacy`, réponses « Confidentialité de l'app » (A5), relecture
   des directives d'Apple (santé, abonnement, IA) ; la soumission reste un geste du propriétaire.
