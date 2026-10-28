@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { formatAgo } from '../utils/timeAgo'
 import { countAllEntries, importFromJson, parseBackup } from '../storage/localHealthStorage'
 import { appLocale } from '../i18n/locale.js'
-import { readDeviceSnapshot } from './snapshot.js'
+import { readDeviceSnapshot, restoreSnapshotSettings } from './snapshot.js'
 
 const measures = (n) => `${n.toLocaleString(appLocale())} ${n > 1 ? 'mesures' : 'mesure'}`
 
@@ -10,7 +10,8 @@ const measures = (n) => `${n.toLocaleString(appLocale())} ${n > 1 ? 'mesures' : 
  * Version iOS (dépôt HealthTrack-iOS) : premier écran de l'onboarding. La sauvegarde iCloud n'emporte pas la base de
  * l'app (WebKit l'exclut, mesuré le 28/10), seulement la copie de secours de Documents (overlay/app/src/ios/snapshot.js) ;
  * après une restauration, ou si iOS a repris la base, l'onboarding revient et la copie est proposée d'emblée.
- * « Reprendre » = l'import « ajouter » de Vos données (entrées et profil) ; l'onboarding continue ensuite (les
+ * « Reprendre » = l'import « ajouter » de Vos données (entrées et profil), plus les réglages gardés dans la copie
+ * (`SNAPSHOT_SETTINGS`) ; l'onboarding continue ensuite (les
  * autorisations sont à redonner sur un nouveau téléphone). Hors de l'app iPhone, `readDeviceSnapshot` rend null : rien.
  */
 export default function SnapshotWelcome({
@@ -18,6 +19,7 @@ export default function SnapshotWelcome({
   count = countAllEntries,
   parse = parseBackup,
   importBackup = importFromJson,
+  restoreSettings = restoreSnapshotSettings,
   now,
 }) {
   const [offer, setOffer] = useState(null)
@@ -46,8 +48,10 @@ export default function SnapshotWelcome({
     setState('running')
     try {
       const { imported, profileRestored } = await importBackup(offer.text, { merge: true })
+      const settings = restoreSettings(offer.text).length > 0
       window.dispatchEvent(new CustomEvent('health-entries-updated'))
-      setState({ done: `${measures(imported)} ${imported > 1 ? 'reprises' : 'reprise'}${profileRestored ? ', avec votre profil' : ''}.` })
+      const also = [profileRestored && 'votre profil', settings && 'vos réglages'].filter(Boolean).join(' et ')
+      setState({ done: `${measures(imported)} ${imported > 1 ? 'reprises' : 'reprise'}${also ? `, avec ${also}` : ''}.` })
     } catch (err) {
       setState({ error: `La copie n’a pas pu être reprise (${err?.message || 'erreur inconnue'}). Elle reste dans Vos données.` })
     }
