@@ -1,5 +1,5 @@
 diff --git a/app/src/connectors/HealthConnectConnector.js b/app/src/connectors/HealthConnectConnector.js
-index 61dc74d..1122c0a 100644
+index 02b4d30..6d18739 100644
 --- a/app/src/connectors/HealthConnectConnector.js
 +++ b/app/src/connectors/HealthConnectConnector.js
 @@ -54,6 +54,14 @@ const EXTRA_READ_TYPES = [
@@ -17,25 +17,25 @@ index 61dc74d..1122c0a 100644
  /** Libellés français des types Health Connect (écran Connecteurs). */
  export const READ_TYPE_LABELS = {
    steps: 'pas',
-@@ -345,12 +353,13 @@ export class HealthConnectConnector extends BaseConnector {
-   constructor() {
+@@ -346,12 +354,13 @@ export class HealthConnectConnector extends BaseConnector {
      super({
        id: 'health_connect',
--      name: 'Health Connect (montre, bague, balance…)',
-+      name: isIos() ? 'App Santé (montre, bague, balance…)' : 'Health Connect (montre, bague, balance…)',
+       // POL-PLAY-28 : titre court (tenait sur 2 lignes) ; « montre, bague, balance » ouvre la description
+-      name: 'Health Connect',
++      name: isIos() ? 'App Santé' : 'Health Connect',
        // VC-27 : une phrase avec des marques connues du public ; la liste complète des types vit au chevron
        // « Ce qui est importé » de la carte (`importedList`, ci-dessous)
 -      description:
--        'Importe ce que vos apps santé écrivent dans Health Connect (Samsung Health, Garmin, Withings, ' +
--        'Oura…) : sommeil, cœur, pas, poids…',
+-        'Montre, bague, balance : ce que vos apps santé y écrivent (Samsung Health, Garmin, Withings, Oura…) : ' +
+-        'sommeil, cœur, pas, poids…',
 +      description: isIos()
-+        ? 'Importe ce que votre montre et vos apps santé écrivent dans l’app Santé (Apple Watch, Garmin, Withings, Oura…) : sommeil, cœur, pas, poids…'
-+        : 'Importe ce que vos apps santé écrivent dans Health Connect (Samsung Health, Garmin, Withings, ' +
-+          'Oura…) : sommeil, cœur, pas, poids…',
++        ? 'Montre, bague, balance : ce que l’Apple Watch et vos apps santé y écrivent (Garmin, Withings, Oura…) : sommeil, cœur, pas, poids…'
++        : 'Montre, bague, balance : ce que vos apps santé y écrivent (Samsung Health, Garmin, Withings, Oura…) : ' +
++          'sommeil, cœur, pas, poids…',
        dataTypes: ['steps', 'sleep', 'heart_rate', 'activity', 'calories', 'respiratory_rate', 'body_temperature', 'blood_pressure', 'blood_glucose', 'weight', 'body_composition'],
      })
      /** Tout ce que la carte peut importer, replié sous « Ce qui est importé ». */
-@@ -399,6 +408,11 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -400,6 +409,11 @@ export class HealthConnectConnector extends BaseConnector {
      // Using sync here avoids any risk of deadlocking the WebView bridge thread.
      const platform = getPlatformSync()
      debugInfo(TAG, `Plateforme détectée (sync) : ${platform}`)
@@ -47,7 +47,7 @@ index 61dc74d..1122c0a 100644
  
      // Collect device info early so it is logged even if something below hangs
      const deviceInfo = await collectDeviceInfo()
-@@ -678,6 +692,10 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -679,6 +693,10 @@ export class HealthConnectConnector extends BaseConnector {
        return 'not_asked'
      }
      const platform = getPlatformSync()
@@ -58,7 +58,7 @@ index 61dc74d..1122c0a 100644
      const hasCheckAuth = typeof Health.checkAuthorization === 'function'
      debugInfo(TAG, 'Vérification méthode Health.checkAuthorization', { hasCheckAuth, platform })
      if (!hasCheckAuth) {
-@@ -727,6 +745,10 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -728,6 +746,10 @@ export class HealthConnectConnector extends BaseConnector {
      try {
        debugInfo(TAG, 'Appel Health.requestAuthorization()…')
        await Health.requestAuthorization({ read: READ_TYPES, write: [] })
@@ -69,7 +69,7 @@ index 61dc74d..1122c0a 100644
        debugInfo(TAG, 'requestAuthorization() terminé, vérification du résultat…')
        return await this.checkPermissions()
      } catch (e) {
-@@ -1008,7 +1030,7 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -1009,7 +1031,7 @@ export class HealthConnectConnector extends BaseConnector {
          payload: {
            value: s.value,
            unit: s.unit,
