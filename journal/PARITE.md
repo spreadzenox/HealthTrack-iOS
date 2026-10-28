@@ -8,7 +8,7 @@
 Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) · 🟡 partiel ou pas encore vérifié ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
-**Parité** : **28 %** au 28/10 08:10 (13 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
+**Parité** : **30 %** au 28/10 08:55 (14 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
 **Dernière version Android suivie** : v544 (commit `84a97a9`, 28/10/2026), voir `upstream.json`.
@@ -64,7 +64,7 @@ analyses, journal, Accueil) : ils arrivent avec `upstream.json` et sont couverts
 | Anti-abus des crédits IA | `PlayIntegrityPlugin` | App Attest (DeviceCheck) | ❌ | I6 ; vérification côté relais : `DEMANDES.md`. 27/10 : le relais est en `INTEGRITY_MODE=observe` (`relay-deploy.yml`), l'analyse des repas passe donc sans jeton depuis l'iPhone ; en `enforce`, elle serait refusée (403) tant qu'App Attest n'est pas accepté |
 | Rappel de fin d'essai | `TrialReminderPlugin` | notification locale | ❌ | I5/I6 |
 | Bilan du ventre du soir (notification à actions) | `GutEveningPlugin` | `UNNotificationCategory` + actions, réponse rangée à l'ouverture | ✅ | I5 : plugin en Swift (PR #20), soirs programmés d'avance ; sur les deux iPhone simulés : notification affichée, « Gêne » touché depuis la bannière dépliée et rangé sans ouvrir l'app (PR #23), puis entré dans l'historique par l'import de l'app (PR #25 : inserted 1, boîte vide) ; geste à refaire sur l'iPhone 12 |
-| Note du soir | `EveningNotePlugin` | idem | 🟡 | I5 : plugin en Swift (PR #24) ; sur les deux iPhone simulés, les 6 notes s'affichent dans la notification dépliée et la note touchée est rangée sans ouvrir l'app ; import à l'ouverture suivante à vérifier (PR #26 : l'essai de la PR #25 a été faussé par une reprogrammation) |
+| Note du soir | `EveningNotePlugin` | idem | ✅ | I5 : plugin en Swift (PR #24) ; sur les deux iPhone simulés, les 6 notes s'affichent dans la notification dépliée, la note touchée est rangée sans ouvrir l'app puis entre dans l'historique par l'import de l'app (PR #26 : inserted 1, boîte vide) ; geste à refaire sur l'iPhone 12 |
 | Rappel de la portion du jour | `PortionReminderPlugin` | notifications locales programmées d'avance, toucher retenu (`takeOpen`) | ✅ | I5 : plugin en Swift (PR #24) ; sur les deux iPhone simulés, rappel programmé par `schedule`, bannière touchée app en arrière-plan → la réintroduction s'ouvre (signal du natif + correctif 18 ; PR #24 et #25) ; vrai rappel du jour à voir sur l'iPhone 12 |
 | Bien-être par le visage, à l'ouverture de l'app | `FaceSensePlugin`, ONNX / LiteRT | Vision + ONNX Runtime iOS ou Core ML ; mêmes scores sur `journal/protocoles/visage-*.py` | ❌ | I7 |
 | Bien-être par le visage, au déverrouillage | `FaceSenseService` (service caméra de premier plan) | — | ⛔ à confirmer | iOS n'autorise pas la caméra en arrière-plan ; alternative : ouverture de l'app, widget, raccourci |
