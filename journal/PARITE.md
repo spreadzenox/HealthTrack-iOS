@@ -63,9 +63,9 @@ analyses, journal, Accueil) : ils arrivent avec `upstream.json` et sont couverts
 | Vérification des achats par le relais | Play Developer API, RTDN | JWS signés par Apple vérifiés par le relais, App Store Server Notifications V2 | ❌ | I6 ; le relais est dans HealthTrack : `DEMANDES.md` |
 | Anti-abus des crédits IA | `PlayIntegrityPlugin` | App Attest (DeviceCheck) | ❌ | I6 ; vérification côté relais : `DEMANDES.md`. 27/10 : le relais est en `INTEGRITY_MODE=observe` (`relay-deploy.yml`), l'analyse des repas passe donc sans jeton depuis l'iPhone ; en `enforce`, elle serait refusée (403) tant qu'App Attest n'est pas accepté |
 | Rappel de fin d'essai | `TrialReminderPlugin` | notification locale | ❌ | I5/I6 |
-| Bilan du ventre du soir (notification à actions) | `GutEveningPlugin` | `UNNotificationCategory` + actions, réponse rangée à l'ouverture | ❌ | I5 |
-| Note du soir | `EveningNotePlugin` | idem | ❌ | I5 |
-| Rappel de la portion du jour | `PortionReminderPlugin` | idem | ❌ | I5 |
+| Bilan du ventre du soir (notification à actions) | `GutEveningPlugin` | `UNNotificationCategory` + actions, réponse rangée à l'ouverture | 🟡 | I5 : plugin en Swift (PR #20), soirs programmés d'avance ; sur simulateur, notification affichée (PR #21) et « Gêne » touché depuis la bannière dépliée, rangé sans ouvrir l'app (PR #23, iPhone 17 Pro) ; reste : import à l'ouverture suivante vérifié, geste sur l'iPhone 12 |
+| Note du soir | `EveningNotePlugin` | idem | 🟡 | I5 : plugin en Swift, boîte commune avec le ventre (PR #24, en relecture) ; 6 notes en actions : combien iOS en affiche-t-il ? (sonde de la PR #24) |
+| Rappel de la portion du jour | `PortionReminderPlugin` | notifications locales programmées d'avance, toucher retenu (`takeOpen`) | 🟡 | I5 : plugin en Swift (PR #24, en relecture) ; sonde : bannière touchée app en arrière-plan, la réintroduction s'ouvre-t-elle ? |
 | Bien-être par le visage, à l'ouverture de l'app | `FaceSensePlugin`, ONNX / LiteRT | Vision + ONNX Runtime iOS ou Core ML ; mêmes scores sur `journal/protocoles/visage-*.py` | ❌ | I7 |
 | Bien-être par le visage, au déverrouillage | `FaceSenseService` (service caméra de premier plan) | — | ⛔ à confirmer | iOS n'autorise pas la caméra en arrière-plan ; alternative : ouverture de l'app, widget, raccourci |
 | Voix | `VoiceProbePlugin` | AVAudioEngine, traitement local | ❌ | I8 |
