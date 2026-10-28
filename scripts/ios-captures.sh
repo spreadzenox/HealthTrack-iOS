@@ -81,6 +81,11 @@ run_device() { # <udid> <nom>
   xcrun simctl boot "$udid"
   xcrun simctl bootstatus "$udid" -b >/dev/null
   xcrun simctl ui "$udid" appearance light
+  # Fiche App Store : barre d'état propre, comme sur les captures d'Apple (9:41, batterie pleine, réseau plein)
+  if [ -n "${CAPTURE_DEVICES:-}" ]; then
+    xcrun simctl status_bar "$udid" override --time "9:41" --batteryState charged --batteryLevel 100 \
+      --wifiMode active --wifiBars 3 --cellularMode active --cellularBars 4 || true
+  fi
   xcrun simctl install "$udid" "$APP"
   # Accusé vide créé d'avance : sans lui, chaque lecture de l'app en attente remplit la console d'erreurs « fichier absent »
   data="$(xcrun simctl get_app_container "$udid" "$BUNDLE" data)"
