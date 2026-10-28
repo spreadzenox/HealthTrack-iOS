@@ -112,6 +112,30 @@
 - [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
   transactions signées par Apple, notifications serveur V2, App Attest, mêmes crédits IA, même période de lancement.
+  Plan (28/10 12:25, après lecture de `playBilling.js`, `entitlement.js`, `distribution.js` d'Android v553) :
+  - Natif : plugin Swift `AppStoreBilling` (StoreKit 2) qui rend **la même forme que `PlayBilling`**, pour que toute
+    la logique JS d'Android serve telle quelle (`describePlans`, achat, restauration, vérification par le relais).
+    - `getProducts` : deux produits App Store `halcya_premium_annuel` et `halcya_premium_mensuel` (un groupe
+      d'abonnements, pas de « base plans » chez Apple), rendus comme les formules `annuel` / `mensuel` de
+      `halcya_premium`. Pour chacun : `offerToken` = id du produit ; phase d'essai (`priceMicros` 0, `P14D`) si
+      `isEligibleForIntroOffer` ; puis prix (`displayPrice`, micros, devise, `P1Y` / `P1M`).
+    - `purchase` : `product.purchase(options: [.appAccountToken(uuid)])`, où `uuid` est tiré de
+      `obfuscatedAccountId`, déjà une empreinte SHA-256 ; le relais devra faire de même.
+    - `queryPurchases` : `Transaction.currentEntitlements`.
+    - Événement `purchasesUpdated` : `Transaction.updates`.
+    - Le « jeton d'achat » = `jwsRepresentation`.
+  - JS : une ligne de correctif dans `loadBillingPlugin()` (`playBilling.js`) : sur iPhone, l'adaptateur
+    (`overlay/app/src/ios/`). `FEATURES.billing` reste faux pour `appstore` tant que le relais ne vérifie pas les
+    transactions d'Apple. Sinon le premium se fermerait sur iPhone sans moyen de payer.
+  - Essais sans compte Apple :
+    - règle de conversion en Swift dans `HalcyaRules` (XCTest) ;
+    - adaptateur en Vitest ;
+    - achat de bout en bout sur simulateur avec un fichier de configuration StoreKit (`.storekit`) branché au
+      schéma, la feuille d'achat de test touchée par XCUITest.
+  - Propriétaire, après A1 à A4 : créer le groupe et les deux produits dans App Store Connect avec ces ids (valeurs
+    exactes préparées le moment venu).
+  - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
+    l'`appAccountToken`.
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : Vision + mêmes modèles (ONNX Runtime iOS ou Core ML),
   mêmes scores qu'Android sur les vecteurs de référence (`journal/protocoles/visage-*.py` d'Android).
 - [ ] **I8 — Le reste du natif** : voix, temps d'écran, montre Huawei (BLE), détection des sources : étude honnête
