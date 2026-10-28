@@ -123,13 +123,18 @@ jobs:
           mkdir -p captures
           codesign -d --entitlements - "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" > captures/entitlements.txt 2>&1 || true
           cat captures/entitlements.txt
-      - name: Manifeste de confidentialité et chiffrement dans l'app (App Store, I9)
+      - name: Manifeste de confidentialité, chiffrement et phrases d'usage dans l'app (App Store, I9)
         run: |
           APP="$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app"
           plutil -lint "$APP/PrivacyInfo.xcprivacy"
           /usr/libexec/PlistBuddy -c 'Print :NSPrivacyTracking' "$APP/PrivacyInfo.xcprivacy" | grep -qx false
           /usr/libexec/PlistBuddy -c 'Print :NSPrivacyAccessedAPITypes:0:NSPrivacyAccessedAPIType' "$APP/PrivacyInfo.xcprivacy" | grep -qx NSPrivacyAccessedAPICategoryUserDefaults
           /usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP/Info.plist" | grep -qx false
+          # Phrases d'usage : sans elles, iOS ferme l'app qui ouvre la caméra (photo du repas) ou refuse la position (météo)
+          for key in NSCameraUsageDescription NSLocationWhenInUseUsageDescription NSHealthShareUsageDescription NSBluetoothAlwaysUsageDescription; do
+            /usr/libexec/PlistBuddy -c "Print :$key" "$APP/Info.plist" > /dev/null
+          done
+          /usr/libexec/PlistBuddy -c 'Print :NSLocationDefaultAccuracyReduced' "$APP/Info.plist" | grep -qx true
       - name: Captures sur simulateur
         env:
           CAPTURE_DEVICES: ${{ inputs.devices }}
