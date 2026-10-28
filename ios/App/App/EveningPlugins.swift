@@ -2,20 +2,19 @@ import Capacitor
 import HalcyaRules
 import UserNotifications
 
-/// Bilan du ventre du soir sur iPhone (étape I5) : même plugin `GutEvening`, mêmes méthodes que la version Android
-/// (`GutEveningPlugin.java`), vu de `src/services/gutEvening.js`. Les règles et la boîte sont dans `HalcyaRules`
-/// (testées par XCTest) ; ici, la colle avec Capacitor et `UNUserNotificationCenter`.
+/// Rappels du soir sur iPhone (étape I5) : mêmes plugins, mêmes méthodes que la version Android
+/// (`GutEveningPlugin.java`, `EveningNotePlugin.java`), vus de `src/services/gutEvening.js` et `eveningNote.js`. Les
+/// règles et la boîte sont dans `HalcyaRules` (testées par XCTest) ; ici, la colle avec Capacitor et
+/// `UNUserNotificationCenter`.
 ///
 /// iOS ne réveille pas l'app le soir : `configure` programme d'avance les prochains soirs (une notification par soir,
-/// sans aujourd'hui si le bilan est fait), et un geste sur Calme / Gêne / Douleur est rangé sans ouvrir l'app
-/// (`GutEveningNotifications.answer`, appelé par le délégué de l'app).
-@objc(GutEveningPlugin)
-public class GutEveningPlugin: CAPPlugin, CAPBridgedPlugin {
-    public let identifier = "GutEveningPlugin"
-    public let jsName = "GutEvening"
-    public let pluginMethods: [CAPPluginMethod] = GutEveningPlugin.methods
+/// sans aujourd'hui si la réponse du jour est donnée), et un geste sur une réponse est rangé sans ouvrir l'app
+/// (`EveningNotifications.answer`, appelé par le délégué de l'app).
+public class EveningPlugin: CAPPlugin {
+    /// Le rappel servi par la sous-classe.
+    var evening: EveningNotifications { fatalError("rappel du soir à définir par la sous-classe") }
 
-    private static var methods: [CAPPluginMethod] {
+    static var methods: [CAPPluginMethod] {
         var methods: [CAPPluginMethod] = [
             CAPPluginMethod(name: "status", returnType: CAPPluginReturnPromise),
             CAPPluginMethod(name: "configure", returnType: CAPPluginReturnPromise),
@@ -29,44 +28,42 @@ public class GutEveningPlugin: CAPPlugin, CAPBridgedPlugin {
         return methods
     }
 
-    private let store = GutEveningNotifications.store
-
     @objc func status(_ call: CAPPluginCall) {
-        GutEveningNotifications.status { call.resolve($0) }
+        evening.status { call.resolve($0) }
     }
 
     /// { enabled, minuteOfDay, noteDay } → reprogramme les soirs ; rend le nouvel état.
     @objc func configure(_ call: CAPPluginCall) {
-        store.configure(enabled: call.getBool("enabled"), minuteOfDay: call.getInt("minuteOfDay"),
-                        noteDay: call.getString("noteDay"))
-        GutEveningNotifications.reschedule {
-            GutEveningNotifications.status { call.resolve($0) }
+        let evening = self.evening
+        evening.store.configure(enabled: call.getBool("enabled"), minuteOfDay: call.getInt("minuteOfDay"),
+                                noteDay: call.getString("noteDay"))
+        evening.reschedule {
+            evening.status { call.resolve($0) }
         }
     }
 
     @objc func list(_ call: CAPPluginCall) {
-        call.resolve(["notes": store.inbox().map { ["name": $0.name, "json": $0.json] }])
+        call.resolve(["notes": evening.store.inbox().map { ["name": $0.name, "json": $0.json] }])
     }
 
-    /// Retire les bilans importés : { names: [...] } → { removed }.
+    /// Retire les réponses importées : { names: [...] } → { removed }.
     @objc func remove(_ call: CAPPluginCall) {
         guard let names = call.getArray("names", String.self) else {
-            call.reject("noms de bilans invalides")
+            call.reject("noms de réponses invalides")
             return
         }
-        call.resolve(["removed": store.remove(names: names)])
+        call.resolve(["removed": evening.store.remove(names: names)])
     }
 
     #if DEBUG
     /// Build de captures seulement (configuration Debug, jamais livrée) : la notification du soir dans `delay` s (3 par
     /// défaut), en bannière si `banner` (sinon discrète comme la vraie), pour la capturer et y répondre sur simulateur
-    /// (`src/ios/captureMode.js` › `probeGutEvening`).
+    /// (`src/ios/captureMode.js`).
     @objc func testNotification(_ call: CAPPluginCall) {
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: Double(call.getInt("delay") ?? 3), repeats: false)
-        let content = GutEveningNotifications.content()
+        let content = evening.content()
         if call.getBool("banner") ?? false { content.interruptionLevel = .active }
-        let request = UNNotificationRequest(identifier: GutEveningNotifications.requestPrefix + "essai",
-                                            content: content, trigger: trigger)
+        let request = UNNotificationRequest(identifier: evening.requestPrefix + "essai", content: content, trigger: trigger)
         UNUserNotificationCenter.current().add(request) { error in
             if let error {
                 call.reject(error.localizedDescription)
@@ -82,7 +79,7 @@ public class GutEveningPlugin: CAPPlugin, CAPBridgedPlugin {
         let center = UNUserNotificationCenter.current()
         center.getNotificationSettings { settings in
             guard settings.authorizationStatus == .notDetermined else {
-                call.resolve(["asked": false, "notifications": GutEveningNotifications.allowed(settings)])
+                call.resolve(["asked": false, "notifications": EveningNotifications.allowed(settings)])
                 return
             }
             center.requestAuthorization(options: [.alert]) { granted, _ in
@@ -92,38 +89,79 @@ public class GutEveningPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 }
 
-/// Notifications du bilan du ventre du soir : catégorie à trois actions, programmation des soirs, gestes.
-enum GutEveningNotifications {
-    static let category = "gut-evening"
-    static let requestPrefix = "gut-evening-"
-    static let store = GutEveningStore(defaults: UserDefaults.standard)
+/// Bilan du ventre du soir : « Et votre ventre aujourd'hui ? », Calme / Gêne / Douleur.
+@objc(GutEveningPlugin)
+public class GutEveningPlugin: EveningPlugin, CAPBridgedPlugin {
+    public let identifier = "GutEveningPlugin"
+    public let jsName = "GutEvening"
+    public let pluginMethods: [CAPPluginMethod] = EveningPlugin.methods
+    override var evening: EveningNotifications { .gut }
+}
 
-    /// Calme / Gêne / Douleur, sans ouvrir l'app (pas d'option `.foreground`).
-    static var notificationCategory: UNNotificationCategory {
-        let actions = zip(GutEveningRule.levels, GutEveningRule.labels).map { level, label in
-            UNNotificationAction(identifier: requestPrefix + level, title: label, options: [])
+/// Note du soir d'un geste : « Votre soirée ? », les 6 notes de bien-être.
+@objc(EveningNotePlugin)
+public class EveningNotePlugin: EveningPlugin, CAPBridgedPlugin {
+    public let identifier = "EveningNotePlugin"
+    public let jsName = "EveningNote"
+    public let pluginMethods: [CAPPluginMethod] = EveningPlugin.methods
+    override var evening: EveningNotifications { .note }
+}
+
+/// Notifications d'un rappel du soir : catégorie à actions, programmation des soirs, gestes.
+final class EveningNotifications {
+    /// Bilan du ventre : Calme / Gêne / Douleur.
+    static let gut = EveningNotifications(
+        kind: .gut, category: "gut-evening", title: "Et votre ventre aujourd’hui ?", body: "Dans l’ensemble, d’un geste.",
+        actions: Array(zip(GutEveningRule.levels, GutEveningRule.labels)))
+    /// Note du soir : les 6 notes, comme les boutons d'Android (`notification_evening_note.xml`).
+    static let note = EveningNotifications(
+        kind: .note, category: "evening-note", title: "Votre soirée ?", body: "0 = très bas, 5 = très bien",
+        actions: EveningNoteRule.scores.map { ("\($0)", "\($0)") })
+    static let all = [gut, note]
+
+    let category: String
+    let requestPrefix: String
+    let store: EveningStore
+    private let title: String
+    private let body: String
+    /// (réponse rangée, titre du bouton), dans l'ordre des boutons.
+    private let actions: [(String, String)]
+
+    private init(kind: EveningKind, category: String, title: String, body: String, actions: [(String, String)]) {
+        self.category = category
+        requestPrefix = category + "-"
+        store = EveningStore(defaults: UserDefaults.standard, kind: kind)
+        self.title = title
+        self.body = body
+        self.actions = actions
+    }
+
+    /// Les réponses, sans ouvrir l'app (pas d'option `.foreground`).
+    var notificationCategory: UNNotificationCategory {
+        let buttons = actions.map { answer, label in
+            UNNotificationAction(identifier: requestPrefix + answer, title: label, options: [])
         }
-        return UNNotificationCategory(identifier: category, actions: actions, intentIdentifiers: [], options: [])
+        return UNNotificationCategory(identifier: category, actions: buttons, intentIdentifiers: [], options: [])
     }
 
     static func allowed(_ settings: UNNotificationSettings) -> Bool {
         settings.authorizationStatus == .authorized || settings.authorizationStatus == .provisional
     }
 
-    /// « Et votre ventre aujourd'hui ? », discrète comme le canal « bas » d'Android, avec Calme / Gêne / Douleur.
-    static func content() -> UNMutableNotificationContent {
+    /// Discrète comme le canal « bas » d'Android, avec les réponses en actions.
+    func content() -> UNMutableNotificationContent {
         let content = UNMutableNotificationContent()
-        content.title = "Et votre ventre aujourd’hui ?"
-        content.body = "Dans l’ensemble, d’un geste."
+        content.title = title
+        content.body = body
         content.categoryIdentifier = category
         content.interruptionLevel = .passive
         return content
     }
 
     /// Retire les soirs programmés, puis programme ceux de `store.plan` (rien si éteint).
-    static func reschedule(_ done: @escaping () -> Void) {
+    func reschedule(_ done: @escaping () -> Void) {
         let center = UNUserNotificationCenter.current()
-        center.getPendingNotificationRequests { pending in
+        center.getPendingNotificationRequests { [self] pending in
             let old = pending.map(\.identifier).filter { $0.hasPrefix(requestPrefix) }
             center.removePendingNotificationRequests(withIdentifiers: old)
             let calendar = Calendar.current
@@ -139,22 +177,22 @@ enum GutEveningNotifications {
         }
     }
 
-    /// Geste sur la notification. Vrai s'il s'agissait d'un bilan du ventre.
-    static func answer(_ response: UNNotificationResponse) -> Bool {
+    /// Geste sur la notification. Vrai s'il s'agissait d'une réponse à ce rappel.
+    func answer(_ response: UNNotificationResponse) -> Bool {
         guard response.notification.request.content.categoryIdentifier == category,
               response.actionIdentifier.hasPrefix(requestPrefix) else { return false }
-        let level = String(response.actionIdentifier.dropFirst(requestPrefix.count))
-        store.answer(level: level, answeredAt: Date(), askedAt: response.notification.date, calendar: Calendar.current)
+        let answer = String(response.actionIdentifier.dropFirst(requestPrefix.count))
+        store.answer(answer, answeredAt: Date(), askedAt: response.notification.date, calendar: Calendar.current)
         return true
     }
 
-    static func status(_ done: @escaping ([String: Any]) -> Void) {
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
+    func status(_ done: @escaping ([String: Any]) -> Void) {
+        UNUserNotificationCenter.current().getNotificationSettings { [self] settings in
             done([
                 "enabled": store.enabled,
                 "minuteOfDay": store.minuteOfDay,
                 "nextAt": store.nextAt,
-                "notifications": allowed(settings),
+                "notifications": Self.allowed(settings),
                 "pending": store.inbox().count,
                 "answers": store.answers,
                 "noteDay": store.noteDay ?? NSNull(),
@@ -174,7 +212,7 @@ final class HalcyaNotificationHandler: NSObject, UNUserNotificationCenterDelegat
     }
 
     func didReceive(response: UNNotificationResponse) {
-        _ = GutEveningNotifications.answer(response)
+        _ = EveningNotifications.all.contains { $0.answer(response) }
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification,

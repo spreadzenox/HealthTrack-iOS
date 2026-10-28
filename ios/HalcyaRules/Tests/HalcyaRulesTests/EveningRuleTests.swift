@@ -87,3 +87,19 @@ final class GutEveningRuleTests: XCTestCase {
         XCTAssertNil(GutEveningRule.record(level: "terrible", at: at))
     }
 }
+
+final class EveningNoteRuleTests: XCTestCase {
+    /// Mêmes valeurs que mood/EveningNote.java : 21 h par défaut, notes de 0 à 5 dans l'ordre des boutons
+    func testSixNotesDe0A5A21h() {
+        XCTAssertEqual(EveningNoteRule.scores, [0, 1, 2, 3, 4, 5])
+        XCTAssertEqual(EveningNoteRule.defaultMinute, 21 * 60)
+    }
+
+    /// Même JSON que la boîte d'Android, lu par parseEveningNote (src/services/eveningNote.js)
+    func testBoiteLaNoteEtLHeureRienDAutre() {
+        let at = Date(timeIntervalSince1970: 1_761_678_000.5)
+        XCTAssertEqual(EveningNoteRule.record(score: 3, at: at), "{\"v\":1,\"score\":3,\"at\":1761678000500}")
+        XCTAssertNil(EveningNoteRule.record(score: 6, at: at))
+        XCTAssertNil(EveningNoteRule.record(score: -1, at: at))
+    }
+}

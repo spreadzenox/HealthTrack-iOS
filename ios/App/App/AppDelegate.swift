@@ -11,7 +11,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Rappels du soir (I5) : catégorie à actions, et délégué posé avant la fin du lancement (un geste sur la
         // notification peut lancer l'app en arrière-plan avant que Capacitor ne soit chargé)
         let center = UNUserNotificationCenter.current()
-        center.setNotificationCategories([GutEveningNotifications.notificationCategory])
+        center.setNotificationCategories(Set(EveningNotifications.all.map(\.notificationCategory)))
         center.delegate = HalcyaNotificationHandler.shared
         return true
     }

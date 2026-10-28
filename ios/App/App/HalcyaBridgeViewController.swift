@@ -5,6 +5,7 @@ import Capacitor
 class HalcyaBridgeViewController: CAPBridgeViewController {
     override func capacitorDidLoad() {
         bridge?.registerPluginInstance(GutEveningPlugin())
+        bridge?.registerPluginInstance(EveningNotePlugin())
         // Capacitor devient le délégué des notifications : il relaie les gestes à ce gestionnaire
         bridge?.notificationRouter.localNotificationHandler = HalcyaNotificationHandler.shared
     }
