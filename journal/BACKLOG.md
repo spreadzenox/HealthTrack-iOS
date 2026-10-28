@@ -168,6 +168,8 @@
 
 ## Idées et questions ouvertes
 
+- Sur l'iPhone 12 : toucher « Prendre une photo » (repas) et « Utiliser ma position approximative » (Météo) ; les phrases d'usage sont en place depuis le 28/10 (PR #45), le simulateur n'a ni caméra ni position réelle.
+
 - Raccourci ou widget « Lire mon bien-être » pour compenser l'absence de lecture au déverrouillage.
 - Apple Watch : HealthKit couvre déjà sommeil, FC, VFC, pas — atout de la version iOS.
 - Huawei Santé sur iOS écrit une partie de ses données dans Santé : vérifier lesquelles (sommeil ? VFC ?).
