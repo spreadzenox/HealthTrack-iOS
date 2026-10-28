@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **23 %** au 27/10 17:45 (11 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v533 (commit `dbaceb7`, 28/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v536 (commit `01df703`, 28/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 28/10 04:05 | #451 (v536) | le relais IA reçoit, sans jeton Play Integrity, la raison de son absence (`X-Integrity-Status`) : sur iPhone, `no_plugin` (pas de plugin Play Integrity), indiscernable d'un Android sans plugin → précisé dans `DEMANDES.md` | — |
 | 28/10 02:05 | #447, #448 (v533) | #447 textes plus clairs (stress de la montre en mots dans le Journal, Analyses, Paramètres) : code web partagé, arrive tel quel (le correctif 17 de `journalChips.js` s'applique toujours) ; #448 répare les tests `UpdateBanner` et Réintroduction (même correction que le correctif 18 d'iOS, retiré) | — |
 | 28/10 01:05 | #446 (v531) | « Votre ventre » le soir : une seule question à l'Accueil (`TodayCards`) : code web partagé, arrive tel quel ; à revoir en capture le soir quand la version iOS aura ses notifications du soir (I5) | — |
 | 28/10 00:05 | #444, #445 (v530) | #444 « bord à bord » sous Android 8 à 14 : natif Android seulement (`MainActivity`, `SystemBarsPlugin.java`), sans objet sur iOS (l'app y est déjà sous les barres, zones sûres vérifiées en captures) ; sa note « Plein écran aussi sous Android 8 à 14 » n'a pas de `variants` et s'afficherait dans les Nouveautés sur iPhone (→ `DEMANDES.md`) ; #445 une seule piste « mouvement » dans Analyses : code web partagé, arrive tel quel | — |
