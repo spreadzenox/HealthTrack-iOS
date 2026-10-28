@@ -1,0 +1,15 @@
+diff --git a/app/src/pages/Reintroduction.jsx b/app/src/pages/Reintroduction.jsx
+index 9b82be1..b35f6e2 100644
+--- a/app/src/pages/Reintroduction.jsx
++++ b/app/src/pages/Reintroduction.jsx
+@@ -379,7 +379,9 @@ export default function Reintroduction({ now: nowProp = null, store = defaultSto
+ 
+   const premium = !FEATURES.billing || ent.premium
+   const current = view?.current
+-  const save = (fn) => run(() => store.update(current.entry.id, fn(current.entry.payload, data.gut, new Date())))
++  // Même horloge que l'affichage (nowProp en test, l'heure réelle sinon) : sinon le test « note la portion du jour »
++  // échoue dès que le vrai jour s'éloigne de sa date figée (HealthTrack-iOS, correctif 18, 28/10/2026)
++  const save = (fn) => run(() => store.update(current.entry.id, fn(current.entry.payload, data.gut, nowProp ?? new Date())))
+ 
+   return (
+     <section className="fodmap-page">
