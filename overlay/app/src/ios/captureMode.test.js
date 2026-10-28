@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
+import { buildPlan, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -606,5 +606,35 @@ describe('sonde de l’export par la feuille de partage (I3)', () => {
     })
     expect(calls).toEqual(['page /data', 'montré Télécharger la sauvegarde', 'capture export-partage'])
     expect(logs).toEqual(['[export] partage {"bouton":true,"avant":1,"après":3}'])
+  })
+})
+
+describe('mode captures iOS : données de démo de l’iPhone', () => {
+  it('ni montre Huawei en direct, ni temps d’écran, ni visage ; la montre de Santé est une Apple Watch', () => {
+    const entries = [
+      { source: 'health_connect', type: 'steps', payload: { value: 8000, sourceName: 'Gadgetbridge' } },
+      { source: 'huawei_watch', type: 'watch_stress', payload: { value: 28 } },
+      { source: 'phone', type: 'phone_usage', payload: {} },
+      { source: 'face_sense', type: 'face_burst', payload: {} },
+      { source: 'withings', type: 'weight', payload: { value: 64 } },
+      { source: 'app_food', type: 'food', payload: {} },
+    ]
+    expect(iphoneDemoEntries(entries)).toEqual([
+      { source: 'health_connect', type: 'steps', payload: { value: 8000, sourceName: 'Apple Watch' } },
+      { source: 'withings', type: 'weight', payload: { value: 64 } },
+      { source: 'app_food', type: 'food', payload: {} },
+    ])
+    expect(entries[0].payload.sourceName).toBe('Gadgetbridge')
+  })
+
+  it('les données de démo d’Android ne nomment plus Gadgetbridge ni Huawei', async () => {
+    const { generateDemoEntries } = await import('../../scripts/visual/demoData.mjs')
+    const text = JSON.stringify(iphoneDemoEntries(generateDemoEntries()))
+    expect(text).not.toMatch(/Gadgetbridge|Huawei/)
+    expect(text).toMatch(/Apple Watch/)
+  })
+
+  it('plan : pas de page Montre (montre Huawei en direct) sur iPhone', () => {
+    expect(buildPlan().map((s) => s.route)).not.toContain('/montre')
   })
 })

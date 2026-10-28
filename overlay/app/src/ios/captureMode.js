@@ -12,9 +12,10 @@
 export const STEP_KEY = 'halcya_ios_capture_step'
 const SEEDED_KEY = 'halcya_ios_capture_seeded'
 
-// Les mêmes pages que `npm run visual` d'Android (scripts/visual/visual-check.mjs, DEFAULT_ROUTES), sauf /bienvenue
+// Les mêmes pages que `npm run visual` d'Android (scripts/visual/visual-check.mjs, DEFAULT_ROUTES), sauf /bienvenue et
+// /montre (montre Huawei en direct : aucun lien vers cette page sur iPhone)
 export const ROUTES = ['/', '/journal', '/tendances', '/food', '/nutrition', '/data', '/connectors', '/recommendations',
-  '/settings', '/plus', '/montre', '/premium', '/bien-etre', '/reintroduction']
+  '/settings', '/plus', '/premium', '/bien-etre', '/reintroduction']
 export const DARK_ROUTES = ['/', '/journal', '/recommendations']
 // Pages longues : écrans suivants, défilés d'environ 80 % de l'écran chacun (`-2`, `-3`…)
 export const SCROLLS = { '/connectors': 2, '/data': 1, '/settings': 1 }
@@ -22,6 +23,16 @@ export const SCROLLS = { '/connectors': 2, '/data': 1, '/settings': 1 }
 // élément amené en haut de l'écran (`target`, id)
 export const REVEALS = {
   '/connectors': [{ name: 'guides', click: 'Ajouter une source', open: 'guide-garmin', target: 'watch-guides-title' }],
+}
+
+// Données de démo d'Android ramenées à ce que l'iPhone reçoit aujourd'hui (captures et fiche App Store fidèles) :
+// ni montre Huawei en direct, ni temps d'écran (I8), ni lecture du visage (I7) ; la montre écrit dans Santé.
+const NOT_ON_IPHONE = new Set(['huawei_watch', 'phone', 'face_sense'])
+
+export function iphoneDemoEntries(entries) {
+  return entries
+    .filter((e) => !NOT_ON_IPHONE.has(e.source))
+    .map((e) => (e.payload?.sourceName === 'Gadgetbridge' ? { ...e, payload: { ...e.payload, sourceName: 'Apple Watch' } } : e))
 }
 
 const pageName = (route) => route.replace(/^\//, '') || 'accueil'
@@ -115,7 +126,7 @@ export async function installCaptureMode() {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
     await runCaptureStep(buildPlan(), {
       storage,
-      demoEntries: () => demo.generateDemoEntries(),
+      demoEntries: () => iphoneDemoEntries(demo.generateDemoEntries()),
       latestChangelogId: changelog.ALL_CHANGELOG[0]?.id ?? null,
       localStorage: window.localStorage,
       go: (path) => window.location.assign(path),
