@@ -162,6 +162,13 @@
 
 ## Idées et questions ouvertes
 
+- **À faire au prochain run** (vu sur les captures de la PR #41, démo fidèle à l'iPhone) :
+  - Accueil, carte « Bien-être estimé » : « … avec la lecture du visage. L'activer dans Sources ». Sur iPhone, ce lien mène à une fonction absente (I7).
+    - Un vrai utilisateur d'iPhone le voit aussi : la démo d'Android le cachait avec ses lectures du visage.
+    - → correctif : sur iPhone, ne proposer que « Noter moi-même » tant qu'I7 n'est pas fait.
+  - Sources, « Mes appareils » : « activez ce partage vers l'app Santé dans Apple Watch ». Ce n'est pas juste pour la montre d'Apple : son SpO₂ s'écrit tout seul si elle en est capable.
+    - → correctif : pas de conseil « dans {app} » pour une Apple Watch.
+
 
 - Raccourci ou widget « Lire mon bien-être » pour compenser l'absence de lecture au déverrouillage.
 - Apple Watch : HealthKit couvre déjà sommeil, FC, VFC, pas — atout de la version iOS.

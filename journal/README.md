@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v567 (28/10) | v565 sur iPhone simulé (28/10, PR #40) ; v567 en vérification (PR #41) |
+| Dernière version | v567 (28/10) | v567 sur iPhone simulé (28/10, PR #41) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 32 % (15 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -34,7 +34,7 @@
   d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
 
 **Ce qui a changé cette semaine**
-- **28/10 19:00 — abonnement d'essai et captures de la fiche App Store** (PR #40, mergée ; PR #41) : sur iPhone
+- **28/10 19:00 — abonnement d'essai et captures de la fiche App Store** (PR #40 et #41, mergées) : sur iPhone
   simulé, un abonnement d'essai s'achète et reste actif, sans compte Apple ; les captures en taille 6,9" pour la fiche
   sont prêtes et ne montrent que ce que l'iPhone fait vraiment (montre Apple Watch, pas d'app Android).
 - **28/10 08:55 — les rappels du soir et de portion sont prêts sur iPhone** (PR #23 à #26) : sur les deux iPhone
@@ -130,7 +130,7 @@ via TestFlight.
 | 28/10 16:00 | I9, I3, I6 | iPhone au niveau d'Android v559 (boutons arrondis vérifiés) ; fiche App Store en français prête en brouillon ; réponses du questionnaire « Confidentialité de l'app » préparées pour vous (les mêmes que pour Google Play) ; export par la feuille de partage : réussi sur un iPhone, l'autre relancé ; achat d'abonnement d'essai : 2e essai en cours | #35 (mergée), #36, #37, #38, #39 |
 | 28/10 17:00 | suivi d'Android v563, I3, I9, I6 | réponses « Confidentialité de l'app » en place (PR #39 mergée) ; vos données s'exportent, s'importent et reviennent après une restauration sur iPhone, réglages compris (vérifié) : la fonction « Données » est au niveau d'Android (parité 32 %) ; Android v563 : textes plus justes sur où vont vos données (aussi sur iPhone, deux adaptations refaites) ; achat d'abonnement d'essai : bloqué par un bogue d'Apple sur iOS 26.5, 3e essai sur un iPhone simulé plus ancien | #39 (mergée), #36, #37 |
 | 28/10 18:00 | suivi d'Android v565, I3, I6, I8 | vos données : export, import et restauration avec vos réglages, vérifiés et en place (PR #37 mergée) ; premier achat d'abonnement d'essai réussi sur iPhone simulé, sans compte Apple ; l'iPhone sait dire s'il reconnaît le français sur le téléphone (préalable de la dictée du soir) ; Android v565 : carte de Sources au titre court (aussi sur iPhone, « App Santé ») | #37 (mergée), #36, #40 |
-| 28/10 19:00 | A1, I8, I6, I9, suivi d'Android v567 | votre inscription chez Apple est en cours (A1), la suite (A3 puis A2) est prête pas à pas ; achat d'abonnement d'essai et préalable de la dictée du soir en place sur iPhone (PR #40 mergée) ; captures en taille 6,9" pour la fiche App Store, fidèles à l'iPhone (plus de « Gadgetbridge » ni de montre Huawei, qui n'existent que sur Android) ; Android v567 : carte « Votre ventre » plus compacte (aussi sur iPhone) | #40 (mergée), #41 |
+| 28/10 19:00 | A1, I8, I6, I9, suivi d'Android v567 | votre inscription chez Apple est en cours (A1), la suite (A3 puis A2) est prête pas à pas ; achat d'abonnement d'essai et préalable de la dictée du soir en place sur iPhone (PR #40 mergée) ; captures en taille 6,9" pour la fiche App Store, fidèles à l'iPhone (plus de « Gadgetbridge » ni de montre Huawei, qui n'existent que sur Android) ; Android v567 : carte « Votre ventre » plus compacte (aussi sur iPhone) | #40, #41 (mergées) |
 
 ---
 
