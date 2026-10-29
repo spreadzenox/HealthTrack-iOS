@@ -138,5 +138,5 @@ run_device() { # <udid> <nom>
 [ -z "$LARGE" ] || run_device "${LARGE%% *}" "${LARGE#* }"
 
 # Erreurs JavaScript relayées par Capacitor (« ⚡️  [error] - … ») et exceptions non rattrapées
-grep -hE "\[error\]|Unhandled|TypeError|ReferenceError|SyntaxError" "$OUT"/*-console.txt > "$OUT/js-errors.txt" || true
+grep -hE "\[error\]|Unhandled|TypeError|ReferenceError|SyntaxError|JS ERROR" "$OUT"/*-console.txt > "$OUT/js-errors.txt" || true
 echo "erreurs JavaScript : $(wc -l < "$OUT/js-errors.txt" | tr -d ' ') ligne(s) (js-errors.txt)"

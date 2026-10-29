@@ -214,3 +214,12 @@ jobs:
           grep -q "TEST BUILD SUCCEEDED" captures/test-interface-build.txt || {
             echo "::error::Build des tests d'interface en échec, gestes non essayés : voir test-interface-build.txt"
             cat captures/test-interface-build.txt; exit 1; }
+      # Aucune erreur JavaScript sur les deux iPhone simulés (0 ligne sur les 10 dernières CI relues le 29/10 ; rendue
+      # bloquante, promesses rejetées sans traitement comprises) ; publiées plus haut, captures et console restent lisibles.
+      - name: Aucune erreur JavaScript
+        if: always() && hashFiles('captures/js-errors.txt') != ''
+        run: |
+          if [ -s captures/js-errors.txt ]; then
+            echo "::error::$(wc -l < captures/js-errors.txt | tr -d ' ') ligne(s) d'erreur JavaScript : voir js-errors.txt"
+            cat captures/js-errors.txt; exit 1
+          fi
