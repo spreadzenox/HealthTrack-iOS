@@ -51,9 +51,11 @@ fi
 
 shopt -s nullglob
 PATCHES=("$ROOT"/patches/*.patch)
+# Application directe, comme sur la CI : son clone sans historique n'a pas les blobs d'une fusion à trois (--3way),
+# qui ferait passer ici un correctif à refaire (29/10, correctif 02 sur v575). Pour le refaire : --3way à la main.
 for patch in "${PATCHES[@]}"; do
-  if ! git -C "$DEST" apply --3way --whitespace=nowarn "$patch"; then
-    echo "::error::Le correctif $(basename "$patch") ne s'applique plus sur Android v$COUNT : le refaire" >&2
+  if ! git -C "$DEST" apply --index --whitespace=nowarn "$patch"; then
+    echo "::error::Le correctif $(basename "$patch") ne s'applique plus sur Android v$COUNT : le refaire (git apply --3way, puis git diff)" >&2
     exit 1
   fi
 done

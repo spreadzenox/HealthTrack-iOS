@@ -190,11 +190,14 @@ priorité du propriétaire** : runs pleins (jusqu'à 50 min), étapes enchaîné
 
 Règles des adaptations :
 - **Correctif** (`patches/NN-sujet.patch`, produit par `git -C upstream diff HEAD -- <fichiers>` : **HEAD** obligatoire,
-  car `git apply --3way` met les correctifs déjà appliqués dans l'index ; exception : un nouveau correctif sur un
+  car `scripts/upstream.sh` met les correctifs déjà appliqués dans l'index ; exception : un nouveau correctif sur un
   fichier qu'un correctif précédent touche déjà se tire de `git -C upstream diff -- <fichiers>`, sans HEAD, juste
   après `scripts/upstream.sh`, pour ne garder que la nouvelle modification) pour modifier un fichier Android ;
   le plus petit possible, un sujet par fichier, pour qu'il survive aux changements d'Android. Un correctif qui ne
   s'applique plus fait échouer le script : le refaire sur le nouveau code (c'est le travail normal du suivi).
+  Le script applique les correctifs **directement**, comme la CI (leçon du 29/10 : avec `--3way`, le correctif 02
+  passait en local par fusion à trois sur v575 et échouait sur la CI, dont le clone n'a pas l'historique) ; pour
+  refaire un correctif : `git apply --3way` à la main sur la version d'avant, puis `git diff`.
 - **Fichier ajouté** (`overlay/<chemin>`) pour du code nouveau propre à iOS (ex. `overlay/app/src/services/appStoreBilling.js`).
   Pas de nouvelle feuille CSS dans `overlay/` : le test `bundleGuard` d'Android exige que toute feuille soit
   chargée d'emblée par `src/pageStyles.js` ; réutiliser les classes d'Android (ex. `.actions`) ou, à défaut, un
