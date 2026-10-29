@@ -1,0 +1,60 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /Users/runner/work/_temp/dd-tests/Build/Products/HalcyaUITests_iphonesimulator26.5-arm64-x86_64.xctestrun -destination id=2263B19F-42E8-4C8B-8AF1-D79508216C90 "-only-testing:HalcyaUITests/SanteUITests/testAccepterLaFeuilleSante"
+
+2026-10-29 06:11:58.276 xcodebuild[71069:196619] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-29 06:11:58.291 xcodebuild[71069:196619] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:2263B19F-42E8-4C8B-8AF1-D79508216C90, OS:26.2, name:iPhone 17 Pro }
+{ platform:iOS Simulator, arch:x86_64, id:2263B19F-42E8-4C8B-8AF1-D79508216C90, OS:26.2, name:iPhone 17 Pro }
+2026-10-29 06:12:01.287 xcodebuild[71069:196619] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-29 06:12:05.865385+0000 HalcyaUITests-Runner[71536:197857] [Default] Running tests...
+2026-10-29 06:12:05.916189+0000 HalcyaUITests-Runner[71536:197966] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+2026-10-29 06:12:05.957752+0000 HalcyaUITests-Runner[71536:197971] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-29 06:12:12.220.
+Test Suite 'HalcyaUITests.xctest' started at 2026-10-29 06:12:12.222.
+Test Suite 'SanteUITests' started at 2026-10-29 06:12:12.222.
+Test Case '-[HalcyaUITests.SanteUITests testAccepterLaFeuilleSante]' started.
+    t =     0.00s Start Test at 2026-10-29 06:12:12.224
+    t =     0.86s Set Up
+    t =     0.86s Open fr.jpesquet.sante
+    t =     0.86s     Activate fr.jpesquet.sante
+    t =     0.97s         Wait for fr.jpesquet.sante to idle
+    t =     1.04s Waiting 30.0s for Any (First Match) to exist
+    t =     2.10s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     2.10s         Checking existence of `Any (First Match)`
+    t =     2.40s Checking existence of `Any (First Match)`
+    t =     2.50s Tap Any (First Match)
+    t =     2.50s     Wait for fr.jpesquet.sante to idle
+    t =     2.50s     Find the Any (First Match)
+    t =     2.60s     Check for interrupting elements affecting "Tout activer" StaticText
+    t =     2.71s     Synthesize event
+    t =     3.13s     Wait for fr.jpesquet.sante to idle
+    t =     4.18s Checking `Expect predicate `isEnabled == 1` for object "Autoriser" Button`
+    t =     4.18s     Find the "Autoriser" Button
+    t =     4.28s Tap "UIA.Health.Allow.Button" Button
+    t =     4.28s     Wait for fr.jpesquet.sante to idle
+    t =     4.29s     Find the "UIA.Health.Allow.Button" Button
+    t =     4.36s     Check for interrupting elements affecting "UIA.Health.Allow.Button" Button
+    t =     4.42s     Synthesize event
+    t =     4.70s     Wait for fr.jpesquet.sante to idle
+    t =     5.78s Checking `Expect predicate `exists == 0` for object "UIA.Health.Allow.Button" Button`
+    t =     5.78s     Checking existence of `"UIA.Health.Allow.Button" Button`
+    t =     5.84s Tear Down
+Test Case '-[HalcyaUITests.SanteUITests testAccepterLaFeuilleSante]' passed (5.876 seconds).
+Test Suite 'SanteUITests' passed at 2026-10-29 06:12:18.101.
+	 Executed 1 test, with 0 failures (0 unexpected) in 5.876 (5.878) seconds
+Test Suite 'HalcyaUITests.xctest' passed at 2026-10-29 06:12:18.101.
+	 Executed 1 test, with 0 failures (0 unexpected) in 5.876 (5.879) seconds
+Test Suite 'Selected tests' passed at 2026-10-29 06:12:18.102.
+	 Executed 1 test, with 0 failures (0 unexpected) in 5.876 (5.882) seconds
+2026-10-29 06:12:18.664 xcodebuild[71069:196619] [MT] IDETestOperationsObserverDebug: 17.370 elapsed -- Testing started completed.
+2026-10-29 06:12:18.664 xcodebuild[71069:196619] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-29 06:12:18.664 xcodebuild[71069:196619] [MT] IDETestOperationsObserverDebug: 17.370 sec, +17.370 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/HalcyaUITests-bvzgihyxfiawkefmoafhjfbnxsep/Logs/Test/Test-HalcyaUITests-2026.10.29_06-11-58-+0000.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started
