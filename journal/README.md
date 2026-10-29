@@ -10,9 +10,9 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v578 (29/10) | v577 sur iPhone simulé (29/10, PR #52) ; v578 en vérification (PR #53) |
+| Dernière version | v578 (29/10) | v578 sur iPhone simulé (29/10, PR #53) : même version qu'Android |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | 38 % (18 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
+| Parité des fonctions | référence | 40 % (19 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
 - **A1 — en cours (28/10 vers 18:50 UTC)** : inscription faite sur le web, cotisation de 99 € en paiement. Il reste à
@@ -23,6 +23,9 @@
   elle les a reprises le jour même (v553) : trois faites, l'abonnement App Store noté pour plus tard.
 - (1 minute, quand vous voulez) **A8** : activer GitHub Pages pour ce dépôt (pas à pas au §8), pour mettre en ligne
   la politique de confidentialité et la page d'assistance de l'iPhone que demandera la fiche App Store.
+- (facultatif, quand vous voulez) Transmettre à la routine Android les demandes marquées « à transmettre » dans
+  `journal/DEMANDES.md` : dont un défaut visible aujourd'hui sur Android (bouton « Autoriser Health Connect » étiré
+  sur toute la hauteur dans l'accueil de l'app) et un libellé « saisi » faux pour un poids de Health Connect.
 - (facultatif) Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS).
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
@@ -143,6 +146,7 @@ via TestFlight.
 | 29/10 03:00 | I2, suivi d'Android v576 | la politique de confidentialité de l'iPhone est dans l'app (PR #50 mergée) ; le rapport PDF pour le médecin est maintenant essayé sur iPhone simulé à chaque build : créé, puis enregistré dans Fichiers par la feuille de partage (résultat au prochain run) ; « Envoyer un avis » mène désormais au dépôt de l'iPhone, plus à celui d'Android ; Android v576 : nombres et unités jamais coupés en fin de ligne, aussi sur iPhone. Parité : 34 % | #50 (mergée), #51 |
 | 29/10 04:00 | I2, suivi d'Android v577 | **le rapport PDF pour le médecin marche sur iPhone simulé** : créé sur le téléphone puis proposé au partage, comme sur Android (PR #51 mergée) ; « Envoyer un avis » mène au dépôt de l'iPhone ; la page Nouveautés de l'iPhone ne montre plus l'ancienne histoire de la version Android (nom « HealthTrack », clé Gemini…), seulement les nouveautés depuis la version iPhone ; Android v577 : Tendances plus nettes quand rien n'est encore noté, aussi sur iPhone. Parité : 36 % | #51 (mergée), #52 |
 | 29/10 05:00 | I2, suivi d'Android v578 | les Nouveautés propres à l'iPhone sont en place (PR #52 mergée), et une note d'Android fausse sur iPhone (l'écran Premium du lancement) y est cachée ; le test automatique enregistre maintenant le rapport PDF dans Fichiers sur le grand iPhone, correction pour le petit en cours ; une règle d'Apple sur les données de santé dans iCloud étudiée (décision à prendre avant la publication ; je vous la présenterai après A1) ; Android v578 : écran Premium du lancement plus simple. Parité : 38 % | #52 (mergée), #53 |
+| 29/10 06:00 | I2 | **l'iPhone est à la même version qu'Android (v578)** ; le rapport PDF pour le médecin est créé puis enregistré dans Fichiers sur les deux iPhone simulés ; tout l'accueil de l'app (onboarding) vérifié sur iPhone ; un défaut visible aussi sur Android trouvé en chemin (bouton « Autoriser » étiré sur l'écran Santé), noté pour la routine Android. Parité : 40 % | #53 (mergée), #54 |
 
 ---
 
