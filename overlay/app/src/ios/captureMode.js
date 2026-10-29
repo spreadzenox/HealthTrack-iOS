@@ -151,6 +151,7 @@ export async function installCaptureMode() {
         await probeFace(d)
         await probeFileImport(d)
         await probeShareExport(d)
+        await probeShareReport(d)
         await probeSnapshotWelcome({ ...d, localStorage: window.localStorage })
         await probeDeleteAll(d) // en dernier : vide la base
       },
@@ -496,6 +497,56 @@ export async function probeShareExport({ log, signal, waitAck, wait, navigate, r
     await waitAck('export-partage', 600) // test d'interface : jusqu'à 3 min
     await wait(2000)
     say('partage', { bouton, avant, après: await exports() })
+  } catch (e) {
+    say('échec', e?.message || String(e))
+  }
+}
+
+/**
+ * Essai du rapport PDF pour le médecin (N6b, correctif 09), le geste réel : Vos données s'ouvre sans recharger la
+ * page et « Préparer le rapport » est touché ; le test d'interface (`DonneesUITests/testEnregistrerLeRapportDansFichiers`)
+ * touche « Créer le PDF » (fichier écrit dans Documents puis feuille de partage), « Enregistrer dans Fichiers », le
+ * dossier Halcya, « Enregistrer » puis « Garder les deux » : une 2e copie apparaît dans Documents. La sonde compte les
+ * fichiers `Halcya-rapport-*.pdf` avant et après (+2 attendus), lit la taille du premier et le message de la carte.
+ * Résultats dans la console (`[rapport] …`).
+ */
+export async function probeShareReport({ log, signal, waitAck, wait, navigate, click, reveal, list, size, status }) {
+  const say = (what, value) => log(`[rapport] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
+  try {
+    const fs = async () => import('@capacitor/filesystem')
+    const names =
+      list ??
+      (async () => {
+        const { Filesystem, Directory } = await fs()
+        return (await Filesystem.readdir({ path: '', directory: Directory.Documents })).files.map((f) => f.name)
+      })
+    const bytes =
+      size ??
+      (async (path) => {
+        const { Filesystem, Directory } = await fs()
+        return (await Filesystem.stat({ path, directory: Directory.Documents })).size
+      })
+    const reports = async () => (await names()).filter((n) => n.startsWith('Halcya-rapport-') && n.endsWith('.pdf'))
+      .sort((a, b) => a.length - b.length || (a < b ? -1 : 1)) // celui de l'app d'abord, puis « … 2.pdf »
+    const go =
+      navigate ??
+      ((path) => {
+        window.history.pushState({}, '', path)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      })
+    const avant = (await reports()).length
+    go('/data')
+    await wait(3000)
+    const préparer = (click ?? clickButton)('Préparer le rapport')
+    await wait(800)
+    const bouton = (reveal ?? revealButton)('Créer le PDF')
+    await wait(800)
+    await signal('rapport-partage') // le test d'interface crée, partage et enregistre, puis la feuille est capturée
+    await waitAck('rapport-partage', 600) // test d'interface : jusqu'à 3 min
+    await wait(2000)
+    const après = await reports()
+    const message = (status ?? (() => document.querySelector('[data-testid="doctor-report"] [role="status"]')?.textContent ?? null))()
+    say('partage', { préparer, bouton, avant, après: après.length, octets: après.length ? await bytes(après[0]) : null, message })
   } catch (e) {
     say('échec', e?.message || String(e))
   }

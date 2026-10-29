@@ -36,6 +36,8 @@
   dans Gadgetbridge (→ guide des montres réécrit, sous I4) ; captures défilées pour les pages longues : faites, PR #5) : compléter `PARITE.md` fonction par fonction (changelog depuis le
   lancement play, `journal/PRODUIT.md`, écrans) ; sur iOS, chaque service qui appelle un plugin Android absent
   retombe proprement (pas d'erreur, pas de carte cassée, pas d'interrupteur qui ne fait rien) ; % de parité.
+  - [ ] Rapport PDF pour le médecin essayé à chaque build (29/10, PR #51) : sonde `[rapport]` et test d'interface
+    (« Créer le PDF », « Enregistrer dans Fichiers ») ; à confirmer sur la CI, puis ✅ dans `PARITE.md`.
 - [ ] **I3 — Données** : durabilité d'IndexedDB dans WKWebView (27/10 : non durable d'après Capacitor et WebKit,
   plan dans `RECHERCHE.md` : `persist()`, instantané automatique en fichier natif, restauration proposée si la base
   est vide ; 27/10 : copie de secours automatique, PR #6), sauvegarde iCloud, export / import JSON par la feuille
@@ -184,7 +186,8 @@
     confidentialité et de conditions du paywall (`PRIVACY_URL`, `TERMS_URL` d'Android) à remplacer avec I6.
   - [ ] Données de démo iPhone (`captureMode.js`, `iphoneDemoEntries`) : le poids et la masse grasse y viennent de
     « Withings » (connexion directe, absente sur iPhone) ; les montrer comme venant de l'app Santé (29/10, vu sur la
-    capture Nutrition de #49, hors des 8 captures de la fiche).
+    capture Nutrition de #49, hors des 8 captures de la fiche). Mais le code partagé annonce un poids de Health Connect
+    (et donc de l'app Santé) « (saisi le …) » : demande à Android (`DEMANDES.md`, 29/10) avant de toucher la démo.
   - [ ] **Directive 5.1.3 (ii) d'Apple** : une app « ne doit pas stocker de données de santé personnelles dans
     iCloud ». La copie de secours (I3) part dans la sauvegarde iCloud de l'iPhone : risque de refus à l'examen. À
     trancher avant la soumission : garder (sauvegarde du système, choisie et chiffrée par l'utilisateur), l'exclure
