@@ -1,17 +1,16 @@
 diff --git a/app/src/components/BaselineCards.jsx b/app/src/components/BaselineCards.jsx
-index 12bf595..6ebe6c7 100644
+index 663727d..a557913 100644
 --- a/app/src/components/BaselineCards.jsx
 +++ b/app/src/components/BaselineCards.jsx
-@@ -1,7 +1,8 @@
+@@ -1,6 +1,7 @@
  import { useState, useEffect, useCallback } from 'react'
- import { Link } from 'react-router-dom'
  import { listEntries } from '../storage/localHealthStorage'
 -import { computeHeartBaselines, BASELINE_METRICS, RECENT_DAYS, BASELINE_DAYS } from '../services/baselines'
 +import { computeHeartBaselines, computeBaseline, BASELINE_METRICS, RECENT_DAYS, BASELINE_DAYS } from '../services/baselines'
 +import { iosBaselineMetrics } from '../ios/sdnnBaseline' // Version iOS (HealthTrack-iOS)
  import { APP_NAME } from '../config/brand'
+ import PastelTiles from './PastelTiles'
  import './BaselineCards.css'
- import { appLocale } from '../i18n/locale.js'
 @@ -88,8 +89,9 @@ export default function BaselineCards({ onStatus }) {
      try {
        const since = new Date(Date.now() - HISTORY_DAYS * 86400000).toISOString()
