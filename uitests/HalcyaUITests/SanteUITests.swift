@@ -175,6 +175,7 @@ final class DonneesUITests: XCTestCase {
         guard cible.waitForExistence(timeout: 10) else {
             print(halcya.debugDescription)
             XCTFail("« \(fichier) » introuvable dans le sélecteur de fichiers")
+            fermerLeSelecteur()
             return
         }
         cible.tap()
@@ -182,10 +183,25 @@ final class DonneesUITests: XCTestCase {
         let ouvrir = halcya.buttons["Ouvrir"]
         if ouvrir.waitForExistence(timeout: 3) { ouvrir.tap() }
         let apercu = element("Ajouter à mes données")
+        // Toucher perdu pendant l'animation du dossier (29/10, PR #59, iPhone 16e : fichier encore affiché, sélecteur
+        // ouvert, aucun aperçu) : un second toucher si, 5 s après, le fichier est toujours là
+        if !apercu.waitForExistence(timeout: 5) && cible.exists {
+            print("fichier toujours affiché 5 s après le toucher : second toucher")
+            cible.tap()
+            if ouvrir.waitForExistence(timeout: 3) { ouvrir.tap() }
+        }
         if !apercu.waitForExistence(timeout: 30) {
             print(halcya.debugDescription)
             XCTFail("aperçu de l'import jamais affiché")
+            fermerLeSelecteur()
         }
+    }
+
+    /// Sélecteur de fichiers resté ouvert après un échec : « Annuler », sinon il bloque les tests suivants (29/10, PR
+    /// #59 : import en échec sur l'iPhone 16e, puis export et rapport en échec derrière le sélecteur resté ouvert).
+    private func fermerLeSelecteur(attente: TimeInterval = 3) {
+        let annuler = halcya.buttons["Annuler"]
+        if annuler.waitForExistence(timeout: attente) { annuler.tap() }
     }
 
     /// Export par la feuille de partage : « Télécharger la sauvegarde » (le fichier est écrit dans Documents, puis
@@ -193,6 +209,7 @@ final class DonneesUITests: XCTestCase {
     /// fichier y est déjà. La sonde compte ensuite les exports dans Documents.
     func testEnregistrerLaSauvegardeDansFichiers() throws {
         halcya.activate()
+        fermerLeSelecteur(attente: 1) // reste éventuel d'un test précédent
         let exporter = element("Télécharger la sauvegarde")
         guard exporter.waitForExistence(timeout: 30) else {
             print(halcya.debugDescription)
@@ -207,6 +224,7 @@ final class DonneesUITests: XCTestCase {
     /// est créé sur l'iPhone, écrit dans Documents, puis partagé : même enregistrement dans Fichiers que l'export.
     func testEnregistrerLeRapportDansFichiers() throws {
         halcya.activate()
+        fermerLeSelecteur(attente: 1) // reste éventuel d'un test précédent
         let creer = element("Créer le PDF")
         guard creer.waitForExistence(timeout: 30) else {
             print(halcya.debugDescription)
