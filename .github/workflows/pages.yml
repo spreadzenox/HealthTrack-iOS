@@ -7,10 +7,10 @@ name: Site — GitHub Pages
 on:
   pull_request:
     branches: [main]
-    paths: ["overlay/app/public/confidentialite-iphone.html", "site/**", "scripts/site.mjs", ".github/workflows/pages.yml"]
+    paths: ["overlay/app/public/confidentialite-iphone.html", "overlay/app/public/conditions-iphone.html", "site/**", "scripts/site.mjs", ".github/workflows/pages.yml"]
   push:
     branches: [main]
-    paths: ["overlay/app/public/confidentialite-iphone.html", "site/**", "scripts/site.mjs", ".github/workflows/pages.yml"]
+    paths: ["overlay/app/public/confidentialite-iphone.html", "overlay/app/public/conditions-iphone.html", "site/**", "scripts/site.mjs", ".github/workflows/pages.yml"]
   workflow_dispatch:
 
 permissions:
@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   build:
-    name: Construire le site (confidentialité, assistance)
+    name: Construire le site (confidentialité, conditions, assistance)
     runs-on: ubuntu-latest
     permissions:
       contents: read

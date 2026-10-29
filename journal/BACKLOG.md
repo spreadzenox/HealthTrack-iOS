@@ -190,9 +190,13 @@
     joindre).
   - [x] Notes pour l'examen d'Apple, en anglais, prêtes à coller (`store/app-store/notes-examen.md`, 29/10) ; à relire
     avant la soumission (I6, directive 5.1.3 (ii), adresses après A8).
-  - [ ] Conditions d'utilisation et de vente propres à l'iPhone (celles d'Android parlent de Google Play ; retirées
-    des Réglages sur iPhone le 29/10, correctif 26), avec le même lien de retour ; lien de
-    confidentialité et de conditions du paywall (`PRIVACY_URL`, `TERMS_URL` d'Android) à remplacer avec I6.
+  - [x] Conditions d'utilisation propres à l'iPhone (29/10, `overlay/app/public/conditions-iphone.html`, correctif 26 :
+    Réglages → Conditions les ouvre de nouveau sur iPhone) : aucun achat, App Store et contrat de licence standard
+    d'Apple, app Santé et sauvegarde iCloud, « pas un dispositif médical » et 15 ou 112 (directive 1.4.1) ; même
+    lien de retour ; témoin `conditionsIphone.test.js` (empreinte de la page d'Android) ; publiées aussi sur le site
+    (`…/conditions/`, avec A8).
+  - [ ] Avec I6 : leur partie vente (formules, renouvellement, annulation, remboursements par Apple), et les liens de
+    confidentialité et de conditions du paywall (`PRIVACY_URL`, `TERMS_URL` d'Android) à remplacer.
   - [ ] Données de démo iPhone (`captureMode.js`, `iphoneDemoEntries`) : le poids et la masse grasse y viennent de
     « Withings » (connexion directe, absente sur iPhone) ; les montrer comme venant de l'app Santé (29/10, vu sur la
     capture Nutrition de #49, hors des 8 captures de la fiche). Mais le code partagé annonce un poids de Health Connect
