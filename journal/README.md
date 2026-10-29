@@ -10,9 +10,9 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v579 (29/10) | v578 sur iPhone simulé (29/10, PR #53) ; v579 en vérification (PR #55) |
+| Dernière version | v580 (29/10) | v579 sur iPhone simulé (29/10, PR #55) ; v580 en vérification (PR #56) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | 40 % (19 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
+| Parité des fonctions | référence | 41 % (19 fonctions vérifiées sur 46 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
 - **A1 — en cours (28/10 vers 18:50 UTC)** : inscription faite sur le web, cotisation de 99 € en paiement. Il reste à
@@ -37,6 +37,8 @@
 - **Temps d'écran** du téléphone : Apple ne laisse pas une app lire ces chiffres → à l'étude (I8).
 - **Montre Huawei en direct** : sur iPhone, pas de Bluetooth « classique » pour les apps → passer par l'app Santé
   d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
+- **Repérer les apps de montre installées** (Garmin, Oura…) : iOS ne laisse pas une app voir les autres apps → la
+  montre est reconnue par les données qu'elle écrit dans l'app Santé, et un guide dit quoi activer dans chaque app.
 
 **Ce qui a changé cette semaine**
 - **28/10 19:00 — abonnement d'essai et captures de la fiche App Store** (PR #40 et #41, mergées) : sur iPhone
@@ -147,6 +149,7 @@ via TestFlight.
 | 29/10 04:00 | I2, suivi d'Android v577 | **le rapport PDF pour le médecin marche sur iPhone simulé** : créé sur le téléphone puis proposé au partage, comme sur Android (PR #51 mergée) ; « Envoyer un avis » mène au dépôt de l'iPhone ; la page Nouveautés de l'iPhone ne montre plus l'ancienne histoire de la version Android (nom « HealthTrack », clé Gemini…), seulement les nouveautés depuis la version iPhone ; Android v577 : Tendances plus nettes quand rien n'est encore noté, aussi sur iPhone. Parité : 36 % | #51 (mergée), #52 |
 | 29/10 05:00 | I2, suivi d'Android v578 | les Nouveautés propres à l'iPhone sont en place (PR #52 mergée), et une note d'Android fausse sur iPhone (l'écran Premium du lancement) y est cachée ; le test automatique enregistre maintenant le rapport PDF dans Fichiers sur le grand iPhone, correction pour le petit en cours ; une règle d'Apple sur les données de santé dans iCloud étudiée (décision à prendre avant la publication ; je vous la présenterai après A1) ; Android v578 : écran Premium du lancement plus simple. Parité : 38 % | #52 (mergée), #53 |
 | 29/10 06:00 | I2 | **l'iPhone est à la même version qu'Android (v578)** ; le rapport PDF pour le médecin est créé puis enregistré dans Fichiers sur les deux iPhone simulés ; tout l'accueil de l'app (onboarding) vérifié sur iPhone ; un défaut visible aussi sur Android trouvé en chemin (bouton « Autoriser » étiré sur l'écran Santé), noté pour la routine Android. Parité : 40 % | #53 (mergée), #54 |
+| 29/10 07:00 | I2, suivi d'Android v579 et v580 | v579 sur iPhone (PR #55 mergée) ; tranché : l'iPhone ne peut pas repérer les apps de montre installées comme Android, il reconnaît la montre par ses données dans l'app Santé (déjà en place) ; l'icône « Halcya » sur l'écran d'accueil de l'iPhone et l'écran de démarrage seront photographiés à chaque build ; Android v580 : « Enregistrer ce repas » plus net, aussi sur iPhone. Parité : 41 % | #55 (mergée), #56 |
 
 ---
 
