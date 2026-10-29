@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v573 (29/10) | v572 sur iPhone simulé (29/10, PR #46) ; v573 en vérification (PR #47) |
+| Dernière version | v573 (29/10) | v573 sur iPhone simulé (29/10, PR #47) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 32 % (15 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -136,7 +136,7 @@ via TestFlight.
 | 28/10 22:00 | I7, suivi d'Android v571 | lecture du visage : le calcul est en place (PR #43 mergée) ; les vrais modèles tournent sur iPhone simulé et donnent les mêmes résultats qu'Android, en un dixième de seconde par image environ ; restent la caméra et l'écran. Android v570 et v571 : textes plus honnêtes sur ce que garde le serveur d'analyse IA (un simple compteur, effacé après 13 mois), pistes présentées comme un lien (« Nuits plus longues → meilleur bien-être ») et non comme un ordre ; aussi sur iPhone (vérifié sur les captures). En préparation : la caméra de l'iPhone pour la lecture du visage | #43, #44 (mergées), #45 |
 | 28/10 23:00 | I7, I9 | défaut trouvé et corrigé avant tout essai sur iPhone : la photo d'un repas aurait fermé l'app (il manquait la phrase qui explique l'usage de la caméra), et la météo n'aurait pas pu lire la position ; les deux phrases sont ajoutées et vérifiées à chaque build. Lecture du visage : la caméra de l'iPhone est prête côté calcul | #45 (mergée) |
 | 29/10 00:00 | I7, suivi d'Android v572 | photo du repas et position de la météo corrigées (PR #45 mergée) ; la lecture du visage est maintenant dans l'app iPhone (simulée) avec ses modèles : reste à la voir lire un vrai visage, sur l'iPhone 12. Android v572 : boutons plus clairs (suppression en orange, chevrons de la réintroduction), aussi sur iPhone | #45, #46 (mergées) |
-| 29/10 01:00 | I7, suivi d'Android v573 | lecture du visage dans l'app iPhone (PR #46 mergée) ; sur iPhone simulé, un visage (portrait de test) est lu de bout en bout et rangé dans vos données comme sur Android ; reste la vraie caméra, sur l'iPhone 12. Android v573 : « Photo du repas » bien en vue dans Repas, aussi sur iPhone | #46 (mergée), #47 |
+| 29/10 01:00 | I7, suivi d'Android v573 | lecture du visage dans l'app iPhone (PR #46 mergée) ; sur iPhone simulé, un visage (portrait de test) est lu de bout en bout et rangé dans vos données comme sur Android ; reste la vraie caméra, sur l'iPhone 12. Android v573 : « Photo du repas » bien en vue dans Repas, aussi sur iPhone | #46, #47 (mergées) |
 
 ---
 
