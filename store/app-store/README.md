@@ -21,9 +21,8 @@ Reste à préparer, au moment des actions A3 et A5 du propriétaire :
 - **Âge** : 18 ans et plus, comme sur Google Play. Questionnaire d'App Store Connect à remplir ; prendre un âge plus élevé que celui qu'il calcule s'il le permet.
 - **URL** : assistance et politique de confidentialité. Celles publiées pour Android parlent d'Android et de Google. La politique de l'iPhone est écrite (`overlay/app/public/confidentialite-iphone.html`, embarquée dans l'app, 29/10) ; elle sera publiée en ligne avec la page d'assistance (`site/assistance.html`) par le workflow « Site — GitHub Pages », dès que Pages est activé (action A8) : `https://spreadzenox.github.io/HealthTrack-iOS/confidentialite/` et `https://spreadzenox.github.io/HealthTrack-iOS/assistance/`.
 - **Captures** : iPhone 6,9 pouces (1320 × 2868), exigées par App Store Connect. Le workflow « iOS — build simulateur » les produit à la demande : lancement manuel (`workflow_dispatch`) avec `devices` = « iPhone 17 Pro Max ». Toutes les pages du parcours sont prises avec les données de démo et publiées sur la branche `captures/store`, sans toucher aux captures des PR. Les 8 captures de la fiche sont choisies : `captures.md`.
-- **Notes pour l'examen** :
-  - pas de compte à créer ;
-  - l'analyse IA d'un repas passe par le relais Halcya, sans clé dans l'app ;
-  - HealthKit ne sert qu'à importer les mesures que la personne autorise ;
-  - abonnement par l'App Store (I6).
+- **Notes pour l'examen** : texte anglais prêt à coller dans `notes-examen.md` (29/10) : pas de compte, données sur
+  l'iPhone, analyse IA seulement à la demande par le relais (sans clé dans l'app), HealthKit en lecture seule (les
+  15 types), caméra (repas, visage sur l'iPhone), capteurs Bluetooth, rappels, copie de secours, aucun achat pour
+  l'instant ; à relire avant la soumission (I6, directive 5.1.3 (ii), A8).
 - **Confidentialité de l'app** (A5) : réponses prêtes dans `confidentialite.md`, en accord avec `ios/App/App/PrivacyInfo.xcprivacy` et avec la déclaration Google Play d'Android (vérifié par un test).

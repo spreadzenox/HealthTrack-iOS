@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v580 (29/10) | v580 sur iPhone simulé (29/10, PR #56) : même version qu'Android |
+| Dernière version | v583 (29/10) | v580 sur iPhone simulé (29/10, PR #56) ; v583 en vérification (PR #59) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -154,6 +154,7 @@ via TestFlight.
 | 29/10 07:00 | I2, suivi d'Android v579 et v580 | v579 sur iPhone (PR #55 mergée) ; tranché : l'iPhone ne peut pas repérer les apps de montre installées comme Android, il reconnaît la montre par ses données dans l'app Santé (déjà en place) ; l'icône « Halcya » sur l'écran d'accueil de l'iPhone et l'écran de démarrage seront photographiés à chaque build ; Android v580 : « Enregistrer ce repas » plus net, aussi sur iPhone. Parité : 41 % | #55 (mergée), #56 |
 | 29/10 08:00 | I2 | **l'iPhone est à la même version qu'Android (v580)** ; l'icône « Halcya » est vue sur l'écran d'accueil de l'iPhone (simulé) ; « Votre avis » et la page Nouveautés de l'iPhone confirmés ; l'écran de démarrage reste à photographier (un peu plus tard après le lancement). Parité : 45 % | #56 (mergée), #57 |
 | 29/10 09:00 | I2, I4 | les mesures de l'app Santé sont bien rangées dans les données de l'app (vérifié sur iPhone simulé à chaque build) ; icône, nom et écran de démarrage vérifiés ; l'iPhone reste à la même version qu'Android (v580). Parité : 49 % | #57 (mergée), #58 |
+| 29/10 10:00 | I9, suivi d'Android v583 | PR #58 mergée (achat d'essai vérifié à chaque build) ; les notes pour l'équipe d'examen d'Apple sont prêtes à coller au moment de la soumission ; Android v581 → v583 : fructanes plus justes pour le pain, le poireau, l'oignon et une cinquantaine d'aliments courants, aussi sur iPhone. Parité : 49 % | #58 (mergée), #59 |
 
 ---
 
