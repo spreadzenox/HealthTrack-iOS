@@ -136,6 +136,15 @@ export async function waitForAck({ readAck, sleep }, name, tries = 100) {
 }
 
 /**
+ * Note marquée « vue » pendant les captures, comme le fait l'onboarding : la plus récente des Nouveautés de la
+ * variante (`CHANGELOG`), pas de tout l'historique : une note d'Android cachée sur iPhone n'y est pas, et l'app
+ * annoncerait alors toutes les autres comme nouvelles.
+ */
+export function lastSeenChangelogId(changelog) {
+  return changelog.CHANGELOG[0]?.id ?? null
+}
+
+/**
  * Une promesse rejetée sans traitement ne passe pas par `window.onerror` : rendue ici en erreur de la console, pour
  * qu'elle compte dans js-errors.txt, qui fait échouer la CI (un service qui retombe mal sur iPhone, étape I2).
  */
@@ -158,7 +167,7 @@ export async function installCaptureMode() {
     await runCaptureStep(buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES), {
       storage,
       demoEntries: () => iphoneDemoEntries(demo.generateDemoEntries()),
-      latestChangelogId: changelog.ALL_CHANGELOG[0]?.id ?? null,
+      latestChangelogId: lastSeenChangelogId(changelog),
       localStorage: window.localStorage,
       go: (path) => window.location.assign(path),
       scroll: (screens) => window.scrollTo({ top: screens * Math.round(window.innerHeight * 0.8), behavior: 'instant' }),

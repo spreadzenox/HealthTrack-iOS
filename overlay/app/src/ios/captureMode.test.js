@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -206,6 +206,16 @@ describe('accusé du script (waitForAck)', () => {
     })
     expect(await waitForAck({ readAck: never, sleep }, 'page', 4)).toBe(false)
     expect(never).toHaveBeenCalledTimes(4)
+  })
+})
+
+describe('Nouveautés déjà vues pendant les captures (lastSeenChangelogId)', () => {
+  it('prend la dernière note de la variante, pas celle de tout l’historique (une note d’Android cachée sur iPhone)', () => {
+    // v590 : la note la plus récente d'Android était cachée sur iPhone ; marquée « vue », l'app ne la trouvait pas
+    // dans ses Nouveautés et annonçait toutes les autres (« … et 13 autres changements ») sur chaque capture
+    const changelog = { ALL_CHANGELOG: [{ id: 'android-seule' }, { id: 'commune' }], CHANGELOG: [{ id: 'commune' }] }
+    expect(lastSeenChangelogId(changelog)).toBe('commune')
+    expect(lastSeenChangelogId({ ALL_CHANGELOG: [], CHANGELOG: [] })).toBeNull()
   })
 })
 

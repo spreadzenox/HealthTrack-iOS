@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v590 (29/10) | v589 sur iPhone simulé (29/10, PR #66) ; v590 en vérification (PR #67) |
+| Dernière version | v591 (29/10) | v590 sur iPhone simulé (29/10, PR #67) ; v591 en vérification (PR #68) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -162,6 +162,7 @@ via TestFlight.
 | 29/10 16:05 | contrôle des erreurs (fin), états vides | v587 sur iPhone, au même niveau qu'Android (PR #63 mergée, aucune erreur JavaScript, contrôle désormais bloquant) ; nouvelles captures de chaque page telle qu'elle apparaît avant la première donnée (Accueil, Journal, Analyses, Sources…), pour vérifier ce qu'un nouvel utilisateur d'iPhone voit. Parité : 49 % | #63 (mergée), #64 |
 | 29/10 17:05 | suivi d'Android v588, états vides (fin) | les pages vides d'un nouvel utilisateur sont justes sur iPhone (8 pages regardées sur les deux iPhone simulés, PR #64 mergée) ; un essai automatique d'export a touché le bouton sans effet sur un iPhone : il retouche maintenant si la feuille de partage ne s'ouvre pas ; Android v588 : la réintroduction propose des aliments qui contiennent vraiment le groupe testé, aussi sur iPhone (vu : sorbitol → pruneaux, PR #65 mergée) ; **conditions d'utilisation propres à l'iPhone** (aucun achat, « pas un dispositif médical », appelez le 15 ou le 112) de nouveau dans Réglages ; Android v589 : rapport PDF sans zéros trompeurs. Parité : 49 % | #64, #65 (mergées), #66 |
 | 29/10 18:00 | suivi d'Android v590 | v589 sur iPhone (PR #66 mergée : « Conditions » de retour dans Réglages, rapport PDF sans zéros trompeurs) ; Android v590 : l'onglet Sources range les sources branchées sous « Ce que lit Halcya », aussi sur iPhone ; sa note de Nouveautés parle de Health Connect et du temps d'écran, absents de l'iPhone : cachée sur iPhone, et une demande de plus pour la routine Android (`DEMANDES.md`). Parité : 49 % | #66 (mergée), #67 |
+| 29/10 19:00 | suivi d'Android v591, captures | v590 sur iPhone (PR #67 mergée : « Ce que lit Halcya » vu dans Sources) ; un bandeau « Nouveau : … et 13 autres changements » s'était glissé sur toutes les captures (défaut de l'outil de capture, pas de l'app) : corrigé ; Android v591 : le Journal vide propose trois tuiles en couleur pour bien démarrer, aussi sur iPhone. Parité : 49 % | #67 (mergée), #68 |
 
 ---
 
@@ -291,7 +292,9 @@ Règles des adaptations :
    `app/src/data/changelog/`, tête de `journal/README.md` et de `journal/PRODUIT.md`. Reporter dans `PARITE.md` §5.
    **Chaque nouvelle note de Nouveautés** sans `variants` s'affiche aussi sur iPhone (depuis le 29/10, l'iPhone montre
    les notes à partir de sa propre version, correctif 28) : fausse sur iPhone → son id dans `APPSTORE_HIDDEN`
-   (correctif 28) et une ligne dans `DEMANDES.md` pour qu'Android la marque `["play", "sideload"]`.
+   (correctif 28) et une ligne dans `DEMANDES.md` pour qu'Android la marque `["play", "sideload"]`. La cacher
+   **au suivi de sa version**, jamais plus tard : une note déjà vue sur un iPhone puis cachée n'est plus trouvée
+   par `getUnseenEntries`, et l'app annoncerait toutes les autres comme nouvelles (vu en capture le 29/10, PR #67).
 3. **Une autre exécution iOS en cours ?** (PR ouverte ici depuis moins de 75 min, ou workflow en cours sur une
    branche de la routine) → ne pas toucher aux mêmes fichiers.
 4. **Priorités** : (a) `main` de ce dépôt rouge → réparer ; (b) une PR de la routine rouge ou en conflit → la
