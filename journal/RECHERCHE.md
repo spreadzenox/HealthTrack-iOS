@@ -309,3 +309,23 @@ montre (Garmin Connect, Oura, Withings, Polar, Suunto, COROS, WHOOP, Zepp…) ne
 une liste devinée serait fragile et pourrait se tromper. **Choix** : ⛔ à l'identique ; l'iPhone reconnaît les
 montres par les données qu'elles écrivent dans l'app Santé (nom de la source de chaque mesure, déjà montré dans
 Sources) et le guide « Votre montre n'apparaît pas ? » dit quoi activer dans chaque app.
+
+## Montre Huawei en direct sur iPhone (29/10/2026, code d'Android v580)
+
+**Ce que fait Android** (`app/src/devices/huawei/`, code propre à Halcya) : un même protocole sur deux transports
+(`transports.js`) : **Bluetooth classique** (RFCOMM, plugin natif `BtClassic`) pour les montres GT 3 → GT 7 et
+récentes, dont la **Watch GT 6 Pro du propriétaire** ; **BLE GATT** (service FE86, écriture FE01, notifications
+FE02, par `@capacitor-community/bluetooth-le`) pour les bracelets et anciens modèles.
+
+**Sur iPhone**
+- RFCOMM / port série : une app ne parle à un accessoire en Bluetooth classique que par External Accessory, réservé
+  aux accessoires certifiés MFi ; CoreBluetooth ne fait que le GATT (en BLE, et en Bluetooth classique seulement
+  pour le GATT). Les montres GT 3 → GT 7 sont donc **hors de portée** d'une app tierce sur iPhone.
+- BLE (FE86) : le transport d'Android passe par `@capacitor-community/bluetooth-le`, qui marche sur iOS ; le reste
+  (association HiChain, chiffrement, synchronisation) est du JavaScript partagé. **Piste réelle pour les bracelets
+  Huawei / Honor en BLE**, à essayer avec un appareil (aucun ici). Questions ouvertes : une montre déjà liée à
+  Huawei Santé accepte-t-elle une seconde association, et l'écran Montre (retiré sur iPhone, correctif 07) est-il
+  à rouvrir pour ces seuls modèles ?
+- Alternative en place : Huawei Santé sur iPhone écrit une partie de ses mesures dans l'app Santé, que Halcya lit
+  (pas, cœur, sommeil, entraînements, poids d'après une page d'intégrateur, Sahha ; rien d'officiel : à vérifier
+  sur un iPhone avec Huawei Santé).

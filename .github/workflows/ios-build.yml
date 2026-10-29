@@ -146,8 +146,8 @@ jobs:
         run: scripts/ios-captures.sh "$RUNNER_TEMP/dd/Build/Products/Debug-iphonesimulator/App.app" captures "${XCTESTRUN:-}"
       # Achat d'essai de l'abonnement App Store (I6), sans compte Apple : StoreKit Test (ios/App/AppTests/Halcya.storekit)
       # dans une cible de tests unitaires hébergée par l'app. Encore à l'essai : n'arrête ni les captures ni la CI.
+      # Bloquant depuis le 29/10 (réussi sans faute sur #53, #55, #56 et #57) ; les captures restent publiées
       - name: Achat d'essai App Store (StoreKit Test, I6)
-        continue-on-error: true
         working-directory: upstream/app/ios/App
         run: |
           set -o pipefail
