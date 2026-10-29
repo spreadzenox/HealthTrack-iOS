@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v590 (commit `5b00f9b`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v591 (commit `b0acbc6`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 18:20 | #507 (v591) | Journal vierge : trois tuiles en couleur (photo d'un repas, ventre ou bien-être, ajouter une source) au lieu d'une phrase grise (`JournalEmpty.jsx`, `DailyJournal.jsx`, `App.css`) : code partagé, aucun correctif touché, note vraie sur iPhone ; visible dans la capture `vide-journal` | — |
 | 29/10 17:30 | #506 (v590) | Sources : les sources branchées sous leur propre titre « Ce que lit Halcya », au-dessus de « Mes appareils » (`Connectors.jsx`) : code partagé, vaut sur iPhone, correctif 08 toujours applicable ; **note de Nouveautés fausse sur iPhone** (« météo, Health Connect, temps d'écran ») : cachée (`APPSTORE_HIDDEN`, correctif 28), demande à Android (`DEMANDES.md`) | — |
 | 29/10 16:45 | #505 (v589) | Rapport PDF : « Pas encore assez de notes du ventre (n/28 jours) » au lieu d'un faux « aucun lien », « – » pour une semaine sans note (`renderPdf.js`) : code partagé, le rapport marche sur iPhone (sonde `[rapport]`), note vraie ; les 28 correctifs s'appliquent directement | — |
 | 29/10 16:15 | #504 (v588) | Réintroduction : aliments de test qui contiennent vraiment le groupe (sorbitol → pruneaux secs, mannitol → champignons de Paris ; `fodmapChallenge.js`, `Reintroduction.jsx`) : code partagé, note de Nouveautés vraie sur iPhone ; les 28 correctifs s'appliquent directement | — |
