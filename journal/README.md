@@ -10,9 +10,9 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v576 (29/10) | v575 sur iPhone simulé (29/10, PR #50) ; v576 en vérification (PR #51) |
+| Dernière version | v577 (29/10) | v576 sur iPhone simulé (29/10, PR #51) ; v577 en vérification (PR #52) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | 34 % (16 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
+| Parité des fonctions | référence | 36 % (17 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
 - **A1 — en cours (28/10 vers 18:50 UTC)** : inscription faite sur le web, cotisation de 99 € en paiement. Il reste à
@@ -141,6 +141,7 @@ via TestFlight.
 | 29/10 01:00 | I7, suivi d'Android v573 | lecture du visage dans l'app iPhone (PR #46 mergée) ; sur iPhone simulé, un visage (portrait de test) est lu de bout en bout et rangé dans vos données comme sur Android ; reste la vraie caméra, sur l'iPhone 12. Android v573 : « Photo du repas » bien en vue dans Repas, aussi sur iPhone | #46, #47 (mergées) |
 | 29/10 02:00 | I9, suivi d'Android v574 et v575 | les 8 images de la fiche App Store sont choisies, à la bonne taille pour l'iPhone, avec des données d'exemple qui ne montrent que ce que l'iPhone sait faire ; l'iPhone a maintenant sa propre politique de confidentialité (celle d'Android parlait de Google et de fonctions absentes, et on ne pouvait pas en revenir sans quitter l'app) et une page d'assistance, prêtes à être mises en ligne (action A8, 1 minute) ; Android v574 et v575 : titres et coupures de lignes plus soignés, aussi sur iPhone | #49, #50 |
 | 29/10 03:00 | I2, suivi d'Android v576 | la politique de confidentialité de l'iPhone est dans l'app (PR #50 mergée) ; le rapport PDF pour le médecin est maintenant essayé sur iPhone simulé à chaque build : créé, puis enregistré dans Fichiers par la feuille de partage (résultat au prochain run) ; « Envoyer un avis » mène désormais au dépôt de l'iPhone, plus à celui d'Android ; Android v576 : nombres et unités jamais coupés en fin de ligne, aussi sur iPhone. Parité : 34 % | #50 (mergée), #51 |
+| 29/10 04:00 | I2, suivi d'Android v577 | **le rapport PDF pour le médecin marche sur iPhone simulé** : créé sur le téléphone puis proposé au partage, comme sur Android (PR #51 mergée) ; « Envoyer un avis » mène au dépôt de l'iPhone ; la page Nouveautés de l'iPhone ne montre plus l'ancienne histoire de la version Android (nom « HealthTrack », clé Gemini…), seulement les nouveautés depuis la version iPhone ; Android v577 : Tendances plus nettes quand rien n'est encore noté, aussi sur iPhone. Parité : 36 % | #51 (mergée), #52 |
 
 ---
 
