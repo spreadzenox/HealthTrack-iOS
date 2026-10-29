@@ -207,3 +207,10 @@ jobs:
             ${{ runner.temp }}/xcodebuild-tests.log
             ${{ runner.temp }}/xcodebuild-unit.log
           if-no-files-found: warn
+      # En dernier, captures publiées : sans tests d'interface construits, les gestes (feuilles Santé et de partage,
+      # notifications, Fichiers) ne tournent pas et les sondes tombent à zéro, CI verte (29/10, PR #53)
+      - name: Tests d'interface construits
+        run: |
+          grep -q "TEST BUILD SUCCEEDED" captures/test-interface-build.txt || {
+            echo "::error::Build des tests d'interface en échec, gestes non essayés : voir test-interface-build.txt"
+            cat captures/test-interface-build.txt; exit 1; }

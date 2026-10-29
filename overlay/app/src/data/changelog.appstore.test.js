@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { ALL_CHANGELOG, APPSTORE_CHANGELOG_SINCE, changelogFor } from './changelog'
+import { ALL_CHANGELOG, APPSTORE_CHANGELOG_SINCE, APPSTORE_HIDDEN, changelogFor } from './changelog'
 
 // Version iOS (HealthTrack-iOS) : les Nouveautés de l'iPhone partent de la version iPhone (correctif 28) ; avant,
 // l'historique parle de « HealthTrack », de la clé Gemini, de la mise à jour par APK, de la montre en Bluetooth…
@@ -19,6 +19,14 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
   it('ne change rien pour Google Play ni pour la version hors store', () => {
     expect(changelogFor(LOG, 'play').map((e) => e.id)).toEqual(['2026-10-29-0233-commune', '2026-10-29-0133-android', '2026-10-28-0433-avant-iphone'])
     expect(changelogFor(LOG, 'sideload')).toHaveLength(4)
+  })
+
+  it('cache les notes d’Android fausses sur iPhone, en attendant leurs variants', () => {
+    // v578 : « l'écran Premium dit jusqu'à quand tout est débloqué » : sur iPhone, pas de période de lancement
+    expect(APPSTORE_HIDDEN.has('2026-10-29-0533-paywall-lancement')).toBe(true)
+    const ids = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
+    for (const id of APPSTORE_HIDDEN) expect(ids).not.toContain(id)
+    expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-10-29-0533-paywall-lancement')
   })
 
   it('les vraies notes de l’iPhone commencent au 29/10 et aucune ne parle de Google Play ni d’Android', () => {

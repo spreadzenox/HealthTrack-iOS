@@ -37,7 +37,16 @@ export function iphoneDemoEntries(entries) {
 
 const pageName = (route) => route.replace(/^\//, '') || 'accueil'
 
-export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS, reveals = REVEALS) {
+// Autres écrans de l'onboarding sur iPhone : objectif, suivi, montre, [Santé si une montre écrit dans Santé], visage,
+// geste (pas d'abonnement tant qu'I6 n'est pas là)
+export const MORE_ONBOARDING = [
+  ['suivi', { goal: 'energy', step: 1 }],
+  ['sante', { goal: 'energy', step: 3, watch: 'health_connect' }],
+  ['visage', { goal: 'energy', step: 3 }],
+  ['geste', { goal: 'energy', step: 4 }],
+]
+
+export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS, reveals = REVEALS, moreOnboarding = []) {
   const light = (route) => {
     const base = { name: `demo-clair-${pageName(route)}`, route, data: 'demo', theme: 'light' }
     const more = Array.from({ length: scrolls[route] || 0 }, (_, k) => ({ ...base, name: `${base.name}-${k + 2}`, scroll: k + 1 }))
@@ -48,6 +57,7 @@ export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = S
     { name: 'vierge-onboarding', route: null, data: null, theme: null },
     // 3e écran de l'onboarding (choix de la montre), avant que les données de démo ne le marquent fait
     { name: 'vierge-onboarding-montre', route: '/bienvenue', data: null, theme: null, onboarding: { goal: 'energy', step: 2 } },
+    ...moreOnboarding.map(([name, onboarding]) => ({ name: `vierge-onboarding-${name}`, route: '/bienvenue', data: null, theme: null, onboarding })),
     ...routes.flatMap(light),
     ...darkRoutes.map((route) => ({ name: `demo-sombre-${pageName(route)}`, route, data: 'demo', theme: 'dark' })),
   ]
@@ -124,7 +134,7 @@ export async function installCaptureMode() {
     ])
     const file = { directory: Directory.Documents, encoding: Encoding.UTF8 }
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-    await runCaptureStep(buildPlan(), {
+    await runCaptureStep(buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING), {
       storage,
       demoEntries: () => iphoneDemoEntries(demo.generateDemoEntries()),
       latestChangelogId: changelog.ALL_CHANGELOG[0]?.id ?? null,
