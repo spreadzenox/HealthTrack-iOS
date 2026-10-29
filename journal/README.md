@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v571 (28/10) | v571 sur iPhone simulé (28/10, PR #44) |
+| Dernière version | v572 (28/10) | v571 sur iPhone simulé (28/10, PR #45) ; v572 en vérification (PR #46) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 32 % (15 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -134,7 +134,8 @@ via TestFlight.
 | 28/10 20:00 | I9, I7 | sur iPhone, l'accueil et l'historique du bien-être ne proposent plus d'activer la lecture du visage, qui n'y existe pas encore : ils invitent à noter soi-même ; pour une Apple Watch, Sources renvoie à l'app Watch de l'iPhone. Lecture du visage commencée : le calcul donne déjà les mêmes résultats qu'Android sur ses images de test ; restent la caméra et les modèles. Point à trancher plus tard par vous : une partie des modèles d'Android (humeur « valence / éveil ») a une licence réservée à la recherche, éteinte sur iPhone en attendant | #42 (mergée), #43 |
 | 28/10 21:00 | I7 | textes justes sur iPhone en place (PR #42 mergée) ; lecture du visage : premier essai des vrais modèles sur iPhone simulé, avec le même moteur qu'Android pour garder les mêmes résultats | #42, #43 (mergées), #44 |
 | 28/10 22:00 | I7, suivi d'Android v571 | lecture du visage : le calcul est en place (PR #43 mergée) ; les vrais modèles tournent sur iPhone simulé et donnent les mêmes résultats qu'Android, en un dixième de seconde par image environ ; restent la caméra et l'écran. Android v570 et v571 : textes plus honnêtes sur ce que garde le serveur d'analyse IA (un simple compteur, effacé après 13 mois), pistes présentées comme un lien (« Nuits plus longues → meilleur bien-être ») et non comme un ordre ; aussi sur iPhone (vérifié sur les captures). En préparation : la caméra de l'iPhone pour la lecture du visage | #43, #44 (mergées), #45 |
-| 28/10 23:00 | I7, I9 | défaut trouvé et corrigé avant tout essai sur iPhone : la photo d'un repas aurait fermé l'app (il manquait la phrase qui explique l'usage de la caméra), et la météo n'aurait pas pu lire la position ; les deux phrases sont ajoutées et vérifiées à chaque build. Lecture du visage : la caméra de l'iPhone est prête côté calcul | #45 |
+| 28/10 23:00 | I7, I9 | défaut trouvé et corrigé avant tout essai sur iPhone : la photo d'un repas aurait fermé l'app (il manquait la phrase qui explique l'usage de la caméra), et la météo n'aurait pas pu lire la position ; les deux phrases sont ajoutées et vérifiées à chaque build. Lecture du visage : la caméra de l'iPhone est prête côté calcul | #45 (mergée) |
+| 29/10 00:00 | I7, suivi d'Android v572 | photo du repas et position de la météo corrigées (PR #45 mergée) ; la lecture du visage est maintenant dans l'app iPhone (simulée) avec ses modèles : reste à la voir lire un vrai visage, sur l'iPhone 12. Android v572 : boutons plus clairs (suppression en orange, chevrons de la réintroduction), aussi sur iPhone | #45 (mergée), #46 |
 
 ---
 
