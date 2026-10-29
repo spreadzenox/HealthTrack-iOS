@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -36,6 +36,15 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
     expect(plan[1]).toMatchObject({ route: '/bienvenue', data: null, onboarding: { goal: 'energy', step: 2 } })
     expect(plan[2]).toMatchObject({ route: '/', data: 'demo', theme: 'light' })
     expect(plan[4]).toMatchObject({ route: '/', data: 'demo', theme: 'dark' })
+  })
+
+  it('plan : les autres écrans de l’onboarding de l’iPhone, après celui de la montre (suivi, Santé, visage, geste)', () => {
+    const plan = buildPlan(['/'], [], {}, {}, MORE_ONBOARDING)
+    expect(plan.map((s) => s.name)).toEqual([
+      'vierge-onboarding', 'vierge-onboarding-montre', 'vierge-onboarding-suivi', 'vierge-onboarding-sante',
+      'vierge-onboarding-visage', 'vierge-onboarding-geste', 'demo-clair-accueil',
+    ])
+    expect(plan[3]).toMatchObject({ route: '/bienvenue', data: null, onboarding: { goal: 'energy', step: 3, watch: 'health_connect' } })
   })
 
   it('plan : les pages longues ont aussi leurs écrans suivants, défilés', () => {

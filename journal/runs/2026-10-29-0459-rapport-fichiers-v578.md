@@ -23,11 +23,17 @@
   `APPSTORE_HIDDEN` (correctif 28, testée) et demande à Android de la marquer. Nouvelle règle dans la charte (§6) :
   chaque note d'Android est relue pour l'iPhone. 28 correctifs s'appliquent directement ; suite d'Android : 2807
   passés ; builds appstore et captures faites.
+- Onboarding (🟡) : seuls ses écrans 1 et 3 étaient capturés ; les autres écrans de l'iPhone (suivi, Santé quand une
+  montre écrit dans Santé, visage, geste) s'ajoutent au parcours (`MORE_ONBOARDING`, `buildPlan` inchangé pour ses
+  tests) ; poussé sur #53 quelques minutes après le début de sa CI.
 - Repris de la branche `claude/ios-recherche-icloud` (run de 03:59) : recherche sur la directive 5.1.3 (ii)
   (`RECHERCHE.md`) et « Fichiers (export) » ✅ : parité 38 %.
 
 ## Suite
-- CI de #53 : sonde `[rapport]` « après » : 2 sur les deux iPhone, test d'interface réussi sur les deux ; puis
-  merger.
+- CI de #53 : sonde `[rapport]` « après » : 2 sur les deux iPhone, test d'interface réussi sur les deux ; captures
+  des écrans d'onboarding à regarder (si justes, avec les feuilles Santé et notifications déjà essayées : Onboarding
+  ✅) ; puis merger.
+- La branche `claude/ios-recherche-icloud` (fondue ici) n'a pas pu être supprimée : `git push --delete` refusé
+  (« the remote end hung up unexpectedly », trois fois) ; sans effet, à supprimer à la main si besoin.
 - A8 fait → lancer « Site — GitHub Pages ».
 - Ensuite (I2) : autres 🟡 vérifiables sur simulateur (onboarding, sources), puis I9.
