@@ -17,6 +17,10 @@ const SEEDED_KEY = 'halcya_ios_capture_seeded'
 export const ROUTES = ['/', '/journal', '/tendances', '/food', '/nutrition', '/data', '/connectors', '/recommendations',
   '/settings', '/plus', '/nouveautes', '/premium', '/bien-etre', '/reintroduction']
 export const DARK_ROUTES = ['/', '/journal', '/recommendations']
+// États vides : onboarding fini, base vide (installation neuve sans source branchée ; `npm run visual -- --empty`
+// d'Android), pour voir sur iPhone ce que chaque page dit avant la première donnée
+export const EMPTY_ROUTES = ['/', '/journal', '/tendances', '/food', '/nutrition', '/recommendations', '/bien-etre',
+  '/connectors']
 // Pages longues : écrans suivants, défilés d'environ 80 % de l'écran chacun (`-2`, `-3`…)
 export const SCROLLS = { '/connectors': 2, '/data': 1, '/settings': 1 }
 // Volets repliés à ouvrir puis capturer : bouton touché (`click`, texte exact), `<details>` ouvert (`open`, id),
@@ -46,7 +50,8 @@ export const MORE_ONBOARDING = [
   ['geste', { goal: 'energy', step: 4 }],
 ]
 
-export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS, reveals = REVEALS, moreOnboarding = []) {
+export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS, reveals = REVEALS, moreOnboarding = [],
+  emptyRoutes = []) {
   const light = (route) => {
     const base = { name: `demo-clair-${pageName(route)}`, route, data: 'demo', theme: 'light' }
     const more = Array.from({ length: scrolls[route] || 0 }, (_, k) => ({ ...base, name: `${base.name}-${k + 2}`, scroll: k + 1 }))
@@ -58,6 +63,7 @@ export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = S
     // 3e écran de l'onboarding (choix de la montre), avant que les données de démo ne le marquent fait
     { name: 'vierge-onboarding-montre', route: '/bienvenue', data: null, theme: null, onboarding: { goal: 'energy', step: 2 } },
     ...moreOnboarding.map(([name, onboarding]) => ({ name: `vierge-onboarding-${name}`, route: '/bienvenue', data: null, theme: null, onboarding })),
+    ...emptyRoutes.map((route) => ({ name: `vide-${pageName(route)}`, route, data: 'empty', theme: 'light' })),
     ...routes.flatMap(light),
     ...darkRoutes.map((route) => ({ name: `demo-sombre-${pageName(route)}`, route, data: 'demo', theme: 'dark' })),
   ]
@@ -65,11 +71,16 @@ export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = S
 
 async function prepare(step, { storage, demoEntries, latestChangelogId, localStorage }) {
   if (step.onboarding) localStorage.setItem('healthtrack_onboarding', JSON.stringify(step.onboarding))
+  // Comme au sortir de l'onboarding : fait, Nouveautés vues
+  const onboarded = () => {
+    localStorage.setItem('healthtrack_onboarding', JSON.stringify({ done: true, endedBy: 'capture', goal: null }))
+    if (latestChangelogId) localStorage.setItem('healthtrack-whats-new-last-seen', latestChangelogId)
+  }
+  if (step.data === 'empty') onboarded()
   if (step.data === 'demo' && !localStorage.getItem(SEEDED_KEY)) {
     await storage.upsertEntries(demoEntries())
     localStorage.setItem(SEEDED_KEY, '1')
-    localStorage.setItem('healthtrack_onboarding', JSON.stringify({ done: true, endedBy: 'capture', goal: null }))
-    if (latestChangelogId) localStorage.setItem('healthtrack-whats-new-last-seen', latestChangelogId)
+    onboarded()
   }
   // Lu par initTheme() au démarrage : appliqué au rechargement qui suit
   if (step.theme) localStorage.setItem('healthtrack_theme', step.theme)
@@ -144,7 +155,7 @@ export async function installCaptureMode() {
     ])
     const file = { directory: Directory.Documents, encoding: Encoding.UTF8 }
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-    await runCaptureStep(buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING), {
+    await runCaptureStep(buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES), {
       storage,
       demoEntries: () => iphoneDemoEntries(demo.generateDemoEntries()),
       latestChangelogId: changelog.ALL_CHANGELOG[0]?.id ?? null,

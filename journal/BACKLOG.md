@@ -24,9 +24,10 @@
     les données de démo d'Android en clair, 3 en sombre, onboarding d'une installation vierge ; parcours piloté par
     l'app (`captureMode.js`), synchronisé par fichier (`Documents/capture/ready.txt` → capture → `ack.txt`) : les 36
     images de la PR #2 correspondent à leur page ; poussées sur la branche `captures/pr-<n>` ou `captures/main`.
-  - [ ] Reste pour plus tard : états vides de chaque page.
-  - [~] Faire échouer la build sur erreur JavaScript (29/10, PR #63 : 0 ligne sur les 10 dernières CI ; étape
-    finale bloquante, promesses rejetées sans traitement comptées en mode captures) ; à confirmer sur sa CI.
+  - [~] États vides de chaque page (29/10, PR #64) : 8 pages capturées onboarding fini et base vide (`vide-*`,
+    `EMPTY_ROUTES`), entre l'onboarding et les données de démo ; à regarder sur sa CI.
+  - [x] Faire échouer la build sur erreur JavaScript (29/10, PR #63, mergée : 0 ligne sur les 10 dernières CI ;
+    étape finale bloquante, promesses rejetées sans traitement comptées en mode captures ; 0 sur sa CI aussi).
 - [ ] **I2 — Audit de parité et replis propres** (déjà repérés le 27/10 : texte Premium « Google Play », détection
   des apps par noms de paquets Android, carte « Lecture du visage » en erreur — traités dans la PR #3 avec « Vos
   données », « Mes appareils », montre Huawei, temps d'écran et les phrases d'usage Bluetooth et Santé

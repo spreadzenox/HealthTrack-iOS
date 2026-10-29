@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v587 (29/10) | v586 sur iPhone simulé (29/10, PR #62) ; v587 en vérification (PR #63) |
+| Dernière version | v587 (29/10) | v587 sur iPhone simulé (29/10, PR #63) : à jour d'Android |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -159,6 +159,7 @@ via TestFlight.
 | 29/10 12:00 | suivi d'Android v585, tests | PR #60 mergée ; l'essai automatique d'import par Fichiers échoue encore par moments sur les iPhone simulés (le sélecteur de fichiers ne s'ouvre pas toujours) sans gêner les autres essais : il réessaie maintenant d'ouvrir le sélecteur ; Android v584 et v585 : fructanes et polyols de nouveaux aliments, aussi sur iPhone. Parité : 49 % | #60 (mergée), #61 |
 | 29/10 13:00 | suivi d'Android v586, tests | v585 sur iPhone (PR #61 mergée) ; les essais automatiques d'import, d'export et du rapport passent sur les deux iPhone simulés ; un autre essai (accepter l'alerte des notifications) touchait parfois sans effet : il vérifie maintenant que l'alerte se ferme ; Android v586 : fer de l'oignon cru corrigé, aussi sur iPhone. Parité : 49 % | #61 (mergée), #62 |
 | 29/10 15:35 | suivi d'Android v587, contrôle des erreurs | v586 sur iPhone (PR #62 mergée : l'alerte des notifications est bien acceptée, les trois rappels vérifiés sur les deux iPhone simulés) ; la vérification automatique échoue désormais si l'app fait la moindre erreur JavaScript sur iPhone (aucune sur les 10 dernières) ; Android v587 : Analyses plus sobre, aussi sur iPhone. Parité : 49 % | #62 (mergée), #63 |
+| 29/10 16:05 | contrôle des erreurs (fin), états vides | v587 sur iPhone, au même niveau qu'Android (PR #63 mergée, aucune erreur JavaScript, contrôle désormais bloquant) ; nouvelles captures de chaque page telle qu'elle apparaît avant la première donnée (Accueil, Journal, Analyses, Sources…), pour vérifier ce qu'un nouvel utilisateur d'iPhone voit. Parité : 49 % | #63 (mergée), #64 |
 
 ---
 
