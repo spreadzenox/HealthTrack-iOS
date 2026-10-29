@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Politique de confidentialité — Halcya pour iPhone</title>
+  <!-- Version iPhone de app/public/privacypolicy.html (HealthTrack), réécrite d'après le code de la variante
+       appstore : app Santé, copie de secours et iCloud, ni montre Huawei en direct, ni temps d'écran, ni Withings,
+       ni achat pour l'instant. Embarquée dans l'app (Réglages → Confidentialité). Quand la page d'Android change,
+       overlay/app/src/ios/privacyPolicyIphone.test.js échoue : relire cette page, puis mettre à jour l'empreinte.
+       Brouillon à faire relire par un juriste, comme celle d'Android. -->
+  <style>
+    :root {
+      --bg: #FFFFFF; --surface: #F4F6F5; --border: #E3E8E6; --ink: #10231D; --ink-2: #4A5E57;
+      --brand: #0B7A5E; --mint: #E3F5EE; --mint-ink: #3B5249;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #10231D; --surface: #17302A; --border: #2A443C; --ink: #F1F5F3; --ink-2: #B8C9C2;
+              --brand: #5EE0B5; --mint: #1C3A31; --mint-ink: #D5EEE4; }
+    }
+    body {
+      font-family: Figtree, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      max-width: 680px; margin: 0 auto;
+      /* Dans l'app, la page passe sous l'heure et l'encoche : marges de la zone sûre de l'iPhone */
+      padding: calc(24px + env(safe-area-inset-top, 0px)) 20px calc(48px + env(safe-area-inset-bottom, 0px));
+      color: var(--ink); background: var(--bg); line-height: 1.6;
+    }
+    h1 { font-size: 1.6rem; font-weight: 800; margin: 0 0 4px; }
+    h2 { font-size: 1.1rem; font-weight: 700; margin: 28px 0 8px; }
+    p  { margin: 0 0 14px; }
+    ul { margin: 0 0 14px; padding-left: 20px; }
+    li { margin-bottom: 6px; }
+    .updated { color: var(--ink-2); font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.85rem; margin-bottom: 24px; }
+    .summary { background: var(--mint); color: var(--mint-ink); border-radius: 22px; padding: 16px 18px; margin-bottom: 8px; }
+    .summary ul { margin: 0; }
+    a  { color: var(--brand); }
+    .back { display: inline-block; margin: 0 0 16px; padding: 10px 0; font-weight: 600; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <!-- L'iPhone n'a pas de bouton retour : sans ce lien, la page serait une impasse dans l'app (/plus = Réglages) -->
+  <a class="back" href="/plus">‹ Revenir à Halcya</a>
+  <h1>Politique de confidentialité</h1>
+  <p class="updated">Halcya pour iPhone · mise à jour du 29 octobre 2026</p>
+
+  <div class="summary">
+    <p><strong>En bref</strong></p>
+    <ul>
+      <li>Vos données restent sur votre iPhone, par défaut. Halcya n'a ni compte, ni serveur qui les garde, ni publicité, ni outil de mesure d'audience.</li>
+      <li>Rien ne quitte l'iPhone sans une action de votre part : l'analyse IA d'un repas, la météo, l'export d'une sauvegarde.</li>
+      <li>La lecture du visage se fait sur l'iPhone : aucune image n'est gardée ni envoyée.</li>
+      <li>Si la sauvegarde iCloud de votre iPhone est activée, iOS y inclut la copie de secours de l'app (chiffrée, gérée par iOS, jamais lue par Halcya).</li>
+      <li>Vous pouvez tout exporter, et tout effacer, à tout moment.</li>
+    </ul>
+  </div>
+
+  <h2>Qui sommes-nous</h2>
+  <p>
+    Halcya est une application de suivi du ventre et du bien-être, éditée par un développeur indépendant établi en
+    France. Elle aide à repérer des tendances dans vos propres données. Elle ne pose pas de diagnostic et ne
+    remplace pas l'avis d'un professionnel de santé. Elle est réservée aux personnes de <strong>18 ans et plus</strong>.
+  </p>
+
+  <h2>Ce qui est enregistré, et où</h2>
+  <p>
+    Tout ce que vous saisissez ou importez est enregistré <strong>uniquement sur votre iPhone</strong>, dans la
+    base de données locale de l'application : repas (description, photo si vous en prenez une, nutriments estimés),
+    notes du ventre (calme, gêne, douleur) et de bien-être, cigarettes, sommeil, activité, fréquence cardiaque et
+    autres mesures importées, scores de la lecture du visage, météo du jour. Ces données ne sont envoyées à aucun
+    serveur de l'éditeur : il n'en existe pas.
+  </p>
+
+  <h2 id="sauvegarde">Copie de secours et sauvegarde iCloud</h2>
+  <p>
+    Halcya tient à jour, dans ses propres fichiers sur l'iPhone, une <strong>copie de secours</strong> de vos
+    saisies, de votre profil et de vos réglages (visible dans l'app Fichiers, Sur mon iPhone → Halcya). Si la
+    sauvegarde iCloud de votre iPhone est activée, iOS y inclut cette copie, comme les fichiers des autres
+    applications : elle est chiffrée, gardée par Apple dans votre compte iCloud et gérée par iOS, et Halcya ne peut
+    pas la lire. Sur un nouvel iPhone restauré depuis cette sauvegarde, l'app vous propose de reprendre vos données.
+    L'identifiant qui compte vos analyses IA (voir plus bas) n'en fait pas partie. Pour ne pas sauvegarder Halcya, retirez-la des
+    apps sauvegardées dans les réglages iCloud de l'iPhone.
+  </p>
+
+  <h2>App Santé</h2>
+  <p>
+    Avec votre autorisation, Halcya <strong>lit</strong> (sans jamais y écrire) dans l'app Santé les données
+    déposées par votre montre et vos applications : pas, distance, calories actives, séances d'exercice, sommeil,
+    fréquence cardiaque, fréquence cardiaque au repos, variabilité de la fréquence cardiaque (VFC), saturation en
+    oxygène, fréquence respiratoire, température corporelle, tension artérielle, glycémie, poids et masse grasse.
+  </p>
+  <p>
+    Ces données servent seulement à vous les montrer et à les comparer, sur l'iPhone, à votre ventre et à votre
+    bien-être. Elles ne sont ni vendues, ni partagées, ni utilisées pour de la publicité, ni envoyées à un service
+    d'IA. Vous pouvez retirer l'accès à tout moment dans l'app Santé ou dans les Réglages de l'iPhone.
+  </p>
+
+  <h2>Capteurs Bluetooth</h2>
+  <p>
+    Si vous connectez un capteur compatible (ceinture cardio, tensiomètre, balance, thermomètre, oxymètre), Halcya
+    échange avec lui directement en Bluetooth pour enregistrer ses mesures sur l'iPhone. L'autorisation Bluetooth
+    ne sert pas à vous localiser, et rien n'est envoyé ailleurs à cette occasion.
+  </p>
+
+  <h2>Lecture du visage (facultative)</h2>
+  <p>
+    Si vous l'activez, Halcya utilise la caméra frontale quand l'application est ouverte, pendant environ une
+    seconde, pour estimer votre bien-être à partir de votre expression. C'est un <strong>système d'intelligence
+    artificielle de reconnaissance des émotions</strong> qui fonctionne entièrement sur l'iPhone. Aucune image
+    n'est gardée, affichée ni envoyée : seuls quelques nombres (des scores) sont enregistrés. Le résultat est une
+    estimation, pas un diagnostic. Un bandeau visible signale chaque lecture. Vous pouvez l'arrêter à tout moment
+    dans l'application, et retirer l'accès à la caméra dans les Réglages de l'iPhone.
+  </p>
+
+  <h2>Météo et position approximative (facultatif)</h2>
+  <p>
+    Pour relier la météo et la qualité de l'air à vos journées, Halcya envoie au service
+    <a href="https://open-meteo.com/">Open-Meteo</a> une position <strong>arrondie à environ 10 km</strong>
+    (ou la ville que vous choisissez). L'app ne demande à iOS que votre position approximative. Aucune autre donnée
+    n'accompagne cette demande. Vous pouvez désactiver la météo à tout moment.
+  </p>
+
+  <h2>Analyse IA des repas (seulement si vous la lancez)</h2>
+  <p>
+    Quand vous demandez l'analyse d'un repas, et seulement à ce moment (l'app vous le demande une première fois
+    avant tout envoi), la photo (réduite, et débarrassée de ses métadonnées : position, date, appareil) ou la
+    description du repas est envoyée au serveur d'analyse de Halcya, hébergé par Google Cloud en Europe
+    (Belgique). Ce serveur retire de nouveau les métadonnées de la photo, la fait analyser par le modèle Gemini
+    de Google sur Vertex AI, dans l'Union européenne, et renvoie seulement la liste des aliments et leurs
+    grammes ; les nutriments sont calculés sur l'iPhone. Il ne garde ni la photo, ni le texte, ni le
+    résultat, et ses journaux techniques n'en contiennent rien. Google agit comme sous-traitant, selon les
+    conditions de Google Cloud : il ne se sert pas de ces données pour entraîner ses modèles.
+    Avec chaque analyse part aussi un identifiant aléatoire créé par l'app à son installation (sans lien avec
+    vous, votre identifiant Apple ou votre iPhone) : il sert seulement à compter vos analyses et à limiter leur
+    nombre par jour. Le serveur n'en garde qu'une empreinte (impossible à retourner vers l'identifiant) et ces
+    compteurs, dans une base de Google Cloud en Europe (Firestore, Belgique) ; chaque compteur est effacé
+    automatiquement 13 mois après la dernière analyse. L'app lui renvoie le dernier état de ses compteurs pour
+    qu'ils restent justes. Rien d'autre n'est envoyé : ni votre ventre, ni votre sommeil, ni vos autres mesures.
+    Sans analyse lancée, rien ne part.
+  </p>
+
+  <h2>Achats</h2>
+  <p>
+    L'app iPhone ne propose pour l'instant aucun achat : rien n'est envoyé à ce sujet. Quand un abonnement par
+    l'App Store sera proposé, cette page sera mise à jour avant, et le paiement sera entièrement géré par Apple.
+  </p>
+
+  <h2>Notifications</h2>
+  <p>
+    Les rappels (par exemple la note du soir) et les notifications de l'app sont programmés sur l'iPhone. Vous
+    pouvez les désactiver dans l'application ou dans les Réglages de l'iPhone.
+  </p>
+
+  <h2>Ce que nous ne faisons pas</h2>
+  <ul>
+    <li>Aucun compte à créer, aucune publicité, aucun outil de mesure d'audience ni de suivi.</li>
+    <li>Aucune vente ni location de données, aucun partage avec des courtiers en données ou des assureurs.</li>
+    <li>Aucune décision automatique qui vous concerne ; les liens montrés par l'app sont des pistes à discuter avec un professionnel, pas des causes.</li>
+  </ul>
+
+  <h2 id="vos-droits">Vos droits et le contrôle de vos données</h2>
+  <ul>
+    <li><strong>Exporter</strong> : Réglages → Données → Exporter crée un fichier de sauvegarde que vous gardez où vous voulez.</li>
+    <li><strong>Supprimer</strong> : chaque saisie se supprime dans le Journal ; pour tout effacer, utilisez Réglages → Données → « Supprimer toutes mes données » dans l'application (un export vous est proposé juste avant ; la copie de secours est effacée aussi), ou supprimez l'app. Rien ne reste chez nous, puisque rien n'y est envoyé. Une copie peut rester dans une sauvegarde iCloud plus ancienne de votre iPhone (voir « Copie de secours et sauvegarde iCloud »).</li>
+    <li><strong>Retirer un accès</strong> : app Santé, caméra, position et Bluetooth se retirent dans les Réglages de l'iPhone.</li>
+  </ul>
+  <p>
+    Vous disposez des droits prévus par le RGPD (accès, rectification, effacement, opposition, portabilité). Comme
+    l'éditeur ne détient aucune de vos données, ces droits s'exercent directement dans l'application. Vous pouvez
+    aussi introduire une réclamation auprès de la <a href="https://www.cnil.fr/">CNIL</a>.
+  </p>
+
+  <h2>Sécurité</h2>
+  <p>
+    Vos données sont protégées par le code de votre iPhone et par le chiffrement d'iOS. Les échanges avec
+    Open-Meteo et le serveur d'analyse de Halcya sont chiffrés (HTTPS). Un fichier exporté n'est pas chiffré :
+    gardez-le en lieu sûr.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Pour toute question sur vos données : une demande sur
+    <a href="https://github.com/spreadzenox/HealthTrack-iOS/issues">github.com/spreadzenox/HealthTrack-iOS</a>
+    (n'y mettez jamais de données de santé).
+  </p>
+
+  <h2>Modifications</h2>
+  <p>
+    Si cette politique change, la date en haut de page change aussi, et les changements importants sont annoncés
+    dans l'application (Réglages → Nouveautés).
+  </p>
+</body>
+</html>

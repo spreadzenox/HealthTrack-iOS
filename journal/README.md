@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v574 (29/10) | v573 sur iPhone simulé (29/10, PR #47) ; v574 en vérification (PR #49) |
+| Dernière version | v575 (29/10) | v574 sur iPhone simulé (29/10, PR #49) ; v575 en vérification (PR #50) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 32 % (15 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -21,6 +21,8 @@
 - ✅ Fait le 28/10 : vous avez transmis à la routine Android les 4 demandes de `DEMANDES.md` (iPhone au contrôle
   d'intégrité, abonnement App Store sur le serveur, Nouveautés propres à Android, textes de sauvegarde neutres) ;
   elle les a reprises le jour même (v553) : trois faites, l'abonnement App Store noté pour plus tard.
+- (1 minute, quand vous voulez) **A8** : activer GitHub Pages pour ce dépôt (pas à pas au §8), pour mettre en ligne
+  la politique de confidentialité et la page d'assistance de l'iPhone que demandera la fiche App Store.
 - (facultatif) Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS).
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
@@ -137,7 +139,7 @@ via TestFlight.
 | 28/10 23:00 | I7, I9 | défaut trouvé et corrigé avant tout essai sur iPhone : la photo d'un repas aurait fermé l'app (il manquait la phrase qui explique l'usage de la caméra), et la météo n'aurait pas pu lire la position ; les deux phrases sont ajoutées et vérifiées à chaque build. Lecture du visage : la caméra de l'iPhone est prête côté calcul | #45 (mergée) |
 | 29/10 00:00 | I7, suivi d'Android v572 | photo du repas et position de la météo corrigées (PR #45 mergée) ; la lecture du visage est maintenant dans l'app iPhone (simulée) avec ses modèles : reste à la voir lire un vrai visage, sur l'iPhone 12. Android v572 : boutons plus clairs (suppression en orange, chevrons de la réintroduction), aussi sur iPhone | #45, #46 (mergées) |
 | 29/10 01:00 | I7, suivi d'Android v573 | lecture du visage dans l'app iPhone (PR #46 mergée) ; sur iPhone simulé, un visage (portrait de test) est lu de bout en bout et rangé dans vos données comme sur Android ; reste la vraie caméra, sur l'iPhone 12. Android v573 : « Photo du repas » bien en vue dans Repas, aussi sur iPhone | #46, #47 (mergées) |
-| 29/10 02:00 | I9, suivi d'Android v574 | les 8 images de la fiche App Store sont choisies, à la bonne taille pour l'iPhone, avec des données d'exemple qui ne montrent que ce que l'iPhone sait faire ; Android v574 : titres du Journal plus clairs, aussi sur iPhone | #49 |
+| 29/10 02:00 | I9, suivi d'Android v574 et v575 | les 8 images de la fiche App Store sont choisies, à la bonne taille pour l'iPhone, avec des données d'exemple qui ne montrent que ce que l'iPhone sait faire ; l'iPhone a maintenant sa propre politique de confidentialité (celle d'Android parlait de Google et de fonctions absentes, et on ne pouvait pas en revenir sans quitter l'app) et une page d'assistance, prêtes à être mises en ligne (action A8, 1 minute) ; Android v574 et v575 : titres et coupures de lignes plus soignés, aussi sur iPhone | #49, #50 |
 
 ---
 
@@ -295,6 +297,7 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 | A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/app-store/confidentialite.md` | examen Apple | avant la 1re soumission |
 | A6 | Inviter les testeurs (d'abord sa compagne : interne via « Utilisateurs et accès » ou externe avec l'examen bêta, la routine dira), soumettre à l'examen, publier | testeurs, production | lui seul |
 | A7 | (facultatif, quand la routine le proposera) Demander à Apple le droit « Family Controls (Distribution) » pour Halcya : formulaire d'Apple, motif « temps d'écran approché pour les analyses de bien-être, données gardées sur le téléphone » | tuile « Écran » sur iPhone (temps d'écran approché, `RECHERCHE.md`) | après A1 |
+| A8 | (1 minute, sur ordinateur, quand vous voulez) Activer GitHub Pages pour ce dépôt : sur github.com, HealthTrack-iOS → Settings → Pages → « Build and deployment » → Source : « GitHub Actions ». Rien d'autre : la routine publie ensuite les pages | adresses de la politique de confidentialité et de l'assistance de l'iPhone, demandées par la fiche App Store (A3, A5) | avant A3 |
 
 #### A1 pas à pas (préparé le 27/10/2026)
 

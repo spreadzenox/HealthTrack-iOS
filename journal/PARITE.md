@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **32 %** au 28/10 17:15 (15 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v574 (commit `82f60a3`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v575 (commit `5488719`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -44,7 +44,7 @@ vérifié sur iOS.
 | Période de lancement (premium offert jusqu'au 20/11, Nouveautés du 24 et 25/10) | 🟡 | sur iPhone, `premium = !FEATURES.billing || …` ouvre déjà tout le premium tant que l'abonnement App Store n'existe pas (I6) ; après le 20/11, Android le fera payer et iOS non : à aligner en I6 |
 | « Donnez-nous votre avis » (Nouveautés du 25/10) | 🟡 | code web partagé, lien à essayer depuis l'iPhone |
 | Nouveautés | 🟡 | `variants: ["appstore"]`, historique iOS depuis le lancement iOS |
-| Confidentialité, conditions | 🟡 | textes à rendre exacts pour iOS (iCloud au lieu de la sauvegarde Android, HealthKit) |
+| Confidentialité, conditions | 🟡 | 29/10 : **politique de confidentialité propre à l'iPhone**, embarquée et ouverte par Réglages → Confidentialité (correctif 26) : app Santé, copie de secours et iCloud, sans montre Huawei, temps d'écran, Withings ni jeton Google ; relue à chaque changement de celle d'Android (test témoin) ; un lien « ‹ Revenir à Halcya » en tête, car l'iPhone n'a pas de bouton retour (la page d'Android y serait une impasse) ; Conditions retirées des Réglages sur iPhone en attendant les siennes (celles d'Android parlent de Google Play) ; publication en ligne avec une page d'assistance prête (workflow `pages.yml`), attend l'action A8 (activer Pages) |
 
 **Nouveautés d'Android (206 entrées au 27/10, toutes visibles dans la variante play)** : 77 touchent au natif.
 Elles se rangent dans les lignes de §3 : montre Huawei en direct (≈ 35 entrées, 11→25/10), capteurs Bluetooth
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 02:25 | #491 (v575) | typographie française à l'affichage (`frenchSpacing.js` : espaces insécables avant « : ; ? ! » et dans les guillemets, posées par un `MutationObserver` sur la racine ; titres `text-wrap: balance`) : code partagé, note de Nouveautés vraie sur iPhone (`text-wrap: balance` demande iOS 17.5, sans effet avant) ; les libellés de boutons touchés par les tests d'interface et les sondes n'ont pas ces signes ; captures à regarder (PR suivante) ; les 26 correctifs s'appliquent, suite d'Android 2796 passés | — |
 | 29/10 02:05 | #490 (v574) | titres du Journal « Vos repas » et « Vos apports » (`Food.jsx`, `Nutrition.jsx`) : code partagé, note de Nouveautés vraie sur iPhone ; captures Repas et Nutrition à regarder ; les 25 correctifs s'appliquent, suite d'Android 2783 passés | — |
 | 29/10 01:05 | #489 (v573) | « Photo du repas » en grand bouton plein dans Journal › Repas, « Galerie » et « Décrire » dessous (`Food.jsx`, `App.css`) : code partagé, note de Nouveautés vraie sur iPhone, l'entrée caméra (`capture="environment"`) reste, donc la phrase d'usage aussi (test) ; capture Repas à regarder ; les 25 correctifs s'appliquent, suite d'Android 2783 passés | — |
 | 29/10 00:05 | #488 (v572) | gestes plus clairs : « Supprimer toutes mes données » en contour orange (`Data.jsx`), chevron sur chaque groupe de la réintroduction et plus d'étiquette « pas testé » (`Reintroduction.jsx`, `.css`), « Voir les liens incertains » sans le nombre (`Recommendations.jsx`) : code partagé, note de Nouveautés vraie sur iPhone ; captures Données, Réintroduction et Analyses à regarder ; les 25 correctifs s'appliquent, suite d'Android 2781 passés | — |
