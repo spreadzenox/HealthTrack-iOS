@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -147,6 +147,17 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
     expect(d.go.mock.calls.map((c) => c[0])).toEqual(['/', '/journal', '/'])
   })
 
+  it('chaque page est relue avant d’être signalée : les mots propres à Android sont notés dans la console', async () => {
+    const plan = buildPlan(['/'], [], {})
+    const local = memoryStorage({ [STEP_KEY]: '2' })
+    const d = deps(local, { readText: () => 'Autoriser Health Connect · Google Play · app Santé' })
+    await runCaptureStep(plan, d)
+    expect(d.log).toHaveBeenCalledWith('[texte] demo-clair-accueil : Health Connect, Google Play')
+    const propre = deps(memoryStorage({ [STEP_KEY]: '2' }), { readText: () => 'Autoriser l’app Santé' })
+    await runCaptureStep(plan, propre)
+    expect(propre.log.mock.calls.flat().some((m) => String(m).startsWith('[texte]'))).toBe(false)
+  })
+
   it('après la dernière page : « fin », plus aucune navigation', async () => {
     const plan = buildPlan(['/'], [], {})
     const local = memoryStorage({ [STEP_KEY]: '2' })
@@ -206,6 +217,17 @@ describe('accusé du script (waitForAck)', () => {
     })
     expect(await waitForAck({ readAck: never, sleep }, 'page', 4)).toBe(false)
     expect(never).toHaveBeenCalledTimes(4)
+  })
+})
+
+describe('mots propres à Android sur une page de l’iPhone (androidWords)', () => {
+  it('relève chaque mot une fois, sans les marques dont l’app existe aussi sur iPhone', () => {
+    expect(androidWords('Health Connect, puis Health Connect ; Android ; temps d’écran ; Samsung Health ; Gadgetbridge'))
+      .toEqual(['Health Connect', 'Android', 'temps d’écran', 'Samsung Health', 'Gadgetbridge'])
+    expect(androidWords('Google Play et le Play Store')).toEqual(['Google Play', 'Play Store'])
+    // Huawei Health, Withings, Garmin… écrivent dans l'app Santé de l'iPhone : les nommer y est juste
+    expect(androidWords('Huawei Health, Withings, Garmin et l’app Santé')).toEqual([])
+    expect(androidWords('')).toEqual([])
   })
 })
 

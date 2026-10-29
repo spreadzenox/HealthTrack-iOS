@@ -39,6 +39,9 @@
   dans Gadgetbridge (→ guide des montres réécrit, sous I4) ; captures défilées pour les pages longues : faites, PR #5) : compléter `PARITE.md` fonction par fonction (changelog depuis le
   lancement play, `journal/PRODUIT.md`, écrans) ; sur iOS, chaque service qui appelle un plugin Android absent
   retombe proprement (pas d'erreur, pas de carte cassée, pas d'interrupteur qui ne fait rien) ; % de parité.
+  - [~] Audit automatique des textes (29/10, PR #70) : chaque page capturée est relue (`androidWords`, mode captures) ;
+    les mots propres à Android (Health Connect, Google Play, Play Store, Android, Gadgetbridge, Samsung Health, temps
+    d'écran) sont listés dans `texte-android.txt` à chaque CI ; non bloquant tant que la première liste n'est pas lue.
   - [x] Rapport PDF pour le médecin essayé à chaque build (29/10, PR #51, mergée) : PDF créé et feuille de partage
     ouverte sur les deux iPhone simulés ; l'enregistrement dans Fichiers par le test d'interface (feuille dépliée)
     est à confirmer sur la CI de #52.

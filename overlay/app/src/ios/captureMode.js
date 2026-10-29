@@ -41,6 +41,15 @@ export function iphoneDemoEntries(entries) {
 
 const pageName = (route) => route.replace(/^\//, '') || 'accueil'
 
+// Audit des textes (I2) : mots qui n'ont pas cours sur iPhone. Pas Huawei, Withings, Garmin… : leurs apps écrivent
+// dans l'app Santé de l'iPhone, les nommer y est juste.
+const ANDROID_ONLY = /Health Connect|Google Play|Play Store|Android|Gadgetbridge|Samsung Health|temps d['’]écran/g
+
+/** Mots propres à Android trouvés dans un texte de page, chacun une fois, dans l'ordre. */
+export function androidWords(text) {
+  return [...new Set(String(text).match(ANDROID_ONLY) ?? [])]
+}
+
 // Autres écrans de l'onboarding sur iPhone : objectif, suivi, montre, [Santé si une montre écrit dans Santé], visage,
 // geste (pas d'abonnement tant qu'I6 n'est pas là)
 export const MORE_ONBOARDING = [
@@ -100,6 +109,10 @@ export async function runCaptureStep(plan, deps, { settleMs = 5000 } = {}) {
   if (step.reveal) {
     await deps.reveal(step.reveal)
     await wait(800)
+  }
+  if (deps.readText) {
+    const words = androidWords(deps.readText())
+    if (words.length) log(`[texte] ${step.name} : ${words.join(', ')}`)
   }
   log(`[capture] page ${step.name}`)
   await signal(step.name)
@@ -178,6 +191,7 @@ export async function installCaptureMode() {
         document.getElementById(target)?.scrollIntoView({ block: 'start', behavior: 'instant' })
       },
       log: (message) => console.log(message),
+      readText: () => document.body?.innerText ?? '',
       wait: sleep,
       signal: (name) => Filesystem.writeFile({ ...file, path: READY, data: name, recursive: true }),
       probe: async (d) => {
