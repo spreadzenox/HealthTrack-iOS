@@ -24,6 +24,8 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
   it('cache les notes d’Android fausses sur iPhone, en attendant leurs variants', () => {
     // v578 : « l'écran Premium dit jusqu'à quand tout est débloqué » : sur iPhone, pas de période de lancement
     expect(APPSTORE_HIDDEN.has('2026-10-29-0533-paywall-lancement')).toBe(true)
+    // v590 : « les sources branchées (météo, Health Connect, temps d'écran…) » : ni l'un ni l'autre sur iPhone
+    expect(APPSTORE_HIDDEN.has('2026-10-29-1737-sources-titre')).toBe(true)
     const ids = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
     for (const id of APPSTORE_HIDDEN) expect(ids).not.toContain(id)
     expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-10-29-0533-paywall-lancement')
