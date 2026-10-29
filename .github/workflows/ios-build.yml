@@ -1,17 +1,17 @@
 # Version iOS de Halcya : code Android suivi (upstream.json) + adaptations iOS, build pour le simulateur sans signature,
 # captures sur deux iPhone simulés (taille de l'iPhone 12 de test, et un récent), en clair et en sombre.
 # Le dépôt est public : les minutes macOS sont gratuites, mais on évite les builds inutiles (journal et fiche App Store
-# seuls ignorés : la fiche a son propre contrôle, store-check.yml, et les modèles du visage face-models.yml ; runs
-# dépassés d'une même PR annulés).
+# seuls ignorés : la fiche a son propre contrôle, store-check.yml, et le workflow des modèles du visage le sien ;
+# runs dépassés d'une même PR annulés).
 name: iOS — build simulateur
 
 on:
   pull_request:
     branches: [main]
-    paths-ignore: ["journal/**", "**.md", "store/**", "ios/HalcyaFaceModels/**", "scripts/face-models.sh", ".github/workflows/face-models.yml"]
+    paths-ignore: ["journal/**", "**.md", "store/**", ".github/workflows/face-models.yml"]
   push:
     branches: [main]
-    paths-ignore: ["journal/**", "**.md", "store/**", "ios/HalcyaFaceModels/**", "scripts/face-models.sh", ".github/workflows/face-models.yml"]
+    paths-ignore: ["journal/**", "**.md", "store/**", ".github/workflows/face-models.yml"]
   workflow_dispatch:
     inputs:
       devices:
@@ -61,6 +61,9 @@ jobs:
           xcode-version: latest-stable
       - name: Code Android suivi + adaptations iOS
         run: scripts/upstream.sh
+      # Lecture du visage (I7) : modèles MediaPipe et TensorFlow Lite C, vérifiés, embarqués dans l'app
+      - name: Modèles du visage (téléchargés et vérifiés)
+        run: scripts/face-models.sh
       # Règles des rappels du soir (I5) : paquet Swift du dépôt, testé seul (XCTest), avant toute build de l'app
       - name: Tests Swift des rappels du soir (XCTest)
         run: swift test --package-path ios/HalcyaRules
@@ -90,6 +93,8 @@ jobs:
         # n'écrit rien dans Santé : la phrase n'est jamais dans ios/App/App/Info.plist du dépôt.
         run: |
           /usr/libexec/PlistBuddy -c "Add :NSHealthUpdateUsageDescription string 'Build de test : écrit des mesures de démonstration dans Santé.'" Info.plist
+      # Entitlements dans les réglages de la cible App (pas en ligne de commande : ils s'appliqueraient aussi au paquet
+      # de ressources des modèles du visage, qui n'en a pas)
       - name: Build Xcode (simulateur, signature à la volée)
         working-directory: upstream/app/ios/App
         run: |
@@ -99,7 +104,6 @@ jobs:
             -derivedDataPath "$RUNNER_TEMP/dd" \
             MARKETING_VERSION="$ANDROID_VERSION" CURRENT_PROJECT_VERSION="$IOS_BUILD" \
             CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= PROVISIONING_PROFILE_SPECIFIER= \
-            CODE_SIGN_ENTITLEMENTS=App/App.entitlements \
             build 2>&1 | tee "$RUNNER_TEMP/xcodebuild.log" | grep -E "error:|warning: .*deprecated|BUILD (SUCCEEDED|FAILED)" || true
           grep -q "BUILD SUCCEEDED" "$RUNNER_TEMP/xcodebuild.log"
       # Test d'interface du dépôt (uitests/, sans bibliothèque tierce) qui accepte la feuille de l'app Santé pendant

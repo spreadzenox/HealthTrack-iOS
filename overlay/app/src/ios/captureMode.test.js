@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
+import { buildPlan, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -583,6 +583,25 @@ describe('sonde vocale (I8)', () => {
     const logs = []
     await probeVoice({ log: (m) => logs.push(m), plugin: { probe: async () => { throw new Error('absent') } } })
     expect(logs).toEqual(['[voix] sonde {"verdict":null}'])
+  })
+})
+
+describe('sonde de la lecture du visage (I7)', () => {
+  it('le plugin répond avec ses modèles, en mode ouverture de l’app, sans valence ; la lecture de test s’arrête avant la caméra', async () => {
+    const logs = []
+    const plugin = {
+      status: vi.fn(async () => ({ models: true, mode: 'app_open', affectModel: false, enabled: false })),
+      test: vi.fn(async () => ({ outcome: 'skip:no_permission' })),
+    }
+    await probeFace({ log: (m) => logs.push(m), plugin })
+    expect(logs).toEqual(['[visage] sonde {"plugin":true,"models":true,"mode":"app_open","affect":false,"outcome":"skip:no_permission"}'])
+  })
+
+  it('sans plugin, ou s’il échoue : le dit', async () => {
+    const logs = []
+    await probeFace({ log: (m) => logs.push(m), plugin: null })
+    await probeFace({ log: (m) => logs.push(m), plugin: { status: async () => { throw new Error('absent') }, test: vi.fn() } })
+    expect(logs).toEqual(['[visage] sonde {"plugin":false}', '[visage] sonde {"plugin":true,"error":"absent"}'])
   })
 })
 

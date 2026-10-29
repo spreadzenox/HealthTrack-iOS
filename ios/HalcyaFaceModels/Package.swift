@@ -14,6 +14,7 @@ let package = Package(
         .target(
             name: "HalcyaFaceModels",
             dependencies: ["TensorFlowLiteC", .product(name: "HalcyaFace", package: "HalcyaFace")],
+            resources: [.copy("Models")], // les 3 .tflite vérifiés, déposés par scripts/face-models.sh
             linkerSettings: [.linkedLibrary("c++")]
         ),
         .testTarget(name: "HalcyaFaceModelsTests", dependencies: ["HalcyaFaceModels", .product(name: "HalcyaFace", package: "HalcyaFace")]),
