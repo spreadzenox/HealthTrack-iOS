@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v591 (29/10) | v590 sur iPhone simulé (29/10, PR #67) ; v591 en vérification (PR #68) |
+| Dernière version | v592 (29/10) | v591 sur iPhone simulé (29/10, PR #68) ; v592 en vérification (PR #69) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -163,6 +163,7 @@ via TestFlight.
 | 29/10 17:05 | suivi d'Android v588, états vides (fin) | les pages vides d'un nouvel utilisateur sont justes sur iPhone (8 pages regardées sur les deux iPhone simulés, PR #64 mergée) ; un essai automatique d'export a touché le bouton sans effet sur un iPhone : il retouche maintenant si la feuille de partage ne s'ouvre pas ; Android v588 : la réintroduction propose des aliments qui contiennent vraiment le groupe testé, aussi sur iPhone (vu : sorbitol → pruneaux, PR #65 mergée) ; **conditions d'utilisation propres à l'iPhone** (aucun achat, « pas un dispositif médical », appelez le 15 ou le 112) de nouveau dans Réglages ; Android v589 : rapport PDF sans zéros trompeurs. Parité : 49 % | #64, #65 (mergées), #66 |
 | 29/10 18:00 | suivi d'Android v590 | v589 sur iPhone (PR #66 mergée : « Conditions » de retour dans Réglages, rapport PDF sans zéros trompeurs) ; Android v590 : l'onglet Sources range les sources branchées sous « Ce que lit Halcya », aussi sur iPhone ; sa note de Nouveautés parle de Health Connect et du temps d'écran, absents de l'iPhone : cachée sur iPhone, et une demande de plus pour la routine Android (`DEMANDES.md`). Parité : 49 % | #66 (mergée), #67 |
 | 29/10 19:00 | suivi d'Android v591, captures | v590 sur iPhone (PR #67 mergée : « Ce que lit Halcya » vu dans Sources) ; un bandeau « Nouveau : … et 13 autres changements » s'était glissé sur toutes les captures (défaut de l'outil de capture, pas de l'app) : corrigé ; Android v591 : le Journal vide propose trois tuiles en couleur pour bien démarrer, aussi sur iPhone. Parité : 49 % | #67 (mergée), #68 |
+| 29/10 20:00 | suivi d'Android v592, onboarding | v591 sur iPhone (PR #68 mergée : plus de bandeau parasite sur les captures, Journal vide en couleur vu) ; dans l'accueil de l'app, le bouton « Autoriser l'app Santé » s'étirait en grand ovale sur toute la hauteur de l'écran : ramené à sa taille sur iPhone (en attendant qu'Android corrige le même défaut chez lui, demande déjà notée) ; Android v592 : carte des pistes plus lisible, aussi sur iPhone. Parité : 49 % | #68 (mergée), #69 |
 
 ---
 

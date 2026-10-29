@@ -1,0 +1,13 @@
+diff --git a/app/src/pages/Onboarding.css b/app/src/pages/Onboarding.css
+index 3906752..741c8a6 100644
+--- a/app/src/pages/Onboarding.css
++++ b/app/src/pages/Onboarding.css
+@@ -219,6 +219,8 @@
+   width: 100%;
+   min-height: var(--button-height);
+   border-radius: var(--radius-pill);
++  /* Version iOS (HealthTrack-iOS) : sans quoi le flex: 1 de .btn (App.css) l'étire sur toute la hauteur de .onb-body */
++  flex: 0 0 auto;
+ }
+ 
+ .onb-note {
