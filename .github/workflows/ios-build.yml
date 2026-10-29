@@ -176,7 +176,7 @@ jobs:
           {
             echo "## iOS — Android v${ANDROID_VERSION:-?} · build ${IOS_BUILD:-?}"
             echo
-            echo "$(ls captures/*.png 2>/dev/null | wc -l | tr -d ' ') capture(s) ; erreurs JavaScript : $(cat captures/js-errors.txt 2>/dev/null | wc -l | tr -d ' ') ligne(s)"
+            echo "$(ls captures/*.png 2>/dev/null | wc -l | tr -d ' ') capture(s) ; erreurs JavaScript : $(cat captures/js-errors.txt 2>/dev/null | wc -l | tr -d ' ') ligne(s) ; pages avec un texte propre à Android : $(cat captures/texte-android.txt 2>/dev/null | wc -l | tr -d ' ')"
             echo '```'
             head -20 captures/js-errors.txt 2>/dev/null || true
             echo '```'

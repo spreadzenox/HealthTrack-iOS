@@ -140,3 +140,8 @@ run_device() { # <udid> <nom>
 # Erreurs JavaScript relayées par Capacitor (« ⚡️  [error] - … ») et exceptions non rattrapées
 grep -hE "\[error\]|Unhandled|TypeError|ReferenceError|SyntaxError|JS ERROR" "$OUT"/*-console.txt > "$OUT/js-errors.txt" || true
 echo "erreurs JavaScript : $(wc -l < "$OUT/js-errors.txt" | tr -d ' ') ligne(s) (js-errors.txt)"
+# Audit des textes (I2) : pages de l'iPhone où un mot propre à Android reste affiché (captureMode.js, androidWords)
+for f in "$OUT"/*-console.txt; do
+  grep -ho "\[texte\] .*" "$f" | sed "s|^|$(basename "$f" -console.txt) |" || true
+done > "$OUT/texte-android.txt"
+echo "textes propres à Android : $(wc -l < "$OUT/texte-android.txt" | tr -d ' ') page(s) (texte-android.txt)"
