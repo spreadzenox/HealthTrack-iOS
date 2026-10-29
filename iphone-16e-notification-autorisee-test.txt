@@ -1,0 +1,49 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /Users/runner/work/_temp/dd-tests/Build/Products/HalcyaUITests_iphonesimulator26.5-arm64-x86_64.xctestrun -destination id=582B068E-2ACA-440E-8D01-417AEDF26981 "-only-testing:HalcyaUITests/NotificationsUITests/testAutoriserLesNotifications"
+
+2026-10-29 06:46:11.100 xcodebuild[33510:100022] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-29 06:46:11.120 xcodebuild[33510:100022] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:582B068E-2ACA-440E-8D01-417AEDF26981, OS:26.2, name:iPhone 16e }
+{ platform:iOS Simulator, arch:x86_64, id:582B068E-2ACA-440E-8D01-417AEDF26981, OS:26.2, name:iPhone 16e }
+2026-10-29 06:46:12.776 xcodebuild[33510:100022] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-29 06:46:15.604953+0000 HalcyaUITests-Runner[33947:101101] [Default] Running tests...
+2026-10-29 06:46:15.693630+0000 HalcyaUITests-Runner[33947:101184] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-29 06:46:17.039.
+Test Suite 'HalcyaUITests.xctest' started at 2026-10-29 06:46:17.041.
+Test Suite 'NotificationsUITests' started at 2026-10-29 06:46:17.041.
+Test Case '-[HalcyaUITests.NotificationsUITests testAutoriserLesNotifications]' started.
+    t =     0.00s Start Test at 2026-10-29 06:46:17.044
+2026-10-29 06:46:17.046945+0000 HalcyaUITests-Runner[33947:101184] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+    t =     0.07s Set Up
+    t =     0.07s Open fr.jpesquet.sante
+    t =     0.07s     Activate fr.jpesquet.sante
+    t =     0.09s         Wait for fr.jpesquet.sante to idle
+    t =     0.12s Waiting 20.0s for "Autoriser" Button to exist
+    t =     1.13s     Checking `Expect predicate `existsNoRetry == 1` for object "Autoriser" Button`
+    t =     1.13s         Checking existence of `"Autoriser" Button`
+    t =     1.41s Tap "Autoriser" Button
+    t =     1.41s     Wait for com.apple.springboard to idle
+    t =     1.42s     Find the "Autoriser" Button
+    t =     1.45s     Check for interrupting elements affecting "Autoriser" Button
+    t =     1.50s     Synthesize event
+    t =     1.94s     Wait for com.apple.springboard to idle
+    t =     2.10s Tear Down
+Test Case '-[HalcyaUITests.NotificationsUITests testAutoriserLesNotifications]' passed (2.131 seconds).
+Test Suite 'NotificationsUITests' passed at 2026-10-29 06:46:19.175.
+	 Executed 1 test, with 0 failures (0 unexpected) in 2.131 (2.133) seconds
+Test Suite 'HalcyaUITests.xctest' passed at 2026-10-29 06:46:19.176.
+	 Executed 1 test, with 0 failures (0 unexpected) in 2.131 (2.135) seconds
+Test Suite 'Selected tests' passed at 2026-10-29 06:46:19.177.
+	 Executed 1 test, with 0 failures (0 unexpected) in 2.131 (2.138) seconds
+2026-10-29 06:46:19.740 xcodebuild[33510:100022] [MT] IDETestOperationsObserverDebug: 6.957 elapsed -- Testing started completed.
+2026-10-29 06:46:19.740 xcodebuild[33510:100022] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-29 06:46:19.740 xcodebuild[33510:100022] [MT] IDETestOperationsObserverDebug: 6.957 sec, +6.957 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/HalcyaUITests-cwsdjefepdogyogfgfuqnaotwodv/Logs/Test/Test-HalcyaUITests-2026.10.29_06-46-11-+0000.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started
