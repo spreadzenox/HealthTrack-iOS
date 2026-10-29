@@ -200,8 +200,28 @@ final class DonneesUITests: XCTestCase {
             return
         }
         exporter.tap()
+        enregistrerDansFichiers(attente: 20)
+    }
+
+    /// Rapport PDF pour le médecin (N6b) : « Créer le PDF » (la sonde a déjà touché « Préparer le rapport ») ; le PDF
+    /// est créé sur l'iPhone, écrit dans Documents, puis partagé : même enregistrement dans Fichiers que l'export.
+    func testEnregistrerLeRapportDansFichiers() throws {
+        halcya.activate()
+        let creer = element("Créer le PDF")
+        guard creer.waitForExistence(timeout: 30) else {
+            print(halcya.debugDescription)
+            XCTFail("« Créer le PDF » introuvable")
+            return
+        }
+        creer.tap()
+        enregistrerDansFichiers(attente: 60) // le PDF se crée d'abord (polices et rendu chargés à la demande)
+    }
+
+    /// Feuille de partage ouverte par l'app : « Enregistrer dans Fichiers », dossier Halcya, « Enregistrer », puis
+    /// « Garder les deux » puisque le fichier y est déjà.
+    private func enregistrerDansFichiers(attente: TimeInterval) {
         let fichiers = lieu("Enregistrer dans Fichiers")
-        guard fichiers.waitForExistence(timeout: 20) else {
+        guard fichiers.waitForExistence(timeout: attente) else {
             print(halcya.debugDescription)
             XCTFail("feuille de partage sans « Enregistrer dans Fichiers »")
             return

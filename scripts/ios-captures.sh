@@ -42,6 +42,7 @@ ui_steps() { # <page> → lignes « <Classe/test> <suffixe de capture> »
     rappel-portion) echo "NotificationsUITests/testToucherLeRappelDePortion rappel-apres" ;;
     import-fichier) echo "DonneesUITests/testImporterUnFichierDepuisFichiers import-apres" ;;
     export-partage) echo "DonneesUITests/testEnregistrerLaSauvegardeDansFichiers export-apres" ;;
+    rapport-partage) echo "DonneesUITests/testEnregistrerLeRapportDansFichiers rapport-apres" ;;
   esac
 }
 

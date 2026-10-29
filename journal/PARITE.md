@@ -8,10 +8,10 @@
 Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) · 🟡 partiel ou pas encore vérifié ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
-**Parité** : **32 %** au 28/10 17:15 (15 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
+**Parité** : **34 %** au 29/10 03:30 (16 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v575 (commit `5488719`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v576 (commit `2fd8dac`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -36,7 +36,7 @@ vérifié sur iOS.
 | Nutrition (Ciqual) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, en clair), gestes à confirmer sur l'iPhone 12 |
 | Analyses (pistes repas → ventre, délais) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, clair et sombre), gestes à confirmer sur l'iPhone 12 |
 | Réintroduction FODMAP guidée | ✅ | rappel de portion : voir §3 ; 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, en clair), gestes à confirmer sur l'iPhone 12 |
-| Rapport PDF médecin | 🟡 | partage / enregistrement du fichier sur iOS : `saveAndShareReport` n'écrit dans Documents + feuille de partage que sur Android ; sur iOS il tente un téléchargement web (à vérifier, sinon correctif I2) |
+| Rapport PDF médecin | 🟡 | partage / enregistrement du fichier sur iOS : `saveAndShareReport` n'écrit dans Documents + feuille de partage que sur Android ; sur iOS il tentait un téléchargement web → correctif 09 (même chemin qu'Android) ; sources « App Santé » dans le rapport (correctif 15) ; 29/10 : sonde `[rapport]` et test d'interface (créer le PDF, l'enregistrer dans Fichiers) en PR #51, à vérifier sur la CI |
 | Sources (détection automatique) | 🟡 | sources iOS différentes : Santé (HealthKit) au lieu de Health Connect ; 27/10 : `canOpenURL` appelé avec des noms de paquets Android, refusés par iOS ; carte « Lecture du visage » en erreur (plugin absent) → I2 ; 27/10 (captures défilées) : la carte Health Connect garde sa description Android (« Importe ce que vos apps santé écrivent dans Health Connect… ») → I4 (HealthKit) ; 28/10 23:00 : carte Météo, la phrase d'usage de la position manquait (iOS refusait la position) : ajoutée, position approximative seulement (PR #45), à essayer sur l'iPhone 12 |
 | Données (export / import JSON) | ✅ | partage de fichier iOS (`@capacitor/filesystem` + feuille de partage) ; 27/10 : hors Android, l'export passe par un lien de téléchargement que WKWebView ignore → I2/I3 ; texte « sauvegarde Google » retiré (PR #3) ; 28/10 (PR #29) : aller-retour vérifié sur les deux iPhone simulés (1924 mesures exportées en JSON, écrites dans un fichier de l'app, relues, réimportées sans doublon, 1924 après) ; 28/10 (PR #34, mergée) : **import par le sélecteur de fichiers vérifié, geste réel** (test d'interface : Explorer › Sur mon iPhone › Halcya, ancien fichier au format d'avant la version 1 : aperçu puis « Ajouter », 2 entrées ajoutées sur les deux iPhone simulés) ; 28/10 (PR #37) : **export par la feuille de partage vérifié, geste réel** (« Télécharger la sauvegarde », « Enregistrer dans Fichiers », Sur mon iPhone › Halcya, « Garder les deux » : 2 fichiers sur les deux iPhone simulés). Le « CSV » de cette ligne n'existe pas dans l'app (aucun export CSV dans le code d'Android) |
 | Paramètres, mode diagnostic caché (7 touches) | ✅ | 27/10 : affiché correctement sur iPhone simulé (captures des PR #2 et #3, données de démo, en clair), gestes à confirmer sur l'iPhone 12 |
@@ -91,7 +91,7 @@ analyses, journal, Accueil) : ils arrivent avec `upstream.json` et sont couverts
 | Fiche du Store fr-FR (titre, textes, captures, icône) | `app/store/`, `Play — fiche du Store` | `store/app-store/` de ce dépôt | 🟡 | 28/10 (PR #35, mergée) : brouillon des textes (nom, sous-titre, texte promotionnel, description, mots-clés) réécrits pour l'iPhone, limites et directive 2.3.10 vérifiées par `store-check.yml` ; 28/10 19:00 : captures 6,9" (iPhone 17 Pro Max simulé, 1320 × 2868) à la demande, barre d'état propre ; données de démo ramenées à ce que l'iPhone reçoit (ni Gadgetbridge, ni montre Huawei en direct, ni temps d'écran, ni visage ; la montre de Santé est une Apple Watch), page Montre retirée des captures ; 29/10 : 8 captures 6,9" choisies (`store/app-store/captures.md`, branche `captures/store`) ; restent catégorie, âge, URL propres à l'iPhone |
 | Sécurité des données | `app/store/data-safety` | « Confidentialité de l'app » (A5) + `PrivacyInfo.xcprivacy` | 🟡 | 28/10 (PR #39) : les mêmes 5 types que la déclaration Google Play d'Android (position approximative, photos, autre contenu, identifiant de l'appareil, historique d'achats), usage « fonctionnalités de l'app », jamais de pistage ; dans le manifeste et dans `store/app-store/confidentialite.md` ; un test vérifie que les deux listes restent identiques à celle d'Android ; reste le geste du propriétaire (A5) |
 | Déclarations santé, âge 18+ | Contenu de l'app | classification par âge, directives santé d'Apple | ❌ | |
-| Chiffrement à l'export | — | `ITSAppUsesNonExemptEncryption` | ❌ | |
+| Chiffrement à l'export | — | `ITSAppUsesNonExemptEncryption` | ✅ | `false` dans `Info.plist` (HTTPS seulement, chiffrement exempté), lu dans l'app construite par la CI à chaque build (PlistBuddy) ; ligne mise à jour le 29/10 |
 | Production | « Promouvoir la version » (propriétaire) | « Soumettre pour examen » puis publier (propriétaire) | — | A6 |
 
 ## 5. Suivi des livraisons Android
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 03:05 | #492 (v576) | nombres et unités jamais séparés en fin de ligne (`frenchSpacing.js` : espace insécable entre un nombre et son unité, et dans les milliers) : code partagé, note de Nouveautés vraie sur iPhone ; libellés touchés par les tests d'interface et les sondes sans nombre ; les 26 correctifs s'appliquent directement, suite d'Android 2801 passés | — |
 | 29/10 02:25 | #491 (v575) | typographie française à l'affichage (`frenchSpacing.js` : espaces insécables avant « : ; ? ! » et dans les guillemets, posées par un `MutationObserver` sur la racine ; titres `text-wrap: balance`) : code partagé, note de Nouveautés vraie sur iPhone (`text-wrap: balance` demande iOS 17.5, sans effet avant) ; les libellés de boutons touchés par les tests d'interface et les sondes n'ont pas ces signes ; captures à regarder (PR suivante) ; les 26 correctifs s'appliquent, suite d'Android 2796 passés | — |
 | 29/10 02:05 | #490 (v574) | titres du Journal « Vos repas » et « Vos apports » (`Food.jsx`, `Nutrition.jsx`) : code partagé, note de Nouveautés vraie sur iPhone ; captures Repas et Nutrition à regarder ; les 25 correctifs s'appliquent, suite d'Android 2783 passés | — |
 | 29/10 01:05 | #489 (v573) | « Photo du repas » en grand bouton plein dans Journal › Repas, « Galerie » et « Décrire » dessous (`Food.jsx`, `App.css`) : code partagé, note de Nouveautés vraie sur iPhone, l'entrée caméra (`capture="environment"`) reste, donc la phrase d'usage aussi (test) ; capture Repas à regarder ; les 25 correctifs s'appliquent, suite d'Android 2783 passés | — |

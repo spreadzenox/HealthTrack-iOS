@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
+import { buildPlan, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -666,5 +666,46 @@ describe('mode captures iOS : données de démo de l’iPhone', () => {
 
   it('plan : pas de page Montre (montre Huawei en direct) sur iPhone', () => {
     expect(buildPlan().map((s) => s.route)).not.toContain('/montre')
+  })
+})
+
+describe('sonde du rapport PDF pour le médecin (N6b, correctif 09)', () => {
+  it('ouvre Vos données, prépare le rapport ; le test d’interface touche « Créer le PDF » puis l’enregistre dans Fichiers', async () => {
+    let names = ['Halcya-copie-de-secours.json', 'healthtrack-export-2026-10-28.json']
+    const calls = []
+    const logs = []
+    await probeShareReport({
+      log: (m) => logs.push(m),
+      signal: vi.fn(async (name) => {
+        calls.push(`capture ${name}`)
+        // le PDF est écrit dans Documents, puis « Enregistrer dans Fichiers › Garder les deux » en ajoute une copie
+        names = [...names, 'Halcya-rapport-2026-10-29.pdf', 'Halcya-rapport-2026-10-29 2.pdf']
+      }),
+      waitAck: vi.fn(async () => true),
+      wait: async () => {},
+      navigate: (path) => calls.push(`page ${path}`),
+      click: (label) => calls.push(`touché ${label}`) && true,
+      reveal: (label) => calls.push(`montré ${label}`) && true,
+      list: async () => names,
+      size: async (name) => (name === 'Halcya-rapport-2026-10-29.pdf' ? 48213 : 0),
+      status: () => 'Halcya-rapport-2026-10-29.pdf est aussi dans l’app Fichiers › Sur mon iPhone › Halcya.',
+    })
+    expect(calls).toEqual(['page /data', 'touché Préparer le rapport', 'montré Créer le PDF', 'capture rapport-partage'])
+    expect(logs).toEqual([
+      '[rapport] partage {"préparer":true,"bouton":true,"avant":0,"après":2,"octets":48213,' +
+        '"message":"Halcya-rapport-2026-10-29.pdf est aussi dans l’app Fichiers › Sur mon iPhone › Halcya."}',
+    ])
+  })
+
+  it('sans PDF, ou si la sonde échoue : le dit', async () => {
+    const logs = []
+    const base = { log: (m) => logs.push(m), signal: async () => {}, waitAck: async () => true, wait: async () => {},
+      navigate: () => {}, click: () => false, reveal: () => false, status: () => null }
+    await probeShareReport({ ...base, list: async () => [] })
+    await probeShareReport({ ...base, list: async () => { throw new Error('Documents illisible') } })
+    expect(logs).toEqual([
+      '[rapport] partage {"préparer":false,"bouton":false,"avant":0,"après":0,"octets":null,"message":null}',
+      '[rapport] échec Documents illisible',
+    ])
   })
 })
