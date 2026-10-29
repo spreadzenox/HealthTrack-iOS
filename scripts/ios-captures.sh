@@ -90,6 +90,13 @@ run_device() { # <udid> <nom>
   # Accusé vide créé d'avance : sans lui, chaque lecture de l'app en attente remplit la console d'erreurs « fichier absent »
   data="$(xcrun simctl get_app_container "$udid" "$BUNDLE" data)"
   mkdir -p "$data/Documents/capture"
+  # Lecture du visage (I7) : le simulateur n'a pas de caméra ; un portrait du domaine public (tests d'Android) la
+  # remplace dans la build de captures, et la permission de la caméra est accordée d'avance
+  PORTRAIT="$(cd "$(dirname "$0")/.." && pwd)/upstream/app/android/app/src/test/resources/face/face-frontal.png"
+  if [ -f "$PORTRAIT" ]; then
+    cp "$PORTRAIT" "$data/Documents/capture/visage.png"
+    xcrun simctl privacy "$udid" grant camera "$BUNDLE" || true
+  fi
   : > "$data/Documents/capture/ack.txt"
   xcrun simctl launch --console-pty --terminate-running-process "$udid" "$BUNDLE" > "$log" 2>&1 &
   pid=$!

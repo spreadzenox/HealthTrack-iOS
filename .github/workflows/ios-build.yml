@@ -22,8 +22,9 @@ on:
 permissions:
   contents: read
 
+# Les captures de la fiche (lancement manuel avec `devices`) ont leur propre groupe : elles n'annulent pas la CI de main
 concurrency:
-  group: ios-build-${{ github.event.pull_request.number || github.ref }}
+  group: ios-build-${{ github.event.pull_request.number || github.ref }}${{ inputs.devices && '-store' || '' }}
   cancel-in-progress: true
 
 jobs:

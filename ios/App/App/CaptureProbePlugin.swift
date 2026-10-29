@@ -1,7 +1,9 @@
 #if DEBUG
 import Capacitor
 import Foundation
+import HalcyaFace
 import HalcyaRules
+import ImageIO
 
 /// Build de captures seulement (configuration Debug, jamais livrée) : ce que la sauvegarde iCloud du téléphone
 /// emporterait des données de l'app (`src/ios/captureMode.js` › `probeBackup`). La sauvegarde prend Documents et
@@ -13,6 +15,15 @@ public class CaptureProbePlugin: CAPPlugin, CAPBridgedPlugin {
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "backupStatus", returnType: CAPPluginReturnPromise),
     ]
+
+    /// Lecture du visage sur le simulateur, qui n'a pas de caméra (I7) : si le script de captures a déposé un portrait
+    /// (`Documents/capture/visage.png`, portrait du domaine public des tests d'Android), il remplace la caméra frontale.
+    override public func load() {
+        let portrait = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("capture/visage.png")
+        if FileManager.default.fileExists(atPath: portrait.path) {
+            FaceSensePlugin.camera = { PortraitCamera(url: portrait) }
+        }
+    }
 
     /// { items: [{ path, excluded, bytes, files }] } : Documents, Library/WebKit, chaque dossier IndexedDB trouvé
     /// sous Library et le repère propre au téléphone (`BackupMarkerPlugin`), chemins relatifs au conteneur de l'app.
@@ -67,6 +78,32 @@ public class CaptureProbePlugin: CAPPlugin, CAPBridgedPlugin {
             files += 1
         }
         return (bytes, files)
+    }
+}
+
+/// « Caméra » des captures : le même portrait, lu en octets bruts (sans correction de couleur), pour chaque image.
+final class PortraitCamera: FaceCamera {
+    let url: URL
+
+    init(url: URL) {
+        self.url = url
+    }
+
+    func capture(frames: Int) -> FaceCapture {
+        guard let source = CGImageSourceCreateWithURL(url as CFURL, nil), let image = CGImageSourceCreateImageAtIndex(source, 0, nil),
+              image.bitsPerComponent == 8, let bytes = image.dataProvider?.data as Data? else {
+            return FaceCapture(error: "camera_error", detail: "portrait")
+        }
+        let step = image.bitsPerPixel / 8
+        let first = [.first, .premultipliedFirst, .noneSkipFirst].contains(image.alphaInfo) ? 1 : 0
+        var rgb = [UInt32](repeating: 0, count: image.width * image.height)
+        for y in 0..<image.height {
+            for x in 0..<image.width {
+                let p = y * image.bytesPerRow + x * step + first
+                rgb[y * image.width + x] = UInt32(bytes[p]) << 16 | UInt32(bytes[p + 1]) << 8 | UInt32(bytes[p + 2])
+            }
+        }
+        return FaceCapture(images: Array(repeating: rgb, count: frames), width: image.width, height: image.height, openMs: 0)
     }
 }
 #endif
