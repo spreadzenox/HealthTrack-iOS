@@ -1,0 +1,22 @@
+diff --git a/app/src/data/changelog.js b/app/src/data/changelog.js
+index 72b85f7..0ae9488 100644
+--- a/app/src/data/changelog.js
++++ b/app/src/data/changelog.js
+@@ -24,12 +24,16 @@ export const ALL_CHANGELOG = Object.entries(modules)
+  */
+ export const PLAY_CHANGELOG_SINCE = '2026-10-24-0000'
+ 
++/** Version iOS (HealthTrack-iOS) : première entrée montrée sur iPhone, la version iPhone (à avancer au 1er TestFlight). */
++export const APPSTORE_CHANGELOG_SINCE = '2026-10-29-0000'
++
+ /** Entrées qui concernent une variante, de la plus récente à la plus ancienne. */
+ export function changelogFor(entries, distribution) {
+   const d = resolveDistribution(distribution)
+   return entries.filter(
+     (e) =>
+-      (!Array.isArray(e.variants) || e.variants.includes(d)) && (d !== 'play' || e.id >= PLAY_CHANGELOG_SINCE),
++      (!Array.isArray(e.variants) || e.variants.includes(d)) && (d !== 'play' || e.id >= PLAY_CHANGELOG_SINCE) &&
++      (d !== 'appstore' || e.id >= APPSTORE_CHANGELOG_SINCE),
+   )
+ }
+ 

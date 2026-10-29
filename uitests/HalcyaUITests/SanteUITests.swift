@@ -218,10 +218,21 @@ final class DonneesUITests: XCTestCase {
     }
 
     /// Feuille de partage ouverte par l'app : « Enregistrer dans Fichiers », dossier Halcya, « Enregistrer », puis
-    /// « Garder les deux » puisque le fichier y est déjà.
+    /// « Garder les deux » puisque le fichier y est déjà. Pour un PDF, la feuille s'ouvre à mi-hauteur (Aperçu,
+    /// Copier, Annoter, Imprimer…) et l'action est plus bas (29/10, iPhone 16e et 17 Pro) : on la déplie d'un
+    /// glissement vers le haut dès qu'elle est là.
     private func enregistrerDansFichiers(attente: TimeInterval) {
         let fichiers = lieu("Enregistrer dans Fichiers")
-        guard fichiers.waitForExistence(timeout: attente) else {
+        let copier = lieu("Copier")
+        let fin = Date().addingTimeInterval(attente)
+        var glissements = 0
+        while !fichiers.waitForExistence(timeout: 2) && Date() < fin {
+            if glissements < 2 && copier.exists {
+                copier.swipeUp()
+                glissements += 1
+            }
+        }
+        guard fichiers.exists else {
             print(halcya.debugDescription)
             XCTFail("feuille de partage sans « Enregistrer dans Fichiers »")
             return

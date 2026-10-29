@@ -36,8 +36,11 @@
   dans Gadgetbridge (→ guide des montres réécrit, sous I4) ; captures défilées pour les pages longues : faites, PR #5) : compléter `PARITE.md` fonction par fonction (changelog depuis le
   lancement play, `journal/PRODUIT.md`, écrans) ; sur iOS, chaque service qui appelle un plugin Android absent
   retombe proprement (pas d'erreur, pas de carte cassée, pas d'interrupteur qui ne fait rien) ; % de parité.
-  - [ ] Rapport PDF pour le médecin essayé à chaque build (29/10, PR #51) : sonde `[rapport]` et test d'interface
-    (« Créer le PDF », « Enregistrer dans Fichiers ») ; à confirmer sur la CI, puis ✅ dans `PARITE.md`.
+  - [x] Rapport PDF pour le médecin essayé à chaque build (29/10, PR #51, mergée) : PDF créé et feuille de partage
+    ouverte sur les deux iPhone simulés ; l'enregistrement dans Fichiers par le test d'interface (feuille dépliée)
+    est à confirmer sur la CI de #52.
+  - [ ] Nouveautés de l'iPhone à partir de sa propre version (29/10, correctif 28 : `APPSTORE_CHANGELOG_SINCE` =
+    29/10) ; **à avancer à la date du premier TestFlight** (I9), pour que les premiers testeurs partent de là.
 - [ ] **I3 — Données** : durabilité d'IndexedDB dans WKWebView (27/10 : non durable d'après Capacitor et WebKit,
   plan dans `RECHERCHE.md` : `persist()`, instantané automatique en fichier natif, restauration proposée si la base
   est vide ; 27/10 : copie de secours automatique, PR #6), sauvegarde iCloud, export / import JSON par la feuille
