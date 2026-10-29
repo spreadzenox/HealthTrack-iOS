@@ -35,8 +35,10 @@
 - Lecture du visage **au déverrouillage** : iOS ne laisse pas une app utiliser la caméra en arrière-plan → lecture à
   l'ouverture de l'app (comme la version Google Play actuelle), raccourci ou widget à étudier.
 - **Temps d'écran** du téléphone : Apple ne laisse pas une app lire ces chiffres → à l'étude (I8).
-- **Montre Huawei en direct** : sur iPhone, pas de Bluetooth « classique » pour les apps → passer par l'app Santé
-  d'Apple (Huawei Santé y écrit une partie des mesures) ; piste Bluetooth basse consommation à étudier (I8).
+- **Montre Huawei en direct** : sur iPhone, pas de Bluetooth « classique » pour les apps : votre Watch GT 6 Pro (et
+  les GT 3 → GT 7) ne peut pas se relier directement à l'app iPhone → passer par l'app Santé d'Apple (Huawei Santé
+  y écrit une partie des mesures). Les bracelets Huawei plus simples (Bluetooth basse consommation) pourraient
+  marcher : à essayer avec un appareil.
 - **Repérer les apps de montre installées** (Garmin, Oura…) : iOS ne laisse pas une app voir les autres apps → la
   montre est reconnue par les données qu'elle écrit dans l'app Santé, et un guide dit quoi activer dans chaque app.
 
