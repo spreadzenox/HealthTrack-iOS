@@ -166,6 +166,30 @@
   CI ; données collectées à compléter avec A5 ; captures 6,9" à la demande, données de démo fidèles à l'iPhone, PR #41 mergée ; 8 captures choisies le 29/10, `store/app-store/captures.md` ; textes sans lecture du visage ni « dans Apple Watch », PR #42) : signature par la CI (A2), envoi TestFlight interne à chaque version suivie, fiche App
   Store fr-FR (`store/`), captures, `PrivacyInfo.xcprivacy`, réponses « Confidentialité de l'app » (A5), relecture
   des directives d'Apple (santé, abonnement, IA) ; la soumission reste un geste du propriétaire.
+  - [x] Politique de confidentialité propre à l'iPhone, embarquée (29/10, `overlay/app/public/confidentialite-iphone.html`,
+    correctif 26 : Réglages → Confidentialité l'ouvre sur iPhone) : app Santé, copie de secours et iCloud, capteurs
+    Bluetooth, visage, météo, analyse IA sans jeton Google, aucun achat pour l'instant ; ni montre Huawei, ni temps
+    d'écran, ni Withings. Lien « ‹ Revenir à Halcya » en tête (pas de bouton retour sur iPhone). Témoin : quand la
+    page d'Android change, `privacyPolicyIphone.test.js` échoue jusqu'à relecture de la page iPhone (empreinte à
+    mettre à jour).
+  - [ ] Publier en ligne la page de confidentialité et une page d'assistance (deux URL exigées par la fiche) :
+    29/10, workflow `pages.yml` et `scripts/site.mjs` prêts (page d'assistance `site/assistance.html` ; la
+    confidentialité est celle de l'app, sans son lien de retour ; directive 2.3.10 vérifiée) ; attend **A8** (Pages
+    à activer une fois par le propriétaire), puis lancer le workflow. Adresses prévues :
+    `https://spreadzenox.github.io/HealthTrack-iOS/confidentialite/` et `…/assistance/`. Contact de l'assistance :
+    les demandes GitHub ; une adresse e-mail si le propriétaire en donne une (directive 1.5 : un moyen simple de le
+    joindre).
+  - [ ] Conditions d'utilisation et de vente propres à l'iPhone (celles d'Android parlent de Google Play ; retirées
+    des Réglages sur iPhone le 29/10, correctif 26), avec le même lien de retour ; lien de
+    confidentialité et de conditions du paywall (`PRIVACY_URL`, `TERMS_URL` d'Android) à remplacer avec I6.
+  - [ ] Données de démo iPhone (`captureMode.js`, `iphoneDemoEntries`) : le poids et la masse grasse y viennent de
+    « Withings » (connexion directe, absente sur iPhone) ; les montrer comme venant de l'app Santé (29/10, vu sur la
+    capture Nutrition de #49, hors des 8 captures de la fiche).
+  - [ ] **Directive 5.1.3 (ii) d'Apple** : une app « ne doit pas stocker de données de santé personnelles dans
+    iCloud ». La copie de secours (I3) part dans la sauvegarde iCloud de l'iPhone : risque de refus à l'examen. À
+    trancher avant la soumission : garder (sauvegarde du système, choisie et chiffrée par l'utilisateur), l'exclure
+    de la sauvegarde (la restauration passe alors par l'export), ou n'y laisser que ce qui ne vient pas de l'app
+    Santé (qui se réimporte seule). La page de confidentialité décrit l'état actuel.
 - [ ] **Ensuite — suivi continu** : chaque version Android suivie, correctifs refaits, nouveautés vérifiées.
 
 ## Idées et questions ouvertes

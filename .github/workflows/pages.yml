@@ -1,0 +1,68 @@
+# Site de l'app iPhone (GitHub Pages de ce dépôt) : politique de confidentialité et assistance, les deux adresses
+# exigées par la fiche App Store (I9), construites par scripts/site.mjs. Pages est à activer une fois par le
+# propriétaire (Settings → Pages → Source : GitHub Actions) ; d'ici là, le site est construit et vérifié, mais pas
+# publié (avertissement, pas d'échec).
+name: Site — GitHub Pages
+
+on:
+  pull_request:
+    branches: [main]
+    paths: ["overlay/app/public/confidentialite-iphone.html", "site/**", "scripts/site.mjs", ".github/workflows/pages.yml"]
+  push:
+    branches: [main]
+    paths: ["overlay/app/public/confidentialite-iphone.html", "site/**", "scripts/site.mjs", ".github/workflows/pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Construire le site (confidentialité, assistance)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    outputs:
+      publish: ${{ steps.pages.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.19"
+      - run: node scripts/site.mjs _site
+      - name: GitHub Pages est-il activé ?
+        id: pages
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type 2>/dev/null)" = "workflow" ]; then
+            echo "publish=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::GitHub Pages n'est pas activé en source « GitHub Actions » : site construit, pas publié (action du propriétaire : Settings → Pages)."
+            echo "publish=false" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.pages.outputs.publish == 'true'
+        with:
+          path: _site
+
+  deploy:
+    name: Publier sur GitHub Pages
+    needs: build
+    if: needs.build.outputs.publish == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
