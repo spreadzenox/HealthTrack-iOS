@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **32 %** au 28/10 17:15 (15 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v573 (commit `d99e469`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v574 (commit `82f60a3`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 02:05 | #490 (v574) | titres du Journal « Vos repas » et « Vos apports » (`Food.jsx`, `Nutrition.jsx`) : code partagé, note de Nouveautés vraie sur iPhone ; captures Repas et Nutrition à regarder ; les 25 correctifs s'appliquent, suite d'Android 2783 passés | — |
 | 29/10 01:05 | #489 (v573) | « Photo du repas » en grand bouton plein dans Journal › Repas, « Galerie » et « Décrire » dessous (`Food.jsx`, `App.css`) : code partagé, note de Nouveautés vraie sur iPhone, l'entrée caméra (`capture="environment"`) reste, donc la phrase d'usage aussi (test) ; capture Repas à regarder ; les 25 correctifs s'appliquent, suite d'Android 2783 passés | — |
 | 29/10 00:05 | #488 (v572) | gestes plus clairs : « Supprimer toutes mes données » en contour orange (`Data.jsx`), chevron sur chaque groupe de la réintroduction et plus d'étiquette « pas testé » (`Reintroduction.jsx`, `.css`), « Voir les liens incertains » sans le nombre (`Recommendations.jsx`) : code partagé, note de Nouveautés vraie sur iPhone ; captures Données, Réintroduction et Analyses à regarder ; les 25 correctifs s'appliquent, suite d'Android 2781 passés | — |
 | 28/10 22:05 | #483 à #487 (v570, v571) | #487 pistes intitulées « facteur → effet » (« Nuits plus longues → meilleur bien-être ») au lieu d'un conseil à l'impératif, le conseil restant sous le chevron (`analysisEngine.js`, `Recommendations.jsx`, `pistesSummary.js`) : code partagé, note de Nouveautés vraie sur iPhone, captures Analyses et Accueil à regarder ; #485 textes honnêtes sur ce que garde le relais IA : un compteur d'analyses sous une empreinte anonyme, effacé 13 mois après la dernière analyse (Paramètres, Données, divulgation avant la 1re analyse, « Tout supprimer » dans `deleteAllData.js`) ; code et relais partagés, vrai aussi sur iPhone ; note de Nouveautés vraie sur iPhone ; réponses « Confidentialité de l'app » (A5) complétées de cette durée ; #483, #484 journal et idées d'Android ; les 25 correctifs s'appliquent (le 22 aussi, sur `deleteAllData.js`), suite d'Android 2774 passés | — |
