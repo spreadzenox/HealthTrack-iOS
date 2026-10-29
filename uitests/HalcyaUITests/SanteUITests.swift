@@ -163,6 +163,19 @@ final class DonneesUITests: XCTestCase {
             XCTFail("« Choisir un fichier à importer » introuvable")
             return
         }
+        // Sélecteur refermé sans aperçu (29/10, PR #70, iPhone 16e : second toucher sur le fichier pendant la
+        // fermeture du sélecteur) : tout le parcours une seconde fois avant d'échouer
+        for essai in 1...2 {
+            if importer(choisir) { return }
+            print("aucun aperçu après le parcours \(essai)")
+            print(halcya.debugDescription)
+            fermerLeSelecteur(attente: 1)
+        }
+        XCTFail("aperçu de l'import jamais affiché")
+    }
+
+    /// Un parcours : sélecteur, Explorer › Sur mon iPhone › Halcya, fichier ; vrai si l'aperçu de l'import s'affiche.
+    private func importer(_ choisir: XCUIElement) -> Bool {
         // Selon la version d'iOS, WKWebView ouvre le sélecteur directement ou propose d'abord un menu. Le sélecteur ne
         // s'ouvre pas toujours au premier toucher (29/10, PR #60, iPhone 17 Pro) : un second essai s'il manque 6 s après
         for essai in 1...2 {
@@ -193,9 +206,8 @@ final class DonneesUITests: XCTestCase {
         }
         guard cible.waitForExistence(timeout: 10) else {
             print(halcya.debugDescription)
-            XCTFail("« \(fichier) » introuvable dans le sélecteur de fichiers")
-            fermerLeSelecteur()
-            return
+            print("« \(fichier) » introuvable dans le sélecteur de fichiers")
+            return false
         }
         cible.tap()
         // Selon la version, toucher le fichier l'ouvre, ou il faut encore toucher « Ouvrir »
@@ -203,17 +215,14 @@ final class DonneesUITests: XCTestCase {
         if ouvrir.waitForExistence(timeout: 3) { ouvrir.tap() }
         let apercu = element("Ajouter à mes données")
         // Toucher perdu pendant l'animation du dossier (29/10, PR #59, iPhone 16e : fichier encore affiché, sélecteur
-        // ouvert, aucun aperçu) : un second toucher si, 5 s après, le fichier est toujours là
-        if !apercu.waitForExistence(timeout: 5) && cible.exists {
+        // ouvert, aucun aperçu) : un second toucher si, 5 s après, le fichier est toujours là et le sélecteur ouvert
+        // (pas pendant sa fermeture : PR #70)
+        if !apercu.waitForExistence(timeout: 5) && cible.exists && halcya.buttons["Annuler"].exists {
             print("fichier toujours affiché 5 s après le toucher : second toucher")
             cible.tap()
             if ouvrir.waitForExistence(timeout: 3) { ouvrir.tap() }
         }
-        if !apercu.waitForExistence(timeout: 30) {
-            print(halcya.debugDescription)
-            XCTFail("aperçu de l'import jamais affiché")
-            fermerLeSelecteur()
-        }
+        return apercu.waitForExistence(timeout: 30)
     }
 
     /// Sélecteur de fichiers affiché : ses onglets (Récents, Explorer) ou son bouton « Annuler ».
