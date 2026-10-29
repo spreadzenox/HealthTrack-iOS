@@ -124,7 +124,17 @@ export async function waitForAck({ readAck, sleep }, name, tries = 100) {
   return false
 }
 
+/**
+ * Une promesse rejetée sans traitement ne passe pas par `window.onerror` : rendue ici en erreur de la console, pour
+ * qu'elle compte dans js-errors.txt, qui fait échouer la CI (un service qui retombe mal sur iPhone, étape I2).
+ */
+export function watchRejections(target = window, report = console.error) {
+  target.addEventListener('unhandledrejection', (e) =>
+    report('[capture] promesse rejetée sans traitement :', e.reason?.stack || e.reason?.message || String(e.reason)))
+}
+
 export async function installCaptureMode() {
+  watchRejections()
   try {
     const [storage, demo, changelog, { Filesystem, Directory, Encoding }] = await Promise.all([
       import('../storage/localHealthStorage.js'),

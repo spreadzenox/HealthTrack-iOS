@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -179,6 +179,22 @@ describe('accusé du script (waitForAck)', () => {
     })
     expect(await waitForAck({ readAck: never, sleep }, 'page', 4)).toBe(false)
     expect(never).toHaveBeenCalledTimes(4)
+  })
+})
+
+describe('promesses rejetées sans traitement (watchRejections)', () => {
+  it('les rend en erreur de la console, comptée dans js-errors.txt', () => {
+    const target = new EventTarget()
+    const report = vi.fn()
+    watchRejections(target, report)
+    const event = new Event('unhandledrejection')
+    event.reason = new Error('plugin absent')
+    target.dispatchEvent(event)
+    expect(report).toHaveBeenCalledWith('[capture] promesse rejetée sans traitement :', expect.stringContaining('plugin absent'))
+    const bare = new Event('unhandledrejection')
+    bare.reason = 'refus'
+    target.dispatchEvent(bare)
+    expect(report).toHaveBeenLastCalledWith('[capture] promesse rejetée sans traitement :', 'refus')
   })
 })
 
