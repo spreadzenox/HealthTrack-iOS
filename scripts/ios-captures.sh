@@ -104,9 +104,12 @@ run_device() { # <udid> <nom>
   : > "$data/Documents/capture/ack.txt"
   xcrun simctl launch --console-pty --terminate-running-process "$udid" "$BUNDLE" > "$log" 2>&1 &
   pid=$!
-  # Écran de démarrage (couleur encre) avant que la page web s'affiche
-  sleep 0.6
+  # Écran de démarrage (couleur encre) avant que la page web s'affiche : à 0,6 s, l'accueil d'iOS était encore là
+  # (29/10, PR #56) ; deux prises, à 1,2 s et 2 s
+  sleep 1.2
   xcrun simctl io "$udid" screenshot "$OUT/$dev-demarrage.png" >/dev/null || true
+  sleep 0.8
+  xcrun simctl io "$udid" screenshot "$OUT/$dev-demarrage-2.png" >/dev/null || true
   # 25 min par iPhone : le parcours et les trois essais de notifications (bannières attendues 45 s) en prennent ~19
   deadline=$((SECONDS + 1500)); last=""
   while [ "$SECONDS" -lt "$deadline" ]; do
