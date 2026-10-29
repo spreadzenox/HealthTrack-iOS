@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v589 (29/10) | v588 sur iPhone simulé (29/10, PR #65) ; v589 en vérification (PR #66) |
+| Dernière version | v590 (29/10) | v589 sur iPhone simulé (29/10, PR #66) ; v590 en vérification (PR #67) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -161,6 +161,7 @@ via TestFlight.
 | 29/10 15:35 | suivi d'Android v587, contrôle des erreurs | v586 sur iPhone (PR #62 mergée : l'alerte des notifications est bien acceptée, les trois rappels vérifiés sur les deux iPhone simulés) ; la vérification automatique échoue désormais si l'app fait la moindre erreur JavaScript sur iPhone (aucune sur les 10 dernières) ; Android v587 : Analyses plus sobre, aussi sur iPhone. Parité : 49 % | #62 (mergée), #63 |
 | 29/10 16:05 | contrôle des erreurs (fin), états vides | v587 sur iPhone, au même niveau qu'Android (PR #63 mergée, aucune erreur JavaScript, contrôle désormais bloquant) ; nouvelles captures de chaque page telle qu'elle apparaît avant la première donnée (Accueil, Journal, Analyses, Sources…), pour vérifier ce qu'un nouvel utilisateur d'iPhone voit. Parité : 49 % | #63 (mergée), #64 |
 | 29/10 17:05 | suivi d'Android v588, états vides (fin) | les pages vides d'un nouvel utilisateur sont justes sur iPhone (8 pages regardées sur les deux iPhone simulés, PR #64 mergée) ; un essai automatique d'export a touché le bouton sans effet sur un iPhone : il retouche maintenant si la feuille de partage ne s'ouvre pas ; Android v588 : la réintroduction propose des aliments qui contiennent vraiment le groupe testé, aussi sur iPhone (vu : sorbitol → pruneaux, PR #65 mergée) ; **conditions d'utilisation propres à l'iPhone** (aucun achat, « pas un dispositif médical », appelez le 15 ou le 112) de nouveau dans Réglages ; Android v589 : rapport PDF sans zéros trompeurs. Parité : 49 % | #64, #65 (mergées), #66 |
+| 29/10 18:00 | suivi d'Android v590 | v589 sur iPhone (PR #66 mergée : « Conditions » de retour dans Réglages, rapport PDF sans zéros trompeurs) ; Android v590 : l'onglet Sources range les sources branchées sous « Ce que lit Halcya », aussi sur iPhone ; sa note de Nouveautés parle de Health Connect et du temps d'écran, absents de l'iPhone : cachée sur iPhone, et une demande de plus pour la routine Android (`DEMANDES.md`). Parité : 49 % | #66 (mergée), #67 |
 
 ---
 

@@ -1,5 +1,5 @@
 diff --git a/app/src/data/changelog.js b/app/src/data/changelog.js
-index 72b85f7..c171be1 100644
+index 72b85f7..de611f9 100644
 --- a/app/src/data/changelog.js
 +++ b/app/src/data/changelog.js
 @@ -24,12 +24,18 @@ export const ALL_CHANGELOG = Object.entries(modules)
@@ -9,7 +9,7 @@ index 72b85f7..c171be1 100644
 +/** Version iOS (HealthTrack-iOS) : première entrée montrée sur iPhone, la version iPhone (à avancer au 1er TestFlight). */
 +export const APPSTORE_CHANGELOG_SINCE = '2026-10-29-0000'
 +/** Version iOS : notes d'Android fausses sur iPhone, cachées en attendant leurs `variants` (DEMANDES.md d'iOS). */
-+export const APPSTORE_HIDDEN = new Set(['2026-10-29-0533-paywall-lancement'])
++export const APPSTORE_HIDDEN = new Set(['2026-10-29-0533-paywall-lancement', '2026-10-29-1737-sources-titre'])
 +
  /** Entrées qui concernent une variante, de la plus récente à la plus ancienne. */
  export function changelogFor(entries, distribution) {
