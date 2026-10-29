@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -45,6 +45,33 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
       'vierge-onboarding-visage', 'vierge-onboarding-geste', 'demo-clair-accueil',
     ])
     expect(plan[3]).toMatchObject({ route: '/bienvenue', data: null, onboarding: { goal: 'energy', step: 3, watch: 'health_connect' } })
+  })
+
+  it('plan : états vides (onboarding fini, base vide), après l’onboarding et avant les données de démo', () => {
+    const plan = buildPlan(['/'], [], {}, {}, [], ['/', '/journal'])
+    expect(plan.map((s) => s.name)).toEqual([
+      'vierge-onboarding', 'vierge-onboarding-montre', 'vide-accueil', 'vide-journal', 'demo-clair-accueil',
+    ])
+    expect(plan[3]).toMatchObject({ route: '/journal', data: 'empty', theme: 'light' })
+    // par défaut : les pages qui ont un état vide à montrer
+    expect(EMPTY_ROUTES).toEqual(expect.arrayContaining(['/', '/journal', '/recommendations', '/connectors']))
+    expect(buildPlan().some((s) => s.data === 'empty')).toBe(false)
+  })
+
+  it('état vide : onboarding fini et Nouveautés vues, comme au sortir de l’onboarding, sans données', async () => {
+    const plan = buildPlan(['/'], [], {}, {}, [], ['/journal'])
+    const local = memoryStorage({ [STEP_KEY]: '1' })
+    const d = deps(local)
+    await runCaptureStep(plan, d) // choix de la montre → Journal vide
+    expect(JSON.parse(local.data.healthtrack_onboarding)).toMatchObject({ done: true })
+    expect(local.data['healthtrack-whats-new-last-seen']).toBe('x')
+    expect(local.data.healthtrack_theme).toBe('light')
+    expect(d.storage.upsertEntries).not.toHaveBeenCalled()
+    expect(d.go).toHaveBeenLastCalledWith('/journal')
+
+    await runCaptureStep(plan, d) // Journal vide → Accueil avec les données de démo
+    expect(d.storage.upsertEntries).toHaveBeenCalledTimes(1)
+    expect(d.go).toHaveBeenLastCalledWith('/')
   })
 
   it('plan : les pages longues ont aussi leurs écrans suivants, défilés', () => {
