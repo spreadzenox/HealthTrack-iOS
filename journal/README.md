@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v578 (29/10) | v578 sur iPhone simulé (29/10, PR #53) : même version qu'Android |
+| Dernière version | v579 (29/10) | v578 sur iPhone simulé (29/10, PR #53) ; v579 en vérification (PR #55) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 40 % (19 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
