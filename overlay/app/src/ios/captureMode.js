@@ -178,10 +178,11 @@ export async function installCaptureMode() {
  * écriture des pas pour l'aller-retour, phrase d'usage ajoutée à la seule build de captures) ; sa feuille est
  * capturée (« healthkit-autorisation »), puis le test d'interface du dépôt (uitests/) l'accepte avant que le script
  * réponde : jusqu'à 3 min d'attente. Acceptée, des pas et une VFC sont écrits dans Santé, relus, puis relus par le
- * connecteur de l'app (VFC rangée en SDNN) : preuve que l'import marche de bout en bout. Résultats dans la console
+ * connecteur de l'app (VFC rangée en SDNN), enfin synchronisés pour de bon dans la base, comme depuis Sources (les
+ * pas écrits doivent y être) : preuve que l'import marche de bout en bout. Résultats dans la console
  * (`[healthkit] …`).
  */
-export async function probeHealthKit({ signal, waitAck, wait, log, health, connector }) {
+export async function probeHealthKit({ signal, waitAck, wait, log, health, connector, store }) {
   const say = (what, value) => log(`[healthkit] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   const failed = (what) => (e) => say(`${what} erreur`, e?.message || String(e))
   try {
@@ -222,6 +223,17 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health, conne
           .map((e) => ({ value: e.payload?.value, subtype: e.payload?.subtype })),
       }),
       failed('connecteur'),
+    )
+    // Puis la vraie synchronisation de l'app, rangée dans la base comme depuis Sources (autoSync)
+    const db = store ?? (await import('../storage/localHealthStorage.js'))
+    await sync.sync({ since: new Date(startDate), until: new Date(), writer: async (entries) => { await db.upsertEntries(entries) } }).then(
+      async (r) => {
+        const pas = (await db.listEntries({ limit: 5000 }))
+          .filter((e) => e.type === 'steps' && e.source === 'health_connect' && e.payload?.sourceName === 'Halcya')
+          .map((e) => e.payload?.value)
+        say('base', { synced: r?.synced, pas })
+      },
+      failed('base'),
     )
   } catch (e) {
     say('échec', e?.message || String(e))

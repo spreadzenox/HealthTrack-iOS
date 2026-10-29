@@ -220,7 +220,7 @@ describe('sonde HealthKit (I4)', () => {
     expect(logs.join('\n')).toMatch(/\[healthkit\] readSamples \{"count":1,"values":\[1234\]\}/)
   })
 
-  it('acceptée : les pas écrits repassent par le connecteur de l’app (celui de Sources), sans rien enregistrer', async () => {
+  it('acceptée : les pas écrits repassent par le connecteur de l’app (celui de Sources), puis entrent dans la base', async () => {
     const h = health({ acceptOnAck: true })
     const logs = []
     const sync = vi.fn(async ({ writer }) => {
@@ -236,12 +236,18 @@ describe('sonde HealthKit (I4)', () => {
       h.accept({})
       return true
     }
-    await probeHealthKit({ signal: async () => {}, waitAck, wait: async () => {}, log: (m) => logs.push(m), health: h.api, connector: { sync } })
+    const stored = []
+    const store = { upsertEntries: vi.fn(async (entries) => stored.push(...entries)), listEntries: vi.fn(async () => stored) }
+    await probeHealthKit({ signal: async () => {}, waitAck, wait: async () => {}, log: (m) => logs.push(m), health: h.api, connector: { sync }, store })
     const { since, until } = sync.mock.calls[0][0]
     expect(until.getTime() - since.getTime()).toBeGreaterThanOrEqual(3600 * 1000)
     expect(logs.join('\n')).toContain(
       '[healthkit] connecteur {"synced":2,"errors":[],"pas":[{"value":1234,"source":"Halcya"}],"vfc":[{"value":48,"subtype":"heartRateVariabilitySdnn"}]}',
     )
+    // Puis la vraie synchronisation, rangée dans la base comme depuis Sources : les pas écrits y sont
+    expect(sync).toHaveBeenCalledTimes(2)
+    expect(store.upsertEntries).toHaveBeenCalledTimes(1)
+    expect(logs.join('\n')).toContain('[healthkit] base {"synced":2,"pas":[1234]}')
   })
 
   it('feuille jamais acceptée : le dit et n’écrit rien', async () => {
