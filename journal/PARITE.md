@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **40 %** au 29/10 06:30 (19 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v578 (commit `fa42638`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v579 (commit `6ff00bd`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 06:30 | #495 (v579) | onboarding, fin de l'import (« Vos 30 derniers jours ») : la provenance des chiffres dite une fois sous la liste (`Onboarding.jsx`, `.css`) : code partagé, vaut aussi pour l'import de l'app Santé sur iPhone ; note de Nouveautés déjà marquée `["play", "sideload"]` par Android (elle nomme Health Connect) ; les 28 correctifs s'appliquent directement, suite d'Android 2810 passés | — |
 | 29/10 05:05 | #494 (v578) | écran Premium de la période de lancement en une phrase avec sa date de fin, « 1er déc. », dates insécables (`Premium.jsx`, `entitlement.js`, `frenchSpacing.js`) : code partagé ; sur iPhone l'écran Premium n'a pas de période de lancement (capture de #52 : « l'abonnement par l'App Store arrive bientôt »), sa note de Nouveautés y serait fausse → cachée (`APPSTORE_HIDDEN`, correctif 28) et demande à Android ; les 28 correctifs s'appliquent directement, suite d'Android 2807 passés | — |
 | 29/10 04:05 | #493 (v577) | Journal › Tendances : sans aucune note de bien-être, une ligne (« Activez la lecture du visage dans Sources, ou notez-le vous-même depuis Aujourd’hui ») au lieu d'un cadre vide ; titre « Votre bien-être » (`WellbeingCharts.jsx`, `.css`, `BaselineCards.css`) : code partagé, note de Nouveautés vraie sur iPhone ; **le correctif 25 ne s'appliquait plus** (`upstream.sh` l'a bien arrêté) : sa partie `WellbeingCharts` est retirée, car le plugin visage est dans l'app iPhone depuis #46 et le texte d'Android y est vrai (test iOS correspondant retiré) ; les 27 correctifs s'appliquent directement | — |
 | 29/10 03:05 | #492 (v576) | nombres et unités jamais séparés en fin de ligne (`frenchSpacing.js` : espace insécable entre un nombre et son unité, et dans les milliers) : code partagé, note de Nouveautés vraie sur iPhone ; libellés touchés par les tests d'interface et les sondes sans nombre ; les 26 correctifs s'appliquent directement, suite d'Android 2801 passés | — |
