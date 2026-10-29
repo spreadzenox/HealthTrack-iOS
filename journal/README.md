@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v583 (29/10) | v583 sur iPhone simulé (29/10, PR #59) : même version qu'Android |
+| Dernière version | v585 (29/10) | v583 sur iPhone simulé (29/10, PR #59) ; v585 en vérification (PR #61) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -156,6 +156,7 @@ via TestFlight.
 | 29/10 09:00 | I2, I4 | les mesures de l'app Santé sont bien rangées dans les données de l'app (vérifié sur iPhone simulé à chaque build) ; icône, nom et écran de démarrage vérifiés ; l'iPhone reste à la même version qu'Android (v580). Parité : 49 % | #57 (mergée), #58 |
 | 29/10 10:00 | I9, suivi d'Android v583 | PR #58 mergée (achat d'essai vérifié à chaque build) ; les notes pour l'équipe d'examen d'Apple sont prêtes à coller au moment de la soumission ; Android v581 → v583 : fructanes plus justes pour le pain, le poireau, l'oignon et une cinquantaine d'aliments courants, aussi sur iPhone. Parité : 49 % | #58 (mergée), #59 |
 | 29/10 11:00 | suivi d'Android, tests | **l'iPhone est à la même version qu'Android (v583)** (PR #59 mergée) ; un essai automatique d'import par Fichiers a échoué une fois sur le petit iPhone simulé et bloqué les suivants : il se referme désormais proprement en cas d'échec. Parité : 49 % | #59 (mergée), #60 |
+| 29/10 12:00 | suivi d'Android v585, tests | PR #60 mergée ; l'essai automatique d'import par Fichiers échoue encore par moments sur les iPhone simulés (le sélecteur de fichiers ne s'ouvre pas toujours) sans gêner les autres essais : il réessaie maintenant d'ouvrir le sélecteur ; Android v584 et v585 : fructanes et polyols de nouveaux aliments, aussi sur iPhone. Parité : 49 % | #60 (mergée), #61 |
 
 ---
 

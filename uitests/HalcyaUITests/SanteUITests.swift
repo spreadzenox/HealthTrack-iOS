@@ -149,11 +149,16 @@ final class DonneesUITests: XCTestCase {
             XCTFail("« Choisir un fichier à importer » introuvable")
             return
         }
-        choisir.tap()
-        // Selon la version d'iOS, WKWebView ouvre le sélecteur directement ou propose d'abord un menu
-        for menu in ["Choisir un fichier", "Choisir des fichiers"] where element(menu).waitForExistence(timeout: 2) {
-            element(menu).tap()
-            break
+        // Selon la version d'iOS, WKWebView ouvre le sélecteur directement ou propose d'abord un menu. Le sélecteur ne
+        // s'ouvre pas toujours au premier toucher (29/10, PR #60, iPhone 17 Pro) : un second essai s'il manque 6 s après
+        for essai in 1...2 {
+            choisir.tap()
+            for menu in ["Choisir un fichier", "Choisir des fichiers"] where element(menu).waitForExistence(timeout: 2) {
+                element(menu).tap()
+                break
+            }
+            if selecteurOuvert(attente: 6) { break }
+            print("sélecteur de fichiers absent après le toucher \(essai)")
         }
         let cible = dossier(fichier)
         if !cible.waitForExistence(timeout: 8) {
@@ -195,6 +200,18 @@ final class DonneesUITests: XCTestCase {
             XCTFail("aperçu de l'import jamais affiché")
             fermerLeSelecteur()
         }
+    }
+
+    /// Sélecteur de fichiers affiché : ses onglets (Récents, Explorer) ou son bouton « Annuler ».
+    private func selecteurOuvert(attente: TimeInterval) -> Bool {
+        let fin = Date().addingTimeInterval(attente)
+        repeat {
+            if ["Récents", "Explorer", "Parcourir"].contains(where: { halcya.buttons[$0].exists }) || halcya.buttons["Annuler"].exists {
+                return true
+            }
+            usleep(300_000)
+        } while Date() < fin
+        return false
     }
 
     /// Sélecteur de fichiers resté ouvert après un échec : « Annuler », sinon il bloque les tests suivants (29/10, PR
