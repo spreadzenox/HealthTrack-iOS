@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v585 (29/10) | v583 sur iPhone simulé (29/10, PR #59) ; v585 en vérification (PR #61) |
+| Dernière version | v586 (29/10) | v585 sur iPhone simulé (29/10, PR #61) ; v586 en vérification (PR #62) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -157,6 +157,7 @@ via TestFlight.
 | 29/10 10:00 | I9, suivi d'Android v583 | PR #58 mergée (achat d'essai vérifié à chaque build) ; les notes pour l'équipe d'examen d'Apple sont prêtes à coller au moment de la soumission ; Android v581 → v583 : fructanes plus justes pour le pain, le poireau, l'oignon et une cinquantaine d'aliments courants, aussi sur iPhone. Parité : 49 % | #58 (mergée), #59 |
 | 29/10 11:00 | suivi d'Android, tests | **l'iPhone est à la même version qu'Android (v583)** (PR #59 mergée) ; un essai automatique d'import par Fichiers a échoué une fois sur le petit iPhone simulé et bloqué les suivants : il se referme désormais proprement en cas d'échec. Parité : 49 % | #59 (mergée), #60 |
 | 29/10 12:00 | suivi d'Android v585, tests | PR #60 mergée ; l'essai automatique d'import par Fichiers échoue encore par moments sur les iPhone simulés (le sélecteur de fichiers ne s'ouvre pas toujours) sans gêner les autres essais : il réessaie maintenant d'ouvrir le sélecteur ; Android v584 et v585 : fructanes et polyols de nouveaux aliments, aussi sur iPhone. Parité : 49 % | #60 (mergée), #61 |
+| 29/10 13:00 | suivi d'Android v586, tests | v585 sur iPhone (PR #61 mergée) ; les essais automatiques d'import, d'export et du rapport passent sur les deux iPhone simulés ; un autre essai (accepter l'alerte des notifications) touchait parfois sans effet : il vérifie maintenant que l'alerte se ferme ; Android v586 : fer de l'oignon cru corrigé, aussi sur iPhone. Parité : 49 % | #61 (mergée), #62 |
 
 ---
 
