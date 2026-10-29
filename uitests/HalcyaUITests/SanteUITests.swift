@@ -219,17 +219,17 @@ final class DonneesUITests: XCTestCase {
 
     /// Feuille de partage ouverte par l'app : « Enregistrer dans Fichiers », dossier Halcya, « Enregistrer », puis
     /// « Garder les deux » puisque le fichier y est déjà. Pour un PDF, la feuille s'ouvre à mi-hauteur (Aperçu,
-    /// Copier, Annoter, Imprimer…) et l'action est plus bas (29/10, iPhone 16e et 17 Pro) : on la déplie d'un
-    /// glissement vers le haut dès qu'elle est là.
+    /// Copier, Annoter, Imprimer…) et l'action est plus bas (29/10, iPhone 16e et 17 Pro) : on la tire vers le haut
+    /// par son en-tête (« Document PDF · 21 ko ») ; un glissement sur « Copier » valait un toucher et la fermait.
     private func enregistrerDansFichiers(attente: TimeInterval) {
         let fichiers = lieu("Enregistrer dans Fichiers")
-        let copier = lieu("Copier")
+        let entete = halcya.descendants(matching: .any).matching(NSPredicate(format: "label CONTAINS %@", "Document PDF")).firstMatch
         let fin = Date().addingTimeInterval(attente)
-        var glissements = 0
+        var tirages = 0
         while !fichiers.waitForExistence(timeout: 2) && Date() < fin {
-            if glissements < 2 && copier.exists {
-                copier.swipeUp()
-                glissements += 1
+            if tirages < 2 && entete.exists {
+                entete.press(forDuration: 0.2, thenDragTo: halcya.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.08)))
+                tirages += 1
             }
         }
         guard fichiers.exists else {
@@ -244,9 +244,10 @@ final class DonneesUITests: XCTestCase {
             XCTFail("« Enregistrer » introuvable après « Enregistrer dans Fichiers »")
             return
         }
-        // Le dernier dossier utilisé peut déjà être ouvert : on repasse par Sur mon iPhone › Halcya
+        // Le dernier dossier utilisé peut déjà être ouvert : on repasse par Sur mon iPhone › Halcya (des dossiers : le
+        // PDF « Halcya-rapport-… » du dossier ne doit pas être pris pour le dossier Halcya, 29/10, iPhone 17 Pro)
         for etape in ["Sur mon iPhone", "Halcya"] {
-            let suivant = dossier(etape)
+            let suivant = repertoire(etape)
             if suivant.waitForExistence(timeout: 3) { suivant.tap() } else { print("étape « \(etape) » absente") }
         }
         print(halcya.debugDescription)
@@ -271,6 +272,13 @@ final class DonneesUITests: XCTestCase {
     private func dossier(_ label: String) -> XCUIElement {
         halcya.descendants(matching: .cell)
             .matching(NSPredicate(format: "label CONTAINS %@ OR identifier CONTAINS %@", label, label))
+            .firstMatch
+    }
+
+    /// Dossier du sélecteur : comme `dossier`, sans les fichiers (dont le libellé ou l'identifiant porte une extension).
+    private func repertoire(_ label: String) -> XCUIElement {
+        halcya.descendants(matching: .cell)
+            .matching(NSPredicate(format: "(label CONTAINS %@ OR identifier CONTAINS %@) AND NOT (label CONTAINS '.' OR identifier CONTAINS '.')", label, label))
             .firstMatch
     }
 
