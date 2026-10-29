@@ -3,7 +3,7 @@
 Texte à coller par le propriétaire dans App Store Connect au moment de la soumission (A6), en anglais, la langue
 des équipes d'examen (4 000 caractères au plus ; celui-ci en fait environ 2 500). À relire juste avant : chaque
 phrase doit rester vraie pour la version envoyée. Le paragraphe « Backup copy » dépend de la décision sur la
-directive 5.1.3 (ii) (`journal/BACKLOG.md`, I9) ; le paragraphe « Purchases » change avec I6 ; les deux adresses de la fin attendent A8 (GitHub Pages).
+directive 5.1.3 (ii) (`journal/BACKLOG.md`, I9) ; le paragraphe « Purchases » change avec I6 ; les trois adresses de la fin attendent A8 (GitHub Pages).
 
 ---
 
@@ -42,4 +42,5 @@ not lost if the system clears the web database; it is included in the device's i
 Purchases: this version has no in-app purchase; all features are free.
 
 Privacy policy: https://spreadzenox.github.io/HealthTrack-iOS/confidentialite/
+Terms of use: https://spreadzenox.github.io/HealthTrack-iOS/conditions/
 Support: https://spreadzenox.github.io/HealthTrack-iOS/assistance/

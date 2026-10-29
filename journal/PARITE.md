@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v588 (commit `b8129bf`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v589 (commit `cd60605`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -44,7 +44,7 @@ vérifié sur iOS.
 | Période de lancement (premium offert jusqu'au 20/11, Nouveautés du 24 et 25/10) | 🟡 | sur iPhone, `premium = !FEATURES.billing || …` ouvre déjà tout le premium tant que l'abonnement App Store n'existe pas (I6) ; après le 20/11, Android le fera payer et iOS non : à aligner en I6 |
 | « Donnez-nous votre avis » (Nouveautés du 25/10) | ✅ | code web partagé ; 29/10 : hors Google Play, le lien ouvrait un ticket du dépôt d'Android → correctif 27 : ticket du dépôt de l'iPhone, « Avis — Halcya pour iPhone v… », rien de joint (PR #51) ; capture Paramètres à regarder, lien à toucher sur l'iPhone 12 ; capture Paramètres regardée sur #51 (« Votre avis » : « Un ticket GitHub s'ouvre avec le numéro de version ») ; lien du dépôt de l'iPhone vérifié par `feedback.appstore.test.js` |
 | Nouveautés | ✅ | `variants: ["appstore"]`, historique iOS depuis le lancement iOS ; 29/10 : l'iPhone montrait toute l'histoire d'Android (236 notes, « HealthTrack », clé Gemini, mise à jour par APK…) → correctif 28 : notes à partir du 29/10 (`APPSTORE_CHANGELOG_SINCE`, à avancer au premier TestFlight), les 5 du 29/10 vraies sur iPhone ; capture regardée sur #52 : les notes du 29/10, « Version installée : 577 » ; notes d'Android fausses sur iPhone cachées (`APPSTORE_HIDDEN`, #53) |
-| Confidentialité, conditions | 🟡 | 29/10 : **politique de confidentialité propre à l'iPhone**, embarquée et ouverte par Réglages → Confidentialité (correctif 26) : app Santé, copie de secours et iCloud, sans montre Huawei, temps d'écran, Withings ni jeton Google ; relue à chaque changement de celle d'Android (test témoin) ; un lien « ‹ Revenir à Halcya » en tête, car l'iPhone n'a pas de bouton retour (la page d'Android y serait une impasse) ; Conditions retirées des Réglages sur iPhone en attendant les siennes (celles d'Android parlent de Google Play) ; publication en ligne avec une page d'assistance prête (workflow `pages.yml`), attend l'action A8 (activer Pages) |
+| Confidentialité, conditions | 🟡 | 29/10 : **politique de confidentialité propre à l'iPhone**, embarquée et ouverte par Réglages → Confidentialité (correctif 26) : app Santé, copie de secours et iCloud, sans montre Huawei, temps d'écran, Withings ni jeton Google ; relue à chaque changement de celle d'Android (test témoin) ; un lien « ‹ Revenir à Halcya » en tête, car l'iPhone n'a pas de bouton retour (la page d'Android y serait une impasse) ; **conditions d'utilisation propres à l'iPhone** (29/10 : aucun achat, App Store, app Santé, iCloud, « pas un dispositif médical »), de nouveau dans Réglages → Conditions, relues elles aussi à chaque changement de celles d'Android ; leur partie vente viendra avec l'abonnement (I6) ; publication en ligne avec une page d'assistance prête (workflow `pages.yml`), attend l'action A8 (activer Pages) |
 
 **Nouveautés d'Android (206 entrées au 27/10, toutes visibles dans la variante play)** : 77 touchent au natif.
 Elles se rangent dans les lignes de §3 : montre Huawei en direct (≈ 35 entrées, 11→25/10), capteurs Bluetooth
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 16:45 | #505 (v589) | Rapport PDF : « Pas encore assez de notes du ventre (n/28 jours) » au lieu d'un faux « aucun lien », « – » pour une semaine sans note (`renderPdf.js`) : code partagé, le rapport marche sur iPhone (sonde `[rapport]`), note vraie ; les 28 correctifs s'appliquent directement | — |
 | 29/10 16:15 | #504 (v588) | Réintroduction : aliments de test qui contiennent vraiment le groupe (sorbitol → pruneaux secs, mannitol → champignons de Paris ; `fodmapChallenge.js`, `Reintroduction.jsx`) : code partagé, note de Nouveautés vraie sur iPhone ; les 28 correctifs s'appliquent directement | — |
 | 29/10 14:40 | #503 (v587) | Analyses : légende « visage » seulement si un lien la porte, « Comment c'est calculé » discret en bas (`Recommendations.jsx`) : code partagé, la lecture du visage existe sur iPhone, note de Nouveautés vraie ; les 28 correctifs s'appliquent directement | — |
 | 29/10 13:25 | #502 (v586) | fer de l'oignon cru mis à « inconnu » (valeur Ciqual suspecte, `ingredientsNutrition.json`) : donnée partagée, note de Nouveautés vraie sur iPhone ; les 28 correctifs s'appliquent directement | — |

@@ -1,8 +1,8 @@
 diff --git a/app/src/pages/More.jsx b/app/src/pages/More.jsx
-index 3558fc0..05f142e 100644
+index 3558fc0..df8b247 100644
 --- a/app/src/pages/More.jsx
 +++ b/app/src/pages/More.jsx
-@@ -12,8 +12,10 @@ const ITEMS = [
+@@ -12,8 +12,12 @@ const ITEMS = [
      : 'Apparence, analyse des repas (IA), abonnement' },
    { to: '/nouveautes', icon: 'sparkle', title: 'Nouveautés', desc: 'Ce qui a changé dans l’application' },
    // Page statique (app/public), hors du routeur : aussi publiée par GitHub Pages et montrée par Health Connect
@@ -10,8 +10,10 @@ index 3558fc0..05f142e 100644
 -  { href: '/conditions.html', icon: 'document', title: 'Conditions', desc: 'Utilisation, abonnement et remboursements' },
 +  // (sur iPhone, sa version propre : app Santé, iCloud, sans montre Huawei ni temps d'écran)
 +  { href: FEATURES.iosStore ? '/confidentialite-iphone.html' : '/privacypolicy.html', icon: 'lock', title: 'Confidentialité', desc: 'Ce qui reste sur le téléphone, ce qui en sort et quand' },
-+  // (pas sur iPhone avant les siennes : celles-ci parlent de Google Play, et la page n'y a pas de retour)
-+  ...(FEATURES.iosStore ? [] : [{ href: '/conditions.html', icon: 'document', title: 'Conditions', desc: 'Utilisation, abonnement et remboursements' }]),
++  // (sur iPhone aussi : celles d'Android parlent de Google Play ; aucun achat sur iPhone pour l'instant)
++  FEATURES.iosStore
++    ? { href: '/conditions-iphone.html', icon: 'document', title: 'Conditions', desc: 'Utilisation, et ce que Halcya n’est pas' }
++    : { href: '/conditions.html', icon: 'document', title: 'Conditions', desc: 'Utilisation, abonnement et remboursements' },
  ]
  
  export default function More({ changelog = CHANGELOG }) {
