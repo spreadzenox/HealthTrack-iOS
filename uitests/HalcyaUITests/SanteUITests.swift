@@ -183,6 +183,13 @@ final class DonneesUITests: XCTestCase {
         let ouvrir = halcya.buttons["Ouvrir"]
         if ouvrir.waitForExistence(timeout: 3) { ouvrir.tap() }
         let apercu = element("Ajouter à mes données")
+        // Toucher perdu pendant l'animation du dossier (29/10, PR #59, iPhone 16e : fichier encore affiché, sélecteur
+        // ouvert, aucun aperçu) : un second toucher si, 5 s après, le fichier est toujours là
+        if !apercu.waitForExistence(timeout: 5) && cible.exists {
+            print("fichier toujours affiché 5 s après le toucher : second toucher")
+            cible.tap()
+            if ouvrir.waitForExistence(timeout: 3) { ouvrir.tap() }
+        }
         if !apercu.waitForExistence(timeout: 30) {
             print(halcya.debugDescription)
             XCTFail("aperçu de l'import jamais affiché")

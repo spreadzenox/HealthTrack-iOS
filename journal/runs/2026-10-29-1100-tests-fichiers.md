@@ -14,7 +14,9 @@
   hiérarchie de l'export montre encore le dossier Halcya du sélecteur). Les trois tests ont réussi sur l'iPhone
   17 Pro, et sur les deux iPhone dans les CI de #53 à #58 : pas de cause trouvée côté app. **#60** : en cas d'échec,
   le test d'import referme le sélecteur (« Annuler »), et les tests d'export et du rapport ferment au départ un
-  sélecteur resté ouvert ; l'échec reste visible, sans entraîner les autres.
+  sélecteur resté ouvert ; l'échec reste visible, sans entraîner les autres. Vu dans la hiérarchie au moment de
+  l'échec : sélecteur ouvert dans le dossier Halcya, fichier affiché (grille) : le toucher a dû tomber pendant
+  l'animation du dossier ; le test retouche le fichier s'il est encore là 5 s après.
 
 ## Suite
 - CI de #60 ; si l'import échoue encore sur le 16e, regarder le moment où le fichier est touché (le sélecteur
