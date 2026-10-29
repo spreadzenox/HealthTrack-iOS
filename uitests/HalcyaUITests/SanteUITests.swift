@@ -247,8 +247,24 @@ final class DonneesUITests: XCTestCase {
             XCTFail("« Télécharger la sauvegarde » introuvable")
             return
         }
-        exporter.tap()
+        toucherJusquaFeuille(exporter)
         enregistrerDansFichiers(attente: 20)
+    }
+
+    /// Toucher qui doit ouvrir la feuille de partage. 29/10 (PR #64, iPhone 17 Pro) : le toucher est arrivé (bouton vu
+    /// enfoncé) sans que la page reçoive le clic : ni fichier écrit, ni feuille. On retouche tant qu'aucune feuille
+    /// n'est venue en 8 s (3 fois au plus), jamais quand elle est là : un toucher derrière elle la fermerait.
+    private func toucherJusquaFeuille(_ bouton: XCUIElement, essais: Int = 3) {
+        let liste = halcya.otherElements["ActivityListView"]
+        let fichiers = lieu("Enregistrer dans Fichiers")
+        for essai in 1...essais {
+            guard bouton.exists else { return }
+            bouton.tap()
+            for _ in 0..<8 {
+                if liste.waitForExistence(timeout: 1) || fichiers.exists { return }
+            }
+            print("Feuille de partage absente 8 s après le toucher \(essai)")
+        }
     }
 
     /// Rapport PDF pour le médecin (N6b) : « Créer le PDF » (la sonde a déjà touché « Préparer le rapport ») ; le PDF

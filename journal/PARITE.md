@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v587 (commit `817f600`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v588 (commit `b8129bf`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 16:15 | #504 (v588) | Réintroduction : aliments de test qui contiennent vraiment le groupe (sorbitol → pruneaux secs, mannitol → champignons de Paris ; `fodmapChallenge.js`, `Reintroduction.jsx`) : code partagé, note de Nouveautés vraie sur iPhone ; les 28 correctifs s'appliquent directement | — |
 | 29/10 14:40 | #503 (v587) | Analyses : légende « visage » seulement si un lien la porte, « Comment c'est calculé » discret en bas (`Recommendations.jsx`) : code partagé, la lecture du visage existe sur iPhone, note de Nouveautés vraie ; les 28 correctifs s'appliquent directement | — |
 | 29/10 13:25 | #502 (v586) | fer de l'oignon cru mis à « inconnu » (valeur Ciqual suspecte, `ingredientsNutrition.json`) : donnée partagée, note de Nouveautés vraie sur iPhone ; les 28 correctifs s'appliquent directement | — |
 | 29/10 12:10 | #500, #501 (v584, v585) | fructanes des pains complets, couscous, boulgour… ; polyols des prunes, abricots secs, pois mange-tout (données FODMAP, `fodmapGroups.js`) : code partagé, notes de Nouveautés vraies sur iPhone ; les 28 correctifs s'appliquent directement | — |

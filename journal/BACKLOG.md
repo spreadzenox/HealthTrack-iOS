@@ -24,8 +24,9 @@
     les données de démo d'Android en clair, 3 en sombre, onboarding d'une installation vierge ; parcours piloté par
     l'app (`captureMode.js`), synchronisé par fichier (`Documents/capture/ready.txt` → capture → `ack.txt`) : les 36
     images de la PR #2 correspondent à leur page ; poussées sur la branche `captures/pr-<n>` ou `captures/main`.
-  - [~] États vides de chaque page (29/10, PR #64) : 8 pages capturées onboarding fini et base vide (`vide-*`,
-    `EMPTY_ROUTES`), entre l'onboarding et les données de démo ; à regarder sur sa CI.
+  - [x] États vides de chaque page (29/10, PR #64, mergée) : 8 pages capturées onboarding fini et base vide
+    (`vide-*`, `EMPTY_ROUTES`), entre l'onboarding et les données de démo ; regardées sur les deux iPhone simulés :
+    textes justes sur iPhone (app Santé, lecture du visage dans Sources), aucune carte cassée.
   - [x] Faire échouer la build sur erreur JavaScript (29/10, PR #63, mergée : 0 ligne sur les 10 dernières CI ;
     étape finale bloquante, promesses rejetées sans traitement comptées en mode captures ; 0 sur sa CI aussi).
 - [ ] **I2 — Audit de parité et replis propres** (déjà repérés le 27/10 : texte Premium « Google Play », détection
