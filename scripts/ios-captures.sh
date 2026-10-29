@@ -88,6 +88,9 @@ run_device() { # <udid> <nom>
       --wifiMode active --wifiBars 3 --cellularMode active --cellularBars 4 || true
   fi
   xcrun simctl install "$udid" "$APP"
+  # Écran d'accueil de l'iPhone juste après l'installation : icône et nom « Halcya » (I1, à vérifier sur l'accueil)
+  sleep 3
+  xcrun simctl io "$udid" screenshot "$OUT/$dev-ecran-accueil.png" >/dev/null || true
   # Accusé vide créé d'avance : sans lui, chaque lecture de l'app en attente remplit la console d'erreurs « fichier absent »
   data="$(xcrun simctl get_app_container "$udid" "$BUNDLE" data)"
   mkdir -p "$data/Documents/capture"
@@ -101,6 +104,9 @@ run_device() { # <udid> <nom>
   : > "$data/Documents/capture/ack.txt"
   xcrun simctl launch --console-pty --terminate-running-process "$udid" "$BUNDLE" > "$log" 2>&1 &
   pid=$!
+  # Écran de démarrage (couleur encre) avant que la page web s'affiche
+  sleep 0.6
+  xcrun simctl io "$udid" screenshot "$OUT/$dev-demarrage.png" >/dev/null || true
   # 25 min par iPhone : le parcours et les trois essais de notifications (bannières attendues 45 s) en prennent ~19
   deadline=$((SECONDS + 1500)); last=""
   while [ "$SECONDS" -lt "$deadline" ]; do

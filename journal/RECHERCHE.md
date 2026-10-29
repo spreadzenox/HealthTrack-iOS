@@ -298,3 +298,14 @@ personnelle (ventre, sommeil, cœur…) que l'app met dans un dossier sauvegard�
 **Recommandation** : demander d'abord à Apple (consultation « Meet with Apple », après A1) ; sans réponse avant la
 première soumission, prendre l'option 2, la plus sûre, et dire dans l'app comment changer d'iPhone (export).
 Décision du propriétaire.
+
+## Détecter les apps de montre installées sur iPhone (29/10/2026)
+
+Android lit la liste des apps installées (noms de paquets) pour proposer la bonne source et le bon réglage. Sur
+iPhone : aucune API ne liste les apps ; `canOpenURL` répond toujours « non » pour un schéma d'URL non déclaré dans
+`LSApplicationQueriesSchemes`, limité à 50 entrées (25 pour une app construite pour iOS 27), et la méthode est
+annoncée jusqu'à iOS 27 (documentation d'Apple de `canOpenURL(_:)`, lue le 29/10/2026). Les schémas des apps de
+montre (Garmin Connect, Oura, Withings, Polar, Suunto, COROS, WHOOP, Zepp…) ne sont pas publiés par leurs éditeurs :
+une liste devinée serait fragile et pourrait se tromper. **Choix** : ⛔ à l'identique ; l'iPhone reconnaît les
+montres par les données qu'elles écrivent dans l'app Santé (nom de la source de chaque mesure, déjà montré dans
+Sources) et le guide « Votre montre n'apparaît pas ? » dit quoi activer dans chaque app.
