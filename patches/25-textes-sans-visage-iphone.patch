@@ -48,26 +48,3 @@ index b4c662a..c7bfb75 100644
                      </p>
                    )}
                    {(showGuide || showOpen) && (
-diff --git a/app/src/components/WellbeingCharts.jsx b/app/src/components/WellbeingCharts.jsx
-index b723f80..d83271e 100644
---- a/app/src/components/WellbeingCharts.jsx
-+++ b/app/src/components/WellbeingCharts.jsx
-@@ -4,6 +4,8 @@ import { seriesByCalendarDay, seriesByHourToday } from '../services/wellbeingSer
- import { getAnalysis, peekAnalysis } from '../services/analysisRunner'
- import { pickLabelIndices } from '../utils/format'
- import { decimalMark } from '../i18n/locale.js'
-+import { FEATURES } from '../config/distribution'
-+import { isFaceSenseAvailable } from '../services/faceSense'
- import './WellbeingCharts.css'
- 
- const W = 320
-@@ -246,6 +248,9 @@ export default function WellbeingCharts() {
-           maxGap={1}
-           emptyMessage={hasOlderNotes
-             ? `Aucune note ces ${DAYS} derniers jours. Notez votre bien-être pour suivre son évolution.`
-+            // Version iOS (HealthTrack-iOS) : pas de lecture du visage à activer tant qu'elle n'est pas sur iPhone (I7)
-+            : FEATURES.iosStore && !isFaceSenseAvailable()
-+              ? 'Pas encore de bien-être noté. Notez-le avec «\u00a0Noter moi-même\u00a0», dans la carte Bien-être estimé.'
-             : 'Pas encore de bien-être noté. Activez la lecture du visage ou notez-le avec «\u00a0Noter moi-même\u00a0», dans la carte Bien-être estimé.'}
-           predictionPoint={showPredictionOnChart ? { x: DAYS - 1, v: todayPrediction.predicted } : null}
-         />
