@@ -1,0 +1,50 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /Users/runner/work/_temp/dd-tests/Build/Products/HalcyaUITests_iphonesimulator26.5-arm64-x86_64.xctestrun -destination id=600A45A3-B3A0-4A39-8A9C-5D051F9FDA9C "-only-testing:HalcyaUITests/NotificationsUITests/testAutoriserLesNotifications"
+
+2026-10-29 20:23:31.886 xcodebuild[28829:87848] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-29 20:23:31.948 xcodebuild[28829:87848] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:600A45A3-B3A0-4A39-8A9C-5D051F9FDA9C, OS:26.2, name:iPhone 16e }
+{ platform:iOS Simulator, arch:x86_64, id:600A45A3-B3A0-4A39-8A9C-5D051F9FDA9C, OS:26.2, name:iPhone 16e }
+2026-10-29 20:23:38.236 xcodebuild[28829:87848] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-29 20:23:55.907567+0000 HalcyaUITests-Runner[29602:90352] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-10-29 20:23:59.349.
+Test Suite 'HalcyaUITests.xctest' started at 2026-10-29 20:23:59.352.
+Test Suite 'NotificationsUITests' started at 2026-10-29 20:23:59.353.
+Test Case '-[HalcyaUITests.NotificationsUITests testAutoriserLesNotifications]' started.
+    t =     0.02s Start Test at 2026-10-29 20:23:59.365
+    t =     0.19s Set Up
+    t =     0.21s Open fr.jpesquet.sante
+    t =     0.21s     Activate fr.jpesquet.sante
+    t =     0.70s         Wait for fr.jpesquet.sante to idle
+    t =     0.82s Waiting 20.0s for "Autoriser" Button to exist
+    t =     1.82s     Checking `Expect predicate `existsNoRetry == 1` for object "Autoriser" Button`
+    t =     1.83s         Checking existence of `"Autoriser" Button`
+    t =     2.31s Checking existence of `"Autoriser" Button`
+    t =     2.39s Tap "Autoriser" Button
+    t =     2.39s     Wait for com.apple.springboard to idle
+    t =     2.39s     Find the "Autoriser" Button
+    t =     2.44s     Check for interrupting elements affecting "Autoriser" Button
+    t =     2.56s     Synthesize event
+    t =     3.03s     Wait for com.apple.springboard to idle
+    t =     4.44s Checking `Expect predicate `exists == 0` for object "Autoriser" Button`
+    t =     4.45s     Checking existence of `"Autoriser" Button`
+    t =     4.51s Tear Down
+Test Case '-[HalcyaUITests.NotificationsUITests testAutoriserLesNotifications]' passed (4.561 seconds).
+Test Suite 'NotificationsUITests' passed at 2026-10-29 20:24:03.926.
+	 Executed 1 test, with 0 failures (0 unexpected) in 4.561 (4.572) seconds
+Test Suite 'HalcyaUITests.xctest' passed at 2026-10-29 20:24:03.926.
+	 Executed 1 test, with 0 failures (0 unexpected) in 4.561 (4.574) seconds
+Test Suite 'Selected tests' passed at 2026-10-29 20:24:03.926.
+	 Executed 1 test, with 0 failures (0 unexpected) in 4.561 (4.577) seconds
+2026-10-29 20:24:04.740 xcodebuild[28829:87848] [MT] IDETestOperationsObserverDebug: 26.494 elapsed -- Testing started completed.
+2026-10-29 20:24:04.741 xcodebuild[28829:87848] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-29 20:24:04.741 xcodebuild[28829:87848] [MT] IDETestOperationsObserverDebug: 26.494 sec, +26.494 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/HalcyaUITests-bcwhxbatpfqibcecuumkbtwwtvlt/Logs/Test/Test-HalcyaUITests-2026.10.29_20-23-31-+0000.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started
