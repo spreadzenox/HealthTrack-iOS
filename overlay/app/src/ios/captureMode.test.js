@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -228,6 +228,18 @@ describe('mots propres à Android sur une page de l’iPhone (androidWords)', ()
     // Huawei Health, Withings, Garmin… écrivent dans l'app Santé de l'iPhone : les nommer y est juste
     expect(androidWords('Huawei Health, Withings, Garmin et l’app Santé')).toEqual([])
     expect(androidWords('')).toEqual([])
+  })
+})
+
+describe('texte relu d’une page de l’iPhone (pageText)', () => {
+  it('laisse de côté les passages où nommer une fonction d’Android est juste sur iPhone', () => {
+    const root = document.createElement('main')
+    root.innerHTML = '<h2>Vos sources</h2><section aria-labelledby="phone-usage-title"><h3 id="phone-usage-title">'
+      + 'Temps d’écran et sommeil</h3><p>Pas encore disponible sur iPhone.</p></section><p>Autoriser Health Connect</p>'
+    const text = pageText(root)
+    expect(text).toContain('Vos sources')
+    expect(text).not.toContain('Temps d’écran')
+    expect(androidWords(text)).toEqual(['Health Connect'])
   })
 })
 

@@ -50,6 +50,16 @@ export function androidWords(text) {
   return [...new Set(String(text).match(ANDROID_ONLY) ?? [])]
 }
 
+// Passages où les nommer est juste sur iPhone : la carte « Temps d'écran et sommeil » de Sources dit « Pas encore
+// disponible sur iPhone » (I8 à l'étude, PARITE.md)
+export const IPHONE_OK = ['[aria-labelledby="phone-usage-title"]']
+
+/** Texte d'une page, sans ces passages (`innerText` dans la WebView, `textContent` sous jsdom). */
+export function pageText(root, allowed = IPHONE_OK) {
+  const text = (el) => el.innerText ?? el.textContent ?? ''
+  return allowed.flatMap((sel) => [...root.querySelectorAll(sel)]).reduce((t, el) => t.replace(text(el), ''), text(root))
+}
+
 // Autres écrans de l'onboarding sur iPhone : objectif, suivi, montre, [Santé si une montre écrit dans Santé], visage,
 // geste (pas d'abonnement tant qu'I6 n'est pas là)
 export const MORE_ONBOARDING = [
@@ -191,7 +201,7 @@ export async function installCaptureMode() {
         document.getElementById(target)?.scrollIntoView({ block: 'start', behavior: 'instant' })
       },
       log: (message) => console.log(message),
-      readText: () => document.body?.innerText ?? '',
+      readText: () => (document.body ? pageText(document.body) : ''),
       wait: sleep,
       signal: (name) => Filesystem.writeFile({ ...file, path: READY, data: name, recursive: true }),
       probe: async (d) => {

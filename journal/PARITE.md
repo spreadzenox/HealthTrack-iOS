@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v592 (commit `1be63e2`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v594 (commit `fa94db1`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 21:05 | #509, #510 (v593, v594) | #509 : journal d'Android seulement ; #510 : Tendances vierges en couleur, tuiles « Ajouter une montre », « Activer la lecture du visage », « Noter votre bien-être » (`PastelTiles`, `BaselineCards.jsx`, `WellbeingCharts.jsx`) : code partagé, vrai sur iPhone (lecture du visage, montre par l'app Santé), note vraie ; **correctif 20 refait** (`BaselineCards.jsx`, mêmes lignes, contexte nouveau) | — |
 | 29/10 19:10 | #508 (v592) | carte « Vos pistes arrivent » : seul le nombre de jours en police des chiffres (`TodayCards.jsx`, `.css`) : code partagé, aucun correctif touché, note vraie sur iPhone | — |
 | 29/10 18:20 | #507 (v591) | Journal vierge : trois tuiles en couleur (photo d'un repas, ventre ou bien-être, ajouter une source) au lieu d'une phrase grise (`JournalEmpty.jsx`, `DailyJournal.jsx`, `App.css`) : code partagé, aucun correctif touché, note vraie sur iPhone ; visible dans la capture `vide-journal` | — |
 | 29/10 17:30 | #506 (v590) | Sources : les sources branchées sous leur propre titre « Ce que lit Halcya », au-dessus de « Mes appareils » (`Connectors.jsx`) : code partagé, vaut sur iPhone, correctif 08 toujours applicable ; **note de Nouveautés fausse sur iPhone** (« météo, Health Connect, temps d'écran ») : cachée (`APPSTORE_HIDDEN`, correctif 28), demande à Android (`DEMANDES.md`) | — |

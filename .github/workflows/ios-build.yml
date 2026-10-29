@@ -223,3 +223,12 @@ jobs:
             echo "::error::$(wc -l < captures/js-errors.txt | tr -d ' ') ligne(s) d'erreur JavaScript : voir js-errors.txt"
             cat captures/js-errors.txt; exit 1
           fi
+      # Aucun mot propre à Android sur les pages de l'iPhone (audit des textes, captureMode.js : androidWords,
+      # pageText ; liste vide depuis le 29/10, PR #71 : la carte du temps d'écran, juste sur iPhone, est mise à part)
+      - name: Aucun texte propre à Android
+        if: always() && hashFiles('captures/texte-android.txt') != ''
+        run: |
+          if [ -s captures/texte-android.txt ]; then
+            echo "::error::$(wc -l < captures/texte-android.txt | tr -d ' ') page(s) avec un mot propre à Android : voir texte-android.txt"
+            cat captures/texte-android.txt; exit 1
+          fi
