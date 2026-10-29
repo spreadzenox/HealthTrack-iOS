@@ -195,7 +195,9 @@
     iCloud ». La copie de secours (I3) part dans la sauvegarde iCloud de l'iPhone : risque de refus à l'examen. À
     trancher avant la soumission : garder (sauvegarde du système, choisie et chiffrée par l'utilisateur), l'exclure
     de la sauvegarde (la restauration passe alors par l'export), ou n'y laisser que ce qui ne vient pas de l'app
-    Santé (qui se réimporte seule). La page de confidentialité décrit l'état actuel.
+    Santé (qui se réimporte seule). La page de confidentialité décrit l'état actuel. 29/10 : recherche dans
+    `RECHERCHE.md` (rien d'officiel sur la sauvegarde de l'appareil) ; recommandation : demander à Apple
+    (consultation « Meet with Apple » après A1), sinon exclure la copie de la sauvegarde avant la soumission.
 - [ ] **Ensuite — suivi continu** : chaque version Android suivie, correctifs refaits, nouveautés vérifiées.
 
 ## Idées et questions ouvertes

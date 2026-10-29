@@ -266,3 +266,35 @@ Moteurs d'Android : LiteRT 1.4.2 et ONNX Runtime 1.22.0, ORT ≥ 1.27 étant éc
   - `CocoaPods/Specs` : `Specs/1/6/0/TensorFlowLiteC/2.17.0/TensorFlowLiteC.podspec.json` ;
   - <https://github.com/microsoft/onnxruntime-swift-package-manager> (`Package.swift` et étiquettes, lus le 28/10).
 
+
+## Données de santé et iCloud : directive 5.1.3 (ii) d'Apple (29/10/2026)
+
+**La règle** (App Review Guidelines, lue le 29/10/2026) : « Apps must not write false or inaccurate data into
+HealthKit […], and may not store personal health information in iCloud. » Elle date de 2014 (alors 27.3, ajoutée
+juste après la fuite des photos iCloud, presse de septembre 2014).
+
+**Ce qui n'est pas tranché** : aucune page d'Apple ne dit si la **sauvegarde iCloud de l'appareil** compte comme
+« stocker dans iCloud ». Sur les forums développeurs d'Apple (fils 838493, 844159 : CloudKit privé chiffré, valeurs
+tirées de HealthKit), Apple ne répond pas sur le fond et renvoie à une consultation avec l'équipe d'examen
+(« Meet with Apple », gratuite, avec un compte développeur, donc après A1). Les données de l'app Santé elles-mêmes
+vont dans iCloud, mais chiffrées de bout en bout par Apple ; une sauvegarde par le Finder n'emporte la Santé que
+chiffrée.
+
+**Halcya aujourd'hui** : la base IndexedDB est exclue de la sauvegarde par WebKit (mesuré le 28/10, PR #30) ; la
+**copie de secours** (Documents : saisies, mesures importées de Santé, profil, réglages) y part, chiffrée par Apple
+mais pas de bout en bout (sauf « Protection avancée des données » activée par la personne). C'est une donnée de santé
+personnelle (ventre, sommeil, cœur…) que l'app met dans un dossier sauvegardé par iCloud.
+
+**Options**
+1. **Garder** (décision du 24/10 : la sauvegarde du téléphone est conservée) et le dire dans les notes pour l'examen.
+   Risque : refus à l'examen, à corriger alors ; rien à changer avant.
+2. **Exclure la copie de la sauvegarde iCloud** (`isExcludedFromBackup` sur le fichier) : plus aucune donnée de
+   santé dans iCloud ; la copie protège encore d'un effacement de la base par iOS (son premier rôle, I3), mais un
+   nouvel iPhone repart vide : on passe par l'export et l'import (déjà vérifiés, d'Android aussi). Petit changement,
+   réversible.
+3. **N'y garder que ce qui ne vient pas de Santé** : ne règle rien, le ventre et le bien-être sont aussi des données
+   de santé.
+
+**Recommandation** : demander d'abord à Apple (consultation « Meet with Apple », après A1) ; sans réponse avant la
+première soumission, prendre l'option 2, la plus sûre, et dire dans l'app comment changer d'iPhone (export).
+Décision du propriétaire.
