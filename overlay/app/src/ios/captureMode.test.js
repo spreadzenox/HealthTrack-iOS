@@ -593,8 +593,19 @@ describe('sonde de la lecture du visage (I7)', () => {
       status: vi.fn(async () => ({ models: true, mode: 'app_open', affectModel: false, enabled: false })),
       test: vi.fn(async () => ({ outcome: 'skip:no_permission' })),
     }
-    await probeFace({ log: (m) => logs.push(m), plugin })
-    expect(logs).toEqual(['[visage] sonde {"plugin":true,"models":true,"mode":"app_open","affect":false,"outcome":"skip:no_permission"}'])
+    await probeFace({ log: (m) => logs.push(m), plugin, importBursts: async () => ({ imported: 0 }) })
+    expect(logs).toEqual(['[visage] sonde {"plugin":true,"models":true,"mode":"app_open","affect":false,"outcome":"skip:no_permission","imported":0}'])
+  })
+
+  it('avec le portrait des captures : visage lu, rafale importée comme sur Android', async () => {
+    const logs = []
+    const plugin = {
+      status: vi.fn(async () => ({ models: true, mode: 'app_open', affectModel: false })),
+      test: vi.fn(async () => ({ outcome: 'face' })),
+    }
+    const importBursts = vi.fn(async ({ plugin: p }) => (p === plugin ? { imported: 1, inserted: 1 } : {}))
+    await probeFace({ log: (m) => logs.push(m), plugin, importBursts })
+    expect(logs).toEqual(['[visage] sonde {"plugin":true,"models":true,"mode":"app_open","affect":false,"outcome":"face","imported":1}'])
   })
 
   it('sans plugin, ou s’il échoue : le dit', async () => {

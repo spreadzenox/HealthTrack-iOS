@@ -566,10 +566,11 @@ export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage
  */
 /**
  * Lecture du visage (I7) : le plugin FaceSense de l'iPhone répond, avec les modèles embarqués, en mode « app_open »,
- * sans valence ni éveil ; puis une lecture de test. Le simulateur n'a pas de caméra (et la permission n'est jamais
- * demandée ici) : la lecture s'arrête avant la caméra, ce qui est attendu. Jamais un score dans la console.
+ * sans valence ni éveil ; puis une lecture de test. Le simulateur n'a pas de caméra : le script de captures dépose un
+ * portrait du domaine public (tests d'Android) et accorde la permission ; la rafale lue est importée comme sur Android
+ * (`importPendingFaceBursts`). Sans portrait, la lecture s'arrête avant la caméra. Jamais un score dans la console.
  */
-export async function probeFace({ log, plugin }) {
+export async function probeFace({ log, plugin, importBursts }) {
   const { faceSensePlugin } = await import('../services/faceSense')
   const p = plugin === undefined ? faceSensePlugin() : plugin
   if (!p) {
@@ -579,7 +580,9 @@ export async function probeFace({ log, plugin }) {
   try {
     const s = await p.status()
     const t = await p.test()
-    log(`[visage] sonde ${JSON.stringify({ plugin: true, models: s.models, mode: s.mode, affect: s.affectModel, outcome: t?.outcome })}`)
+    const importer = importBursts ?? (await import('../services/faceBursts')).importPendingFaceBursts
+    const r = await importer({ plugin: p })
+    log(`[visage] sonde ${JSON.stringify({ plugin: true, models: s.models, mode: s.mode, affect: s.affectModel, outcome: t?.outcome, imported: r?.imported ?? 0 })}`)
   } catch (e) {
     log(`[visage] sonde ${JSON.stringify({ plugin: true, error: String(e?.message || e) })}`)
   }
