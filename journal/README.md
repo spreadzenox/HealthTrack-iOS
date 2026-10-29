@@ -12,7 +12,7 @@
 |---|---|---|
 | Dernière version | v580 (29/10) | v580 sur iPhone simulé (29/10, PR #56) : même version qu'Android |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
-| Parité des fonctions | référence | 45 % (21 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
+| Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
 - **A1 — en cours (28/10 vers 18:50 UTC)** : inscription faite sur le web, cotisation de 99 € en paiement. Il reste à
@@ -151,6 +151,7 @@ via TestFlight.
 | 29/10 06:00 | I2 | **l'iPhone est à la même version qu'Android (v578)** ; le rapport PDF pour le médecin est créé puis enregistré dans Fichiers sur les deux iPhone simulés ; tout l'accueil de l'app (onboarding) vérifié sur iPhone ; un défaut visible aussi sur Android trouvé en chemin (bouton « Autoriser » étiré sur l'écran Santé), noté pour la routine Android. Parité : 40 % | #53 (mergée), #54 |
 | 29/10 07:00 | I2, suivi d'Android v579 et v580 | v579 sur iPhone (PR #55 mergée) ; tranché : l'iPhone ne peut pas repérer les apps de montre installées comme Android, il reconnaît la montre par ses données dans l'app Santé (déjà en place) ; l'icône « Halcya » sur l'écran d'accueil de l'iPhone et l'écran de démarrage seront photographiés à chaque build ; Android v580 : « Enregistrer ce repas » plus net, aussi sur iPhone. Parité : 41 % | #55 (mergée), #56 |
 | 29/10 08:00 | I2 | **l'iPhone est à la même version qu'Android (v580)** ; l'icône « Halcya » est vue sur l'écran d'accueil de l'iPhone (simulé) ; « Votre avis » et la page Nouveautés de l'iPhone confirmés ; l'écran de démarrage reste à photographier (un peu plus tard après le lancement). Parité : 45 % | #56 (mergée), #57 |
+| 29/10 09:00 | I2, I4 | les mesures de l'app Santé sont bien rangées dans les données de l'app (vérifié sur iPhone simulé à chaque build) ; icône, nom et écran de démarrage vérifiés ; l'iPhone reste à la même version qu'Android (v580). Parité : 49 % | #57 (mergée), #58 |
 
 ---
 
