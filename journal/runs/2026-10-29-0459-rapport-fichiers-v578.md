@@ -29,6 +29,14 @@
 - Repris de la branche `claude/ios-recherche-icloud` (run de 03:59) : recherche sur la directive 5.1.3 (ii)
   (`RECHERCHE.md`) et « Fichiers (export) » ✅ : parité 38 %.
 
+## CI de #53 (premier passage, `ed85120`)
+- Verte, mais **aucun test d'interface n'a tourné** : `test-interface-build.txt` : « cannot convert value of type
+  'XCUICoordinate' to expected argument type 'XCUIElement' » (`press(forDuration:thenDragTo:)` d'un élément attend un
+  élément). Conséquences : 70 captures au lieu de 84, sondes à zéro (export, rapport, import), visage
+  `skip:screen_off`. Corrigé (glissement entre deux coordonnées) ; nouvelle étape finale de la build, rouge si les
+  tests d'interface ne se construisent pas ; leçon dans la charte (§3). Captures de l'onboarding à revoir au
+  prochain passage.
+
 ## Suite
 - CI de #53 : sonde `[rapport]` « après » : 2 sur les deux iPhone, test d'interface réussi sur les deux ; captures
   des écrans d'onboarding à regarder (si justes, avec les feuilles Santé et notifications déjà essayées : Onboarding

@@ -228,7 +228,8 @@ final class DonneesUITests: XCTestCase {
         var tirages = 0
         while !fichiers.waitForExistence(timeout: 2) && Date() < fin {
             if tirages < 2 && entete.exists {
-                entete.press(forDuration: 0.2, thenDragTo: halcya.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.08)))
+                entete.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5))
+                    .press(forDuration: 0.2, thenDragTo: halcya.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.08)))
                 tirages += 1
             }
         }
