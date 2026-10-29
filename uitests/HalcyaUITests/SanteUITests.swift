@@ -62,7 +62,21 @@ final class NotificationsUITests: XCTestCase {
             XCTFail("alerte des notifications introuvable")
             return
         }
-        autoriser.tap()
+        if !toucherJusquaFermeture(autoriser) {
+            print(springboard.debugDescription)
+            XCTFail("alerte des notifications toujours ouverte après trois touchers")
+        }
+    }
+
+    /// Touche un bouton d'alerte d'iOS jusqu'à ce qu'il disparaisse : le toucher ne prend pas toujours (29/10, PR #61,
+    /// iPhone 17 Pro : alerte des notifications encore ouverte après le toucher, test réussi, essais suivants sautés).
+    private func toucherJusquaFermeture(_ bouton: XCUIElement, essais: Int = 3) -> Bool {
+        for _ in 0..<essais {
+            if bouton.exists { bouton.tap() }
+            let ferme = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: bouton)
+            if XCTWaiter().wait(for: [ferme], timeout: 4) == .completed { return true }
+        }
+        return false
     }
 
     /// Bilan du ventre : bannière dépliée, puis « Gêne ».
