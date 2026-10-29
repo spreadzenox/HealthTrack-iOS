@@ -8,7 +8,7 @@
 Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) · 🟡 partiel ou pas encore vérifié ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
-**Parité** : **36 %** au 29/10 04:20 (17 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
+**Parité** : **38 %** au 29/10 04:20 (18 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
 **Dernière version Android suivie** : v577 (commit `4c83636`, 29/10/2026), voir `upstream.json`.
@@ -78,7 +78,7 @@ analyses, journal, Accueil) : ils arrivent avec `upstream.json` et sont couverts
 | Sauvegarde du téléphone (décision du 24/10 : conservée) | sauvegarde Android + règles d'exclusion, `BackupMarkerPlugin`, `restoreGuard.js` | sauvegarde iCloud : la copie de secours de Documents (entrées et profil) ; `BackupMarker` en Swift (même plugin, repère exclu de la sauvegarde) | 🟡 | I3 : **mesuré le 28/10 (PR #30, sonde sur les deux iPhone simulés) : WebKit exclut lui-même de la sauvegarde la base IndexedDB (et le localStorage, même dossier)** ; Documents, lui, est sauvegardé. Après une restauration, l'app repart vide (onboarding compris) et la copie se restaure par « Vos données › Restaurer la copie de secours » ; réglages non repris. Repère en Swift (PR #30, mergée) : `restoreGuard.js` le lit (`restored: false`). « Supprimer toutes mes données » efface aussi la copie (correctif 22, PR #31, mergée : vérifié sur les deux iPhone simulés). Depuis la PR #32 (mergée le 28/10), la copie est proposée au premier écran de l'onboarding après une restauration (« Reprendre mes données » : les 1925 mesures de démo reprises sur les deux iPhone simulés). Réglages (thème, note du soir, bilan du ventre, météo) gardés dans la copie et repris avec elle (PR #38, intégrée à #37 : thème retiré puis rétabli sur les deux iPhone simulés). Reste l'écart avec Android : l'identifiant d'installation (crédits IA) n'est pas repris, choix à faire (`BACKLOG.md`) |
 | Persistance des données locales | IndexedDB (WebView Android) | IndexedDB (WKWebView) + copie de secours dans Documents | 🔬 | I3 : base non durable d'après Capacitor et WebKit, et exclue de la sauvegarde iCloud par WebKit (mesuré le 28/10, PR #30) ; filet : copie de secours (PR #6), tenue à jour au démarrage et à chaque passage en arrière-plan, sauvegardée par iCloud, effacée par « Supprimer toutes mes données » (correctif 22, PR #31, mergée) |
 | Ouvrir une autre app | `@capacitor/app-launcher` | idem (iOS supporté) | 🟡 | |
-| Fichiers (export) | `@capacitor/filesystem` | idem (iOS supporté) | 🟡 | |
+| Fichiers (export) | `@capacitor/filesystem` | idem (iOS supporté) | ✅ | écriture dans Documents puis feuille de partage : sonde `[export]` à chaque build depuis la PR #37 (+2 fichiers sur les deux iPhone simulés, encore le 29/10 sur #51), rapport PDF écrit de même (#51) ; ligne mise à jour le 29/10 |
 | BLE générique | `@capacitor-community/bluetooth-le` | idem (iOS supporté) | 🟡 | phrase `NSBluetoothAlwaysUsageDescription` ajoutée (PR #3) ; la carte « Capteurs Bluetooth » est active sur iPhone, à essayer sur l'iPhone 12 (A1) |
 | Mise à jour par APK | `AppUpdatePlugin`, `@m430/capacitor-app-install` | — | — | sideload seulement |
 
