@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v594 (29/10) | v594 sur iPhone simulé (29/10, PR #71) : à jour d'Android |
+| Dernière version | v596 (29/10) | v594 sur iPhone simulé (29/10, PR #71) ; v596 en vérification (PR #73) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -167,6 +167,7 @@ via TestFlight.
 | 29/10 21:00 | contrôle des textes (I2) | v592 sur iPhone, au même niveau qu'Android (PR #69 mergée : bouton « Autoriser l'app Santé » à sa taille, vu sur les deux iPhone simulés) ; chaque vérification automatique relit maintenant le texte de toutes les pages de l'iPhone et signale un mot propre à Android (Health Connect, Google Play, temps d'écran…) qui y resterait. Parité : 49 % | #69 (mergée), #70 |
 | 29/10 22:00 | suivi d'Android v594, contrôle des textes | relecture des textes en place (PR #70 mergée) : sur les 110 pages de l'iPhone, un seul mot propre à Android, « temps d'écran », dans la carte qui dit justement « Pas encore disponible sur iPhone » : mise à part, et le contrôle devient bloquant ; Android v594 : l'onglet Tendances vide propose des tuiles en couleur, aussi sur iPhone (un correctif iOS refait pour suivre). Parité : 49 % | #70 (mergée), #71 |
 | 29/10 23:00 | contrôle des textes (fin), test d'import | v594 sur iPhone, au même niveau qu'Android (PR #71 mergée : aucune page de l'iPhone ne garde de mot propre à Android, contrôle désormais bloquant ; Tendances vides en couleur vues) ; l'essai automatique d'import, qui échouait parfois sur un iPhone, recommence maintenant tout le parcours une fois avant d'échouer. Parité : 49 % | #71 (mergée), #72 |
+| 30/10 00:00 | suivi d'Android v596 | test d'import fiabilisé (PR #72 mergée, import réussi sur les deux iPhone simulés) ; Android v595 et v596 : Nutrition vide en couleur et actions des repas rangées derrière « ⋯ », aussi sur iPhone ; la note de Nouveautés de v596 parle aussi du stress de la montre en direct, absent de l'iPhone : cachée sur iPhone, demande à Android de la scinder. Parité : 49 % | #72 (mergée), #73 |
 
 ---
 
