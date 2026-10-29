@@ -185,6 +185,8 @@
     `https://spreadzenox.github.io/HealthTrack-iOS/confidentialite/` et `…/assistance/`. Contact de l'assistance :
     les demandes GitHub ; une adresse e-mail si le propriétaire en donne une (directive 1.5 : un moyen simple de le
     joindre).
+  - [x] Notes pour l'examen d'Apple, en anglais, prêtes à coller (`store/app-store/notes-examen.md`, 29/10) ; à relire
+    avant la soumission (I6, directive 5.1.3 (ii), adresses après A8).
   - [ ] Conditions d'utilisation et de vente propres à l'iPhone (celles d'Android parlent de Google Play ; retirées
     des Réglages sur iPhone le 29/10, correctif 26), avec le même lien de retour ; lien de
     confidentialité et de conditions du paywall (`PRIVACY_URL`, `TERMS_URL` d'Android) à remplacer avec I6.

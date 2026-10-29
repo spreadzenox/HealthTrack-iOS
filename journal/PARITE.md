@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v580 (commit `aa4abd9`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v583 (commit `a68699b`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 10:05 | #497 à #499 (v581 → v583) | #498 fructanes en fourchette quand les mesures publiées divergent (pain, poireau, oignon : « Probablement riche en fructanes ») ; #499 fructanes d'une cinquantaine d'aliments courants, viandes et poissons sans fructanes ni GOS (`fodmapGroups.js`, données FODMAP, `nutritionKPIs.js`) ; #497 idées d'Android : code partagé, notes de Nouveautés vraies sur iPhone (repas et rapport PDF) ; captures Repas et Analyses à regarder ; les 28 correctifs s'appliquent directement | — |
 | 29/10 07:15 | #496 (v580) | après l'analyse d'un repas, « Enregistrer ce repas » sur toute la ligne, ligne FODMAP en phrase (`NewMealForm.jsx`, `Food.jsx`, CSS) : code partagé, note de Nouveautés vraie sur iPhone ; écran après analyse non capturé (l'analyse passe par le relais, pas lancée par la CI) ; les 28 correctifs s'appliquent directement | — |
 | 29/10 06:30 | #495 (v579) | onboarding, fin de l'import (« Vos 30 derniers jours ») : la provenance des chiffres dite une fois sous la liste (`Onboarding.jsx`, `.css`) : code partagé, vaut aussi pour l'import de l'app Santé sur iPhone ; note de Nouveautés déjà marquée `["play", "sideload"]` par Android (elle nomme Health Connect) ; les 28 correctifs s'appliquent directement, suite d'Android 2810 passés | — |
 | 29/10 05:05 | #494 (v578) | écran Premium de la période de lancement en une phrase avec sa date de fin, « 1er déc. », dates insécables (`Premium.jsx`, `entitlement.js`, `frenchSpacing.js`) : code partagé ; sur iPhone l'écran Premium n'a pas de période de lancement (capture de #52 : « l'abonnement par l'App Store arrive bientôt »), sa note de Nouveautés y serait fausse → cachée (`APPSTORE_HIDDEN`, correctif 28) et demande à Android ; les 28 correctifs s'appliquent directement, suite d'Android 2807 passés | — |
