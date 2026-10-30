@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v614 (30/10) | v614 sur iPhone simulé (30/10, PR #91 : VFC de l'app Santé dans les Analyses) |
+| Dernière version | v616 (30/10) | v614 sur iPhone simulé (30/10) ; v616 en vérification (PR #96), puis envoi sur TestFlight (premier essai du 30/10 : signature par Apple réussie, envoi refusé pour une phrase manquante, corrigé dans #96) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight dès la première build envoyée par la CI) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -195,6 +195,7 @@ via TestFlight.
 | 30/10 17:00 | suivi d'Android v614 | v613 sur iPhone (PR #89 mergée : plus de phrase sur l'abonnement dans Paramètres, vu) ; Android v614 : au premier import, la fréquence cardiaque et les pas des derniers jours ne se perdent plus quand la montre mesure souvent ; c'était vrai aussi avec l'Apple Watch sur iPhone, corrigé de même. Parité : 49 % | #89 (mergée), #90 |
 | 30/10 18:00 | VFC de l'app Santé dans les Analyses | v614 sur iPhone, au même niveau qu'Android (PR #90 mergée : lecture de l'app Santé jour par jour essayée sur les deux iPhone simulés) ; la variabilité cardiaque de l'app Santé entre dans les Analyses, à part de celle d'Android pour ne pas inventer de fausses pistes, et dans le résumé du premier import. Parité : 49 % | #90 (mergée), #91 |
 | 30/10 19:00 | vos actions Apple, VFC dans les Analyses | **vous avez fait A1, A3 et A8** : compte Apple validé, fiche « Halcya » créée dans App Store Connect, pages de confidentialité, de conditions et d'assistance en ligne ; nous avons passé en revue avec vous toutes les cases et demandes d'Apple (seuls HealthKit, achats intégrés, App Attest, et la demande Family Controls pour le temps d'écran, servent à Halcya) ; la variabilité cardiaque de l'app Santé est dans les Analyses de l'iPhone (PR #91 mergée, vue dans les captures). Parité : 49 % | #91 (mergée), #92, #93 |
+| 30/10 20:00 | TestFlight, suivi d'Android v616 | **vous avez fait A2** (clé et accord pour la signature par Apple) et obtenu le droit du temps d'écran ; l'envoi automatique sur TestFlight est écrit (PR #95, premier envoi juste après sa vérification) ; Android v615 et v616 : lecture du visage sans plantage sur Android, et tout l'historique lu sans coupure, aussi pour l'app Santé sur iPhone. Parité : 49 % | #95, #96 |
 
 ---
 

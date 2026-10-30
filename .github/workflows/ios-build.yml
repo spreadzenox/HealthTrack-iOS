@@ -90,10 +90,10 @@ jobs:
           npx -y -p "@capacitor/cli@$CORE" cap sync ios # CLI de la même version que le runtime (modèles de projet identiques)
       - name: Écriture dans Santé pour la build de captures seulement (sonde I4)
         working-directory: upstream/app/ios/App/App
-        # La sonde écrit des pas de démonstration puis les relit ; sans cette phrase, iOS ferme l'app. L'app livrée
-        # n'écrit rien dans Santé : la phrase n'est jamais dans ios/App/App/Info.plist du dépôt.
+        # La sonde écrit des pas de démonstration puis les relit. L'app livrée n'écrit rien dans Santé : sa phrase
+        # (exigée par Apple, le plugin contenant l'écriture) le dit ; la build de captures la remplace par la sienne.
         run: |
-          /usr/libexec/PlistBuddy -c "Add :NSHealthUpdateUsageDescription string 'Build de test : écrit des mesures de démonstration dans Santé.'" Info.plist
+          /usr/libexec/PlistBuddy -c "Set :NSHealthUpdateUsageDescription 'Build de test : écrit des mesures de démonstration dans Santé.'" Info.plist
       # Entitlements dans les réglages de la cible App (pas en ligne de commande : ils s'appliqueraient aussi au paquet
       # de ressources des modèles du visage, qui n'en a pas)
       - name: Build Xcode (simulateur, signature à la volée)
