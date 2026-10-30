@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v598 (commit `274e512`, 30/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v600 (commit `061b3ca`, 30/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 30/10 02:05 | #515, #516 (v599, v600) | #515 : réintroduction, « Oui, je continue » / « Non, j'arrête » de même taille et résultat relu (`Reintroduction.jsx`, `.css`) : vrai sur iPhone, note vraie ; #516 : phrases d'aide `.hint` en gris (`App.css`) : vrai sur iPhone, mais sa note cite « l'écran de la montre » (montre en direct, absente) : **cachée** (`APPSTORE_HIDDEN`, correctif 28), demande à Android | — |
 | 30/10 01:05 | #514 (v598) | `FaceSenseCard.jsx` ne met plus à jour une carte fermée (test rouge sur le main d'Android) : code partagé, pas de note, le correctif iOS qui touche ce fichier s'applique toujours | — |
 | 30/10 00:05 | #513 (v597) | Réintroduction : « Repère général, à adapter avec votre diététicienne. » écrit comme une phrase (`Reintroduction.jsx`, `.css`) : code partagé, aucun correctif touché, note vraie sur iPhone | — |
 | 29/10 23:05 | #511, #512 (v595, v596) | #511 : Nutrition vierge, tuile « Photographier un repas » (`Nutrition.jsx`, `.css`) : vrai sur iPhone, note vraie ; #512 : actions des repas derrière « ⋯ » (`Food.jsx`, `EntryActionsToggle`), vrai sur iPhone, et stress de la montre Huawei en mots (`devices/huawei/coverage.js`), sans objet sur iPhone : **note cachée** (`APPSTORE_HIDDEN`, correctif 28), demande à Android de la scinder ; les 29 correctifs s'appliquent directement | — |

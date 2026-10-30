@@ -6,7 +6,9 @@ pleine) ; données de démo ramenées à ce que l'iPhone reçoit (Apple Watch pa
 Huawei en direct, ni temps d'écran). Les fichiers sont sur la branche `captures/store` (jamais dans `main`) ; ils
 seront envoyés par l'API d'App Store Connect une fois A2 et A3 faits, ou glissés à la main par le propriétaire.
 
-Sélection du 29/10 (captures de `9654bc0`, Android v573), dans l'ordre d'affichage. Les trois premières sont celles
+Sélection du 29/10, captures refaites le 30/10 (`f91404a`, Android v597 : bouton de l'onboarding à sa taille, pages vides
+en couleur, « Ce que lit Halcya », sorbitol → pruneaux) et regardées une à une : barre d'état à 9:41, aucune
+bannière du système. Dans l'ordre d'affichage. Les trois premières sont celles
 qu'on voit sans faire défiler :
 
 | # | Fichier (`captures/store`) | Ce qu'elle montre |
