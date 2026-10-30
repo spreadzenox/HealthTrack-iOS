@@ -329,3 +329,65 @@ FE02, par `@capacitor-community/bluetooth-le`) pour les bracelets et anciens mod
 - Alternative en place : Huawei Santé sur iPhone écrit une partie de ses mesures dans l'app Santé, que Halcya lit
   (pas, cœur, sommeil, entraînements, poids d'après une page d'intégrateur, Sahha ; rien d'officiel : à vérifier
   sur un iPhone avec Huawei Santé).
+
+## Capacités et droits d'Apple passés en revue (30/10/2026, avec le propriétaire, après A1)
+
+**Onglet « Capabilities » de l'identifiant** (liste vue par le propriétaire le 30/10) : cocher **HealthKit**,
+**In-App Purchase** (si pas déjà cochée d'office) et **App Attest** (anti-abus des crédits IA, I6) ; rien d'autre.
+- La caméra (visage, photo des repas), le Bluetooth et la position ne sont pas des capacités : phrases d'usage
+  d'`Info.plist`, déjà en place.
+- « Multitasking Camera Access » : caméra en écran partagé sur iPad, pas en arrière-plan. « Background Inference »,
+  « Sustained Execution », « Background GPU Access » n'ouvrent pas la caméra app fermée : la lecture du visage reste
+  à l'ouverture de l'app.
+- « Push Notifications », « Time Sensitive Notifications » : inutiles (notifications locales, pas urgentes).
+  « iCloud » : inutile pour la sauvegarde de l'iPhone. « App Groups » : à ajouter avec l'extension du temps
+  d'écran. « App Attest Opt-In » : aucune documentation officielle trouvée, pas coché.
+- « App Services » : rien. WeatherKit inutile : la météo, la qualité de l'air et les pollens viennent d'Open-Meteo
+  (`services/weather.js`), sur les deux plateformes.
+
+**Onglet « Capability Requests »** (droits soumis à l'accord d'Apple) : seul **Family Controls (Distribution)** sert
+Halcya (temps d'écran). Passés en revue et écartés :
+- **SensorKit Reader Access** (usage du téléphone, déverrouillages, capteurs de la montre…) : réservé par Apple aux
+  études de recherche approuvées, pas à une app grand public ;
+- **Health Research Background Processing**, **Health Movement Disorder** (tremblements, Parkinson),
+  **HealthKit Access (Verifiable Health Records)**, **Fall Detection Notifications** : recherche, dossiers
+  médicaux vérifiables ou sécurité, sans rapport ;
+- **Critical Alerts** : alertes qui passent le mode silencieux, réservées aux urgences de santé ou de sécurité ; un
+  rappel du soir n'en est pas une ;
+- **Foundation Model Adapter** : seulement pour un adaptateur entraîné sur mesure du modèle d'Apple, inutile pour
+  s'en servir ;
+- **Main Camera Access**, **Passthrough Camera Access**, **Camera Region** et les autres capacités caméra ou
+  espace : Apple Vision Pro ;
+- **StoreKit External Purchase (Link)** : paiement hors App Store, Halcya passe par les achats intégrés ;
+- CarPlay, DriverKit, navigateurs, NFC et paiement, eSIM, réseau, HomePod, etc. : sans rapport.
+
+**Temps d'écran, à revoir** : Apple documente le droit **`com.apple.developer.family-controls.app-and-website-usage`**
+(« Family Controls App and Website Usage ») : avec l'accord de la personne, l'app accède à l'usage des apps et des
+sites de l'iPhone (`FamilyActivityData`, statut d'autorisation `approvedWithDataAccess`), par FamilyControls et
+DeviceActivity. Il demande l'accord d'Apple (titulaire du compte, onglet Capability Requests). Le 30/10, il n'y
+apparaît pas ; des développeurs le signalent aussi sur les forums, ainsi qu'un statut `approved` seulement, sans
+accès aux données, en TestFlight (anecdotes, non officiel). Demande faite dans le texte de celle de Family Controls
+(Distribution). Si elle aboutit, un vrai temps d'écran remplace l'approximation par seuils.
+Justification proposée (en anglais) : « Halcya is a personal wellbeing journal (gut health, sleep, mood) for adults.
+With the user's explicit permission (individual authorization), it reads the user's own daily app and website
+usage on this device, to show it in their private journal and look for patterns with how they feel (for example,
+late-evening screen use and next-day wellbeing). It does not block or restrict apps and does not manage other
+people's devices. Usage data never leaves the device: it is stored and analyzed locally only. The Android version
+of Halcya already offers this using Android's usage statistics. »
+
+**Montre Huawei, correction** : la conclusion du 29/10 (« GT 3 → GT 7 hors de portée ») était trop affirmative. Une
+app iPhone n'a que le Bluetooth basse consommation (hors accessoires MFi) ; Huawei Santé sur iPhone parle donc à la
+GT 6 Pro en BLE. Deux pistes restent ouvertes avant tout verdict : le transport BLE d'Android avec une montre déjà
+associée à Huawei Santé (essai prudent sur l'iPhone 12, dès TestFlight), et **Health Kit de Huawei** (données de
+Huawei Santé lues avec l'accord du compte Huawei ; iOS annoncé parmi les plateformes ; compte développeur et
+validation de Huawei ; données venues des serveurs de Huawei vers le téléphone, rien ne sort de Halcya).
+
+Sources (lues le 30/10/2026) :
+- <https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.family-controls.app-and-website-usage>
+- <https://developer.apple.com/documentation/familycontrols/requesting-the-family-controls-entitlement>
+- <https://developer.apple.com/documentation/familycontrols/familyactivitydata>
+- <https://developer.apple.com/forums/tags/family-controls>
+- <https://developer.apple.com/documentation/bundleresources/entitlements/com.apple.developer.devicecheck.appattest-environment>
+- <https://developer.huawei.com/consumer/en/hms/huaweihealth/>
+- <https://consumer.huawei.com/en/support/content/en-us15935171/>
+
