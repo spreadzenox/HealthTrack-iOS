@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v616 (30/10) | v614 sur iPhone simulé (30/10) ; v616 en vérification (PR #96) ; premier envoi TestFlight en préparation (PR #95) |
+| Dernière version | v616 (30/10) | v614 sur iPhone simulé (30/10) ; v616 en vérification (PR #96), puis envoi sur TestFlight (premier essai du 30/10 : signature par Apple réussie, envoi refusé pour une phrase manquante, corrigé dans #96) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight dès la première build envoyée par la CI) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
