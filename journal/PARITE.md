@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v610 (commit `fbe8990`, 30/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v611 (commit `f951849`, 30/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 30/10 13:05 | #527 (v611) | **une seule source par séance de sport** (`workoutSources.js`, nouveau ; Journal, analyses, résumé du premier import) : code partagé, **vrai sur iPhone** (les séances de l'app Santé ont la source `health_connect`, `sourceName` et `endDate` rendus par le plugin, `Health.swift` lu ; test iOS ajouté : Apple Watch et une app de course sur la même séance → une seule) ; **correctif 15 refait** (import voisin dans `firstImport.js`, fusion à trois) ; note de Nouveautés déjà marquée `["play", "sideload"]` par Android (elle cite la montre Huawei et Health Connect) : rien à cacher | — |
 | 30/10 12:05 | #526 (v610) | fiche Google Play réécrite (montres et délais d'abord, ce qui est livré décrit) : rien dans l'app ; même ordre repris dans la description App Store (`store/app-store/fr-FR/description.txt`), avec ce que l'iPhone fait vraiment | — |
 | 30/10 11:05 | #525 (v609) | onboarding : le compteur d'écrans annonce d'emblée le plus grand nombre possible et ne fait que baisser (`displayedStepCount`, `Onboarding.jsx`) : code partagé, **vrai sur iPhone**, où il grimpait aussi (« 01/05 » au premier écran, « 04/06 » sur celui de l'app Santé, captures de #80) : le choix « Une montre ou une bague qui écrit dans l'app Santé » a la valeur `health_connect` (correctif 08) ; note de Nouveautés fausse sur iPhone (« une montre Health Connect ») : cachée (`APPSTORE_HIDDEN`), demande dans `DEMANDES.md` ; correctifs 08 et 23 (même fichier) toujours appliqués directement | — |
 | 30/10 10:05 | #524 (v608) | « Quand consulter » : une phrase fixe (`WHEN_TO_SEE_DOCTOR`, `today.js`) dans les détails de la carte « Votre ventre », la réintroduction et le bas du rapport PDF ; jamais déclenchée par les données : code partagé, vrai sur iPhone, note vraie (rien de propre à Android) ; correctifs 09 et 15 (rapport, `today.js`) toujours appliqués directement | — |
