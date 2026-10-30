@@ -193,6 +193,9 @@
   (BLE à côté de Huawei Santé, essai sur l'iPhone 12 ; Health Kit de Huawei).
 - [ ] **I8 — Le reste du natif** (28/10 : sonde vocale `VoiceProbe` en Swift, PR #40) : voix, temps d'écran, montre Huawei (BLE), détection des sources : étude honnête
   (sources datées) puis ce qui est faisable ; ⛔ argumentés dans `PARITE.md`.
+- [~] **TestFlight (I9), 30/10** : A1, A2, A3 faits par le propriétaire, accord pour la signature par Apple ;
+  `testflight.yml` (lancement manuel sur `main`, environnement `appstore`) : premier envoi, puis branchement sur chaque
+  version (push sur `main`) une fois sûr ; ensuite A6 (testeuse : la compagne du propriétaire, iPhone 12).
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
   CI ; données collectées à compléter avec A5 ; captures 6,9" à la demande, données de démo fidèles à l'iPhone, PR #41 mergée ; 8 captures choisies le 29/10, `store/app-store/captures.md` ; textes sans lecture du visage ni « dans Apple Watch », PR #42) : signature par la CI (A2), envoi TestFlight interne à chaque version suivie, fiche App
   Store fr-FR (`store/`), captures, `PrivacyInfo.xcprivacy`, réponses « Confidentialité de l'app » (A5), relecture
