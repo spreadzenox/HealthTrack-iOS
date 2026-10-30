@@ -31,6 +31,9 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
     expect(APPSTORE_HIDDEN.has('2026-10-29-2333-repas-actions')).toBe(true)
     // v600 : « dans Paramètres, Premium et l'écran de la montre » : cet écran (montre en direct) n'existe pas sur iPhone
     expect(APPSTORE_HIDDEN.has('2026-10-30-0233-phrases-aide')).toBe(true)
+    // v607 : « votre montre et Health Connect (Samsung Health, Health Sync…) » : la correction vaut sur iPhone (deux
+    // apps qui écrivent la même nuit dans l'app Santé), mais pas ces noms
+    expect(APPSTORE_HIDDEN.has('2026-10-30-0933-sommeil-une-source')).toBe(true)
     const ids = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
     for (const id of APPSTORE_HIDDEN) expect(ids).not.toContain(id)
     expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-10-29-0533-paywall-lancement')

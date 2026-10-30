@@ -29,18 +29,18 @@ index 0a3c792..e503f36 100644
        setState({ hasData, radar, why: explainRadar(radar, [...wellbeing, ...workouts, ...meals, ...context]) })
      } catch {
 diff --git a/app/src/services/radar.js b/app/src/services/radar.js
-index dea1b63..240c432 100644
+index 372ee7b..9315de1 100644
 --- a/app/src/services/radar.js
 +++ b/app/src/services/radar.js
-@@ -23,6 +23,7 @@
- import { BASELINE_METRICS, dailyValues } from './baselines'
+@@ -24,6 +24,7 @@ import { BASELINE_METRICS, dailyValues } from './baselines'
  import { localDateKey } from './wellbeingSeries'
  import { BEHAVIOR_TAGS, measuredTagsByDay } from './behaviorTags'
+ import { oneSleepSourcePerNight } from './sleepSources'
 +import { radarHrvMetric } from '../ios/sdnnBaseline' // Version iOS (HealthTrack-iOS)
  
  export const RADAR_DAYS = 3
  export const RADAR_BASELINE_DAYS = 60
-@@ -109,7 +110,7 @@ function meanSd(values) {
+@@ -111,7 +112,7 @@ function meanSd(values) {
  export function computeRadar(entries, now = new Date()) {
    const series = {
      restingHeartRate: dailyValues(entries, BASELINE_METRICS.restingHeartRate),

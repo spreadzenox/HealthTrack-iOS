@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v605 (30/10) | v604 sur iPhone simulé (30/10, PR #79) ; v605 en vérification (PR #80) |
+| Dernière version | v607 (30/10) | v605 sur iPhone simulé (30/10, PR #80) ; v607 en vérification (PR #82) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -178,6 +178,7 @@ via TestFlight.
 | 30/10 07:00 | suivi d'Android v604 | Android v603 et v604 : Nutrition aux couleurs plus calmes (« bas » en gris, pas en rouge), et l'Accueil compte vraiment les jours avant vos pistes du ventre, aussi sur iPhone. Parité : 49 % | #79 (mergée) |
 | 30/10 08:00 | suivi d'Android v605 | v604 sur iPhone (PR #79 mergée : « bas » en gris dans Nutrition, vu) ; Android v605 : dans les premiers écrans, le bouton « Continuer » reste gris tant que rien n'est choisi, aussi sur iPhone. Parité : 49 % | #80 |
 | 30/10 09:00 | vérification | v605 sur iPhone, au même niveau qu'Android (PR #80 mergée : « Continuer » gris, bouton « Autoriser l'app Santé » à sa hauteur, vus) ; pas de nouvelle version d'Android ; un fichier exporté d'un téléphone Android s'importe sur iPhone avec le même code, seul écart : ses mesures Health Connect y seraient marquées « App Santé ». Parité : 49 % | #80 (mergée) |
+| 30/10 10:00 | suivi d'Android v607 | Android v607 : une nuit vue par deux sources (votre montre et une app de sommeil) n'est plus comptée deux fois ; vrai aussi sur iPhone, où l'Apple Watch, l'iPhone et une app de sommeil écrivent la même nuit dans l'app Santé (vérifié par un test : 7 h, pas 14 h) ; la note de Nouveautés d'Android parle de Health Connect : cachée sur iPhone, demande à Android de la reformuler. Parité : 49 % | #81 (mergée), #82 |
 
 ---
 
