@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v612 (30/10) | v611 sur iPhone simulé (30/10, PR #86) ; v612 en vérification (PR #87) |
+| Dernière version | v612 (30/10) | v612 sur iPhone simulé (30/10, PR #87) ; VFC de l'app Santé sur l'Accueil en vérification (PR #88) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -183,7 +183,7 @@ via TestFlight.
 | 30/10 12:00 | suivi d'Android v609 | v608 sur iPhone (PR #83 mergée) ; Android v609 : au premier lancement, le compteur d'écrans (« 01/07 ») ne grimpe plus en cours de route ; c'était le cas aussi sur iPhone (« 01/05 » puis « 04/06 »), corrigé de même ; la note de Nouveautés d'Android parle de Health Connect : cachée sur iPhone, demande à Android de la reformuler. Parité : 49 % | #83 (mergée), #84 |
 | 30/10 13:00 | suivi d'Android v610, fiche App Store | v609 sur iPhone (PR #84 mergée : compteur « 01/07 » puis « 04/07 », vu) ; Android v610 ne change que sa fiche Google Play ; la description de la fiche App Store suit le même ordre et dit enfin ce que l'iPhone sait faire : délais repas → ventre jusqu'à 48 h, FODMAP groupe par groupe, bilan du soir, rapport PDF pour le médecin. Parité : 49 % | #84 (mergée), #85 |
 | 30/10 14:00 | suivi d'Android v611 | v610 sur iPhone (PR #85 mergée, nouvelle description de la fiche App Store) ; Android v611 : une séance de sport vue par deux sources (votre montre et une app de course) n'est plus comptée deux fois ; vrai aussi sur iPhone pour les séances de l'app Santé (vérifié par un test). Android réserve désormais lui-même à Google Play ses notes qui parlent de Health Connect. Parité : 49 % | #85 (mergée), #86 |
-| 30/10 15:00 | suivi d'Android v612 | v611 sur iPhone (PR #86 mergée : une séance de sport comptée une fois, vu) ; Android v612 : deux retouches d'affichage (« VFC nuit » dans le Journal, étiquette « premium » espacée), sans effet visible sur iPhone (la VFC de l'app Santé y garde son nom, rien n'y est vendu) ; un correctif iOS refait, la note d'Android cachée sur iPhone. Parité : 49 % | #86 (mergée), #87 |
+| 30/10 15:00 | suivi d'Android v612 | v611 sur iPhone (PR #86 mergée : une séance de sport comptée une fois, vu) ; Android v612 : deux retouches d'affichage (« VFC nuit » dans le Journal, étiquette « premium » espacée), sans effet visible sur iPhone (la VFC de l'app Santé y garde son nom, rien n'y est vendu) ; un correctif iOS refait, la note d'Android cachée sur iPhone. Trouvé en rendant la démo fidèle : sur un vrai iPhone, la variabilité cardiaque (VFC) de l'app Santé n'apparaissait pas sur l'Accueil, corrigé ; les Analyses suivront. Parité : 49 % | #86, #87 (mergées), #88 |
 
 ---
 

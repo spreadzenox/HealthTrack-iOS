@@ -44,9 +44,9 @@
     Health, temps d'écran) sont listés dans `texte-android.txt`. Première liste (#70) : « temps d'écran » seulement,
     dans la carte qui dit « Pas encore disponible sur iPhone » (juste, mise à part par `IPHONE_OK`) ; étape de CI
     bloquante depuis #71.
-  - [ ] Démo de l'iPhone fidèle à l'app Santé (30/10) : `iphoneDemoEntries` garde la VFC RMSSD de la démo d'Android
-    (« VFC nuit » dans le Journal depuis v612), alors que l'app Santé donne une VFC SDNN (« VFC (SDNN) ») ; la convertir
-    en `heartRateVariabilitySdnn`, puis refaire les captures de la fiche.
+  - [x] Démo de l'iPhone fidèle à l'app Santé (30/10, PR #88) : la VFC de la démo est en SDNN
+    (`heartRateVariabilitySdnn`), comme celle de l'app Santé ; elle a révélé la tuile VFC vide de l'Accueil (I4).
+    Captures de la fiche à refaire avant la soumission (Journal et Accueil changent).
   - [x] Captures de la fiche refaites le 30/10 (`captures/store`, Android v597) et regardées : 8 captures propres, barre
     d'état à 9:41, sans la bannière système « Prêt pour Apple Intelligence » vue une fois sur une capture de PR (#73) ;
     à revérifier à chaque nouvelle prise (aucun réglage `simctl` documenté pour l'empêcher).
@@ -121,6 +121,9 @@
     sous-catégorie). « Mes appareils » compte la VFC SDNN (correctif 19, PR #25). Norme personnelle SDNN prête
     (correctif 20, PR #26) ; radar avec la VFC SDNN prêt (correctif 21, branche `claude/ios-i4-radar-sdnn`, PR après #26).
   - [x] Simulateurs en français pour les captures (PR #9).
+  - [~] VFC de l'app Santé (SDNN) partout où Android montre la VFC (30/10) : Journal (correctif 17), normes et Radar
+    (20, 21) faits ; **Accueil** (tuile « VFC (SDNN) », correctif 30, PR #88) ; restent les **Analyses**
+    (`analysisEngine.js`, VFC de la nuit comme variable) et le **résumé du premier import** (`firstImport.js`).
 - [ ] **I5 — Notifications** : bilan du ventre du soir, note du soir, rappel de portion, rappel de fin d'essai ;
   actions dans la notification, réponse rangée à l'ouverture suivante.
   - [x] Règles du soir en Swift, testées par XCTest (`ios/HalcyaRules`, PR #18, mergée) : soirs programmés d'avance (iOS ne
