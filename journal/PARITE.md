@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v608 (commit `aca43a5`, 30/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v609 (commit `7b0f84a`, 30/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 30/10 11:05 | #525 (v609) | onboarding : le compteur d'écrans annonce d'emblée le plus grand nombre possible et ne fait que baisser (`displayedStepCount`, `Onboarding.jsx`) : code partagé, **vrai sur iPhone**, où il grimpait aussi (« 01/05 » au premier écran, « 04/06 » sur celui de l'app Santé, captures de #80) : le choix « Une montre ou une bague qui écrit dans l'app Santé » a la valeur `health_connect` (correctif 08) ; note de Nouveautés fausse sur iPhone (« une montre Health Connect ») : cachée (`APPSTORE_HIDDEN`), demande dans `DEMANDES.md` ; correctifs 08 et 23 (même fichier) toujours appliqués directement | — |
 | 30/10 10:05 | #524 (v608) | « Quand consulter » : une phrase fixe (`WHEN_TO_SEE_DOCTOR`, `today.js`) dans les détails de la carte « Votre ventre », la réintroduction et le bas du rapport PDF ; jamais déclenchée par les données : code partagé, vrai sur iPhone, note vraie (rien de propre à Android) ; correctifs 09 et 15 (rapport, `today.js`) toujours appliqués directement | — |
 | 30/10 09:05 | #522 (v606), #523 (v607) | #522 : idées et journal d'Android seulement ; #523 : **une seule source de sommeil par nuit** (`sleepSources.js`, nouveau ; Journal, Accueil, analyses, Radar, rapport) : code partagé, **vrai sur iPhone** (Apple Watch, iPhone « au lit » et une app de sommeil qui écrivent la même nuit dans l'app Santé ont la même source `health_connect` et des `sourceName` différents ; test iOS ajouté : 7 h, pas 14 h) ; **correctif 21 refait** (import voisin dans `radar.js`, fusion à trois) ; note de Nouveautés fausse sur iPhone (« Health Connect (Samsung Health, Health Sync…) ») : cachée (`APPSTORE_HIDDEN`), demande dans `DEMANDES.md` | — |
 | 30/10 07:05 | #521 (v605) | onboarding : « Continuer » désactivé en gris neutre (`.onb-continue:disabled`, `Onboarding.css`) : code partagé, vrai sur iPhone, note vraie ; le correctif 29 (même fichier, `.onb-action`) s'applique toujours, vérifié contre #521 avant sa sortie | — |
