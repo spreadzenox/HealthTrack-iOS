@@ -53,8 +53,8 @@
   - [x] Rapport PDF pour le médecin essayé à chaque build (29/10, PR #51, mergée) : PDF créé et feuille de partage
     ouverte sur les deux iPhone simulés ; l'enregistrement dans Fichiers par le test d'interface (feuille dépliée)
     est à confirmer sur la CI de #52.
-  - [ ] Nouveautés de l'iPhone à partir de sa propre version (29/10, correctif 28 : `APPSTORE_CHANGELOG_SINCE` =
-    29/10) ; **à avancer à la date du premier TestFlight** (I9), pour que les premiers testeurs partent de là.
+  - [x] Nouveautés de l'iPhone à partir du premier TestFlight (30/10, PR #97) : `APPSTORE_CHANGELOG_SINCE` =
+    2026-10-30-2100, note « Halcya arrive sur iPhone » (`variants: ["appstore"]`, correctif 33 pour le test d'Android).
 - [ ] **I3 — Données** : durabilité d'IndexedDB dans WKWebView (27/10 : non durable d'après Capacitor et WebKit,
   plan dans `RECHERCHE.md` : `persist()`, instantané automatique en fichier natif, restauration proposée si la base
   est vide ; 27/10 : copie de secours automatique, PR #6), sauvegarde iCloud, export / import JSON par la feuille
@@ -194,8 +194,9 @@
 - [ ] **I8 — Le reste du natif** (28/10 : sonde vocale `VoiceProbe` en Swift, PR #40) : voix, temps d'écran, montre Huawei (BLE), détection des sources : étude honnête
   (sources datées) puis ce qui est faisable ; ⛔ argumentés dans `PARITE.md`.
 - [~] **TestFlight (I9), 30/10** : A1, A2, A3 faits par le propriétaire, accord pour la signature par Apple ;
-  `testflight.yml` (lancement manuel sur `main`, environnement `appstore`) : premier envoi, puis branchement sur chaque
-  version (push sur `main`) une fois sûr ; ensuite A6 (testeuse : la compagne du propriétaire, iPhone 12).
+  `testflight.yml` : **premier envoi réussi** (616.97, après un refus pour `NSHealthUpdateUsageDescription`, #96) ;
+  reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
+  fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
   CI ; données collectées à compléter avec A5 ; captures 6,9" à la demande, données de démo fidèles à l'iPhone, PR #41 mergée ; 8 captures choisies le 29/10, `store/app-store/captures.md` ; textes sans lecture du visage ni « dans Apple Watch », PR #42) : signature par la CI (A2), envoi TestFlight interne à chaque version suivie, fiche App
   Store fr-FR (`store/`), captures, `PrivacyInfo.xcprivacy`, réponses « Confidentialité de l'app » (A5), relecture
