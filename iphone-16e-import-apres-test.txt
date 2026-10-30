@@ -1,0 +1,930 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /Users/runner/work/_temp/dd-tests/Build/Products/HalcyaUITests_iphonesimulator26.5-arm64-x86_64.xctestrun -destination id=600A45A3-B3A0-4A39-8A9C-5D051F9FDA9C "-only-testing:HalcyaUITests/DonneesUITests/testImporterUnFichierDepuisFichiers"
+
+2026-10-30 14:35:48.884 xcodebuild[32039:98943] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-30 14:35:48.920 xcodebuild[32039:98943] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:600A45A3-B3A0-4A39-8A9C-5D051F9FDA9C, OS:26.2, name:iPhone 16e }
+{ platform:iOS Simulator, arch:x86_64, id:600A45A3-B3A0-4A39-8A9C-5D051F9FDA9C, OS:26.2, name:iPhone 16e }
+2026-10-30 14:35:52.043 xcodebuild[32039:98943] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-10-30 14:35:58.490927+0000 HalcyaUITests-Runner[32680:100492] [Default] Running tests...
+2026-10-30 14:35:58.631097+0000 HalcyaUITests-Runner[32680:100573] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+    t =      nans Interface orientation changed to Portrait
+2026-10-30 14:36:01.287371+0000 HalcyaUITests-Runner[32680:100577] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+Test Suite 'Selected tests' started at 2026-10-30 14:36:01.380.
+Test Suite 'HalcyaUITests.xctest' started at 2026-10-30 14:36:01.381.
+Test Suite 'DonneesUITests' started at 2026-10-30 14:36:01.382.
+Test Case '-[HalcyaUITests.DonneesUITests testImporterUnFichierDepuisFichiers]' started.
+    t =     0.00s Start Test at 2026-10-30 14:36:01.383
+    t =     0.30s Set Up
+    t =     0.31s Open fr.jpesquet.sante
+    t =     0.31s     Activate fr.jpesquet.sante
+    t =     0.42s         Wait for fr.jpesquet.sante to idle
+    t =     0.51s Waiting 30.0s for Any (First Match) to exist
+    t =     1.52s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     1.53s         Checking existence of `Any (First Match)`
+    t =     1.65s Tap Any (First Match)
+    t =     1.65s     Wait for fr.jpesquet.sante to idle
+    t =     1.66s     Find the Any (First Match)
+    t =     1.72s     Check for interrupting elements affecting "Choisir un fichier à importer" Button
+    t =     1.86s     Synthesize event
+    t =     2.29s     Wait for fr.jpesquet.sante to idle
+    t =     2.38s Waiting 2.0s for Any (First Match) to exist
+    t =     3.42s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     3.42s         Checking existence of `Any (First Match)`
+    t =     3.48s         Capturing element debug description
+    t =     4.39s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     4.39s         Checking existence of `Any (First Match)`
+    t =     4.52s         Capturing element debug description
+    t =     4.52s     Checking existence of `Any (First Match)`
+    t =     4.62s Collecting debug information to assist test failure triage
+    t =     4.62s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =     4.76s Waiting 2.0s for Any (First Match) to exist
+    t =     5.77s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     5.78s         Checking existence of `Any (First Match)`
+    t =     5.88s         Capturing element debug description
+    t =     6.83s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     6.85s         Checking existence of `Any (First Match)`
+    t =     7.13s         Capturing element debug description
+    t =     7.13s     Checking existence of `Any (First Match)`
+    t =     7.55s Collecting debug information to assist test failure triage
+    t =     7.55s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =     7.96s Checking existence of `"Récents" Button`
+    t =     8.14s Waiting 8.0s for Cell (First Match) to exist
+    t =     9.16s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =     9.16s         Checking existence of `Cell (First Match)`
+    t =    10.50s         Capturing element debug description
+    t =    11.15s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =    11.15s         Checking existence of `Cell (First Match)`
+    t =    11.29s         Capturing element debug description
+    t =    12.14s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =    12.15s         Checking existence of `Cell (First Match)`
+    t =    13.12s         Capturing element debug description
+    t =    13.21s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =    13.21s         Checking existence of `Cell (First Match)`
+    t =    13.74s         Capturing element debug description
+    t =    14.18s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =    14.18s         Checking existence of `Cell (First Match)`
+    t =    14.55s         Capturing element debug description
+    t =    15.16s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =    15.16s         Checking existence of `Cell (First Match)`
+    t =    15.28s         Capturing element debug description
+    t =    16.15s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =    16.15s         Checking existence of `Cell (First Match)`
+    t =    16.28s         Capturing element debug description
+    t =    16.28s     Checking existence of `Cell (First Match)`
+    t =    16.38s Collecting debug information to assist test failure triage
+    t =    16.38s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    16.61s Waiting 3.0s for Any (First Match) to exist
+    t =    17.62s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    17.62s         Checking existence of `Any (First Match)`
+    t =    17.72s Tap Any (First Match)
+    t =    17.72s     Wait for fr.jpesquet.sante to idle
+    t =    17.73s     Find the Any (First Match)
+    t =    17.82s     Check for interrupting elements affecting "Explorer" Button
+    t =    17.95s     Synthesize event
+    t =    18.50s     Wait for fr.jpesquet.sante to idle
+    t =    18.52s Checking existence of `Cell (First Match)`
+    t =    20.70s Checking existence of `Cell (First Match)`
+    t =    20.90s Waiting 10.0s for Cell (First Match) to exist
+    t =    21.97s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =    21.98s         Checking existence of `Cell (First Match)`
+    t =    22.10s Tap Cell (First Match)
+    t =    22.10s     Wait for fr.jpesquet.sante to idle
+    t =    22.10s     Find the Cell (First Match)
+    t =    22.21s     Check for interrupting elements affecting "halcya-essai-import.json, json" Cell
+    t =    22.31s     Synthesize event
+    t =    22.62s     Wait for fr.jpesquet.sante to idle
+    t =    22.63s Waiting 3.0s for "Ouvrir" Button to exist
+    t =    23.67s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    23.67s         Checking existence of `"Ouvrir" Button`
+    t =    23.79s         Capturing element debug description
+    t =    24.63s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    24.63s         Checking existence of `"Ouvrir" Button`
+    t =    24.80s         Capturing element debug description
+    t =    25.64s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    25.64s         Checking existence of `"Ouvrir" Button`
+    t =    25.75s         Capturing element debug description
+    t =    25.76s     Checking existence of `"Ouvrir" Button`
+    t =    25.88s Collecting debug information to assist test failure triage
+    t =    25.88s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    26.10s Waiting 5.0s for Any (First Match) to exist
+    t =    27.16s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    27.16s         Checking existence of `Any (First Match)`
+    t =    27.31s         Capturing element debug description
+    t =    28.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    28.11s         Checking existence of `Any (First Match)`
+    t =    28.25s         Capturing element debug description
+    t =    29.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    29.11s         Checking existence of `Any (First Match)`
+    t =    29.27s         Capturing element debug description
+    t =    30.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    30.11s         Checking existence of `Any (First Match)`
+    t =    30.27s         Capturing element debug description
+    t =    31.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    31.11s         Checking existence of `Any (First Match)`
+    t =    31.26s         Capturing element debug description
+    t =    31.27s     Checking existence of `Any (First Match)`
+    t =    31.39s Collecting debug information to assist test failure triage
+    t =    31.39s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    31.63s Checking existence of `"halcya-essai-import.json, json" Cell`
+    t =    31.79s Checking existence of `"Annuler" Button`
+fichier toujours affiché 5 s après le toucher : second toucher
+    t =    31.92s Tap "halcya-essai-import.json, json" Cell
+    t =    31.92s     Wait for fr.jpesquet.sante to idle
+    t =    31.93s     Find the "halcya-essai-import.json, json" Cell
+    t =    32.04s     Check for interrupting elements affecting "halcya-essai-import.json, json" Cell
+    t =    32.18s     Synthesize event
+    t =    32.52s     Wait for fr.jpesquet.sante to idle
+    t =    32.52s Waiting 3.0s for "Ouvrir" Button to exist
+    t =    33.54s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    33.54s         Checking existence of `"Ouvrir" Button`
+    t =    33.68s         Capturing element debug description
+    t =    34.57s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    34.57s         Checking existence of `"Ouvrir" Button`
+    t =    34.70s         Capturing element debug description
+    t =    35.53s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    35.53s         Checking existence of `"Ouvrir" Button`
+    t =    35.66s         Capturing element debug description
+    t =    35.66s     Checking existence of `"Ouvrir" Button`
+    t =    35.78s Collecting debug information to assist test failure triage
+    t =    35.78s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    36.05s Waiting 30.0s for Any (First Match) to exist
+    t =    37.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    37.09s         Checking existence of `Any (First Match)`
+    t =    37.24s         Capturing element debug description
+    t =    38.05s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    38.05s         Checking existence of `Any (First Match)`
+    t =    38.20s         Capturing element debug description
+    t =    39.06s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    39.06s         Checking existence of `Any (First Match)`
+    t =    39.24s         Capturing element debug description
+    t =    40.05s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    40.05s         Checking existence of `Any (First Match)`
+    t =    40.18s         Capturing element debug description
+    t =    41.08s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    41.08s         Checking existence of `Any (First Match)`
+    t =    41.21s         Capturing element debug description
+    t =    42.13s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    42.13s         Checking existence of `Any (First Match)`
+    t =    42.28s         Capturing element debug description
+    t =    43.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    43.09s         Checking existence of `Any (First Match)`
+    t =    43.29s         Capturing element debug description
+    t =    44.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    44.09s         Checking existence of `Any (First Match)`
+    t =    44.24s         Capturing element debug description
+    t =    45.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    45.09s         Checking existence of `Any (First Match)`
+    t =    45.25s         Capturing element debug description
+    t =    46.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    46.09s         Checking existence of `Any (First Match)`
+    t =    46.34s         Capturing element debug description
+    t =    47.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    47.11s         Checking existence of `Any (First Match)`
+    t =    47.33s         Capturing element debug description
+    t =    48.07s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    48.07s         Checking existence of `Any (First Match)`
+    t =    48.31s         Capturing element debug description
+    t =    49.06s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    49.06s         Checking existence of `Any (First Match)`
+    t =    49.29s         Capturing element debug description
+    t =    50.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    50.09s         Checking existence of `Any (First Match)`
+    t =    50.27s         Capturing element debug description
+    t =    51.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    51.10s         Checking existence of `Any (First Match)`
+    t =    51.35s         Capturing element debug description
+    t =    52.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    52.09s         Checking existence of `Any (First Match)`
+    t =    52.32s         Capturing element debug description
+    t =    53.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    53.11s         Checking existence of `Any (First Match)`
+    t =    53.33s         Capturing element debug description
+    t =    54.05s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    54.06s         Checking existence of `Any (First Match)`
+    t =    54.22s         Capturing element debug description
+    t =    55.06s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    55.06s         Checking existence of `Any (First Match)`
+    t =    55.24s         Capturing element debug description
+    t =    56.08s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    56.08s         Checking existence of `Any (First Match)`
+    t =    56.26s         Capturing element debug description
+    t =    57.10s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    57.10s         Checking existence of `Any (First Match)`
+    t =    57.27s         Capturing element debug description
+    t =    58.05s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    58.05s         Checking existence of `Any (First Match)`
+    t =    58.22s         Capturing element debug description
+    t =    59.11s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    59.11s         Checking existence of `Any (First Match)`
+    t =    59.43s         Capturing element debug description
+    t =    60.06s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    60.06s         Checking existence of `Any (First Match)`
+    t =    60.25s         Capturing element debug description
+    t =    61.06s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    61.06s         Checking existence of `Any (First Match)`
+    t =    61.21s         Capturing element debug description
+    t =    62.13s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    62.13s         Checking existence of `Any (First Match)`
+    t =    62.32s         Capturing element debug description
+    t =    63.06s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    63.06s         Checking existence of `Any (First Match)`
+    t =    63.25s         Capturing element debug description
+    t =    64.10s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    64.10s         Checking existence of `Any (First Match)`
+    t =    64.29s         Capturing element debug description
+    t =    65.09s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    65.09s         Checking existence of `Any (First Match)`
+    t =    65.27s         Capturing element debug description
+    t =    66.06s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    66.06s         Checking existence of `Any (First Match)`
+    t =    66.20s         Capturing element debug description
+    t =    66.20s     Checking existence of `Any (First Match)`
+    t =    66.34s Collecting debug information to assist test failure triage
+    t =    66.35s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+aucun aperçu après le parcours 1
+    t =    66.66s Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    67.44s Requesting snapshot of accessibility hierarchy for app with pid 8587
+Attributes: Application, 0x103e35360, pid: 8587, label: 'Halcya'
+Element subtree:
+ →Application, 0x103e35360, pid: 8587, label: 'Halcya'
+    Window (Main), 0x103e3dd30, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x103e343b0, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x103e06860, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x103e3c820, {{-390.0, -844.0}, {1170.0, 2532.0}}
+          WebView, 0x103e364a0, {{0.0, 0.0}, {390.0, 844.0}}
+            WebView, 0x103e18ab0, {{0.0, 0.0}, {390.0, 844.0}}
+              WebView, 0x103e2e8d0, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x103e17e50, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x103e18ed0, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x103e2ab70, {{0.0, -397.0}, {390.0, 844.0}}
+                      Other, 0x103e34880, {{0.0, -397.0}, {390.0, 1323.0}}, label: 'Halcya – ventre et bien-être', Focused
+                        Other, 0x103e18270, {{16.0, -350.0}, {358.0, 70.0}}, label: 'bannière', Focused
+                          Other, 0x103e38c40, {{58.0, -326.0}, {61.0, 24.0}}, label: 'Halcya', value: 1, Focused
+                            StaticText, 0x103e30ed0, {{58.0, -326.0}, {61.0, 24.0}}, label: 'Halcya', value: Halcya, Focused
+                          Link, 0x103e35050, {{330.0, -336.0}, {44.0, 44.0}}, label: 'Réglages', Focused
+                        Other, 0x103e049d0, {{16.0, -280.0}, {358.0, 1100.0}}, label: 'principal', Focused
+                          Other, 0x103e15920, {{16.0, -280.0}, {358.0, 24.0}}, label: 'Vos données', value: 2, Focused
+                            StaticText, 0x103e3f4f0, {{16.0, -280.0}, {118.0, 24.0}}, label: 'Vos données', value: Vos données, Focused
+                          Other, 0x103e33170, {{16.0, -248.0}, {358.0, 100.0}}, Focused
+                            StaticText, 0x103e453d0, {{16.0, -247.0}, {137.0, 18.0}}, label: 'Vos données restent', value: Vos données restent , Focused
+                            StaticText, 0x103e454f0, {{152.0, -247.0}, {103.0, 18.0}}, label: 'sur cet appareil', value: sur cet appareil, Focused
+                            StaticText, 0x103e3d6b0, {{16.0, -247.0}, {345.0, 38.0}}, label: 'et survivent aux mises à jour.', value:  et survivent aux ..., Focused
+                            StaticText, 0x103e3d7d0, {{16.0, -227.0}, {354.0, 78.0}}, label: 'Une copie de secours est tenue à jour dans l’app Fichiers › Sur mon iPhone › Halcya ; avant de réinstaller ou de changer de téléphone, exportez-les aussi.', value: Une copie de secou..., Focused
+                          Other, 0x103e3fac0, {{32.0, -112.0}, {326.0, 20.0}}, label: 'Exporter (sauvegarde)', value: 3, Focused
+                            StaticText, 0x103e65650, {{32.0, -112.0}, {163.0, 20.0}}, label: 'Exporter (sauvegarde)', value: Exporter (sauvegar..., Focused
+                          Other, 0x103e65770, {{32.0, -80.0}, {326.0, 40.0}}, Focused
+                            StaticText, 0x103e65890, {{32.0, -79.0}, {315.0, 38.0}}, label: 'Un fichier avec toutes vos entrées et votre profil, rangé dans', value: Un fichier avec to..., Focused
+                            StaticText, 0x103e659b0, {{106.0, -59.0}, {76.0, 18.0}}, label: 'Documents', value: Documents, Focused
+                            StaticText, 0x103e65ad0, {{181.0, -59.0}, {4.0, 18.0}}, label: '.', value: ., Focused
+                          Button, 0x103e65bf0, {{32.0, -28.0}, {230.0, 52.0}}, label: 'Télécharger la sauvegarde', Focused
+                          Other, 0x103e65d10, {{16.0, 80.0}, {358.0, 180.0}}, label: 'article', Focused
+                            StaticText, 0x103e65e30, {{34.0, 96.0}, {235.0, 20.0}}, label: 'Rapport PDF pour mon médecin', value: Rapport PDF pour m..., Focused
+                            Other, 0x103e65f50, {{34.0, 124.0}, {322.0, 60.0}}, Focused
+                              StaticText, 0x103e66070, {{34.0, 125.0}, {319.0, 58.0}}, label: 'Votre ventre semaine par semaine, vos repas et vos pistes, sur 2 pages. Créé sur votre téléphone : vous choisissez à qui l’envoyer.', value: Votre ventre semai..., Focused
+                            Button, 0x103e663d0, {{34.0, 192.0}, {322.0, 52.0}}, label: 'Préparer le rapport', Focused
+                          Other, 0x103e664f0, {{32.0, 312.0}, {326.0, 20.0}}, label: 'Importer (restaurer)', value: 3, Focused
+                            StaticText, 0x103e66610, {{32.0, 312.0}, {146.0, 20.0}}, label: 'Importer (restaurer)', value: Importer (restaurer), Focused
+                          Other, 0x103e66730, {{32.0, 344.0}, {326.0, 40.0}}, Focused
+                            StaticText, 0x103e66850, {{32.0, 345.0}, {276.0, 18.0}}, label: 'Vous verrez son contenu avant de choisir :', value: Vous verrez son co..., Focused
+                            StaticText, 0x103e66970, {{307.0, 345.0}, {48.0, 18.0}}, label: 'ajouter', value: ajouter, Focused
+                            StaticText, 0x103e66a90, {{32.0, 365.0}, {126.0, 18.0}}, label: '(sans doublons) ou', value: (sans doublons) ou , Focused
+                            StaticText, 0x103e66bb0, {{157.0, 365.0}, {68.0, 18.0}}, label: 'remplacer', value: remplacer, Focused
+                            StaticText, 0x103e66cd0, {{224.0, 365.0}, {4.0, 18.0}}, label: '.', value: ., Focused
+                          Button, 0x103e66df0, {{16.0, 296.0}, {358.0, 10.0}}, label: 'Choisir un fichier de sauvegarde', Focused
+                          Button, 0x103e66f10, {{32.0, 396.0}, {247.0, 52.0}}, label: 'Choisir un fichier à importer', Focused
+                          Button, 0x103e67030, {{32.0, 460.0}, {326.0, 68.0}}, label: 'Restaurer la copie de secours (il y a moins d’une heure)', Focused
+                          Other, 0x103e67150, {{32.0, 584.0}, {326.0, 20.0}}, label: 'Supprimer', value: 3, Focused
+                            StaticText, 0x103e67270, {{32.0, 584.0}, {77.0, 20.0}}, label: 'Supprimer', value: Supprimer, Focused
+                          Other, 0x103e67390, {{32.0, 616.0}, {326.0, 100.0}}, Focused
+                            StaticText, 0x103e674b0, {{32.0, 617.0}, {324.0, 98.0}}, label: 'Efface de ce téléphone vos repas, notes, mesures, lectures du visage et votre profil. Chez nous, il ne reste au plus qu’un compteur d’analyses IA, sous une empreinte anonyme, effacé seul au bout de 13 mois sans analyse.', value: Efface de ce télép..., Focused
+                          Button, 0x103e67970, {{32.0, 728.0}, {271.0, 52.0}}, label: 'Supprimer toutes mes données', Focused
+                        Other, 0x103e67a90, {{0.0, 749.0}, {390.0, 95.0}}, label: 'Principal, navigation', Focused
+                          Link, 0x103e67bb0, {{25.0, 789.0}, {60.0, 15.0}}, label: 'Aujourd’hui', Focused
+                            StaticText, 0x103e67cd0, {{25.0, 789.0}, {60.0, 15.0}}, label: 'Aujourd’hui', value: Aujourd’hui, Focused
+                          Link, 0x103e67df0, {{129.0, 789.0}, {39.0, 15.0}}, label: 'Journal', Focused
+                            StaticText, 0x103e67f10, {{129.0, 789.0}, {39.0, 15.0}}, label: 'Journal', value: Journal, Focused
+                          Link, 0x103e68030, {{218.0, 789.0}, {47.0, 15.0}}, label: 'Analyses', Focused
+                            StaticText, 0x103e68150, {{218.0, 789.0}, {47.0, 15.0}}, label: 'Analyses', value: Analyses, Focused
+                          Link, 0x103e68270, {{314.0, 789.0}, {43.0, 15.0}}, label: 'Sources', Focused
+                            StaticText, 0x103e68390, {{314.0, 789.0}, {43.0, 15.0}}, label: 'Sources', value: Sources, Focused
+              Other, 0x103e684b0, {{357.0, 47.3}, {30.0, 749.3}}, label: 'Barre de défilement verticale, 2 pages', value: 83 %
+                Other, 0x103e685d0, {{384.0, 273.3}, {3.0, 474.3}}
+              Other, 0x103e686f0, {{47.3, 811.0}, {295.3, 30.0}}, label: 'Barre de défilement horizontale, 1 page', value: 0 %
+                Other, 0x103e68810, {{50.3, 838.0}, {289.3, 3.0}}
+              Other, 0x103e68930, {{357.0, 47.3}, {30.0, 749.3}}, label: 'Barre de défilement verticale, 2 pages', value: 83 %
+                Other, 0x103e68a50, {{384.0, 273.3}, {3.0, 474.3}}
+              Other, 0x103e68b70, {{47.3, 811.0}, {295.3, 30.0}}, label: 'Barre de défilement horizontale, 1 page', value: 0 %
+                Other, 0x103e68c90, {{50.3, 838.0}, {289.3, 3.0}}
+      Other, 0x103e68db0, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x103e68ed0, {{-390.0, -844.0}, {1170.0, 2532.0}}
+        Other, 0x103e68ff0, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x103e69110, {{0.0, 0.0}, {390.0, 844.0}}
+            Other, 0x103e69230, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x103e69350, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x103e69470, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x103e69590, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x103e696b0, {{281.3, 77.0}, {36.7, 36.0}}, label: 'Annuler'
+                  Other, 0x103e697d0, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x103e698f0, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x103e69a10, {{0.0, 0.0}, {390.0, 844.0}}
+                        Other, 0x103e69b30, {{0.0, 0.0}, {390.0, 844.0}}
+                          Other, 0x103e69c50, {{0.0, 0.0}, {390.0, 844.0}}
+                            Other, 0x103e69d70, {{0.0, 0.0}, {390.0, 844.0}}
+                              Other, 0x103e69e90, {{0.0, 57.0}, {390.0, 787.0}}
+                                Image, 0x103e69fb0, {{-150.0, -93.0}, {690.0, 1087.0}}
+                                Other, 0x103e6a0d0, {{0.0, 57.0}, {390.0, 787.0}}
+                                  Other, 0x103e6a1f0, {{0.0, 57.0}, {390.0, 787.0}}
+                                    Other, 0x103e6a310, {{0.0, 57.0}, {390.0, 787.0}}
+                                      Other, 0x103e6a430, {{0.0, 57.0}, {390.0, 787.0}}
+                                        Other, 0x103e6a550, {{0.0, 57.0}, {390.0, 787.0}}
+                                          Other, 0x103e6a670, {{0.0, 57.0}, {390.0, 787.0}}
+                                          Other, 0x103e6a790, {{0.0, 57.0}, {390.0, 787.0}}
+                                            Other, 0x103e6a8b0, {{0.0, 57.0}, {390.0, 787.0}}
+                                              Other, 0x103e6a9d0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                Other, 0x103e6aaf0, {{0.0, 57.0}, {390.0, 787.0}}, identifier: 'Browse View (Picker)'
+                                                  Other, 0x103e6ac10, {{0.0, 57.0}, {390.0, 787.0}}
+                                                    Other, 0x103e6ad30, {{0.0, 57.0}, {390.0, 787.0}}
+                                                      Other, 0x103e6ae50, {{0.0, 57.0}, {390.0, 787.0}}
+                                                        Other, 0x103e6af70, {{0.0, 57.0}, {390.0, 787.0}}
+                                                        Other, 0x103e6b090, {{0.0, 57.0}, {390.0, 787.0}}, identifier: 'DOC.browsingRoot Source: com.apple.FileProvider.LocalStorage, Title: Halcya'
+                                                          NavigationBar, 0x103e6b1b0, {{0.0, 73.0}, {390.0, 114.0}}, identifier: 'FullDocumentManagerViewControllerNavigationBar'
+                                                            Button, 0x103e6b2d0, {{16.0, 73.0}, {44.0, 44.0}}, identifier: 'BackButton', label: 'Sur mon iPhone'
+                                                            Button, 0x103e6b3f0, {{154.7, 84.7}, {54.7, 20.7}}, label: 'Halcya, Menu d’actions'
+                                                            Button, 0x103e6b510, {{281.3, 77.0}, {36.7, 36.0}}, label: 'Annuler'
+                                                            Button, 0x103e6b630, {{334.0, 77.0}, {36.0, 36.0}}, identifier: 'OverflowBarButtonItem', label: 'Plus'
+                                                            SearchField, 0x103e6b750, {{16.0, 128.0}, {358.0, 44.0}}, label: 'Rechercher', placeholderValue: 'Rechercher'
+                                                              Image, 0x103e6b870, {{28.0, 140.0}, {20.7, 19.3}}, identifier: 'magnifyingglass', label: 'Rechercher'
+                                                          Other, 0x103e6b990, {{0.0, 57.0}, {390.0, 787.0}}
+                                                            Other, 0x103e6bab0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                              Other, 0x103e6bbd0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                Other, 0x103e6bcf0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                  ScrollView, 0x103e6be10, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                    Other, 0x103e6bf30, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                      Other, 0x103e6c050, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                      Other, 0x103e6c170, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                    Other, 0x103e6c290, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                      Other, 0x103e6c3b0, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                        Image, 0x103e6c4d0, {{-120.0, -118.0}, {630.0, 350.0}}, identifier: 'AdditionalDimmingOverlay'
+                                                                        Other, 0x103e6c5f0, {{0.0, 57.0}, {390.0, 115.0}}
+                                                                        Other, 0x103e6c710, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                          Other, 0x103e6c830, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                        Other, 0x103e6c950, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                          Other, 0x103e6ca70, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                        Other, 0x103e6cb90, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                          Other, 0x103e6ccb0, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                          Other, 0x103e6cdd0, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                      Other, 0x103e6cef0, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                        Image, 0x103e6d010, {{-120.0, 701.0}, {630.0, 286.0}}, identifier: 'AdditionalDimmingOverlay'
+                                                                        Other, 0x103e6d130, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                          Other, 0x103e6d250, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                        Other, 0x103e6d370, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                          Other, 0x103e6d490, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                          Other, 0x103e6d5b0, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                    CollectionView, 0x103e6d6d0, {{0.0, 57.0}, {390.0, 787.0}}, identifier: 'File View', value: Icon Mode
+                                                                      Cell, 0x103e6d7f0, {{10.0, 197.0}, {118.0, 189.7}}, identifier: 'capture, Folder', label: 'capture, 3 éléments'
+                                                                        Other, 0x103e6d910, {{10.0, 197.0}, {118.0, 189.7}}
+                                                                        Other, 0x103e6da30, {{10.0, 197.0}, {118.0, 189.7}}
+                                                                          Other, 0x103e6db50, {{27.0, 201.0}, {84.0, 84.0}}
+                                                                            Image, 0x103e6dc70, {{27.0, 201.0}, {84.0, 84.0}}
+                                                                          Other, 0x103e6dd90, {{13.0, 290.0}, {112.0, 55.7}}
+                                                                            StaticText, 0x103e6deb0, {{13.0, 290.0}, {112.0, 20.0}}, label: 'capture'
+                                                                            StaticText, 0x103e6dfd0, {{13.0, 313.0}, {112.0, 14.3}}, label: '3 éléments'
+                                                                            StaticText, 0x103e6e0f0, {{13.0, 331.3}, {112.0, 14.3}}
+                                                                      Cell, 0x103e6e210, {{136.0, 197.0}, {118.0, 189.7}}, identifier: 'Halcya-copie-de-secours.json, json', label: 'Halcya-copie-de-secours.json, json, 14:35, 482 ko'
+                                                                        Other, 0x103e6e330, {{136.0, 197.0}, {118.0, 189.7}}
+                                                                        Other, 0x103e6e450, {{136.0, 197.0}, {118.0, 189.7}}
+                                                                          Other, 0x103e6e570, {{153.0, 201.0}, {84.0, 84.0}}
+                                                                            Image, 0x103e6e690, {{163.7, 201.0}, {63.0, 84.0}}
+                                                                            Other, 0x103e6e7b0, {{163.7, 201.0}, {63.0, 84.0}}
+                                                                          Other, 0x103e6e8d0, {{139.0, 290.0}, {112.0, 75.7}}
+                                                                            StaticText, 0x103e6e9f0, {{139.0, 290.0}, {112.0, 40.0}}, label: 'Halcya-copie-de-secours.json'
+                                                                            StaticText, 0x103e6eb10, {{139.0, 333.0}, {112.0, 14.3}}, label: '14:35'
+                                                                            StaticText, 0x103e6ec30, {{139.0, 351.3}, {112.0, 14.3}}, label: '482 ko'
+                                                                      Cell, 0x103e6ed50, {{262.0, 197.0}, {118.0, 189.7}}, identifier: 'halcya-essai-import.json, json', label: 'halcya-essai-import.json, json, 14:35, 336 octets'
+                                                                        Other, 0x103e6ee70, {{262.0, 197.0}, {118.0, 189.7}}
+                                                                        Other, 0x103e6ef90, {{262.0, 197.0}, {118.0, 189.7}}
+                                                                          Other, 0x103e6f0b0, {{279.0, 201.0}, {84.0, 84.0}}
+                                                                            Image, 0x103e6f1d0, {{289.7, 201.0}, {63.0, 84.0}}
+                                                                            Other, 0x103e6f2f0, {{289.7, 201.0}, {63.0, 84.0}}
+                                                                          Other, 0x103e6f410, {{265.0, 290.0}, {112.0, 75.7}}
+                                                                            StaticText, 0x103e6f530, {{265.0, 290.0}, {112.0, 40.0}}, label: 'halcya-essai-import.json'
+                                                                            StaticText, 0x103e6f650, {{265.0, 333.0}, {112.0, 14.3}}, label: '14:35'
+                                                                            StaticText, 0x103e6f770, {{265.0, 351.3}, {112.0, 14.3}}, label: '336 octets'
+                                                                      Other, 0x103e6f890, {{0.0, 723.0}, {390.0, 38.0}}
+                                                                        Other, 0x103e6f9b0, {{0.0, 723.0}, {390.0, 38.0}}, identifier: 'DOCItemCollectionViewFooterViewIdentifier'
+                                                                          StaticText, 0x103e6fad0, {{154.3, 723.0}, {81.3, 18.0}}, label: '3 éléments'
+                                                                      Other, 0x103e6fbf0, {{357.0, 187.0}, {30.0, 574.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                                                        Other, 0x103e6fd10, {{384.0, 506.3}, {3.0, 251.7}}
+                                                                      Other, 0x103e6fe30, {{357.0, 187.0}, {30.0, 574.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                                                        Other, 0x103e6ff50, {{384.0, 506.3}, {3.0, 251.7}}
+                                                                    Other, 0x103e70070, {{357.0, 187.0}, {30.0, 574.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                                                      Other, 0x103e70190, {{384.0, 751.0}, {3.0, 7.0}}
+                                                                    Other, 0x103e702b0, {{41.3, 728.0}, {307.0, 30.0}}, label: 'Barre de défilement horizontale, 1 page', value: 0 %
+                                                                      Other, 0x103e703d0, {{338.3, 755.0}, {7.0, 3.0}}
+                                                                    Other, 0x103e704f0, {{357.0, 187.0}, {30.0, 574.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                                                      Other, 0x103e70610, {{384.0, 751.0}, {3.0, 7.0}}
+                                                                    Other, 0x103e70730, {{41.3, 728.0}, {307.0, 30.0}}, label: 'Barre de défilement horizontale, 1 page', value: 0 %
+                                                                      Other, 0x103e70850, {{338.3, 755.0}, {7.0, 3.0}}
+                                                          Other, 0x103e70970, {{0.0, 57.0}, {390.0, 787.0}}
+                                                            Other, 0x103e70a90, {{0.0, 57.0}, {390.0, 787.0}}
+                                                  Other, 0x103e70bb0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                    Other, 0x103e70cd0, {{0.0, 57.0}, {390.0, 787.0}}
+                                            Other, 0x103e70df0, {{0.0, 761.0}, {390.0, 83.0}}
+                                              Other, 0x103e70f10, {{0.0, 57.0}, {390.0, 787.0}}
+                                                TabBar, 0x103e71030, {{0.0, 761.0}, {390.0, 83.0}}, identifier: 'DOC.browsingModeTabBar', label: 'Barre d’onglets'
+                                                  Other, 0x103e71150, {{58.0, 761.0}, {274.0, 62.0}}
+                                                    Other, 0x103e71270, {{58.0, 761.0}, {94.0, 54.0}}
+                                                    Other, 0x103e71390, {{58.0, 761.0}, {274.0, 62.0}}
+                                                      Button, 0x103e714b0, {{62.0, 765.0}, {94.0, 54.0}}, label: 'Récents'
+                                                        Image, 0x103e715d0, {{95.0, 771.3}, {27.3, 27.3}}, identifier: 'clock.fill', label: 'horloge'
+                                                      Button, 0x103e716f0, {{148.0, 765.0}, {94.0, 54.0}}, label: 'Partagé'
+                                                        Image, 0x103e71810, {{179.0, 770.3}, {35.0, 27.0}}, identifier: 'folder.fill.badge.person.crop', label: 'Dossier partagé'
+                                                      Button, 0x103e71930, {{234.0, 765.0}, {94.0, 54.0}}, label: 'Explorer', Selected
+                                                        Image, 0x103e71a50, {{265.0, 772.3}, {32.0, 25.0}}, identifier: 'folder.fill', label: 'déplacer'
+                                                    Other, 0x103e71b70, {{234.0, 765.0}, {94.0, 54.0}}
+                                                      Other, 0x103e71c90, {{234.0, 765.0}, {94.0, 54.0}}
+                                                        Other, 0x103e71db0, {{234.0, 765.0}, {94.0, 54.0}}
+                                                        Other, 0x103e71ed0, {{234.0, 765.0}, {94.0, 54.0}}
+                                                          Other, 0x103e71ff0, {{234.0, 765.0}, {94.0, 54.0}}
+                                                            Other, 0x103e72110, {{234.0, 765.0}, {94.0, 54.0}}
+                                                              Other, 0x103e72230, {{234.0, 765.0}, {94.0, 54.0}}
+                                                            Other, 0x103e72350, {{234.0, 765.0}, {94.0, 54.0}}
+                                                          Other, 0x103e72470, {{234.0, 765.0}, {94.0, 54.0}}
+                                              Other, 0x103e72590, {{0.0, 761.0}, {390.0, 83.0}}
+                                                Other, 0x103e726b0, {{0.0, 761.0}, {390.0, 83.0}}
+                                                  Other, 0x103e727d0, {{0.0, 761.0}, {390.0, 83.0}}
+                                                    Other, 0x103e728f0, {{0.0, 761.0}, {390.0, 83.0}}
+                                                      Other, 0x103e72a10, {{0.0, 761.0}, {390.0, 83.0}}
+                                                        Other, 0x103e72b30, {{0.0, 761.0}, {390.0, 83.0}}
+                                                    Other, 0x103e72c50, {{0.0, 761.0}, {390.0, 83.0}}
+                                                      Other, 0x103e72d70, {{0.0, 761.0}, {390.0, 83.0}}
+    Window, 0x103e72e90, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x103e72fb0, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x103e730d0, {{0.0, 0.0}, {390.0, 844.0}}
+Path to element:
+ →Application, 0x103e35360, pid: 8587, label: 'Halcya'
+Query chain:
+ →Find: Application 'fr.jpesquet.sante'
+  Output: {
+    Application, 0x103dce700, pid: 8587, label: 'Halcya'
+  }
+
+    t =    67.68s Waiting 1.0s for "Annuler" Button to exist
+    t =    68.69s     Checking `Expect predicate `existsNoRetry == 1` for object "Annuler" Button`
+    t =    68.69s         Checking existence of `"Annuler" Button`
+    t =    68.86s     Checking existence of `"Annuler" Button`
+    t =    69.03s Tap "Annuler" Button
+    t =    69.03s     Wait for fr.jpesquet.sante to idle
+    t =    69.03s     Find the "Annuler" Button
+    t =    69.16s     Check for interrupting elements affecting "Annuler" Button
+    t =    69.29s     Synthesize event
+    t =    69.79s     Wait for fr.jpesquet.sante to idle
+    t =    70.26s Tap "Choisir un fichier à importer" Button
+    t =    70.31s     Wait for fr.jpesquet.sante to idle
+    t =    70.43s     Find the "Choisir un fichier à importer" Button
+    t =    70.78s     Check for interrupting elements affecting "Choisir un fichier à importer" Button
+    t =    71.41s     Synthesize event
+    t =    71.95s     Wait for fr.jpesquet.sante to idle
+    t =    71.99s Waiting 2.0s for Any (First Match) to exist
+    t =    73.02s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    73.03s         Checking existence of `Any (First Match)`
+    t =    73.08s         Capturing element debug description
+    t =    74.02s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    74.02s         Checking existence of `Any (First Match)`
+    t =    74.28s         Capturing element debug description
+    t =    74.28s     Checking existence of `Any (First Match)`
+    t =    78.97s Collecting debug information to assist test failure triage
+    t =    78.97s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    79.36s Waiting 2.0s for Any (First Match) to exist
+    t =    80.42s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    80.42s         Checking existence of `Any (First Match)`
+    t =    80.57s         Capturing element debug description
+    t =    81.36s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    81.36s         Checking existence of `Any (First Match)`
+    t =    81.54s         Capturing element debug description
+    t =    81.54s     Checking existence of `Any (First Match)`
+    t =    81.71s Collecting debug information to assist test failure triage
+    t =    81.71s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    81.94s Checking existence of `"Récents" Button`
+    t =    82.09s Waiting 8.0s for Cell (First Match) to exist
+    t =    83.11s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =    83.11s         Checking existence of `Cell (First Match)`
+    t =    83.27s Waiting 10.0s for Cell (First Match) to exist
+    t =    84.29s     Checking `Expect predicate `existsNoRetry == 1` for object Cell (First Match)`
+    t =    84.29s         Checking existence of `Cell (First Match)`
+    t =    84.44s Tap Cell (First Match)
+    t =    84.44s     Wait for fr.jpesquet.sante to idle
+    t =    84.44s     Find the Cell (First Match)
+    t =    84.56s     Check for interrupting elements affecting "halcya-essai-import.json, json" Cell
+    t =    84.73s     Synthesize event
+    t =    85.11s     Wait for fr.jpesquet.sante to idle
+    t =    85.13s Waiting 3.0s for "Ouvrir" Button to exist
+    t =    86.19s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    86.19s         Checking existence of `"Ouvrir" Button`
+    t =    86.36s         Capturing element debug description
+    t =    87.16s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    87.16s         Checking existence of `"Ouvrir" Button`
+    t =    87.35s         Capturing element debug description
+    t =    88.14s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    88.14s         Checking existence of `"Ouvrir" Button`
+    t =    88.25s         Capturing element debug description
+    t =    88.25s     Checking existence of `"Ouvrir" Button`
+    t =    88.39s Collecting debug information to assist test failure triage
+    t =    88.39s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    88.63s Waiting 5.0s for Any (First Match) to exist
+    t =    89.64s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    89.64s         Checking existence of `Any (First Match)`
+    t =    89.80s         Capturing element debug description
+    t =    90.64s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    90.64s         Checking existence of `Any (First Match)`
+    t =    90.76s         Capturing element debug description
+    t =    91.65s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    91.65s         Checking existence of `Any (First Match)`
+    t =    91.82s         Capturing element debug description
+    t =    92.64s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    92.64s         Checking existence of `Any (First Match)`
+    t =    92.76s         Capturing element debug description
+    t =    93.63s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    93.63s         Checking existence of `Any (First Match)`
+    t =    93.82s         Capturing element debug description
+    t =    93.82s     Checking existence of `Any (First Match)`
+    t =    93.97s Collecting debug information to assist test failure triage
+    t =    93.97s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    94.23s Checking existence of `"halcya-essai-import.json, json" Cell`
+    t =    94.38s Checking existence of `"Annuler" Button`
+fichier toujours affiché 5 s après le toucher : second toucher
+    t =    94.55s Tap "halcya-essai-import.json, json" Cell
+    t =    94.55s     Wait for fr.jpesquet.sante to idle
+    t =    94.55s     Find the "halcya-essai-import.json, json" Cell
+    t =    94.67s     Check for interrupting elements affecting "halcya-essai-import.json, json" Cell
+    t =    94.82s     Synthesize event
+    t =    95.18s     Wait for fr.jpesquet.sante to idle
+    t =    95.21s Waiting 3.0s for "Ouvrir" Button to exist
+    t =    96.22s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    96.22s         Checking existence of `"Ouvrir" Button`
+    t =    96.35s         Capturing element debug description
+    t =    97.25s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    97.25s         Checking existence of `"Ouvrir" Button`
+    t =    97.42s         Capturing element debug description
+    t =    98.22s     Checking `Expect predicate `existsNoRetry == 1` for object "Ouvrir" Button`
+    t =    98.22s         Checking existence of `"Ouvrir" Button`
+    t =    98.39s         Capturing element debug description
+    t =    98.40s     Checking existence of `"Ouvrir" Button`
+    t =    98.57s Collecting debug information to assist test failure triage
+    t =    98.57s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =    98.84s Waiting 30.0s for Any (First Match) to exist
+    t =    99.89s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =    99.89s         Checking existence of `Any (First Match)`
+    t =   100.11s         Capturing element debug description
+    t =   100.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   100.85s         Checking existence of `Any (First Match)`
+    t =   101.07s         Capturing element debug description
+    t =   101.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   101.85s         Checking existence of `Any (First Match)`
+    t =   102.04s         Capturing element debug description
+    t =   102.88s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   102.88s         Checking existence of `Any (First Match)`
+    t =   103.06s         Capturing element debug description
+    t =   103.89s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   103.89s         Checking existence of `Any (First Match)`
+    t =   104.05s         Capturing element debug description
+    t =   104.88s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   104.89s         Checking existence of `Any (First Match)`
+    t =   105.02s         Capturing element debug description
+    t =   105.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   105.85s         Checking existence of `Any (First Match)`
+    t =   106.08s         Capturing element debug description
+    t =   106.92s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   106.92s         Checking existence of `Any (First Match)`
+    t =   107.16s         Capturing element debug description
+    t =   107.89s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   107.89s         Checking existence of `Any (First Match)`
+    t =   108.11s         Capturing element debug description
+    t =   108.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   108.85s         Checking existence of `Any (First Match)`
+    t =   109.01s         Capturing element debug description
+    t =   109.89s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   109.89s         Checking existence of `Any (First Match)`
+    t =   110.09s         Capturing element debug description
+    t =   110.92s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   110.93s         Checking existence of `Any (First Match)`
+    t =   111.15s         Capturing element debug description
+    t =   111.89s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   111.89s         Checking existence of `Any (First Match)`
+    t =   112.09s         Capturing element debug description
+    t =   112.89s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   112.89s         Checking existence of `Any (First Match)`
+    t =   113.09s         Capturing element debug description
+    t =   113.89s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   113.90s         Checking existence of `Any (First Match)`
+    t =   114.12s         Capturing element debug description
+    t =   114.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   114.85s         Checking existence of `Any (First Match)`
+    t =   115.05s         Capturing element debug description
+    t =   115.89s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   115.89s         Checking existence of `Any (First Match)`
+    t =   116.14s         Capturing element debug description
+    t =   116.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   116.85s         Checking existence of `Any (First Match)`
+    t =   117.02s         Capturing element debug description
+    t =   117.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   117.85s         Checking existence of `Any (First Match)`
+    t =   118.04s         Capturing element debug description
+    t =   118.89s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   118.89s         Checking existence of `Any (First Match)`
+    t =   119.15s         Capturing element debug description
+    t =   119.86s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   119.87s         Checking existence of `Any (First Match)`
+    t =   120.09s         Capturing element debug description
+    t =   120.91s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   120.91s         Checking existence of `Any (First Match)`
+    t =   121.09s         Capturing element debug description
+    t =   121.92s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   121.92s         Checking existence of `Any (First Match)`
+    t =   122.15s         Capturing element debug description
+    t =   122.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   122.85s         Checking existence of `Any (First Match)`
+    t =   123.02s         Capturing element debug description
+    t =   123.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   123.85s         Checking existence of `Any (First Match)`
+    t =   124.03s         Capturing element debug description
+    t =   124.88s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   124.89s         Checking existence of `Any (First Match)`
+    t =   125.21s         Capturing element debug description
+    t =   125.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   125.86s         Checking existence of `Any (First Match)`
+    t =   126.10s         Capturing element debug description
+    t =   126.91s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   126.91s         Checking existence of `Any (First Match)`
+    t =   127.12s         Capturing element debug description
+    t =   127.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   127.85s         Checking existence of `Any (First Match)`
+    t =   128.03s         Capturing element debug description
+    t =   128.85s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =   128.85s         Checking existence of `Any (First Match)`
+    t =   129.02s         Capturing element debug description
+    t =   129.02s     Checking existence of `Any (First Match)`
+    t =   129.17s Collecting debug information to assist test failure triage
+    t =   129.17s     Requesting snapshot of accessibility hierarchy for app with pid 8587
+aucun aperçu après le parcours 2
+    t =   129.37s Requesting snapshot of accessibility hierarchy for app with pid 8587
+    t =   130.21s Requesting snapshot of accessibility hierarchy for app with pid 8587
+Attributes: Application, 0x103dcaaa0, pid: 8587, label: 'Halcya'
+Element subtree:
+ →Application, 0x103dcaaa0, pid: 8587, label: 'Halcya'
+    Window (Main), 0x103daa910, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x103d5be20, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x103d9c260, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x103d5a630, {{-390.0, -844.0}, {1170.0, 2532.0}}
+          WebView, 0x103d6ef90, {{0.0, 0.0}, {390.0, 844.0}}
+            WebView, 0x103d5dfe0, {{0.0, 0.0}, {390.0, 844.0}}
+              WebView, 0x103d5dc80, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x103da5cb0, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x103d51e80, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x103da7ca0, {{0.0, -397.0}, {390.0, 844.0}}
+                      Other, 0x103da7910, {{0.0, -397.0}, {390.0, 1323.0}}, label: 'Halcya – ventre et bien-être', Focused
+                        Other, 0x103d37040, {{16.0, -350.0}, {358.0, 70.0}}, label: 'bannière', Focused
+                          Other, 0x103d9ccf0, {{58.0, -326.0}, {61.0, 24.0}}, label: 'Halcya', value: 1, Focused
+                            StaticText, 0x103da86b0, {{58.0, -326.0}, {61.0, 24.0}}, label: 'Halcya', value: Halcya, Focused
+                          Link, 0x103d74c80, {{330.0, -336.0}, {44.0, 44.0}}, label: 'Réglages', Focused
+                        Other, 0x103dae720, {{16.0, -280.0}, {358.0, 1100.0}}, label: 'principal', Focused
+                          Other, 0x103da6380, {{16.0, -280.0}, {358.0, 24.0}}, label: 'Vos données', value: 2, Focused
+                            StaticText, 0x103dacb60, {{16.0, -280.0}, {118.0, 24.0}}, label: 'Vos données', value: Vos données, Focused
+                          Other, 0x103da9430, {{16.0, -248.0}, {358.0, 100.0}}, Focused
+                            StaticText, 0x103da97c0, {{16.0, -247.0}, {137.0, 18.0}}, label: 'Vos données restent', value: Vos données restent , Focused
+                            StaticText, 0x103da8a10, {{152.0, -247.0}, {103.0, 18.0}}, label: 'sur cet appareil', value: sur cet appareil, Focused
+                            StaticText, 0x103d76420, {{16.0, -247.0}, {345.0, 38.0}}, label: 'et survivent aux mises à jour.', value:  et survivent aux ..., Focused
+                            StaticText, 0x103da7ff0, {{16.0, -227.0}, {354.0, 78.0}}, label: 'Une copie de secours est tenue à jour dans l’app Fichiers › Sur mon iPhone › Halcya ; avant de réinstaller ou de changer de téléphone, exportez-les aussi.', value: Une copie de secou..., Focused
+                          Other, 0x103d8e350, {{32.0, -112.0}, {326.0, 20.0}}, label: 'Exporter (sauvegarde)', value: 3, Focused
+                            StaticText, 0x103d5e360, {{32.0, -112.0}, {163.0, 20.0}}, label: 'Exporter (sauvegarde)', value: Exporter (sauvegar..., Focused
+                          Other, 0x103d4e3e0, {{32.0, -80.0}, {326.0, 40.0}}, Focused
+                            StaticText, 0x103d8edf0, {{32.0, -79.0}, {315.0, 38.0}}, label: 'Un fichier avec toutes vos entrées et votre profil, rangé dans', value: Un fichier avec to..., Focused
+                            StaticText, 0x103d69c80, {{106.0, -59.0}, {76.0, 18.0}}, label: 'Documents', value: Documents, Focused
+                            StaticText, 0x103d70e40, {{181.0, -59.0}, {4.0, 18.0}}, label: '.', value: ., Focused
+                          Button, 0x103da5170, {{32.0, -28.0}, {230.0, 52.0}}, label: 'Télécharger la sauvegarde', Focused
+                          Other, 0x103d61e00, {{16.0, 80.0}, {358.0, 180.0}}, label: 'article', Focused
+                            StaticText, 0x103da8350, {{34.0, 96.0}, {235.0, 20.0}}, label: 'Rapport PDF pour mon médecin', value: Rapport PDF pour m..., Focused
+                            Other, 0x103dae390, {{34.0, 124.0}, {322.0, 60.0}}, Focused
+                              StaticText, 0x103daeaa0, {{34.0, 125.0}, {319.0, 58.0}}, label: 'Votre ventre semaine par semaine, vos repas et vos pistes, sur 2 pages. Créé sur votre téléphone : vous choisissez à qui l’envoyer.', value: Votre ventre semai..., Focused
+                            Button, 0x103d6a380, {{34.0, 192.0}, {322.0, 52.0}}, label: 'Préparer le rapport', Focused
+                          Other, 0x103d9c5e0, {{32.0, 312.0}, {326.0, 20.0}}, label: 'Importer (restaurer)', value: 3, Focused
+                            StaticText, 0x103d4e070, {{32.0, 312.0}, {146.0, 20.0}}, label: 'Importer (restaurer)', value: Importer (restaurer), Focused
+                          Other, 0x103d5ad00, {{32.0, 344.0}, {326.0, 40.0}}, Focused
+                            StaticText, 0x103d5cf30, {{32.0, 345.0}, {276.0, 18.0}}, label: 'Vous verrez son contenu avant de choisir :', value: Vous verrez son co..., Focused
+                            StaticText, 0x103d83e50, {{307.0, 345.0}, {48.0, 18.0}}, label: 'ajouter', value: ajouter, Focused
+                            StaticText, 0x103d9ed50, {{32.0, 365.0}, {126.0, 18.0}}, label: '(sans doublons) ou', value: (sans doublons) ou , Focused
+                            StaticText, 0x103d34600, {{157.0, 365.0}, {68.0, 18.0}}, label: 'remplacer', value: remplacer, Focused
+                            StaticText, 0x103d9b7e0, {{224.0, 365.0}, {4.0, 18.0}}, label: '.', value: ., Focused
+                          Button, 0x103d68470, {{16.0, 296.0}, {358.0, 10.0}}, label: 'Choisir un fichier de sauvegarde', Focused
+                          Button, 0x103da90d0, {{32.0, 396.0}, {247.0, 52.0}}, label: 'Choisir un fichier à importer', Focused
+                          Button, 0x103d2f9e0, {{32.0, 460.0}, {326.0, 68.0}}, label: 'Restaurer la copie de secours (il y a moins d’une heure)', Focused
+                          Other, 0x103d90d50, {{32.0, 584.0}, {326.0, 20.0}}, label: 'Supprimer', value: 3, Focused
+                            StaticText, 0x103b8bfe0, {{32.0, 584.0}, {77.0, 20.0}}, label: 'Supprimer', value: Supprimer, Focused
+                          Other, 0x103b45b80, {{32.0, 616.0}, {326.0, 100.0}}, Focused
+                            StaticText, 0x103b53080, {{32.0, 617.0}, {324.0, 98.0}}, label: 'Efface de ce téléphone vos repas, notes, mesures, lectures du visage et votre profil. Chez nous, il ne reste au plus qu’un compteur d’analyses IA, sous une empreinte anonyme, effacé seul au bout de 13 mois sans analyse.', value: Efface de ce télép..., Focused
+                          Button, 0x103b52200, {{32.0, 728.0}, {271.0, 52.0}}, label: 'Supprimer toutes mes données', Focused
+                        Other, 0x103b40240, {{0.0, 749.0}, {390.0, 95.0}}, label: 'Principal, navigation', Focused
+                          Link, 0x103b8d100, {{25.0, 789.0}, {60.0, 15.0}}, label: 'Aujourd’hui', Focused
+                            StaticText, 0x103b8d220, {{25.0, 789.0}, {60.0, 15.0}}, label: 'Aujourd’hui', value: Aujourd’hui, Focused
+                          Link, 0x103b8d340, {{129.0, 789.0}, {39.0, 15.0}}, label: 'Journal', Focused
+                            StaticText, 0x103b8d460, {{129.0, 789.0}, {39.0, 15.0}}, label: 'Journal', value: Journal, Focused
+                          Link, 0x103b87360, {{218.0, 789.0}, {47.0, 15.0}}, label: 'Analyses', Focused
+                            StaticText, 0x103b87480, {{218.0, 789.0}, {47.0, 15.0}}, label: 'Analyses', value: Analyses, Focused
+                          Link, 0x103b875a0, {{314.0, 789.0}, {43.0, 15.0}}, label: 'Sources', Focused
+                            StaticText, 0x103b876c0, {{314.0, 789.0}, {43.0, 15.0}}, label: 'Sources', value: Sources, Focused
+              Other, 0x103b877e0, {{357.0, 47.3}, {30.0, 749.3}}, label: 'Barre de défilement verticale, 2 pages', value: 83 %
+                Other, 0x103b87900, {{384.0, 273.3}, {3.0, 474.3}}
+              Other, 0x103b87a20, {{47.3, 811.0}, {295.3, 30.0}}, label: 'Barre de défilement horizontale, 1 page', value: 0 %
+                Other, 0x103b87b40, {{50.3, 838.0}, {289.3, 3.0}}
+              Other, 0x103b87c60, {{357.0, 47.3}, {30.0, 749.3}}, label: 'Barre de défilement verticale, 2 pages', value: 83 %
+                Other, 0x103b87d80, {{384.0, 273.3}, {3.0, 474.3}}
+              Other, 0x103b87ea0, {{47.3, 811.0}, {295.3, 30.0}}, label: 'Barre de défilement horizontale, 1 page', value: 0 %
+                Other, 0x103b87fc0, {{50.3, 838.0}, {289.3, 3.0}}
+      Other, 0x103b880e0, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x103b88200, {{-390.0, -844.0}, {1170.0, 2532.0}}
+        Other, 0x103b88320, {{0.0, 0.0}, {390.0, 844.0}}
+          Other, 0x103b88440, {{0.0, 0.0}, {390.0, 844.0}}
+            Other, 0x103b8d7d0, {{0.0, 0.0}, {390.0, 844.0}}
+              Other, 0x103b8d8f0, {{0.0, 0.0}, {390.0, 844.0}}
+                Other, 0x103b8da10, {{0.0, 0.0}, {390.0, 844.0}}
+                  Other, 0x103b8db30, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x103b8dc50, {{279.3, 77.0}, {36.7, 36.0}}, label: 'Annuler'
+                  Other, 0x103d8cdb0, {{0.0, 0.0}, {390.0, 844.0}}
+                    Other, 0x103d4c150, {{0.0, 0.0}, {390.0, 844.0}}
+                      Other, 0x103d925c0, {{0.0, 0.0}, {390.0, 844.0}}
+                        Other, 0x103d62840, {{0.0, 0.0}, {390.0, 844.0}}
+                          Other, 0x103d55920, {{0.0, 0.0}, {390.0, 844.0}}
+                            Other, 0x103d6ec30, {{0.0, 0.0}, {390.0, 844.0}}
+                              Other, 0x103d61700, {{0.0, 57.0}, {390.0, 787.0}}
+                                Image, 0x103d741e0, {{-150.0, -93.0}, {690.0, 1087.0}}
+                                Other, 0x103d60970, {{0.0, 57.0}, {390.0, 787.0}}
+                                  Other, 0x103d70770, {{0.0, 57.0}, {390.0, 787.0}}
+                                    Other, 0x103d6dea0, {{0.0, 57.0}, {390.0, 787.0}}
+                                      Other, 0x103d6e8e0, {{0.0, 57.0}, {390.0, 787.0}}
+                                        Other, 0x103d4f150, {{0.0, 57.0}, {390.0, 787.0}}
+                                          Other, 0x103d5d5d0, {{0.0, 57.0}, {390.0, 787.0}}
+                                          Other, 0x103d78ca0, {{0.0, 57.0}, {390.0, 787.0}}
+                                            Other, 0x103d53000, {{0.0, 57.0}, {390.0, 787.0}}
+                                              Other, 0x103d4afe0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                Other, 0x103d6d480, {{0.0, 57.0}, {390.0, 787.0}}, identifier: 'Browse View (Picker)'
+                                                  Other, 0x103d60610, {{0.0, 57.0}, {390.0, 787.0}}
+                                                    Other, 0x103d7ded0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                      Other, 0x103d67a60, {{0.0, 57.0}, {390.0, 787.0}}
+                                                        Other, 0x103d4bdf0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                        Other, 0x103d5f140, {{0.0, 57.0}, {390.0, 787.0}}, identifier: 'DOC.browsingRoot Source: com.apple.FileProvider.LocalStorage, Title: Sur mon iPhone'
+                                                          NavigationBar, 0x103d79000, {{0.0, 73.0}, {390.0, 114.0}}, identifier: 'FullDocumentManagerViewControllerNavigationBar'
+                                                            Button, 0x103d4ff50, {{16.0, 73.0}, {44.0, 44.0}}, identifier: 'BackButton', label: 'Sur mon iPhone'
+                                                            Button, 0x103d85830, {{154.7, 84.7}, {54.7, 20.7}}, label: 'Halcya, Menu d’actions'
+                                                            Button, 0x103d98100, {{279.3, 77.0}, {36.7, 36.0}}, label: 'Annuler'
+                                                            Button, 0x103d971e0, {{332.0, 77.0}, {38.0, 36.0}}, identifier: 'OverflowBarButtonItem', label: 'Plus'
+                                                            SearchField, 0x103d97d70, {{16.0, 128.0}, {358.0, 44.0}}, label: 'Rechercher', placeholderValue: 'Rechercher'
+                                                              Image, 0x103d8e6e0, {{28.0, 140.0}, {20.7, 19.3}}, identifier: 'magnifyingglass', label: 'Rechercher'
+                                                          Other, 0x103d79a30, {{0.0, 57.0}, {390.0, 787.0}}
+                                                            Other, 0x103da6a50, {{0.0, 57.0}, {390.0, 787.0}}
+                                                              Other, 0x103d92ca0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                Other, 0x103d87ff0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                  ScrollView, 0x103d771d0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                    Other, 0x103d782a0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                      Other, 0x103d81920, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                      Other, 0x103d72d70, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                    Other, 0x103d56e30, {{0.0, 57.0}, {390.0, 787.0}}
+                                                                      Other, 0x103d89af0, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                        Image, 0x103d8ea60, {{-120.0, -118.0}, {630.0, 350.0}}, identifier: 'AdditionalDimmingOverlay'
+                                                                        Other, 0x103d8b320, {{0.0, 57.0}, {390.0, 115.0}}
+                                                                        Other, 0x103d70410, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                          Other, 0x103d93a70, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                        Other, 0x103d52210, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                          Other, 0x103d7cdd0, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                        Other, 0x103d5e6f0, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                          Other, 0x103d6e200, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                          Other, 0x103d8f880, {{0.0, 57.0}, {390.0, 179.8}}
+                                                                      Other, 0x103d6b4e0, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                        Image, 0x103d785f0, {{-120.0, 701.0}, {630.0, 286.0}}, identifier: 'AdditionalDimmingOverlay'
+                                                                        Other, 0x103d8d130, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                          Other, 0x103d602c0, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                        Other, 0x103d79350, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                          Other, 0x103d4f4b0, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                          Other, 0x103d84840, {{0.0, 696.2}, {390.0, 147.8}}
+                                                                    CollectionView, 0x103d87930, {{0.0, 57.0}, {390.0, 787.0}}, identifier: 'File View', value: Icon Mode
+                                                                      Cell, 0x103d2efa0, {{10.0, 197.0}, {118.0, 189.7}}, identifier: 'capture, Folder', label: 'capture, 3 éléments'
+                                                                        Other, 0x103d4b360, {{10.0, 197.0}, {118.0, 189.7}}
+                                                                        Other, 0x103d9ad40, {{10.0, 197.0}, {118.0, 189.7}}
+                                                                          Other, 0x103d82340, {{27.0, 201.0}, {84.0, 84.0}}
+                                                                            Image, 0x103d711e0, {{27.0, 201.0}, {84.0, 84.0}}
+                                                                          Other, 0x103d8f510, {{13.0, 290.0}, {112.0, 55.7}}
+                                                                            StaticText, 0x103d95510, {{13.0, 290.0}, {112.0, 20.0}}, label: 'capture'
+                                                                            StaticText, 0x103d51b00, {{13.0, 313.0}, {112.0, 14.3}}, label: '3 éléments'
+                                                                            StaticText, 0x103d73450, {{13.0, 331.3}, {112.0, 14.3}}
+                                                                      Cell, 0x103d89460, {{136.0, 197.0}, {118.0, 189.7}}, identifier: 'Halcya-copie-de-secours.json, json', label: 'Halcya-copie-de-secours.json, json, 14:35, 482 ko'
+                                                                        Other, 0x103d50d60, {{136.0, 197.0}, {118.0, 189.7}}
+                                                                        Other, 0x103d55240, {{136.0, 197.0}, {118.0, 189.7}}
+                                                                          Other, 0x103d92270, {{153.0, 201.0}, {84.0, 84.0}}
+                                                                            Image, 0x103d966a0, {{163.7, 201.0}, {63.0, 84.0}}
+                                                                            Other, 0x103d7ab60, {{163.7, 201.0}, {63.0, 84.0}}
+                                                                          Other, 0x103db39e0, {{139.0, 290.0}, {112.0, 75.7}}
+                                                                            StaticText, 0x103db32e0, {{139.0, 290.0}, {112.0, 40.0}}, label: 'Halcya-copie-de-secours.json'
+                                                                            StaticText, 0x103d99810, {{139.0, 333.0}, {112.0, 14.3}}, label: '14:35'
+                                                                            StaticText, 0x103d66250, {{139.0, 351.3}, {112.0, 14.3}}, label: '482 ko'
+                                                                      Cell, 0x103da8d80, {{262.0, 197.0}, {118.0, 189.7}}, identifier: 'halcya-essai-import.json, json', label: 'halcya-essai-import.json, json, 14:35, 336 octets'
+                                                                        Other, 0x103d64a90, {{262.0, 197.0}, {118.0, 189.7}}
+                                                                        Other, 0x103d83b00, {{262.0, 197.0}, {118.0, 189.7}}
+                                                                          Other, 0x103d7fde0, {{279.0, 201.0}, {84.0, 84.0}}
+                                                                            Image, 0x103d80810, {{289.7, 201.0}, {63.0, 84.0}}
+                                                                            Other, 0x103d70ae0, {{289.7, 201.0}, {63.0, 84.0}}
+                                                                          Other, 0x103d951c0, {{265.0, 290.0}, {112.0, 75.7}}
+                                                                            StaticText, 0x103d57f40, {{265.0, 290.0}, {112.0, 40.0}}, label: 'halcya-essai-import.json'
+                                                                            StaticText, 0x103d99b90, {{265.0, 333.0}, {112.0, 14.3}}, label: '14:35'
+                                                                            StaticText, 0x103d8afa0, {{265.0, 351.3}, {112.0, 14.3}}, label: '336 octets'
+                                                                      Other, 0x103d571b0, {{0.0, 723.0}, {390.0, 38.0}}
+                                                                        Other, 0x103d7b260, {{0.0, 723.0}, {390.0, 38.0}}, identifier: 'DOCItemCollectionViewFooterViewIdentifier'
+                                                                          StaticText, 0x103d7d130, {{154.3, 723.0}, {81.3, 18.0}}, label: '3 éléments'
+                                                                      Other, 0x103d6f680, {{357.0, 187.0}, {30.0, 574.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                                                        Other, 0x103d9f420, {{384.0, 506.3}, {3.0, 251.7}}
+                                                                      Other, 0x103d77bc0, {{357.0, 187.0}, {30.0, 574.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                                                        Other, 0x103d624e0, {{384.0, 506.3}, {3.0, 251.7}}
+                                                                    Other, 0x103d77f30, {{357.0, 187.0}, {30.0, 574.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                                                      Other, 0x103d6ae00, {{384.0, 751.0}, {3.0, 7.0}}
+                                                                    Other, 0x103d62f00, {{41.3, 728.0}, {307.0, 30.0}}, label: 'Barre de défilement horizontale, 1 page', value: 0 %
+                                                                      Other, 0x103d7ca80, {{380.0, 755.0}, {7.0, 3.0}}
+                                                                    Other, 0x103da1380, {{357.0, 187.0}, {30.0, 574.0}}, label: 'Barre de défilement verticale, 1 page', value: 0 %
+                                                                      Other, 0x103db2c20, {{384.0, 751.0}, {3.0, 7.0}}
+                                                                    Other, 0x103db2540, {{41.3, 728.0}, {307.0, 30.0}}, label: 'Barre de défilement horizontale, 1 page', value: 0 %
+                                                                      Other, 0x103d54830, {{380.0, 755.0}, {7.0, 3.0}}
+                                                          Other, 0x103d8a8d0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                            Other, 0x103d86130, {{0.0, 57.0}, {390.0, 787.0}}
+                                                  Other, 0x103d864a0, {{0.0, 57.0}, {390.0, 787.0}}
+                                                    Other, 0x103daf1b0, {{0.0, 57.0}, {390.0, 787.0}}
+                                            Other, 0x103d86800, {{0.0, 761.0}, {390.0, 83.0}}
+                                              Other, 0x103d2f670, {{0.0, 57.0}, {390.0, 787.0}}
+                                                TabBar, 0x103d59800, {{0.0, 761.0}, {390.0, 83.0}}, identifier: 'DOC.browsingModeTabBar', label: 'Barre d’onglets'
+                                                  Other, 0x103d84f50, {{58.0, 761.0}, {274.0, 62.0}}
+                                                    Other, 0x103d88a30, {{58.0, 761.0}, {94.0, 54.0}}
+                                                    Other, 0x103d5fba0, {{58.0, 761.0}, {274.0, 62.0}}
+                                                      Button, 0x103d76e80, {{62.0, 765.0}, {94.0, 54.0}}, label: 'Récents'
+                                                        Image, 0x103d4a1e0, {{95.0, 771.3}, {27.3, 27.3}}, identifier: 'clock.fill', label: 'horloge'
+                                                      Button, 0x103d875e0, {{148.0, 765.0}, {94.0, 54.0}}, label: 'Partagé'
+                                                        Image, 0x103daced0, {{179.0, 770.3}, {35.0, 27.0}}, identifier: 'folder.fill.badge.person.crop', label: 'Dossier partagé'
+                                                      Button, 0x103d718d0, {{234.0, 765.0}, {94.0, 54.0}}, label: 'Explorer', Selected
+                                                        Image, 0x103d9a630, {{265.0, 772.3}, {32.0, 25.0}}, identifier: 'folder.fill', label: 'déplacer'
+                                                    Other, 0x103d53de0, {{234.0, 765.0}, {94.0, 54.0}}
+                                                      Other, 0x103d88390, {{234.0, 765.0}, {94.0, 54.0}}
+                                                        Other, 0x103d75a00, {{234.0, 765.0}, {94.0, 54.0}}
+                                                        Other, 0x103daf530, {{234.0, 765.0}, {94.0, 54.0}}
+                                                          Other, 0x103d890f0, {{234.0, 765.0}, {94.0, 54.0}}
+                                                            Other, 0x103d98f10, {{234.0, 765.0}, {94.0, 54.0}}
+                                                              Other, 0x103d50650, {{234.0, 765.0}, {94.0, 54.0}}
+                                                            Other, 0x103d91ba0, {{234.0, 765.0}, {94.0, 54.0}}
+                                                          Other, 0x103d9b0c0, {{234.0, 765.0}, {94.0, 54.0}}
+                                              Other, 0x103d61050, {{0.0, 761.0}, {390.0, 83.0}}
+                                                Other, 0x103d9a9b0, {{0.0, 761.0}, {390.0, 83.0}}
+                                                  Other, 0x103d613a0, {{0.0, 761.0}, {390.0, 83.0}}
+                                                    Other, 0x103d555c0, {{0.0, 761.0}, {390.0, 83.0}}
+                                                      Other, 0x103db02d0, {{0.0, 761.0}, {390.0, 83.0}}
+                                                        Other, 0x103d9ea00, {{0.0, 761.0}, {390.0, 83.0}}
+                                                    Other, 0x103da4720, {{0.0, 761.0}, {390.0, 83.0}}
+                                                      Other, 0x103d80b60, {{0.0, 761.0}, {390.0, 83.0}}
+    Window, 0x103da3600, {{0.0, 0.0}, {390.0, 844.0}}
+      Other, 0x103d2c280, {{0.0, 0.0}, {390.0, 844.0}}
+        Other, 0x103d804d0, {{0.0, 0.0}, {390.0, 844.0}}
+Path to element:
+ →Application, 0x103dcaaa0, pid: 8587, label: 'Halcya'
+Query chain:
+ →Find: Application 'fr.jpesquet.sante'
+  Output: {
+    Application, 0x103e3dd30, pid: 8587, label: 'Halcya'
+  }
+
+    t =   130.42s Waiting 1.0s for "Annuler" Button to exist
+    t =   131.43s     Checking `Expect predicate `existsNoRetry == 1` for object "Annuler" Button`
+    t =   131.43s         Checking existence of `"Annuler" Button`
+    t =   131.60s     Checking existence of `"Annuler" Button`
+    t =   131.75s Tap "Annuler" Button
+    t =   131.75s     Wait for fr.jpesquet.sante to idle
+    t =   131.76s     Find the "Annuler" Button
+    t =   131.90s     Check for interrupting elements affecting "Annuler" Button
+    t =   132.05s     Synthesize event
+    t =   132.46s     Wait for fr.jpesquet.sante to idle
+/Users/runner/work/HealthTrack-iOS/HealthTrack-iOS/uitests/HalcyaUITests/SanteUITests.swift:174: error: -[HalcyaUITests.DonneesUITests testImporterUnFichierDepuisFichiers] : failed - aperçu de l'import jamais affiché
+    t =   133.94s Tear Down
+Test Case '-[HalcyaUITests.DonneesUITests testImporterUnFichierDepuisFichiers]' failed (134.305 seconds).
+Test Suite 'DonneesUITests' failed at 2026-10-30 14:38:15.690.
+	 Executed 1 test, with 1 failure (0 unexpected) in 134.305 (134.308) seconds
+Test Suite 'HalcyaUITests.xctest' failed at 2026-10-30 14:38:15.691.
+	 Executed 1 test, with 1 failure (0 unexpected) in 134.305 (134.310) seconds
+Test Suite 'Selected tests' failed at 2026-10-30 14:38:15.692.
+	 Executed 1 test, with 1 failure (0 unexpected) in 134.305 (134.313) seconds
+2026-10-30 14:39:04.111 xcodebuild[32039:98943] [MT] IDETestOperationsObserverDebug: 192.055 elapsed -- Testing started completed.
+2026-10-30 14:39:04.112 xcodebuild[32039:98943] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-10-30 14:39:04.112 xcodebuild[32039:98943] [MT] IDETestOperationsObserverDebug: 192.056 sec, +192.056 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/HalcyaUITests-gyddhoybnaaficclkakryrknxryv/Logs/Test/Test-HalcyaUITests-2026.10.30_14-35-48-+0000.xcresult
+
+Failing tests:
+	DonneesUITests.testImporterUnFichierDepuisFichiers()
+
+** TEST EXECUTE FAILED **
+
+Testing started
