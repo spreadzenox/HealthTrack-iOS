@@ -116,7 +116,7 @@ jobs:
             -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
             2>&1 | tee "$RUNNER_TEMP/export.log" | grep -E "error:|EXPORT (SUCCEEDED|FAILED)" || true
           grep -q "EXPORT SUCCEEDED" "$RUNNER_TEMP/export.log"
-      - name: Vérification de l'app signée (entitlements, version, aucune écriture dans Santé)
+      - name: Vérification de l'app signée (entitlements, version, phrases de l'app livrée)
         run: |
           IPA="$(ls "$RUNNER_TEMP"/export/*.ipa | head -1)"
           echo "IPA=$IPA" >> "$GITHUB_ENV"
@@ -131,9 +131,9 @@ jobs:
           [ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Info.plist")" = "$ANDROID_VERSION" ]
           [ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP/Info.plist")" = "$IOS_BUILD" ]
           [ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$APP/Info.plist")" = "fr.jpesquet.sante" ]
-          if /usr/libexec/PlistBuddy -c 'Print :NSHealthUpdateUsageDescription' "$APP/Info.plist" > /dev/null 2>&1; then
-            echo "::error::phrase d'écriture dans Santé présente (réservée à la build de captures)"; exit 1
-          fi
+          # Phrase d'écriture exigée par Apple (le plugin Santé contient l'écriture) : celle de l'app livrée, qui dit que
+          # Halcya n'écrit rien, jamais celle de la build de captures
+          /usr/libexec/PlistBuddy -c 'Print :NSHealthUpdateUsageDescription' "$APP/Info.plist" | grep -q "n’écrit rien"
           /usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP/Info.plist" | grep -qx false
       - name: Envoi sur App Store Connect (TestFlight)
         env:

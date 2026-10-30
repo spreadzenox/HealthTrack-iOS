@@ -36,6 +36,13 @@ describe('phrases d’usage de l’iPhone (Info.plist)', () => {
     expect(flag('NSLocationDefaultAccuracyReduced')).toBe('true')
   })
 
+  it('app Santé : la lecture expliquée ; l’écriture, exigée par Apple, dit que Halcya n’écrit rien', () => {
+    // Le plugin Santé contient du code d'écriture : sans cette phrase, App Store Connect refuse l'envoi (TestFlight,
+    // 30/10). L'app livrée n'écrit rien dans Santé ; seule la build de captures y écrit des mesures de démonstration.
+    expect(usage('NSHealthShareUsageDescription')).toMatch(/lit vos mesures/)
+    expect(usage('NSHealthUpdateUsageDescription')).toMatch(/n’écrit rien dans l’app Santé/)
+  })
+
   it('aucune phrase ne parle d’Android, toutes vouvoient', () => {
     const all = [...plist.matchAll(/<key>NS\w+UsageDescription<\/key>\s*<string>([^<]+)<\/string>/g)].map((m) => m[1])
     expect(all.length).toBeGreaterThanOrEqual(4)
