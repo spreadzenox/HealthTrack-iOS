@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v594 (commit `fa94db1`, 29/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v596 (commit `c89269f`, 29/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 29/10 23:05 | #511, #512 (v595, v596) | #511 : Nutrition vierge, tuile « Photographier un repas » (`Nutrition.jsx`, `.css`) : vrai sur iPhone, note vraie ; #512 : actions des repas derrière « ⋯ » (`Food.jsx`, `EntryActionsToggle`), vrai sur iPhone, et stress de la montre Huawei en mots (`devices/huawei/coverage.js`), sans objet sur iPhone : **note cachée** (`APPSTORE_HIDDEN`, correctif 28), demande à Android de la scinder ; les 29 correctifs s'appliquent directement | — |
 | 29/10 21:05 | #509, #510 (v593, v594) | #509 : journal d'Android seulement ; #510 : Tendances vierges en couleur, tuiles « Ajouter une montre », « Activer la lecture du visage », « Noter votre bien-être » (`PastelTiles`, `BaselineCards.jsx`, `WellbeingCharts.jsx`) : code partagé, vrai sur iPhone (lecture du visage, montre par l'app Santé), note vraie ; **correctif 20 refait** (`BaselineCards.jsx`, mêmes lignes, contexte nouveau) | — |
 | 29/10 19:10 | #508 (v592) | carte « Vos pistes arrivent » : seul le nombre de jours en police des chiffres (`TodayCards.jsx`, `.css`) : code partagé, aucun correctif touché, note vraie sur iPhone | — |
 | 29/10 18:20 | #507 (v591) | Journal vierge : trois tuiles en couleur (photo d'un repas, ventre ou bien-être, ajouter une source) au lieu d'une phrase grise (`JournalEmpty.jsx`, `DailyJournal.jsx`, `App.css`) : code partagé, aucun correctif touché, note vraie sur iPhone ; visible dans la capture `vide-journal` | — |
