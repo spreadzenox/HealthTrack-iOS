@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v620 (30/10) | **617 sur TestFlight** (build 617.98 ; 616.97 avant) ; v620 en vérification (PR #99) |
+| Dernière version | v620 (30/10) | **620 sur TestFlight** (build 620.100 ; 617.98 et 616.97 avant) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -36,7 +36,8 @@
 - (facultatif, quand vous voulez) Transmettre à la routine Android les demandes marquées « à transmettre » dans
   `journal/DEMANDES.md` : dont un défaut visible aujourd'hui sur Android (bouton « Autoriser Health Connect » étiré
   sur toute la hauteur dans l'accueil de l'app) et un libellé « saisi » faux pour un poids de Health Connect.
-- (facultatif) Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS).
+- Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS) : le temps d'écran
+  réel demande iOS 26.4 ou plus.
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
@@ -201,6 +202,7 @@ via TestFlight.
 | 30/10 21:00 | TestFlight, suivi d'Android v617 | **l'app iPhone est sur TestFlight** (version 616) : premier envoi refusé par Apple pour une phrase manquante sur l'app Santé, corrigée (PR #96), deuxième envoi réussi ; l'iPhone a maintenant ses propres Nouveautés, qui commencent à cette version de test ; Android v617 : un aliment par ligne dans les repas, aussi sur iPhone. Parité : 49 % | #96 (mergée), #97 |
 | 30/10 22:00 | TestFlight 617 | v617 sur `main` (PR #97 mergée : Nouveautés de l'iPhone vues, une seule note « Halcya arrive sur iPhone ») ; la 617 part aussi sur TestFlight pour que votre compagne installe la plus récente. Parité : 49 % | #97 (mergée) |
 | 30/10 23:00 | suivi d'Android v620 | la 617 est sur TestFlight (build 617.98) ; Android v618 à v620 : « œuf », « bœuf », « cœur » bien écrits, et ce qui manque aux Analyses dit en mots simples, aussi sur iPhone, dont les Nouveautés affichent désormais ces notes. Parité : 49 % | #99 |
+| 31/10 00:00 | TestFlight 620, temps d'écran | la 620 est sur TestFlight (build 620.100) ; bonne nouvelle : en Europe, depuis iOS 26.4, le droit obtenu aujourd'hui permet de lire le vrai temps d'écran (par jour et par app, avec votre accord), comme sur Android ; ce sera la prochaine fonction iPhone, à essayer sur l'iPhone 12. Parité : 49 % | #99 (mergée) |
 
 ---
 
