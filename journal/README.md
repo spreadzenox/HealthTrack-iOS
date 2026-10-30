@@ -11,19 +11,19 @@
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
 | Dernière version | v614 (30/10) | v613 sur iPhone simulé (30/10, PR #89) ; v614 en vérification (PR #90) |
-| Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
+| Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight dès les actions A3 et A2 faites) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **A1 — en cours (28/10 vers 18:50 UTC)** : inscription faite sur le web, cotisation de 99 € en paiement. Il reste à
-  attendre l'e-mail de confirmation d'Apple (jusqu'à 48 h), puis me dire « A1 fait ». La suite, A3 puis A2, est
-  préparée pas à pas au §8, avec une décision à prendre sur la signature (A2, point 2).
+- **A3 puis A2 — maintenant (pas à pas au §8, environ 20 min sur ordinateur)** : créer l'identifiant et la fiche de
+  l'app dans App Store Connect (A3), puis la clé API rangée en secrets GitHub (A2), et me dire « A2 fait — signature
+  par Apple d'accord ». C'est ce qui débloque TestFlight, donc l'app sur l'iPhone 12.
+- ✅ **A1 fait le 30/10** : l'e-mail de bienvenue d'Apple est arrivé (adhésion validée).
+- ✅ **A8 fait le 30/10** : GitHub Pages activé ; site publié par la routine (déploiement réussi,
+  https://spreadzenox.github.io/HealthTrack-iOS/ : confidentialité, conditions, assistance).
 - ✅ Fait le 28/10 : vous avez transmis à la routine Android les 4 demandes de `DEMANDES.md` (iPhone au contrôle
   d'intégrité, abonnement App Store sur le serveur, Nouveautés propres à Android, textes de sauvegarde neutres) ;
   elle les a reprises le jour même (v553) : trois faites, l'abonnement App Store noté pour plus tard.
-- (1 minute, quand vous voulez) **A8** : activer GitHub Pages pour ce dépôt (pas à pas au §8), pour mettre en ligne
-  la politique de confidentialité, les conditions d'utilisation et la page d'assistance de l'iPhone que demandera la
-  fiche App Store.
 - (facultatif, quand vous voulez) Transmettre à la routine Android les demandes marquées « à transmettre » dans
   `journal/DEMANDES.md` : dont un défaut visible aujourd'hui sur Android (bouton « Autoriser Health Connect » étiré
   sur toute la hauteur dans l'accueil de l'app) et un libellé « saisi » faux pour un poids de Health Connect.
@@ -347,14 +347,14 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 | | Action | Débloque | État |
 |---|---|---|---|
 | A0 | Téléphone de test | tests sur un vrai téléphone | ✅ 26/10 : iPhone 12 de sa compagne (version d'iOS à préciser) |
-| A1 | Adhérer à l'Apple Developer Program (individuel, payant à l'année ; pas à pas ci-dessous) | signature, TestFlight, App Store | en cours : inscription sur le web et paiement le 28/10 vers 18:50 UTC, confirmation d'Apple attendue |
+| A1 | Adhérer à l'Apple Developer Program (individuel, payant à l'année ; pas à pas ci-dessous) | signature, TestFlight, App Store | ✅ 30/10 : adhésion validée (e-mail de bienvenue d'Apple ; inscription et paiement le 28/10) |
 | A2 | Créer une clé API App Store Connect (rôle Admin ; pas à pas « A2 et A3 » ci-dessous) et l'enregistrer en secrets GitHub Actions de ce dépôt, dans un environnement `appstore` réservé à `main` | builds signées et envoi TestFlight automatiques | après A1 |
 | A3 | Créer la fiche de l'app dans App Store Connect (nom, langue principale français, bundle id, SKU) | envoi TestFlight, fiche | après A1 |
 | A4 | Contrat « Paid Applications », coordonnées bancaires et fiscales | abonnement App Store | après A1 |
 | A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/app-store/confidentialite.md` | examen Apple | avant la 1re soumission |
 | A6 | Inviter les testeurs (d'abord sa compagne : interne via « Utilisateurs et accès » ou externe avec l'examen bêta, la routine dira), soumettre à l'examen, publier | testeurs, production | lui seul |
 | A7 | (facultatif, quand la routine le proposera) Demander à Apple le droit « Family Controls (Distribution) » pour Halcya : formulaire d'Apple, motif « temps d'écran approché pour les analyses de bien-être, données gardées sur le téléphone » | tuile « Écran » sur iPhone (temps d'écran approché, `RECHERCHE.md`) | après A1 |
-| A8 | (1 minute, sur ordinateur, quand vous voulez) Activer GitHub Pages pour ce dépôt : sur github.com, HealthTrack-iOS → Settings → Pages → « Build and deployment » → Source : « GitHub Actions ». Rien d'autre : la routine publie ensuite les pages | adresses de la politique de confidentialité, des conditions d'utilisation et de l'assistance de l'iPhone, demandées par la fiche App Store (A3, A5) | avant A3 |
+| A8 | (1 minute, sur ordinateur, quand vous voulez) Activer GitHub Pages pour ce dépôt : sur github.com, HealthTrack-iOS → Settings → Pages → « Build and deployment » → Source : « GitHub Actions ». Rien d'autre : la routine publie ensuite les pages | adresses de la politique de confidentialité, des conditions d'utilisation et de l'assistance de l'iPhone, demandées par la fiche App Store (A3, A5) | ✅ 30/10 : Pages activé, site publié (`pages.yml`, déploiement réussi) |
 
 #### A1 pas à pas (préparé le 27/10/2026)
 
