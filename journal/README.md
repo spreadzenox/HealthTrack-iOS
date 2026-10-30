@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v610 (30/10) | v609 sur iPhone simulé (30/10, PR #84) ; v610 en vérification (PR #85) |
+| Dernière version | v611 (30/10) | v610 sur iPhone simulé (30/10, PR #85) ; v611 en vérification (PR #86) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -182,6 +182,7 @@ via TestFlight.
 | 30/10 11:00 | suivi d'Android v608 | v607 sur iPhone (PR #82 mergée : Journal et Nouveautés regardés) ; Android v608 : une phrase fixe rappelle les signes à signaler vite à votre médecin (carte du ventre, réintroduction, rapport PDF), aussi sur iPhone. Parité : 49 % | #82 (mergée), #83 |
 | 30/10 12:00 | suivi d'Android v609 | v608 sur iPhone (PR #83 mergée) ; Android v609 : au premier lancement, le compteur d'écrans (« 01/07 ») ne grimpe plus en cours de route ; c'était le cas aussi sur iPhone (« 01/05 » puis « 04/06 »), corrigé de même ; la note de Nouveautés d'Android parle de Health Connect : cachée sur iPhone, demande à Android de la reformuler. Parité : 49 % | #83 (mergée), #84 |
 | 30/10 13:00 | suivi d'Android v610, fiche App Store | v609 sur iPhone (PR #84 mergée : compteur « 01/07 » puis « 04/07 », vu) ; Android v610 ne change que sa fiche Google Play ; la description de la fiche App Store suit le même ordre et dit enfin ce que l'iPhone sait faire : délais repas → ventre jusqu'à 48 h, FODMAP groupe par groupe, bilan du soir, rapport PDF pour le médecin. Parité : 49 % | #84 (mergée), #85 |
+| 30/10 14:00 | suivi d'Android v611 | v610 sur iPhone (PR #85 mergée, nouvelle description de la fiche App Store) ; Android v611 : une séance de sport vue par deux sources (votre montre et une app de course) n'est plus comptée deux fois ; vrai aussi sur iPhone pour les séances de l'app Santé (vérifié par un test). Android réserve désormais lui-même à Google Play ses notes qui parlent de Health Connect. Parité : 49 % | #85 (mergée), #86 |
 
 ---
 

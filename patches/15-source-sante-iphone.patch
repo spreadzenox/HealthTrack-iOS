@@ -1,16 +1,29 @@
+diff --git a/app/src/pages/Data.jsx b/app/src/pages/Data.jsx
+index 4fce330..bfb1c46 100644
+--- a/app/src/pages/Data.jsx
++++ b/app/src/pages/Data.jsx
+@@ -349,7 +349,7 @@ export default function Data() {
+                 C’est définitif : exportez-les d’abord si vous voulez les garder.
+               </p>
+               <p className="data-hint">
+-                Restent : vos réglages, vos connexions (montre, Health Connect), votre abonnement et vos crédits IA.
++                Restent : vos réglages, vos connexions (montre, {FEATURES.iosStore ? 'app Santé' : 'Health Connect'}), votre abonnement et vos crédits IA.
+               </p>
+               <div className="import-preview-actions">
+                 <button type="button" className="btn btn-secondary" onClick={handleExport} disabled={wipe.running}>
 diff --git a/app/src/services/firstImport.js b/app/src/services/firstImport.js
-index 9ebc2f1..6ae8a2f 100644
+index 42de24c..2b44da9 100644
 --- a/app/src/services/firstImport.js
 +++ b/app/src/services/firstImport.js
-@@ -16,6 +16,7 @@ import { localDateKey } from './wellbeingSeries'
- import { isDaytimeHrv } from './hrv'
+@@ -17,6 +17,7 @@ import { isDaytimeHrv } from './hrv'
  import { appLocale } from '../i18n/locale.js'
  import { totalOf } from './activityTotals'
+ import { oneSourcePerWorkout } from './workoutSources'
 +import { FEATURES } from '../config/distribution'
  
  const DAY_MS = 24 * 3600 * 1000
  
-@@ -57,9 +58,10 @@ function sourceLine(entries) {
+@@ -58,9 +59,10 @@ function sourceLine(entries) {
      const raw = e.payload?.sourceName
      return raw ? (matchHealthApp(raw)?.name || raw) : null
    }).filter(Boolean))]
@@ -24,7 +37,7 @@ index 9ebc2f1..6ae8a2f 100644
  
  /**
 diff --git a/app/src/services/today.js b/app/src/services/today.js
-index dcad447..ed3a6cd 100644
+index 4e0bfc2..c7f1b73 100644
 --- a/app/src/services/today.js
 +++ b/app/src/services/today.js
 @@ -11,6 +11,7 @@
@@ -35,7 +48,7 @@ index dcad447..ed3a6cd 100644
  
  export const GUT_TYPE = 'gut'
  export const GUT_SOURCE = 'app_gut'
-@@ -129,6 +130,8 @@ export const SOURCE_LABELS = {
+@@ -142,6 +143,8 @@ export const SOURCE_LABELS = {
    scale: 'Balance connectée',
    phone_usage: 'Téléphone',
  }
@@ -44,16 +57,3 @@ index dcad447..ed3a6cd 100644
  
  /** Source lisible d'une entrée : l'appli d'origine quand Health Connect la donne (« Health Connect · Garmin »). */
  export function entrySourceLabel(e) {
-diff --git a/app/src/pages/Data.jsx b/app/src/pages/Data.jsx
-index 0e8886c..15f6ba7 100644
---- a/app/src/pages/Data.jsx
-+++ b/app/src/pages/Data.jsx
-@@ -348,7 +348,7 @@ export default function Data() {
-                 C’est définitif : exportez-les d’abord si vous voulez les garder.
-               </p>
-               <p className="data-hint">
--                Restent : vos réglages, vos connexions (montre, Health Connect), votre abonnement et vos crédits IA.
-+                Restent : vos réglages, vos connexions (montre, {FEATURES.iosStore ? 'app Santé' : 'Health Connect'}), votre abonnement et vos crédits IA.
-               </p>
-               <div className="import-preview-actions">
-                 <button type="button" className="btn btn-secondary" onClick={handleExport} disabled={wipe.running}>
