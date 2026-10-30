@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v609 (30/10) | v608 sur iPhone simulé (30/10, PR #83) ; v609 en vérification (PR #84) |
+| Dernière version | v610 (30/10) | v609 sur iPhone simulé (30/10, PR #84) ; v610 en vérification (PR #85) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -181,6 +181,7 @@ via TestFlight.
 | 30/10 10:00 | suivi d'Android v607 | Android v607 : une nuit vue par deux sources (votre montre et une app de sommeil) n'est plus comptée deux fois ; vrai aussi sur iPhone, où l'Apple Watch, l'iPhone et une app de sommeil écrivent la même nuit dans l'app Santé (vérifié par un test : 7 h, pas 14 h) ; la note de Nouveautés d'Android parle de Health Connect : cachée sur iPhone, demande à Android de la reformuler. Parité : 49 % | #81 (mergée), #82 |
 | 30/10 11:00 | suivi d'Android v608 | v607 sur iPhone (PR #82 mergée : Journal et Nouveautés regardés) ; Android v608 : une phrase fixe rappelle les signes à signaler vite à votre médecin (carte du ventre, réintroduction, rapport PDF), aussi sur iPhone. Parité : 49 % | #82 (mergée), #83 |
 | 30/10 12:00 | suivi d'Android v609 | v608 sur iPhone (PR #83 mergée) ; Android v609 : au premier lancement, le compteur d'écrans (« 01/07 ») ne grimpe plus en cours de route ; c'était le cas aussi sur iPhone (« 01/05 » puis « 04/06 »), corrigé de même ; la note de Nouveautés d'Android parle de Health Connect : cachée sur iPhone, demande à Android de la reformuler. Parité : 49 % | #83 (mergée), #84 |
+| 30/10 13:00 | suivi d'Android v610, fiche App Store | v609 sur iPhone (PR #84 mergée : compteur « 01/07 » puis « 04/07 », vu) ; Android v610 ne change que sa fiche Google Play ; la description de la fiche App Store suit le même ordre et dit enfin ce que l'iPhone sait faire : délais repas → ventre jusqu'à 48 h, FODMAP groupe par groupe, bilan du soir, rapport PDF pour le médecin. Parité : 49 % | #84 (mergée), #85 |
 
 ---
 
