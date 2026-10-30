@@ -1,0 +1,22 @@
+diff --git a/app/src/pages/Settings.jsx b/app/src/pages/Settings.jsx
+index e0883b3..02b8651 100644
+--- a/app/src/pages/Settings.jsx
++++ b/app/src/pages/Settings.jsx
+@@ -28,6 +28,8 @@ function RelayAiBlock() {
+   let quota = 'Sans abonnement : 10 analyses offertes, puis 15 par mois. Avec le premium : jusqu’à 10 par jour.'
+   if (ent.premium && ent.source === 'launch') quota = 'Pendant le test : jusqu’à 10 analyses par jour, sans rien payer.'
+   else if (ent.premium) quota = 'Avec votre premium : jusqu’à 10 analyses par jour.'
++  // Version iOS (HealthTrack-iOS) : rien n'est vendu sur iPhone ; le nombre d'analyses restantes (AiCreditsHint) suffit
++  if (!FEATURES.billing) quota = null
+   return (
+     <div className="settings-block">
+       <h3 className="section-title">Analyse des repas (IA)</h3>
+@@ -37,7 +39,7 @@ function RelayAiBlock() {
+         saisie manuelle reste possible.
+       </p>
+       <AiCreditsHint />
+-      <p className="hint">{quota}</p>
++      {quota && <p className="hint">{quota}</p>}
+       <div className="gemini-privacy">
+         <p className="hint">
+           <strong><LineIcon name="lock" size={16} /> Ce qui est envoyé :</strong> uniquement la photo du repas, réduite et sans métadonnées
