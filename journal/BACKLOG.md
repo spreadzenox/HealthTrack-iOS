@@ -85,7 +85,8 @@
   - [x] Export par la feuille de partage, geste réel (PR #37) : « Enregistrer dans Fichiers », 2 fichiers sur les
     deux iPhone simulés.
   - [ ] Gestes réels, suite : puis export par la feuille de partage ;
-    fichier exporté d'Android réimporté sur iPhone (même format, déjà couvert par l'aller-retour de #29).
+    fichier exporté d'Android réimporté sur iPhone (même format, déjà couvert par l'aller-retour de #29 ; 30/10 : code
+    d'import identique, mesures Health Connect d'Android étiquetées « App Santé » sur iPhone, voir `PARITE.md`).
 - [ ] **I4 — Santé (HealthKit)** par `@capgo/capacitor-health` (déjà une dépendance d'Android ; 27/10 : code iOS
   vérifié, mêmes méthodes et types que le connecteur ; **VFC en SDNN sur iOS contre RMSSD sur Android**, à ne pas
   mélanger ; voir `RECHERCHE.md`. 27/10 : **HealthKit marche sur simulateur sans compte Apple** (build signée à la
