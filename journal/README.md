@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v613 (30/10) | v612 sur iPhone simulé (30/10, PR #88) ; v613 en vérification (PR #89) |
+| Dernière version | v614 (30/10) | v613 sur iPhone simulé (30/10, PR #89) ; v614 en vérification (PR #90) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -185,6 +185,7 @@ via TestFlight.
 | 30/10 14:00 | suivi d'Android v611 | v610 sur iPhone (PR #85 mergée, nouvelle description de la fiche App Store) ; Android v611 : une séance de sport vue par deux sources (votre montre et une app de course) n'est plus comptée deux fois ; vrai aussi sur iPhone pour les séances de l'app Santé (vérifié par un test). Android réserve désormais lui-même à Google Play ses notes qui parlent de Health Connect. Parité : 49 % | #85 (mergée), #86 |
 | 30/10 15:00 | suivi d'Android v612 | v611 sur iPhone (PR #86 mergée : une séance de sport comptée une fois, vu) ; Android v612 : deux retouches d'affichage (« VFC nuit » dans le Journal, étiquette « premium » espacée), sans effet visible sur iPhone (la VFC de l'app Santé y garde son nom, rien n'y est vendu) ; un correctif iOS refait, la note d'Android cachée sur iPhone. Trouvé en rendant la démo fidèle : sur un vrai iPhone, la variabilité cardiaque (VFC) de l'app Santé n'apparaissait pas sur l'Accueil, corrigé ; les Analyses suivront. Parité : 49 % | #86, #87 (mergées), #88 |
 | 30/10 16:00 | suivi d'Android v613, VFC sur l'Accueil | la variabilité cardiaque de l'app Santé s'affiche sur l'Accueil de l'iPhone (PR #88 mergée, « VFC (SDNN) 46 ms » vu sur les deux iPhone simulés) ; Android v613 retouche une phrase des Paramètres sur l'abonnement : sur iPhone, où rien n'est vendu, cette phrase n'est plus montrée du tout. Parité : 49 % | #88 (mergée), #89 |
+| 30/10 17:00 | suivi d'Android v614 | v613 sur iPhone (PR #89 mergée : plus de phrase sur l'abonnement dans Paramètres, vu) ; Android v614 : au premier import, la fréquence cardiaque et les pas des derniers jours ne se perdent plus quand la montre mesure souvent ; c'était vrai aussi avec l'Apple Watch sur iPhone, corrigé de même. Parité : 49 % | #89 (mergée), #90 |
 
 ---
 
