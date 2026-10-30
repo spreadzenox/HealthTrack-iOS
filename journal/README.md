@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v617 (30/10) | **616 sur TestFlight** (build 616.97, envoyée le 30/10 à 20:30 UTC) ; v617 en vérification (PR #97) |
+| Dernière version | v617 (30/10) | **617 sur `main`** ; TestFlight : 616 (build 616.97), 617 en envoi le 30/10 vers 21:20 UTC |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -199,6 +199,7 @@ via TestFlight.
 | 30/10 19:00 | vos actions Apple, VFC dans les Analyses | **vous avez fait A1, A3 et A8** : compte Apple validé, fiche « Halcya » créée dans App Store Connect, pages de confidentialité, de conditions et d'assistance en ligne ; nous avons passé en revue avec vous toutes les cases et demandes d'Apple (seuls HealthKit, achats intégrés, App Attest, et la demande Family Controls pour le temps d'écran, servent à Halcya) ; la variabilité cardiaque de l'app Santé est dans les Analyses de l'iPhone (PR #91 mergée, vue dans les captures). Parité : 49 % | #91 (mergée), #92, #93 |
 | 30/10 20:00 | TestFlight, suivi d'Android v616 | **vous avez fait A2** (clé et accord pour la signature par Apple) et obtenu le droit du temps d'écran ; l'envoi automatique sur TestFlight est écrit (PR #95, premier envoi juste après sa vérification) ; Android v615 et v616 : lecture du visage sans plantage sur Android, et tout l'historique lu sans coupure, aussi pour l'app Santé sur iPhone. Parité : 49 % | #95, #96 |
 | 30/10 21:00 | TestFlight, suivi d'Android v617 | **l'app iPhone est sur TestFlight** (version 616) : premier envoi refusé par Apple pour une phrase manquante sur l'app Santé, corrigée (PR #96), deuxième envoi réussi ; l'iPhone a maintenant ses propres Nouveautés, qui commencent à cette version de test ; Android v617 : un aliment par ligne dans les repas, aussi sur iPhone. Parité : 49 % | #96 (mergée), #97 |
+| 30/10 22:00 | TestFlight 617 | v617 sur `main` (PR #97 mergée : Nouveautés de l'iPhone vues, une seule note « Halcya arrive sur iPhone ») ; la 617 part aussi sur TestFlight pour que votre compagne installe la plus récente. Parité : 49 % | #97 (mergée) |
 
 ---
 
