@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v613 (commit `9b84f1b`, 30/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v614 (commit `2267b1d`, 30/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 30/10 16:25 | #530 (v614) | connecteur : FC et pas en échantillons **lus jour par jour** (`readSamplesInWindows`, fenêtre coupée en deux quand elle atteint la limite), FC brute limitée aux 30 derniers jours au premier import ; le « aha » du premier import compte une nuit une fois (`firstImport.js`, `sleepRegularity.js`) : code partagé, **vrai sur iPhone** : le plugin y lit HealthKit avec la même limite triée du plus ancien au plus récent (`HKSampleQuery`, `Health.swift` lu), donc une Apple Watch qui mesure souvent perdait aussi les jours récents ; **correctif 15 refait à la main** (import voisin dans `firstImport.js` ; la fusion à trois ne trouvait plus sa base), mêmes lignes ; note de Nouveautés marquée `["play", "sideload"]` par Android | — |
 | 30/10 15:25 | #529 (v613) | Paramètres : pendant la période de lancement, le quota d'analyses IA dit « jusqu'à 10 analyses par jour, sans rien payer » au lieu de parler d'abonnement (`Settings.jsx`) : sur iPhone, la phrase de quota n'est plus montrée du tout (correctif 31, rien n'y est vendu) ; note de Nouveautés marquée `["play"]` par Android : rien à cacher | — |
 | 30/10 14:15 | #528 (v612) | audit du thème sombre : dans le Journal, la VFC RMSSD de la nuit s'appelle « VFC nuit » (`journalChips.js`) ; dans la réintroduction, l'étiquette « premium » de la carte « Débloquer » est espacée du titre (`Reintroduction.css`) : code partagé ; sur iPhone, la VFC de l'app Santé reste « VFC (SDNN) » (« VFC nuit » ne vaut que pour une VFC RMSSD, d'un fichier d'Android par exemple) et la carte « Débloquer » n'apparaît pas (rien n'est vendu) : **correctif 17 refait** (ligne voisine dans `journalChips.js`, fusion à trois sans conflit), note de Nouveautés cachée (`APPSTORE_HIDDEN`), demande dans `DEMANDES.md` | — |
 | 30/10 13:05 | #527 (v611) | **une seule source par séance de sport** (`workoutSources.js`, nouveau ; Journal, analyses, résumé du premier import) : code partagé, **vrai sur iPhone** (les séances de l'app Santé ont la source `health_connect`, `sourceName` et `endDate` rendus par le plugin, `Health.swift` lu ; test iOS ajouté : Apple Watch et une app de course sur la même séance → une seule) ; **correctif 15 refait** (import voisin dans `firstImport.js`, fusion à trois) ; note de Nouveautés déjà marquée `["play", "sideload"]` par Android (elle cite la montre Huawei et Health Connect) : rien à cacher | — |
