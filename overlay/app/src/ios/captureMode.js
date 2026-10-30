@@ -30,13 +30,19 @@ export const REVEALS = {
 }
 
 // Données de démo d'Android ramenées à ce que l'iPhone reçoit aujourd'hui (captures et fiche App Store fidèles) :
-// ni montre Huawei en direct, ni temps d'écran (I8), ni lecture du visage (I7) ; la montre écrit dans Santé.
+// ni montre Huawei en direct, ni temps d'écran (I8), ni lecture du visage (I7) ; la montre écrit dans Santé, qui
+// donne une VFC en SDNN (rangée à part, `heartRateVariabilitySdnn`), pas la RMSSD d'Android.
 const NOT_ON_IPHONE = new Set(['huawei_watch', 'phone', 'face_sense'])
 
 export function iphoneDemoEntries(entries) {
   return entries
     .filter((e) => !NOT_ON_IPHONE.has(e.source))
-    .map((e) => (e.payload?.sourceName === 'Gadgetbridge' ? { ...e, payload: { ...e.payload, sourceName: 'Apple Watch' } } : e))
+    .map((e) => {
+      if (e.payload?.sourceName !== 'Gadgetbridge') return e
+      const payload = { ...e.payload, sourceName: 'Apple Watch' }
+      if (payload.subtype === 'heartRateVariability') payload.subtype = 'heartRateVariabilitySdnn'
+      return { ...e, payload }
+    })
 }
 
 const pageName = (route) => route.replace(/^\//, '') || 'accueil'
