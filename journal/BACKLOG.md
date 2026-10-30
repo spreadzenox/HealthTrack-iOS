@@ -44,6 +44,9 @@
     Health, temps d'écran) sont listés dans `texte-android.txt`. Première liste (#70) : « temps d'écran » seulement,
     dans la carte qui dit « Pas encore disponible sur iPhone » (juste, mise à part par `IPHONE_OK`) ; étape de CI
     bloquante depuis #71.
+  - [ ] Bannière système « Prêt pour Apple Intelligence » du simulateur iOS 26 vue sur une capture (Repas, iPhone 17
+    Pro, CI de #73) : hors de l'app, mais à ne pas laisser sur les captures de la fiche ; aucun réglage `simctl`
+    documenté trouvé (30/10) ; vérifier `captures/store` avant la soumission, refaire la capture au besoin.
   - [x] Rapport PDF pour le médecin essayé à chaque build (29/10, PR #51, mergée) : PDF créé et feuille de partage
     ouverte sur les deux iPhone simulés ; l'enregistrement dans Fichiers par le test d'interface (feuille dépliée)
     est à confirmer sur la CI de #52.
