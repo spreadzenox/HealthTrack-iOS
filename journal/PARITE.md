@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v617 (commit `6c09780`, 30/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v620 (commit `4b46597`, 30/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 30/10 22:10 | #534 (v618), #535 (v619), #536 (v620) | #534 : idées et journal d'Android seulement ; #535 : « œ » dans les noms d'aliments (« Œuf », « Bœuf », « Cœur de palmier » ; `format.js`, `MealItemList.jsx`, `MealEditor.jsx`, `quickMeals.js`), la recherche trouve toujours « oeuf » ; #536 : en bas d'Analyses, ce qui manque aux repères pas encore comparés, en mots simples (`Recommendations.jsx`) : code partagé, vrai sur iPhone ; **premières notes d'Android montrées sur iPhone** depuis le départ de ses Nouveautés (2026-10-30-2100) : relues, vraies sur iPhone ; 33 correctifs appliqués directement | — |
 | 30/10 20:30 | #533 (v617) | repas : un aliment par ligne, quantité à droite (`MealItemList.jsx`, `Food.jsx`, `DailyJournal.jsx`, `App.css`) : code partagé, vrai sur iPhone, note vraie ; aucun correctif touché. Android a aussi marqué `["play", "sideload"]` la note du sommeil (demande iOS du 30/10 reprise) | — |
 | 30/10 19:10 | #531 (v615), #532 (v616) | #531 : lecture du visage sans plantage à l'activation (règles R8, service Android ; `faceSense.js` : la lecture au déverrouillage attend que le service tourne, `FaceSenseCard.jsx` : message si Android la refuse) : surtout Android, la partie JavaScript ne concerne que le déverrouillage, absent de l'iPhone ; note `["play"]`. #532 : historique long lu sans coupure (`readInWindows` : sommeil, séances et autres types lus par fenêtres, une fenêtre pleine coupée en deux) : code partagé, **vrai sur iPhone** (même limite du plugin sur HealthKit, v614) ; note `["play", "sideload"]` ; 32 correctifs appliqués directement | — |
 | 30/10 16:25 | #530 (v614) | connecteur : FC et pas en échantillons **lus jour par jour** (`readSamplesInWindows`, fenêtre coupée en deux quand elle atteint la limite), FC brute limitée aux 30 derniers jours au premier import ; le « aha » du premier import compte une nuit une fois (`firstImport.js`, `sleepRegularity.js`) : code partagé, **vrai sur iPhone** : le plugin y lit HealthKit avec la même limite triée du plus ancien au plus récent (`HKSampleQuery`, `Health.swift` lu), donc une Apple Watch qui mesure souvent perdait aussi les jours récents ; **correctif 15 refait à la main** (import voisin dans `firstImport.js` ; la fusion à trois ne trouvait plus sa base), mêmes lignes ; note de Nouveautés marquée `["play", "sideload"]` par Android | — |
