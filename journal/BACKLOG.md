@@ -165,7 +165,9 @@
     correctif 24, contrat avec `describePlans` (Vitest). Inactifs tant que `FEATURES.billing` est faux.
   - [x] Achat d'essai sur simulateur : cible de tests unitaires hébergée par l'app + fichier `.storekit` +
     `SKTestSession` (`RECHERCHE.md`, 28/10 13:30) ; fait le 28/10 (PR #40 : un abonnement d'essai s'achète et reste
-    actif) ; étape de la CI **bloquante depuis le 29/10** (PR #58), après quatre passages sans faute.
+    actif) ; étape de la CI **bloquante depuis le 29/10** (PR #58), après quatre passages sans faute. Un échec le
+    30/10 (première CI de #77 : achat abouti, conversion vide), sans cause connue, la même étape verte sur `main` ; le
+    test dit désormais pourquoi (`StoreKit Test : transaction non vérifiée …`) ; repassé sans faute sur la CI suivante.
   - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
     l'`appAccountToken`.
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : mêmes modèles qu'Android, mêmes scores sur ses vecteurs de référence.
