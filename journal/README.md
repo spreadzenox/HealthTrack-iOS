@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v600 (30/10) | v598 sur iPhone simulé (30/10, PR #75) ; v600 en vérification (PR #76) |
+| Dernière version | v602 (30/10) | v600 sur iPhone simulé (30/10, PR #76) ; v602 en vérification (PR #77) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -171,6 +171,8 @@ via TestFlight.
 | 30/10 01:00 | suivi d'Android v597 | v596 sur iPhone (PR #73 mergée : Nutrition vide en couleur et « ⋯ » des repas vus) ; Android v597 : la réintroduction écrit son repère des portions comme une phrase, aussi sur iPhone. Parité : 49 % | #73 (mergée), #74 |
 | 30/10 02:00 | suivi d'Android v598, captures de la fiche | v597 sur iPhone (PR #74 mergée) ; Android v598 : une réparation interne de la carte de lecture du visage, aussi sur iPhone ; nouvelles captures de la fiche App Store lancées (grand iPhone), avec l'interface du jour. Parité : 49 % | #74 (mergée), #75 |
 | 30/10 03:00 | suivi d'Android v600, captures de la fiche | v598 sur iPhone (PR #75 mergée) ; les 8 captures de la fiche App Store refaites avec l'interface du jour et regardées (propres, sans bannière du système) ; Android v599 et v600 : réintroduction plus claire, phrases d'aide plus discrètes, aussi sur iPhone (une note qui parle d'un écran absent de l'iPhone y est cachée). Parité : 49 % | #75 (mergée), #76 |
+| 30/10 04:00 | données de l'app Santé dans le Journal | v600 sur iPhone, au même niveau qu'Android (PR #76 mergée) ; l'essai automatique de l'app Santé va maintenant jusqu'au Journal : les pas écrits dans Santé y apparaissent bien (« Pas 1 234 » vu sur les deux iPhone simulés). Parité : 49 % | #76 (mergée), #77 |
+| 30/10 05:00 | suivi d'Android v602 | Android v601 et v602 : plus de rapport PDF vide proposé, noms d'aliments plus courts dans les pistes, aussi sur iPhone (un correctif iOS refait) ; un essai d'achat simulé a échoué une fois sans dire pourquoi : il le dira la prochaine fois. Parité : 49 % | #77 |
 
 ---
 

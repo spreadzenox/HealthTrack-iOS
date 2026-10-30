@@ -96,8 +96,9 @@
   - [ ] Vérifier l'import réel : sonde d'écriture et de relecture (PR #11, mergée ; `idb` écarté : dépôt Homebrew
     tiers non approuvé) ; feuille acceptée par un test d'interface XCUITest du dépôt (`uitests/`, PR #12, mergée :
     1234 pas écrits puis relus sur les deux iPhone simulés) ; pas relus par le connecteur de l'app (PR #15 : vu sur
-    l'iPhone 16e, toucher du test fiabilisé ; mergée, vu sur les deux iPhone) ; ensuite les montrer dans le Journal ;
-    à refaire sur l'iPhone 12.
+    l'iPhone 16e, toucher du test fiabilisé ; mergée, vu sur les deux iPhone) ; ensuite les montrer dans le Journal
+    (30/10, PR #77 : la sonde ouvre le Journal après la synchronisation, y cherche « 1 234 » pas, `[healthkit] journal`,
+    capture `healthkit-journal`) ; à refaire sur l'iPhone 12.
   - [x] Textes Santé sur iPhone : source « App Santé » des mesures importées (Journal, tuiles, rapport), résumé du
     premier import, confirmation de suppression (PR #13, mergée le 28/10).
   - [x] Guide « Votre montre n'apparaît pas ? » réécrit pour l'iPhone (Health Connect, Gadgetbridge et Bluetooth

@@ -337,6 +337,29 @@ describe('sonde HealthKit (I4)', () => {
     expect(logs.join('\n')).toContain('[healthkit] base {"synced":2,"pas":[1234]}')
   })
 
+  it('puis les pas importés sont cherchés dans le Journal, et la page est capturée (I4)', async () => {
+    const h = health({ acceptOnAck: true })
+    const logs = []
+    const signals = []
+    const sync = vi.fn(async ({ writer }) => {
+      await writer([{ type: 'steps', source: 'health_connect', payload: { value: 1234, sourceName: 'Halcya' } }])
+      return { synced: 1, skipped: 0, errors: [] }
+    })
+    const waitAck = async () => {
+      h.accept({})
+      return true
+    }
+    const store = { upsertEntries: vi.fn(async () => {}), listEntries: vi.fn(async () => []) }
+    const navigate = vi.fn()
+    await probeHealthKit({
+      signal: async (name) => signals.push(name), waitAck, wait: async () => {}, log: (m) => logs.push(m),
+      health: h.api, connector: { sync }, store, navigate, readText: () => 'Aujourd’hui · Pas 1\u202f234',
+    })
+    expect(navigate).toHaveBeenCalledWith('/journal')
+    expect(logs.join('\n')).toContain('[healthkit] journal {"pas":true}')
+    expect(signals).toEqual(['healthkit-autorisation', 'healthkit-journal'])
+  })
+
   it('feuille jamais acceptée : le dit et n’écrit rien', async () => {
     const h = health({ acceptOnAck: false })
     const logs = []

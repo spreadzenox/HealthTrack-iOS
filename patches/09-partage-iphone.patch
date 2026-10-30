@@ -1,16 +1,16 @@
 diff --git a/app/src/components/DoctorReportCard.jsx b/app/src/components/DoctorReportCard.jsx
-index a095ec6..10c9c0a 100644
+index 6b2a098..d1c6ae7 100644
 --- a/app/src/components/DoctorReportCard.jsx
 +++ b/app/src/components/DoctorReportCard.jsx
 @@ -1,6 +1,7 @@
- import { useState } from 'react'
+ import { useEffect, useState } from 'react'
  import { Link } from 'react-router-dom'
  import { FEATURES } from '../config/distribution'
 +import { APP_NAME } from '../config/brand'
  import { useEntitlement } from '../hooks/useEntitlement'
  import { REPORT_DEFAULT_WEEKS, REPORT_PERIODS } from '../services/report/buildReport'
  import { createReportPdf, saveAndShareReport } from '../services/report/createReportPdf'
-@@ -26,7 +27,9 @@ export default function DoctorReportCard({ create = createReportPdf, save = save
+@@ -42,7 +43,9 @@ export default function DoctorReportCard({ create = createReportPdf, save = save
        const pdf = await create({ weeks, includeWellbeing: wellbeing })
        const { saved } = await save(pdf)
        setStatus(saved === 'documents'
@@ -22,7 +22,7 @@ index a095ec6..10c9c0a 100644
      } catch (e) {
        setStatus('Le rapport n’a pas pu être créé : ' + (e?.message || 'erreur inconnue') + '.')
 diff --git a/app/src/pages/Data.jsx b/app/src/pages/Data.jsx
-index 37822e7..fc8cbb0 100644
+index ef5d623..ba1bcfa 100644
 --- a/app/src/pages/Data.jsx
 +++ b/app/src/pages/Data.jsx
 @@ -13,7 +13,8 @@ import { appLocale } from '../i18n/locale.js'
