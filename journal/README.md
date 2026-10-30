@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v598 (30/10) | v597 sur iPhone simulé (30/10, PR #74) ; v598 en vérification (PR #75) |
+| Dernière version | v600 (30/10) | v598 sur iPhone simulé (30/10, PR #75) ; v600 en vérification (PR #76) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -170,6 +170,7 @@ via TestFlight.
 | 30/10 00:00 | suivi d'Android v596 | test d'import fiabilisé (PR #72 mergée, import réussi sur les deux iPhone simulés) ; Android v595 et v596 : Nutrition vide en couleur et actions des repas rangées derrière « ⋯ », aussi sur iPhone ; la note de Nouveautés de v596 parle aussi du stress de la montre en direct, absent de l'iPhone : cachée sur iPhone, demande à Android de la scinder. Parité : 49 % | #72 (mergée), #73 |
 | 30/10 01:00 | suivi d'Android v597 | v596 sur iPhone (PR #73 mergée : Nutrition vide en couleur et « ⋯ » des repas vus) ; Android v597 : la réintroduction écrit son repère des portions comme une phrase, aussi sur iPhone. Parité : 49 % | #73 (mergée), #74 |
 | 30/10 02:00 | suivi d'Android v598, captures de la fiche | v597 sur iPhone (PR #74 mergée) ; Android v598 : une réparation interne de la carte de lecture du visage, aussi sur iPhone ; nouvelles captures de la fiche App Store lancées (grand iPhone), avec l'interface du jour. Parité : 49 % | #74 (mergée), #75 |
+| 30/10 03:00 | suivi d'Android v600, captures de la fiche | v598 sur iPhone (PR #75 mergée) ; les 8 captures de la fiche App Store refaites avec l'interface du jour et regardées (propres, sans bannière du système) ; Android v599 et v600 : réintroduction plus claire, phrases d'aide plus discrètes, aussi sur iPhone (une note qui parle d'un écran absent de l'iPhone y est cachée). Parité : 49 % | #75 (mergée), #76 |
 
 ---
 
