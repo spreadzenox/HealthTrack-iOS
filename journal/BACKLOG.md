@@ -187,6 +187,9 @@
   - [x] 5. YUV → RVB (BT.601 plein écart, 4 rotations ; 28/10 : `FaceFrames`, plan CbCr entrelacé de l'iPhone et arrondi de Java, 9 tests, PR #44 ; garde-fous `FaceSchedule`, chaleur de l'iPhone sur l'échelle d'Android, 10 tests, PR #44 ; boîte des rafales `FaceInbox` et lecture `FaceOneShot` avec caméra et modèles injectables, 13 tests, branche `claude/ios-i7-plugin` ; caméra frontale `FrontCamera` (AVFoundation, 352 × 288, portrait sans miroir), conversion testée sur images fabriquées), puis plugin `FaceSense` en Swift (branché dans l'app, PR #46, mergée) avec images injectables (29/10 : un visage lu de bout en bout sur les deux iPhone simulés, PR #47).
   - [ ] 6. Sur l'iPhone 12 (dès TestFlight, après A1–A3) : la vraie caméra, le temps par lecture, la fluidité.
   - [ ] 7. Décision du propriétaire sur les poids AffectNet (valence et éveil), `DEMANDES.md`. À l'intégration dans l'app : relire le `PrivacyInfo.xcprivacy` livré dans `TensorFlowLiteC.xcframework`.
+- [ ] **I8, revu le 30/10 (`RECHERCHE.md`)** : temps d'écran peut-être **réel** avec le droit « Family Controls App and
+  Website Usage » (demandé par le propriétaire, A7) ; montre Huawei GT : deux pistes à étudier avant tout verdict
+  (BLE à côté de Huawei Santé, essai sur l'iPhone 12 ; Health Kit de Huawei).
 - [ ] **I8 — Le reste du natif** (28/10 : sonde vocale `VoiceProbe` en Swift, PR #40) : voix, temps d'écran, montre Huawei (BLE), détection des sources : étude honnête
   (sources datées) puis ce qui est faisable ; ⛔ argumentés dans `PARITE.md`.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
