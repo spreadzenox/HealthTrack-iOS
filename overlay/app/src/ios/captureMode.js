@@ -236,7 +236,7 @@ export async function installCaptureMode() {
  * pas écrits doivent y être) : preuve que l'import marche de bout en bout. Résultats dans la console
  * (`[healthkit] …`).
  */
-export async function probeHealthKit({ signal, waitAck, wait, log, health, connector, store }) {
+export async function probeHealthKit({ signal, waitAck, wait, log, health, connector, store, navigate, readText }) {
   const say = (what, value) => log(`[healthkit] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   const failed = (what) => (e) => say(`${what} erreur`, e?.message || String(e))
   try {
@@ -289,6 +289,18 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health, conne
       },
       failed('base'),
     )
+    // Montrés dans le Journal (I4) : la page Jours relue (« 1 234 » pas d'aujourd'hui), puis capturée
+    const go =
+      navigate ??
+      ((path) => {
+        window.history.pushState({}, '', path)
+        window.dispatchEvent(new PopStateEvent('popstate'))
+      })
+    go('/journal')
+    await wait(3000)
+    say('journal', { pas: /1[\s\u202f\u00a0]?234/.test((readText ?? (() => pageText(document.body)))()) })
+    await signal('healthkit-journal')
+    await waitAck('healthkit-journal')
   } catch (e) {
     say('échec', e?.message || String(e))
   }
