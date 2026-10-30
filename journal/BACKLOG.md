@@ -122,8 +122,9 @@
     (correctif 20, PR #26) ; radar avec la VFC SDNN prêt (correctif 21, branche `claude/ios-i4-radar-sdnn`, PR après #26).
   - [x] Simulateurs en français pour les captures (PR #9).
   - [~] VFC de l'app Santé (SDNN) partout où Android montre la VFC (30/10) : Journal (correctif 17), normes et Radar
-    (20, 21) faits ; **Accueil** (tuile « VFC (SDNN) », correctif 30, PR #88) ; restent les **Analyses**
-    (`analysisEngine.js`, VFC de la nuit comme variable) et le **résumé du premier import** (`firstImport.js`).
+    (20, 21), **Accueil** (tuile « VFC (SDNN) », correctif 30, PR #88), **Analyses** (variable à part
+    `hrv_sdnn_ms`, « Variabilité cardiaque (SDNN) ») et **résumé du premier import** (correctif 32, PR #91) ; à
+    revoir sur l'iPhone 12 avec une vraie Apple Watch (fréquence des mesures SDNN, jour et nuit mêlés).
 - [ ] **I5 — Notifications** : bilan du ventre du soir, note du soir, rappel de portion, rappel de fin d'essai ;
   actions dans la notification, réponse rangée à l'ouverture suivante.
   - [x] Règles du soir en Swift, testées par XCTest (`ios/HalcyaRules`, PR #18, mergée) : soirs programmés d'avance (iOS ne

@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v614 (30/10) | v613 sur iPhone simulé (30/10, PR #89) ; v614 en vérification (PR #90) |
+| Dernière version | v614 (30/10) | v614 sur iPhone simulé (30/10, PR #91 : VFC de l'app Santé dans les Analyses) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight dès les actions A3 et A2 faites) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -186,6 +186,7 @@ via TestFlight.
 | 30/10 15:00 | suivi d'Android v612 | v611 sur iPhone (PR #86 mergée : une séance de sport comptée une fois, vu) ; Android v612 : deux retouches d'affichage (« VFC nuit » dans le Journal, étiquette « premium » espacée), sans effet visible sur iPhone (la VFC de l'app Santé y garde son nom, rien n'y est vendu) ; un correctif iOS refait, la note d'Android cachée sur iPhone. Trouvé en rendant la démo fidèle : sur un vrai iPhone, la variabilité cardiaque (VFC) de l'app Santé n'apparaissait pas sur l'Accueil, corrigé ; les Analyses suivront. Parité : 49 % | #86, #87 (mergées), #88 |
 | 30/10 16:00 | suivi d'Android v613, VFC sur l'Accueil | la variabilité cardiaque de l'app Santé s'affiche sur l'Accueil de l'iPhone (PR #88 mergée, « VFC (SDNN) 46 ms » vu sur les deux iPhone simulés) ; Android v613 retouche une phrase des Paramètres sur l'abonnement : sur iPhone, où rien n'est vendu, cette phrase n'est plus montrée du tout. Parité : 49 % | #88 (mergée), #89 |
 | 30/10 17:00 | suivi d'Android v614 | v613 sur iPhone (PR #89 mergée : plus de phrase sur l'abonnement dans Paramètres, vu) ; Android v614 : au premier import, la fréquence cardiaque et les pas des derniers jours ne se perdent plus quand la montre mesure souvent ; c'était vrai aussi avec l'Apple Watch sur iPhone, corrigé de même. Parité : 49 % | #89 (mergée), #90 |
+| 30/10 18:00 | VFC de l'app Santé dans les Analyses | v614 sur iPhone, au même niveau qu'Android (PR #90 mergée : lecture de l'app Santé jour par jour essayée sur les deux iPhone simulés) ; la variabilité cardiaque de l'app Santé entre dans les Analyses, à part de celle d'Android pour ne pas inventer de fausses pistes, et dans le résumé du premier import. Parité : 49 % | #90 (mergée), #91 |
 
 ---
 
