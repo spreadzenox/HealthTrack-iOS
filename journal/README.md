@@ -11,14 +11,18 @@
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
 | Dernière version | v614 (30/10) | v614 sur iPhone simulé (30/10, PR #91 : VFC de l'app Santé dans les Analyses) |
-| Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight dès l'action A2 faite) |
+| Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight dès la première build envoyée par la CI) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **Demande Family Controls puis A2 — maintenant (pas à pas au §8)** : demander à Apple le droit du temps d'écran
-  (A7 : Identifiers → Halcya → Capability Requests → Family Controls (Distribution), texte préparé), puis créer la
-  clé API rangée en secrets GitHub (A2) et me dire « A2 fait — signature par Apple d'accord ». C'est ce qui débloque
-  TestFlight, donc l'app sur l'iPhone 12.
+- **Bientôt, A6 : inviter votre compagne sur TestFlight** (la routine dira quand la première build sera arrivée ;
+  pas à pas au §8 le moment venu). Rien à faire d'ici là.
+- ✅ **A2 fait le 30/10** : clé API « Halcya CI » (Admin) rangée dans l'environnement `appstore` (réservé à `main`,
+  sans contournement par les administrateurs) ; **accord du propriétaire pour la signature par Apple** (certificat de
+  distribution géré par Apple, créé par la CI). Workflow d'envoi sur TestFlight écrit (`testflight.yml`).
+- ✅ **Temps d'écran demandé et accordé le 30/10** (A7) : Apple a accordé « Family Controls (Distribution) » dans la
+  minute ; le propriétaire a activé sur l'identifiant Halcya Family Controls (Distribution) **et** Family Controls
+  App and Website Usage.
 - ✅ **A3 fait le 30/10** : identifiant `fr.jpesquet.sante` (HealthKit, In-App Purchase, App Attest) et fiche créée
   dans App Store Connect sous le nom **« Halcya »** (choix du propriétaire), iOS 1.0 « Prêt à soumettre ».
 - ✅ **A1 fait le 30/10** : l'e-mail de bienvenue d'Apple est arrivé (adhésion validée).
@@ -353,12 +357,12 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 |---|---|---|---|
 | A0 | Téléphone de test | tests sur un vrai téléphone | ✅ 26/10 : iPhone 12 de sa compagne (version d'iOS à préciser) |
 | A1 | Adhérer à l'Apple Developer Program (individuel, payant à l'année ; pas à pas ci-dessous) | signature, TestFlight, App Store | ✅ 30/10 : adhésion validée (e-mail de bienvenue d'Apple ; inscription et paiement le 28/10) |
-| A2 | Créer une clé API App Store Connect (rôle Admin ; pas à pas « A2 et A3 » ci-dessous) et l'enregistrer en secrets GitHub Actions de ce dépôt, dans un environnement `appstore` réservé à `main` | builds signées et envoi TestFlight automatiques | après A1 |
+| A2 | Créer une clé API App Store Connect (rôle Admin ; pas à pas « A2 et A3 » ci-dessous) et l'enregistrer en secrets GitHub Actions de ce dépôt, dans un environnement `appstore` réservé à `main` | builds signées et envoi TestFlight automatiques | ✅ 30/10 : clé « Halcya CI » (Admin), environnement `appstore` (main seulement, administrateurs sans contournement), « signature par Apple d'accord » |
 | A3 | Créer la fiche de l'app dans App Store Connect (nom, langue principale français, bundle id, SKU) | envoi TestFlight, fiche | ✅ 30/10 : identifiant (HealthKit, In-App Purchase, App Attest) et fiche « Halcya » créés ; le nom se modifie encore dans « Informations sur l'app » tant que rien n'est soumis |
 | A4 | Contrat « Paid Applications », coordonnées bancaires et fiscales | abonnement App Store | après A1 |
 | A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/app-store/confidentialite.md` | examen Apple | avant la 1re soumission |
 | A6 | Inviter les testeurs (d'abord sa compagne : interne via « Utilisateurs et accès » ou externe avec l'examen bêta, la routine dira), soumettre à l'examen, publier | testeurs, production | lui seul |
-| A7 | **Maintenant, après A3** : demander à Apple « Family Controls (Distribution) » pour Halcya (Certificates, IDs & Profiles → Identifiers → Halcya → onglet **Capability Requests** → Family Controls (Distribution)), en demandant aussi dans le texte le droit **« Family Controls App and Website Usage »** (absent de cet onglet le 30/10 ; justification en anglais préparée dans la conversation du 30/10 et dans `RECHERCHE.md`). Rien d'autre à demander dans cet onglet (passé en revue le 30/10, `RECHERCHE.md`) | tuile « Écran » sur iPhone (temps d'écran, peut-être réel et non plus approché, `RECHERCHE.md`) | après A3 (le formulaire demande l'app) |
+| A7 | **Maintenant, après A3** : demander à Apple « Family Controls (Distribution) » pour Halcya (Certificates, IDs & Profiles → Identifiers → Halcya → onglet **Capability Requests** → Family Controls (Distribution)), en demandant aussi dans le texte le droit **« Family Controls App and Website Usage »** (absent de cet onglet le 30/10 ; justification en anglais préparée dans la conversation du 30/10 et dans `RECHERCHE.md`). Rien d'autre à demander dans cet onglet (passé en revue le 30/10, `RECHERCHE.md`) | tuile « Écran » sur iPhone (temps d'écran, peut-être réel et non plus approché, `RECHERCHE.md`) | ✅ 30/10 : Family Controls (Distribution) accordé dans la minute ; Distribution et App and Website Usage activés sur l'identifiant |
 | A8 | (1 minute, sur ordinateur, quand vous voulez) Activer GitHub Pages pour ce dépôt : sur github.com, HealthTrack-iOS → Settings → Pages → « Build and deployment » → Source : « GitHub Actions ». Rien d'autre : la routine publie ensuite les pages | adresses de la politique de confidentialité, des conditions d'utilisation et de l'assistance de l'iPhone, demandées par la fiche App Store (A3, A5) | ✅ 30/10 : Pages activé, site publié (`pages.yml`, déploiement réussi) |
 
 #### A1 pas à pas (préparé le 27/10/2026)
