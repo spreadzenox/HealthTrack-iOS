@@ -10,13 +10,15 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v616 (30/10) | v614 sur iPhone simulé (30/10) ; v616 en vérification (PR #96), puis envoi sur TestFlight (premier essai du 30/10 : signature par Apple réussie, envoi refusé pour une phrase manquante, corrigé dans #96) |
-| Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight dès la première build envoyée par la CI) |
+| Dernière version | v617 (30/10) | **616 sur TestFlight** (build 616.97, envoyée le 30/10 à 20:30 UTC) ; v617 en vérification (PR #97) |
+| Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **Bientôt, A6 : inviter votre compagne sur TestFlight** (la routine dira quand la première build sera arrivée ;
-  pas à pas au §8 le moment venu). Rien à faire d'ici là.
+- **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
+  l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis, quand la build 616.97
+  apparaît dans TestFlight, créer un groupe de test interne avec elle ; elle installe l'app TestFlight sur son iPhone 12.
+- ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
 - ✅ **A2 fait le 30/10** : clé API « Halcya CI » (Admin) rangée dans l'environnement `appstore` (réservé à `main`,
   sans contournement par les administrateurs) ; **accord du propriétaire pour la signature par Apple** (certificat de
   distribution géré par Apple, créé par la CI). Workflow d'envoi sur TestFlight écrit (`testflight.yml`).
@@ -196,6 +198,7 @@ via TestFlight.
 | 30/10 18:00 | VFC de l'app Santé dans les Analyses | v614 sur iPhone, au même niveau qu'Android (PR #90 mergée : lecture de l'app Santé jour par jour essayée sur les deux iPhone simulés) ; la variabilité cardiaque de l'app Santé entre dans les Analyses, à part de celle d'Android pour ne pas inventer de fausses pistes, et dans le résumé du premier import. Parité : 49 % | #90 (mergée), #91 |
 | 30/10 19:00 | vos actions Apple, VFC dans les Analyses | **vous avez fait A1, A3 et A8** : compte Apple validé, fiche « Halcya » créée dans App Store Connect, pages de confidentialité, de conditions et d'assistance en ligne ; nous avons passé en revue avec vous toutes les cases et demandes d'Apple (seuls HealthKit, achats intégrés, App Attest, et la demande Family Controls pour le temps d'écran, servent à Halcya) ; la variabilité cardiaque de l'app Santé est dans les Analyses de l'iPhone (PR #91 mergée, vue dans les captures). Parité : 49 % | #91 (mergée), #92, #93 |
 | 30/10 20:00 | TestFlight, suivi d'Android v616 | **vous avez fait A2** (clé et accord pour la signature par Apple) et obtenu le droit du temps d'écran ; l'envoi automatique sur TestFlight est écrit (PR #95, premier envoi juste après sa vérification) ; Android v615 et v616 : lecture du visage sans plantage sur Android, et tout l'historique lu sans coupure, aussi pour l'app Santé sur iPhone. Parité : 49 % | #95, #96 |
+| 30/10 21:00 | TestFlight, suivi d'Android v617 | **l'app iPhone est sur TestFlight** (version 616) : premier envoi refusé par Apple pour une phrase manquante sur l'app Santé, corrigée (PR #96), deuxième envoi réussi ; l'iPhone a maintenant ses propres Nouveautés, qui commencent à cette version de test ; Android v617 : un aliment par ligne dans les repas, aussi sur iPhone. Parité : 49 % | #96 (mergée), #97 |
 
 ---
 
