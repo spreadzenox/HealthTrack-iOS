@@ -782,6 +782,16 @@ describe('mode captures iOS : données de démo de l’iPhone', () => {
     expect(entries[0].payload.sourceName).toBe('Gadgetbridge')
   })
 
+  it('la VFC de la démo est en SDNN, comme celle de l’app Santé (« VFC (SDNN) » dans le Journal et sur l’Accueil)', () => {
+    const rmssd = { source: 'health_connect', type: 'heart_rate', payload: { value: 46, unit: 'ms', subtype: 'heartRateVariability', sourceName: 'Gadgetbridge' } }
+    const resting = { source: 'health_connect', type: 'heart_rate', payload: { bpm: 61, subtype: 'restingHeartRate', sourceName: 'Gadgetbridge' } }
+    expect(iphoneDemoEntries([rmssd, resting])).toEqual([
+      { source: 'health_connect', type: 'heart_rate', payload: { value: 46, unit: 'ms', subtype: 'heartRateVariabilitySdnn', sourceName: 'Apple Watch' } },
+      { source: 'health_connect', type: 'heart_rate', payload: { bpm: 61, subtype: 'restingHeartRate', sourceName: 'Apple Watch' } },
+    ])
+    expect(rmssd.payload.subtype).toBe('heartRateVariability')
+  })
+
   it('les données de démo d’Android ne nomment plus Gadgetbridge ni Huawei', async () => {
     const { generateDemoEntries } = await import('../../scripts/visual/demoData.mjs')
     const text = JSON.stringify(iphoneDemoEntries(generateDemoEntries()))
