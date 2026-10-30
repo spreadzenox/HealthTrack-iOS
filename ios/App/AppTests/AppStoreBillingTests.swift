@@ -45,6 +45,17 @@ final class AppStoreBillingTests: XCTestCase {
         guard case .success(let resultat) = try await mensuel.purchase(options: [.appAccountToken(compte)]) else {
             return XCTFail("achat d'essai non abouti")
         }
+        // Échec d'une fois (30/10, PR #77, iPhone 16e sous iOS 26.2) : conversion vide sans dire pourquoi ; le dire
+        if AppStoreBillingPlugin.purchase(resultat) == nil {
+            switch resultat {
+            case .unverified(let transaction, let erreur):
+                print("StoreKit Test : transaction non vérifiée (\(transaction.productID)) : \(erreur)")
+            case .verified(let transaction):
+                print("StoreKit Test : transaction refusée (\(transaction.productID), révoquée : \(String(describing: transaction.revocationDate)))")
+            @unknown default:
+                print("StoreKit Test : résultat d'achat inconnu")
+            }
+        }
         let achat = try XCTUnwrap(AppStoreBillingPlugin.purchase(resultat))
         XCTAssertEqual(achat["state"] as? String, "purchased")
         XCTAssertEqual(achat["products"] as? [String], ["halcya_premium"])
