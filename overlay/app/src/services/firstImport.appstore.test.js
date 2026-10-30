@@ -25,3 +25,21 @@ describe('Résumé du premier import sur iPhone', () => {
     expect(JSON.stringify([withOrigin, without])).not.toMatch(/Health Connect/)
   })
 })
+
+// La VFC de l'app Santé est en SDNN : le résumé la donne sous son nom quand il n'y a pas de RMSSD (correctif 32)
+describe('VFC du premier import sur iPhone', () => {
+  const hrv = (day, value, subtype) => ({
+    type: 'heart_rate', source: 'health_connect', at: `2026-10-${day}T03:00:00Z`,
+    payload: { value, unit: 'ms', subtype, sourceName: 'Apple Watch' },
+  })
+
+  it('« de VFC (SDNN) en moyenne », avec sa source', () => {
+    const facts = summarizeImport([hrv('18', 40, 'heartRateVariabilitySdnn'), hrv('19', 50, 'heartRateVariabilitySdnn')], now)
+    expect(facts.find((f) => f.key === 'hrv')).toMatchObject({ value: '45 ms', label: 'de VFC (SDNN) en moyenne, sur 2 mesures', source: 'Apple Watch via l’app Santé' })
+  })
+
+  it('une RMSSD (fichier d’Android) garde « de VFC en moyenne », sans mêler la SDNN', () => {
+    const facts = summarizeImport([hrv('18', 30, 'heartRateVariability'), hrv('19', 50, 'heartRateVariabilitySdnn')], now)
+    expect(facts.find((f) => f.key === 'hrv')).toMatchObject({ value: '30 ms', label: 'de VFC en moyenne, sur 1 mesure' })
+  })
+})
