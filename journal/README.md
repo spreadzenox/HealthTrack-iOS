@@ -11,13 +11,16 @@
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
 | Dernière version | v614 (30/10) | v614 sur iPhone simulé (30/10, PR #91 : VFC de l'app Santé dans les Analyses) |
-| Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight dès les actions A3 et A2 faites) |
+| Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight dès l'action A2 faite) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **A3 puis A2 — maintenant (pas à pas au §8, environ 20 min sur ordinateur)** : créer l'identifiant et la fiche de
-  l'app dans App Store Connect (A3), puis la clé API rangée en secrets GitHub (A2), et me dire « A2 fait — signature
-  par Apple d'accord ». C'est ce qui débloque TestFlight, donc l'app sur l'iPhone 12.
+- **Demande Family Controls puis A2 — maintenant (pas à pas au §8)** : demander à Apple le droit du temps d'écran
+  (A7 : Identifiers → Halcya → Capability Requests → Family Controls (Distribution), texte préparé), puis créer la
+  clé API rangée en secrets GitHub (A2) et me dire « A2 fait — signature par Apple d'accord ». C'est ce qui débloque
+  TestFlight, donc l'app sur l'iPhone 12.
+- ✅ **A3 fait le 30/10** : identifiant `fr.jpesquet.sante` (HealthKit, In-App Purchase, App Attest) et fiche créée
+  dans App Store Connect sous le nom **« Halcya »** (choix du propriétaire), iOS 1.0 « Prêt à soumettre ».
 - ✅ **A1 fait le 30/10** : l'e-mail de bienvenue d'Apple est arrivé (adhésion validée).
 - ✅ **A8 fait le 30/10** : GitHub Pages activé ; site publié par la routine (déploiement réussi,
   https://spreadzenox.github.io/HealthTrack-iOS/ : confidentialité, conditions, assistance).
@@ -187,7 +190,7 @@ via TestFlight.
 | 30/10 16:00 | suivi d'Android v613, VFC sur l'Accueil | la variabilité cardiaque de l'app Santé s'affiche sur l'Accueil de l'iPhone (PR #88 mergée, « VFC (SDNN) 46 ms » vu sur les deux iPhone simulés) ; Android v613 retouche une phrase des Paramètres sur l'abonnement : sur iPhone, où rien n'est vendu, cette phrase n'est plus montrée du tout. Parité : 49 % | #88 (mergée), #89 |
 | 30/10 17:00 | suivi d'Android v614 | v613 sur iPhone (PR #89 mergée : plus de phrase sur l'abonnement dans Paramètres, vu) ; Android v614 : au premier import, la fréquence cardiaque et les pas des derniers jours ne se perdent plus quand la montre mesure souvent ; c'était vrai aussi avec l'Apple Watch sur iPhone, corrigé de même. Parité : 49 % | #89 (mergée), #90 |
 | 30/10 18:00 | VFC de l'app Santé dans les Analyses | v614 sur iPhone, au même niveau qu'Android (PR #90 mergée : lecture de l'app Santé jour par jour essayée sur les deux iPhone simulés) ; la variabilité cardiaque de l'app Santé entre dans les Analyses, à part de celle d'Android pour ne pas inventer de fausses pistes, et dans le résumé du premier import. Parité : 49 % | #90 (mergée), #91 |
-| 30/10 19:00 | vos actions Apple, VFC dans les Analyses | **vous avez fait A1 et A8** : compte Apple validé, pages de confidentialité, de conditions et d'assistance en ligne ; nous avons passé en revue avec vous toutes les cases et demandes d'Apple (seuls HealthKit, achats intégrés, App Attest, et la demande Family Controls pour le temps d'écran, servent à Halcya) ; la variabilité cardiaque de l'app Santé est dans les Analyses de l'iPhone (PR #91 mergée, vue dans les captures). Parité : 49 % | #91 (mergée), #92, #93 |
+| 30/10 19:00 | vos actions Apple, VFC dans les Analyses | **vous avez fait A1, A3 et A8** : compte Apple validé, fiche « Halcya » créée dans App Store Connect, pages de confidentialité, de conditions et d'assistance en ligne ; nous avons passé en revue avec vous toutes les cases et demandes d'Apple (seuls HealthKit, achats intégrés, App Attest, et la demande Family Controls pour le temps d'écran, servent à Halcya) ; la variabilité cardiaque de l'app Santé est dans les Analyses de l'iPhone (PR #91 mergée, vue dans les captures). Parité : 49 % | #91 (mergée), #92, #93 |
 
 ---
 
@@ -351,7 +354,7 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 | A0 | Téléphone de test | tests sur un vrai téléphone | ✅ 26/10 : iPhone 12 de sa compagne (version d'iOS à préciser) |
 | A1 | Adhérer à l'Apple Developer Program (individuel, payant à l'année ; pas à pas ci-dessous) | signature, TestFlight, App Store | ✅ 30/10 : adhésion validée (e-mail de bienvenue d'Apple ; inscription et paiement le 28/10) |
 | A2 | Créer une clé API App Store Connect (rôle Admin ; pas à pas « A2 et A3 » ci-dessous) et l'enregistrer en secrets GitHub Actions de ce dépôt, dans un environnement `appstore` réservé à `main` | builds signées et envoi TestFlight automatiques | après A1 |
-| A3 | Créer la fiche de l'app dans App Store Connect (nom, langue principale français, bundle id, SKU) | envoi TestFlight, fiche | après A1 |
+| A3 | Créer la fiche de l'app dans App Store Connect (nom, langue principale français, bundle id, SKU) | envoi TestFlight, fiche | ✅ 30/10 : identifiant (HealthKit, In-App Purchase, App Attest) et fiche « Halcya » créés ; le nom se modifie encore dans « Informations sur l'app » tant que rien n'est soumis |
 | A4 | Contrat « Paid Applications », coordonnées bancaires et fiscales | abonnement App Store | après A1 |
 | A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/app-store/confidentialite.md` | examen Apple | avant la 1re soumission |
 | A6 | Inviter les testeurs (d'abord sa compagne : interne via « Utilisateurs et accès » ou externe avec l'examen bêta, la routine dira), soumettre à l'examen, publier | testeurs, production | lui seul |
