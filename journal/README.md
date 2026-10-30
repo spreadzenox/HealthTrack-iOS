@@ -22,7 +22,8 @@
   d'intégrité, abonnement App Store sur le serveur, Nouveautés propres à Android, textes de sauvegarde neutres) ;
   elle les a reprises le jour même (v553) : trois faites, l'abonnement App Store noté pour plus tard.
 - (1 minute, quand vous voulez) **A8** : activer GitHub Pages pour ce dépôt (pas à pas au §8), pour mettre en ligne
-  la politique de confidentialité et la page d'assistance de l'iPhone que demandera la fiche App Store.
+  la politique de confidentialité, les conditions d'utilisation et la page d'assistance de l'iPhone que demandera la
+  fiche App Store.
 - (facultatif, quand vous voulez) Transmettre à la routine Android les demandes marquées « à transmettre » dans
   `journal/DEMANDES.md` : dont un défaut visible aujourd'hui sur Android (bouton « Autoriser Health Connect » étiré
   sur toute la hauteur dans l'accueil de l'app) et un libellé « saisi » faux pour un poids de Health Connect.
@@ -176,6 +177,7 @@ via TestFlight.
 | 30/10 06:00 | vérification (fin) | v602 sur iPhone, au même niveau qu'Android (PR #77 mergée) : l'essai d'achat simulé est repassé sans faute, les pas de l'app Santé sont vus dans le Journal sur les deux iPhone simulés. Parité : 49 % | #77 (mergée), #78 |
 | 30/10 07:00 | suivi d'Android v604 | Android v603 et v604 : Nutrition aux couleurs plus calmes (« bas » en gris, pas en rouge), et l'Accueil compte vraiment les jours avant vos pistes du ventre, aussi sur iPhone. Parité : 49 % | #79 (mergée) |
 | 30/10 08:00 | suivi d'Android v605 | v604 sur iPhone (PR #79 mergée : « bas » en gris dans Nutrition, vu) ; Android v605 : dans les premiers écrans, le bouton « Continuer » reste gris tant que rien n'est choisi, aussi sur iPhone. Parité : 49 % | #80 |
+| 30/10 09:00 | vérification | v605 sur iPhone, au même niveau qu'Android (PR #80 mergée : « Continuer » gris, bouton « Autoriser l'app Santé » à sa hauteur, vus) ; pas de nouvelle version d'Android ; un fichier exporté d'un téléphone Android s'importe sur iPhone avec le même code, seul écart : ses mesures Health Connect y seraient marquées « App Santé ». Parité : 49 % | #80 (mergée) |
 
 ---
 
@@ -344,7 +346,7 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 | A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/app-store/confidentialite.md` | examen Apple | avant la 1re soumission |
 | A6 | Inviter les testeurs (d'abord sa compagne : interne via « Utilisateurs et accès » ou externe avec l'examen bêta, la routine dira), soumettre à l'examen, publier | testeurs, production | lui seul |
 | A7 | (facultatif, quand la routine le proposera) Demander à Apple le droit « Family Controls (Distribution) » pour Halcya : formulaire d'Apple, motif « temps d'écran approché pour les analyses de bien-être, données gardées sur le téléphone » | tuile « Écran » sur iPhone (temps d'écran approché, `RECHERCHE.md`) | après A1 |
-| A8 | (1 minute, sur ordinateur, quand vous voulez) Activer GitHub Pages pour ce dépôt : sur github.com, HealthTrack-iOS → Settings → Pages → « Build and deployment » → Source : « GitHub Actions ». Rien d'autre : la routine publie ensuite les pages | adresses de la politique de confidentialité et de l'assistance de l'iPhone, demandées par la fiche App Store (A3, A5) | avant A3 |
+| A8 | (1 minute, sur ordinateur, quand vous voulez) Activer GitHub Pages pour ce dépôt : sur github.com, HealthTrack-iOS → Settings → Pages → « Build and deployment » → Source : « GitHub Actions ». Rien d'autre : la routine publie ensuite les pages | adresses de la politique de confidentialité, des conditions d'utilisation et de l'assistance de l'iPhone, demandées par la fiche App Store (A3, A5) | avant A3 |
 
 #### A1 pas à pas (préparé le 27/10/2026)
 
