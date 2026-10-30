@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v602 (commit `d78fac4`, 30/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v604 (commit `cbb8481`, 30/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 30/10 06:05 | #519, #520 (v603, v604) | #519 : Nutrition, « bas » en gris neutre, seule « limite dépassée » en orange (`Nutrition.css`) ; #520 : Accueil, compte à rebours réel des pistes du ventre (`TodayCards.jsx`, `today.js`) : code partagé, aucun correctif touché, notes vraies sur iPhone | — |
 | 30/10 04:15 | #517, #518 (v601, v602) | #517 : pas de rapport PDF vide tant que rien n'est noté (`DoctorReportCard.jsx`) : vrai sur iPhone, note vraie, **correctif 09 refait** (fusion à trois, mêmes lignes) ; #518 : noms d'aliments courts dans les pistes et les repas (`gutLinks.js`, `format.js`) : vrai sur iPhone, note vraie | — |
 | 30/10 02:05 | #515, #516 (v599, v600) | #515 : réintroduction, « Oui, je continue » / « Non, j'arrête » de même taille et résultat relu (`Reintroduction.jsx`, `.css`) : vrai sur iPhone, note vraie ; #516 : phrases d'aide `.hint` en gris (`App.css`) : vrai sur iPhone, mais sa note cite « l'écran de la montre » (montre en direct, absente) : **cachée** (`APPSTORE_HIDDEN`, correctif 28), demande à Android | — |
 | 30/10 01:05 | #514 (v598) | `FaceSenseCard.jsx` ne met plus à jour une carte fermée (test rouge sur le main d'Android) : code partagé, pas de note, le correctif iOS qui touche ce fichier s'applique toujours | — |

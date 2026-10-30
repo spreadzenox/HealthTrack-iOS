@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v602 (30/10) | v602 sur iPhone simulé (30/10, PR #77) : à jour d'Android |
+| Dernière version | v604 (30/10) | v602 sur iPhone simulé (30/10, PR #77) ; v604 en vérification (PR #79) |
 | Où l'installer | Play Store, test fermé | pas encore (simulateur seulement ; TestFlight après l'action A1) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -174,6 +174,7 @@ via TestFlight.
 | 30/10 04:00 | données de l'app Santé dans le Journal | v600 sur iPhone, au même niveau qu'Android (PR #76 mergée) ; l'essai automatique de l'app Santé va maintenant jusqu'au Journal : les pas écrits dans Santé y apparaissent bien (« Pas 1 234 » vu sur les deux iPhone simulés). Parité : 49 % | #76 (mergée), #77 |
 | 30/10 05:00 | suivi d'Android v602 | Android v601 et v602 : plus de rapport PDF vide proposé, noms d'aliments plus courts dans les pistes, aussi sur iPhone (un correctif iOS refait) ; un essai d'achat simulé a échoué une fois sans dire pourquoi : il le dira la prochaine fois. Parité : 49 % | #77 |
 | 30/10 06:00 | vérification (fin) | v602 sur iPhone, au même niveau qu'Android (PR #77 mergée) : l'essai d'achat simulé est repassé sans faute, les pas de l'app Santé sont vus dans le Journal sur les deux iPhone simulés. Parité : 49 % | #77 (mergée), #78 |
+| 30/10 07:00 | suivi d'Android v604 | Android v603 et v604 : Nutrition aux couleurs plus calmes (« bas » en gris, pas en rouge), et l'Accueil compte vraiment les jours avant vos pistes du ventre, aussi sur iPhone. Parité : 49 % | #79 |
 
 ---
 
