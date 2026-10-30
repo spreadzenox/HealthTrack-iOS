@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v617 (30/10) | **617 sur `main`** ; TestFlight : 616 (build 616.97), 617 en envoi le 30/10 vers 21:20 UTC |
+| Dernière version | v620 (30/10) | **617 sur TestFlight** (build 617.98 ; 616.97 avant) ; v620 en vérification (PR #99) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -200,6 +200,7 @@ via TestFlight.
 | 30/10 20:00 | TestFlight, suivi d'Android v616 | **vous avez fait A2** (clé et accord pour la signature par Apple) et obtenu le droit du temps d'écran ; l'envoi automatique sur TestFlight est écrit (PR #95, premier envoi juste après sa vérification) ; Android v615 et v616 : lecture du visage sans plantage sur Android, et tout l'historique lu sans coupure, aussi pour l'app Santé sur iPhone. Parité : 49 % | #95, #96 |
 | 30/10 21:00 | TestFlight, suivi d'Android v617 | **l'app iPhone est sur TestFlight** (version 616) : premier envoi refusé par Apple pour une phrase manquante sur l'app Santé, corrigée (PR #96), deuxième envoi réussi ; l'iPhone a maintenant ses propres Nouveautés, qui commencent à cette version de test ; Android v617 : un aliment par ligne dans les repas, aussi sur iPhone. Parité : 49 % | #96 (mergée), #97 |
 | 30/10 22:00 | TestFlight 617 | v617 sur `main` (PR #97 mergée : Nouveautés de l'iPhone vues, une seule note « Halcya arrive sur iPhone ») ; la 617 part aussi sur TestFlight pour que votre compagne installe la plus récente. Parité : 49 % | #97 (mergée) |
+| 30/10 23:00 | suivi d'Android v620 | la 617 est sur TestFlight (build 617.98) ; Android v618 à v620 : « œuf », « bœuf », « cœur » bien écrits, et ce qui manque aux Analyses dit en mots simples, aussi sur iPhone, dont les Nouveautés affichent désormais ces notes. Parité : 49 % | #99 |
 
 ---
 
