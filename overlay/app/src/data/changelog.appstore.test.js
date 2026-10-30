@@ -37,6 +37,9 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
     // v609 : « quand vous choisissez une montre Health Connect » : sur iPhone, c'est « une montre ou une bague qui
     // écrit dans l'app Santé » (le compteur, lui, ne grimpe plus non plus)
     expect(APPSTORE_HIDDEN.has('2026-10-30-1133-onboarding-compteur')).toBe(true)
+    // v612 : « VFC nuit » dans le Journal et l'étiquette « premium » de la réintroduction : sur iPhone, la VFC de l'app
+    // Santé s'appelle « VFC (SDNN) » et rien n'est vendu (l'étiquette n'y apparaît jamais)
+    expect(APPSTORE_HIDDEN.has('2026-10-30-1433-vfc-nuit')).toBe(true)
     const ids = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
     for (const id of APPSTORE_HIDDEN) expect(ids).not.toContain(id)
     expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-10-29-0533-paywall-lancement')

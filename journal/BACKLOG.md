@@ -44,6 +44,9 @@
     Health, temps d'écran) sont listés dans `texte-android.txt`. Première liste (#70) : « temps d'écran » seulement,
     dans la carte qui dit « Pas encore disponible sur iPhone » (juste, mise à part par `IPHONE_OK`) ; étape de CI
     bloquante depuis #71.
+  - [ ] Démo de l'iPhone fidèle à l'app Santé (30/10) : `iphoneDemoEntries` garde la VFC RMSSD de la démo d'Android
+    (« VFC nuit » dans le Journal depuis v612), alors que l'app Santé donne une VFC SDNN (« VFC (SDNN) ») ; la convertir
+    en `heartRateVariabilitySdnn`, puis refaire les captures de la fiche.
   - [x] Captures de la fiche refaites le 30/10 (`captures/store`, Android v597) et regardées : 8 captures propres, barre
     d'état à 9:41, sans la bannière système « Prêt pour Apple Intelligence » vue une fois sur une capture de PR (#73) ;
     à revérifier à chaque nouvelle prise (aucun réglage `simctl` documenté pour l'empêcher).
