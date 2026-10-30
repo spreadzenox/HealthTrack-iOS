@@ -391,3 +391,38 @@ Sources (lues le 30/10/2026) :
 - <https://developer.huawei.com/consumer/en/hms/huaweihealth/>
 - <https://consumer.huawei.com/en/support/content/en-us15935171/>
 
+## Temps d'écran réel sur iPhone : l'export des données d'activité (30/10/2026, 23:00)
+
+Les deux droits accordés au propriétaire le 30/10 (Family Controls (Distribution), Family Controls App and Website
+Usage) ouvrent plus que prévu. Documentation d'Apple lue le 30/10 (iOS et iPadOS **26.4 et plus**) :
+- **`AuthorizationStatus.approvedWithDataAccess`** : tout ce que permet `approved`, plus l'accès aux données
+  d'activité non masquées (identifiants réels des apps, domaines des sites, noms des catégories) **et à
+  `DeviceActivityData.activityData(filteredBy:using:)`**. Une seule app à la fois peut avoir ce statut sur un
+  appareil (si la personne l'accorde à une autre, Halcya revient à `.notDetermined`).
+- **`DeviceActivityData.activityData(filteredBy:using:)`** : une suite asynchrone de `DeviceActivityData`
+  (« pour exporter les données d'activité vers une autre app ou plateforme »), appelée par l'app elle-même : plus
+  de bac à sable d'extension. Chaque `DeviceActivityData.ActivitySegment` (segments horaires ou quotidiens,
+  `DeviceActivityFilter`) donne `dateInterval`, **`totalActivityDuration`**, `longestActivity`, **`firstPickup`**,
+  `totalPickupsWithoutApplicationActivity` et les `categories` (activité par catégorie, puis par app et par site :
+  `CategoryActivity`, `ApplicationActivity`, `WebDomainActivity`). C'est l'équivalent des statistiques d'usage
+  d'Android (`PhoneUsagePlugin`) : durée d'écran par jour, première prise en main, par app.
+- **Région** : développement et test partout (profil fourni par Apple) ; **chez les utilisateurs, seulement sur un
+  appareil situé dans l'UE avec un compte Apple de l'UE** (ailleurs, l'appel échoue : `FamilyControlsError.unavailable`).
+  Halcya est publiée en France : c'est le cas visé ; hors UE, la tuile « Écran » reste absente (repli actuel).
+- `FamilyActivityData` (même statut) donne la liste des apps installées et des sites visités : utile pour la
+  détection des sources (montres et apps d'objets connectés installées), à étudier ensuite.
+- **Ouvert** : la façon exacte de demander `approvedWithDataAccess` (la page d'`AuthorizationCenter` ne montre que
+  `requestAuthorization(for: .individual)`) ; le premier essai le dira, sur l'iPhone 12 (iOS 26.4 ou plus requis :
+  version à demander au propriétaire).
+- **Verdict** : temps d'écran **réel** faisable sur iPhone dans l'UE (pas seulement approché par des seuils). Plan :
+  plugin Swift `PhoneUsage` qui rend la même forme que celui d'Android (le code partagé `phoneUsageSync.js` sert
+  tel quel), autorisation demandée au même moment qu'Android, entitlement
+  `com.apple.developer.family-controls` et `…app-and-website-usage` ajoutés à l'app ; données gardées sur le
+  téléphone, comme sur Android.
+- Sources :
+  - <https://developer.apple.com/documentation/familycontrols/authorizationstatus/approvedwithdataaccess>
+  - <https://developer.apple.com/documentation/deviceactivity/deviceactivitydata/activitydata(filteredby:using:)>
+  - <https://developer.apple.com/documentation/deviceactivity/deviceactivitydata>
+  - <https://developer.apple.com/documentation/deviceactivity/deviceactivitydata/activitysegment>
+  - <https://developer.apple.com/documentation/familycontrols/familyactivitydata>
+
