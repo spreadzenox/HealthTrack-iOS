@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow, fakePhoneUsage, installPhoneUsageFake } from './captureMode'
 import { phoneUsageEntriesFromSegments, summarizeSegmentsDay } from './phoneUsageIos'
+import { summarizeSegmentsApps } from './phoneAppsIos'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -890,6 +891,10 @@ describe('temps d’écran de démonstration (faux plugin PhoneUsage, I8)', () =
     const today = summarizeSegmentsDay(segments, '2026-10-31', { now: now.getTime() })
     expect(today.screenMinutes).toBeGreaterThan(0)
     expect(today.unlocks).toBeGreaterThan(0)
+    // Apps de démonstration (réseaux sociaux, messagerie, vidéo) : la carte montre « Dont … »
+    const apps = summarizeSegmentsApps(segments, '2026-10-31')
+    expect(Object.keys(apps.minutes).sort()).toEqual(['messaging', 'social', 'video'])
+    expect(apps.topApps[0].label).toBe('Instagram')
   })
 
   it('installé : activé dans les réglages, puis la carte est relancée (visibilitychange)', () => {

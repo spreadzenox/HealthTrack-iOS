@@ -2,6 +2,7 @@ import Capacitor
 import DeviceActivity
 import FamilyControls
 import Foundation
+import ManagedSettings
 // Les segments (`activitySegments`, `categories`, `applications`) sont déclarés dans le recouvrement
 // `_DeviceActivity_SwiftUI`, chargé seulement quand SwiftUI est importé aussi.
 import SwiftUI
@@ -68,9 +69,17 @@ public class PhoneUsagePlugin: CAPPlugin, CAPBridgedPlugin {
                     let device = data.device.name ?? ""
                     for await segment in data.activitySegments {
                         var pickups = segment.totalPickupsWithoutApplicationActivity
+                        // Apps de l'heure, avec la catégorie de Temps d'écran (`phoneAppsIos.js`) ; Apple peut taire le nom
+                        var apps: [[String: Any]] = []
                         for await category in segment.categories {
+                            let categoryName = category.category.localizedDisplayName
                             for await app in category.applications {
                                 pickups += app.numberOfPickups
+                                var entry: [String: Any] = ["ms": app.totalActivityDuration * 1000]
+                                if let id = app.application.bundleIdentifier { entry["id"] = id }
+                                if let label = app.application.localizedDisplayName { entry["label"] = label }
+                                if let name = categoryName { entry["category"] = name }
+                                apps.append(entry)
                             }
                         }
                         var item: [String: Any] = [
@@ -78,6 +87,7 @@ public class PhoneUsagePlugin: CAPPlugin, CAPBridgedPlugin {
                             "end": segment.dateInterval.end.timeIntervalSince1970 * 1000,
                             "activeMs": segment.totalActivityDuration * 1000,
                             "pickups": pickups,
+                            "apps": apps,
                         ]
                         if let first = segment.firstPickup { item["firstPickup"] = first.timeIntervalSince1970 * 1000 }
                         box.put("\(device)|\(segment.dateInterval.start.timeIntervalSince1970)", item)
