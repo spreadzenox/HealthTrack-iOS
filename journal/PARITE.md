@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **48 %** au 31/10 10:00 (23 ✅ sur 48 lignes faisables ; 2 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau ; le temps d'écran, passé de 🔬 à 🟡 en cours, compte désormais parmi les lignes faisables, d'où 48 au lieu de 47) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v642 (commit `cf36172`, 31/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v644 (commit `ec8bc28`, 31/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 31/10 13:05 | #559 (v643), #560 (v644) | #560 : l'onboarding met en avant la lecture du visage **au déverrouillage** (variante play, `Onboarding.jsx`, `permissionDisclosures.js`) : ⛔ sur iPhone (pas de caméra en arrière-plan) ; sans effet sur iPhone, où le plugin `FaceSense` rend `unlockAvailable: false` (l'écran garde ses boutons ; un statut illisible donne aussi « non ») ; note `["play"]`, absente sur iPhone ; #559 : journal d'Android ; 34 correctifs appliqués directement | — |
 | 31/10 12:05 | #557 (v641), #558 (v642) | #558 : l'onglet du bas reste surligné sur les sous-pages (réintroduction sous Analyses, historique du bien-être sous Aujourd'hui, données de la montre sous Sources ; `TabBar.jsx`) : code partagé, vrai sur iPhone ; note vraie sur iPhone pour l'essentiel (elle cite aussi les données de la montre, page absente sur iPhone) : laissée visible ; #557 : journal d'Android ; 34 correctifs appliqués directement | — |
 | 31/10 11:05 | #555 (v639), #556 (v640) | #556 : « Données de la montre », un type sans rien reçu tient sur une ligne (`WatchData.jsx`, `.css`) : page de la montre Huawei en direct, absente sur iPhone (correctif 07) ; **note cachée sur iPhone** (`APPSTORE_HIDDEN`, correctif 28 : une entrée de plus), demande dans `DEMANDES.md` ; #555 : journal d'Android ; 34 correctifs appliqués | — |
 | 31/10 09:05 | #552 à #554 (v636 à v638) | #554 : Paramètres, « Ce qui est envoyé » pour l'analyse IA en une phrase, le détail derrière « Ce qui est envoyé, en détail » (`Settings.jsx`) ; un lien mort ouvre l'Accueil au lieu d'une page blanche (`App.jsx`) : code partagé, vrai sur iPhone ; **correctif 31 refait** (quota IA sur iPhone : contexte changé par la nouvelle phrase, fusion à trois, mêmes lignes) ; note sans variante, vraie sur iPhone (montrée) ; #552, #553 : journal et idées d'Android | — |
