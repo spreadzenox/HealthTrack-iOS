@@ -3,7 +3,8 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { generateKeyPairSync, createVerify } from 'node:crypto'
-import { fiche, jwt, editable, SUPPORT_URL, PRIVACY_URL } from './store-push.mjs'
+import { readFileSync } from 'node:fs'
+import { fiche, jwt, editable, versionString, SUPPORT_URL, PRIVACY_URL } from './store-push.mjs'
 
 test('fiche : textes de store/app-store/fr-FR et adresses du site', () => {
   const f = fiche()
@@ -63,4 +64,12 @@ test('envoi d’une capture : morceaux selon les opérations d’Apple, empreint
   assert.deepEqual(parts[0].headers, { 'Content-Type': 'image/png' })
   assert.equal(parts[1].url, 'https://u/2')
   assert.equal(md5(bytes), 'a925576942e94b2ef57a066101b48876')
+})
+
+test('versionString : numéro de la version iOS = versionCode d’Android suivi, comme les builds envoyées', () => {
+  const upstream = JSON.parse(readFileSync(new URL('../upstream.json', import.meta.url), 'utf8'))
+  assert.equal(versionString(), String(upstream.versionCode))
+  assert.equal(versionString({ versionCode: 648 }), '648')
+  assert.throws(() => versionString({}), /versionCode/)
+  assert.throws(() => versionString({ versionCode: '1.0' }), /versionCode/)
 })

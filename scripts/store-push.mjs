@@ -5,7 +5,7 @@
 // .github/workflows/store-push.yml avec la clé de l'environnement `appstore` (ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8),
 // jamais affichée. `--dry-run` : montre ce qui serait envoyé, sans réseau ni clé. `--captures <dossier>` : envoie aussi
 // les captures 6,9" de store/app-store/captures.md (branche captures/store), dans l'ordre du tableau, à la place des
-// précédentes.
+// précédentes. Le numéro de cette version prend celui des builds (versionCode d'Android suivi, `upstream.json`).
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { createHash, sign } from 'node:crypto'
@@ -13,6 +13,7 @@ import { pathToFileURL } from 'node:url'
 
 const DIR = join(import.meta.dirname, '..', 'store', 'app-store', 'fr-FR')
 const CAPTURES_MD = join(import.meta.dirname, '..', 'store', 'app-store', 'captures.md')
+const UPSTREAM_JSON = join(import.meta.dirname, '..', 'upstream.json')
 /** Captures 6,9" (1320 × 2868) : App Store Connect les reprend pour les iPhone plus petits. */
 const DISPLAY_TYPE = 'APP_IPHONE_67'
 const API = 'https://api.appstoreconnect.apple.com'
@@ -37,6 +38,17 @@ export function fiche(dir = DIR) {
       supportUrl: SUPPORT_URL,
     },
   }
+}
+
+/**
+ * Numéro de la version iOS : le versionCode d'Android suivi (upstream.json), celui des builds envoyées sur TestFlight
+ * (CFBundleShortVersionString, testflight.yml). App Store Connect ne laisse choisir pour une version que des builds de
+ * même numéro : la version « Prête à soumettre » le reprend.
+ */
+export function versionString(json = JSON.parse(readFileSync(UPSTREAM_JSON, 'utf8'))) {
+  const n = json?.versionCode
+  if (!Number.isInteger(n) || n <= 0) throw new Error('upstream.json : versionCode absent ou invalide')
+  return String(n)
 }
 
 /** Fichiers des captures de la fiche, dans l'ordre d'affichage (tableau de store/app-store/captures.md). */
@@ -148,6 +160,8 @@ async function main() {
   const at = process.argv.indexOf('--captures')
   const capturesDir = at > 0 ? process.argv[at + 1] : null
   if (capturesDir || process.argv.includes('--dry-run')) console.log(`Captures (${DISPLAY_TYPE}) : ${captureFiles().join(', ')}`)
+  const wanted = versionString()
+  console.log(`Numéro de la version : ${wanted} (versionCode d'Android suivi, comme les builds de TestFlight)`)
   if (process.argv.includes('--dry-run')) return
 
   for (const name of ['ASC_KEY_ID', 'ASC_ISSUER_ID', 'ASC_KEY_P8']) {
@@ -162,6 +176,11 @@ async function main() {
   const versions = await api(token, 'GET', `/v1/apps/${app.id}/appStoreVersions?filter[platform]=IOS&limit=20`)
   const version = editable(versions.data)
   if (!version) throw new Error('aucune version iOS « Prête à soumettre » : rien à modifier (version en examen ou en vente)')
+  if (version.attributes?.versionString !== wanted) {
+    await api(token, 'PATCH', `/v1/appStoreVersions/${version.id}`, { data: { type: 'appStoreVersions', id: version.id, attributes: { versionString: wanted } } })
+    console.log(`Version ${version.attributes?.versionString} renommée ${wanted}`)
+    version.attributes = { ...version.attributes, versionString: wanted }
+  }
   const v = await upsertLocalization(token, {
     listPath: `/v1/appStoreVersions/${version.id}/appStoreVersionLocalizations`,
     type: 'appStoreVersionLocalizations', parentType: 'appStoreVersions', parentRel: 'appStoreVersion', parentId: version.id,
