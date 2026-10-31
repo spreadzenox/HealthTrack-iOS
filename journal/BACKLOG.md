@@ -193,8 +193,9 @@
   enregistré, entitlements Family Controls et App and Website Usage dans l'app ; compile avec `import SwiftUI`
   (les segments sont dans le recouvrement `_DeviceActivity_SwiftUI`, vérifié par `swiftc -typecheck`) ; mergé le 31/10.
   Étape 3 écrite (31/10, branche `claude/ios-temps-ecran-3`) : correctif 34 (`phoneUsageSync.js` lit les segments,
-  carte et accord propres à l'iPhone), faux plugin des captures, note des Nouveautés de l'iPhone ; reste : PR, CI,
-  captures de la carte relues, puis essai sur l'iPhone 12 (UE, iOS 26.4+) et envoi TestFlight.
+  carte et accord propres à l'iPhone), faux plugin des captures, note des Nouveautés de l'iPhone, lecture bornée à
+  20 s et iPhone du même compte additionnés (PR #105) ; reste : CI et captures de la carte relues, merge, puis essai
+  sur l'iPhone 12 (UE, iOS 26.4+) et envoi TestFlight.
 - [ ] **Temps d'écran réel, conception (31/10)** : le code partagé d'Android (`phoneUsage.js`) attend des événements
   bruts `{ t, e: 'on' | 'off' | 'unlock' }` ; l'iPhone donne des segments horaires (`totalActivityDuration`,
   `firstPickup`, prises en main). Plugin Swift `PhoneUsage` : `checkAccess` (`approvedWithDataAccess`, iOS 26.4+),
@@ -210,6 +211,7 @@
   (sources datées) puis ce qui est faisable ; ⛔ argumentés dans `PARITE.md`.
 - [~] **TestFlight (I9), 30/10** : A1, A2, A3 faits par le propriétaire, accord pour la signature par Apple ;
   `testflight.yml` : **premier envoi réussi** (616.97, après un refus pour `NSHealthUpdateUsageDescription`, #96) ;
+  31/10 : 624.105 envoyée, droits Family Controls vérifiés dans l'app signée (étape ajoutée à `testflight.yml`) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
