@@ -25,15 +25,15 @@ jobs:
             f="$(find "$SDK/System/Library/Frameworks/$fw.framework" -name 'arm64e-apple-ios.swiftinterface' -o -name 'arm64-apple-ios.swiftinterface' | head -1)"
             echo "::group::$fw ($f)"
             if [ "$fw" = DeviceActivity ]; then
-              sed -n '200,330p' "$f"
-              echo "--- fichiers du SDK qui déclarent activitySegments :"
-              grep -rl --include='*.swiftinterface' 'activitySegments' "$SDK" | grep -E 'arm64e-apple-ios|arm64-apple-ios' | head
-              for g in $(grep -rl --include='arm64e-apple-ios.swiftinterface' 'activitySegments' "$SDK" | head -3); do
+              echo "--- recouvrements (cross-import) :"
+              find "$SDK/System/Library/Frameworks/DeviceActivity.framework" -maxdepth 3 | head -30
+              find "$SDK/System/Library/Frameworks/DeviceActivity.framework" -name '*.swiftoverlay' -exec sh -c 'echo "== $1"; cat "$1"' _ {} \;
+              echo "--- tout fichier du SDK qui contient activitySegments :"
+              grep -rl 'activitySegments' "$SDK" 2>/dev/null | head -20
+              find "$SDK" -iname '*DeviceActivity*' -maxdepth 6 | grep -v '/DeviceActivity.framework/' | head -20
+              for g in $(grep -rl --include='*.swiftinterface' 'activitySegments' "$SDK" 2>/dev/null | head -2); do
                 echo "=== $g"
-                head -15 "$g"
-                grep -n -E "activitySegments|DeviceActivityResults|categories|applications|numberOfPickups|AsyncSequence|totalPickups" "$g" | head -40
-                n="$(grep -n 'public struct DeviceActivityResults' "$g" | head -1 | cut -d: -f1)"
-                [ -n "$n" ] && sed -n "$((n - 6)),$((n + 40))p" "$g"
+                grep -n -E "^import|activitySegments|DeviceActivityResults|categories|applications|AsyncSequence" "$g" | head -40
               done
             else
               grep -n -E "approvedWithDataAccess|requestAuthorization|authorizationStatus" "$f" | head -20
