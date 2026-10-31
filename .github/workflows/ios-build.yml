@@ -8,10 +8,10 @@ name: iOS — build simulateur
 on:
   pull_request:
     branches: [main]
-    paths-ignore: ["journal/**", "**.md", "store/**", "site/**", "scripts/site.mjs", ".github/workflows/face-models.yml", ".github/workflows/pages.yml", ".github/workflows/testflight.yml"]
+    paths-ignore: ["journal/**", "**.md", "store/**", "site/**", "scripts/site.mjs", "scripts/store-*.mjs", ".github/workflows/face-models.yml", ".github/workflows/pages.yml", ".github/workflows/testflight.yml", ".github/workflows/store-*.yml"]
   push:
     branches: [main]
-    paths-ignore: ["journal/**", "**.md", "store/**", "site/**", "scripts/site.mjs", ".github/workflows/face-models.yml", ".github/workflows/pages.yml", ".github/workflows/testflight.yml"]
+    paths-ignore: ["journal/**", "**.md", "store/**", "site/**", "scripts/site.mjs", "scripts/store-*.mjs", ".github/workflows/face-models.yml", ".github/workflows/pages.yml", ".github/workflows/testflight.yml", ".github/workflows/store-*.yml"]
   workflow_dispatch:
     inputs:
       devices:

@@ -1,0 +1,36 @@
+# Fiche App Store fr-FR (store/app-store/fr-FR) envoyée à App Store Connect par son API (I9) : nom, sous-titre,
+# description, mots-clés, texte promotionnel, adresses d'assistance et de confidentialité, sur la version encore
+# « Prête à soumettre ». Rien n'est publié ni soumis à l'examen (geste du propriétaire). Lancement manuel, sur main
+# seulement (environnement `appstore` : ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8, jamais affichés).
+name: Fiche App Store — envoi
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: store-push
+  cancel-in-progress: false
+
+jobs:
+  push:
+    name: Envoi de la fiche fr-FR
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: appstore
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Limites de la fiche
+        run: node scripts/store-check.mjs
+      - name: Envoi (API App Store Connect)
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: node scripts/store-push.mjs
