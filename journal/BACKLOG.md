@@ -218,7 +218,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -251,8 +251,9 @@
     version** : App Store Connect a créé « 1.0 », les builds envoyées portent le numéro d'Android (6xx), et une version
     ne reçoit que des builds de même numéro → `store-push.mjs` renomme la version « Prête à soumettre » au versionCode
     d'`upstream.json` à chaque envoi (PR #129, 31/10) : « 1.0 » renommée 648 le 31/10 à 15:21. État des captures chez
-    Apple lu à chaque envoi (PR #132) : 7/8 traitées, 1 en cours, aucune refusée à 15:25. Reste la relecture du
-    propriétaire.
+    Apple lu à chaque envoi (PR #132) : 7/8 traitées à 15:25, **8/8 traitées à 16:02** (run 41217672289), aucune
+    refusée. Après chaque envoi TestFlight d'une nouvelle version : `store-push.yml` sans « captures », pour que la
+    version de la fiche suive (charte §4). Reste la relecture du propriétaire.
   - [x] Catégorie (Santé et forme) et classification par âge (18 ans et plus, comme sur Google Play) envoyées par l'API
     (`store/app-store/classification.json`, PR #130, acceptées le 31/10 à 15:21) : réponses au plus prudent (informations médicales et
     tabac « fréquents »), à relire par le propriétaire avant la soumission.
