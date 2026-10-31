@@ -23,6 +23,8 @@ export const EMPTY_ROUTES = ['/', '/journal', '/tendances', '/food', '/nutrition
   '/connectors']
 // Pages longues : écrans suivants, défilés d'environ 80 % de l'écran chacun (`-2`, `-3`…)
 export const SCROLLS = { '/connectors': 2, '/data': 1, '/settings': 1 }
+// États vides défilés de même : Sources vierge, pour la carte du temps d'écran sous le pli (« Activer »)
+export const EMPTY_SCROLLS = { '/connectors': 1 }
 // Volets repliés à ouvrir puis capturer : bouton touché (`click`, texte exact), `<details>` ouvert (`open`, id),
 // élément amené en haut de l'écran (`target`, id)
 export const REVEALS = {
@@ -76,7 +78,7 @@ export const MORE_ONBOARDING = [
 ]
 
 export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS, reveals = REVEALS, moreOnboarding = [],
-  emptyRoutes = []) {
+  emptyRoutes = [], emptyScrolls = {}) {
   const light = (route) => {
     const base = { name: `demo-clair-${pageName(route)}`, route, data: 'demo', theme: 'light' }
     const more = Array.from({ length: scrolls[route] || 0 }, (_, k) => ({ ...base, name: `${base.name}-${k + 2}`, scroll: k + 1 }))
@@ -88,7 +90,10 @@ export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = S
     // 3e écran de l'onboarding (choix de la montre), avant que les données de démo ne le marquent fait
     { name: 'vierge-onboarding-montre', route: '/bienvenue', data: null, theme: null, onboarding: { goal: 'energy', step: 2 } },
     ...moreOnboarding.map(([name, onboarding]) => ({ name: `vierge-onboarding-${name}`, route: '/bienvenue', data: null, theme: null, onboarding })),
-    ...emptyRoutes.map((route) => ({ name: `vide-${pageName(route)}`, route, data: 'empty', theme: 'light' })),
+    ...emptyRoutes.flatMap((route) => {
+      const base = { name: `vide-${pageName(route)}`, route, data: 'empty', theme: 'light' }
+      return [base, ...Array.from({ length: emptyScrolls[route] || 0 }, (_, k) => ({ ...base, name: `${base.name}-${k + 2}`, scroll: k + 1 }))]
+    }),
     ...routes.flatMap(light),
     ...darkRoutes.map((route) => ({ name: `demo-sombre-${pageName(route)}`, route, data: 'demo', theme: 'dark' })),
   ]
@@ -245,7 +250,7 @@ export async function installCaptureMode() {
     ])
     const file = { directory: Directory.Documents, encoding: Encoding.UTF8 }
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-    const plan = buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES)
+    const plan = buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS)
     if (plan[Number(window.localStorage.getItem(STEP_KEY) ?? 0)]?.data === 'demo') installPhoneUsageFake()
     await runCaptureStep(plan, {
       storage,
