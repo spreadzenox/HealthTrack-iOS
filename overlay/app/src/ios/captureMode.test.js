@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow, fakePhoneUsage, installPhoneUsageFake } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow, fakePhoneUsage, installPhoneUsageFake } from './captureMode'
 import { phoneUsageEntriesFromSegments, summarizeSegmentsDay } from './phoneUsageIos'
+import { summarizeSegmentsApps } from './phoneAppsIos'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -57,6 +58,13 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
     // par défaut : les pages qui ont un état vide à montrer
     expect(EMPTY_ROUTES).toEqual(expect.arrayContaining(['/', '/journal', '/recommendations', '/connectors']))
     expect(buildPlan().some((s) => s.data === 'empty')).toBe(false)
+  })
+
+  it('état vide défilé : Sources vierge montre aussi la carte du temps d’écran, sous le pli', () => {
+    const plan = buildPlan([], [], {}, {}, [], ['/connectors'], { '/connectors': 1 })
+    expect(plan.map((s) => s.name)).toEqual(['vierge-onboarding', 'vierge-onboarding-montre', 'vide-connectors', 'vide-connectors-2'])
+    expect(plan[3]).toMatchObject({ route: '/connectors', data: 'empty', theme: 'light', scroll: 1 })
+    expect(EMPTY_SCROLLS).toEqual({ '/connectors': 1 })
   })
 
   it('état vide : onboarding fini et Nouveautés vues, comme au sortir de l’onboarding, sans données', async () => {
@@ -890,6 +898,10 @@ describe('temps d’écran de démonstration (faux plugin PhoneUsage, I8)', () =
     const today = summarizeSegmentsDay(segments, '2026-10-31', { now: now.getTime() })
     expect(today.screenMinutes).toBeGreaterThan(0)
     expect(today.unlocks).toBeGreaterThan(0)
+    // Apps de démonstration (réseaux sociaux, messagerie, vidéo) : la carte montre « Dont … »
+    const apps = summarizeSegmentsApps(segments, '2026-10-31')
+    expect(Object.keys(apps.minutes).sort()).toEqual(['messaging', 'social', 'video'])
+    expect(apps.topApps[0].label).toBe('Instagram')
   })
 
   it('installé : activé dans les réglages, puis la carte est relancée (visibilitychange)', () => {

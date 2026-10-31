@@ -10,6 +10,7 @@
  */
 import { Capacitor } from '@capacitor/core'
 import { MIN_SLEEP_MIN, MAX_SLEEP_MIN, GLANCE_MAX_MS, dateKeyOf } from '../services/phoneUsage'
+import { phoneAppsEntriesFromSegments, summarizeSegmentsApps } from './phoneAppsIos'
 
 const MIN = 60000
 const NIGHT_START_H = 20
@@ -149,20 +150,26 @@ export function segmentsAccessError(access) {
 
 /**
  * Lecture iPhone de `syncPhoneUsage` (accès déjà vérifié) : segments des `lookbackMs` dernières millisecondes, journées
- * terminées enregistrées (sans doublon), journée en cours gardée dans les réglages par `save`. Pas de temps par
- * catégorie d'app sur iPhone pour l'instant (`todayApps` vide). Peut lever : l'appelant rattrape.
+ * terminées enregistrées (sans doublon), minutes par catégorie d'app comprises quand le plugin rend les apps de
+ * chaque heure (`phoneAppsIos.js`), journée en cours gardée dans les réglages par `save`. Peut lever : l'appelant
+ * rattrape.
  */
 export async function syncSegments({ plugin, now, write, save, lookbackMs }) {
   const end = now.getTime()
   const res = await plugin.queryUsageSegments({ start: end - lookbackMs, end })
   const segments = Array.isArray(res?.segments) ? res.segments : []
-  const entries = phoneUsageEntriesFromSegments(segments, { now: end })
+  // Apps de chaque heure : seulement si le plugin sait les lire (pas de journées vides sinon)
+  const withApps = segments.some((s) => Array.isArray(s?.apps))
+  const entries = [
+    ...phoneUsageEntriesFromSegments(segments, { now: end }),
+    ...(withApps ? phoneAppsEntriesFromSegments(segments, { now: end }) : []),
+  ]
   const result = entries.length ? await write(entries) : { inserted: 0 }
   save({
     lastSyncAt: now.toISOString(),
     lastError: null,
     today: segments.length ? summarizeSegmentsDay(segments, dateKeyOf(end), { now: end }) : null,
-    todayApps: null,
+    todayApps: withApps ? summarizeSegmentsApps(segments, dateKeyOf(end)) : null,
   })
   if (result?.inserted > 0) window.dispatchEvent(new CustomEvent('health-entries-updated'))
   return { ran: true, inserted: result?.inserted ?? 0 }

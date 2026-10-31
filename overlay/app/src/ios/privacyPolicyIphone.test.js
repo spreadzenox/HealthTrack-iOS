@@ -23,7 +23,7 @@ describe('politique de confidentialité sur iPhone', () => {
 
   it("ne parle d'aucune fonction ni d'aucun service absents de l'iPhone", () => {
     for (const absent of [/Android/i, /Google Play/i, /Health Connect/i, /sauvegarde Google/i, /Huawei/i, /Withings/i,
-      /temps d'écran/i, /données d'utilisation/i, /Play Integrity/i, /clé Gemini/i]) {
+      /données d'utilisation/i, /Play Integrity/i, /clé Gemini/i]) {
       expect(text, String(absent)).not.toMatch(absent)
     }
   })
@@ -40,6 +40,10 @@ describe('politique de confidentialité sur iPhone', () => {
     expect(text).toMatch(/Supprimer toutes mes données/)
     expect(text).toMatch(/CNIL/)
     expect(text).toMatch(/13 mois/)
+    // Temps d'écran (31/10) : autorisation Temps d'écran d'Apple, sur l'iPhone seulement
+    expect(text).toMatch(/Temps d'écran \(facultatif\)/)
+    expect(text).toMatch(/autorisation Temps d'écran/)
+    expect(text).toMatch(/par application/)
   })
 
   it("ramène à l'app, faute de bouton retour sur iPhone", () => {
