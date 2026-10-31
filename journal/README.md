@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v633 (31/10) | **631 sur TestFlight** (build 631.112, temps d'écran et temps par app) ; v633 en vérification (PR #113) |
+| Dernière version | v633 (31/10) | **631 sur TestFlight** (build 631.112, temps d'écran et temps par app) ; 633 sur `main`, envoi TestFlight en cours |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -235,7 +235,7 @@ via TestFlight.
 | 31/10 05:00 | TestFlight 625, temps d'écran, suivi d'Android v629 | **la 625 est sur TestFlight** (build 625.107) ; Android v625 mergé (#106 : boutons inactifs gris clair, repas habituels à une majuscule, vus en images) ; l'écran du temps d'écran de l'iPhone s'affiche bien en images (« Automatique », minutes d'écran, écran tard) : sa vérification repasse après une correction de notre contrôle de textes (PR #105) ; Android v626 à v629 : Nutrition dit « incertain » plutôt que « bas » quand des repas manquent, champs de saisie à la police de l'app, aussi sur iPhone. Parité : 49 % | #106 (mergée), #105 |
 | 31/10 06:00 | temps d'écran sur TestFlight, v631 | **le temps d'écran est dans l'app iPhone** (PR #105 mergée, build 625.108 sur TestFlight) : à essayer sur l'iPhone 12 (iOS 26.4 ou plus) ; le temps par catégorie d'app et la politique de confidentialité qui en parle sont prêts (PR #110) ; Android v631 mergé (PR #109 : Nutrition « incertain » quand des repas manquent, police des champs, vus en images), envoi de la 631 sur TestFlight lancé. Parité : 49 % | #105, #108, #109 (mergées), #110 |
 | 31/10 07:00 | 631 sur TestFlight, temps par app | **l'iPhone a la même version qu'Android** : la 631 est sur TestFlight (build 631.110), avec le temps d'écran ; le temps par catégorie d'app (réseaux sociaux, vidéo…) et la confidentialité qui en parle sont dans l'app (PR #110 mergée), nouvel envoi TestFlight lancé. Parité : 49 % | #110 (mergée) |
-| 31/10 08:00 | TestFlight 631.112, suivi d'Android v633 | la 631.112 est sur TestFlight, avec le temps par catégorie d'app ; la page de confidentialité en ligne parle du temps d'écran ; la fiche App Store (brouillon) le mentionne aussi ; Android v633 : la recherche d'aliments propose d'abord le bon aliment (« ail », « lait »), aussi sur iPhone (PR #113). Parité : 49 % | #113 |
+| 31/10 08:00 | TestFlight 631.112, suivi d'Android v633 | la 631.112 est sur TestFlight, avec le temps par catégorie d'app ; la page de confidentialité en ligne parle du temps d'écran ; la fiche App Store (brouillon) le mentionne aussi ; Android v633 : la recherche d'aliments propose d'abord le bon aliment (« ail », « lait »), aussi sur iPhone (PR #113 mergée, 633 vers TestFlight). Parité : 49 % | #113 (mergée) |
 
 ---
 
