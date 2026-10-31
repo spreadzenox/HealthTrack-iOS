@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v642 (31/10) | **638 sur TestFlight** (build 638.121, la première avec la phrase exigée par Apple) ; v642 en vérification (PR #123) |
+| Dernière version | v644 (31/10) | **638 sur TestFlight** (build 638.121, la première avec la phrase exigée par Apple) ; 642 en route vers TestFlight, v644 en vérification |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -243,6 +243,7 @@ via TestFlight.
 | 31/10 11:00 | e-mail d'Apple, TestFlight 638, fiche par l'API | **merci pour l'e-mail d'Apple** : il manquait une phrase d'explication (reconnaissance vocale) que l'iPhone exige ; les builds envoyées jusqu'ici sont sans doute refusées à l'installation ; corrigé (PR #121), une build corrigée part dès sa vérification ; la fiche App Store s'envoie maintenant par la routine (un caractère « ★ » à retirer d'abord) ; parité recomptée : 48 % | #119 (mergée), #121 |
 | 31/10 12:00 | build corrigée, fiche App Store envoyée | **la build 638.121 est sur TestFlight avec la phrase demandée par Apple** (PR #121) : c'est elle à installer ; **la fiche App Store est remplie dans App Store Connect** (nom, sous-titre, description, mots-clés, adresses), sans rien soumettre (PR #122 : un caractère « ★ » refusé par Apple, retiré) ; Android v640 : page de la montre Huawei, sans objet sur iPhone. Parité : 48 % | #121, #122 (mergées) |
 | 31/10 13:00 | suivi d'Android v642, captures de la fiche | Android v641 et v642 : l'onglet du bas reste surligné quand vous ouvrez la réintroduction ou l'historique du bien-être, aussi sur iPhone (PR #123, en vérification) ; l'envoi des captures de la fiche App Store est prêt (PR #124), elles seront refaites et regardées avant l'envoi. Parité : 48 % | #123, #124 |
+| 31/10 14:00 | v642 mergée, captures de la fiche en cours | Android v642 sur iPhone (PR #123 mergée : l'onglet du bas reste surligné sur les sous-pages, vu en image), envoi de la 642 sur TestFlight ; les captures de la fiche App Store sont refaites sur l'iPhone le plus grand, à regarder avant de les envoyer ; Android v644 : rien ne change sur iPhone (lecture du visage au déverrouillage, impossible sur iPhone). Parité : 48 % | #123, #124 (mergées) |
 
 ---
 
