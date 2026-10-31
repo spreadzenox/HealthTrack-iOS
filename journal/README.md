@@ -10,14 +10,15 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v622 (31/10) | **620 sur TestFlight** (build 620.100) ; v622 en vérification (PR #101) |
+| Dernière version | v625 (31/10) | **624 sur TestFlight** (build 624.105) ; v625 en vérification (PR #106) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
-  l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis, quand la build 616.97
-  apparaît dans TestFlight, créer un groupe de test interne avec elle ; elle installe l'app TestFlight sur son iPhone 12.
+  l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
+  groupe de test interne avec elle et la build la plus récente (624.105) ; elle installe l'app TestFlight sur son
+  iPhone 12.
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
 - ✅ **A2 fait le 30/10** : clé API « Halcya CI » (Admin) rangée dans l'environnement `appstore` (réservé à `main`,
   sans contournement par les administrateurs) ; **accord du propriétaire pour la signature par Apple** (certificat de
@@ -45,7 +46,8 @@
 **Ce qui ne pourra pas marcher pareil sur iPhone** (à confirmer, détail dans `PARITE.md`)
 - Lecture du visage **au déverrouillage** : iOS ne laisse pas une app utiliser la caméra en arrière-plan → lecture à
   l'ouverture de l'app (comme la version Google Play actuelle), raccourci ou widget à étudier.
-- **Temps d'écran** du téléphone : Apple ne laisse pas une app lire ces chiffres → à l'étude (I8).
+- **Temps d'écran** du téléphone : possible seulement **dans l'Union européenne, avec iOS 26.4 ou plus** (règle
+  d'Apple) ; ailleurs, la carte le dit et rien ne s'affiche. Écran écrit (PR #105), à essayer sur l'iPhone 12.
 - **Montre Huawei en direct** : sur iPhone, pas de Bluetooth « classique » pour les apps : votre Watch GT 6 Pro (et
   les GT 3 → GT 7) ne peut pas se relier directement à l'app iPhone → passer par l'app Santé d'Apple (Huawei Santé
   y écrit une partie des mesures). Les bracelets Huawei plus simples (Bluetooth basse consommation) pourraient
@@ -54,6 +56,9 @@
   montre est reconnue par les données qu'elle écrit dans l'app Santé, et un guide dit quoi activer dans chaque app.
 
 **Ce qui a changé cette semaine**
+- **31/10 03:05 — Halcya 624 sur TestFlight, temps d'écran en route** : la 624 (build 624.105) est envoyée, signée
+  par Apple avec les droits du temps d'écran ; sur iPhone, l'écran « Temps d'écran et sommeil » lira, avec votre
+  accord, le temps d'écran, l'écran tard le soir et les prises en main (PR #105, en vérification).
 - **28/10 19:00 — abonnement d'essai et captures de la fiche App Store** (PR #40 et #41, mergées) : sur iPhone
   simulé, un abonnement d'essai s'achète et reste actif, sans compte Apple ; les captures en taille 6,9" pour la fiche
   sont prêtes et ne montrent que ce que l'iPhone fait vraiment (montre Apple Watch, pas d'app Android).
@@ -204,6 +209,9 @@ via TestFlight.
 | 30/10 23:00 | suivi d'Android v620 | la 617 est sur TestFlight (build 617.98) ; Android v618 à v620 : « œuf », « bœuf », « cœur » bien écrits, et ce qui manque aux Analyses dit en mots simples, aussi sur iPhone, dont les Nouveautés affichent désormais ces notes. Parité : 49 % | #99 |
 | 31/10 00:00 | TestFlight 620, temps d'écran | la 620 est sur TestFlight (build 620.100) ; bonne nouvelle : en Europe, depuis iOS 26.4, le droit obtenu aujourd'hui permet de lire le vrai temps d'écran (par jour et par app, avec votre accord), comme sur Android ; ce sera la prochaine fonction iPhone, à essayer sur l'iPhone 12. Parité : 49 % | #99 (mergée) |
 | 31/10 01:00 | suivi d'Android v622 | Android v621 et v622 : la réintroduction dit combien de jours calmes il reste à attendre, aussi sur iPhone (un correctif iOS refait) ; l'autre changement ne concerne que les anciens Android. Parité : 49 % | #101 |
+| 31/10 02:00 | temps d'écran, suivi d'Android v624 | le code qui lit le temps d'écran de l'iPhone est corrigé : une pièce d'Apple se trouvait ailleurs que dans sa documentation (vérifié avec les outils d'Apple) ; l'app se construit de nouveau en entier ; Android v623 et v624 : modifier un repas tient sur un petit écran, aussi sur iPhone. Parité : 49 % | #102, #103, #104 |
+| 31/10 03:00 | temps d'écran (suite), v624 | Android v624 sur iPhone (PR #104 : la note « Modifier un repas » s'affiche, version 624) ; l'écran « Temps d'écran et sommeil » de l'iPhone est écrit : il demande votre accord Temps d'écran (Face ID ou code) et compte les prises en main ; il reste à le vérifier en images puis à l'essayer sur l'iPhone 12, en Europe et avec iOS 26.4 ou plus. Parité : 49 % | #102 et #103 (mergées), #104 |
+| 31/10 04:00 | TestFlight 624, suivi d'Android v625 | **la 624 est sur TestFlight** (build 624.105), signée par Apple avec les droits du temps d'écran (vérifiés dans l'app envoyée) ; Android v624 mergé (#104) ; Android v625 : boutons inactifs gris clair et repas habituels à une majuscule, aussi sur iPhone (PR #106) ; l'écran du temps d'écran de l'iPhone se construit (PR #105). Parité : 49 % | #104 (mergée), #105, #106 |
 
 ---
 
