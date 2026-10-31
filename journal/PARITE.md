@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v625 (commit `e388397`, 31/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v631 (commit `fe121c1`, 31/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,8 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 31/10 05:05 | #546 (v630), #547 (v631) | journal d'Android et contrôle bord à bord de sa CI (API 34) seulement : rien à faire sur iPhone ; 34 correctifs appliqués directement (dont le 34, temps d'écran) | — |
+| 31/10 04:05 | #542 à #545 (v626 à v629) | #543 : Nutrition, « incertain : repas manquants » (vert pâle) au lieu de « bas » ou « proche » quand la semaine semble incomplète, légende réduite aux couleurs présentes (`nutritionIntakeCompare.js`, `Nutrition.jsx`, `Nutrition.css`) ; #545 : champs de saisie à la police de l'app (`index.css`, `font-family: inherit` seulement : pas de changement de taille, donc pas de zoom de Safari au toucher) ; #542 et #544 : journal d'Android seulement ; code partagé, vrai sur iPhone ; deux notes sans variante, vraies sur iPhone (montrées) ; 33 correctifs appliqués directement | — |
 | 31/10 03:05 | #541 (v625) | boutons désactivés neutres (gris clair au lieu d'un vert estompé, `App.css`) et repas habituels à une seule majuscule (« Poulet, pomme de terre, haricot vert », `quickMeals.js`) : code partagé, vrai sur iPhone ; note sans variante, vraie sur iPhone (montrée) ; 33 correctifs appliqués directement | — |
 | 31/10 01:30 | #539 (v623), #540 (v624) | #539 : modifier un repas, les calories sur la ligne du nom et « Enregistrer » sur une ligne (`MealEditor.jsx`, `MealEditor.css`, `SavedMealEditor.jsx`) : code partagé, vrai sur iPhone (petits écrans compris), note sans variante, vraie sur iPhone (montrée) ; #540 : CI d'Android seulement (`java-protocol-test.sh`) ; 33 correctifs appliqués directement | — |
 | 31/10 00:10 | #537 (v621), #538 (v622) | #537 : réintroduction, l'attente dite en jours calmes restants (`fodmapChallenge.js`, `Reintroduction.jsx`, `fodmapReminder.js`) : code partagé, vrai sur iPhone, note vraie (montrée sur iPhone) ; **correctif 10 refait** (import voisin dans `fodmapReminder.js`, fusion à trois, mêmes lignes). #538 : Android ≤ 14, encarts de la barre d'état redemandés au démarrage (`safeAreaRestore.js`, `theme.js`, plugin Android) : sur iPhone, `getInsets` n'existe pas, l'appel échoue sans effet (erreur rattrapée) ; note `["play", "sideload"]` | — |
