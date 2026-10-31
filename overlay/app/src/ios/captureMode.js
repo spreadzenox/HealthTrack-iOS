@@ -36,10 +36,20 @@ export const REVEALS = {
 // donne une VFC en SDNN (rangée à part, `heartRateVariabilitySdnn`), pas la RMSSD d'Android.
 const NOT_ON_IPHONE = new Set(['huawei_watch', 'phone', 'face_sense'])
 
+// Pas de connexion Withings directe sur iPhone : la balance écrit dans l'app Santé, que Halcya lit comme le reste
+// (connecteur `health_connect`) : le poids, et la masse grasse seule (pas la masse musculaire)
+const FROM_HEALTH_APP = {
+  weight: (p) => ({ valueKg: p.valueKg }),
+  body_composition: (p) => ({ fatRatioPct: p.fatRatioPct }),
+}
+
 export function iphoneDemoEntries(entries) {
   return entries
     .filter((e) => !NOT_ON_IPHONE.has(e.source))
     .map((e) => {
+      if (e.source === 'withings' && FROM_HEALTH_APP[e.type]) {
+        return { ...e, source: 'health_connect', payload: FROM_HEALTH_APP[e.type](e.payload || {}) }
+      }
       if (e.payload?.sourceName !== 'Gadgetbridge') return e
       const payload = { ...e.payload, sourceName: 'Apple Watch' }
       if (payload.subtype === 'heartRateVariability') payload.subtype = 'heartRateVariabilitySdnn'
