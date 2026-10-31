@@ -10,14 +10,14 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v625 (31/10) | **624 sur TestFlight** (build 624.105) ; v625 en vérification (PR #106) |
+| Dernière version | v629 (31/10) | **625 sur TestFlight** (build 625.107) ; v629 en vérification |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (624.105) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (625.107) ; elle installe l'app TestFlight sur son
   iPhone 12.
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
 - ✅ **A2 fait le 30/10** : clé API « Halcya CI » (Admin) rangée dans l'environnement `appstore` (réservé à `main`,
@@ -56,6 +56,9 @@
   montre est reconnue par les données qu'elle écrit dans l'app Santé, et un guide dit quoi activer dans chaque app.
 
 **Ce qui a changé cette semaine**
+- **31/10 04:05 — Halcya 625 sur TestFlight** (build 625.107) : boutons inactifs gris clair, repas habituels à une
+  majuscule ; Android v626 à v629 (Nutrition « incertain » quand des repas manquent, champs à la police de l'app) en
+  vérification.
 - **31/10 03:05 — Halcya 624 sur TestFlight, temps d'écran en route** : la 624 (build 624.105) est envoyée, signée
   par Apple avec les droits du temps d'écran ; sur iPhone, l'écran « Temps d'écran et sommeil » lira, avec votre
   accord, le temps d'écran, l'écran tard le soir et les prises en main (PR #105, en vérification).
@@ -212,6 +215,7 @@ via TestFlight.
 | 31/10 02:00 | temps d'écran, suivi d'Android v624 | le code qui lit le temps d'écran de l'iPhone est corrigé : une pièce d'Apple se trouvait ailleurs que dans sa documentation (vérifié avec les outils d'Apple) ; l'app se construit de nouveau en entier ; Android v623 et v624 : modifier un repas tient sur un petit écran, aussi sur iPhone. Parité : 49 % | #102, #103, #104 |
 | 31/10 03:00 | temps d'écran (suite), v624 | Android v624 sur iPhone (PR #104 : la note « Modifier un repas » s'affiche, version 624) ; l'écran « Temps d'écran et sommeil » de l'iPhone est écrit : il demande votre accord Temps d'écran (Face ID ou code) et compte les prises en main ; il reste à le vérifier en images puis à l'essayer sur l'iPhone 12, en Europe et avec iOS 26.4 ou plus. Parité : 49 % | #102 et #103 (mergées), #104 |
 | 31/10 04:00 | TestFlight 624, suivi d'Android v625 | **la 624 est sur TestFlight** (build 624.105), signée par Apple avec les droits du temps d'écran (vérifiés dans l'app envoyée) ; Android v624 mergé (#104) ; Android v625 : boutons inactifs gris clair et repas habituels à une majuscule, aussi sur iPhone (PR #106) ; l'écran du temps d'écran de l'iPhone se construit (PR #105). Parité : 49 % | #104 (mergée), #105, #106 |
+| 31/10 05:00 | TestFlight 625, temps d'écran, suivi d'Android v629 | **la 625 est sur TestFlight** (build 625.107) ; Android v625 mergé (#106 : boutons inactifs gris clair, repas habituels à une majuscule, vus en images) ; l'écran du temps d'écran de l'iPhone s'affiche bien en images (« Automatique », minutes d'écran, écran tard) : sa vérification repasse après une correction de notre contrôle de textes (PR #105) ; Android v626 à v629 : Nutrition dit « incertain » plutôt que « bas » quand des repas manquent, champs de saisie à la police de l'app, aussi sur iPhone. Parité : 49 % | #106 (mergée), #105 |
 
 ---
 
@@ -288,6 +292,12 @@ Règles des adaptations :
   Plusieurs PR vertes à la fois : chaque merge oblige les autres à repasser la CI ; regrouper dans une seule PR
   celles qui touchent les mêmes fichiers (#38 dans #37, 28/10). Un lancement manuel sur `main` partageait le groupe
   de concurrence de la CI de `main` et l'aurait annulée (29/10) : les captures de la fiche ont désormais leur groupe.
+  Une PR de journal seul (sans CI) se merge **en dernier** dans le run, après les PR de code : sinon leurs branches
+  passent en retard sur `main` et leur CI repart (31/10, #107 mergée avant #106). Une PR qui dure (fonction en
+  plusieurs étapes) se merge avant le suivi d'Android suivant, qui la remettrait sinon en retard à chaque heure.
+- **Fichiers d'`overlay/`** : vérifier qu'un fichier n'existe pas avant d'en écrire un « nouveau » (`ls`) : l'écrire
+  l'écrase sans erreur (31/10 : le test d'origine de la carte du temps d'écran, remis ensuite). Comparer la liste
+  des fichiers de test (`npx vitest list --filesOnly`) avant / après quand le total ne bouge pas comme prévu.
 - **Calcul natif d'Android réécrit en Swift** (I7, 28/10) : paquet Swift pur, mêmes cas et mêmes tolérances que les
   tests JVM d'Android, vecteurs et portraits lus dans `upstream/` (jamais copiés) ; arrondis et tris de Java reproduits
   (`Math.round`, `%.4f`, tri stable) ; modèles téléchargés en CI avec les empreintes d'Android (`scripts/face-models.sh`).
