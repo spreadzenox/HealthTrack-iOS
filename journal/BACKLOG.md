@@ -216,7 +216,8 @@
   `testflight.yml` : **premier envoi réussi** (616.97, après un refus pour `NSHealthUpdateUsageDescription`, #96) ;
   31/10 : 624.105 envoyée, droits Family Controls vérifiés dans l'app signée (étape ajoutée à `testflight.yml`) ;
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
-  qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ;
+  qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
+  `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -238,7 +239,8 @@
     joindre).
   - [~] Fiche envoyée par l'API App Store Connect (31/10, PR #119 : `scripts/store-push.mjs`, workflow manuel
     `store-push.yml`) : nom, sous-titre, description, mots-clés, texte promotionnel, adresses d'assistance et de
-    confidentialité, sur la version « Prête à soumettre ». Reste : captures de la fiche par l'API ; **numéro de la
+    confidentialité, sur la version « Prête à soumettre ». **Envoyée le 31/10 11:39** (run 41197722535) après le retrait
+    des « ★ », refusés par Apple (#122, règle dans `store-check`). Reste : captures de la fiche par l'API ; **numéro de la
     version** : App Store Connect a créé « 1.0 », les builds envoyées portent le numéro d'Android (6xx) ; à aligner sur
     la build choisie avant la soumission (par l'API, ou par le propriétaire au moment de soumettre).
   - [x] Notes pour l'examen d'Apple, en anglais, prêtes à coller (`store/app-store/notes-examen.md`, 29/10) ; à relire

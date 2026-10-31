@@ -10,16 +10,16 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v638 (31/10) | **638 sur TestFlight** (build 638.118) : même version qu'Android |
+| Dernière version | v640 (31/10) | **638 sur TestFlight** (build 638.121, la première avec la phrase exigée par Apple) ; v640 en vérification |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **31/10 : attendez la prochaine build avant d'installer** : Apple a signalé une phrase d'explication manquante (votre
-  e-mail du 31/10, ITMS-90683) ; elle est corrigée, une nouvelle build part sur TestFlight dans l'heure qui vient.
+- **31/10 : installez la build 638.121 ou plus récente** : les builds d'avant manquaient d'une phrase exigée par Apple
+  (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (638.118) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (638.121) ; elle installe l'app TestFlight sur son
   iPhone 12.
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
 - ✅ **A2 fait le 30/10** : clé API « Halcya CI » (Admin) rangée dans l'environnement `appstore` (réservé à `main`,
@@ -50,7 +50,7 @@
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build 638.118) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build 638.121) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -241,6 +241,7 @@ via TestFlight.
 | 31/10 09:00 | TestFlight 633, suivi d'Android v635 | **la 633 est sur TestFlight** (build 633.114) ; Android v635 : dans Vos données, l'export dit combien d'entrées il contiendra et ne propose plus de fichier vide, aussi sur iPhone (PR #115 mergée, 635 vers TestFlight) ; les captures montrent maintenant la carte du temps d'écran complète (minutes, prises en main, temps par catégorie d'app, nuit estimée). Parité : 49 % | #115 (mergée) |
 | 31/10 10:00 | TestFlight 635, suivi d'Android v638 | **la 635 est sur TestFlight** (build 635.116) ; Android v638 : dans Paramètres, ce que l'analyse IA envoie tient en une phrase (le détail reste à un toucher), et un lien mort mène à l'Accueil, aussi sur iPhone (un correctif iOS refait, PR #117 mergée, 638 vers TestFlight). Parité : 49 % | #117 (mergée) |
 | 31/10 11:00 | e-mail d'Apple, TestFlight 638, fiche par l'API | **merci pour l'e-mail d'Apple** : il manquait une phrase d'explication (reconnaissance vocale) que l'iPhone exige ; les builds envoyées jusqu'ici sont sans doute refusées à l'installation ; corrigé (PR #121), une build corrigée part dès sa vérification ; la fiche App Store s'envoie maintenant par la routine (un caractère « ★ » à retirer d'abord) ; parité recomptée : 48 % | #119 (mergée), #121 |
+| 31/10 12:00 | build corrigée, fiche App Store envoyée | **la build 638.121 est sur TestFlight avec la phrase demandée par Apple** (PR #121) : c'est elle à installer ; **la fiche App Store est remplie dans App Store Connect** (nom, sous-titre, description, mots-clés, adresses), sans rien soumettre (PR #122 : un caractère « ★ » refusé par Apple, retiré) ; Android v640 : page de la montre Huawei, sans objet sur iPhone. Parité : 48 % | #121, #122 (mergées) |
 
 ---
 
