@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow, fakePhoneUsage, installPhoneUsageFake } from './captureMode'
+import { phoneUsageEntriesFromSegments, summarizeSegmentsDay } from './phoneUsageIos'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -222,8 +223,10 @@ describe('accusé du script (waitForAck)', () => {
 
 describe('mots propres à Android sur une page de l’iPhone (androidWords)', () => {
   it('relève chaque mot une fois, sans les marques dont l’app existe aussi sur iPhone', () => {
-    expect(androidWords('Health Connect, puis Health Connect ; Android ; temps d’écran ; Samsung Health ; Gadgetbridge'))
-      .toEqual(['Health Connect', 'Android', 'temps d’écran', 'Samsung Health', 'Gadgetbridge'])
+    expect(androidWords('Health Connect, puis Health Connect ; Android ; Samsung Health ; Gadgetbridge'))
+      .toEqual(['Health Connect', 'Android', 'Samsung Health', 'Gadgetbridge'])
+    // Le temps d'écran existe aussi sur iPhone depuis le 31/10 (UE, iOS 26.4+) : le nommer y est juste
+    expect(androidWords('Temps d’écran et sommeil ; votre temps d\'écran')).toEqual([])
     expect(androidWords('Google Play et le Play Store')).toEqual(['Google Play', 'Play Store'])
     // Huawei Health, Withings, Garmin… écrivent dans l'app Santé de l'iPhone : les nommer y est juste
     expect(androidWords('Huawei Health, Withings, Garmin et l’app Santé')).toEqual([])
@@ -236,10 +239,12 @@ describe('texte relu d’une page de l’iPhone (pageText)', () => {
     const root = document.createElement('main')
     root.innerHTML = '<h2>Vos sources</h2><section aria-labelledby="phone-usage-title"><h3 id="phone-usage-title">'
       + 'Temps d’écran et sommeil</h3><p>Pas encore disponible sur iPhone.</p></section><p>Autoriser Health Connect</p>'
-    const text = pageText(root)
+    const text = pageText(root, ['[aria-labelledby="phone-usage-title"]'])
     expect(text).toContain('Vos sources')
     expect(text).not.toContain('Temps d’écran')
     expect(androidWords(text)).toEqual(['Health Connect'])
+    // Par défaut, plus aucun passage écarté : la carte du temps d'écran de l'iPhone est relue comme le reste
+    expect(pageText(root)).toContain('Pas encore disponible sur iPhone.')
   })
 })
 
@@ -866,3 +871,35 @@ describe('mode captures iOS : fenêtre des mesures écrites dans Santé', () => 
   })
 })
 
+
+describe('temps d’écran de démonstration (faux plugin PhoneUsage, I8)', () => {
+  const now = new Date(2026, 9, 31, 15, 20)
+
+  it('autorisé ; segments horaires des 10 derniers jours, jusqu’à maintenant, dont l’app tire des journées et une nuit', async () => {
+    const plugin = fakePhoneUsage(now)
+    expect(await plugin.checkAccess()).toEqual({ granted: true, supported: true })
+    const { segments } = await plugin.queryUsageSegments({ start: now.getTime() - 10 * 86400000, end: now.getTime() })
+    expect(segments.length).toBeGreaterThan(200)
+    expect(Math.max(...segments.map((s) => s.end))).toBeLessThanOrEqual(now.getTime())
+    const days = phoneUsageEntriesFromSegments(segments, { now: now.getTime() })
+    expect(days.length).toBeGreaterThanOrEqual(8)
+    for (const d of days) {
+      expect(d.payload.screenMinutes).toBeGreaterThan(60)
+      expect(d.payload.sleepEstimate?.minutes).toBeGreaterThan(6 * 60)
+    }
+    const today = summarizeSegmentsDay(segments, '2026-10-31', { now: now.getTime() })
+    expect(today.screenMinutes).toBeGreaterThan(0)
+    expect(today.unlocks).toBeGreaterThan(0)
+  })
+
+  it('installé : activé dans les réglages, puis la carte est relancée (visibilitychange)', () => {
+    const store = new Map()
+    const localStorage = { getItem: (k) => store.get(k) ?? null, setItem: (k, v) => store.set(k, v) }
+    const target = {}
+    const doc = { dispatchEvent: vi.fn() }
+    installPhoneUsageFake({ target, localStorage, doc, now })
+    expect(typeof target.__healthtrackFakePhoneUsage.queryUsageSegments).toBe('function')
+    expect(JSON.parse(store.get('healthtrack_phone_usage')).enabled).toBe(true)
+    expect(doc.dispatchEvent).toHaveBeenCalledWith(expect.objectContaining({ type: 'visibilitychange' }))
+  })
+})

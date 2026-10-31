@@ -49,16 +49,16 @@ const pageName = (route) => route.replace(/^\//, '') || 'accueil'
 
 // Audit des textes (I2) : mots qui n'ont pas cours sur iPhone. Pas Huawei, Withings, Garmin… : leurs apps écrivent
 // dans l'app Santé de l'iPhone, les nommer y est juste.
-const ANDROID_ONLY = /Health Connect|Google Play|Play Store|Android|Gadgetbridge|Samsung Health|temps d['’]écran/g
+const ANDROID_ONLY = /Health Connect|Google Play|Play Store|Android|Gadgetbridge|Samsung Health/g
 
 /** Mots propres à Android trouvés dans un texte de page, chacun une fois, dans l'ordre. */
 export function androidWords(text) {
   return [...new Set(String(text).match(ANDROID_ONLY) ?? [])]
 }
 
-// Passages où les nommer est juste sur iPhone : la carte « Temps d'écran et sommeil » de Sources dit « Pas encore
-// disponible sur iPhone » (I8 à l'étude, PARITE.md)
-export const IPHONE_OK = ['[aria-labelledby="phone-usage-title"]']
+// Passages où les nommer serait juste sur iPhone (sélecteurs CSS). Vide depuis le 31/10 : le temps d'écran existe aussi
+// sur iPhone (I8), sa carte est relue comme le reste
+export const IPHONE_OK = []
 
 /** Texte d'une page, sans ces passages (`innerText` dans la WebView, `textContent` sous jsdom). */
 export function pageText(root, allowed = IPHONE_OK) {
@@ -182,6 +182,51 @@ export function watchRejections(target = window, report = console.error) {
     report('[capture] promesse rejetée sans traitement :', e.reason?.stack || e.reason?.message || String(e.reason)))
 }
 
+/**
+ * Temps d'écran de démonstration (I8) : faux plugin `PhoneUsage`, lu par `phoneUsageSync.js` comme celui des captures
+ * d'Android (`--phone`), mais en segments horaires comme l'iPhone : écran de 07:00 à 23:00, un peu plus le soir, nuit
+ * calme, reprise vers 07:10. Accès accordé.
+ */
+export function fakePhoneUsage(now = new Date()) {
+  const HOUR = 3600000
+  const end = now.getTime()
+  const segments = []
+  for (let start = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 10).getTime(); start + HOUR <= end; start += HOUR) {
+    const d = new Date(start)
+    const h = d.getHours()
+    const k = d.getDate() + h
+    if (h >= 7 && h < 23) {
+      const minutes = h === 7 ? 6 : h >= 21 ? 18 + (k % 4) * 4 : 8 + (k % 5) * 3
+      segments.push({ start, end: start + HOUR, activeMs: minutes * 60000, pickups: 1 + (k % 4), firstPickup: start + (h === 7 ? 10 : 2) * 60000 })
+    } else {
+      segments.push({ start, end: start + HOUR, activeMs: 0, pickups: 0 })
+    }
+  }
+  return {
+    checkAccess: async () => ({ granted: true, supported: true }),
+    openAccessSettings: async () => ({ granted: true, supported: true }),
+    queryUsageSegments: async ({ start = -Infinity, end: to = Infinity } = {}) => ({
+      segments: segments.filter((s) => s.start >= start && s.end <= to),
+    }),
+  }
+}
+
+/**
+ * Pages de démonstration : temps d'écran activé avec le faux plugin. Ce mode est chargé après le premier rendu : la
+ * carte relit l'accès à chaque `visibilitychange`, on la relance donc.
+ */
+export function installPhoneUsageFake({ target = window, localStorage = window.localStorage, doc = document, now = new Date() } = {}) {
+  target.__healthtrackFakePhoneUsage = fakePhoneUsage(now)
+  let settings = {}
+  try {
+    settings = JSON.parse(localStorage.getItem('healthtrack_phone_usage') || '{}')
+  } catch {
+    /* réglages illisibles : remplacés */
+  }
+  if (!settings.enabled) localStorage.setItem('healthtrack_phone_usage', JSON.stringify({ ...settings, enabled: true }))
+  doc.dispatchEvent(new Event('visibilitychange'))
+}
+
 export async function installCaptureMode() {
   watchRejections()
   try {
@@ -193,7 +238,9 @@ export async function installCaptureMode() {
     ])
     const file = { directory: Directory.Documents, encoding: Encoding.UTF8 }
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-    await runCaptureStep(buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES), {
+    const plan = buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES)
+    if (plan[Number(window.localStorage.getItem(STEP_KEY) ?? 0)]?.data === 'demo') installPhoneUsageFake()
+    await runCaptureStep(plan, {
       storage,
       demoEntries: () => iphoneDemoEntries(demo.generateDemoEntries()),
       latestChangelogId: lastSeenChangelogId(changelog),
