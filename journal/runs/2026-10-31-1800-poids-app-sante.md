@@ -1,6 +1,6 @@
 # 2026-10-31 18:00 UTC — Nutrition : le poids de l'app Santé n'est plus « saisi »
 
-**Étape** : I4 (Santé), suivi d'Android  ·  **PR** : #138 (correctif 35), journal  ·  **Android suivi** : v654 sur `main` (v656 pas encore publié sur Google Play)  ·  **iOS** : 654 sur `main` et sur TestFlight (654.137)  ·  **Parité** : 48 % (23/48)
+**Étape** : I4 (Santé), suivi d'Android  ·  **PR** : #138 (correctif 35, mergée), journal  ·  **Android suivi** : v654 sur `main` (v656 pas encore publié sur Google Play)  ·  **iOS** : 654 sur `main` et sur TestFlight (654.139)  ·  **Parité** : 48 % (23/48)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun. A6 et version d'iOS de l'iPhone 12 attendus.
@@ -19,7 +19,14 @@
     appstore OK. CI en cours.
 - `DEMANDES.md` : la demande garde son état (« à transmettre »), avec le contournement iOS.
 
+## Fin du run
+- **#138 mergée** : CI verte ; captures regardées sur l'iPhone 16e :
+  - Nutrition : « 77,2 kg (app Santé, 28/10) », « Masse grasse 21,2 % (app Santé) », plus de Withings ;
+  - Nouveautés : la note « correctif » en tête ; audit vide, aucune erreur JavaScript.
+- **Envoi TestFlight** (run 41229898007, `main` 33001b2) : réussi, build **654.139**. Même numéro de version : la
+  fiche App Store n'a pas à changer.
+
 ## Suite
-- #138 : CI, capture de Nutrition (« (app Santé, …) ») et des Nouveautés, merge, envoi TestFlight, `store-push.yml`
-  sans captures.
-- Android v656 dès sa publication sur Google Play.
+- Android v656 dès sa publication sur Google Play (nos correctifs s'y appliquent déjà).
+- Le reste attend le propriétaire : A6 (iPhone 12), version d'iOS de l'iPhone 12, décisions (sauvegarde iCloud,
+  identifiant d'installation, AffectNet).
