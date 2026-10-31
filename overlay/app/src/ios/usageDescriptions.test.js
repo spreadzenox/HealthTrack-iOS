@@ -17,6 +17,14 @@ function files(dir) {
   })
 }
 const code = files(src).map((p) => readFileSync(p, 'utf8')).join('\n')
+// Sources Swift de l'app (copiées dans upstream/app/ios), hors tests des paquets
+function swiftFiles(dir) {
+  return readdirSync(dir).flatMap((name) => {
+    const p = join(dir, name)
+    if (statSync(p).isDirectory()) return /^(Tests|\.build|DerivedData|node_modules)$/.test(name) ? [] : swiftFiles(p)
+    return name.endsWith('.swift') ? [p] : []
+  })
+}
 const usage = (key) => plist.match(new RegExp(`<key>${key}</key>\\s*<string>([^<]+)</string>`))?.[1]
 const flag = (key) => plist.match(new RegExp(`<key>${key}</key>\\s*<(true|false)/>`))?.[1]
 
@@ -41,6 +49,25 @@ describe('phrases d’usage de l’iPhone (Info.plist)', () => {
     // 30/10). L'app livrée n'écrit rien dans Santé ; seule la build de captures y écrit des mesures de démonstration.
     expect(usage('NSHealthShareUsageDescription')).toMatch(/lit vos mesures/)
     expect(usage('NSHealthUpdateUsageDescription')).toMatch(/n’écrit rien dans l’app Santé/)
+  })
+
+  it('chaque framework sensible importé par le Swift de l’app a sa phrase (ITMS-90683, 31/10 : Speech manquait)', () => {
+    // App Store Connect exige la phrase dès que le code fait référence au framework, même sans demande d'autorisation
+    const NEEDS = {
+      Speech: 'NSSpeechRecognitionUsageDescription', Contacts: 'NSContactsUsageDescription',
+      EventKit: 'NSCalendarsUsageDescription', CoreMotion: 'NSMotionUsageDescription',
+      Photos: 'NSPhotoLibraryUsageDescription', CoreBluetooth: 'NSBluetoothAlwaysUsageDescription',
+      CoreLocation: 'NSLocationWhenInUseUsageDescription', HealthKit: 'NSHealthShareUsageDescription',
+    }
+    const swift = swiftFiles(join(process.cwd(), 'ios')).map((p) => readFileSync(p, 'utf8')).join('\n')
+    const imported = Object.keys(NEEDS).filter((fw) => new RegExp(`^import ${fw}$`, 'm').test(swift))
+    expect(imported).toContain('Speech')
+    for (const fw of imported) expect(usage(NEEDS[fw]), `${fw} → ${NEEDS[fw]}`).toBeTruthy()
+  })
+
+  it('la sonde vocale (Speech) : la phrase dit qu’aucune voix n’est écoutée ni envoyée', () => {
+    expect(usage('NSSpeechRecognitionUsageDescription')).toMatch(/français sur cet iPhone/)
+    expect(usage('NSSpeechRecognitionUsageDescription')).toMatch(/ni écoutée ni enregistrée/)
   })
 
   it('aucune phrase ne parle d’Android, toutes vouvoient', () => {

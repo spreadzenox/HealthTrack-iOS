@@ -1,14 +1,15 @@
 # Fiche App Store fr-FR (store/app-store/) : limites d'App Store Connect et directive 2.3.10 d'Apple, vérifiées sans
-# runner macOS (scripts/store-check.mjs). L'envoi de la fiche par l'API App Store Connect viendra après A2–A3.
+# runner macOS (scripts/store-check.mjs), et tests de l'envoi par l'API App Store Connect (scripts/store-push.mjs,
+# lancé par store-push.yml).
 name: Fiche App Store — contrôle
 
 on:
   pull_request:
     branches: [main]
-    paths: ["store/**", "scripts/store-check.mjs", ".github/workflows/store-check.yml"]
+    paths: ["store/**", "scripts/store-*.mjs", ".github/workflows/store-*.yml"]
   push:
     branches: [main]
-    paths: ["store/**", "scripts/store-check.mjs", ".github/workflows/store-check.yml"]
+    paths: ["store/**", "scripts/store-*.mjs", ".github/workflows/store-*.yml"]
 
 permissions:
   contents: read
@@ -21,5 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20.19"
+          node-version: "22"
       - run: node scripts/store-check.mjs
+      - run: node --test scripts/store-push.test.mjs
+      - run: node scripts/store-push.mjs --dry-run
