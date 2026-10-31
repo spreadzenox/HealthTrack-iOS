@@ -218,7 +218,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -250,6 +250,9 @@
     version** : App Store Connect a créé « 1.0 », les builds envoyées portent le numéro d'Android (6xx), et une version
     ne reçoit que des builds de même numéro → `store-push.mjs` renomme la version « Prête à soumettre » au versionCode
     d'`upstream.json` à chaque envoi (PR #129, 31/10).
+  - [~] Catégorie (Santé et forme) et classification par âge (18 ans et plus, comme sur Google Play) envoyées par l'API
+    (`store/app-store/classification.json`, PR #130, 31/10) : réponses au plus prudent (informations médicales et
+    tabac « fréquents »), à relire par le propriétaire avant la soumission.
   - [x] Notes pour l'examen d'Apple, en anglais, prêtes à coller (`store/app-store/notes-examen.md`, 29/10) ; à relire
     avant la soumission (I6, directive 5.1.3 (ii), adresses après A8).
   - [x] Conditions d'utilisation propres à l'iPhone (29/10, `overlay/app/public/conditions-iphone.html`, correctif 26 :
