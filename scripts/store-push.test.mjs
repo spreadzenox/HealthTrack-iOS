@@ -41,3 +41,26 @@ test('editable : la version ou la fiche encore en préparation, jamais celle en 
   assert.equal(editable([{ id: '4', attributes: { appStoreState: 'WAITING_FOR_REVIEW' } }]), undefined)
   assert.equal(editable([]), undefined)
 })
+
+test('captures : les 8 fichiers du tableau de store/app-store/captures.md, dans l’ordre d’affichage', async () => {
+  const { captureFiles } = await import('./store-push.mjs')
+  const files = captureFiles()
+  assert.equal(files.length, 8)
+  assert.equal(files[0], 'iphone-17-pro-max-demo-clair-accueil.png')
+  assert.equal(files[7], 'iphone-17-pro-max-demo-sombre-accueil.png')
+  assert.ok(files.every((f) => /^iphone-17-pro-max-.+\.png$/.test(f)))
+})
+
+test('envoi d’une capture : morceaux selon les opérations d’Apple, empreinte MD5 du fichier', async () => {
+  const { slices, md5 } = await import('./store-push.mjs')
+  const bytes = Buffer.from('abcdefghij')
+  const ops = [
+    { method: 'PUT', url: 'https://u/1', offset: 0, length: 4, requestHeaders: [{ name: 'Content-Type', value: 'image/png' }] },
+    { method: 'PUT', url: 'https://u/2', offset: 4, length: 6, requestHeaders: [] },
+  ]
+  const parts = slices(bytes, ops)
+  assert.deepEqual(parts.map((p) => p.body.toString()), ['abcd', 'efghij'])
+  assert.deepEqual(parts[0].headers, { 'Content-Type': 'image/png' })
+  assert.equal(parts[1].url, 'https://u/2')
+  assert.equal(md5(bytes), 'a925576942e94b2ef57a066101b48876')
+})

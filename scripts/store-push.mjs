@@ -3,13 +3,18 @@
 // propriétaire : « mettre à jour la fiche App Store par l'API »). Ne touche qu'à une version encore « Prête à
 // soumettre » : rien n'est publié ni soumis à l'examen (geste du propriétaire). Lancé par
 // .github/workflows/store-push.yml avec la clé de l'environnement `appstore` (ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8),
-// jamais affichée. `--dry-run` : montre ce qui serait envoyé, sans réseau ni clé.
+// jamais affichée. `--dry-run` : montre ce qui serait envoyé, sans réseau ni clé. `--captures <dossier>` : envoie aussi
+// les captures 6,9" de store/app-store/captures.md (branche captures/store), dans l'ordre du tableau, à la place des
+// précédentes.
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { sign } from 'node:crypto'
+import { createHash, sign } from 'node:crypto'
 import { pathToFileURL } from 'node:url'
 
 const DIR = join(import.meta.dirname, '..', 'store', 'app-store', 'fr-FR')
+const CAPTURES_MD = join(import.meta.dirname, '..', 'store', 'app-store', 'captures.md')
+/** Captures 6,9" (1320 × 2868) : App Store Connect les reprend pour les iPhone plus petits. */
+const DISPLAY_TYPE = 'APP_IPHONE_67'
 const API = 'https://api.appstoreconnect.apple.com'
 const BUNDLE_ID = 'fr.jpesquet.sante'
 const LOCALE = 'fr-FR'
@@ -32,6 +37,24 @@ export function fiche(dir = DIR) {
       supportUrl: SUPPORT_URL,
     },
   }
+}
+
+/** Fichiers des captures de la fiche, dans l'ordre d'affichage (tableau de store/app-store/captures.md). */
+export function captureFiles(md = readFileSync(CAPTURES_MD, 'utf8')) {
+  return [...md.matchAll(/^\|\s*\d+\s*\|\s*`([^`]+\.png)`\s*\|/gm)].map((m) => m[1])
+}
+
+/** Empreinte MD5 qu'App Store Connect vérifie à la fin de l'envoi d'une capture. */
+export const md5 = (bytes) => createHash('md5').update(bytes).digest('hex')
+
+/** Morceaux à envoyer, d'après les opérations rendues par App Store Connect pour une capture. */
+export function slices(bytes, operations) {
+  return (operations || []).map((op) => ({
+    method: op.method,
+    url: op.url,
+    body: bytes.subarray(op.offset, op.offset + op.length),
+    headers: Object.fromEntries((op.requestHeaders || []).map((h) => [h.name, h.value])),
+  }))
 }
 
 /** Jeton de l'API App Store Connect (ES256, 20 minutes au plus). */
@@ -70,12 +93,51 @@ async function upsertLocalization(token, { listPath, type, parentType, parentRel
   const found = data.find((l) => l.attributes?.locale === LOCALE)
   if (found) {
     await api(token, 'PATCH', `/v1/${type}/${found.id}`, { data: { type, id: found.id, attributes } })
-    return 'mise à jour'
+    return { action: 'mise à jour', id: found.id }
   }
-  await api(token, 'POST', `/v1/${type}`, {
+  const created = await api(token, 'POST', `/v1/${type}`, {
     data: { type, attributes: { locale: LOCALE, ...attributes }, relationships: { [parentRel]: { data: { type: parentType, id: parentId } } } },
   })
-  return 'créée'
+  return { action: 'créée', id: created.data?.id }
+}
+
+/** Captures de la fiche remplacées par celles du dossier, dans l'ordre de captures.md. */
+async function uploadScreenshots(token, localizationId, dir) {
+  const files = captureFiles()
+  const sets = await api(token, 'GET', `/v1/appStoreVersionLocalizations/${localizationId}/appScreenshotSets?limit=50`)
+  let set = (sets.data || []).find((s) => s.attributes?.screenshotDisplayType === DISPLAY_TYPE)
+  if (!set) {
+    set = (await api(token, 'POST', '/v1/appScreenshotSets', {
+      data: {
+        type: 'appScreenshotSets', attributes: { screenshotDisplayType: DISPLAY_TYPE },
+        relationships: { appStoreVersionLocalization: { data: { type: 'appStoreVersionLocalizations', id: localizationId } } },
+      },
+    })).data
+  }
+  const old = await api(token, 'GET', `/v1/appScreenshotSets/${set.id}/appScreenshots?limit=50`)
+  for (const shot of old.data || []) await api(token, 'DELETE', `/v1/appScreenshots/${shot.id}`)
+  const ids = []
+  for (const name of files) {
+    const bytes = readFileSync(join(dir, name))
+    const created = (await api(token, 'POST', '/v1/appScreenshots', {
+      data: {
+        type: 'appScreenshots', attributes: { fileName: name, fileSize: bytes.length },
+        relationships: { appScreenshotSet: { data: { type: 'appScreenshotSets', id: set.id } } },
+      },
+    })).data
+    for (const part of slices(bytes, created.attributes?.uploadOperations)) {
+      const res = await fetch(part.url, { method: part.method, headers: part.headers, body: part.body })
+      if (!res.ok) throw new Error(`envoi de ${name} : ${res.status}`)
+    }
+    await api(token, 'PATCH', `/v1/appScreenshots/${created.id}`, {
+      data: { type: 'appScreenshots', id: created.id, attributes: { uploaded: true, sourceFileChecksum: md5(bytes) } },
+    })
+    ids.push(created.id)
+  }
+  await api(token, 'PATCH', `/v1/appScreenshotSets/${set.id}/relationships/appScreenshots`, {
+    data: ids.map((id) => ({ type: 'appScreenshots', id })),
+  })
+  return files.length
 }
 
 async function main() {
@@ -83,6 +145,9 @@ async function main() {
   const sizes = (o) => Object.entries(o).map(([k, v]) => `${k} ${[...v].length} car.`).join(', ')
   console.log(`Fiche ${LOCALE} — app : ${sizes(f.info)}`)
   console.log(`Fiche ${LOCALE} — version : ${sizes(f.version)}`)
+  const at = process.argv.indexOf('--captures')
+  const capturesDir = at > 0 ? process.argv[at + 1] : null
+  if (capturesDir || process.argv.includes('--dry-run')) console.log(`Captures (${DISPLAY_TYPE}) : ${captureFiles().join(', ')}`)
   if (process.argv.includes('--dry-run')) return
 
   for (const name of ['ASC_KEY_ID', 'ASC_ISSUER_ID', 'ASC_KEY_P8']) {
@@ -102,7 +167,8 @@ async function main() {
     type: 'appStoreVersionLocalizations', parentType: 'appStoreVersions', parentRel: 'appStoreVersion', parentId: version.id,
     attributes: f.version,
   })
-  console.log(`Version ${version.attributes?.versionString} : fiche ${LOCALE} ${v} (description, mots-clés, texte promotionnel, assistance)`)
+  console.log(`Version ${version.attributes?.versionString} : fiche ${LOCALE} ${v.action} (description, mots-clés, texte promotionnel, assistance)`)
+  if (capturesDir) console.log(`Captures : ${await uploadScreenshots(token, v.id, capturesDir)} envoyées dans l'ordre de captures.md`)
 
   const infos = await api(token, 'GET', `/v1/apps/${app.id}/appInfos?limit=10`)
   const info = editable(infos.data)
@@ -112,7 +178,7 @@ async function main() {
     type: 'appInfoLocalizations', parentType: 'appInfos', parentRel: 'appInfo', parentId: info.id,
     attributes: f.info,
   })
-  console.log(`App : nom, sous-titre et confidentialité ${LOCALE} ${i === 'créée' ? 'créés' : 'mis à jour'}`)
+  console.log(`App : nom, sous-titre et confidentialité ${LOCALE} ${i.action === 'créée' ? 'créés' : 'mis à jour'}`)
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
