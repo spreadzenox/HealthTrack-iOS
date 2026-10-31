@@ -124,6 +124,11 @@ jobs:
           APP="$(ls -d "$RUNNER_TEMP"/ipa/Payload/*.app | head -1)"
           codesign -d --entitlements - "$APP" 2>&1 | tee "$RUNNER_TEMP/ipa-entitlements.txt"
           grep -q "com.apple.developer.healthkit" "$RUNNER_TEMP/ipa-entitlements.txt"
+          # Temps d'écran (I8) : droits accordés par Apple le 30/10, à garder dans l'app signée pour l'App Store
+          grep -qE 'com\.apple\.developer\.family-controls([^.]|$)' "$RUNNER_TEMP/ipa-entitlements.txt" \
+            || { echo "::error::family-controls absent de l'app signée"; exit 1; }
+          grep -q 'com.apple.developer.family-controls.app-and-website-usage' "$RUNNER_TEMP/ipa-entitlements.txt" \
+            || { echo "::error::family-controls.app-and-website-usage absent de l'app signée"; exit 1; }
           if grep -A2 "get-task-allow" "$RUNNER_TEMP/ipa-entitlements.txt" | grep -q true; then
             echo "::error::app signée en développement (get-task-allow)"; exit 1
           fi

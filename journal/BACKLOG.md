@@ -188,11 +188,13 @@
   - [x] 5. YUV → RVB (BT.601 plein écart, 4 rotations ; 28/10 : `FaceFrames`, plan CbCr entrelacé de l'iPhone et arrondi de Java, 9 tests, PR #44 ; garde-fous `FaceSchedule`, chaleur de l'iPhone sur l'échelle d'Android, 10 tests, PR #44 ; boîte des rafales `FaceInbox` et lecture `FaceOneShot` avec caméra et modèles injectables, 13 tests, branche `claude/ios-i7-plugin` ; caméra frontale `FrontCamera` (AVFoundation, 352 × 288, portrait sans miroir), conversion testée sur images fabriquées), puis plugin `FaceSense` en Swift (branché dans l'app, PR #46, mergée) avec images injectables (29/10 : un visage lu de bout en bout sur les deux iPhone simulés, PR #47).
   - [ ] 6. Sur l'iPhone 12 (dès TestFlight, après A1–A3) : la vraie caméra, le temps par lecture, la fluidité.
   - [ ] 7. Décision du propriétaire sur les poids AffectNet (valence et éveil), `DEMANDES.md`. À l'intégration dans l'app : relire le `PrivacyInfo.xcprivacy` livré dans `TensorFlowLiteC.xcframework`.
-- [~] **Temps d'écran réel, étapes 1 et 2 faites (31/10, PR #103)** : module `phoneUsageIos.js` (5 tests) ; plugin Swift
+- [~] **Temps d'écran réel, étapes 1 et 2 faites (31/10, PR #103, mergée)** : module `phoneUsageIos.js` (5 tests) ; plugin Swift
   `PhoneUsage` (`checkAccess`, `openAccessSettings` = demande d'autorisation Temps d'écran, `queryUsageSegments`),
   enregistré, entitlements Family Controls et App and Website Usage dans l'app ; compile avec `import SwiftUI`
-  (les segments sont dans le recouvrement `_DeviceActivity_SwiftUI`, vérifié par `swiftc -typecheck`). Reste (étape 3) : correctif de
-  `phoneUsageSync.js` et carte « Écran » sur iPhone (correctif 07), puis essai sur l'iPhone 12 (EU, iOS 26.4+).
+  (les segments sont dans le recouvrement `_DeviceActivity_SwiftUI`, vérifié par `swiftc -typecheck`) ; mergé le 31/10.
+  Étape 3 écrite (31/10, branche `claude/ios-temps-ecran-3`) : correctif 34 (`phoneUsageSync.js` lit les segments,
+  carte et accord propres à l'iPhone), faux plugin des captures, note des Nouveautés de l'iPhone ; reste : PR, CI,
+  captures de la carte relues, puis essai sur l'iPhone 12 (UE, iOS 26.4+) et envoi TestFlight.
 - [ ] **Temps d'écran réel, conception (31/10)** : le code partagé d'Android (`phoneUsage.js`) attend des événements
   bruts `{ t, e: 'on' | 'off' | 'unlock' }` ; l'iPhone donne des segments horaires (`totalActivityDuration`,
   `firstPickup`, prises en main). Plugin Swift `PhoneUsage` : `checkAccess` (`approvedWithDataAccess`, iOS 26.4+),
