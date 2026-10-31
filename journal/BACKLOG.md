@@ -218,7 +218,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -266,10 +266,11 @@
     (`…/conditions/`, avec A8).
   - [ ] Avec I6 : leur partie vente (formules, renouvellement, annulation, remboursements par Apple), et les liens de
     confidentialité et de conditions du paywall (`PRIVACY_URL`, `TERMS_URL` d'Android) à remplacer.
-  - [ ] Données de démo iPhone (`captureMode.js`, `iphoneDemoEntries`) : le poids et la masse grasse y viennent de
-    « Withings » (connexion directe, absente sur iPhone) ; les montrer comme venant de l'app Santé (29/10, vu sur la
-    capture Nutrition de #49, hors des 8 captures de la fiche). Mais le code partagé annonce un poids de Health Connect
-    (et donc de l'app Santé) « (saisi le …) » : demande à Android (`DEMANDES.md`, 29/10) avant de toucher la démo.
+  - [x] Données de démo iPhone (`captureMode.js`, `iphoneDemoEntries`) : le poids et la masse grasse y venaient de
+    « Withings » (connexion directe, absente sur iPhone). Le code partagé annonçait un poids de l'app Santé « (saisi
+    le …) » et taisait sa masse grasse (demande à Android du 29/10, `DEMANDES.md`, toujours à transmettre).
+    **Correctif 35 (31/10, PR #138)** : origine « app Santé », libellés « (app Santé, 28/10) » ; démo de l'iPhone
+    passée par l'app Santé (poids, masse grasse seule).
   - [ ] **Directive 5.1.3 (ii) d'Apple** : une app « ne doit pas stocker de données de santé personnelles dans
     iCloud ». La copie de secours (I3) part dans la sauvegarde iCloud de l'iPhone : risque de refus à l'examen. À
     trancher avant la soumission : garder (sauvegarde du système, choisie et chiffrée par l'utilisateur), l'exclure
