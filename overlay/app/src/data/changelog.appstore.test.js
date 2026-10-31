@@ -40,6 +40,8 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
     // v612 : « VFC nuit » dans le Journal et l'étiquette « premium » de la réintroduction : sur iPhone, la VFC de l'app
     // Santé s'appelle « VFC (SDNN) » et rien n'est vendu (l'étiquette n'y apparaît jamais)
     expect(APPSTORE_HIDDEN.has('2026-10-30-1433-vfc-nuit')).toBe(true)
+    // v640 : « Données de la montre : plus courte » : cette page (montre Huawei en direct) n'existe pas sur iPhone
+    expect(APPSTORE_HIDDEN.has('2026-10-31-1033-montre-compacte')).toBe(true)
     const ids = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
     for (const id of APPSTORE_HIDDEN) expect(ids).not.toContain(id)
     expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-10-29-0533-paywall-lancement')
