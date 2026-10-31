@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v622 (31/10) | **622 sur TestFlight** (build 622.102) |
+| Dernière version | v622 (31/10) | **620 sur TestFlight** (build 620.100) ; v622 en vérification (PR #101) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -204,7 +204,6 @@ via TestFlight.
 | 30/10 23:00 | suivi d'Android v620 | la 617 est sur TestFlight (build 617.98) ; Android v618 à v620 : « œuf », « bœuf », « cœur » bien écrits, et ce qui manque aux Analyses dit en mots simples, aussi sur iPhone, dont les Nouveautés affichent désormais ces notes. Parité : 49 % | #99 |
 | 31/10 00:00 | TestFlight 620, temps d'écran | la 620 est sur TestFlight (build 620.100) ; bonne nouvelle : en Europe, depuis iOS 26.4, le droit obtenu aujourd'hui permet de lire le vrai temps d'écran (par jour et par app, avec votre accord), comme sur Android ; ce sera la prochaine fonction iPhone, à essayer sur l'iPhone 12. Parité : 49 % | #99 (mergée) |
 | 31/10 01:00 | suivi d'Android v622 | Android v621 et v622 : la réintroduction dit combien de jours calmes il reste à attendre, aussi sur iPhone (un correctif iOS refait) ; l'autre changement ne concerne que les anciens Android. Parité : 49 % | #101 |
-| 31/10 02:00 | temps d'écran (début) | la 622 est sur TestFlight ; le temps d'écran réel de l'iPhone avance : le calcul (minutes par jour, écran tard, nuit estimée) est prêt et testé, et la brique iPhone qui lit ces chiffres est écrite ; reste à l'afficher dans l'app et à l'essayer sur l'iPhone 12. Parité : 49 % | #102, #103 |
 
 ---
 
