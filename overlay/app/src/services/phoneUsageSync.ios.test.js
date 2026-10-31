@@ -64,6 +64,23 @@ describe('phoneUsageSync (iPhone : segments horaires)', () => {
     expect(settings.todayApps).toBeNull()
   })
 
+  it('avec les apps de chaque heure : aussi les minutes par catégorie (phone_apps) et celles du jour', async () => {
+    enablePhoneUsage()
+    const now = new Date(at('2026-10-31', 15))
+    const segments = hourlySegments(at('2026-10-29', 18), at('2026-10-31', 15)).map((s) => ({
+      ...s,
+      apps: s.activeMs ? [{ id: 'com.burbn.instagram', label: 'Instagram', category: 'Réseaux sociaux', ms: s.activeMs }] : [],
+    }))
+    const write = vi.fn(async (entries) => ({ inserted: entries.length }))
+    const res = await syncPhoneUsage({ now, plugin: iphonePlugin({ segments }), write })
+
+    expect(res).toEqual({ ran: true, inserted: 2 })
+    const apps = write.mock.calls[0][0].filter((e) => e.type === 'phone_apps')
+    expect(apps.map((e) => e.payload.date)).toEqual(['2026-10-30'])
+    expect(apps[0].payload.minutes).toEqual({ social: 16 * 20 })
+    expect(getPhoneUsageSettings().todayApps).toMatchObject({ date: '2026-10-31', minutes: { social: 8 * 20 } })
+  })
+
   it('sans autorisation Temps d’écran : message propre à l’iPhone, aucune lecture', async () => {
     enablePhoneUsage()
     const plugin = iphonePlugin({ granted: false })
