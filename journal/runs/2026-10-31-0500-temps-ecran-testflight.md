@@ -1,6 +1,6 @@
 # 2026-10-31 05:00 UTC — le temps d'écran sur TestFlight (625.108) ; temps par catégorie d'app ; Android v631
 
-**Étape** : I8 (temps d'écran), I9  ·  **PR** : #105 et #108 (mergées), #109 (v631), #110  ·  **Android suivi** : v625 sur `main`, v631 en PR  ·  **iOS** : 625 sur `main` et sur TestFlight (625.108)  ·  **Parité** : 49 % (23/47)
+**Étape** : I8 (temps d'écran), I9  ·  **PR** : #105, #108 et #109 (mergées), #110  ·  **Android suivi** : v631 sur `main`  ·  **iOS** : 625 sur `main` et sur TestFlight (625.108)  ·  **Parité** : 49 % (23/47)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun. A6, version d'iOS de l'iPhone 12 et trois décisions toujours attendus.
@@ -37,7 +37,11 @@
   - README : la 625.108 ; quoi essayer sur l'iPhone 12 ; ligne de 06:00 ;
   - PARITE (temps d'écran) et BACKLOG à jour.
 
+- **#109 mergée** (v631) : CI verte ; Nutrition : légende « atteint · incertain : repas manquants » seulement, barres
+  incertaines en vert pâle (vu en image) ; audit vide, sondes bonnes. Envoi TestFlight de la 631 lancé en fin de run
+  (résultat au prochain run). #110 compile (build Xcode verte) ; ses captures étaient en cours.
+
 ## Suite
-- #109 : CI → merge → cette PR de journal (en dernier) ; TestFlight de la 631.
+- Résultat de l'envoi TestFlight de la 631.
 - #110 : `main` fusionnée après #109, CI, captures (« Dont … » sur la carte, Nouveautés), merge, TestFlight.
 - Essai sur l'iPhone 12 dès A6 : temps d'écran réel, noms d'apps (Apple peut les taire), durée de lecture.
