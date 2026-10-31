@@ -39,6 +39,9 @@
 - ✅ Fait le 28/10 : vous avez transmis à la routine Android les 4 demandes de `DEMANDES.md` (iPhone au contrôle
   d'intégrité, abonnement App Store sur le serveur, Nouveautés propres à Android, textes de sauvegarde neutres) ;
   elle les a reprises le jour même (v553) : trois faites, l'abonnement App Store noté pour plus tard.
+- (quand vous voulez) **Modèle d'analyse des repas** (votre demande du 31/10) : la demande précise est prête dans
+  `journal/DEMANDES.md` (dernière ligne) : banc d'essai sur une vingtaine de vos repas pesés, puis Gemini Flash avec
+  réflexion si l'écart baisse nettement. À transmettre à la routine Android, qui gère le relais commun aux deux apps.
 - (facultatif, quand vous voulez) Transmettre à la routine Android les demandes marquées « à transmettre » dans
   `journal/DEMANDES.md` : dont un défaut visible aujourd'hui sur Android (bouton « Autoriser Health Connect » étiré
   sur toute la hauteur dans l'accueil de l'app) et un libellé « saisi » faux pour un poids de Health Connect.
@@ -53,7 +56,7 @@
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build 638.121) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 658.141) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -254,6 +257,7 @@ via TestFlight.
 | 31/10 19:00 | Nutrition : poids de l'app Santé | dans votre profil de Nutrition, un poids lu dans l'app Santé (une balance, par exemple) s'affichait « saisi le … » comme si vous l'aviez tapé, et sa masse grasse n'apparaissait pas : corrigé sur iPhone, « (app Santé, 28/10) » (PR #138, mergée, vue en image), dans la build 654.139 sur TestFlight ; Android v656 pas encore publié sur Google Play (nos correctifs s'y appliquent déjà). Parité : 48 % | #138 (mergée) |
 | 31/10 20:00 | Android v658 | Android v655 à v658 : les cartes de Sources prennent la couleur de leur thème (menthe pour l'app Santé et la lecture du visage, lilas pour la météo et le temps d'écran) et la question du soir de la carte « Votre ventre » se lit mieux, aussi sur iPhone ; la note d'Android qui nommait « Health Connect » est remplacée sur iPhone par une note qui parle de l'app Santé (PR #140, mergée, vue en image) ; **la 658 est sur TestFlight (658.141)**, même version qu'Android. Parité : 48 % | #140 (mergée) |
 | 31/10 21:00 | captures de la fiche à jour | les 8 captures de la fiche App Store sont refaites sur la 658 (Sources en couleur, Accueil du soir), regardées et envoyées : Apple les a toutes acceptées ; Android v659 et v660 ne changent que son journal (rien pour l'iPhone, pas encore publiés). Parité : 48 % | — |
+| 31/10 22:00 | vos questions, modèle d'analyse des repas | vous avez demandé ce qu'il vous reste à faire (réponse dans la conversation : d'abord A6, l'iPhone 12) et un modèle d'IA plus précis pour lire les repas : demande précise prête dans `DEMANDES.md` pour la routine Android (le relais est commun aux deux apps), avec un essai sur vos repas pesés avant de basculer ; Android n'a rien publié de nouveau (son prochain changement s'appliquera tel quel). Parité : 48 % | — |
 
 ---
 
