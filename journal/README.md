@@ -10,16 +10,16 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v644 (31/10) | **638 sur TestFlight** (build 638.121, la première avec la phrase exigée par Apple) ; 642 en route vers TestFlight, v644 en vérification |
+| Dernière version | v648 (31/10) | **644 sur TestFlight** (build 644.127 ; la 638.121 fut la première avec la phrase exigée par Apple) ; 648 en route vers TestFlight |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **31/10 : installez la build 638.121 ou plus récente** : les builds d'avant manquaient d'une phrase exigée par Apple
+- **31/10 : installez la build la plus récente (644.127), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (638.121) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (644.127 aujourd'hui) ; elle installe l'app TestFlight sur son
   iPhone 12.
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
 - ✅ **A2 fait le 30/10** : clé API « Halcya CI » (Admin) rangée dans l'environnement `appstore` (réservé à `main`,
@@ -243,7 +243,8 @@ via TestFlight.
 | 31/10 11:00 | e-mail d'Apple, TestFlight 638, fiche par l'API | **merci pour l'e-mail d'Apple** : il manquait une phrase d'explication (reconnaissance vocale) que l'iPhone exige ; les builds envoyées jusqu'ici sont sans doute refusées à l'installation ; corrigé (PR #121), une build corrigée part dès sa vérification ; la fiche App Store s'envoie maintenant par la routine (un caractère « ★ » à retirer d'abord) ; parité recomptée : 48 % | #119 (mergée), #121 |
 | 31/10 12:00 | build corrigée, fiche App Store envoyée | **la build 638.121 est sur TestFlight avec la phrase demandée par Apple** (PR #121) : c'est elle à installer ; **la fiche App Store est remplie dans App Store Connect** (nom, sous-titre, description, mots-clés, adresses), sans rien soumettre (PR #122 : un caractère « ★ » refusé par Apple, retiré) ; Android v640 : page de la montre Huawei, sans objet sur iPhone. Parité : 48 % | #121, #122 (mergées) |
 | 31/10 13:00 | suivi d'Android v642, captures de la fiche | Android v641 et v642 : l'onglet du bas reste surligné quand vous ouvrez la réintroduction ou l'historique du bien-être, aussi sur iPhone (PR #123, en vérification) ; l'envoi des captures de la fiche App Store est prêt (PR #124), elles seront refaites et regardées avant l'envoi. Parité : 48 % | #123, #124 |
-| 31/10 14:00 | v642 mergée, captures de la fiche en cours | Android v642 sur iPhone (PR #123 mergée : l'onglet du bas reste surligné sur les sous-pages, vu en image), envoi de la 642 sur TestFlight ; les captures de la fiche App Store sont refaites sur l'iPhone le plus grand, à regarder avant de les envoyer ; Android v644 : rien ne change sur iPhone (lecture du visage au déverrouillage, impossible sur iPhone). Parité : 48 % | #123, #124 (mergées) |
+| 31/10 14:00 | v642 mergée, captures de la fiche en cours | Android v642 sur iPhone (PR #123 mergée : l'onglet du bas reste surligné sur les sous-pages, vu en image), envoi de la 642 sur TestFlight ; la 642 est sur TestFlight (642.124) ; les captures de la fiche App Store, refaites sur l'iPhone le plus grand, ont été regardées une à une : elles ont montré un défaut réel, corrigé (Sources disait « Jamais reçu : VFC » sous une Apple Watch qui envoie sa VFC, PR #127) ; elles seront refaites après ce correctif, puis envoyées ; Android v644 sur iPhone (PR #126 mergée) : rien ne change sur iPhone (lecture du visage au déverrouillage, impossible sur iPhone), envoi de la 644 sur TestFlight. Parité : 48 % | #123, #124, #126 (mergées), #127 |
+| 31/10 15:00 | 644 sur TestFlight, Android v648, VFC de l'Apple Watch | **la 644 est sur TestFlight (644.127)** ; Android v645 à v648 : un rappel de la lecture du visage au déverrouillage (Android seulement, jamais affiché sur iPhone) et une légende complète dans l'historique du bien-être, aussi sur iPhone ; regroupés avec le correctif de la VFC de l'Apple Watch dans une seule vérification (PR #127, mergée, vue en image), envoi de la 648 sur TestFlight ; les captures de la fiche App Store sont refaites ; le numéro de la version de la fiche App Store (« 1.0 ») suivra celui des builds, sinon aucune build ne pourrait être choisie à la soumission (PR #129, mergée). Parité : 48 % | #127, #129 (mergées), #128 |
 
 ---
 
