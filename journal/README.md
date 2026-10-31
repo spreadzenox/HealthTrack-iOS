@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v620 (30/10) | **620 sur TestFlight** (build 620.100 ; 617.98 et 616.97 avant) |
+| Dernière version | v622 (31/10) | **620 sur TestFlight** (build 620.100) ; v622 en vérification (PR #101) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -203,6 +203,7 @@ via TestFlight.
 | 30/10 22:00 | TestFlight 617 | v617 sur `main` (PR #97 mergée : Nouveautés de l'iPhone vues, une seule note « Halcya arrive sur iPhone ») ; la 617 part aussi sur TestFlight pour que votre compagne installe la plus récente. Parité : 49 % | #97 (mergée) |
 | 30/10 23:00 | suivi d'Android v620 | la 617 est sur TestFlight (build 617.98) ; Android v618 à v620 : « œuf », « bœuf », « cœur » bien écrits, et ce qui manque aux Analyses dit en mots simples, aussi sur iPhone, dont les Nouveautés affichent désormais ces notes. Parité : 49 % | #99 |
 | 31/10 00:00 | TestFlight 620, temps d'écran | la 620 est sur TestFlight (build 620.100) ; bonne nouvelle : en Europe, depuis iOS 26.4, le droit obtenu aujourd'hui permet de lire le vrai temps d'écran (par jour et par app, avec votre accord), comme sur Android ; ce sera la prochaine fonction iPhone, à essayer sur l'iPhone 12. Parité : 49 % | #99 (mergée) |
+| 31/10 01:00 | suivi d'Android v622 | Android v621 et v622 : la réintroduction dit combien de jours calmes il reste à attendre, aussi sur iPhone (un correctif iOS refait) ; l'autre changement ne concerne que les anciens Android. Parité : 49 % | #101 |
 
 ---
 

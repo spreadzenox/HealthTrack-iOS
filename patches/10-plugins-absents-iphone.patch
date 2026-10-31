@@ -20,13 +20,13 @@ index 816292b..c89382b 100644
  
  const minuteOf = (iso) => {
 diff --git a/app/src/services/fodmapReminder.js b/app/src/services/fodmapReminder.js
-index 7f914fb..9414551 100644
+index 7a12772..91f0658 100644
 --- a/app/src/services/fodmapReminder.js
 +++ b/app/src/services/fodmapReminder.js
 @@ -12,6 +12,7 @@ import { registerPlugin } from '@capacitor/core'
  import { listEntries } from '../storage/localHealthStorage'
  import { GUT_TYPE } from './today'
- import { CALM_DAYS_REQUIRED, CHALLENGE_DAYS, FODMAP_CHALLENGE_TYPE, currentChallenge, findFood, formatAmount } from './fodmapChallenge'
+ import { CHALLENGE_DAYS, FODMAP_CHALLENGE_TYPE, calmDaysLeftText, currentChallenge, findFood, formatAmount } from './fodmapChallenge'
 +import { missingOnIos } from '../ios/nativePlugins.js' // Version iOS (HealthTrack-iOS)
  
  export const PORTION_DEFAULT_MINUTE = 12 * 60
