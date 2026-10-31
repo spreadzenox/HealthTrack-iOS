@@ -1,5 +1,5 @@
 diff --git a/app/src/components/MoodEstimateCard.jsx b/app/src/components/MoodEstimateCard.jsx
-index 0655c88..98fb32d 100644
+index e3ff415..f1631d1 100644
 --- a/app/src/components/MoodEstimateCard.jsx
 +++ b/app/src/components/MoodEstimateCard.jsx
 @@ -13,6 +13,8 @@ import DetailsToggle from './DetailsToggle'
@@ -11,12 +11,13 @@ index 0655c88..98fb32d 100644
  
  const pct = (v) => `${(v / 5) * 100}%`
  
-@@ -94,8 +96,18 @@ function hourOf(iso) {
-  *   onToggleDetails?: () => void, onAddManual?: () => void, now?: Date }} props
-  *   `data` : undefined pendant la lecture, null sans lecture.
+@@ -116,9 +118,20 @@ function hourOf(iso) {
   */
--export default function MoodEstimateCard({ data, details = false, onToggleDetails, onAddManual, now }) {
-+export default function MoodEstimateCard({ data, details = false, onToggleDetails, onAddManual, now, faceReading = !FEATURES.iosStore || isFaceSenseAvailable() }) {
+ export default function MoodEstimateCard({
+   data, details = false, onToggleDetails, onAddManual, unlockReminder = false, onDismissReminder, now,
++  faceReading = !FEATURES.iosStore || isFaceSenseAvailable(),
+ }) {
+   const reminder = unlockReminder && <UnlockReminder onDismiss={onDismissReminder} />
    if (data === undefined) return null
 +  // Version iOS (HealthTrack-iOS) : tant que la lecture du visage n'est pas sur iPhone (I7), pas de renvoi vers elle
 +  if (!data?.est && !faceReading) {
