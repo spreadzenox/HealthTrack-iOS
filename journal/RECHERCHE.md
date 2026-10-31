@@ -426,3 +426,36 @@ Usage) ouvrent plus que prévu. Documentation d'Apple lue le 30/10 (iOS et iPadO
   - <https://developer.apple.com/documentation/deviceactivity/deviceactivitydata/activitysegment>
   - <https://developer.apple.com/documentation/familycontrols/familyactivitydata>
 
+
+## Montre Huawei sur iPhone : la piste Health Kit de Huawei (31/10/2026, 04:20)
+
+Question du propriétaire (30/10) : être sûr qu'aucun contournement n'existe avant de dire « impossible ». Il en existe
+un, en ligne, à des conditions qui lui reviennent.
+
+- **Côté personne** : dans Huawei Santé sur iPhone, Moi › Services tiers › HUAWEI Health Kit › Lier. Les mesures de
+  la montre (sommeil par phases, fréquence cardiaque, FC au repos…) remontent alors sur le compte Huawei
+  (synchronisation automatique par défaut, **pas en temps réel** : Huawei la retarde pour la batterie).
+- **Côté app** : API REST de Huawei (`health-api.cloud.huawei.com/healthkit/v2`, jeton OAuth 2.0 du compte Huawei,
+  périmètres par type, ex. `…/healthkit/sleep.read`) : elle se lit depuis n'importe quelle plateforme, donc depuis
+  l'iPhone. Les données viennent des serveurs de Huawei vers le téléphone : Halcya n'envoie rien.
+- **Conditions** (actions du propriétaire, rien n'est fait) : compte développeur Huawei ; demande d'accès aux données
+  par périmètre avec « matériaux de demande et présentation de l'entreprise », traitée sous 15 jours ouvrés ;
+  données sensibles soumises à approbation ; rien n'indique qu'un développeur individuel soit exclu, rien ne le
+  garantit non plus.
+- **À vérifier avant de s'engager** : type d'identifiants OAuth possible pour une app sans serveur (les guides
+  tiers parlent d'un « Server App », qui suppose un secret côté serveur : à éviter dans l'app) ; délai réel de
+  remontée ; ce que Huawei Santé écrit déjà dans l'app Santé d'Apple (pas, FC, sommeil, entraînements, d'après
+  sahha.ai) peut suffire pour une partie des besoins.
+- **Verdict provisoire** : pas « impossible » ; faisable avec le compte Huawei de la personne et l'accord de Huawei,
+  donc décision du propriétaire (D4 dans `DEMANDES.md` si utile). La lecture directe en Bluetooth reste à essayer sur
+  l'iPhone 12 (BLE seulement).
+- La documentation de Huawei (`developer.huawei.com`) est hors des domaines autorisés de cette session : la lire en
+  entier demande de l'ajouter aux réglages réseau de l'environnement.
+
+Sources (consultées le 31/10/2026, via recherche) :
+- <https://developer.huawei.com/consumer/en/doc/HMSCore-Guides/sleep-0000001131264006>
+- <https://developer.huawei.com/consumer/en/doc/HMSCore-Guides/access-process-0000001624467736>
+- <https://www.thryve.health/blog/connect-huawei-health-thryve>
+- <https://pub.dev/documentation/huawei_health/latest/huawei_health/Scope-class.html>
+- <https://consumer.huawei.com/en/support/content/en-us01057432>
+- <https://sahha.ai/integrations/huawei-health/>
