@@ -2,6 +2,9 @@ import Capacitor
 import DeviceActivity
 import FamilyControls
 import Foundation
+// Les segments (`activitySegments`, `categories`, `applications`) sont déclarés dans le recouvrement
+// `_DeviceActivity_SwiftUI`, chargé seulement quand SwiftUI est importé aussi.
+import SwiftUI
 
 /// Temps d'écran sur iPhone (étape I8) : même nom de plugin que `PhoneUsagePlugin.java` d'Android, vu de
 /// `src/services/phoneUsageSync.js` (correctif iOS) et d'`src/ios/phoneUsageIos.js`. Android lit les allumages d'écran
