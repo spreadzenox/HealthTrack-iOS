@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v640 (31/10) | **638 sur TestFlight** (build 638.121, la première avec la phrase exigée par Apple) ; v640 en vérification |
+| Dernière version | v642 (31/10) | **638 sur TestFlight** (build 638.121, la première avec la phrase exigée par Apple) ; v642 en vérification (PR #123) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -242,6 +242,7 @@ via TestFlight.
 | 31/10 10:00 | TestFlight 635, suivi d'Android v638 | **la 635 est sur TestFlight** (build 635.116) ; Android v638 : dans Paramètres, ce que l'analyse IA envoie tient en une phrase (le détail reste à un toucher), et un lien mort mène à l'Accueil, aussi sur iPhone (un correctif iOS refait, PR #117 mergée, 638 vers TestFlight). Parité : 49 % | #117 (mergée) |
 | 31/10 11:00 | e-mail d'Apple, TestFlight 638, fiche par l'API | **merci pour l'e-mail d'Apple** : il manquait une phrase d'explication (reconnaissance vocale) que l'iPhone exige ; les builds envoyées jusqu'ici sont sans doute refusées à l'installation ; corrigé (PR #121), une build corrigée part dès sa vérification ; la fiche App Store s'envoie maintenant par la routine (un caractère « ★ » à retirer d'abord) ; parité recomptée : 48 % | #119 (mergée), #121 |
 | 31/10 12:00 | build corrigée, fiche App Store envoyée | **la build 638.121 est sur TestFlight avec la phrase demandée par Apple** (PR #121) : c'est elle à installer ; **la fiche App Store est remplie dans App Store Connect** (nom, sous-titre, description, mots-clés, adresses), sans rien soumettre (PR #122 : un caractère « ★ » refusé par Apple, retiré) ; Android v640 : page de la montre Huawei, sans objet sur iPhone. Parité : 48 % | #121, #122 (mergées) |
+| 31/10 13:00 | suivi d'Android v642, captures de la fiche | Android v641 et v642 : l'onglet du bas reste surligné quand vous ouvrez la réintroduction ou l'historique du bien-être, aussi sur iPhone (PR #123, en vérification) ; l'envoi des captures de la fiche App Store est prêt (PR #124), elles seront refaites et regardées avant l'envoi. Parité : 48 % | #123, #124 |
 
 ---
 
