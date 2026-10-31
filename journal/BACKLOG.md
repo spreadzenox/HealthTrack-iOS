@@ -240,7 +240,9 @@
   - [~] Fiche envoyée par l'API App Store Connect (31/10, PR #119 : `scripts/store-push.mjs`, workflow manuel
     `store-push.yml`) : nom, sous-titre, description, mots-clés, texte promotionnel, adresses d'assistance et de
     confidentialité, sur la version « Prête à soumettre ». **Envoyée le 31/10 11:39** (run 41197722535) après le retrait
-    des « ★ », refusés par Apple (#122, règle dans `store-check`). Reste : captures de la fiche par l'API ; **numéro de la
+    des « ★ », refusés par Apple (#122, règle dans `store-check`). Captures : envoi par l'API écrit (PR #124, option « captures » de
+    `store-push.yml`) ; avant de l'utiliser, refaire les captures 6,9" (`ios-build.yml`, `devices: iPhone 17 Pro Max`,
+    branche `captures/store`, v597 aujourd'hui) et les regarder. Reste : captures de la fiche par l'API ; **numéro de la
     version** : App Store Connect a créé « 1.0 », les builds envoyées portent le numéro d'Android (6xx) ; à aligner sur
     la build choisie avant la soumission (par l'API, ou par le propriétaire au moment de soumettre).
   - [x] Notes pour l'examen d'Apple, en anglais, prêtes à coller (`store/app-store/notes-examen.md`, 29/10) ; à relire
