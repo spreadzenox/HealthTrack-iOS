@@ -6,6 +6,7 @@
 // jamais affichée. `--dry-run` : montre ce qui serait envoyé, sans réseau ni clé. `--captures <dossier>` : envoie aussi
 // les captures 6,9" de store/app-store/captures.md (branche captures/store), dans l'ordre du tableau, à la place des
 // précédentes. Le numéro de cette version prend celui des builds (versionCode d'Android suivi, `upstream.json`).
+// Catégorie et classification par âge : store/app-store/classification.json.
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { createHash, sign } from 'node:crypto'
@@ -14,6 +15,7 @@ import { pathToFileURL } from 'node:url'
 const DIR = join(import.meta.dirname, '..', 'store', 'app-store', 'fr-FR')
 const CAPTURES_MD = join(import.meta.dirname, '..', 'store', 'app-store', 'captures.md')
 const UPSTREAM_JSON = join(import.meta.dirname, '..', 'upstream.json')
+const CLASSIFICATION_JSON = join(import.meta.dirname, '..', 'store', 'app-store', 'classification.json')
 /** Captures 6,9" (1320 × 2868) : App Store Connect les reprend pour les iPhone plus petits. */
 const DISPLAY_TYPE = 'APP_IPHONE_67'
 const API = 'https://api.appstoreconnect.apple.com'
@@ -49,6 +51,14 @@ export function versionString(json = JSON.parse(readFileSync(UPSTREAM_JSON, 'utf
   const n = json?.versionCode
   if (!Number.isInteger(n) || n <= 0) throw new Error('upstream.json : versionCode absent ou invalide')
   return String(n)
+}
+
+/**
+ * Catégorie et classification par âge (store/app-store/classification.json, expliquées dans le README) : Santé et
+ * forme, 18 ans et plus comme sur Google Play.
+ */
+export function classification(path = CLASSIFICATION_JSON) {
+  return JSON.parse(readFileSync(path, 'utf8'))
 }
 
 /** Fichiers des captures de la fiche, dans l'ordre d'affichage (tableau de store/app-store/captures.md). */
@@ -160,6 +170,8 @@ async function main() {
   const at = process.argv.indexOf('--captures')
   const capturesDir = at > 0 ? process.argv[at + 1] : null
   if (capturesDir || process.argv.includes('--dry-run')) console.log(`Captures (${DISPLAY_TYPE}) : ${captureFiles().join(', ')}`)
+  const c = classification()
+  console.log(`Catégorie : ${c.primaryCategory} ; âge : ${c.ageRating.ageRatingOverrideV2}`)
   const wanted = versionString()
   console.log(`Numéro de la version : ${wanted} (versionCode d'Android suivi, comme les builds de TestFlight)`)
   if (process.argv.includes('--dry-run')) return
@@ -198,6 +210,14 @@ async function main() {
     attributes: f.info,
   })
   console.log(`App : nom, sous-titre et confidentialité ${LOCALE} ${i.action === 'créée' ? 'créés' : 'mis à jour'}`)
+
+  await api(token, 'PATCH', `/v1/appInfos/${info.id}`, {
+    data: { type: 'appInfos', id: info.id, relationships: { primaryCategory: { data: { type: 'appCategories', id: c.primaryCategory } } } },
+  })
+  const { data: rating } = await api(token, 'GET', `/v1/appInfos/${info.id}/ageRatingDeclaration`)
+  if (!rating?.id) throw new Error('classification par âge introuvable dans App Store Connect')
+  await api(token, 'PATCH', `/v1/ageRatingDeclarations/${rating.id}`, { data: { type: 'ageRatingDeclarations', id: rating.id, attributes: c.ageRating } })
+  console.log(`App : catégorie ${c.primaryCategory}, classification par âge ${c.ageRating.ageRatingOverrideV2} (classification.json)`)
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1]).href) {
