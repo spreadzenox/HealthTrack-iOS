@@ -144,7 +144,16 @@
   - [x] Import des réponses à l'ouverture suivante vérifié en capture : bilan du ventre (PR #25 : inserted 1,
     boîte vide), note du soir (PR #26 : inserted 1, boîte vide), toujours vrai à chaque CI depuis ; gestes sur
     l'iPhone 12 après A1.
-- [ ] **I6 — Abonnement et relais** : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
+- [ ] **I6 — Abonnement et relais** — **décision du 31/10 (propriétaire et routine Android) : deux formules, Silver
+  et Gold.** Gold à 10 €/mois, plus de crédits et la meilleure analyse des repas (dernier Gemini Flash en Europe) ;
+  Silver avec le dernier Gemini Flash-Lite en Europe (prix et crédits à fixer). Le modèle n'est jamais nommé à
+  l'utilisateur ; on met en avant que **Gold fait moins d'erreurs sur la reconnaissance des aliments et l'estimation
+  des quantités**. Bêta-testeurs et propriétaire en Gold par défaut. Sur iPhone : un groupe d'abonnements « Halcya »,
+  Gold au niveau le plus haut et Silver en dessous (Apple gère montée et descente), identifiants
+  `halcya_gold_mensuel`, `halcya_silver_mensuel` (et annuels si décidés) ; textes préparés dans
+  `store/app-store/abonnements.md` ; demande au relais dans `DEMANDES.md`. Le plan d'origine ci-dessous reste vrai
+  pour la mécanique (StoreKit 2, `AppStoreBilling`, vérification par le relais), à adapter aux deux formules.
+  Ancien libellé : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
   transactions signées par Apple, notifications serveur V2, App Attest, mêmes crédits IA, même période de lancement.
   Plan (28/10 12:25, après lecture de `playBilling.js`, `entitlement.js`, `distribution.js` d'Android v553) :
@@ -278,6 +287,10 @@
     Santé (qui se réimporte seule). La page de confidentialité décrit l'état actuel. 29/10 : recherche dans
     `RECHERCHE.md` (rien d'officiel sur la sauvegarde de l'appareil) ; recommandation : demander à Apple
     (consultation « Meet with Apple » après A1), sinon exclure la copie de la sauvegarde avant la soumission.
+- [ ] **Plus tard, quand il y aura plus d'utilisateurs (décision du 31/10)** : la stratégie de cache décidée avec la
+  routine Android pour l'analyse des repas, côté relais. Aujourd'hui, les consignes commencent par la longue liste des
+  ingrédients, identique d'un appel à l'autre, que Vertex AI met en cache implicitement (`relay/src/prompts.js`
+  d'Android). Rien à faire côté iPhone, qui passe par le même relais.
 - [ ] **Ensuite — suivi continu** : chaque version Android suivie, correctifs refaits, nouveautés vérifiées.
 
 ## Idées et questions ouvertes
