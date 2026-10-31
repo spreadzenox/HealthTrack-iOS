@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v658 (31/10) | **658 sur TestFlight** (build 658.141 ; la 638.121 fut la première avec la phrase exigée par Apple) : même version qu'Android |
+| Dernière version | v661 (31/10) | **658 sur TestFlight** (build 658.141 ; la 638.121 fut la première avec la phrase exigée par Apple) ; v661 en vérification |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -265,6 +265,7 @@ via TestFlight.
 | 31/10 20:00 | Android v658 | Android v655 à v658 : les cartes de Sources prennent la couleur de leur thème (menthe pour l'app Santé et la lecture du visage, lilas pour la météo et le temps d'écran) et la question du soir de la carte « Votre ventre » se lit mieux, aussi sur iPhone ; la note d'Android qui nommait « Health Connect » est remplacée sur iPhone par une note qui parle de l'app Santé (PR #140, mergée, vue en image) ; **la 658 est sur TestFlight (658.141)**, même version qu'Android. Parité : 48 % | #140 (mergée) |
 | 31/10 21:00 | captures de la fiche à jour | les 8 captures de la fiche App Store sont refaites sur la 658 (Sources en couleur, Accueil du soir), regardées et envoyées : Apple les a toutes acceptées ; Android v659 et v660 ne changent que son journal (rien pour l'iPhone, pas encore publiés). Parité : 48 % | — |
 | 31/10 22:00 | vos questions, modèle d'analyse des repas | vous avez demandé ce qu'il vous reste à faire (réponse dans la conversation : d'abord A6, l'iPhone 12) et un modèle d'IA plus précis pour lire les repas : demande précise prête dans `DEMANDES.md` pour la routine Android (le relais est commun aux deux apps), avec un essai sur vos repas pesés avant de basculer ; Android n'a rien publié de nouveau (son prochain changement s'appliquera tel quel). **Puis, à 22:00, vos décisions** : modèles 3.8, formules Silver et Gold (Gold à 10 €/mois, moins d'erreurs mis en avant, Gold par défaut pour les bêta-testeurs et vous), cache plus tard : notées, plan de l'abonnement iPhone revu. Parité : 48 % | #144 |
+| 31/10 23:00 | Android v661, relais en Gold | Android v659 à v661 : les signes à signaler au médecin citent aussi les antécédents familiaux, la réintroduction rappelle la durée d'éviction, aussi sur iPhone (PR #145, en vérification) ; la routine Android a basculé le relais : Gold sur Gemini 3.8 Flash avec réflexion, plafonds de coût du mois. Les requêtes de l'iPhone sont pour l'instant servies comme « gratuit » (Flash-Lite) : pour mettre la testeuse en Gold tout de suite, la routine Android peut ajouter son installation à la liste Gold du relais (demande mise à jour). Parité : 48 % | #145 |
 
 ---
 
