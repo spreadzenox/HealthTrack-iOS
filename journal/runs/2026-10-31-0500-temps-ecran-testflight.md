@@ -36,7 +36,6 @@
 - Journal :
   - README : la 625.108 ; quoi essayer sur l'iPhone 12 ; ligne de 06:00 ;
   - PARITE (temps d'écran) et BACKLOG à jour.
-
 - **#109 mergée** (v631) : CI verte ; Nutrition : légende « atteint · incertain : repas manquants » seulement, barres
   incertaines en vert pâle (vu en image) ; audit vide, sondes bonnes. Envoi TestFlight de la 631 lancé en fin de run
   (résultat au prochain run). #110 compile (build Xcode verte) ; ses captures étaient en cours.
