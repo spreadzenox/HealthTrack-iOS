@@ -61,10 +61,11 @@ public class PhoneUsagePlugin: CAPPlugin, CAPBridgedPlugin {
             return
         }
         let filter = DeviceActivityFilter(segment: .hourly(during: DateInterval(start: start, end: end)), users: .all, devices: .init([.iPhone]))
-        Task {
+        let box = SegmentBox()
+        let reading = Task {
             do {
-                var segments: [[String: Any]] = []
                 for try await data in DeviceActivityData.activityData(filteredBy: filter) {
+                    let device = data.device.name ?? ""
                     for await segment in data.activitySegments {
                         var pickups = segment.totalPickupsWithoutApplicationActivity
                         for await category in segment.categories {
@@ -79,13 +80,45 @@ public class PhoneUsagePlugin: CAPPlugin, CAPBridgedPlugin {
                             "pickups": pickups,
                         ]
                         if let first = segment.firstPickup { item["firstPickup"] = first.timeIntervalSince1970 * 1000 }
-                        segments.append(item)
+                        box.put("\(device)|\(segment.dateInterval.start.timeIntervalSince1970)", item)
                     }
                 }
-                call.resolve(["segments": segments])
+                if let segments = box.finish() { call.resolve(["segments": segments]) }
             } catch {
-                call.reject("Lecture du temps d’écran impossible : \(error.localizedDescription)")
+                if box.finish() != nil { call.reject("Lecture du temps d’écran impossible : \(error.localizedDescription)") }
             }
         }
+        // Si la suite d'Apple reste ouverte (mises à jour), on rend ce qui est lu au bout de 20 s.
+        Task {
+            try? await Task.sleep(nanoseconds: 20_000_000_000)
+            if let segments = box.finish() {
+                reading.cancel()
+                call.resolve(["segments": segments])
+            }
+        }
+    }
+}
+
+/// Segments lus, un par appareil et par heure (une mise à jour remplace l'ancien), rendus une seule fois : à la fin de
+/// la lecture ou au délai, le premier des deux.
+private final class SegmentBox: @unchecked Sendable {
+    private let lock = NSLock()
+    private var items: [String: [String: Any]] = [:]
+    private var order: [String] = []
+    private var done = false
+
+    func put(_ key: String, _ item: [String: Any]) {
+        lock.lock()
+        defer { lock.unlock() }
+        if items[key] == nil { order.append(key) }
+        items[key] = item
+    }
+
+    func finish() -> [[String: Any]]? {
+        lock.lock()
+        defer { lock.unlock() }
+        if done { return nil }
+        done = true
+        return order.compactMap { items[$0] }
     }
 }
