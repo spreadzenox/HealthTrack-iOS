@@ -99,3 +99,14 @@ test('classification : catégorie Santé et forme, 18 ans et plus comme sur Goog
   for (const k of LEVELED) assert.ok(LEVELS.includes(a[k]), k)
   assert.deepEqual(Object.keys(a).sort(), [...BOOLEANS, ...LEVELED, 'ageRatingOverrideV2'].sort())
 })
+
+test('état des captures chez Apple : traitées, en cours, refusées (avec la raison)', async () => {
+  const { screenshotStates } = await import('./store-push.mjs')
+  const shot = (fileName, state, errors) => ({ attributes: { fileName, assetDeliveryState: { state, errors } } })
+  const r = screenshotStates([
+    shot('a.png', 'COMPLETE'), shot('b.png', 'UPLOAD_COMPLETE'), shot('c.png', 'AWAITING_UPLOAD'),
+    shot('d.png', 'FAILED', [{ code: 'IMAGE_TOO_LARGE', description: 'trop grande' }]), { attributes: {} },
+  ])
+  assert.deepEqual(r, { total: 5, complete: 1, pending: 3, failed: ['d.png : trop grande'] })
+  assert.deepEqual(screenshotStates([]), { total: 0, complete: 0, pending: 0, failed: [] })
+})
