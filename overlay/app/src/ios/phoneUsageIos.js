@@ -25,10 +25,24 @@ function at(dateKey, dayOffset, h, min = 0) {
   return new Date(y, m - 1, d + dayOffset, h, min).getTime()
 }
 
+/**
+ * Segments valides, triés, un par heure : la même heure vue sur un autre iPhone du même compte (Temps d'écran partagé
+ * entre appareils) est additionnée, et sa première prise en main est la plus tôt des deux.
+ */
 function valid(segments) {
-  return (segments || [])
-    .filter((s) => s && Number.isFinite(s.start) && Number.isFinite(s.end) && s.end > s.start)
-    .sort((a, b) => a.start - b.start)
+  const byStart = new Map()
+  for (const s of segments || []) {
+    if (!s || !Number.isFinite(s.start) || !Number.isFinite(s.end) || !(s.end > s.start)) continue
+    const seen = byStart.get(s.start)
+    if (!seen) {
+      byStart.set(s.start, { ...s })
+      continue
+    }
+    seen.activeMs = (seen.activeMs || 0) + (s.activeMs || 0)
+    seen.pickups = (seen.pickups || 0) + (s.pickups || 0)
+    if (Number.isFinite(s.firstPickup) && !(seen.firstPickup <= s.firstPickup)) seen.firstPickup = s.firstPickup
+  }
+  return [...byStart.values()].sort((a, b) => a.start - b.start)
 }
 
 const within = (s, from, to) => s.start >= from && s.start < to

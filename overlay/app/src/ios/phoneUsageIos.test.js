@@ -56,4 +56,21 @@ describe('temps d’écran de l’iPhone (segments horaires)', () => {
     const today = summarizeSegmentsDay(segments(), '2026-10-22', { now: at(2026, 10, 22, 10) })
     expect(today).toMatchObject({ date: '2026-10-22', screenMinutes: 1 + 20 + 2 * 10, unlocks: 1 + 2 + 2 * 3 })
   })
+
+  it('même heure sur deux iPhone du même compte : additionnée, la nuit finit à la première prise en main des deux', () => {
+    // Second iPhone : 5 min et 1 prise en main de plus dans chacune des 16 heures d'usage (07:00 → 23:00), pris en main
+    // 10 min plus tôt que le premier (07:05 le matin) ; rien la nuit
+    const other = segments().map((s) => {
+      const active = s.activeMs >= 10 * 60000
+      return { ...s, activeMs: active ? 5 * 60000 : 0, pickups: active ? 1 : 0, firstPickup: active ? s.firstPickup - 10 * 60000 : null }
+    })
+    const [, day] = phoneUsageEntriesFromSegments([...segments(), ...other], { now: at(2026, 10, 22, 10) })
+    expect(day.payload).toMatchObject({ screenMinutes: 191 + 16 * 5, unlocks: 48 + 16 })
+    const [, alone] = phoneUsageEntriesFromSegments(segments(), { now: at(2026, 10, 22, 10) })
+    expect(day.payload.sleepEstimate).toMatchObject({
+      start: alone.payload.sleepEstimate.start,
+      end: new Date(at(2026, 10, 21, 7, 5)).toISOString(),
+      minutes: alone.payload.sleepEstimate.minutes - 10,
+    })
+  })
 })
