@@ -123,6 +123,39 @@ async function upsertLocalization(token, { listPath, type, parentType, parentRel
   return { action: 'créée', id: created.data?.id }
 }
 
+/**
+ * État des captures chez Apple (`assetDeliveryState`) : traitées (COMPLETE), en cours (envoyées, pas encore
+ * traitées), refusées (FAILED, avec la raison donnée par Apple).
+ */
+export function screenshotStates(items) {
+  const out = { total: 0, complete: 0, pending: 0, failed: [] }
+  for (const it of items || []) {
+    const a = it?.attributes || {}
+    const st = a.assetDeliveryState || {}
+    out.total += 1
+    if (st.state === 'COMPLETE') out.complete += 1
+    else if (st.state === 'FAILED') {
+      const why = (st.errors || []).map((e) => e.description || e.code).filter(Boolean).join(', ')
+      out.failed.push(`${a.fileName || '?'} : ${why || 'refusée'}`)
+    } else out.pending += 1
+  }
+  return out
+}
+
+/** Lit l'état des captures 6,9" de la fiche ; attend jusqu'à `waitMs` que le traitement d'Apple se termine. */
+async function screenshotReport(token, localizationId, { waitMs = 0 } = {}) {
+  const sets = await api(token, 'GET', `/v1/appStoreVersionLocalizations/${localizationId}/appScreenshotSets?limit=50`)
+  const set = (sets.data || []).find((x) => x.attributes?.screenshotDisplayType === DISPLAY_TYPE)
+  if (!set) return null
+  const until = Date.now() + waitMs
+  for (;;) {
+    const shots = await api(token, 'GET', `/v1/appScreenshotSets/${set.id}/appScreenshots?limit=50&fields[appScreenshots]=fileName,assetDeliveryState`)
+    const r = screenshotStates(shots.data)
+    if (r.pending === 0 || Date.now() >= until) return r
+    await new Promise((ok) => setTimeout(ok, 5000))
+  }
+}
+
 /** Captures de la fiche remplacées par celles du dossier, dans l'ordre de captures.md. */
 async function uploadScreenshots(token, localizationId, dir) {
   const files = captureFiles()
@@ -200,6 +233,12 @@ async function main() {
   })
   console.log(`Version ${version.attributes?.versionString} : fiche ${LOCALE} ${v.action} (description, mots-clés, texte promotionnel, assistance)`)
   if (capturesDir) console.log(`Captures : ${await uploadScreenshots(token, v.id, capturesDir)} envoyées dans l'ordre de captures.md`)
+  const shots = await screenshotReport(token, v.id, { waitMs: capturesDir ? 120000 : 0 })
+  if (!shots) console.log(`Captures (${DISPLAY_TYPE}) : aucune dans la fiche`)
+  else {
+    console.log(`Captures (${DISPLAY_TYPE}) chez Apple : ${shots.complete}/${shots.total} traitées, ${shots.pending} en cours, ${shots.failed.length} refusées`)
+    if (shots.failed.length) throw new Error(`captures refusées par Apple : ${shots.failed.join(' ; ')}`)
+  }
 
   const infos = await api(token, 'GET', `/v1/apps/${app.id}/appInfos?limit=10`)
   const info = editable(infos.data)
