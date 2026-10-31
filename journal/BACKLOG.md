@@ -245,13 +245,15 @@
     `store-push.yml`). Captures 6,9" refaites le 31/10 (`ios-build.yml`, `devices: iPhone 17 Pro Max`, branche
     `captures/store`, Android v642, build 642.125) et regardées une à une : propres (09:41, aucun bandeau, aucun mot
     d'Android, pistes « pas des causes ni un diagnostic »), sauf Sources : « Jamais reçu en 30 jours : VFC » sous
-    l'Apple Watch, qui envoie pourtant sa VFC (SDNN), faux sur tout iPhone → correctif 19 étendu (PR #127). Après son
-    merge : refaire les captures, les regarder, `captures.md`, puis `store-push.yml` avec « captures ». **Numéro de la
+    l'Apple Watch, qui envoie pourtant sa VFC (SDNN), faux sur tout iPhone → correctif 19 étendu (PR #127, mergée).
+    **Refaites sur la v648 (build 648.128), regardées et envoyées le 31/10 à 15:21** (run 41214456732 : 8 captures
+    dans l'ordre de `captures.md`). **Numéro de la
     version** : App Store Connect a créé « 1.0 », les builds envoyées portent le numéro d'Android (6xx), et une version
     ne reçoit que des builds de même numéro → `store-push.mjs` renomme la version « Prête à soumettre » au versionCode
-    d'`upstream.json` à chaque envoi (PR #129, 31/10).
-  - [~] Catégorie (Santé et forme) et classification par âge (18 ans et plus, comme sur Google Play) envoyées par l'API
-    (`store/app-store/classification.json`, PR #130, 31/10) : réponses au plus prudent (informations médicales et
+    d'`upstream.json` à chaque envoi (PR #129, 31/10) : « 1.0 » renommée 648 le 31/10 à 15:21. Reste : vérifier que
+    les captures sont traitées par Apple (état de chaque capture, au prochain envoi), et la relecture du propriétaire.
+  - [x] Catégorie (Santé et forme) et classification par âge (18 ans et plus, comme sur Google Play) envoyées par l'API
+    (`store/app-store/classification.json`, PR #130, acceptées le 31/10 à 15:21) : réponses au plus prudent (informations médicales et
     tabac « fréquents »), à relire par le propriétaire avant la soumission.
   - [x] Notes pour l'examen d'Apple, en anglais, prêtes à coller (`store/app-store/notes-examen.md`, 29/10) ; à relire
     avant la soumission (I6, directive 5.1.3 (ii), adresses après A8).

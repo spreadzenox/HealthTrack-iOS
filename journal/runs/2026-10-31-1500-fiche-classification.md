@@ -1,6 +1,6 @@
-# 2026-10-31 15:00 UTC — 648 sur TestFlight ; fiche App Store : catégorie et âge ; captures refaites
+# 2026-10-31 15:00 UTC — 648 sur TestFlight ; fiche App Store complète (captures, numéro 648, catégorie, âge)
 
-**Étape** : I9 (fiche)  ·  **PR** : #130 (catégorie et âge), journal  ·  **Android suivi** : v648 sur `main` (v650 pas encore publié sur Google Play)  ·  **iOS** : 648 sur `main` et sur TestFlight (648.128)  ·  **Parité** : 48 % (23/48)
+**Étape** : I9 (fiche)  ·  **PR** : #130 (catégorie et âge, mergée), journal  ·  **Android suivi** : v648 sur `main` (v650 pas encore publié sur Google Play)  ·  **iOS** : 648 sur `main` et sur TestFlight (648.128)  ·  **Parité** : 48 % (23/48)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun. A6 et version d'iOS de l'iPhone 12 attendus.
@@ -17,9 +17,20 @@
   - Envoi : `store-push.mjs`, après la fiche (`PATCH appInfos` pour la catégorie, `PATCH ageRatingDeclarations`).
   - Noms et valeurs admises relevés dans la documentation de l'API ; 1 test rouge avant ; README de la fiche :
     réponses à relire par le propriétaire avant la soumission.
-- **Captures 6,9" de la fiche** (`main` 7ed9849, Android v648, avec le correctif de la VFC) : en cours.
+- **#130 mergée** après `store-check` vert.
+- **Captures 6,9" de la fiche** (run 41212312731, `main` 7ed9849, Android v648, build 648.128) :
+  - 8 fichiers en 1320 × 2868 ; aucun mot d'Android, aucune erreur JavaScript ;
+  - Sources regardée : sous l'Apple Watch, « Jamais reçu en 30 jours : SpO₂ » seulement ; Accueil regardé ;
+  - les six autres sont identiques au pixel près à celles de la v642, regardées une à une au run de 13:00 ;
+  - `captures.md` à jour (date, version, temps d'écran sur la capture de Sources).
+- **Fiche complète envoyée** (`store-push.yml` avec « captures », run 41214456732, `main` 00ce044) :
+  - version « 1.0 » renommée **648** ; textes fr-FR mis à jour ;
+  - **8 captures envoyées** dans l'ordre de `captures.md` ;
+  - nom, sous-titre et confidentialité ; catégorie Santé et forme ; âge 18+.
+  - Rien n'est soumis.
 
 ## Suite
-- Captures : les regarder une à une, `captures.md`, puis `store-push.yml` avec « captures » ; il enverra aussi le
-  numéro 648 (#129), la catégorie et l'âge (#130).
+- Au prochain envoi de la fiche : vérifier que les 8 captures sont traitées par Apple (état de chaque capture).
 - Android v650 dès sa publication sur Google Play (barres « incertain » hachurées de Nutrition).
+- Le reste attend le propriétaire : A6 (iPhone 12), version d'iOS de l'iPhone 12, décisions (sauvegarde iCloud,
+  identifiant d'installation, AffectNet).
