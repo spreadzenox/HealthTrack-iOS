@@ -26,6 +26,10 @@ describe('variante appstore (iOS)', () => {
     expect(featuresFor('appstore').billing).toBe(false)
   })
 
+  it('ne nomme jamais le modèle d’IA derrière l’analyse des repas (décision du 31/10, formules Silver et Gold)', () => {
+    expect(featuresFor('appstore').aiModelName).toBe(false)
+  })
+
   it('ne change rien aux variantes Android', () => {
     expect(featuresFor('play')).toMatchObject({ faceAppOpen: true, aiRelay: true, billing: true, selfUpdate: false })
     expect(featuresFor('sideload')).toMatchObject({ faceAppOpen: false, aiRelay: false, billing: false, selfUpdate: true })
