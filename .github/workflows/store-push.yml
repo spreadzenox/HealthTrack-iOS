@@ -1,11 +1,17 @@
 # Fiche App Store fr-FR (store/app-store/fr-FR) envoyée à App Store Connect par son API (I9) : nom, sous-titre,
-# description, mots-clés, texte promotionnel, adresses d'assistance et de confidentialité, sur la version encore
-# « Prête à soumettre ». Rien n'est publié ni soumis à l'examen (geste du propriétaire). Lancement manuel, sur main
-# seulement (environnement `appstore` : ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8, jamais affichés).
+# description, mots-clés, texte promotionnel, adresses d'assistance et de confidentialité, et, sur demande, les
+# captures 6,9" de captures/store, sur la version encore « Prête à soumettre ». Rien n'est publié ni soumis à
+# l'examen (geste du propriétaire). Lancement manuel, sur main seulement (environnement `appstore` : ASC_KEY_ID,
+# ASC_ISSUER_ID, ASC_KEY_P8, jamais affichés).
 name: Fiche App Store — envoi
 
 on:
   workflow_dispatch:
+    inputs:
+      captures:
+        description: "Envoyer aussi les captures 6,9\" de la branche captures/store (à refaire et regarder avant)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -28,9 +34,15 @@ jobs:
           node-version: "22"
       - name: Limites de la fiche
         run: node scripts/store-check.mjs
+      - name: Captures de la fiche (branche captures/store)
+        if: inputs.captures
+        uses: actions/checkout@v4
+        with:
+          ref: captures/store
+          path: captures-store
       - name: Envoi (API App Store Connect)
         env:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
-        run: node scripts/store-push.mjs
+        run: node scripts/store-push.mjs ${{ inputs.captures && '--captures captures-store' || '' }}
