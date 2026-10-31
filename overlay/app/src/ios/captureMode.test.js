@@ -904,6 +904,15 @@ describe('temps d’écran de démonstration (faux plugin PhoneUsage, I8)', () =
     expect(apps.topApps[0].label).toBe('Instagram')
   })
 
+  it('tôt le matin aussi, la journée a déjà de l’écran et des apps (un peu d’écran juste après minuit)', async () => {
+    const early = new Date(2026, 9, 31, 2, 30)
+    const { segments } = await fakePhoneUsage(early).queryUsageSegments()
+    const today = summarizeSegmentsDay(segments, '2026-10-31', { now: early.getTime() })
+    expect(today.screenMinutes).toBeGreaterThan(0)
+    expect(today.unlocks).toBeGreaterThan(0)
+    expect(Object.keys(summarizeSegmentsApps(segments, '2026-10-31').minutes)).toContain('social')
+  })
+
   it('installé : activé dans les réglages, puis la carte est relancée (visibilitychange)', () => {
     const store = new Map()
     const localStorage = { getItem: (k) => store.get(k) ?? null, setItem: (k, v) => store.set(k, v) }

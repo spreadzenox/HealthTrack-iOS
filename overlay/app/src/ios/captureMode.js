@@ -190,7 +190,7 @@ export function watchRejections(target = window, report = console.error) {
 /**
  * Temps d'écran de démonstration (I8) : faux plugin `PhoneUsage`, lu par `phoneUsageSync.js` comme celui des captures
  * d'Android (`--phone`), mais en segments horaires comme l'iPhone : écran de 07:00 à 23:00, un peu plus le soir, nuit
- * calme, reprise vers 07:10, avec les apps de chaque heure. Accès accordé.
+ * calme (après quelques minutes juste après minuit), reprise vers 07:10, avec les apps de chaque heure. Accès accordé.
  */
 export function fakePhoneUsage(now = new Date()) {
   const HOUR = 3600000
@@ -200,7 +200,8 @@ export function fakePhoneUsage(now = new Date()) {
     const d = new Date(start)
     const h = d.getHours()
     const k = d.getDate() + h
-    if (h >= 7 && h < 23) {
+    // Un peu d'écran juste après minuit : la journée en cours en a déjà quand les captures tournent tôt le matin
+    if ((h >= 7 && h < 23) || h === 0) {
       const minutes = h === 7 ? 6 : h >= 21 ? 18 + (k % 4) * 4 : 8 + (k % 5) * 3
       const ms = minutes * 60000
       // Apps de l'heure (identifiants iPhone, catégorie de Temps d'écran) : moitié Instagram, quart WhatsApp et YouTube
