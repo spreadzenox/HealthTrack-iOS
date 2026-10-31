@@ -49,16 +49,16 @@ const pageName = (route) => route.replace(/^\//, '') || 'accueil'
 
 // Audit des textes (I2) : mots qui n'ont pas cours sur iPhone. Pas Huawei, Withings, Garmin… : leurs apps écrivent
 // dans l'app Santé de l'iPhone, les nommer y est juste.
-const ANDROID_ONLY = /Health Connect|Google Play|Play Store|Android|Gadgetbridge|Samsung Health|temps d['’]écran/g
+const ANDROID_ONLY = /Health Connect|Google Play|Play Store|Android|Gadgetbridge|Samsung Health/g
 
 /** Mots propres à Android trouvés dans un texte de page, chacun une fois, dans l'ordre. */
 export function androidWords(text) {
   return [...new Set(String(text).match(ANDROID_ONLY) ?? [])]
 }
 
-// Passages où les nommer est juste sur iPhone : la carte « Temps d'écran et sommeil » de Sources dit « Pas encore
-// disponible sur iPhone » (I8 à l'étude, PARITE.md)
-export const IPHONE_OK = ['[aria-labelledby="phone-usage-title"]']
+// Passages où les nommer serait juste sur iPhone (sélecteurs CSS). Vide depuis le 31/10 : le temps d'écran existe aussi
+// sur iPhone (I8), sa carte est relue comme le reste
+export const IPHONE_OK = []
 
 /** Texte d'une page, sans ces passages (`innerText` dans la WebView, `textContent` sous jsdom). */
 export function pageText(root, allowed = IPHONE_OK) {

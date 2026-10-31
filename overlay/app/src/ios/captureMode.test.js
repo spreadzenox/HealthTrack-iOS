@@ -223,8 +223,10 @@ describe('accusé du script (waitForAck)', () => {
 
 describe('mots propres à Android sur une page de l’iPhone (androidWords)', () => {
   it('relève chaque mot une fois, sans les marques dont l’app existe aussi sur iPhone', () => {
-    expect(androidWords('Health Connect, puis Health Connect ; Android ; temps d’écran ; Samsung Health ; Gadgetbridge'))
-      .toEqual(['Health Connect', 'Android', 'temps d’écran', 'Samsung Health', 'Gadgetbridge'])
+    expect(androidWords('Health Connect, puis Health Connect ; Android ; Samsung Health ; Gadgetbridge'))
+      .toEqual(['Health Connect', 'Android', 'Samsung Health', 'Gadgetbridge'])
+    // Le temps d'écran existe aussi sur iPhone depuis le 31/10 (UE, iOS 26.4+) : le nommer y est juste
+    expect(androidWords('Temps d’écran et sommeil ; votre temps d\'écran')).toEqual([])
     expect(androidWords('Google Play et le Play Store')).toEqual(['Google Play', 'Play Store'])
     // Huawei Health, Withings, Garmin… écrivent dans l'app Santé de l'iPhone : les nommer y est juste
     expect(androidWords('Huawei Health, Withings, Garmin et l’app Santé')).toEqual([])
@@ -237,10 +239,12 @@ describe('texte relu d’une page de l’iPhone (pageText)', () => {
     const root = document.createElement('main')
     root.innerHTML = '<h2>Vos sources</h2><section aria-labelledby="phone-usage-title"><h3 id="phone-usage-title">'
       + 'Temps d’écran et sommeil</h3><p>Pas encore disponible sur iPhone.</p></section><p>Autoriser Health Connect</p>'
-    const text = pageText(root)
+    const text = pageText(root, ['[aria-labelledby="phone-usage-title"]'])
     expect(text).toContain('Vos sources')
     expect(text).not.toContain('Temps d’écran')
     expect(androidWords(text)).toEqual(['Health Connect'])
+    // Par défaut, plus aucun passage écarté : la carte du temps d'écran de l'iPhone est relue comme le reste
+    expect(pageText(root)).toContain('Pas encore disponible sur iPhone.')
   })
 })
 
