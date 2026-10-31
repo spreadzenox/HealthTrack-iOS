@@ -190,7 +190,8 @@
   - [ ] 7. Décision du propriétaire sur les poids AffectNet (valence et éveil), `DEMANDES.md`. À l'intégration dans l'app : relire le `PrivacyInfo.xcprivacy` livré dans `TensorFlowLiteC.xcframework`.
 - [~] **Temps d'écran réel, étapes 1 et 2 faites (31/10, PR #103)** : module `phoneUsageIos.js` (5 tests) ; plugin Swift
   `PhoneUsage` (`checkAccess`, `openAccessSettings` = demande d'autorisation Temps d'écran, `queryUsageSegments`),
-  enregistré, entitlements Family Controls et App and Website Usage dans l'app. Reste (étape 3) : correctif de
+  enregistré, entitlements Family Controls et App and Website Usage dans l'app ; compile avec `import SwiftUI`
+  (les segments sont dans le recouvrement `_DeviceActivity_SwiftUI`, vérifié par `swiftc -typecheck`). Reste (étape 3) : correctif de
   `phoneUsageSync.js` et carte « Écran » sur iPhone (correctif 07), puis essai sur l'iPhone 12 (EU, iOS 26.4+).
 - [ ] **Temps d'écran réel, conception (31/10)** : le code partagé d'Android (`phoneUsage.js`) attend des événements
   bruts `{ t, e: 'on' | 'off' | 'unlock' }` ; l'iPhone donne des segments horaires (`totalActivityDuration`,
