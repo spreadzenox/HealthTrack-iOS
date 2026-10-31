@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **49 %** au 29/10 09:10 (23 ✅ sur 47 lignes faisables ; 3 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v624 (commit `9d1c0fb`, 31/10/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v625 (commit `e388397`, 31/10/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 31/10 03:05 | #541 (v625) | boutons désactivés neutres (gris clair au lieu d'un vert estompé, `App.css`) et repas habituels à une seule majuscule (« Poulet, pomme de terre, haricot vert », `quickMeals.js`) : code partagé, vrai sur iPhone ; note sans variante, vraie sur iPhone (montrée) ; 33 correctifs appliqués directement | — |
 | 31/10 01:30 | #539 (v623), #540 (v624) | #539 : modifier un repas, les calories sur la ligne du nom et « Enregistrer » sur une ligne (`MealEditor.jsx`, `MealEditor.css`, `SavedMealEditor.jsx`) : code partagé, vrai sur iPhone (petits écrans compris), note sans variante, vraie sur iPhone (montrée) ; #540 : CI d'Android seulement (`java-protocol-test.sh`) ; 33 correctifs appliqués directement | — |
 | 31/10 00:10 | #537 (v621), #538 (v622) | #537 : réintroduction, l'attente dite en jours calmes restants (`fodmapChallenge.js`, `Reintroduction.jsx`, `fodmapReminder.js`) : code partagé, vrai sur iPhone, note vraie (montrée sur iPhone) ; **correctif 10 refait** (import voisin dans `fodmapReminder.js`, fusion à trois, mêmes lignes). #538 : Android ≤ 14, encarts de la barre d'état redemandés au démarrage (`safeAreaRestore.js`, `theme.js`, plugin Android) : sur iPhone, `getInsets` n'existe pas, l'appel échoue sans effet (erreur rattrapée) ; note `["play", "sideload"]` | — |
 | 30/10 22:10 | #534 (v618), #535 (v619), #536 (v620) | #534 : idées et journal d'Android seulement ; #535 : « œ » dans les noms d'aliments (« Œuf », « Bœuf », « Cœur de palmier » ; `format.js`, `MealItemList.jsx`, `MealEditor.jsx`, `quickMeals.js`), la recherche trouve toujours « oeuf » ; #536 : en bas d'Analyses, ce qui manque aux repères pas encore comparés, en mots simples (`Recommendations.jsx`) : code partagé, vrai sur iPhone ; **premières notes d'Android montrées sur iPhone** depuis le départ de ses Nouveautés (2026-10-30-2100) : relues, vraies sur iPhone ; 33 correctifs appliqués directement | — |
