@@ -215,7 +215,8 @@
 - [~] **TestFlight (I9), 30/10** : A1, A2, A3 faits par le propriétaire, accord pour la signature par Apple ;
   `testflight.yml` : **premier envoi réussi** (616.97, après un refus pour `NSHealthUpdateUsageDescription`, #96) ;
   31/10 : 624.105 envoyée, droits Family Controls vérifiés dans l'app signée (étape ajoutée à `testflight.yml`) ;
-  625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ;
+  625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
+  qu'Android ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
