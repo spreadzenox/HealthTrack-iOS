@@ -10,14 +10,14 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v633 (31/10) | **631 sur TestFlight** (build 631.112, temps d'écran et temps par app) ; 633 sur `main`, envoi TestFlight en cours |
+| Dernière version | v635 (31/10) | **633 sur TestFlight** (build 633.114) ; 635 sur `main`, envoi TestFlight en cours |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (631.112) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (633.114) ; elle installe l'app TestFlight sur son
   iPhone 12.
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
 - ✅ **A2 fait le 30/10** : clé API « Halcya CI » (Admin) rangée dans l'environnement `appstore` (réservé à `main`,
@@ -48,7 +48,7 @@
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build 631.112) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build 633.114) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -236,6 +236,7 @@ via TestFlight.
 | 31/10 06:00 | temps d'écran sur TestFlight, v631 | **le temps d'écran est dans l'app iPhone** (PR #105 mergée, build 625.108 sur TestFlight) : à essayer sur l'iPhone 12 (iOS 26.4 ou plus) ; le temps par catégorie d'app et la politique de confidentialité qui en parle sont prêts (PR #110) ; Android v631 mergé (PR #109 : Nutrition « incertain » quand des repas manquent, police des champs, vus en images), envoi de la 631 sur TestFlight lancé. Parité : 49 % | #105, #108, #109 (mergées), #110 |
 | 31/10 07:00 | 631 sur TestFlight, temps par app | **l'iPhone a la même version qu'Android** : la 631 est sur TestFlight (build 631.110), avec le temps d'écran ; le temps par catégorie d'app (réseaux sociaux, vidéo…) et la confidentialité qui en parle sont dans l'app (PR #110 mergée), nouvel envoi TestFlight lancé. Parité : 49 % | #110 (mergée) |
 | 31/10 08:00 | TestFlight 631.112, suivi d'Android v633 | la 631.112 est sur TestFlight, avec le temps par catégorie d'app ; la page de confidentialité en ligne parle du temps d'écran ; la fiche App Store (brouillon) le mentionne aussi ; Android v633 : la recherche d'aliments propose d'abord le bon aliment (« ail », « lait »), aussi sur iPhone (PR #113 mergée, 633 vers TestFlight). Parité : 49 % | #113 (mergée) |
+| 31/10 09:00 | TestFlight 633, suivi d'Android v635 | **la 633 est sur TestFlight** (build 633.114) ; Android v635 : dans Vos données, l'export dit combien d'entrées il contiendra et ne propose plus de fichier vide, aussi sur iPhone (PR #115 mergée, 635 vers TestFlight) ; les captures montrent maintenant la carte du temps d'écran complète (minutes, prises en main, temps par catégorie d'app, nuit estimée). Parité : 49 % | #115 (mergée) |
 
 ---
 
