@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow, fakePhoneUsage, installPhoneUsageFake } from './captureMode'
+import { phoneUsageEntriesFromSegments, summarizeSegmentsDay } from './phoneUsageIos'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -866,3 +867,35 @@ describe('mode captures iOS : fenêtre des mesures écrites dans Santé', () => 
   })
 })
 
+
+describe('temps d’écran de démonstration (faux plugin PhoneUsage, I8)', () => {
+  const now = new Date(2026, 9, 31, 15, 20)
+
+  it('autorisé ; segments horaires des 10 derniers jours, jusqu’à maintenant, dont l’app tire des journées et une nuit', async () => {
+    const plugin = fakePhoneUsage(now)
+    expect(await plugin.checkAccess()).toEqual({ granted: true, supported: true })
+    const { segments } = await plugin.queryUsageSegments({ start: now.getTime() - 10 * 86400000, end: now.getTime() })
+    expect(segments.length).toBeGreaterThan(200)
+    expect(Math.max(...segments.map((s) => s.end))).toBeLessThanOrEqual(now.getTime())
+    const days = phoneUsageEntriesFromSegments(segments, { now: now.getTime() })
+    expect(days.length).toBeGreaterThanOrEqual(8)
+    for (const d of days) {
+      expect(d.payload.screenMinutes).toBeGreaterThan(60)
+      expect(d.payload.sleepEstimate?.minutes).toBeGreaterThan(6 * 60)
+    }
+    const today = summarizeSegmentsDay(segments, '2026-10-31', { now: now.getTime() })
+    expect(today.screenMinutes).toBeGreaterThan(0)
+    expect(today.unlocks).toBeGreaterThan(0)
+  })
+
+  it('installé : activé dans les réglages, puis la carte est relancée (visibilitychange)', () => {
+    const store = new Map()
+    const localStorage = { getItem: (k) => store.get(k) ?? null, setItem: (k, v) => store.set(k, v) }
+    const target = {}
+    const doc = { dispatchEvent: vi.fn() }
+    installPhoneUsageFake({ target, localStorage, doc, now })
+    expect(typeof target.__healthtrackFakePhoneUsage.queryUsageSegments).toBe('function')
+    expect(JSON.parse(store.get('healthtrack_phone_usage')).enabled).toBe(true)
+    expect(doc.dispatchEvent).toHaveBeenCalledWith(expect.objectContaining({ type: 'visibilitychange' }))
+  })
+})
