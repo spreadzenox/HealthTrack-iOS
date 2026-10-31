@@ -249,6 +249,7 @@ via TestFlight.
 | 31/10 14:00 | v642 mergée, captures de la fiche en cours | Android v642 sur iPhone (PR #123 mergée : l'onglet du bas reste surligné sur les sous-pages, vu en image), envoi de la 642 sur TestFlight ; la 642 est sur TestFlight (642.124) ; les captures de la fiche App Store, refaites sur l'iPhone le plus grand, ont été regardées une à une : elles ont montré un défaut réel, corrigé (Sources disait « Jamais reçu : VFC » sous une Apple Watch qui envoie sa VFC, PR #127) ; elles seront refaites après ce correctif, puis envoyées ; Android v644 sur iPhone (PR #126 mergée) : rien ne change sur iPhone (lecture du visage au déverrouillage, impossible sur iPhone), envoi de la 644 sur TestFlight. Parité : 48 % | #123, #124, #126 (mergées), #127 |
 | 31/10 15:00 | 644 sur TestFlight, Android v648, VFC de l'Apple Watch | **la 644 est sur TestFlight (644.127)** ; Android v645 à v648 : un rappel de la lecture du visage au déverrouillage (Android seulement, jamais affiché sur iPhone) et une légende complète dans l'historique du bien-être, aussi sur iPhone ; regroupés avec le correctif de la VFC de l'Apple Watch dans une seule vérification (PR #127, mergée, vue en image), envoi de la 648 sur TestFlight ; les captures de la fiche App Store sont refaites ; le numéro de la version de la fiche App Store (« 1.0 ») suivra celui des builds, sinon aucune build ne pourrait être choisie à la soumission (PR #129, mergée). Parité : 48 % | #127, #129 (mergées), #128 |
 | 31/10 16:00 | 648 sur TestFlight, fiche App Store complétée | **la 648 est sur TestFlight (648.128)**, avec le correctif de la VFC de l'Apple Watch ; **la fiche App Store est complète dans App Store Connect** : textes, 8 captures de la v648 regardées une à une, version renommée 648 comme les builds, catégorie Santé et forme et âge 18 ans et plus comme sur Google Play (réponses prudentes au questionnaire d'Apple, à relire avant de soumettre ; PR #130) ; Android v650 pas encore publié sur Google Play ; l'envoi dit désormais si Apple a bien traité chaque capture (7 sur 8 traitées, 1 en cours, aucune refusée ; PR #132). Parité : 48 % | #130, #132 (mergées) |
+| 31/10 17:00 | Android v652, captures de la fiche traitées | les 8 captures de la fiche App Store sont traitées par Apple (8 sur 8, aucune refusée) ; Android v649 à v652 : dans Nutrition, les apports incertains sont hachurés pour mieux se voir, et « Noter votre bien-être » ouvre la note sur place dans le Journal, aussi sur iPhone (PR #134, en vérification). Parité : 48 % | #134 |
 
 ---
 
@@ -350,6 +351,9 @@ Règles des adaptations :
   n'y trouve aucune fonction faisable manquante. La plupart des nouveautés Android sont du code web partagé : elles
   arrivent sur iOS en avançant `upstream.json` ; il reste à refaire les correctifs cassés, vérifier sur simulateur et
   cocher.
+- **Version de la fiche App Store** : elle porte le même numéro que les builds (une version n'accepte que des builds
+  de même numéro). Après chaque envoi TestFlight d'une nouvelle version, lancer `store-push.yml` sans « captures » :
+  il renomme la version « Prête à soumettre » et dit l'état des captures chez Apple (31/10, #129, #132).
 - **Nouveautés in-app** : variante `appstore` (correctif de `app/src/config/distribution.js`) ; les entrées de
   changelog propres à iOS vont dans `overlay/app/src/data/changelog/` avec `"variants": ["appstore"]`, et
   l'historique iOS commence au lancement iOS (équivalent de `PLAY_CHANGELOG_SINCE`).
