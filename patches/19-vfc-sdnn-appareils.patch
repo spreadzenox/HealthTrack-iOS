@@ -1,5 +1,5 @@
 diff --git a/app/src/devices/healthApps.js b/app/src/devices/healthApps.js
-index c1f74a0..b293354 100644
+index c1f74a0..442448a 100644
 --- a/app/src/devices/healthApps.js
 +++ b/app/src/devices/healthApps.js
 @@ -123,6 +123,7 @@ export const METRICS = [
@@ -10,3 +10,11 @@ index c1f74a0..b293354 100644
    { key: 'oxygenSaturation', label: 'SpO₂', watch: true },
    { key: 'sleep', label: 'sommeil', watch: true },
    { key: 'steps', label: 'pas', watch: true },
+@@ -197,6 +198,7 @@ export function sourceCoverage(entries, now = new Date()) {
+ export function missingWatchMetrics(metrics) {
+   const keys = new Set((metrics || []).map((m) => m.key))
+   if (!keys.has('heartRate') && !keys.has('restingHeartRate')) return []
++  if (keys.has('heartRateVariabilitySdnn')) keys.add('heartRateVariability') // Version iOS : la VFC de l'app Santé en tient lieu
+   return METRICS.filter((m) => m.watch && !keys.has(m.key)).map((m) => m.label)
+ }
+ 
