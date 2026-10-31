@@ -51,7 +51,10 @@
 - **Montre Huawei en direct** : sur iPhone, pas de Bluetooth « classique » pour les apps : votre Watch GT 6 Pro (et
   les GT 3 → GT 7) ne peut pas se relier directement à l'app iPhone → passer par l'app Santé d'Apple (Huawei Santé
   y écrit une partie des mesures). Les bracelets Huawei plus simples (Bluetooth basse consommation) pourraient
-  marcher : à essayer avec un appareil.
+  marcher : à essayer avec un appareil. **Autre piste trouvée le 31/10** : le « HUAWEI Health Kit » en ligne (Huawei
+  Santé › Services tiers › Lier) laisserait Halcya lire sommeil et cœur depuis votre compte Huawei, avec un léger
+  différé ; il faudrait un compte développeur Huawei et l'accord de Huawei (jusqu'à 15 jours ouvrés) : à décider
+  quand vous voulez (détail dans `RECHERCHE.md`).
 - **Repérer les apps de montre installées** (Garmin, Oura…) : iOS ne laisse pas une app voir les autres apps → la
   montre est reconnue par les données qu'elle écrit dans l'app Santé, et un guide dit quoi activer dans chaque app.
 
