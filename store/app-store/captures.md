@@ -7,10 +7,12 @@ l'autorisation Temps d'écran ; ni app Android, ni montre Huawei en direct). Les
 `captures/store` (jamais dans `main`) ; `store-push.yml`, option « captures », les envoie par l'API d'App Store
 Connect dans l'ordre du tableau, à la place des précédentes.
 
-Sélection du 29/10. Captures refaites le 31/10 (`7ed9849`, Android v648, build 648.128) et regardées une à une :
+Sélection du 29/10. Captures refaites le 31/10 au soir (`dd9328f`, Android v658, build 658.141) et regardées :
 - barre d'état à 9:41, aucune bannière du système, aucun mot d'Android, aucune erreur JavaScript ;
-- Sources : sous l'Apple Watch, « Jamais reçu : SpO₂ » seulement (la VFC n'y est plus réclamée, #127) ;
-- les six autres sont identiques au pixel près à celles de la v642, regardées le même jour.
+- Sources en couleur (#140) : lecture du visage en menthe, temps d'écran en lilas ; sous l'Apple Watch, « Jamais
+  reçu : SpO₂ » seulement (#127) ;
+- Accueil (clair et sombre), pris le soir : la carte « Votre ventre » pose la question du soir, en texte simple ;
+- les cinq autres sont identiques au pixel près à celles de la v648, regardées le même jour.
 
 Envoyées par l'API le 31/10. Dans l'ordre d'affichage ; les trois premières sont celles qu'on voit sans faire
 défiler :
