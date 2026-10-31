@@ -10,18 +10,18 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v658 (31/10) | **654 sur TestFlight** (build 654.139 ; la 638.121 fut la première avec la phrase exigée par Apple) ; v658 en vérification |
+| Dernière version | v658 (31/10) | **658 sur TestFlight** (build 658.141 ; la 638.121 fut la première avec la phrase exigée par Apple) : même version qu'Android |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **31/10 : installez la build la plus récente (654.139), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
+- **31/10 : installez la build la plus récente (658.141), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (654.139 aujourd'hui) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (658.141 aujourd'hui) ; elle installe l'app TestFlight sur son
   iPhone 12.
-- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 654, « Prête à
+- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 658, « Prête à
   soumettre ») : textes, 8 captures, catégorie Santé et forme, âge 18+. Rien n'est soumis. Avant une soumission,
   relisez-la, en particulier les réponses du questionnaire d'âge (`store/app-store/README.md`).
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
@@ -252,7 +252,7 @@ via TestFlight.
 | 31/10 17:00 | Android v652, captures de la fiche traitées | les 8 captures de la fiche App Store sont traitées par Apple (8 sur 8, aucune refusée) ; Android v649 à v652 : dans Nutrition, les apports incertains sont hachurés pour mieux se voir, et « Noter votre bien-être » ouvre la note sur place dans le Journal, aussi sur iPhone (PR #134, mergée, vue en image) ; **la 652 est sur TestFlight (652.135)**, même version qu'Android, et la fiche App Store porte ce numéro. Parité : 48 % | #134 (mergée) |
 | 31/10 18:00 | Android v654 | Android v653 et v654 : quand aucun repas n'est encore enregistré, Journal → Repas montre en trois étapes ce qui va se passer (photo ou quelques mots, aliments notés, comparaison avec votre ventre), aussi sur iPhone (PR #136, mergée, vue en image) ; **la 654 est sur TestFlight (654.137)**, même version qu'Android, et la fiche App Store porte ce numéro. Parité : 48 % | #136 (mergée) |
 | 31/10 19:00 | Nutrition : poids de l'app Santé | dans votre profil de Nutrition, un poids lu dans l'app Santé (une balance, par exemple) s'affichait « saisi le … » comme si vous l'aviez tapé, et sa masse grasse n'apparaissait pas : corrigé sur iPhone, « (app Santé, 28/10) » (PR #138, mergée, vue en image), dans la build 654.139 sur TestFlight ; Android v656 pas encore publié sur Google Play (nos correctifs s'y appliquent déjà). Parité : 48 % | #138 (mergée) |
-| 31/10 20:00 | Android v658 | Android v655 à v658 : les cartes de Sources prennent la couleur de leur thème (menthe pour l'app Santé et la lecture du visage, lilas pour la météo et le temps d'écran) et la question du soir de la carte « Votre ventre » se lit mieux, aussi sur iPhone ; la note d'Android qui nommait « Health Connect » est remplacée sur iPhone par une note qui parle de l'app Santé (PR #140, en vérification). Parité : 48 % | #140 |
+| 31/10 20:00 | Android v658 | Android v655 à v658 : les cartes de Sources prennent la couleur de leur thème (menthe pour l'app Santé et la lecture du visage, lilas pour la météo et le temps d'écran) et la question du soir de la carte « Votre ventre » se lit mieux, aussi sur iPhone ; la note d'Android qui nommait « Health Connect » est remplacée sur iPhone par une note qui parle de l'app Santé (PR #140, mergée, vue en image) ; **la 658 est sur TestFlight (658.141)**, même version qu'Android. Parité : 48 % | #140 (mergée) |
 
 ---
 
