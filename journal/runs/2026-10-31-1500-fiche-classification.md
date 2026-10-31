@@ -1,6 +1,6 @@
 # 2026-10-31 15:00 UTC — 648 sur TestFlight ; fiche App Store complète (captures, numéro 648, catégorie, âge)
 
-**Étape** : I9 (fiche)  ·  **PR** : #130 (catégorie et âge, mergée), journal  ·  **Android suivi** : v648 sur `main` (v650 pas encore publié sur Google Play)  ·  **iOS** : 648 sur `main` et sur TestFlight (648.128)  ·  **Parité** : 48 % (23/48)
+**Étape** : I9 (fiche)  ·  **PR** : #130 (catégorie et âge), #132 (état des captures), mergées ; journal  ·  **Android suivi** : v648 sur `main` (v650 pas encore publié sur Google Play)  ·  **iOS** : 648 sur `main` et sur TestFlight (648.128)  ·  **Parité** : 48 % (23/48)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun. A6 et version d'iOS de l'iPhone 12 attendus.
@@ -29,8 +29,15 @@
   - nom, sous-titre et confidentialité ; catégorie Santé et forme ; âge 18+.
   - Rien n'est soumis.
 
+## Fin du run
+- **PR #132 mergée** : `store-push.mjs` lit l'état de chaque capture chez Apple (traitée, en cours, refusée avec la
+  raison) ; après un envoi de captures, il attend la fin du traitement ; une capture refusée fait échouer l'envoi.
+  1 test rouge avant.
+- Envoi sans captures (run 41214750833, `main` 7ac18c9) : **7 captures sur 8 traitées par Apple, 1 en cours, aucune
+  refusée** ; fiche, catégorie et âge réécrits à l'identique.
+
 ## Suite
-- Au prochain envoi de la fiche : vérifier que les 8 captures sont traitées par Apple (état de chaque capture).
+- Au prochain envoi de la fiche : confirmer la 8e capture traitée (l'envoi l'affiche désormais).
 - Android v650 dès sa publication sur Google Play (barres « incertain » hachurées de Nutrition).
 - Le reste attend le propriétaire : A6 (iPhone 12), version d'iOS de l'iPhone 12, décisions (sauvegarde iCloud,
   identifiant d'installation, AffectNet).
