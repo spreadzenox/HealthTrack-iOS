@@ -39,6 +39,11 @@
   sur toute la hauteur dans l'accueil de l'app) et un libellé « saisi » faux pour un poids de Health Connect.
 - Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS) : le temps d'écran
   réel demande iOS 26.4 ou plus.
+- **À prévoir, pas urgent tant que l'iPhone reste en TestFlight** : sur Android, la période de lancement (premium
+  offert) finit le 20/11 ; sur iPhone, rien n'est vendu tant que l'abonnement App Store n'existe pas, donc tout y
+  reste gratuit. Avant de publier sur l'App Store après le 20/11, il faudra A4 (contrat « Paid Applications »,
+  banque et fiscalité, dans App Store Connect) ; la routine créera ensuite les abonnements par l'API et finira leur
+  branchement (I6).
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
