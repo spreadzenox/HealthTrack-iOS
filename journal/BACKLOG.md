@@ -266,10 +266,11 @@
     (`…/conditions/`, avec A8).
   - [ ] Avec I6 : leur partie vente (formules, renouvellement, annulation, remboursements par Apple), et les liens de
     confidentialité et de conditions du paywall (`PRIVACY_URL`, `TERMS_URL` d'Android) à remplacer.
-  - [ ] Données de démo iPhone (`captureMode.js`, `iphoneDemoEntries`) : le poids et la masse grasse y viennent de
-    « Withings » (connexion directe, absente sur iPhone) ; les montrer comme venant de l'app Santé (29/10, vu sur la
-    capture Nutrition de #49, hors des 8 captures de la fiche). Mais le code partagé annonce un poids de Health Connect
-    (et donc de l'app Santé) « (saisi le …) » : demande à Android (`DEMANDES.md`, 29/10) avant de toucher la démo.
+  - [x] Données de démo iPhone (`captureMode.js`, `iphoneDemoEntries`) : le poids et la masse grasse y venaient de
+    « Withings » (connexion directe, absente sur iPhone). Le code partagé annonçait un poids de l'app Santé « (saisi
+    le …) » et taisait sa masse grasse (demande à Android du 29/10, `DEMANDES.md`, toujours à transmettre).
+    **Correctif 35 (31/10, PR #138)** : origine « app Santé », libellés « (app Santé, 28/10) » ; démo de l'iPhone
+    passée par l'app Santé (poids, masse grasse seule).
   - [ ] **Directive 5.1.3 (ii) d'Apple** : une app « ne doit pas stocker de données de santé personnelles dans
     iCloud ». La copie de secours (I3) part dans la sauvegarde iCloud de l'iPhone : risque de refus à l'examen. À
     trancher avant la soumission : garder (sauvegarde du système, choisie et chiffrée par l'utilisateur), l'exclure
