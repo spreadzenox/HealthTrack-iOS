@@ -10,18 +10,18 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v658 (31/10) | **658 sur TestFlight** (build 658.141 ; la 638.121 fut la première avec la phrase exigée par Apple) : même version qu'Android |
+| Dernière version | v663 (31/10) | **663 sur TestFlight** (build 663.147 ; la 638.121 fut la première avec la phrase exigée par Apple) : même version qu'Android |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **31/10 : installez la build la plus récente (658.141), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
+- **31/10 : installez la build la plus récente (663.147), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (658.141 aujourd'hui) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (663.147 aujourd'hui) ; elle installe l'app TestFlight sur son
   iPhone 12.
-- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 658, « Prête à
+- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 663, « Prête à
   soumettre ») : textes, 8 captures, catégorie Santé et forme, âge 18+. Rien n'est soumis. Avant une soumission,
   relisez-la, en particulier les réponses du questionnaire d'âge (`store/app-store/README.md`).
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
@@ -63,7 +63,7 @@
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 658.141) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 663.147) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -265,6 +265,8 @@ via TestFlight.
 | 31/10 20:00 | Android v658 | Android v655 à v658 : les cartes de Sources prennent la couleur de leur thème (menthe pour l'app Santé et la lecture du visage, lilas pour la météo et le temps d'écran) et la question du soir de la carte « Votre ventre » se lit mieux, aussi sur iPhone ; la note d'Android qui nommait « Health Connect » est remplacée sur iPhone par une note qui parle de l'app Santé (PR #140, mergée, vue en image) ; **la 658 est sur TestFlight (658.141)**, même version qu'Android. Parité : 48 % | #140 (mergée) |
 | 31/10 21:00 | captures de la fiche à jour | les 8 captures de la fiche App Store sont refaites sur la 658 (Sources en couleur, Accueil du soir), regardées et envoyées : Apple les a toutes acceptées ; Android v659 et v660 ne changent que son journal (rien pour l'iPhone, pas encore publiés). Parité : 48 % | — |
 | 31/10 22:00 | vos questions, modèle d'analyse des repas | vous avez demandé ce qu'il vous reste à faire (réponse dans la conversation : d'abord A6, l'iPhone 12) et un modèle d'IA plus précis pour lire les repas : demande précise prête dans `DEMANDES.md` pour la routine Android (le relais est commun aux deux apps), avec un essai sur vos repas pesés avant de basculer ; Android n'a rien publié de nouveau (son prochain changement s'appliquera tel quel). **Puis, à 22:00, vos décisions** : modèles 3.8, formules Silver et Gold (Gold à 10 €/mois, moins d'erreurs mis en avant, Gold par défaut pour les bêta-testeurs et vous), cache plus tard : notées, plan de l'abonnement iPhone revu. Parité : 48 % | #144 |
+| 31/10 23:00 | Android v661, relais en Gold | Android v659 à v661 : les signes à signaler au médecin citent aussi les antécédents familiaux, la réintroduction rappelle la durée d'éviction, aussi sur iPhone (PR #145, mergée, vue en image), et la 661 est sur TestFlight (661.146) ; la routine Android a basculé le relais : Gold sur Gemini 3.8 Flash avec réflexion, plafonds de coût du mois. Les requêtes de l'iPhone sont pour l'instant servies comme « gratuit » (Flash-Lite) : pour mettre la testeuse en Gold tout de suite, la routine Android peut ajouter son installation à la liste Gold du relais (demande mise à jour). Parité : 48 % | #145 (mergée) |
+| 1/11 00:00 | Android v663 | Android v663 : le relais sert Gold sur le dernier modèle Flash, et l'app ne montre plus le nom du modèle, aussi sur iPhone (PR #146, mergée), et la 663 est sur TestFlight (663.147), même version qu'Android ; une adaptation de l'iPhone a été refaite pour suivre ce changement ; la prochaine version d'Android (une seule mention « pas un diagnostic » aux endroits clés au lieu de la répéter partout) est déjà vérifiée côté iPhone. Parité : 48 % | #146 (mergée) |
 
 ---
 
