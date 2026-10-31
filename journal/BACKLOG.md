@@ -216,7 +216,7 @@
   `testflight.yml` : **premier envoi réussi** (616.97, après un refus pour `NSHealthUpdateUsageDescription`, #96) ;
   31/10 : 624.105 envoyée, droits Family Controls vérifiés dans l'app signée (étape ajoutée à `testflight.yml`) ;
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
-  qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ;
+  qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -236,6 +236,11 @@
     `https://spreadzenox.github.io/HealthTrack-iOS/confidentialite/` et `…/assistance/`. Contact de l'assistance :
     les demandes GitHub ; une adresse e-mail si le propriétaire en donne une (directive 1.5 : un moyen simple de le
     joindre).
+  - [~] Fiche envoyée par l'API App Store Connect (31/10, PR #119 : `scripts/store-push.mjs`, workflow manuel
+    `store-push.yml`) : nom, sous-titre, description, mots-clés, texte promotionnel, adresses d'assistance et de
+    confidentialité, sur la version « Prête à soumettre ». Reste : captures de la fiche par l'API ; **numéro de la
+    version** : App Store Connect a créé « 1.0 », les builds envoyées portent le numéro d'Android (6xx) ; à aligner sur
+    la build choisie avant la soumission (par l'API, ou par le propriétaire au moment de soumettre).
   - [x] Notes pour l'examen d'Apple, en anglais, prêtes à coller (`store/app-store/notes-examen.md`, 29/10) ; à relire
     avant la soumission (I6, directive 5.1.3 (ii), adresses après A8).
   - [x] Conditions d'utilisation propres à l'iPhone (29/10, `overlay/app/public/conditions-iphone.html`, correctif 26 :
