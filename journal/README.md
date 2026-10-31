@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v622 (31/10) | **620 sur TestFlight** (build 620.100) ; v622 en vérification (PR #101) |
+| Dernière version | v624 (31/10) | **622 sur TestFlight** (build 622.102) ; v624 en vérification |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 49 % (23 fonctions vérifiées sur 47 faisables ; audit I2 en cours) |
 
@@ -204,6 +204,7 @@ via TestFlight.
 | 30/10 23:00 | suivi d'Android v620 | la 617 est sur TestFlight (build 617.98) ; Android v618 à v620 : « œuf », « bœuf », « cœur » bien écrits, et ce qui manque aux Analyses dit en mots simples, aussi sur iPhone, dont les Nouveautés affichent désormais ces notes. Parité : 49 % | #99 |
 | 31/10 00:00 | TestFlight 620, temps d'écran | la 620 est sur TestFlight (build 620.100) ; bonne nouvelle : en Europe, depuis iOS 26.4, le droit obtenu aujourd'hui permet de lire le vrai temps d'écran (par jour et par app, avec votre accord), comme sur Android ; ce sera la prochaine fonction iPhone, à essayer sur l'iPhone 12. Parité : 49 % | #99 (mergée) |
 | 31/10 01:00 | suivi d'Android v622 | Android v621 et v622 : la réintroduction dit combien de jours calmes il reste à attendre, aussi sur iPhone (un correctif iOS refait) ; l'autre changement ne concerne que les anciens Android. Parité : 49 % | #101 |
+| 31/10 02:00 | temps d'écran, suivi d'Android v624 | le code qui lit le temps d'écran de l'iPhone est corrigé : une pièce d'Apple se trouvait ailleurs que dans sa documentation (vérifié avec les outils d'Apple) ; la construction complète de l'app est en cours, puis il faudra le brancher sur l'écran « Temps d'écran et sommeil » et l'essayer sur l'iPhone 12 ; Android v623 et v624 : modifier un repas tient sur un petit écran, aussi sur iPhone. Parité : 49 % | #102, #103, #104 |
 
 ---
 
