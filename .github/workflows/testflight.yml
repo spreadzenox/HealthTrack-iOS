@@ -139,6 +139,9 @@ jobs:
           # Phrase d'écriture exigée par Apple (le plugin Santé contient l'écriture) : celle de l'app livrée, qui dit que
           # Halcya n'écrit rien, jamais celle de la build de captures
           /usr/libexec/PlistBuddy -c 'Print :NSHealthUpdateUsageDescription' "$APP/Info.plist" | grep -q "n’écrit rien"
+          # Phrase exigée dès que le code fait référence au framework Speech (sonde vocale) : sans elle, Apple invalide la
+          # build après l'envoi (ITMS-90683, e-mail reçu pour 616.97)
+          /usr/libexec/PlistBuddy -c 'Print :NSSpeechRecognitionUsageDescription' "$APP/Info.plist" | grep -q "ni écoutée ni enregistrée"
           /usr/libexec/PlistBuddy -c 'Print :ITSAppUsesNonExemptEncryption' "$APP/Info.plist" | grep -qx false
       - name: Envoi sur App Store Connect (TestFlight)
         env:
