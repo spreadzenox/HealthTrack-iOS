@@ -250,8 +250,9 @@
     dans l'ordre de `captures.md`). **Numéro de la
     version** : App Store Connect a créé « 1.0 », les builds envoyées portent le numéro d'Android (6xx), et une version
     ne reçoit que des builds de même numéro → `store-push.mjs` renomme la version « Prête à soumettre » au versionCode
-    d'`upstream.json` à chaque envoi (PR #129, 31/10) : « 1.0 » renommée 648 le 31/10 à 15:21. Reste : vérifier que
-    les captures sont traitées par Apple (état de chaque capture, au prochain envoi), et la relecture du propriétaire.
+    d'`upstream.json` à chaque envoi (PR #129, 31/10) : « 1.0 » renommée 648 le 31/10 à 15:21. État des captures chez
+    Apple lu à chaque envoi (PR #132) : 7/8 traitées, 1 en cours, aucune refusée à 15:25. Reste la relecture du
+    propriétaire.
   - [x] Catégorie (Santé et forme) et classification par âge (18 ans et plus, comme sur Google Play) envoyées par l'API
     (`store/app-store/classification.json`, PR #130, acceptées le 31/10 à 15:21) : réponses au plus prudent (informations médicales et
     tabac « fréquents »), à relire par le propriétaire avant la soumission.
