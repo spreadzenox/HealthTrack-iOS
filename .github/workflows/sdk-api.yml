@@ -1,0 +1,29 @@
+# Diagnostic (temporaire) : déclarations publiques d'une API d'Apple telles que le SDK d'Xcode les voit, quand la
+# documentation en ligne et le compilateur ne s'accordent pas (temps d'écran, I8, 31/10). Aucune donnée, aucun secret.
+name: iOS — API du SDK (diagnostic)
+
+on:
+  pull_request:
+    branches: [main]
+    paths: [".github/workflows/sdk-api.yml"]
+
+permissions:
+  contents: read
+
+jobs:
+  api:
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+      - uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: DeviceActivity et FamilyControls (interfaces Swift du SDK iOS)
+        run: |
+          SDK="$(xcrun --sdk iphoneos --show-sdk-path)"
+          for fw in DeviceActivity FamilyControls; do
+            f="$(find "$SDK/System/Library/Frameworks/$fw.framework" -name 'arm64e-apple-ios.swiftinterface' -o -name 'arm64-apple-ios.swiftinterface' | head -1)"
+            echo "::group::$fw ($f)"
+            grep -n -E "struct DeviceActivityData|activitySegments|ActivitySegment|activityData\(|var categories|var applications|numberOfPickups|totalPickups|firstPickup|totalActivityDuration|approvedWithDataAccess|requestAuthorization|DeviceActivityResults|struct Devices|case iPhone|init\(segment" "$f" | head -120
+            echo "::endgroup::"
+          done
