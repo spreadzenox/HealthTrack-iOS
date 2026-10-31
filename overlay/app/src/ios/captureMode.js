@@ -242,6 +242,19 @@ export async function installCaptureMode() {
  * pas écrits doivent y être) : preuve que l'import marche de bout en bout. Résultats dans la console
  * (`[healthkit] …`).
  */
+/**
+ * Fenêtre des mesures que la sonde écrit dans Santé : la dernière heure, sans remonter avant minuit. Juste après
+ * minuit, une heure pleine rangerait les pas à hier, où la démo en compte déjà davantage : le Journal ne les
+ * montrerait pas (CI du 31/10 à 00:20).
+ */
+export function healthSampleWindow(now = new Date()) {
+  const end = now.getTime()
+  const midnight = new Date(now)
+  midnight.setHours(0, 0, 0, 0)
+  const start = Math.min(Math.max(end - 3600 * 1000, midnight.getTime()), end - 1000)
+  return { startDate: new Date(start).toISOString(), endDate: new Date(end).toISOString() }
+}
+
 export async function probeHealthKit({ signal, waitAck, wait, log, health, connector, store, navigate, readText }) {
   const say = (what, value) => log(`[healthkit] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   const failed = (what) => (e) => say(`${what} erreur`, e?.message || String(e))
@@ -261,8 +274,7 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health, conne
     if (!(await waitAck('healthkit-autorisation', 600))) say('aller-retour', 'pas d’accusé du script en 3 min')
     for (let i = 0; i < 20 && !answered; i++) await wait(500)
     if (!answered) return say('aller-retour', 'feuille toujours ouverte : pas d’écriture ni de relecture')
-    const endDate = new Date().toISOString()
-    const startDate = new Date(Date.now() - 3600 * 1000).toISOString()
+    const { startDate, endDate } = healthSampleWindow()
     await Health.saveSample({ dataType: 'steps', value: 1234, startDate, endDate }).then(() => say('saveSample', 'ok'), failed('saveSample'))
     // VFC de démonstration : HealthKit la donne en SDNN, que le connecteur doit ranger à part de la RMSSD d'Android
     await Health.saveSample({ dataType: 'heartRateVariability', value: 48, startDate, endDate }).then(() => say('saveSample VFC', 'ok'), failed('saveSample VFC'))

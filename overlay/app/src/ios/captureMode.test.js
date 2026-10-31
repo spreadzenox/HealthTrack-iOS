@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow } from './captureMode'
 
 function memoryStorage(initial = {}) {
   const data = { ...initial }
@@ -327,7 +327,9 @@ describe('sonde HealthKit (I4)', () => {
     const store = { upsertEntries: vi.fn(async (entries) => stored.push(...entries)), listEntries: vi.fn(async () => stored) }
     await probeHealthKit({ signal: async () => {}, waitAck, wait: async () => {}, log: (m) => logs.push(m), health: h.api, connector: { sync }, store })
     const { since, until } = sync.mock.calls[0][0]
-    expect(until.getTime() - since.getTime()).toBeGreaterThanOrEqual(3600 * 1000)
+    // Le connecteur relit la fenêtre écrite : la dernière heure, sans remonter avant minuit (healthSampleWindow)
+    expect(until.getTime() - since.getTime()).toBeGreaterThanOrEqual(1000)
+    expect(until.getTime() - since.getTime()).toBeLessThanOrEqual(3600 * 1000 + 5000)
     expect(logs.join('\n')).toContain(
       '[healthkit] connecteur {"synced":2,"errors":[],"pas":[{"value":1234,"source":"Halcya"}],"vfc":[{"value":48,"subtype":"heartRateVariabilitySdnn"}]}',
     )
@@ -844,3 +846,23 @@ describe('sonde du rapport PDF pour le médecin (N6b, correctif 09)', () => {
     ])
   })
 })
+
+describe('mode captures iOS : fenêtre des mesures écrites dans Santé', () => {
+  it('la dernière heure, dans la journée : les pas de la sonde sont ceux d’aujourd’hui', () => {
+    const w = healthSampleWindow(new Date(2026, 9, 30, 15, 0))
+    expect(new Date(w.startDate)).toEqual(new Date(2026, 9, 30, 14, 0))
+    expect(new Date(w.endDate)).toEqual(new Date(2026, 9, 30, 15, 0))
+  })
+
+  it('juste après minuit, la fenêtre commence à minuit (sinon les pas vont à hier, sous les 10 085 de la démo)', () => {
+    const w = healthSampleWindow(new Date(2026, 9, 31, 0, 20))
+    expect(new Date(w.startDate)).toEqual(new Date(2026, 9, 31, 0, 0))
+    expect(new Date(w.endDate)).toEqual(new Date(2026, 9, 31, 0, 20))
+  })
+
+  it('dans la première seconde après minuit, une fenêtre d’une seconde (jamais vide)', () => {
+    const w = healthSampleWindow(new Date(2026, 9, 31, 0, 0, 0, 500))
+    expect(Date.parse(w.endDate) - Date.parse(w.startDate)).toBe(1000)
+  })
+})
+
