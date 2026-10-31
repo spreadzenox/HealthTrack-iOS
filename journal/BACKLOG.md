@@ -247,8 +247,9 @@
     d'Android, pistes « pas des causes ni un diagnostic »), sauf Sources : « Jamais reçu en 30 jours : VFC » sous
     l'Apple Watch, qui envoie pourtant sa VFC (SDNN), faux sur tout iPhone → correctif 19 étendu (PR #127). Après son
     merge : refaire les captures, les regarder, `captures.md`, puis `store-push.yml` avec « captures ». **Numéro de la
-    version** : App Store Connect a créé « 1.0 », les builds envoyées portent le numéro d'Android (6xx) ; à aligner sur
-    la build choisie avant la soumission (par l'API, ou par le propriétaire au moment de soumettre).
+    version** : App Store Connect a créé « 1.0 », les builds envoyées portent le numéro d'Android (6xx), et une version
+    ne reçoit que des builds de même numéro → `store-push.mjs` renomme la version « Prête à soumettre » au versionCode
+    d'`upstream.json` à chaque envoi (PR #129, 31/10).
   - [x] Notes pour l'examen d'Apple, en anglais, prêtes à coller (`store/app-store/notes-examen.md`, 29/10) ; à relire
     avant la soumission (I6, directive 5.1.3 (ii), adresses après A8).
   - [x] Conditions d'utilisation propres à l'iPhone (29/10, `overlay/app/public/conditions-iphone.html`, correctif 26 :
