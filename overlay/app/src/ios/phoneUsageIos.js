@@ -8,6 +8,7 @@
  * nuit comptés pour le jour du réveil) ; la nuit est estimée à l'heure près (fin de la dernière heure d'usage du
  * soir), la reprise du matin à la minute (première prise en main). Rien ne sort du téléphone.
  */
+import { Capacitor } from '@capacitor/core'
 import { MIN_SLEEP_MIN, MAX_SLEEP_MIN, GLANCE_MAX_MS, dateKeyOf } from '../services/phoneUsage'
 
 const MIN = 60000
@@ -24,10 +25,24 @@ function at(dateKey, dayOffset, h, min = 0) {
   return new Date(y, m - 1, d + dayOffset, h, min).getTime()
 }
 
+/**
+ * Segments valides, triés, un par heure : la même heure vue sur un autre iPhone du même compte (Temps d'écran partagé
+ * entre appareils) est additionnée, et sa première prise en main est la plus tôt des deux.
+ */
 function valid(segments) {
-  return (segments || [])
-    .filter((s) => s && Number.isFinite(s.start) && Number.isFinite(s.end) && s.end > s.start)
-    .sort((a, b) => a.start - b.start)
+  const byStart = new Map()
+  for (const s of segments || []) {
+    if (!s || !Number.isFinite(s.start) || !Number.isFinite(s.end) || !(s.end > s.start)) continue
+    const seen = byStart.get(s.start)
+    if (!seen) {
+      byStart.set(s.start, { ...s })
+      continue
+    }
+    seen.activeMs = (seen.activeMs || 0) + (s.activeMs || 0)
+    seen.pickups = (seen.pickups || 0) + (s.pickups || 0)
+    if (Number.isFinite(s.firstPickup) && !(seen.firstPickup <= s.firstPickup)) seen.firstPickup = s.firstPickup
+  }
+  return [...byStart.values()].sort((a, b) => a.start - b.start)
 }
 
 const within = (s, from, to) => s.start >= from && s.start < to
@@ -113,4 +128,42 @@ export function phoneUsageEntriesFromSegments(segments, { now = Date.now() } = {
     })
   }
   return out
+}
+
+/**
+ * Le plugin rend-il des segments horaires (iPhone) plutôt que les événements d'Android ? Le plugin natif est un proxy
+ * de Capacitor (toute méthode « existe ») : la plateforme décide ; un faux plugin (tests, captures) se reconnaît à ses
+ * méthodes.
+ */
+export function readsSegments(plugin, platform = Capacitor.getPlatform()) {
+  if (platform === 'ios') return true
+  return typeof plugin?.queryUsageSegments === 'function' && typeof plugin?.queryScreenEvents !== 'function'
+}
+
+/** Message quand l'autorisation Temps d'écran manque (`{ supported }` de `checkAccess`). */
+export function segmentsAccessError(access) {
+  return access?.supported === false
+    ? 'Le temps d’écran demande iOS 26.4 ou plus : mettez à jour l’iPhone.'
+    : 'Accès au temps d’écran pas encore accordé.'
+}
+
+/**
+ * Lecture iPhone de `syncPhoneUsage` (accès déjà vérifié) : segments des `lookbackMs` dernières millisecondes, journées
+ * terminées enregistrées (sans doublon), journée en cours gardée dans les réglages par `save`. Pas de temps par
+ * catégorie d'app sur iPhone pour l'instant (`todayApps` vide). Peut lever : l'appelant rattrape.
+ */
+export async function syncSegments({ plugin, now, write, save, lookbackMs }) {
+  const end = now.getTime()
+  const res = await plugin.queryUsageSegments({ start: end - lookbackMs, end })
+  const segments = Array.isArray(res?.segments) ? res.segments : []
+  const entries = phoneUsageEntriesFromSegments(segments, { now: end })
+  const result = entries.length ? await write(entries) : { inserted: 0 }
+  save({
+    lastSyncAt: now.toISOString(),
+    lastError: null,
+    today: segments.length ? summarizeSegmentsDay(segments, dateKeyOf(end), { now: end }) : null,
+    todayApps: null,
+  })
+  if (result?.inserted > 0) window.dispatchEvent(new CustomEvent('health-entries-updated'))
+  return { ran: true, inserted: result?.inserted ?? 0 }
 }
