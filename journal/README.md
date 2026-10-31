@@ -48,13 +48,13 @@
   l'ouverture de l'app (comme la version Google Play actuelle), raccourci ou widget à étudier.
 - **Temps d'écran** du téléphone : possible seulement **dans l'Union européenne, avec iOS 26.4 ou plus** (règle
   d'Apple) ; ailleurs, la carte le dit et rien ne s'affiche. Écran écrit (PR #105), à essayer sur l'iPhone 12.
-- **Montre Huawei en direct** : sur iPhone, pas de Bluetooth « classique » pour les apps : votre Watch GT 6 Pro (et
-  les GT 3 → GT 7) ne peut pas se relier directement à l'app iPhone → passer par l'app Santé d'Apple (Huawei Santé
-  y écrit une partie des mesures). Les bracelets Huawei plus simples (Bluetooth basse consommation) pourraient
-  marcher : à essayer avec un appareil. **Autre piste trouvée le 31/10** : le « HUAWEI Health Kit » en ligne (Huawei
-  Santé › Services tiers › Lier) laisserait Halcya lire sommeil et cœur depuis votre compte Huawei, avec un léger
-  différé ; il faudrait un compte développeur Huawei et l'accord de Huawei (jusqu'à 15 jours ouvrés) : à décider
-  quand vous voulez (détail dans `RECHERCHE.md`).
+- **Montre Huawei** : en attendant, Huawei Santé écrit une partie des mesures (pas, cœur, sommeil, séances) dans l'app
+  Santé d'Apple, que Halcya lit déjà. Deux pistes pour aller plus loin, sans verdict pour l'instant : la liaison
+  directe en Bluetooth basse consommation (le seul Bluetooth permis aux apps iPhone, celui qu'utilise Huawei Santé
+  sur iPhone), à essayer sur l'iPhone 12 ; et le « HUAWEI Health Kit » en ligne (Huawei Santé › Services tiers ›
+  Lier), qui laisserait Halcya lire sommeil et cœur depuis votre compte Huawei, avec un léger différé : il faudrait
+  un compte développeur Huawei et l'accord de Huawei (jusqu'à 15 jours ouvrés). À décider quand vous voulez
+  (détail dans `RECHERCHE.md`, 31/10).
 - **Repérer les apps de montre installées** (Garmin, Oura…) : iOS ne laisse pas une app voir les autres apps → la
   montre est reconnue par les données qu'elle écrit dans l'app Santé, et un guide dit quoi activer dans chaque app.
 
