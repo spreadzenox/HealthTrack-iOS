@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { METRICS, metricKey, sourceCoverage } from './healthApps'
+import { METRICS, metricKey, missingWatchMetrics, sourceCoverage } from './healthApps'
 
 // Sur iPhone, la VFC de l'app Santé (SDNN) est rangée à part de la RMSSD d'Android (heartRateVariabilitySdnn,
 // correctif 08) : « Mes appareils » doit la compter parmi les mesures d'une source, sous son propre nom.
@@ -16,5 +16,11 @@ describe('« qui envoie quoi » avec la VFC de l’app Santé (SDNN, iPhone)', (
     expect(cov).toHaveLength(1)
     expect(cov[0]).toMatchObject({ key: 'heartRateVariabilitySdnn', label: 'VFC (SDNN)' })
     expect(METRICS.find((m) => m.key === 'heartRateVariabilitySdnn').watch).toBeFalsy()
+  })
+
+  it('une Apple Watch qui envoie la VFC (SDNN) : jamais « VFC » dans ce qui manque', () => {
+    const watch = [{ key: 'heartRate' }, { key: 'restingHeartRate' }, { key: 'heartRateVariabilitySdnn' }, { key: 'sleep' }, { key: 'steps' }]
+    expect(missingWatchMetrics(watch)).toEqual(['SpO₂'])
+    expect(missingWatchMetrics([{ key: 'heartRate' }, { key: 'sleep' }, { key: 'steps' }])).toEqual(['FC repos', 'VFC', 'SpO₂'])
   })
 })
