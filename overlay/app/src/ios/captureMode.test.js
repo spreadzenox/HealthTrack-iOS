@@ -786,15 +786,25 @@ describe('mode captures iOS : données de démo de l’iPhone', () => {
       { source: 'huawei_watch', type: 'watch_stress', payload: { value: 28 } },
       { source: 'phone', type: 'phone_usage', payload: {} },
       { source: 'face_sense', type: 'face_burst', payload: {} },
-      { source: 'withings', type: 'weight', payload: { value: 64 } },
       { source: 'app_food', type: 'food', payload: {} },
     ]
     expect(iphoneDemoEntries(entries)).toEqual([
       { source: 'health_connect', type: 'steps', payload: { value: 8000, sourceName: 'Apple Watch' } },
-      { source: 'withings', type: 'weight', payload: { value: 64 } },
       { source: 'app_food', type: 'food', payload: {} },
     ])
     expect(entries[0].payload.sourceName).toBe('Gadgetbridge')
+  })
+
+  it('la balance passe par l’app Santé (pas de Withings en direct sur iPhone) : poids et masse grasse seulement', () => {
+    const body = { valueKg: 77.2, fatRatioPct: 21.2, muscleMassKg: 32.4 }
+    const at = '2026-10-28T07:30:00.000Z'
+    expect(iphoneDemoEntries([
+      { source: 'withings', type: 'weight', at, payload: body },
+      { source: 'withings', type: 'body_composition', at, payload: body },
+    ])).toEqual([
+      { source: 'health_connect', type: 'weight', at, payload: { valueKg: 77.2 } },
+      { source: 'health_connect', type: 'body_composition', at, payload: { fatRatioPct: 21.2 } },
+    ])
   })
 
   it('la VFC de la démo est en SDNN, comme celle de l’app Santé (« VFC (SDNN) » dans le Journal et sur l’Accueil)', () => {
@@ -810,7 +820,7 @@ describe('mode captures iOS : données de démo de l’iPhone', () => {
   it('les données de démo d’Android ne nomment plus Gadgetbridge ni Huawei', async () => {
     const { generateDemoEntries } = await import('../../scripts/visual/demoData.mjs')
     const text = JSON.stringify(iphoneDemoEntries(generateDemoEntries()))
-    expect(text).not.toMatch(/Gadgetbridge|Huawei/)
+    expect(text).not.toMatch(/Gadgetbridge|Huawei|"withings"/)
     expect(text).toMatch(/Apple Watch/)
   })
 
