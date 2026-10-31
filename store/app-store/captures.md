@@ -2,14 +2,18 @@
 
 Faites par la CI (`ios-build.yml`, lancement manuel avec `devices: iPhone 17 Pro Max`) : **1320 × 2868**, la taille
 6,9" qu'App Store Connect demande (elle sert aussi aux tailles plus petites). Barre d'état propre (9:41, batterie
-pleine) ; données de démo ramenées à ce que l'iPhone reçoit (Apple Watch par l'app Santé ; ni app Android, ni montre
-Huawei en direct, ni temps d'écran). Les fichiers sont sur la branche `captures/store` (jamais dans `main`) ; ils
-seront envoyés par l'API d'App Store Connect une fois A2 et A3 faits, ou glissés à la main par le propriétaire.
+pleine) ; données de démo ramenées à ce que l'iPhone reçoit (Apple Watch par l'app Santé, temps d'écran par
+l'autorisation Temps d'écran ; ni app Android, ni montre Huawei en direct). Les fichiers sont sur la branche
+`captures/store` (jamais dans `main`) ; `store-push.yml`, option « captures », les envoie par l'API d'App Store
+Connect dans l'ordre du tableau, à la place des précédentes.
 
-Sélection du 29/10, captures refaites le 30/10 (`f91404a`, Android v597 : bouton de l'onboarding à sa taille, pages vides
-en couleur, « Ce que lit Halcya », sorbitol → pruneaux) et regardées une à une : barre d'état à 9:41, aucune
-bannière du système. Dans l'ordre d'affichage. Les trois premières sont celles
-qu'on voit sans faire défiler :
+Sélection du 29/10. Captures refaites le 31/10 (`7ed9849`, Android v648, build 648.128) et regardées une à une :
+- barre d'état à 9:41, aucune bannière du système, aucun mot d'Android, aucune erreur JavaScript ;
+- Sources : sous l'Apple Watch, « Jamais reçu : SpO₂ » seulement (la VFC n'y est plus réclamée, #127) ;
+- les six autres sont identiques au pixel près à celles de la v642, regardées le même jour.
+
+Envoyées par l'API le 31/10. Dans l'ordre d'affichage ; les trois premières sont celles qu'on voit sans faire
+défiler :
 
 | # | Fichier (`captures/store`) | Ce qu'elle montre |
 |---|---|---|
@@ -19,7 +23,7 @@ qu'on voit sans faire défiler :
 | 4 | `iphone-17-pro-max-demo-clair-reintroduction.png` | Réintroduction guidée des FODMAP, groupe par groupe |
 | 5 | `iphone-17-pro-max-demo-clair-tendances.png` | Tendances : votre forme face à votre propre norme (FC au repos, VFC, sommeil) |
 | 6 | `iphone-17-pro-max-demo-clair-journal.png` | Journal : vos derniers jours, mesure par mesure |
-| 7 | `iphone-17-pro-max-demo-clair-connectors.png` | Sources : Apple Watch par l'app Santé, lecture du visage, « rangées sur ce téléphone, jamais chez Halcya » |
+| 7 | `iphone-17-pro-max-demo-clair-connectors.png` | Sources : Apple Watch par l'app Santé, lecture du visage, temps d'écran, « rangées sur ce téléphone, jamais chez Halcya » |
 | 8 | `iphone-17-pro-max-demo-sombre-accueil.png` | L'accueil en mode sombre |
 
 Écartées :
