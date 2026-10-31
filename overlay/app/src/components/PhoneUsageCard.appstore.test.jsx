@@ -1,8 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 
-// Version iOS (HealthTrack-iOS) : sur iPhone, la carte demande l'autorisation Temps d'écran (Face ID ou code), pas
-// l'accès aux données d'utilisation d'Android, et compte des prises en main (correctif 34)
+// Version iOS (HealthTrack-iOS) : sans le plugin natif, la carte dit que ce n'est pas encore sur iPhone (correctif 07) ;
+// avec, elle demande l'autorisation Temps d'écran (Face ID ou code), pas l'accès aux données d'utilisation d'Android,
+// et compte des prises en main (correctif 34)
 vi.mock('../config/distribution', async (importOriginal) => {
   const actual = await importOriginal()
   return { ...actual, DISTRIBUTION: 'appstore', FEATURES: actual.featuresFor('appstore') }
@@ -25,6 +26,12 @@ function props(over = {}) {
 
 describe('Temps d’écran et sommeil sur iPhone', () => {
   beforeEach(() => localStorage.clear())
+
+  it('sans le plugin natif : pas encore sur iPhone, sans renvoi vers l’app Android', () => {
+    render(<PhoneUsageCard available={false} />)
+    expect(screen.getByText('Pas encore disponible sur iPhone.')).toBeInTheDocument()
+    expect(screen.queryByText(/app Android/)).not.toBeInTheDocument()
+  })
 
   it('« Activer » : accord propre à l’iPhone, puis demande d’autorisation Temps d’écran, sans mot d’Android', async () => {
     const p = props()
