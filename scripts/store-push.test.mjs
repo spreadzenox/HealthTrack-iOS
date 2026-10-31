@@ -4,7 +4,7 @@ import { test } from 'node:test'
 import assert from 'node:assert/strict'
 import { generateKeyPairSync, createVerify } from 'node:crypto'
 import { readFileSync } from 'node:fs'
-import { fiche, jwt, editable, versionString, SUPPORT_URL, PRIVACY_URL } from './store-push.mjs'
+import { fiche, jwt, editable, versionString, classification, SUPPORT_URL, PRIVACY_URL } from './store-push.mjs'
 
 test('fiche : textes de store/app-store/fr-FR et adresses du site', () => {
   const f = fiche()
@@ -72,4 +72,30 @@ test('versionString : numéro de la version iOS = versionCode d’Android suivi,
   assert.equal(versionString({ versionCode: 648 }), '648')
   assert.throws(() => versionString({}), /versionCode/)
   assert.throws(() => versionString({ versionCode: '1.0' }), /versionCode/)
+})
+
+test('classification : catégorie Santé et forme, 18 ans et plus comme sur Google Play, réponses valides pour Apple', () => {
+  const c = classification()
+  assert.equal(c.primaryCategory, 'HEALTH_AND_FITNESS')
+  const a = c.ageRating
+  assert.equal(a.ageRatingOverrideV2, 'EIGHTEEN_PLUS')
+  assert.equal(a.healthOrWellnessTopics, true)
+  // Relevé des cigarettes, réintroduction FODMAP et rapport pour le médecin : déclarés, au plus prudent.
+  assert.equal(a.alcoholTobaccoOrDrugUseOrReferences, 'FREQUENT')
+  assert.equal(a.medicalOrTreatmentInformation, 'FREQUENT')
+  // Ni publicité, ni échanges entre personnes, ni contenu publié par d'autres : tout reste sur le téléphone.
+  for (const k of ['advertising', 'messagingAndChat', 'socialMedia', 'userGeneratedContent', 'unrestrictedWebAccess', 'gambling', 'lootBox']) {
+    assert.equal(a[k], false, k)
+  }
+  // Valeurs admises par l'API d'App Store Connect (AgeRatingDeclarationUpdateRequest, relevées le 31/10/2026).
+  const LEVELS = ['NONE', 'INFREQUENT_OR_MILD', 'FREQUENT_OR_INTENSE', 'INFREQUENT', 'FREQUENT']
+  const BOOLEANS = ['advertising', 'ageAssurance', 'gambling', 'healthOrWellnessTopics', 'lootBox', 'messagingAndChat',
+    'parentalControls', 'socialMedia', 'socialMediaAgeRestricted', 'unrestrictedWebAccess', 'userGeneratedContent']
+  const LEVELED = ['alcoholTobaccoOrDrugUseOrReferences', 'contests', 'gamblingSimulated', 'gunsOrOtherWeapons',
+    'horrorOrFearThemes', 'matureOrSuggestiveThemes', 'medicalOrTreatmentInformation', 'profanityOrCrudeHumor',
+    'sexualContentGraphicAndNudity', 'sexualContentOrNudity', 'violenceCartoonOrFantasy', 'violenceRealistic',
+    'violenceRealisticProlongedGraphicOrSadistic']
+  for (const k of BOOLEANS) assert.equal(typeof a[k], 'boolean', k)
+  for (const k of LEVELED) assert.ok(LEVELS.includes(a[k]), k)
+  assert.deepEqual(Object.keys(a).sort(), [...BOOLEANS, ...LEVELED, 'ageRatingOverrideV2'].sort())
 })
