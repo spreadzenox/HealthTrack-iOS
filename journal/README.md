@@ -10,21 +10,18 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v683 (1/11) | **683 sur TestFlight** (build 683.177) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v687 (1/11) | **683 sur TestFlight** (build 683.177) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** — **décision du 1/11 vers 15:00 : l'iPhone sort avec les abonnements**, comme Google Play
-- **A4 maintenant (le plus long : Apple vérifie banque et fiscalité en 1 à 3 jours)** : App Store Connect → **Business**
-  (« Accords, taxes et services bancaires ») → accepter le contrat **Paid Applications** ; **compte bancaire** (titulaire
-  = votre statut d'entrepreneur individuel, IBAN, BIC, paiement en euros) ; **fiscalité** (formulaire américain
-  **W-8BEN**, personne physique hors États-Unis, et ce qu'Apple demande pour la France) ; **contacts** (responsable,
-  finance, juridique, technique) ; **statut de professionnel (DSA)**, obligatoire pour vendre dans l'Union
-  européenne : adresse, téléphone et e-mail de contact affichés sur la fiche. Rien à m'envoyer : dites seulement quand
-  le contrat est « Actif ». Ensuite, la routine crée les trois abonnements par l'API (Silver annuel avec essai de 14
-  jours, Silver mensuel, Gold mensuel, aux prix d'Android).
-- **Transmettre à la routine Android le message prêt à coller** en tête de `journal/DEMANDES.md` : son relais doit
-  vérifier les achats de l'App Store (sans cela, un achat sur iPhone ne débloquerait rien).
+- **Transmettre à la routine Android le message prêt à coller** en tête de `journal/DEMANDES.md` : c'est maintenant
+  ce qui bloque la vente sur iPhone. Son relais doit vérifier les achats de l'App Store (sans cela, un achat sur iPhone
+  ne débloquerait rien).
+- ✅ **A4 fait le 1/11** : contrat **Paid Applications actif**, compte bancaire, formulaire fiscal et DAC7 actifs ;
+  le statut de professionnel (DSA) est **en examen chez Apple** : rien à faire, Apple prévient par e-mail. La routine
+  crée les trois abonnements par l'API (Silver annuel avec essai de 14 jours, Silver mensuel, Gold mensuel, aux prix
+  d'Android, en France) ; rien n'est soumis à Apple.
 - **31/10 : installez la build la plus récente (683.177), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
@@ -67,10 +64,8 @@
 - Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS) : le temps d'écran
   réel demande iOS 26.4 ou plus.
 - **À prévoir, pas urgent tant que l'iPhone reste en TestFlight** : sur Android, la période de lancement (premium
-  offert) finit le 20/11 ; sur iPhone, rien n'est vendu tant que l'abonnement App Store n'existe pas, donc tout y
-  reste gratuit. Avant de publier sur l'App Store après le 20/11, il faudra A4 (contrat « Paid Applications »,
-  banque et fiscalité, dans App Store Connect) ; la routine créera ensuite les abonnements par l'API et finira leur
-  branchement (I6).
+  offert) finit le 20/11 ; sur iPhone, rien n'est vendu tant que l'achat n'y est pas ouvert, donc tout y reste
+  gratuit. A4 est fait (1/11) ; restent le relais d'Android et le branchement de l'achat sur iPhone (I6).
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
@@ -295,6 +290,7 @@ via TestFlight.
 | 1/11 14:00 | Android v681, Gold | Android v681 : l'abonnement Gold existe sur Google Play (9,99 €/mois, sans essai), annoncé par ce qu'il apporte de vérifiable (20 analyses de repas par jour) tant que le test sur des repas pesés n'a pas prouvé qu'il se trompe moins ; même offre et mêmes textes prévus pour l'iPhone (PR #174, mergée) ; **la 681 est sur TestFlight (681.175)**, même version qu'Android. Parité : 48 % | #174 (mergée) |
 | 1/11 15:00 | Android v683, Gold | Android v683 : l'écran d'abonnement propose Silver et Gold sur Google Play ; sur iPhone, l'abonnement App Store n'est pas encore ouvert (l'écran le dit) ; un test de l'iPhone adapté avant même la publication d'Android (PR #176, mergée, vue en image) ; **la 683 est sur TestFlight (683.177)**, même version qu'Android ; Gold ajouté au module d'achat App Store de l'iPhone, avec un essai qui vérifie qu'on ne paie qu'un abonnement en passant de Silver à Gold (PR #177, en vérification). Parité : 48 % | #176 (mergée), #177 |
 | 1/11 16:00 | votre décision : abonnements | vous avez demandé ce qu'il reste avant la mise en production, puis décidé de **sortir l'iPhone avec les abonnements** : chemin noté en tête (A4 d'abord, message prêt à coller pour la routine Android) ; la routine créera les abonnements par l'API dès A4 actif. Parité : 48 % | #177, #178 |
+| 1/11 17:00 | A4 fait, abonnements | vous avez terminé A4 dans App Store Connect : contrat de vente, banque, fiscalité et DAC7 actifs, statut de professionnel en examen chez Apple ; Gold ajouté au module d'achat de l'iPhone (PR #177, mergée) ; le script qui crée les trois abonnements dans App Store Connect est prêt et testé (PR #180) ; Android v685 et v687 suivies (passage de Silver à Gold sur Google Play, banc d'essai côté serveur : rien de visible sur iPhone, PR #179) ; vous avez commencé A5 (confidentialité de l'app), guidé pas à pas. Parité : 48 % | #177 (mergée), #179, #180 |
 
 ---
 

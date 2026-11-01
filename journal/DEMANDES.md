@@ -6,7 +6,7 @@
 
 
 > **À coller tel quel à la routine Android (préparé le 1/11 à 15:00, après votre décision « sortir avec les
-> abonnements »)** :
+> abonnements » ; point 6 ajouté à 17:10 après Android v685)** :
 >
 > « La version iPhone sort avec les abonnements, comme Google Play. Pour cela le relais doit vérifier les achats de
 > l'App Store (tâche I6-RELAIS de ton BACKLOG), sans rien changer au chemin Google Play :
@@ -21,6 +21,11 @@
 > 4. Mêmes droits en sortie (`premium`, `tier`, `state`, `expiresAt`, `autoRenewing`, `trial`, `source: 'appstore'`) et
 >    mêmes crédits (10 par jour en Silver, 20 en Gold).
 > 5. Plus tard : App Attest pour l'iPhone, comme Play Integrity pour Android.
+> 6. Dans l'app (écran d'abonnement, `playBilling.js`) : le nom du magasin pris d'une constante de distribution (« Google
+>    Play » ou « l'App Store ») plutôt qu'écrit en dur : « Google Play… » pendant l'achat, « Annulable à tout moment dans
+>    Google Play », « Lecture des formules auprès de Google Play… », `ALREADY_GOLD_MESSAGE` ; et, pour un achat
+>    `source: 'appstore'`, le lien « Gérer mon abonnement » vers https://apps.apple.com/account/subscriptions et le
+>    bouton « Passer à Gold » (Apple fait le passage dans le groupe, sans ancien jeton).
 > Le détail est dans `journal/DEMANDES.md` de spreadzenox/HealthTrack-iOS (lignes du 28/10 et du 31/10). »
 
 | Date | Demande | Pourquoi | Contournement | État |
