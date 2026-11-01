@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v693 (1/11) | **693 sur TestFlight** (build 693.185), première avec l'achat ouvert ; même version qu'Android |
+| Dernière version | v697 (1/11) | **693 sur TestFlight** (build 693.185), première avec l'achat ouvert ; même version qu'Android |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -313,6 +313,7 @@ via TestFlight.
 | 1/11 19:00 | notifications de l'App Store | Android v691 : son serveur reçoit aussi les avis d'Apple (renouvellement, remboursement, fin d'abonnement) ; l'adresse à donner à Apple est réglée par la routine, sans geste de votre part (PR #182, mergée, avec le rappel de fin d'essai sur iPhone) ; **la 691 est sur TestFlight (691.183)** ; textes de vente de l'iPhone (conditions, confidentialité, fiche) rédigés, publiés le jour où l'achat s'ouvre. Parité : 48 % | #182 (mergée) |
 | 1/11 20:00 | l'achat s'ouvre sur iPhone | Android v693 nomme le magasin selon la version (« l'App Store », « compte Apple ») ; **l'achat est ouvert sur iPhone** : Silver et Gold s'achètent dans l'app, par l'App Store, avec le rappel avant la fin de l'essai, les conditions et la fiche de vente (PR #184, mergée ; écran d'achat vérifié en image) ; jusqu'au 20/11, Gold reste offert à tous, donc rien à payer sur TestFlight. Parité : 48 % | #184 (mergée) |
 | 1/11 21:00 | la 693 sur TestFlight | **la 693 est sur TestFlight (693.185)** : première avec l'achat ouvert ; l'écran d'achat a été vérifié en image (prix, essai de 14 jours, renouvellement, « Restaurer un achat », conditions) ; la fiche App Store dit maintenant les abonnements et leurs prix ; la capture de l'écran d'achat est chez Apple pour l'examen des abonnements ; Apple les dit encore incomplets, un coup d'œil de votre part dira pourquoi. Parité : 48 % | #185, #186 (mergées) |
+| 1/11 23:00 | suivi d'Android v697 | Android a décidé que l'écran d'abonnement de l'App Store ne promet pas de rappel avant la fin de l'essai (Apple envoie le sien) : l'iPhone suit, conditions et note de Nouveautés adaptées ; les Réglages montrent l'empreinte de l'installation, qui sert à Android pour offrir Gold aux testeurs (PR #188, en vérification). Parité : 48 % | #188 |
 
 ---
 
