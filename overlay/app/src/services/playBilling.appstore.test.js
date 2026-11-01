@@ -28,8 +28,9 @@ const fromStoreKit = [
 describe('formules App Store lues par describePlans (contrat avec BillingRule.swift)', () => {
   it('annuel avec essai de 14 jours, puis mensuel ; le jeton d’offre est l’id du produit App Store', () => {
     expect(describePlans(fromStoreKit)).toEqual([
-      { basePlanId: 'annuel', offerToken: 'halcya_premium_annuel', period: 'year', price: '29,99 €', priceMicros: 29_990_000, currency: 'EUR', trialDays: 14 },
-      { basePlanId: 'mensuel', offerToken: 'halcya_premium_mensuel', period: 'month', price: '2,99 €', priceMicros: 2_990_000, currency: 'EUR', trialDays: null },
+      // Depuis Android v682 (GOLD-b4), chaque formule dit son produit et son niveau (Silver ou Gold)
+      { basePlanId: 'annuel', offerToken: 'halcya_premium_annuel', productId: 'halcya_premium', tier: 'silver', period: 'year', price: '29,99 €', priceMicros: 29_990_000, currency: 'EUR', trialDays: 14 },
+      { basePlanId: 'mensuel', offerToken: 'halcya_premium_mensuel', productId: 'halcya_premium', tier: 'silver', period: 'month', price: '2,99 €', priceMicros: 2_990_000, currency: 'EUR', trialDays: null },
     ])
   })
 
