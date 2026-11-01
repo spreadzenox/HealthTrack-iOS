@@ -4,33 +4,37 @@ Décision du propriétaire du 31/10, prise avec la routine Android : deux formul
 
 | | Silver | Gold |
 |---|---|---|
-| Prix | **4,99 €/mois ou 29,99 €/an** (l'abonnement « premium » d'Android, prix décidés par le propriétaire) | **10 €/mois** (9,99 € ou 10,00 € selon le palier retenu) |
+| Prix | **4,99 €/mois ou 29,99 €/an** (l'abonnement « premium » d'Android, prix décidés par le propriétaire) | **9,99 €/mois** (produit `halcya_gold` créé sur Google Play le 1/11, Android v681) |
 | Annuel | 29,99 €/an, mis en avant | plus tard, à 79,99 €/an (proposition d'Android du 1/11, P35) |
 | Essai gratuit | 14 jours sur l'annuel | aucun (proposition P35 : un essai Gold coûterait 1 à 4 € d'IA par personne) |
 | Crédits d'analyse IA | 10 analyses de repas par jour (texte proposé par Android pour l'écran d'abonnement) | 20 par jour (idem) |
 | Analyse des repas (relais) | dernier Gemini Flash-Lite en Europe | dernier Gemini Flash en Europe |
 | Par défaut | — | bêta-testeurs et propriétaire |
 
-Proposition d'Android du 1/11 08:33 (P35, en attente du propriétaire ; sans réponse, Android l'applique) : Gold
-mensuel seul au lancement, annuel à 79,99 € une fois un mois de vrais coûts mesuré par le relais, pas d'essai Gold.
+Proposition d'Android du 1/11 08:33 (P35), **appliquée par Android le 1/11 (v681) faute de réponse du propriétaire** :
+Gold mensuel seul à 9,99 €, sans essai ; annuel à 79,99 € une fois un mois de vrais coûts mesuré par le relais.
 L'iPhone suit la même offre.
 
 **Règles**
 - Le modèle n'est jamais nommé à l'utilisateur : ni dans l'app, ni dans la fiche, ni dans les textes des abonnements.
 - La page de confidentialité continue de nommer le prestataire (Google, Vertex AI, dans l'Union européenne), comme la
   loi l'exige, sans dire quel modèle sert quelle formule.
-- Ce qu'on met en avant pour Gold : **moins d'erreurs sur la reconnaissance des aliments et l'estimation des
-  quantités**. Le banc d'essai du relais sur des repas pesés (demande à Android) chiffre cet avantage : c'est ce qui
-  le rend vérifiable si Apple ou un client le demande.
+- Ce qu'on mettra en avant pour Gold : **moins d'erreurs sur la reconnaissance des aliments et l'estimation des
+  quantités**, mais **seulement quand le banc d'essai du relais (Nutrition5k, repas pesés) l'aura confirmé** : règle
+  d'Android du 1/11 (v681, `goldPlayBenefits`), reprise sur iPhone. D'ici là, Gold se décrit par ce qui est vérifiable :
+  20 analyses de repas par jour au lieu de 10.
 
 **App Store Connect** : un seul groupe d'abonnements « Halcya », Gold au niveau 1 (le plus haut), Silver au niveau 2.
 
 | Identifiant | Niveau | Durée | Offre de lancement | Nom affiché (30 car. max) | Description (45 car. max) |
 |---|---|---|---|---|---|
-| `halcya_gold_mensuel` | 1 | 1 mois | — | Halcya Gold | Repas mieux reconnus, plus de crédits |
-| `halcya_gold_annuel` | 1 | 1 an | — | Halcya Gold annuel | Repas mieux reconnus, plus de crédits |
-| `halcya_premium_annuel` | 2 | 1 an | essai gratuit de 2 semaines | Halcya Silver annuel | L'analyse des repas par l'IA |
-| `halcya_premium_mensuel` | 2 | 1 mois | — | Halcya Silver | L'analyse des repas par l'IA |
+| `halcya_gold_mensuel` | 1 | 1 mois | — | Halcya Gold | Analyse IA des repas, 20 par jour |
+| `halcya_gold_annuel` | 1 | 1 an | — | Halcya Gold annuel | Analyse IA des repas, 20 par jour |
+| `halcya_premium_annuel` | 2 | 1 an | essai gratuit de 2 semaines | Halcya Premium annuel | Analyse IA des repas, 10 par jour |
+| `halcya_premium_mensuel` | 2 | 1 mois | — | Halcya Premium | Analyse IA des repas, 10 par jour |
+
+Noms et descriptions repris des produits d'Android sur Google Play (v681) : Silver s'y appelle toujours « Halcya
+Premium », Gold « Halcya Gold » ; « Analyse IA des repas, 10 (ou 20) par jour » est leur ligne d'avantage.
 
 `halcya_gold_annuel` n'est créé que si l'annuel Gold est décidé.
 
@@ -53,8 +57,8 @@ L'iPhone suit la même offre.
 
 Texte de l'écran d'abonnement (paywall, code partagé avec Android) et de la fiche, à reprendre quand les formules
 seront branchées :
-- « **Gold** : moins d'erreurs sur la reconnaissance des aliments et l'estimation des quantités, et plus de
-  crédits d'analyse. »
+- « **Gold** : 20 analyses de repas par jour » ; « moins d'erreurs sur la reconnaissance des aliments et l'estimation
+  des quantités » seulement après confirmation par le banc d'essai.
 - « **Silver** : l'analyse des repas par photo ou description, avec des crédits chaque mois. »
 
 Reste à décider par le propriétaire : l'offre Gold (P35 d'Android : mensuel seul, annuel plus tard, pas d'essai) ; les
