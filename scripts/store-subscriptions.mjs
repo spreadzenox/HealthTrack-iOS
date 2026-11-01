@@ -8,9 +8,13 @@
 // essai déjà en place n'est jamais modifié ici (un changement touche les abonnés : décision du propriétaire) ; un
 // écart est seulement signalé. Rien n'est soumis à l'examen d'Apple (geste du propriétaire, avec une version de
 // l'app). Lancé par .github/workflows/store-subscriptions.yml avec la clé de l'environnement `appstore`, jamais
-// affichée. `--dry-run` : montre ce qui serait créé, sans réseau ni clé.
+// affichée. `--dry-run` : montre ce qui serait créé, sans réseau ni clé. `--capture-examen <fichier.png>` : envoie
+// aussi cette capture de l'écran d'achat comme capture pour l'examen d'Apple de chaque abonnement (à la place de la
+// précédente) ; sans elle, Apple les dit « métadonnées manquantes » et ils ne peuvent pas être soumis.
+import { readFileSync } from 'node:fs'
+import { basename } from 'node:path'
 import { pathToFileURL } from 'node:url'
-import { jwt } from './store-push.mjs'
+import { jwt, md5, slices } from './store-push.mjs'
 
 const API = 'https://api.appstoreconnect.apple.com'
 const BUNDLE_ID = 'fr.jpesquet.sante'
@@ -134,9 +138,10 @@ export function client(token, fetchImpl = fetch) {
 /**
  * Crée ce qui manque, écrit une ligne par élément dans `log` et rend `{ drift, states }` : `drift`, les écarts
  * entre ce qui est en place et ce qui est décidé (jamais corrigés ici) ; `states`, l'état de chaque abonnement chez
- * Apple (`MISSING_METADATA` tant que la capture pour l'examen manque).
+ * Apple (`MISSING_METADATA` tant que la capture pour l'examen manque). `reviewScreenshot` (`{ name, bytes }`) : la
+ * capture de l'écran d'achat, envoyée pour chaque abonnement à la place de la précédente.
  */
-export async function ensureSubscriptions({ token, fetchImpl = fetch, log = () => {} }) {
+export async function ensureSubscriptions({ token, fetchImpl = fetch, log = () => {}, reviewScreenshot = null }) {
   const { api, all } = client(token, fetchImpl)
   const drift = []
   const states = {}
@@ -228,11 +233,52 @@ export async function ensureSubscriptions({ token, fetchImpl = fetch, log = () =
       }
     }
 
+    if (reviewScreenshot) {
+      await uploadReviewScreenshot({ api, fetchImpl }, id, reviewScreenshot)
+      done.push(`capture pour l'examen envoyée (${reviewScreenshot.name})`)
+    }
+
     const fresh = await api('GET', `/v1/subscriptions/${id}`)
     states[s.productId] = fresh.data?.attributes?.state ?? '?'
     say(`${s.productId} : ${done.length ? done.join(', ') : 'déjà en place'} ; état chez Apple : ${states[s.productId]}`)
   }
   return { drift, states }
+}
+
+/**
+ * Capture pour l'examen d'un abonnement (l'écran d'achat de l'app), à la place de la précédente : réservation chez
+ * Apple, envoi des morceaux demandés, puis empreinte MD5 pour qu'Apple la vérifie.
+ */
+export async function uploadReviewScreenshot({ api, fetchImpl = fetch }, subscriptionId, { name, bytes }) {
+  let old = null
+  try {
+    old = (await api('GET', `/v1/subscriptions/${subscriptionId}/appStoreReviewScreenshot`)).data
+  } catch (e) {
+    if (e.status !== 404) throw e
+  }
+  if (old?.id) await api('DELETE', `/v1/subscriptionAppStoreReviewScreenshots/${old.id}`)
+  const created = (await api('POST', '/v1/subscriptionAppStoreReviewScreenshots', {
+    data: {
+      type: 'subscriptionAppStoreReviewScreenshots',
+      attributes: { fileName: name, fileSize: bytes.length },
+      relationships: { subscription: rel('subscriptions', subscriptionId) },
+    },
+  })).data
+  for (const part of slices(bytes, created?.attributes?.uploadOperations)) {
+    const res = await fetchImpl(part.url, { method: part.method, headers: part.headers, body: part.body })
+    if (!res.ok) throw new Error(`envoi de ${name} : ${res.status}`)
+  }
+  await api('PATCH', `/v1/subscriptionAppStoreReviewScreenshots/${created.id}`, {
+    data: { type: 'subscriptionAppStoreReviewScreenshots', id: created.id, attributes: { uploaded: true, sourceFileChecksum: md5(bytes) } },
+  })
+  return created.id
+}
+
+/** Capture PNG lue sur le disque, ou erreur claire (fichier absent, pas un PNG). */
+export function readReviewScreenshot(path) {
+  const bytes = readFileSync(path)
+  if (bytes.subarray(0, 8).toString('hex') !== '89504e470d0a1a0a') throw new Error(`${path} n'est pas un PNG`)
+  return { name: basename(path), bytes }
 }
 
 function dryRun(log) {
@@ -246,12 +292,15 @@ function dryRun(log) {
 async function main() {
   const log = (line) => console.log(line)
   dryRun(log)
+  const at = process.argv.indexOf('--capture-examen')
+  const reviewScreenshot = at > 0 ? readReviewScreenshot(process.argv[at + 1]) : null
+  if (reviewScreenshot) log(`Capture pour l'examen : ${reviewScreenshot.name} (${reviewScreenshot.bytes.length} octets), pour chaque abonnement`)
   if (process.argv.includes('--dry-run')) return
   for (const name of ['ASC_KEY_ID', 'ASC_ISSUER_ID', 'ASC_KEY_P8']) {
     if (!process.env[name]) throw new Error(`secret ${name} absent de l'environnement appstore`)
   }
   const token = jwt({ keyId: process.env.ASC_KEY_ID, issuerId: process.env.ASC_ISSUER_ID, p8: process.env.ASC_KEY_P8 })
-  const { drift, states } = await ensureSubscriptions({ token, log })
+  const { drift, states } = await ensureSubscriptions({ token, log, reviewScreenshot })
   for (const d of drift) console.log(`::warning::${d}`)
   const missing = Object.entries(states).filter(([, st]) => st === 'MISSING_METADATA').map(([id]) => id)
   if (missing.length) {
