@@ -47,8 +47,10 @@
   - Gold par défaut pour les bêta-testeurs et vous ; la stratégie de cache attendra plus d'utilisateurs.
   - Côté iPhone : plan de l'abonnement App Store revu (BACKLOG, I6) et textes préparés
     (`store/app-store/abonnements.md`). Il reste à transmettre une demande (`DEMANDES.md`) : la formule lue sur
-    l'achat App Store, et les bêta-testeurs iPhone servis en Gold. À décider plus tard : prix de Silver, crédits de
-    chaque formule, formules annuelles.
+    l'achat App Store, et les bêta-testeurs iPhone servis en Gold. Silver reprend les prix de l'abonnement Android
+    (4,99 €/mois, 29,99 €/an, essai de 14 jours sur l'annuel). **L'offre Gold que la routine Android vous propose
+    (1/11, P35 : au mois seulement au lancement, annuel plus tard, pas d'essai) vaudra aussi pour l'iPhone** : votre
+    réponse à Android suffit.
 - (facultatif, quand vous voulez) Transmettre à la routine Android les demandes marquées « à transmettre » dans
   `journal/DEMANDES.md` : dont un défaut visible aujourd'hui sur Android (bouton « Autoriser Health Connect » étiré
   sur toute la hauteur dans l'accueil de l'app) et un libellé « saisi » faux pour un poids de Health Connect.
