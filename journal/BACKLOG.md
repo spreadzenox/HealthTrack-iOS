@@ -196,9 +196,12 @@
     test dit désormais pourquoi (`StoreKit Test : transaction non vérifiée …`) ; repassé sans faute sur la CI suivante.
   - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
     l'`appAccountToken`.
-  - [ ] **Sortie avec les abonnements (décision du propriétaire, 1/11 vers 15:00)** — avancement au 1/11 17:50 : A4 ✅,
-    abonnements créés par l'API ✅, message au relais d'Android transmis ✅ (attente de son relais), A5 ✅, copie de
-    secours hors d'iCloud (PR #181). Ordre : A4 (propriétaire) → groupe
+  - [ ] **Sortie avec les abonnements (décision du propriétaire, 1/11 vers 15:00)** — avancement au 1/11 18:10 : A4 ✅,
+    abonnements créés par l'API ✅, **relais d'Android qui vérifie les achats App Store ✅ (v689, #605)**, A5 ✅, copie
+    de secours hors d'iCloud (PR #181), rappel de fin d'essai en Swift (PR #182), capture pour l'examen par l'API
+    (PR #183) ; restent : textes « Google Play » de l'écran d'abonnement (I6-RELAIS-6 chez Android, sinon correctif),
+    `FEATURES.billing` vrai, captures de l'écran d'achat, partie vente des conditions, de la confidentialité et de la
+    fiche, notifications serveur V2 (I6-RELAIS-3 chez Android), essai sur l'iPhone 12. Ordre : A4 (propriétaire) → groupe
     « Halcya » et trois abonnements créés par l'API (`store/app-store/abonnements.md` : Silver annuel 29,99 € avec essai de
     2 semaines, Silver mensuel 4,99 €, Gold mensuel 9,99 € ; noms, descriptions, prix en euros, disponibilité, adresse des
     notifications serveur V2 du relais) ; relais d'Android qui vérifie les achats Apple (message prêt à coller dans
