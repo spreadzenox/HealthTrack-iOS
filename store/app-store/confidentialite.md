@@ -24,4 +24,8 @@ Reprises de la « Sécurité des données » de Google Play d'Android (`app/stor
    - Données de diagnostic : aucun outil de suivi ni de plantages ;
    - Contacts, Historique de navigation, Identifiants publicitaires, Données financières hors achats ;
    - Lecture du visage : aucune image gardée ni envoyée.
-5. **URL de la politique de confidentialité** : à fournir. Celle d'Android parle d'Android et de Google (#468) ; il faut une version iPhone (`store/app-store/README.md`).
+5. **URL de la politique de confidentialité** : https://spreadzenox.github.io/HealthTrack-iOS/confidentialite/, la
+   version iPhone, déjà renseignée dans la fiche par `store-push.yml`.
+
+Relu le 1/11 avant la création des abonnements : les achats d'abonnement y sont déjà (Achats → Historique des
+achats). Rien d'autre ne change avec Silver et Gold : le relais reçoit la transaction App Store, et rien d'autre.
