@@ -10,11 +10,15 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v691 (1/11) | **691 sur TestFlight** (build 691.183) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v693 (1/11) | **691 sur TestFlight** (build 691.183) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** — **décision du 1/11 vers 15:00 : l'iPhone sort avec les abonnements**, comme Google Play
+- **Une décision pour la date de soumission** : jusqu'au 20/11, Android offre Gold à toute installation (période de
+  lancement), iPhone compris ; l'écran d'abonnement de l'iPhone n'a alors rien à vendre, et Apple doit pouvoir
+  trouver l'achat pendant l'examen. Deux choix : soumettre après le 20/11 (rien à faire d'ici là), ou demander à la
+  routine Android que la période de lancement ne vaille que pour Google Play. Dites-moi lequel.
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès), créer dans
   TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la version d'iOS de son
   iPhone 12 (Réglages → Général → Informations). Ensuite, il ne restera que la relecture et la soumission, quand
@@ -304,6 +308,7 @@ via TestFlight.
 | 1/11 17:00 | A4 fait, abonnements | vous avez terminé A4 dans App Store Connect : contrat de vente, banque, fiscalité et DAC7 actifs, statut de professionnel en examen chez Apple ; Gold ajouté au module d'achat de l'iPhone (PR #177, mergée) ; **les trois abonnements existent dans App Store Connect** (Gold 9,99 €/mois, Premium 29,99 €/an avec 2 semaines d'essai, Premium 4,99 €/mois, en France ; créés par l'API, rien de soumis, PR #180) ; Android v685 et v687 suivies (passage de Silver à Gold sur Google Play, banc d'essai côté serveur : rien de visible sur iPhone, PR #179) ; **la 687 est sur TestFlight (687.179)** ; vous avez fait A5 (confidentialité de l'app), guidé pas à pas et relu sur capture ; votre décision appliquée : la copie de secours sort de la sauvegarde iCloud (PR #181). Parité : 48 % | #177, #179, #180 (mergées), #181 |
 | 1/11 18:00 | serveur prêt, achat en préparation | la routine Android a fait votre demande en 30 minutes : son serveur vérifie les achats faits sur iPhone (v689) ; Android v689 suivie, avec la copie de secours hors d'iCloud (PR #181, mergée) : **la 689 est sur TestFlight (689.181)** ; envoi à Apple de la capture de l'écran d'achat prêt (PR #183, mergée) ; rappel de fin d'essai sur iPhone (PR #182, en vérification) ; reste avant d'ouvrir l'achat : les textes « Google Play » de l'écran d'abonnement et la partie vente des conditions. Parité : 48 % | #181, #183 (mergées), #182 |
 | 1/11 19:00 | notifications de l'App Store | Android v691 : son serveur reçoit aussi les avis d'Apple (renouvellement, remboursement, fin d'abonnement) ; l'adresse à donner à Apple est réglée par la routine, sans geste de votre part (PR #182, mergée, avec le rappel de fin d'essai sur iPhone) ; **la 691 est sur TestFlight (691.183)** ; textes de vente de l'iPhone (conditions, confidentialité, fiche) rédigés, publiés le jour où l'achat s'ouvre. Parité : 48 % | #182 (mergée) |
+| 1/11 20:00 | l'achat s'ouvre sur iPhone | Android v693 nomme le magasin selon la version (« l'App Store », « compte Apple ») ; l'iPhone ouvre l'achat : Silver et Gold s'achètent dans l'app, par l'App Store, avec le rappel avant la fin de l'essai, les conditions et la fiche de vente (PR #184, en vérification) ; jusqu'au 20/11, Gold reste offert à tous, donc rien à payer sur TestFlight. Parité : 48 % | #184 |
 
 ---
 
