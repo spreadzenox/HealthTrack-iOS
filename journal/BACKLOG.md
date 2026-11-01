@@ -193,6 +193,7 @@
     test dit désormais pourquoi (`StoreKit Test : transaction non vérifiée …`) ; repassé sans faute sur la CI suivante.
   - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
     l'`appAccountToken`.
+  - [ ] À l'ouverture de l'achat sur iPhone (Android v685, GOLD-b2) : le bouton « Passer à Gold », réservé par Android aux abonnés venus de Google Play, et `ALREADY_GOLD_MESSAGE` (« compte Google Play ») demandent un texte iPhone (« compte Apple ») ; le plugin `AppStoreBilling` ignore `oldPurchaseToken` et `replacementMode`, Apple fait le passage dans le groupe.
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : mêmes modèles qu'Android, mêmes scores sur ses vecteurs de référence.
   Étude du 28/10 (`RECHERCHE.md`) : ni Vision ni ARKit, qui changeraient les scores. Valence et éveil (HSEmotion, poids
   AffectNet) éteints tant que la licence n'est pas tranchée (`DEMANDES.md`). Étapes :
