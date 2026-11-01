@@ -221,6 +221,7 @@ final class HalcyaNotificationHandler: NSObject, UNUserNotificationCenterDelegat
 
     func didReceive(response: UNNotificationResponse) {
         if PortionReminderNotifications.opened(response) { return }
+        if TrialReminderNotifications.opened(response) { return }
         _ = EveningNotifications.all.contains { $0.answer(response) }
     }
 
