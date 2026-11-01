@@ -230,7 +230,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -270,9 +270,9 @@
     croire » depuis Android v667 : captures refaites sur la 667, regardées et renvoyées le 1/11 à 02:08 (run 41263918798) :
     8/8 traitées à 02:55 (run 41267111020), aucune refusée. À refaire après Android v673 : la capture 7 (Sources) montre encore « jamais chez Halcya », retiré de Sources ;
     captures refaites sur la 673 (run 41278746988), regardées et renvoyées le 1/11 à 06:17 (run 41280232640) :
-    8/8 traitées à 06:59 (run 41282979617), aucune refusée. Depuis Android v677 et v678 (1/11), les captures 2 (Analyses)
-    et 4 (réintroduction) montrent d'anciens textes : captures relancées sur la 678 le 1/11 à 10:57 (run 41299620118), à
-    regarder et renvoyer. Après chaque envoi TestFlight d'une nouvelle version : `store-push.yml` sans « captures », pour que la
+    8/8 traitées à 06:59 (run 41282979617), aucune refusée. Refaites sur la 678 et renvoyées le 1/11 à 11:26 (run 41301867601) :
+    8/8 traitées. Android reprend encore ses textes d'heure en heure (série SLOP) : prochaine série de captures à la fin
+    de ces reprises, ou juste avant une soumission par le propriétaire. Après chaque envoi TestFlight d'une nouvelle version : `store-push.yml` sans « captures », pour que la
     version de la fiche suive (charte §4). Reste la relecture du propriétaire.
   - [x] Catégorie (Santé et forme) et classification par âge (18 ans et plus, comme sur Google Play) envoyées par l'API
     (`store/app-store/classification.json`, PR #130, acceptées le 31/10 à 15:21) : réponses au plus prudent (informations médicales et

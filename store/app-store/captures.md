@@ -7,10 +7,13 @@ l'autorisation Temps d'écran ; ni app Android, ni montre Huawei en direct). Les
 `captures/store` (jamais dans `main`) ; `store-push.yml`, option « captures », les envoie par l'API d'App Store
 Connect dans l'ordre du tableau, à la place des précédentes.
 
-Sélection du 29/10. Captures refaites le 1/11 (`88b79f3`, Android v673, build 673.159) et regardées :
+Sélection du 29/10. Captures refaites le 1/11 (`96835b0`, Android v678, build 678.169) et regardées :
 - barre d'état à 9:41, aucune bannière du système, aucun mot d'Android, aucune erreur JavaScript ;
-- Analyses (capture 2) : « Des liens repérés dans vos données, à vérifier avant d'y croire » (Android v667) au lieu
-  de « pas des causes ni un diagnostic », avec « Piste solide » et « À confirmer » ;
+- Analyses (capture 2) : « Des liens repérés dans vos données, à vérifier avant d'y croire », « Ce qui va avec vos
+  meilleurs jours », « Piste solide » et « À confirmer » ; sous « Autres liens repérés », la phrase de la v677 (« Le jour
+  même : quand ce chiffre monte… »), que la v679 raccourcit encore : à refaire avec la prochaine série ;
+- Réintroduction (capture 4) : « Un groupe à la fois, sur 3 jours : une portion, puis le double, puis le triple. »
+  (Android v678) ;
 - Accueil (clair et sombre), pris le matin : la carte « Votre ventre » propose Calme, Gêne, Douleur ; le bouton
   « + 1 cigarette » de la démo est visible, comme le déclare la classification par âge ;
 - Sources : « Les apps et appareils qui envoient vos mesures. Elles restent sur ce téléphone. » (Android v673, au lieu
