@@ -149,9 +149,12 @@
   Silver avec le dernier Gemini Flash-Lite en Europe (prix et crédits à fixer). Le modèle n'est jamais nommé à
   l'utilisateur ; on met en avant que **Gold fait moins d'erreurs sur la reconnaissance des aliments et l'estimation
   des quantités**. Bêta-testeurs et propriétaire en Gold par défaut. Sur iPhone : un groupe d'abonnements « Halcya »,
-  Gold au niveau le plus haut et Silver en dessous (Apple gère montée et descente), identifiants
-  `halcya_gold_mensuel`, `halcya_silver_mensuel` (et annuels si décidés) ; textes préparés dans
-  `store/app-store/abonnements.md` ; demande au relais dans `DEMANDES.md`. Le plan d'origine ci-dessous reste vrai
+  Gold au niveau le plus haut et Silver en dessous (Apple gère montée et descente, sans double facturation),
+  identifiants `halcya_gold_mensuel` (et `halcya_gold_annuel` si décidé) et, pour Silver, `halcya_premium_annuel` /
+  `halcya_premium_mensuel` comme le produit Silver d'Android et le plugin déjà écrit (1/11 : le brouillon
+  `halcya_silver_mensuel` est abandonné) ; Silver à 4,99 €/mois ou 29,99 €/an, essai de 14 jours sur l'annuel ; offre
+  Gold proposée par Android le 1/11 (P35 : mensuel seul, annuel à 79,99 € plus tard, pas d'essai), en attente du
+  propriétaire ; textes préparés dans `store/app-store/abonnements.md` ; demande au relais dans `DEMANDES.md`. Le plan d'origine ci-dessous reste vrai
   pour la mécanique (StoreKit 2, `AppStoreBilling`, vérification par le relais), à adapter aux deux formules.
   Ancien libellé : StoreKit 2 (plugin Swift dans `ios/`), mêmes formules (annuel mis en avant,
   mensuel, essai 14 jours), prix lus dans StoreKit ; côté relais (dans HealthTrack → `DEMANDES.md`) : vérification des
