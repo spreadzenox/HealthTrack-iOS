@@ -8,7 +8,7 @@ import assert from 'node:assert/strict'
 import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { SUBSCRIPTIONS, LIMITS, TERRITORY, GROUP, NOTIFICATIONS, bodies, pricePointFor, currentPrices, ensureSubscriptions, readReviewScreenshot, notificationsPlan } from './store-subscriptions.mjs'
+import { SUBSCRIPTIONS, LIMITS, TERRITORY, GROUP, NOTIFICATIONS, bodies, pricePointFor, currentPrices, ensureSubscriptions, readReviewScreenshot, notificationsPlan, diagnose } from './store-subscriptions.mjs'
 
 const root = new URL('..', import.meta.url)
 const read = (path) => readFileSync(new URL(path, root), 'utf8')
@@ -313,4 +313,16 @@ test('ensureSubscriptions : l’adresse des notifications est réglée une fois,
   assert.equal(kept.db.app.subscriptionStatusUrl, 'https://exemple.fr/notif')
   assert.equal(kept.db.app.subscriptionStatusUrlForSandbox, NOTIFICATIONS.url, 'la sandbox vide est réglée')
   assert.match(drift.join(' ; '), /production.*non modifiée/)
+})
+
+test('diagnose : relevé sans écriture de chaque pièce exigée par Apple', async () => {
+  const asc = fakeAsc()
+  await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl })
+  const writes = asc.calls.filter((c) => !c.startsWith('GET')).length
+  const lines = await diagnose({ token: 't', fetchImpl: asc.fetchImpl })
+  assert.equal(asc.calls.filter((c) => !c.startsWith('GET')).length, writes, 'aucune écriture')
+  assert.match(lines[0], /^app : langue principale /)
+  assert.match(lines[1], /^groupe : fr-FR « Halcya »/)
+  assert.equal(lines.length, 5)
+  assert.match(lines[2], /^halcya_gold_mensuel : état MISSING_METADATA ; noms fr-FR .* ; capture absente ; prix en FRA 9\.99 ; territoires FRA$/)
 })
