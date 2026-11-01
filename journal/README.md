@@ -10,18 +10,36 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v681 (1/11) | **681 sur TestFlight** (build 681.175) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v691 (1/11) | **691 sur TestFlight** (build 691.183) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
-**👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **31/10 : installez la build la plus récente (681.175), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
+**👉 Prochaine action du propriétaire** — **décision du 1/11 vers 15:00 : l'iPhone sort avec les abonnements**, comme Google Play
+- **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès), créer dans
+  TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la version d'iOS de son
+  iPhone 12 (Réglages → Général → Informations). Ensuite, il ne restera que la relecture et la soumission, quand
+  l'achat sera ouvert sur iPhone.
+- ✅ **Message transmis à la routine Android le 1/11 vers 17:15, et déjà fait par elle à 17:45** : son serveur vérifie
+  maintenant les achats faits sur iPhone (v689). Il reste, de mon côté, à ouvrir l'achat dans l'app iPhone : les
+  textes qui disent « Google Play » (la routine Android les rend neutres), l'écran d'achat avec les trois formules et
+  sa capture pour Apple, la partie vente des conditions ; le rappel de fin d'essai est prêt (PR #182).
+- ✅ **Décidé le 1/11 vers 17:15 : la copie de secours sort de la sauvegarde iCloud** (directive 5.1.3 d'Apple) ;
+  sur un nouvel iPhone, on reprend ses données par l'export. **Fait** (PR #181) : dans la 689.181 sur TestFlight ;
+  vérifié sur iPhone simulé (dossier exclu de la sauvegarde, restauration et suppression).
+- ✅ **A5 fait le 1/11** (confidentialité de l'app, réponses de `store/app-store/confidentialite.md`, relues sur votre
+  capture : position non liée, photos, autre contenu, identifiant d'appareil et achats liés, tout pour le
+  fonctionnement de l'app, aucun pistage) ; il ne restait qu'à cliquer « Publish ».
+- ✅ **A4 fait le 1/11** : contrat **Paid Applications actif**, compte bancaire, formulaire fiscal et DAC7 actifs ;
+  le statut de professionnel (DSA) est **en examen chez Apple** : rien à faire, Apple prévient par e-mail. La routine
+  crée les trois abonnements par l'API (Silver annuel avec essai de 14 jours, Silver mensuel, Gold mensuel, aux prix
+  d'Android, en France) ; rien n'est soumis à Apple.
+- **31/10 : installez la build la plus récente (691.183), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (681.175 aujourd'hui) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (691.183 aujourd'hui) ; elle installe l'app TestFlight sur son
   iPhone 12.
-- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 681, « Prête à
+- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 691, « Prête à
   soumettre ») : textes, 8 captures, catégorie Santé et forme, âge 18+. Rien n'est soumis. Avant une soumission,
   relisez-la, en particulier les réponses du questionnaire d'âge (`store/app-store/README.md`).
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
@@ -57,15 +75,13 @@
 - Donner la version d'iOS de l'iPhone 12 de test (Réglages → Général → Informations → Version d'iOS) : le temps d'écran
   réel demande iOS 26.4 ou plus.
 - **À prévoir, pas urgent tant que l'iPhone reste en TestFlight** : sur Android, la période de lancement (premium
-  offert) finit le 20/11 ; sur iPhone, rien n'est vendu tant que l'abonnement App Store n'existe pas, donc tout y
-  reste gratuit. Avant de publier sur l'App Store après le 20/11, il faudra A4 (contrat « Paid Applications »,
-  banque et fiscalité, dans App Store Connect) ; la routine créera ensuite les abonnements par l'API et finira leur
-  branchement (I6).
+  offert) finit le 20/11 ; sur iPhone, rien n'est vendu tant que l'achat n'y est pas ouvert, donc tout y reste
+  gratuit. A4 est fait (1/11) ; restent le relais d'Android et le branchement de l'achat sur iPhone (I6).
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 681.175) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 691.183) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -283,6 +299,11 @@ via TestFlight.
 | 1/11 12:00 | Android v679 | Android v679 : les détails des liens dans Analyses tiennent en une phrase (« Le jour même : plus haut, meilleur bien-être ») ; aussi sur iPhone, sans rien à adapter (PR #170, mergée, vue en image) ; **la 679 est sur TestFlight (679.171)**, même version qu'Android ; les captures de la fiche App Store refaites sur la 678 sont envoyées (réintroduction et Analyses à jour) ; la prochaine série viendra quand Android aura fini de reprendre ses textes. Parité : 48 % | #170 (mergée) |
 | 1/11 13:00 | Android v680 | Android v680 : le serveur d'analyse reconnaît maintenant l'abonnement Gold de Google Play (20 analyses par jour) ; rien de visible sur iPhone ; pour que Gold marche aussi sur iPhone, la demande à Android précise comment reconnaître les abonnements Gold de l'App Store (PR #172, mergée) ; **la 680 est sur TestFlight (680.173)**, même version qu'Android. Parité : 48 % | #172 (mergée) |
 | 1/11 14:00 | Android v681, Gold | Android v681 : l'abonnement Gold existe sur Google Play (9,99 €/mois, sans essai), annoncé par ce qu'il apporte de vérifiable (20 analyses de repas par jour) tant que le test sur des repas pesés n'a pas prouvé qu'il se trompe moins ; même offre et mêmes textes prévus pour l'iPhone (PR #174, mergée) ; **la 681 est sur TestFlight (681.175)**, même version qu'Android. Parité : 48 % | #174 (mergée) |
+| 1/11 15:00 | Android v683, Gold | Android v683 : l'écran d'abonnement propose Silver et Gold sur Google Play ; sur iPhone, l'abonnement App Store n'est pas encore ouvert (l'écran le dit) ; un test de l'iPhone adapté avant même la publication d'Android (PR #176, mergée, vue en image) ; **la 683 est sur TestFlight (683.177)**, même version qu'Android ; Gold ajouté au module d'achat App Store de l'iPhone, avec un essai qui vérifie qu'on ne paie qu'un abonnement en passant de Silver à Gold (PR #177, en vérification). Parité : 48 % | #176 (mergée), #177 |
+| 1/11 16:00 | votre décision : abonnements | vous avez demandé ce qu'il reste avant la mise en production, puis décidé de **sortir l'iPhone avec les abonnements** : chemin noté en tête (A4 d'abord, message prêt à coller pour la routine Android) ; la routine créera les abonnements par l'API dès A4 actif. Parité : 48 % | #177, #178 |
+| 1/11 17:00 | A4 fait, abonnements | vous avez terminé A4 dans App Store Connect : contrat de vente, banque, fiscalité et DAC7 actifs, statut de professionnel en examen chez Apple ; Gold ajouté au module d'achat de l'iPhone (PR #177, mergée) ; **les trois abonnements existent dans App Store Connect** (Gold 9,99 €/mois, Premium 29,99 €/an avec 2 semaines d'essai, Premium 4,99 €/mois, en France ; créés par l'API, rien de soumis, PR #180) ; Android v685 et v687 suivies (passage de Silver à Gold sur Google Play, banc d'essai côté serveur : rien de visible sur iPhone, PR #179) ; **la 687 est sur TestFlight (687.179)** ; vous avez fait A5 (confidentialité de l'app), guidé pas à pas et relu sur capture ; votre décision appliquée : la copie de secours sort de la sauvegarde iCloud (PR #181). Parité : 48 % | #177, #179, #180 (mergées), #181 |
+| 1/11 18:00 | serveur prêt, achat en préparation | la routine Android a fait votre demande en 30 minutes : son serveur vérifie les achats faits sur iPhone (v689) ; Android v689 suivie, avec la copie de secours hors d'iCloud (PR #181, mergée) : **la 689 est sur TestFlight (689.181)** ; envoi à Apple de la capture de l'écran d'achat prêt (PR #183, mergée) ; rappel de fin d'essai sur iPhone (PR #182, en vérification) ; reste avant d'ouvrir l'achat : les textes « Google Play » de l'écran d'abonnement et la partie vente des conditions. Parité : 48 % | #181, #183 (mergées), #182 |
+| 1/11 19:00 | notifications de l'App Store | Android v691 : son serveur reçoit aussi les avis d'Apple (renouvellement, remboursement, fin d'abonnement) ; l'adresse à donner à Apple est réglée par la routine, sans geste de votre part (PR #182, mergée, avec le rappel de fin d'essai sur iPhone) ; **la 691 est sur TestFlight (691.183)** ; textes de vente de l'iPhone (conditions, confidentialité, fiche) rédigés, publiés le jour où l'achat s'ouvre. Parité : 48 % | #182 (mergée) |
 
 ---
 
@@ -456,8 +477,8 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 | A1 | Adhérer à l'Apple Developer Program (individuel, payant à l'année ; pas à pas ci-dessous) | signature, TestFlight, App Store | ✅ 30/10 : adhésion validée (e-mail de bienvenue d'Apple ; inscription et paiement le 28/10) |
 | A2 | Créer une clé API App Store Connect (rôle Admin ; pas à pas « A2 et A3 » ci-dessous) et l'enregistrer en secrets GitHub Actions de ce dépôt, dans un environnement `appstore` réservé à `main` | builds signées et envoi TestFlight automatiques | ✅ 30/10 : clé « Halcya CI » (Admin), environnement `appstore` (main seulement, administrateurs sans contournement), « signature par Apple d'accord » |
 | A3 | Créer la fiche de l'app dans App Store Connect (nom, langue principale français, bundle id, SKU) | envoi TestFlight, fiche | ✅ 30/10 : identifiant (HealthKit, In-App Purchase, App Attest) et fiche « Halcya » créés ; le nom se modifie encore dans « Informations sur l'app » tant que rien n'est soumis |
-| A4 | Contrat « Paid Applications », coordonnées bancaires et fiscales | abonnement App Store | après A1 |
-| A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/app-store/confidentialite.md` | examen Apple | avant la 1re soumission |
+| A4 | Contrat « Paid Applications », coordonnées bancaires et fiscales | abonnement App Store | ✅ 1/11 : contrat, banque, fiscalité et DAC7 actifs ; statut de professionnel (DSA) en examen chez Apple |
+| A5 | Remplir « Confidentialité de l'app » (pas d'API) avec les réponses préparées dans `store/app-store/confidentialite.md` | examen Apple | ✅ 1/11 : rempli par le propriétaire, relu sur capture |
 | A6 | Inviter les testeurs (d'abord sa compagne : interne via « Utilisateurs et accès » ou externe avec l'examen bêta, la routine dira), soumettre à l'examen, publier | testeurs, production | lui seul |
 | A7 | **Maintenant, après A3** : demander à Apple « Family Controls (Distribution) » pour Halcya (Certificates, IDs & Profiles → Identifiers → Halcya → onglet **Capability Requests** → Family Controls (Distribution)), en demandant aussi dans le texte le droit **« Family Controls App and Website Usage »** (absent de cet onglet le 30/10 ; justification en anglais préparée dans la conversation du 30/10 et dans `RECHERCHE.md`). Rien d'autre à demander dans cet onglet (passé en revue le 30/10, `RECHERCHE.md`) | tuile « Écran » sur iPhone (temps d'écran, peut-être réel et non plus approché, `RECHERCHE.md`) | ✅ 30/10 : Family Controls (Distribution) accordé dans la minute ; Distribution et App and Website Usage activés sur l'identifiant |
 | A8 | (1 minute, sur ordinateur, quand vous voulez) Activer GitHub Pages pour ce dépôt : sur github.com, HealthTrack-iOS → Settings → Pages → « Build and deployment » → Source : « GitHub Actions ». Rien d'autre : la routine publie ensuite les pages | adresses de la politique de confidentialité, des conditions d'utilisation et de l'assistance de l'iPhone, demandées par la fiche App Store (A3, A5) | ✅ 30/10 : Pages activé, site publié (`pages.yml`, déploiement réussi) |
