@@ -1,5 +1,5 @@
 diff --git a/app/src/config/feedback.js b/app/src/config/feedback.js
-index 2706bd7..a4f8d31 100644
+index 9068ecb..cf1771c 100644
 --- a/app/src/config/feedback.js
 +++ b/app/src/config/feedback.js
 @@ -4,6 +4,8 @@ import { resolveDistribution } from './distribution'
@@ -12,7 +12,7 @@ index 2706bd7..a4f8d31 100644
  /**
   * Lien « Envoyer un avis » (AVIS, audit du 25/10) selon la variante. Rien n'est joint : ni journal ni donnée de
 @@ -17,6 +19,13 @@ export function feedbackLink(distribution, version) {
-       hint: 'Pendant le test : « Envoyer des commentaires privés au développeur », en bas de la page Halcya. Ensuite : « Noter cette application ».',
+       hint: 'Sur la page Halcya du Play Store : « Envoyer des commentaires privés au développeur » pendant le test, « Noter cette application » ensuite.',
      }
    }
 +  if (resolveDistribution(distribution) === 'appstore') {

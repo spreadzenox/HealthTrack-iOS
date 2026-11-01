@@ -1,5 +1,5 @@
 diff --git a/app/src/pages/Settings.jsx b/app/src/pages/Settings.jsx
-index 35dc3e9..7eefd16 100644
+index c679c8e..f42af4b 100644
 --- a/app/src/pages/Settings.jsx
 +++ b/app/src/pages/Settings.jsx
 @@ -28,6 +28,8 @@ function RelayAiBlock() {
@@ -11,12 +11,12 @@ index 35dc3e9..7eefd16 100644
    return (
      <div className="settings-block">
        <h3 className="section-title">Analyse des repas (IA)</h3>
-@@ -37,7 +39,7 @@ function RelayAiBlock() {
-         saisie manuelle reste possible.
+@@ -36,7 +38,7 @@ function RelayAiBlock() {
+         Google, en Europe. Sans IA, vous pouvez ajouter les aliments à la main.
        </p>
        <AiCreditsHint />
 -      <p className="hint">{quota}</p>
 +      {quota && <p className="hint">{quota}</p>}
        <div className="gemini-privacy">
          <p className="hint">
-           <LineIcon name="lock" size={16} /> Seule la photo ou la description du repas part, sans métadonnées ;
+           <LineIcon name="lock" size={16} /> Seule la photo ou la description part, sans ses métadonnées.
