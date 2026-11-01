@@ -1,9 +1,9 @@
 diff --git a/app/src/components/PhoneUsageCard.jsx b/app/src/components/PhoneUsageCard.jsx
-index f959f1b..17bdd07 100644
+index 1205994..d8516c5 100644
 --- a/app/src/components/PhoneUsageCard.jsx
 +++ b/app/src/components/PhoneUsageCard.jsx
 @@ -131,10 +131,20 @@ export default function PhoneUsageCard({
-             des apps ni vos messages, et {APP_NAME} n’envoie rien.
+             lit pas le contenu des apps.
            </p>
            <MethodNote summary="Détails">
 -            Votre téléphone sait quand il s’allume et quelles apps sont ouvertes : {APP_NAME} en tire votre temps
@@ -73,10 +73,10 @@ index f959f1b..17bdd07 100644
            ) : (
              <p className="my-device-message">{busy ? 'Lecture du téléphone…' : 'Pas encore de données aujourd’hui.'}</p>
 diff --git a/app/src/config/permissionDisclosures.js b/app/src/config/permissionDisclosures.js
-index 1687d44..2c1d1b3 100644
+index 90538c6..351488e 100644
 --- a/app/src/config/permissionDisclosures.js
 +++ b/app/src/config/permissionDisclosures.js
-@@ -122,6 +122,20 @@ if (FEATURES.iosStore) {
+@@ -137,6 +137,20 @@ if (FEATURES.iosStore) {
    }
  }
  

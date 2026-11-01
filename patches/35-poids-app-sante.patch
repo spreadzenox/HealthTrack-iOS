@@ -1,16 +1,16 @@
 diff --git a/app/src/components/BodyProfileCard.jsx b/app/src/components/BodyProfileCard.jsx
-index f0e6106..86fc968 100644
+index 20126f0..ea17978 100644
 --- a/app/src/components/BodyProfileCard.jsx
 +++ b/app/src/components/BodyProfileCard.jsx
-@@ -8,6 +8,7 @@ import { useDetailsMode } from '../hooks/useDetailsMode'
+@@ -7,6 +7,7 @@ import { computeDailyEnergyKcal, ACTIVITY_LEVELS, activityLevel } from '../servi
+ import { useDetailsMode } from '../hooks/useDetailsMode'
  import DetailsToggle from './DetailsToggle'
  import { appLocale } from '../i18n/locale.js'
- import { APP_NAME } from '../config/brand'
 +import { FEATURES } from '../config/distribution'
  
  const formatNumber = (v) => new Intl.NumberFormat(appLocale(), { maximumFractionDigits: 1 }).format(v)
  const formatInt = (v) => new Intl.NumberFormat(appLocale(), { maximumFractionDigits: 0 }).format(v)
-@@ -31,6 +32,10 @@ const COMPOSITION_FIELDS = [
+@@ -30,6 +31,10 @@ const COMPOSITION_FIELDS = [
    ['pwvMps', 'Vitesse d’onde de pouls', 'm/s'],
  ]
  
@@ -21,8 +21,8 @@ index f0e6106..86fc968 100644
  function compositionParts(payload) {
    if (!payload) return []
    return COMPOSITION_FIELDS
-@@ -206,7 +211,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
-           Rangé sur ce téléphone, jamais chez {APP_NAME}.
+@@ -204,7 +209,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
+           Complétez votre profil pour des repères ajustés à vous.
          </p>
          {compositionLine.length > 0 && (
 -          <p className="nutrition-profile-line">{compositionLine.join(SEP)}<Hint>(Withings)</Hint></p>
@@ -30,7 +30,7 @@ index f0e6106..86fc968 100644
          )}
        </div>
      )
-@@ -214,11 +219,13 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
+@@ -212,11 +217,13 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
  
    const weightHint = () => (origins.weight === 'withings'
      ? `(Withings, ${formatDayMonth(profile.weightAt)})`
@@ -46,7 +46,7 @@ index f0e6106..86fc968 100644
      details && bmi != null && <span>IMC{'\u00a0'}{formatNumber(bmi)}</span>,
    ])
    const energyParts = join([
-@@ -240,7 +247,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
+@@ -238,7 +245,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
        {head}
        {bodyParts.length > 0 && <p className="nutrition-profile-line">{bodyParts}</p>}
        {compositionLine.length > 0 && (

@@ -1,5 +1,5 @@
 diff --git a/app/src/connectors/HealthConnectConnector.js b/app/src/connectors/HealthConnectConnector.js
-index 02b4d30..6d18739 100644
+index b768e8c..ef5d3a0 100644
 --- a/app/src/connectors/HealthConnectConnector.js
 +++ b/app/src/connectors/HealthConnectConnector.js
 @@ -54,6 +54,14 @@ const EXTRA_READ_TYPES = [
@@ -17,7 +17,7 @@ index 02b4d30..6d18739 100644
  /** Libellés français des types Health Connect (écran Connecteurs). */
  export const READ_TYPE_LABELS = {
    steps: 'pas',
-@@ -346,12 +354,13 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -391,11 +399,12 @@ export class HealthConnectConnector extends BaseConnector {
      super({
        id: 'health_connect',
        // POL-PLAY-28 : titre court (tenait sur 2 lignes) ; « montre, bague, balance » ouvre la description
@@ -26,16 +26,14 @@ index 02b4d30..6d18739 100644
        // VC-27 : une phrase avec des marques connues du public ; la liste complète des types vit au chevron
        // « Ce qui est importé » de la carte (`importedList`, ci-dessous)
 -      description:
--        'Montre, bague, balance : ce que vos apps santé y écrivent (Samsung Health, Garmin, Withings, Oura…) : ' +
--        'sommeil, cœur, pas, poids…',
+-        'Sommeil, cœur, pas, poids… écrits par vos apps santé : Samsung Health, Garmin, Withings, Oura.',
 +      description: isIos()
-+        ? 'Montre, bague, balance : ce que l’Apple Watch et vos apps santé y écrivent (Garmin, Withings, Oura…) : sommeil, cœur, pas, poids…'
-+        : 'Montre, bague, balance : ce que vos apps santé y écrivent (Samsung Health, Garmin, Withings, Oura…) : ' +
-+          'sommeil, cœur, pas, poids…',
++        ? 'Sommeil, cœur, pas, poids… écrits par l’Apple Watch et vos apps santé : Garmin, Withings, Oura.'
++        : 'Sommeil, cœur, pas, poids… écrits par vos apps santé : Samsung Health, Garmin, Withings, Oura.',
        dataTypes: ['steps', 'sleep', 'heart_rate', 'activity', 'calories', 'respiratory_rate', 'body_temperature', 'blood_pressure', 'blood_glucose', 'weight', 'body_composition'],
      })
      /** Tout ce que la carte peut importer, replié sous « Ce qui est importé ». */
-@@ -400,6 +409,11 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -444,6 +453,11 @@ export class HealthConnectConnector extends BaseConnector {
      // Using sync here avoids any risk of deadlocking the WebView bridge thread.
      const platform = getPlatformSync()
      debugInfo(TAG, `Plateforme détectée (sync) : ${platform}`)
@@ -47,7 +45,7 @@ index 02b4d30..6d18739 100644
  
      // Collect device info early so it is logged even if something below hangs
      const deviceInfo = await collectDeviceInfo()
-@@ -679,6 +693,10 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -723,6 +737,10 @@ export class HealthConnectConnector extends BaseConnector {
        return 'not_asked'
      }
      const platform = getPlatformSync()
@@ -58,7 +56,7 @@ index 02b4d30..6d18739 100644
      const hasCheckAuth = typeof Health.checkAuthorization === 'function'
      debugInfo(TAG, 'Vérification méthode Health.checkAuthorization', { hasCheckAuth, platform })
      if (!hasCheckAuth) {
-@@ -728,6 +746,10 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -772,6 +790,10 @@ export class HealthConnectConnector extends BaseConnector {
      try {
        debugInfo(TAG, 'Appel Health.requestAuthorization()…')
        await Health.requestAuthorization({ read: READ_TYPES, write: [] })
@@ -69,7 +67,7 @@ index 02b4d30..6d18739 100644
        debugInfo(TAG, 'requestAuthorization() terminé, vérification du résultat…')
        return await this.checkPermissions()
      } catch (e) {
-@@ -1009,7 +1031,7 @@ export class HealthConnectConnector extends BaseConnector {
+@@ -1020,7 +1042,7 @@ export class HealthConnectConnector extends BaseConnector {
          payload: {
            value: s.value,
            unit: s.unit,
@@ -79,10 +77,10 @@ index 02b4d30..6d18739 100644
            sourceName: s.sourceName,
            connector: 'health_connect',
 diff --git a/app/src/pages/Connectors.jsx b/app/src/pages/Connectors.jsx
-index 5e2620d..5ebc920 100644
+index 055efa7..486fee2 100644
 --- a/app/src/pages/Connectors.jsx
 +++ b/app/src/pages/Connectors.jsx
-@@ -76,6 +76,18 @@ const SYSTEM_UPDATE = (
+@@ -77,6 +77,18 @@ const SYSTEM_UPDATE = (
  
  /** Message affiché quand Health Connect est indisponible, selon la raison remontée par le natif. */
  const UNAVAILABLE_MESSAGES = {
@@ -117,7 +115,7 @@ index 5e2620d..5ebc920 100644
                </div>
              )
 diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
-index aa4e5fe..57c7399 100644
+index 4dbfd4e..d15ee14 100644
 --- a/app/src/pages/Onboarding.jsx
 +++ b/app/src/pages/Onboarding.jsx
 @@ -26,6 +26,11 @@ const WATCHES = [
@@ -132,7 +130,7 @@ index aa4e5fe..57c7399 100644
  
  /**
   * Écrans dans l'ordre (jalon 4a : 1 à 3 ; 4b : Health Connect puis import et « aha », seulement avec une montre
-@@ -147,7 +152,7 @@ function WatchStep({ watch, onWatch }) {
+@@ -156,7 +161,7 @@ function WatchStep({ watch, onWatch }) {
        <p className="onb-lead">Rien n’est demandé à cette étape : vous choisirez ce que l’app peut lire juste après.</p>
        <fieldset className="onb-choices">
          <legend className="onb-sr">Votre montre</legend>
@@ -141,7 +139,7 @@ index aa4e5fe..57c7399 100644
            <Choice
              key={w.id}
              type="radio"
-@@ -211,7 +216,7 @@ function HealthStep({ health, onHealth }) {
+@@ -220,7 +225,7 @@ function HealthStep({ health, onHealth }) {
    return (
      <>
        {disclosure}
@@ -150,7 +148,7 @@ index aa4e5fe..57c7399 100644
        <p className="onb-lead">
          Sommeil, pas, cœur, VFC et activité de vos 30 derniers jours, lus sur le téléphone. Rien n’est envoyé.
        </p>
-@@ -227,13 +232,16 @@ function HealthStep({ health, onHealth }) {
+@@ -236,13 +241,16 @@ function HealthStep({ health, onHealth }) {
        )}
        {health === 'unavailable' && (
          <p className="onb-note" role="status">
@@ -170,7 +168,7 @@ index aa4e5fe..57c7399 100644
          </button>
        )}
      </>
-@@ -298,7 +306,7 @@ function AhaStep({ imported, onImported, onReady }) {
+@@ -307,7 +315,7 @@ function AhaStep({ imported, onImported, onReady }) {
          <div
            className="onb-import-bar"
            role="progressbar"

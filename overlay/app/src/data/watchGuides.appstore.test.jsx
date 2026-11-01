@@ -29,7 +29,8 @@ describe('Guides des montres sur iPhone', () => {
 
   it('l’introduction parle de l’app Santé ; pas de liste d’étapes vide (Samsung)', () => {
     const { container } = render(<WatchGuides />)
-    expect(screen.getByText(/lit tout ce qui passe par/)).toHaveTextContent('lit tout ce qui passe par l’app Santé')
+    // Phrase d'Android depuis v673 (SLOP-1b-3) : « Choisissez sa marque : on vous montre comment envoyer ses mesures vers… »
+    expect(screen.getByText(/envoyer ses mesures vers/)).toHaveTextContent('envoyer ses mesures vers l’app Santé.')
     expect(container.querySelectorAll('#guide-samsung ol')).toHaveLength(0)
     expect(container.querySelectorAll('#guide-garmin ol li')).toHaveLength(3)
   })
