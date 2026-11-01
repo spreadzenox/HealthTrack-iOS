@@ -261,7 +261,9 @@
     ne reçoit que des builds de même numéro → `store-push.mjs` renomme la version « Prête à soumettre » au versionCode
     d'`upstream.json` à chaque envoi (PR #129, 31/10) : « 1.0 » renommée 648 le 31/10 à 15:21. État des captures chez
     Apple lu à chaque envoi (PR #132) : 7/8 traitées à 15:25, **8/8 traitées à 16:02** (run 41217672289), aucune
-    refusée. Refaites sur la 658 (Sources en couleur) et renvoyées le 31/10 à 20:11 (run 41237667780) : 8/8 traitées. Après chaque envoi TestFlight d'une nouvelle version : `store-push.yml` sans « captures », pour que la
+    refusée. Refaites sur la 658 (Sources en couleur) et renvoyées le 31/10 à 20:11 (run 41237667780) : 8/8 traitées.
+    À refaire au prochain envoi : la capture 2 (Analyses) montre encore « pas des causes ni un diagnostic », remplacé
+    par « à vérifier avant d'y croire » depuis Android v667 (1/11). Après chaque envoi TestFlight d'une nouvelle version : `store-push.yml` sans « captures », pour que la
     version de la fiche suive (charte §4). Reste la relecture du propriétaire.
   - [x] Catégorie (Santé et forme) et classification par âge (18 ans et plus, comme sur Google Play) envoyées par l'API
     (`store/app-store/classification.json`, PR #130, acceptées le 31/10 à 15:21) : réponses au plus prudent (informations médicales et
