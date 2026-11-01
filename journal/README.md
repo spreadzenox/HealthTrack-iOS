@@ -15,6 +15,9 @@
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** — **décision du 1/11 vers 15:00 : l'iPhone sort avec les abonnements**, comme Google Play
+- (sans urgence) **Un coup d'œil dans App Store Connect** : Halcya → Monétisation → Abonnements → groupe « Halcya » →
+  « Halcya Gold » : Apple y écrit ce qu'il attend encore (les trois abonnements sont « métadonnées manquantes » alors
+  que noms, prix, essai et capture sont en place). Envoyez-moi une capture de cette page.
 - **Une décision pour la date de soumission** : jusqu'au 20/11, Android offre Gold à toute installation (période de
   lancement), iPhone compris ; l'écran d'abonnement de l'iPhone n'a alors rien à vendre, et Apple doit pouvoir
   trouver l'achat pendant l'examen. Deux choix : soumettre après le 20/11 (rien à faire d'ici là), ou demander à la
@@ -309,7 +312,7 @@ via TestFlight.
 | 1/11 18:00 | serveur prêt, achat en préparation | la routine Android a fait votre demande en 30 minutes : son serveur vérifie les achats faits sur iPhone (v689) ; Android v689 suivie, avec la copie de secours hors d'iCloud (PR #181, mergée) : **la 689 est sur TestFlight (689.181)** ; envoi à Apple de la capture de l'écran d'achat prêt (PR #183, mergée) ; rappel de fin d'essai sur iPhone (PR #182, en vérification) ; reste avant d'ouvrir l'achat : les textes « Google Play » de l'écran d'abonnement et la partie vente des conditions. Parité : 48 % | #181, #183 (mergées), #182 |
 | 1/11 19:00 | notifications de l'App Store | Android v691 : son serveur reçoit aussi les avis d'Apple (renouvellement, remboursement, fin d'abonnement) ; l'adresse à donner à Apple est réglée par la routine, sans geste de votre part (PR #182, mergée, avec le rappel de fin d'essai sur iPhone) ; **la 691 est sur TestFlight (691.183)** ; textes de vente de l'iPhone (conditions, confidentialité, fiche) rédigés, publiés le jour où l'achat s'ouvre. Parité : 48 % | #182 (mergée) |
 | 1/11 20:00 | l'achat s'ouvre sur iPhone | Android v693 nomme le magasin selon la version (« l'App Store », « compte Apple ») ; **l'achat est ouvert sur iPhone** : Silver et Gold s'achètent dans l'app, par l'App Store, avec le rappel avant la fin de l'essai, les conditions et la fiche de vente (PR #184, mergée ; écran d'achat vérifié en image) ; jusqu'au 20/11, Gold reste offert à tous, donc rien à payer sur TestFlight. Parité : 48 % | #184 (mergée) |
-| 1/11 21:00 | la 693 sur TestFlight | **la 693 est sur TestFlight (693.185)** : première avec l'achat ouvert ; l'écran d'achat a été vérifié en image (prix, essai de 14 jours, renouvellement, « Restaurer un achat », conditions) ; la fiche App Store dit maintenant les abonnements et leurs prix ; la capture de l'écran d'achat part chez Apple pour l'examen des abonnements. Parité : 48 % | — |
+| 1/11 21:00 | la 693 sur TestFlight | **la 693 est sur TestFlight (693.185)** : première avec l'achat ouvert ; l'écran d'achat a été vérifié en image (prix, essai de 14 jours, renouvellement, « Restaurer un achat », conditions) ; la fiche App Store dit maintenant les abonnements et leurs prix ; la capture de l'écran d'achat est chez Apple pour l'examen des abonnements ; Apple les dit encore incomplets, un coup d'œil de votre part dira pourquoi. Parité : 48 % | #185, #186 (mergées) |
 
 ---
 
