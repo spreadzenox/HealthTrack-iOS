@@ -1,12 +1,18 @@
 # Abonnements App Store (I6) créés par l'API App Store Connect (scripts/store-subscriptions.mjs) : groupe « Halcya »,
 # Gold mensuel (9,99 €), Silver annuel (29,99 €, essai gratuit de 2 semaines) et Silver mensuel (4,99 €), en France,
 # comme sur Google Play. Ne crée que ce qui manque ; un prix, un niveau ou un essai déjà en place n'est jamais modifié
-# (écart signalé). Rien n'est soumis à l'examen d'Apple (geste du propriétaire). Lancement manuel, sur main seulement
+# (écart signalé). Sur demande, envoie aussi la capture de l'écran d'achat pour l'examen de chaque abonnement. Rien
+# n'est soumis à l'examen d'Apple (geste du propriétaire). Lancement manuel, sur main seulement
 # (environnement `appstore` : ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8, jamais affichés).
 name: Abonnements App Store — création
 
 on:
   workflow_dispatch:
+    inputs:
+      capture_examen:
+        description: "Capture de l'écran d'achat pour l'examen d'Apple : fichier de la branche captures/store (ex. iphone-17-pro-max-demo-clair-premium.png), vide pour ne rien envoyer"
+        type: string
+        default: ""
 
 permissions:
   contents: read
@@ -29,9 +35,22 @@ jobs:
           node-version: "22"
       - name: Tests du script
         run: node --test scripts/store-subscriptions.test.mjs
+      - name: Capture pour l'examen (branche captures/store)
+        if: inputs.capture_examen != ''
+        uses: actions/checkout@v4
+        with:
+          ref: captures/store
+          path: captures-store
       - name: Création (API App Store Connect)
         env:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
-        run: node scripts/store-subscriptions.mjs
+          CAPTURE_EXAMEN: ${{ inputs.capture_examen }}
+        run: |
+          if [ -n "$CAPTURE_EXAMEN" ]; then
+            case "$CAPTURE_EXAMEN" in *..*|/*) echo "::error::chemin de capture refusé"; exit 1;; esac
+            node scripts/store-subscriptions.mjs --capture-examen "captures-store/$CAPTURE_EXAMEN"
+          else
+            node scripts/store-subscriptions.mjs
+          fi

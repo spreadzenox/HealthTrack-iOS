@@ -3,9 +3,12 @@
 // création contre un App Store Connect simulé : tout se crée au premier passage, rien au second, et un prix déjà en
 // place n'est jamais modifié.
 import { test } from 'node:test'
+import { createHash } from 'node:crypto'
 import assert from 'node:assert/strict'
-import { readFileSync } from 'node:fs'
-import { SUBSCRIPTIONS, LIMITS, TERRITORY, GROUP, bodies, pricePointFor, currentPrices, ensureSubscriptions } from './store-subscriptions.mjs'
+import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { SUBSCRIPTIONS, LIMITS, TERRITORY, GROUP, bodies, pricePointFor, currentPrices, ensureSubscriptions, readReviewScreenshot } from './store-subscriptions.mjs'
 
 const root = new URL('..', import.meta.url)
 const read = (path) => readFileSync(new URL(path, root), 'utf8')
@@ -83,7 +86,7 @@ test('currentPrices : prix clients en place lus dans les paliers inclus', () => 
 
 /** App Store Connect simulé : juste ce que le script lit et crée. */
 function fakeAsc({ prePrice = null, monthlyPlans = false } = {}) {
-  const db = { groups: [], groupLocs: [], subs: [], locs: [], avail: {}, prices: {}, offers: {} }
+  const db = { groups: [], groupLocs: [], subs: [], locs: [], avail: {}, prices: {}, offers: {}, shots: {}, uploads: [], deleted: [] }
   const calls = []
   let n = 0
   const id = (p) => `${p}${++n}`
@@ -92,7 +95,7 @@ function fakeAsc({ prePrice = null, monthlyPlans = false } = {}) {
   const fetchImpl = async (url, { method, body }) => {
     const u = new URL(url)
     const path = u.pathname
-    const data = body ? JSON.parse(body).data : null
+    const data = body && typeof body === 'string' ? JSON.parse(body).data : null
     calls.push(`${method} ${path}`)
     let m
     if (method === 'GET' && path === '/v1/apps') return json(200, { data: [{ id: 'app1', type: 'apps' }] })
@@ -156,6 +159,37 @@ function fakeAsc({ prePrice = null, monthlyPlans = false } = {}) {
       db.offers[sub] = [{ id: id('o'), attributes: data.attributes, relationships: { territory: { data: data.relationships.territory.data } } }]
       return json(201, { data: {} })
     }
+    if ((m = /^\/v1\/subscriptions\/(\w+)\/appStoreReviewScreenshot$/.exec(path))) {
+      const shot = db.shots[m[1]]
+      return shot ? json(200, { data: shot }) : json(404, { errors: [{ title: 'Not found' }] })
+    }
+    if (method === 'POST' && path === '/v1/subscriptionAppStoreReviewScreenshots') {
+      const sub = data.relationships.subscription.data.id
+      const shot = {
+        id: id('rs'), sub, attributes: { ...data.attributes, uploadOperations: [
+          { method: 'PUT', url: `https://envoi.example/${sub}/1`, offset: 0, length: 4, requestHeaders: [{ name: 'Content-Type', value: 'image/png' }] },
+          { method: 'PUT', url: `https://envoi.example/${sub}/2`, offset: 4, length: data.attributes.fileSize - 4, requestHeaders: [] },
+        ] },
+      }
+      db.shots[sub] = shot
+      return json(201, { data: shot })
+    }
+    if (u.host === 'envoi.example' && method === 'PUT') {
+      db.uploads.push({ path, bytes: Buffer.from(body).length })
+      return json(200, {})
+    }
+    if ((m = /^\/v1\/subscriptionAppStoreReviewScreenshots\/(\w+)$/.exec(path))) {
+      const shot = Object.values(db.shots).find((x) => x.id === m[1])
+      if (method === 'DELETE') {
+        db.deleted.push(m[1])
+        delete db.shots[shot.sub]
+        return json(204, {})
+      }
+      if (method === 'PATCH') {
+        Object.assign(shot.attributes, data.attributes)
+        return json(200, { data: shot })
+      }
+    }
     if ((m = /^\/v1\/subscriptions\/(\w+)$/.exec(path)) && method === 'GET') return json(200, { data: db.subs.find((s) => s.id === m[1]) })
     return json(500, { errors: [{ title: `route non simulée ${method} ${path}` }] })
   }
@@ -208,4 +242,38 @@ test('ensureSubscriptions : deux paliers au même prix (paiement mensuel d’App
   assert.deepEqual(drift, [])
   for (const s of asc.db.subs) assert.equal(asc.db.prices[s.id].length, 1)
   assert.equal(asc.calls.filter((c) => c === 'POST /v1/subscriptionPrices').length, 3)
+})
+
+test('capture pour l’examen : envoyée pour chaque abonnement, morceaux et empreinte MD5, la précédente remplacée', async () => {
+  const asc = fakeAsc()
+  const png = Buffer.concat([Buffer.from('89504e470d0a1a0a', 'hex'), Buffer.from('image de l’écran d’achat')])
+  const shot = { name: 'achat.png', bytes: png }
+  const lines = []
+  await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl, log: (l) => lines.push(l), reviewScreenshot: shot })
+  assert.equal(Object.keys(asc.db.shots).length, 3)
+  for (const s of Object.values(asc.db.shots)) {
+    assert.equal(s.attributes.fileName, 'achat.png')
+    assert.equal(s.attributes.fileSize, png.length)
+    assert.equal(s.attributes.uploaded, true)
+    assert.equal(s.attributes.sourceFileChecksum, createHash('md5').update(png).digest('hex'))
+  }
+  assert.equal(asc.db.uploads.length, 6, 'deux morceaux par abonnement')
+  assert.equal(asc.db.uploads.reduce((n, x) => n + x.bytes, 0), 3 * png.length)
+  assert.ok(lines.filter((l) => /capture pour l'examen envoyée \(achat\.png\)/.test(l)).length === 3)
+  // Second envoi : l'ancienne capture est supprimée avant la nouvelle, sans rien recréer d'autre
+  const writesBefore = asc.calls.filter((c) => c.startsWith('POST /v1/subscriptions')).length
+  await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl, reviewScreenshot: shot })
+  assert.equal(asc.db.deleted.length, 3)
+  assert.equal(Object.keys(asc.db.shots).length, 3)
+  assert.equal(asc.calls.filter((c) => c.startsWith('POST /v1/subscriptions')).length, writesBefore, 'aucun abonnement recréé')
+})
+
+test('readReviewScreenshot : un PNG seulement, avec son nom de fichier', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'examen-'))
+  const ok = join(dir, 'iphone-17-pro-max-demo-clair-premium.png')
+  writeFileSync(ok, Buffer.concat([Buffer.from('89504e470d0a1a0a', 'hex'), Buffer.from('x')]))
+  assert.equal(readReviewScreenshot(ok).name, 'iphone-17-pro-max-demo-clair-premium.png')
+  const bad = join(dir, 'faux.png')
+  writeFileSync(bad, 'pas une image')
+  assert.throws(() => readReviewScreenshot(bad), /n'est pas un PNG/)
 })
