@@ -183,8 +183,8 @@
     **créés par l'API le 1/11 à 17:48** (`scripts/store-subscriptions.mjs`, 9 tests, workflow « Abonnements App Store
     — création », PR #180) : groupe « Halcya » (nom affiché fr-FR), Gold mensuel 9,99 € (niveau 1), Silver annuel
     29,99 € avec 2 semaines d'essai et Silver mensuel 4,99 € (niveau 2), noms et descriptions fr-FR, en vente en France.
-  - [ ] Capture d'écran pour l'examen de chaque abonnement (état chez Apple : `MISSING_METADATA` tant qu'elle
-    manque) : l'écran d'achat de l'app, à prendre en CI et envoyer par l'API quand l'achat ouvrira sur iPhone ;
+  - [~] Capture d'écran pour l'examen de chaque abonnement : **envoyée le 1/11 à 22:24** (écran d'achat 6,9",
+    « premium-2 » de `captures/store`) ; état chez Apple à revérifier (`MISSING_METADATA` juste après l'envoi) : l'écran d'achat de l'app, à prendre en CI et envoyer par l'API quand l'achat ouvrira sur iPhone ;
     adresse des notifications serveur V2 (relais d'Android, v691) réglée par le script (PR #182) ; la soumission,
     avec une version de l'app, reste au propriétaire.
   - [x] Natif et branchement JS (PR #33, mergée le 28/10) : `BillingRule` (5 tests XCTest), plugin `AppStoreBilling`,
@@ -196,13 +196,13 @@
     test dit désormais pourquoi (`StoreKit Test : transaction non vérifiée …`) ; repassé sans faute sur la CI suivante.
   - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
     l'`appAccountToken`.
-  - [ ] **Sortie avec les abonnements (décision du propriétaire, 1/11 vers 15:00)** — avancement au 1/11 18:10 : A4 ✅,
-    abonnements créés par l'API ✅, **relais d'Android qui vérifie les achats App Store ✅ (v689, #605)**, A5 ✅, copie
-    de secours hors d'iCloud (PR #181), rappel de fin d'essai en Swift (PR #182), capture pour l'examen par l'API
-    (PR #183) ; restent : textes « Google Play » de l'écran d'abonnement (I6-RELAIS-6 chez Android, sinon correctif),
-    `FEATURES.billing` vrai, captures de l'écran d'achat, partie vente des conditions, de la confidentialité et de la
-    fiche (brouillon prêt sur `claude/ios-achat-iphone-011815`), essai sur l'iPhone 12 ; notifications serveur V2 :
-    relais prêt (v691, #607), adresse réglée par `store-subscriptions.mjs` (PR #182). Ordre : A4 (propriétaire) → groupe
+  - [ ] **Sortie avec les abonnements (décision du propriétaire, 1/11 vers 15:00)** — avancement au 1/11 20:30 : A4 ✅, A5 ✅,
+    abonnements créés par l'API ✅ (adresse des notifications réglée ✅), relais d'Android ✅ (v689, v691), nom du magasin
+    chez Android ✅ (v693, #609), copie de secours hors d'iCloud ✅ (#181), rappel de fin d'essai en Swift ✅ (#182),
+    capture pour l'examen par l'API ✅ (#183) ; **achat ouvert sur iPhone : PR #184** (FEATURES.billing, VITE_STORE,
+    correctif 36, faux magasin des captures, partie vente des conditions, de la confidentialité et de la fiche) ; puis
+    captures 6,9" et capture pour l'examen envoyée ; essai d'achat sur l'iPhone 12 (TestFlight, après le 20/11 : avant,
+    Gold est offert) ; date de soumission selon la décision sur la période de lancement (`DEMANDES.md`). Ordre : A4 (propriétaire) → groupe
     « Halcya » et trois abonnements créés par l'API (`store/app-store/abonnements.md` : Silver annuel 29,99 € avec essai de
     2 semaines, Silver mensuel 4,99 €, Gold mensuel 9,99 € ; noms, descriptions, prix en euros, disponibilité, adresse des
     notifications serveur V2 du relais) ; relais d'Android qui vérifie les achats Apple (message prêt à coller dans
@@ -256,7 +256,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ; **693.185 (1/11 21:59, achat ouvert)** ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la

@@ -10,11 +10,18 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v691 (1/11) | **691 sur TestFlight** (build 691.183) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v693 (1/11) | **693 sur TestFlight** (build 693.185), première avec l'achat ouvert ; même version qu'Android |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** — **décision du 1/11 vers 15:00 : l'iPhone sort avec les abonnements**, comme Google Play
+- (sans urgence) **Un coup d'œil dans App Store Connect** : Halcya → Monétisation → Abonnements → groupe « Halcya » →
+  « Halcya Gold » : Apple y écrit ce qu'il attend encore (les trois abonnements sont « métadonnées manquantes » alors
+  que noms, prix, essai et capture sont en place). Envoyez-moi une capture de cette page.
+- **Une décision pour la date de soumission** : jusqu'au 20/11, Android offre Gold à toute installation (période de
+  lancement), iPhone compris ; l'écran d'abonnement de l'iPhone n'a alors rien à vendre, et Apple doit pouvoir
+  trouver l'achat pendant l'examen. Deux choix : soumettre après le 20/11 (rien à faire d'ici là), ou demander à la
+  routine Android que la période de lancement ne vaille que pour Google Play. Dites-moi lequel.
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès), créer dans
   TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la version d'iOS de son
   iPhone 12 (Réglages → Général → Informations). Ensuite, il ne restera que la relecture et la soumission, quand
@@ -33,13 +40,13 @@
   le statut de professionnel (DSA) est **en examen chez Apple** : rien à faire, Apple prévient par e-mail. La routine
   crée les trois abonnements par l'API (Silver annuel avec essai de 14 jours, Silver mensuel, Gold mensuel, aux prix
   d'Android, en France) ; rien n'est soumis à Apple.
-- **31/10 : installez la build la plus récente (691.183), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
+- **31/10 : installez la build la plus récente (693.185), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (691.183 aujourd'hui) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (693.185 aujourd'hui) ; elle installe l'app TestFlight sur son
   iPhone 12.
-- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 691, « Prête à
+- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 693, « Prête à
   soumettre ») : textes, 8 captures, catégorie Santé et forme, âge 18+. Rien n'est soumis. Avant une soumission,
   relisez-la, en particulier les réponses du questionnaire d'âge (`store/app-store/README.md`).
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
@@ -81,7 +88,7 @@
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 691.183) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 693.185) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -304,6 +311,8 @@ via TestFlight.
 | 1/11 17:00 | A4 fait, abonnements | vous avez terminé A4 dans App Store Connect : contrat de vente, banque, fiscalité et DAC7 actifs, statut de professionnel en examen chez Apple ; Gold ajouté au module d'achat de l'iPhone (PR #177, mergée) ; **les trois abonnements existent dans App Store Connect** (Gold 9,99 €/mois, Premium 29,99 €/an avec 2 semaines d'essai, Premium 4,99 €/mois, en France ; créés par l'API, rien de soumis, PR #180) ; Android v685 et v687 suivies (passage de Silver à Gold sur Google Play, banc d'essai côté serveur : rien de visible sur iPhone, PR #179) ; **la 687 est sur TestFlight (687.179)** ; vous avez fait A5 (confidentialité de l'app), guidé pas à pas et relu sur capture ; votre décision appliquée : la copie de secours sort de la sauvegarde iCloud (PR #181). Parité : 48 % | #177, #179, #180 (mergées), #181 |
 | 1/11 18:00 | serveur prêt, achat en préparation | la routine Android a fait votre demande en 30 minutes : son serveur vérifie les achats faits sur iPhone (v689) ; Android v689 suivie, avec la copie de secours hors d'iCloud (PR #181, mergée) : **la 689 est sur TestFlight (689.181)** ; envoi à Apple de la capture de l'écran d'achat prêt (PR #183, mergée) ; rappel de fin d'essai sur iPhone (PR #182, en vérification) ; reste avant d'ouvrir l'achat : les textes « Google Play » de l'écran d'abonnement et la partie vente des conditions. Parité : 48 % | #181, #183 (mergées), #182 |
 | 1/11 19:00 | notifications de l'App Store | Android v691 : son serveur reçoit aussi les avis d'Apple (renouvellement, remboursement, fin d'abonnement) ; l'adresse à donner à Apple est réglée par la routine, sans geste de votre part (PR #182, mergée, avec le rappel de fin d'essai sur iPhone) ; **la 691 est sur TestFlight (691.183)** ; textes de vente de l'iPhone (conditions, confidentialité, fiche) rédigés, publiés le jour où l'achat s'ouvre. Parité : 48 % | #182 (mergée) |
+| 1/11 20:00 | l'achat s'ouvre sur iPhone | Android v693 nomme le magasin selon la version (« l'App Store », « compte Apple ») ; **l'achat est ouvert sur iPhone** : Silver et Gold s'achètent dans l'app, par l'App Store, avec le rappel avant la fin de l'essai, les conditions et la fiche de vente (PR #184, mergée ; écran d'achat vérifié en image) ; jusqu'au 20/11, Gold reste offert à tous, donc rien à payer sur TestFlight. Parité : 48 % | #184 (mergée) |
+| 1/11 21:00 | la 693 sur TestFlight | **la 693 est sur TestFlight (693.185)** : première avec l'achat ouvert ; l'écran d'achat a été vérifié en image (prix, essai de 14 jours, renouvellement, « Restaurer un achat », conditions) ; la fiche App Store dit maintenant les abonnements et leurs prix ; la capture de l'écran d'achat est chez Apple pour l'examen des abonnements ; Apple les dit encore incomplets, un coup d'œil de votre part dira pourquoi. Parité : 48 % | #185, #186 (mergées) |
 
 ---
 
