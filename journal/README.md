@@ -10,18 +10,18 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v681 (1/11) | **681 sur TestFlight** (build 681.175) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v683 (1/11) | **683 sur TestFlight** (build 683.177) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **31/10 : installez la build la plus récente (681.175), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
+- **31/10 : installez la build la plus récente (683.177), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (681.175 aujourd'hui) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (683.177 aujourd'hui) ; elle installe l'app TestFlight sur son
   iPhone 12.
-- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 681, « Prête à
+- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 683, « Prête à
   soumettre ») : textes, 8 captures, catégorie Santé et forme, âge 18+. Rien n'est soumis. Avant une soumission,
   relisez-la, en particulier les réponses du questionnaire d'âge (`store/app-store/README.md`).
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
@@ -65,7 +65,7 @@
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 681.175) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 683.177) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -283,6 +283,7 @@ via TestFlight.
 | 1/11 12:00 | Android v679 | Android v679 : les détails des liens dans Analyses tiennent en une phrase (« Le jour même : plus haut, meilleur bien-être ») ; aussi sur iPhone, sans rien à adapter (PR #170, mergée, vue en image) ; **la 679 est sur TestFlight (679.171)**, même version qu'Android ; les captures de la fiche App Store refaites sur la 678 sont envoyées (réintroduction et Analyses à jour) ; la prochaine série viendra quand Android aura fini de reprendre ses textes. Parité : 48 % | #170 (mergée) |
 | 1/11 13:00 | Android v680 | Android v680 : le serveur d'analyse reconnaît maintenant l'abonnement Gold de Google Play (20 analyses par jour) ; rien de visible sur iPhone ; pour que Gold marche aussi sur iPhone, la demande à Android précise comment reconnaître les abonnements Gold de l'App Store (PR #172, mergée) ; **la 680 est sur TestFlight (680.173)**, même version qu'Android. Parité : 48 % | #172 (mergée) |
 | 1/11 14:00 | Android v681, Gold | Android v681 : l'abonnement Gold existe sur Google Play (9,99 €/mois, sans essai), annoncé par ce qu'il apporte de vérifiable (20 analyses de repas par jour) tant que le test sur des repas pesés n'a pas prouvé qu'il se trompe moins ; même offre et mêmes textes prévus pour l'iPhone (PR #174, mergée) ; **la 681 est sur TestFlight (681.175)**, même version qu'Android. Parité : 48 % | #174 (mergée) |
+| 1/11 15:00 | Android v683, Gold | Android v683 : l'écran d'abonnement propose Silver et Gold sur Google Play ; sur iPhone, l'abonnement App Store n'est pas encore ouvert (l'écran le dit) ; un test de l'iPhone adapté avant même la publication d'Android (PR #176, mergée, vue en image) ; **la 683 est sur TestFlight (683.177)**, même version qu'Android ; Gold ajouté au module d'achat App Store de l'iPhone, avec un essai qui vérifie qu'on ne paie qu'un abonnement en passant de Silver à Gold (PR #177, en vérification). Parité : 48 % | #176 (mergée), #177 |
 
 ---
 
