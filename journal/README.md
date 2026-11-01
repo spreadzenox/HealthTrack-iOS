@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v687 (1/11) | **687 sur TestFlight** (build 687.179) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v689 (1/11) | **687 sur TestFlight** (build 687.179) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -19,8 +19,10 @@
   TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la version d'iOS de son
   iPhone 12 (Réglages → Général → Informations). Ensuite, il ne restera que la relecture et la soumission, quand
   l'achat sera ouvert sur iPhone.
-- ✅ **Message transmis à la routine Android le 1/11 vers 17:15** (vérification des achats de l'App Store par son
-  relais, nom du magasin dans l'écran d'abonnement) : l'achat s'ouvrira sur iPhone dès que son relais sera prêt.
+- ✅ **Message transmis à la routine Android le 1/11 vers 17:15, et déjà fait par elle à 17:45** : son serveur vérifie
+  maintenant les achats faits sur iPhone (v689). Il reste, de mon côté, à ouvrir l'achat dans l'app iPhone : les
+  textes qui disent « Google Play » (la routine Android les rend neutres), l'écran d'achat avec les trois formules et
+  sa capture pour Apple, la partie vente des conditions ; le rappel de fin d'essai est prêt (PR #182).
 - ✅ **Décidé le 1/11 vers 17:15 : la copie de secours sort de la sauvegarde iCloud** (directive 5.1.3 d'Apple) ;
   sur un nouvel iPhone, on reprend ses données par l'export. Écrit et testé (PR #181), en vérification sur Mac.
 - ✅ **A5 fait le 1/11** (confidentialité de l'app, réponses de `store/app-store/confidentialite.md`, relues sur votre
@@ -299,6 +301,7 @@ via TestFlight.
 | 1/11 15:00 | Android v683, Gold | Android v683 : l'écran d'abonnement propose Silver et Gold sur Google Play ; sur iPhone, l'abonnement App Store n'est pas encore ouvert (l'écran le dit) ; un test de l'iPhone adapté avant même la publication d'Android (PR #176, mergée, vue en image) ; **la 683 est sur TestFlight (683.177)**, même version qu'Android ; Gold ajouté au module d'achat App Store de l'iPhone, avec un essai qui vérifie qu'on ne paie qu'un abonnement en passant de Silver à Gold (PR #177, en vérification). Parité : 48 % | #176 (mergée), #177 |
 | 1/11 16:00 | votre décision : abonnements | vous avez demandé ce qu'il reste avant la mise en production, puis décidé de **sortir l'iPhone avec les abonnements** : chemin noté en tête (A4 d'abord, message prêt à coller pour la routine Android) ; la routine créera les abonnements par l'API dès A4 actif. Parité : 48 % | #177, #178 |
 | 1/11 17:00 | A4 fait, abonnements | vous avez terminé A4 dans App Store Connect : contrat de vente, banque, fiscalité et DAC7 actifs, statut de professionnel en examen chez Apple ; Gold ajouté au module d'achat de l'iPhone (PR #177, mergée) ; **les trois abonnements existent dans App Store Connect** (Gold 9,99 €/mois, Premium 29,99 €/an avec 2 semaines d'essai, Premium 4,99 €/mois, en France ; créés par l'API, rien de soumis, PR #180) ; Android v685 et v687 suivies (passage de Silver à Gold sur Google Play, banc d'essai côté serveur : rien de visible sur iPhone, PR #179) ; **la 687 est sur TestFlight (687.179)** ; vous avez fait A5 (confidentialité de l'app), guidé pas à pas et relu sur capture ; votre décision appliquée : la copie de secours sort de la sauvegarde iCloud (PR #181). Parité : 48 % | #177, #179, #180 (mergées), #181 |
+| 1/11 18:00 | serveur prêt, achat en préparation | la routine Android a fait votre demande en 30 minutes : son serveur vérifie les achats faits sur iPhone (v689) ; Android v689 suivie, avec la copie de secours hors d'iCloud (PR #181, en vérification) ; rappel de fin d'essai sur iPhone prêt (PR #182) ; envoi à Apple de la capture de l'écran d'achat préparé (PR #183) ; reste avant d'ouvrir l'achat : les textes « Google Play » de l'écran d'abonnement et la partie vente des conditions. Parité : 48 % | #181, #182, #183 |
 
 ---
 
