@@ -147,10 +147,19 @@
     Sans analyse lancée, rien ne part.
   </p>
 
-  <h2>Achats</h2>
+  <h2>Abonnement (achats intégrés de l'App Store)</h2>
   <p>
-    L'app iPhone ne propose pour l'instant aucun achat : rien n'est envoyé à ce sujet. Quand un abonnement par
-    l'App Store sera proposé, cette page sera mise à jour avant, et le paiement sera entièrement géré par Apple.
+    Si vous vous abonnez à Silver ou à Gold, le paiement est entièrement géré par Apple : Halcya ne voit jamais votre
+    moyen de paiement, votre nom ni votre adresse e-mail. Pour ouvrir les fonctions de l'abonnement, l'app envoie au
+    serveur de Halcya la transaction signée par Apple (abonnement acheté, dates d'achat et d'échéance, essai,
+    renouvellement), aussi jointe à chaque analyse IA pour appliquer vos droits, avec l'identifiant aléatoire
+    d'installation décrit plus haut. Le serveur vérifie la signature d'Apple et renvoie seulement l'état de
+    l'abonnement (actif, essai, période de grâce…) et sa date d'échéance. Il ne garde pas la transaction : ses
+    journaux techniques n'en notent qu'une courte empreinte. Lors de l'achat, l'app transmet à Apple une empreinte
+    de cet identifiant d'installation, qui ne permet pas de vous identifier. Apple prévient aussi le serveur des
+    renouvellements, remboursements et fins d'abonnement : après un remboursement ou une expiration, le serveur garde
+    seulement l'état de l'abonnement, sous une empreinte de son numéro, sans rien qui vous identifie. Sans
+    abonnement, aucun achat n'est envoyé.
   </p>
 
   <h2>Notifications</h2>
