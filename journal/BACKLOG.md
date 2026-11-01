@@ -239,7 +239,8 @@
     Bluetooth, visage, météo, analyse IA sans jeton Google, aucun achat pour l'instant ; ni montre Huawei, ni temps
     d'écran, ni Withings. Lien « ‹ Revenir à Halcya » en tête (pas de bouton retour sur iPhone). Témoin : quand la
     page d'Android change, `privacyPolicyIphone.test.js` échoue jusqu'à relecture de la page iPhone (empreinte à
-    mettre à jour).
+    mettre à jour). Relue le 1/11 sur Android v671, avec les conditions (`conditionsIphone.test.js`) : refrain « pas un
+    diagnostic » et « pas des causes » retirés comme sur Android, sans la lecture au déverrouillage (PR #154).
   - [ ] Publier en ligne la page de confidentialité et une page d'assistance (deux URL exigées par la fiche) :
     29/10, workflow `pages.yml` et `scripts/site.mjs` prêts (page d'assistance `site/assistance.html` ; la
     confidentialité est celle de l'app, sans son lien de retour ; directive 2.3.10 vérifiée) ; attend **A8** (Pages

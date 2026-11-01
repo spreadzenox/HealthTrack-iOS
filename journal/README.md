@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v670 (1/11) | **670 sur TestFlight** (build 670.153) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v671 (1/11) | **670 sur TestFlight** (build 670.153 ; la 638.121 fut la première avec la phrase exigée par Apple) ; v671 en vérification |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -270,6 +270,7 @@ via TestFlight.
 | 1/11 01:00 | Android v665 | Android v665 : la phrase « une estimation, pas un diagnostic » n'est plus répétée sous chaque carte, elle est dite une fois aux endroits clés (découverte de la lecture du visage, historique du bien-être, rapport PDF) ; aussi sur iPhone, où le nouveau test d'Android passe sur nos textes (PR #148, mergée, vue en image) ; **la 665 est sur TestFlight (665.149)**, même version qu'Android. Parité : 48 % | #148 (mergée) |
 | 1/11 02:00 | Android v667 | Android v667 : les cartes de pistes disent « à vérifier avant d'y croire » au lieu de répéter « pas des causes », la règle étant expliquée une fois dans « Comment c'est calculé » ; les pistes restent des liens à vérifier, aussi sur iPhone (PR #150, mergée, vue en image) ; **la 667 est sur TestFlight (667.151)**, même version qu'Android ; les captures de la fiche sont refaites pour montrer la nouvelle phrase ; Android v668 (textes des repas, plus courts) sera suivi au prochain run. Parité : 48 % | #150 (mergée) |
 | 1/11 03:00 | Android v670 | Android v668 à v670 : des textes plus courts pour les repas (ce qui est envoyé à l'IA, en trois phrases), les premiers pas et les détails de la lecture du visage dans Sources ; aussi sur iPhone (PR #152, mergée, vue en image) ; **la 670 est sur TestFlight (670.153)**, même version qu'Android ; une note des Nouveautés d'Android parle de Health Connect : remplacée sur iPhone par une note propre ; **les captures de la fiche App Store sont refaites et envoyées** : la capture des analyses dit « à vérifier avant d'y croire », et Apple les a toutes acceptées. Parité : 48 % | #152 (mergée) |
+| 1/11 04:00 | Android v671 | Android v671 : la politique de confidentialité, les conditions et la fiche de l'app ne répètent plus « pas un diagnostic » ni « pas des causes » ; l'iPhone a ses propres pages, relues et alignées (sans la lecture au déverrouillage, qui n'existe que sur Android), et la description App Store suit la nouvelle fiche (PR #154, en vérification). Parité : 48 % | #154 |
 
 ---
 
