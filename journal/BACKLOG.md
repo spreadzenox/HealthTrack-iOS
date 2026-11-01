@@ -179,8 +179,11 @@
     - adaptateur en Vitest ;
     - achat de bout en bout sur simulateur avec un fichier de configuration StoreKit (`.storekit`) branché au
       schéma, la feuille d'achat de test touchée par XCUITest.
-  - Propriétaire, après A1 à A4 : créer le groupe et les deux produits dans App Store Connect avec ces ids (valeurs
-    exactes préparées le moment venu).
+  - [~] Groupe et abonnements dans App Store Connect (A4 fait le 1/11, contrat « Paid Applications » actif) : créés
+    par l'API, pas par le propriétaire (`scripts/store-subscriptions.mjs`, 9 tests, workflow « Abonnements App Store —
+    création ») : Gold mensuel 9,99 €, Silver annuel 29,99 € avec 2 semaines d'essai, Silver mensuel 4,99 €, en
+    France ; reste la capture d'écran pour l'examen de chaque abonnement (écran d'achat, à prendre en CI quand
+    l'achat ouvrira) ; la soumission, avec une version de l'app, reste au propriétaire.
   - [x] Natif et branchement JS (PR #33, mergée le 28/10) : `BillingRule` (5 tests XCTest), plugin `AppStoreBilling`,
     correctif 24, contrat avec `describePlans` (Vitest). Inactifs tant que `FEATURES.billing` est faux.
   - [x] Achat d'essai sur simulateur : cible de tests unitaires hébergée par l'app + fichier `.storekit` +
@@ -190,6 +193,7 @@
     test dit désormais pourquoi (`StoreKit Test : transaction non vérifiée …`) ; repassé sans faute sur la CI suivante.
   - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
     l'`appAccountToken`.
+  - [ ] À l'ouverture de l'achat sur iPhone (Android v685, GOLD-b2) : le bouton « Passer à Gold », réservé par Android aux abonnés venus de Google Play, et `ALREADY_GOLD_MESSAGE` (« compte Google Play ») demandent un texte iPhone (« compte Apple ») ; le plugin `AppStoreBilling` ignore `oldPurchaseToken` et `replacementMode`, Apple fait le passage dans le groupe.
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : mêmes modèles qu'Android, mêmes scores sur ses vecteurs de référence.
   Étude du 28/10 (`RECHERCHE.md`) : ni Vision ni ARKit, qui changeraient les scores. Valence et éveil (HSEmotion, poids
   AffectNet) éteints tant que la licence n'est pas tranchée (`DEMANDES.md`). Étapes :
