@@ -250,6 +250,60 @@ export function installPhoneUsageFake({ target = window, localStorage = window.l
   doc.dispatchEvent(new Event('visibilitychange'))
 }
 
+/**
+ * Abonnements de démonstration (I6) : faux plugin `AppStoreBilling` des captures, de même forme que le vrai
+ * (`BillingRule.swift`) : les trois abonnements du groupe Halcya aux prix de `store/app-store/abonnements.md`, essai
+ * gratuit de 2 semaines sur Silver annuel. Rien ne s'achète : `purchase` rend « annulé ».
+ */
+export function fakeAppStoreBilling() {
+  const phase = (priceMicros, formattedPrice, billingPeriod) => ({ priceMicros, formattedPrice, billingPeriod, currency: 'EUR' })
+  const products = [
+    {
+      productId: 'halcya_premium',
+      offers: [
+        { basePlanId: 'annuel', offerToken: 'halcya_premium_annuel', phases: [phase(0, '', 'P2W'), phase(29_990_000, '29,99 €', 'P1Y')] },
+        { basePlanId: 'mensuel', offerToken: 'halcya_premium_mensuel', phases: [phase(4_990_000, '4,99 €', 'P1M')] },
+      ],
+    },
+    { productId: 'halcya_gold', offers: [{ basePlanId: 'mensuel', offerToken: 'halcya_gold_mensuel', phases: [phase(9_990_000, '9,99 €', 'P1M')] }] },
+  ]
+  return {
+    getProducts: async ({ productIds } = {}) => ({ products: products.filter((p) => !productIds || productIds.includes(p.productId)) }),
+    purchase: async () => ({ status: 'cancelled' }),
+    queryPurchases: async () => ({ purchases: [] }),
+    addListener: async () => ({ remove: async () => {} }),
+  }
+}
+
+/**
+ * Écran d'abonnement des captures : faux plugin d'achat et droits « sans abonnement » rendus à la place du relais,
+ * pour montrer l'écran d'achat tel qu'Apple et les abonnés le verront (pendant la période de lancement, le vrai
+ * relais offre Gold et l'écran n'a rien à vendre) ; c'est aussi la capture pour l'examen des abonnements. Le mode est
+ * chargé après le premier rendu : une page d'abonnement déjà affichée est remontée, sans recharger l'app.
+ */
+export function installBillingFake({ target = window, storage = window.localStorage, location = window.location, history = window.history } = {}) {
+  target.__HT_PLAY_BILLING__ = fakeAppStoreBilling()
+  if (!target.__htFakeVerify && typeof target.fetch === 'function') {
+    const realFetch = target.fetch.bind(target)
+    target.__htFakeVerify = true
+    target.fetch = (url, init) =>
+      String(url?.url ?? url).includes('/v1/subscription/verify')
+        ? Promise.resolve(new Response(JSON.stringify({ ok: true, premium: false, source: null }), { status: 200, headers: { 'Content-Type': 'application/json' } }))
+        : realFetch(url, init)
+  }
+  try {
+    storage.removeItem('halcya_entitlement')
+  } catch {
+    /* rien en cache */
+  }
+  if (location.pathname === '/premium') {
+    for (const path of ['/plus', '/premium']) {
+      history.pushState({}, '', path)
+      target.dispatchEvent(new PopStateEvent('popstate'))
+    }
+  }
+}
+
 export async function installCaptureMode() {
   watchRejections()
   try {
@@ -263,6 +317,7 @@ export async function installCaptureMode() {
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
     const plan = buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS)
     if (plan[Number(window.localStorage.getItem(STEP_KEY) ?? 0)]?.data === 'demo') installPhoneUsageFake()
+    installBillingFake()
     await runCaptureStep(plan, {
       storage,
       demoEntries: () => iphoneDemoEntries(demo.generateDemoEntries()),

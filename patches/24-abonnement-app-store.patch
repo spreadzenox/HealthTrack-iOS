@@ -1,9 +1,14 @@
 diff --git a/app/src/services/playBilling.js b/app/src/services/playBilling.js
-index 681134c..cce7447 100644
+index 129e8ff..772b437 100644
 --- a/app/src/services/playBilling.js
 +++ b/app/src/services/playBilling.js
-@@ -113,7 +113,10 @@ export async function loadBillingPlugin() {
-   if (import.meta.env?.DEV && typeof window !== 'undefined' && window.__HT_PLAY_BILLING__) return window.__HT_PLAY_BILLING__
+@@ -119,10 +119,14 @@ export function annualSavingPercent(plans) {
+ export async function loadBillingPlugin() {
+   if (!FEATURES.billing) return null
+   // Captures (npm run visual -- --play --billing) : faux plugin, jamais en production
+-  if (import.meta.env?.DEV && typeof window !== 'undefined' && window.__HT_PLAY_BILLING__) return window.__HT_PLAY_BILLING__
++  // Version iOS (HealthTrack-iOS) : aussi dans la build de captures de l'iPhone (VITE_IOS_CAPTURE), jamais livrée
++  if ((import.meta.env?.DEV || import.meta.env?.VITE_IOS_CAPTURE) && typeof window !== 'undefined' && window.__HT_PLAY_BILLING__) return window.__HT_PLAY_BILLING__
    try {
      const { Capacitor, registerPlugin } = await import('@capacitor/core')
 -    if (!Capacitor?.isNativePlatform?.() || Capacitor.getPlatform?.() !== 'android') return null

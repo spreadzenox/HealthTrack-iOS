@@ -34,6 +34,11 @@ describe('politique de confidentialité sur iPhone', () => {
     for (const type of ['pas', 'sommeil', 'fréquence cardiaque au repos', 'variabilité de la fréquence cardiaque',
       'saturation en oxygène', 'tension artérielle', 'glycémie', 'masse grasse']) expect(text).toContain(type)
     expect(text).toMatch(/copie de secours/)
+    // I6, achat ouvert : la transaction signée par Apple est vérifiée par le relais, sans rien qui identifie
+    expect(text).toMatch(/Abonnement \(achats intégrés de l'App Store\)/)
+    expect(text).toMatch(/transaction signée par Apple/)
+    expect(text).toMatch(/empreinte de son numéro, sans rien qui vous identifie/)
+    expect(text).not.toMatch(/ne propose pour l'instant aucun achat/)
     expect(text).toMatch(/sauvegarde iCloud/)
     // 1/11 : copie de secours hors de la sauvegarde iCloud (directive 5.1.3 (ii) d'Apple)
     expect(text).toMatch(/n'est pas incluse dans la sauvegarde iCloud/)

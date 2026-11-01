@@ -81,6 +81,7 @@ jobs:
         working-directory: upstream/app
         env:
           VITE_DISTRIBUTION: appstore
+          VITE_STORE: appstore # nom du magasin dans les textes (« l’App Store », compte Apple ; distribution.js d’Android)
           VITE_IOS_CAPTURE: "1" # build simulateur : mode « captures » (overlay/app/src/ios/captureMode.js), jamais en TestFlight
         run: |
           npm ci --no-audit --no-fund
