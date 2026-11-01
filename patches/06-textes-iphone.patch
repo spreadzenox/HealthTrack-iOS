@@ -22,7 +22,7 @@ index 2576449..8a86949 100644
        ) : (
          <>
 diff --git a/app/src/pages/Data.jsx b/app/src/pages/Data.jsx
-index 40ca6d5..37822e7 100644
+index 2a7f5c1..7a31cc8 100644
 --- a/app/src/pages/Data.jsx
 +++ b/app/src/pages/Data.jsx
 @@ -5,6 +5,7 @@ import { fixWatchKcalOnce } from '../services/watchKcalFix'
@@ -33,20 +33,20 @@ index 40ca6d5..37822e7 100644
  import DoctorReportCard from '../components/DoctorReportCard'
  import '../Food.css'
  import { appLocale } from '../i18n/locale.js'
-@@ -192,9 +193,15 @@ export default function Data() {
+@@ -206,9 +207,15 @@ export default function Data() {
      <section className="food-page">
        <h2 className="page-title">Vos données</h2>
        <p className="page-intro">
--        Vos données restent <strong>sur cet appareil</strong> et survivent aux mises à jour. Si la sauvegarde
--        du téléphone est activée, elles y sont incluses (chiffrées, gérées par le système,
--        jamais lues par {APP_NAME}). Avant de réinstaller ou de changer de téléphone, exportez-les aussi.
-+        Vos données restent <strong>sur cet appareil</strong> et survivent aux mises à jour.{' '}
+-        Vos données sont sur ce téléphone et passent les mises à jour. Si la sauvegarde du téléphone est
+-        activée, elles y sont copiées, chiffrées ; {APP_NAME} ne la lit pas. Exportez-les avant de réinstaller
+-        l’app ou de changer de téléphone.
++        Vos données sont sur ce téléphone et passent les mises à jour.{' '}
 +        {FEATURES.iosStore ? (
 +          'Avant de réinstaller ou de changer de téléphone, exportez-les.'
 +        ) : (
 +          <>
-+            Si la sauvegarde du téléphone est activée, elles y sont incluses (chiffrées, gérées par le système,
-+            jamais lues par {APP_NAME}). Avant de réinstaller ou de changer de téléphone, exportez-les aussi.
++            Si la sauvegarde du téléphone est activée, elles y sont copiées, chiffrées ; {APP_NAME} ne la lit pas.
++            Exportez-les avant de réinstaller l’app ou de changer de téléphone.
 +          </>
 +        )}
        </p>

@@ -18,7 +18,8 @@ import Data from './Data'
 describe('Vos données sur iPhone (variante appstore)', () => {
   it('garde le conseil d’exporter, sans parler de la sauvegarde Google ni d’Android', () => {
     render(<MemoryRouter><Data /></MemoryRouter>)
-    const intro = screen.getByText(/survivent aux mises à jour/)
+    // Phrase d'Android depuis v674 (SLOP-1b-4) : « Vos données sont sur ce téléphone et passent les mises à jour. »
+    const intro = screen.getByText(/passent les mises à jour/)
     expect(intro).toHaveTextContent(/changer de téléphone, exportez-les/)
     expect(intro).not.toHaveTextContent(/Google|Android/)
     // Copie de secours tenue à jour par l'app (overlay/app/src/ios/snapshot.js)
