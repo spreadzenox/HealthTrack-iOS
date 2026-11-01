@@ -72,6 +72,10 @@ par le workflow « Abonnements App Store — création » sur `main`.
   - il ne crée que ce qui manque ;
   - un prix, un niveau ou un essai déjà en place n'est jamais modifié (l'écart est signalé) ;
   - rien n'est soumis à l'examen d'Apple.
+- **Notifications serveur de l'App Store** (version 2, production et sandbox) : adresse du relais d'Android, qui les
+  reçoit depuis la v691 (I6-RELAIS-3 : renouvellement, remboursement, révocation, expiration, fin de grâce) :
+  `https://halcya-relay-81378799481.europe-west1.run.app/appstore/notifications`. Réglée par le même script (attributs
+  `subscriptionStatusUrl…` de l'app) si elle est vide ; une autre adresse en place n'est jamais remplacée.
 - **Avant la première soumission** (propriétaire, avec une version de l'app), chaque abonnement doit avoir sa capture
   d'écran pour l'examen d'Apple : l'écran d'achat de l'app. Elle sera prise par la CI quand l'achat ouvrira sur
   iPhone. D'ici là, App Store Connect les dit « métadonnées manquantes », ce qui est attendu.

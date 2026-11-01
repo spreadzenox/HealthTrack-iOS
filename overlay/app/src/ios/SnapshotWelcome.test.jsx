@@ -2,8 +2,8 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import SnapshotWelcome from './SnapshotWelcome'
 
-// Version iOS (HealthTrack-iOS) : la sauvegarde iCloud n'emporte pas la base de l'app (WebKit l'exclut), seulement la
-// copie de secours de Documents ; après une restauration, l'onboarding la propose d'emblée
+// Version iOS (HealthTrack-iOS) : si iOS a repris la base faute de place, la copie de secours reste sur l'iPhone ;
+// l'onboarding revient et la propose d'emblée (ni la base ni la copie ne sont dans la sauvegarde iCloud)
 const copie = { text: '{"entries":[1,2,3]}', savedAt: '2026-10-27T10:00:00Z' }
 const parse = () => ({ entries: [1, 2, 3] })
 const now = new Date('2026-10-27T13:00:00Z')

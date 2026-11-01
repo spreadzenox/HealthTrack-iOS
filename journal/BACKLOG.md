@@ -317,13 +317,16 @@
     le …) » et taisait sa masse grasse (demande à Android du 29/10, `DEMANDES.md`, toujours à transmettre).
     **Correctif 35 (31/10, PR #138)** : origine « app Santé », libellés « (app Santé, 28/10) » ; démo de l'iPhone
     passée par l'app Santé (poids, masse grasse seule).
-  - [ ] **Directive 5.1.3 (ii) d'Apple** : une app « ne doit pas stocker de données de santé personnelles dans
-    iCloud ». La copie de secours (I3) part dans la sauvegarde iCloud de l'iPhone : risque de refus à l'examen. À
-    trancher avant la soumission : garder (sauvegarde du système, choisie et chiffrée par l'utilisateur), l'exclure
-    de la sauvegarde (la restauration passe alors par l'export), ou n'y laisser que ce qui ne vient pas de l'app
-    Santé (qui se réimporte seule). La page de confidentialité décrit l'état actuel. 29/10 : recherche dans
-    `RECHERCHE.md` (rien d'officiel sur la sauvegarde de l'appareil) ; recommandation : demander à Apple
-    (consultation « Meet with Apple » après A1), sinon exclure la copie de la sauvegarde avant la soumission.
+  - [x] **Directive 5.1.3 (ii) d'Apple** : une app « ne doit pas stocker de données de santé personnelles dans
+    iCloud ». La copie de secours (I3) partait dans la sauvegarde iCloud de l'iPhone. **Décision du propriétaire du
+    1/11 : l'exclure.** Fait (branche `claude/ios-copie-hors-icloud-011615`) : dossier « Copie de secours » de
+    Documents, créé et marqué exclu de la sauvegarde par l'app à chaque lancement et changement d'état
+    (`SnapshotFolder.swift`, 3 tests XCTest) ; la page y écrit la copie, lit encore l'ancienne de la racine et ne la
+    retire qu'après avoir écrit la nouvelle ; « Supprimer toutes mes données » efface les deux ; sonde de la CI
+    (`[sauvegarde] Documents/Copie de secours`, erreur si le dossier n'est pas exclu) ; textes : confidentialité,
+    conditions, fiche, assistance, notes pour l'examen, Nouveautés de l'iPhone. Pour changer d'iPhone : l'export.
+    Reste ouvert : les fichiers que la personne exporte elle-même vont à la racine de Documents (donc dans la
+    sauvegarde iCloud) avant la feuille de partage ; c'est son geste, à revoir si Apple le relève.
 - [ ] **Plus tard, quand il y aura plus d'utilisateurs (décision du 31/10)** : la stratégie de cache décidée avec la
   routine Android pour l'analyse des repas, côté relais. Aujourd'hui, les consignes commencent par la longue liste des
   ingrédients, identique d'un appel à l'autre, que Vertex AI met en cache implicitement (`relay/src/prompts.js`

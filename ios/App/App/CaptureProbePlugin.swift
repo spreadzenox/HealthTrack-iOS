@@ -26,7 +26,8 @@ public class CaptureProbePlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     /// { items: [{ path, excluded, bytes, files }] } : Documents, Library/WebKit, chaque dossier IndexedDB trouvé
-    /// sous Library et le repère propre au téléphone (`BackupMarkerPlugin`), chemins relatifs au conteneur de l'app.
+    /// sous Library, le repère propre au téléphone (`BackupMarkerPlugin`) et le dossier de la copie de secours
+    /// (`SnapshotFolder`, exclu depuis le 1/11), chemins relatifs au conteneur de l'app.
     @objc func backupStatus(_ call: CAPPluginCall) {
         let fm = FileManager.default
         let home = URL(fileURLWithPath: NSHomeDirectory()).standardizedFileURL
@@ -36,6 +37,7 @@ public class CaptureProbePlugin: CAPPlugin, CAPBridgedPlugin {
             for case let url as URL in walk where url.lastPathComponent == "IndexedDB" { targets.append(url) }
         }
         targets.append(BackupMarkerPlugin.directory.appendingPathComponent(DeviceMarker.fileName))
+        targets.append(fm.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(SnapshotFolder.name))
         let items: [[String: Any]] = targets.filter { fm.fileExists(atPath: $0.path) }.map { url in
             let (bytes, files) = Self.size(of: url)
             return [

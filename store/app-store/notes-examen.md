@@ -36,8 +36,10 @@ scale, thermometer, pulse oximeter) to record their measurements on the device.
 Notifications: optional local reminders (evening note, gut check, portion reminder during a FODMAP
 reintroduction), answerable from the notification.
 
-Backup copy: the app keeps a copy of the user's entries in its Documents folder (visible in Files) so that data is
-not lost if the system clears the web database; it is included in the device's iCloud backup like other app files.
+Backup copy: the app keeps a copy of the user's entries in a folder of its Documents directory (visible in Files) so
+that data is not lost if the system clears the web database. This folder is excluded from iCloud backup
+(isExcludedFromBackup), in line with guideline 5.1.3(ii); users move to a new iPhone by exporting a file and importing
+it.
 
 Purchases: this version has no in-app purchase; all features are free.
 

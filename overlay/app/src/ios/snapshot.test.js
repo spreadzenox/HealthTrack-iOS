@@ -1,8 +1,9 @@
 import { describe, it, expect, vi } from 'vitest'
-import { SNAPSHOT_FILE, saveSnapshot, installSnapshots } from './snapshot.js'
+import { SNAPSHOT_FILE, SNAPSHOT_DIR, SNAPSHOT_PATH, saveSnapshot, installSnapshots } from './snapshot.js'
 
 // Version iOS (HealthTrack-iOS) : IndexedDB n'est pas durable dans WKWebView (iOS peut le reprendre quand le
-// téléphone manque de place) ; une copie de secours, le même JSON que l'export, est tenue à jour dans Documents
+// téléphone manque de place) ; une copie de secours, le même JSON que l'export, est tenue à jour dans le dossier
+// « Copie de secours » de Documents, exclu de la sauvegarde iCloud (directive 5.1.3 (ii), décision du 1/11)
 function deps(overrides = {}) {
   return {
     countAllEntries: vi.fn(async () => 12),
@@ -13,10 +14,32 @@ function deps(overrides = {}) {
 }
 
 describe('copie de secours de la base sur iPhone', () => {
-  it('écrit le même JSON que l’export dans Documents', async () => {
+  it('écrit le même JSON que l’export dans le dossier « Copie de secours », exclu de la sauvegarde iCloud', async () => {
     const d = deps()
     expect(await saveSnapshot(d)).toBe(true)
-    expect(d.writeFile).toHaveBeenCalledWith(SNAPSHOT_FILE, '{"entries":[1]}')
+    expect(d.writeFile).toHaveBeenCalledWith(SNAPSHOT_PATH, '{"entries":[1]}')
+    expect(SNAPSHOT_PATH).toBe('Copie de secours/Halcya-copie-de-secours.json')
+  })
+
+  it('l’ancienne copie de la racine (dans la sauvegarde iCloud) n’est retirée qu’après l’écriture de la nouvelle', async () => {
+    const order = []
+    const d = deps({
+      writeFile: vi.fn(async () => order.push('écrite')),
+      removeLegacy: vi.fn(async () => order.push('ancienne retirée')),
+    })
+    expect(await saveSnapshot(d)).toBe(true)
+    expect(order).toEqual(['écrite', 'ancienne retirée'])
+  })
+
+  it('nouvelle copie non écrite : l’ancienne reste (jamais aucune copie)', async () => {
+    const d = deps({ writeFile: vi.fn(async () => { throw new Error('disque plein') }), removeLegacy: vi.fn() })
+    expect(await saveSnapshot(d)).toBe(false)
+    expect(d.removeLegacy).not.toHaveBeenCalled()
+  })
+
+  it('l’ancienne copie ne se retire pas : la nouvelle compte quand même, l’essai suivant la retirera', async () => {
+    const d = deps({ removeLegacy: vi.fn(async () => { throw new Error('verrouillé') }) })
+    expect(await saveSnapshot(d)).toBe(true)
   })
 
   it('base vide : n’écrase jamais une copie existante (la base a peut-être été effacée par iOS)', async () => {
@@ -57,47 +80,81 @@ describe('copie de secours de la base sur iPhone', () => {
   })
 })
 
+/** Documents simulé : `{ dossier: [{ name, mtime }] }` ; un dossier absent fait échouer `list`, comme Capacitor. */
+function documents(tree) {
+  return {
+    list: vi.fn(async (dir) => {
+      if (!(dir in tree)) throw new Error('dossier absent')
+      return tree[dir]
+    }),
+    readFile: vi.fn(async (path) => ({ data: `contenu de ${path}` })),
+    deleteFile: vi.fn(async () => {}),
+  }
+}
+
 describe('lecture de la copie de secours', () => {
-  it('rend son contenu et sa date, trouvés en listant Documents', async () => {
+  it('rend son contenu et sa date, trouvés dans le dossier « Copie de secours »', async () => {
     const { readSnapshot } = await import('./snapshot.js')
-    const fs = {
-      list: vi.fn(async () => [{ name: 'autre.json', mtime: 1 }, { name: SNAPSHOT_FILE, mtime: Date.parse('2026-10-27T10:00:00Z') }]),
-      readFile: vi.fn(async () => ({ data: '{"entries":[1]}' })),
-    }
-    expect(await readSnapshot(fs)).toEqual({ text: '{"entries":[1]}', savedAt: '2026-10-27T10:00:00.000Z' })
+    const fs = documents({ '': [{ name: 'autre.json', mtime: 1 }, { name: SNAPSHOT_DIR, mtime: 1 }], [SNAPSHOT_DIR]: [{ name: SNAPSHOT_FILE, mtime: Date.parse('2026-11-01T10:00:00Z') }] })
+    expect(await readSnapshot(fs)).toEqual({ text: `contenu de ${SNAPSHOT_PATH}`, savedAt: '2026-11-01T10:00:00.000Z' })
+  })
+
+  it('iPhone mis à jour depuis une version d’avant le 1/11 : l’ancienne copie de la racine est lue', async () => {
+    const { readSnapshot } = await import('./snapshot.js')
+    const fs = documents({ '': [{ name: SNAPSHOT_FILE, mtime: Date.parse('2026-10-27T10:00:00Z') }] })
+    expect(await readSnapshot(fs)).toEqual({ text: `contenu de ${SNAPSHOT_FILE}`, savedAt: '2026-10-27T10:00:00.000Z' })
+  })
+
+  it('les deux : la copie du dossier exclu, la plus récente, passe d’abord', async () => {
+    const { readSnapshot } = await import('./snapshot.js')
+    const fs = documents({ '': [{ name: SNAPSHOT_FILE, mtime: 1 }], [SNAPSHOT_DIR]: [{ name: SNAPSHOT_FILE, mtime: 2 }] })
+    expect((await readSnapshot(fs)).text).toBe(`contenu de ${SNAPSHOT_PATH}`)
   })
 
   it('pas de copie : null, sans lire de fichier absent (Capacitor l’écrirait en erreur dans la console)', async () => {
     const { readSnapshot } = await import('./snapshot.js')
-    const fs = { list: vi.fn(async () => [{ name: 'capture', mtime: 1 }]), readFile: vi.fn() }
+    const fs = documents({ '': [{ name: 'capture', mtime: 1 }], [SNAPSHOT_DIR]: [] })
     expect(await readSnapshot(fs)).toBeNull()
     expect(fs.readFile).not.toHaveBeenCalled()
+  })
+
+  it('l’ancienne copie se retire de la racine, et elle seule', async () => {
+    const { removeLegacySnapshot } = await import('./snapshot.js')
+    const fs = documents({ '': [{ name: 'Halcya-sauvegarde-2026-10-28.json', mtime: 1 }, { name: SNAPSHOT_FILE, mtime: 2 }] })
+    expect(await removeLegacySnapshot(fs)).toBe(true)
+    expect(fs.deleteFile).toHaveBeenCalledTimes(1)
+    expect(fs.deleteFile).toHaveBeenCalledWith(SNAPSHOT_FILE)
+    expect(await removeLegacySnapshot(documents({ '': [] }))).toBe(false)
   })
 })
 
 describe('« Supprimer toutes mes données » efface aussi la copie de secours', () => {
-  it('efface la copie trouvée dans Documents, et elle seule (une sauvegarde exportée reste à la personne)', async () => {
+  it('efface la copie du dossier exclu et l’ancienne de la racine, et elles seules (une sauvegarde exportée reste à la personne)', async () => {
     const { deleteSnapshot } = await import('./snapshot.js')
-    const fs = {
-      list: vi.fn(async () => [{ name: 'Halcya-sauvegarde-2026-10-28.json', mtime: 1 }, { name: SNAPSHOT_FILE, mtime: 2 }]),
-      deleteFile: vi.fn(async () => {}),
-    }
+    const fs = documents({
+      '': [{ name: 'Halcya-sauvegarde-2026-10-28.json', mtime: 1 }, { name: SNAPSHOT_FILE, mtime: 2 }],
+      [SNAPSHOT_DIR]: [{ name: SNAPSHOT_FILE, mtime: 3 }],
+    })
     expect(await deleteSnapshot(fs)).toBe(true)
-    expect(fs.deleteFile).toHaveBeenCalledTimes(1)
-    expect(fs.deleteFile).toHaveBeenCalledWith(SNAPSHOT_FILE)
+    expect(fs.deleteFile.mock.calls.map((c) => c[0])).toEqual([SNAPSHOT_PATH, SNAPSHOT_FILE])
   })
 
   it('pas de copie : rien à effacer, sans toucher à un fichier absent', async () => {
     const { deleteSnapshot } = await import('./snapshot.js')
-    const fs = { list: vi.fn(async () => []), deleteFile: vi.fn() }
+    const fs = documents({ '': [] })
     expect(await deleteSnapshot(fs)).toBe(false)
     expect(fs.deleteFile).not.toHaveBeenCalled()
   })
 
-  it('une erreur ne remonte jamais', async () => {
+  it('une erreur ne remonte jamais, et l’autre emplacement est quand même effacé', async () => {
     const { deleteSnapshot } = await import('./snapshot.js')
-    const fs = { list: vi.fn(async () => [{ name: SNAPSHOT_FILE, mtime: 1 }]), deleteFile: vi.fn(async () => { throw new Error('verrouillé') }) }
-    expect(await deleteSnapshot(fs)).toBe(false)
+    const fs = documents({ '': [{ name: SNAPSHOT_FILE, mtime: 1 }], [SNAPSHOT_DIR]: [{ name: SNAPSHOT_FILE, mtime: 1 }] })
+    fs.deleteFile.mockImplementationOnce(async () => { throw new Error('verrouillé') })
+    expect(await deleteSnapshot(fs)).toBe(true)
+    expect(fs.deleteFile).toHaveBeenCalledTimes(2)
+    const locked = documents({ [SNAPSHOT_DIR]: [{ name: SNAPSHOT_FILE, mtime: 1 }] })
+    locked.deleteFile.mockImplementation(async () => { throw new Error('verrouillé') })
+    expect(await deleteSnapshot(locked)).toBe(false)
   })
 
   it('ailleurs que dans l’app iPhone : rien', async () => {
@@ -130,7 +187,7 @@ describe('réglages dans la copie de secours (ce que la sauvegarde Android ramè
   it('sans réglage, la copie reste exactement le JSON de l’export', async () => {
     const d = deps({ storage: memory({ healthtrack_withings_tokens: 'secret' }) })
     await saveSnapshot(d)
-    expect(d.writeFile).toHaveBeenCalledWith(SNAPSHOT_FILE, '{"entries":[1]}')
+    expect(d.writeFile).toHaveBeenCalledWith(SNAPSHOT_PATH, '{"entries":[1]}')
   })
 
   it('à la reprise, seuls les réglages de la liste sont rétablis, même si le fichier en contient d’autres', async () => {
