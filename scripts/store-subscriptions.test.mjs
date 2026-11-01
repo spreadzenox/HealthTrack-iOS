@@ -321,7 +321,8 @@ test('diagnose : relevé sans écriture de chaque pièce exigée par Apple', asy
   const writes = asc.calls.filter((c) => !c.startsWith('GET')).length
   const lines = await diagnose({ token: 't', fetchImpl: asc.fetchImpl })
   assert.equal(asc.calls.filter((c) => !c.startsWith('GET')).length, writes, 'aucune écriture')
-  assert.match(lines[0], /^groupe : fr-FR « Halcya »/)
-  assert.equal(lines.length, 4)
-  assert.match(lines[1], /^halcya_gold_mensuel : état MISSING_METADATA ; noms fr-FR .* ; capture absente ; prix en FRA 9\.99 ; territoires FRA$/)
+  assert.match(lines[0], /^app : langue principale /)
+  assert.match(lines[1], /^groupe : fr-FR « Halcya »/)
+  assert.equal(lines.length, 5)
+  assert.match(lines[2], /^halcya_gold_mensuel : état MISSING_METADATA ; noms fr-FR .* ; capture absente ; prix en FRA 9\.99 ; territoires FRA$/)
 })

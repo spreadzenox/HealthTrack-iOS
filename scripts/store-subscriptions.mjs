@@ -331,8 +331,8 @@ export async function diagnose({ token, fetchImpl = fetch }) {
   const { api, all } = client(token, fetchImpl)
   const app = (await api('GET', `/v1/apps?filter[bundleId]=${BUNDLE_ID}`)).data?.[0]
   const group = (await all(`/v1/apps/${app.id}/subscriptionGroups?limit=50`)).find((g) => g.attributes?.referenceName === GROUP.referenceName)
-  const lines = []
-  if (!group) return ['aucun groupe « Halcya »']
+  const lines = [`app : langue principale ${app.attributes?.primaryLocale ?? '?'}`]
+  if (!group) return [...lines, 'aucun groupe « Halcya »']
   const groupLocs = await all(`/v1/subscriptionGroups/${group.id}/subscriptionGroupLocalizations?limit=50`)
   lines.push(`groupe : ${groupLocs.map((l) => `${l.attributes?.locale} « ${l.attributes?.name} » ${l.attributes?.state ?? '?'}`).join(', ') || 'aucun nom affiché'}`)
   for (const sub of await all(`/v1/subscriptionGroups/${group.id}/subscriptions?limit=50`)) {
