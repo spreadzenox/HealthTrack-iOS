@@ -179,8 +179,11 @@
     - adaptateur en Vitest ;
     - achat de bout en bout sur simulateur avec un fichier de configuration StoreKit (`.storekit`) branché au
       schéma, la feuille d'achat de test touchée par XCUITest.
-  - Propriétaire, après A1 à A4 : créer le groupe et les deux produits dans App Store Connect avec ces ids (valeurs
-    exactes préparées le moment venu).
+  - [~] Groupe et abonnements dans App Store Connect (A4 fait le 1/11, contrat « Paid Applications » actif) : créés
+    par l'API, pas par le propriétaire (`scripts/store-subscriptions.mjs`, 8 tests, workflow « Abonnements App Store —
+    création ») : Gold mensuel 9,99 €, Silver annuel 29,99 € avec 2 semaines d'essai, Silver mensuel 4,99 €, en
+    France ; reste la capture d'écran pour l'examen de chaque abonnement (écran d'achat, à prendre en CI quand
+    l'achat ouvrira) ; la soumission, avec une version de l'app, reste au propriétaire.
   - [x] Natif et branchement JS (PR #33, mergée le 28/10) : `BillingRule` (5 tests XCTest), plugin `AppStoreBilling`,
     correctif 24, contrat avec `describePlans` (Vitest). Inactifs tant que `FEATURES.billing` est faux.
   - [x] Achat d'essai sur simulateur : cible de tests unitaires hébergée par l'app + fichier `.storekit` +

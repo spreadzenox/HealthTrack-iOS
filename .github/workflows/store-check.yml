@@ -1,6 +1,6 @@
 # Fiche App Store fr-FR (store/app-store/) : limites d'App Store Connect et directive 2.3.10 d'Apple, vérifiées sans
 # runner macOS (scripts/store-check.mjs), et tests de l'envoi par l'API App Store Connect (scripts/store-push.mjs,
-# lancé par store-push.yml).
+# lancé par store-push.yml ; scripts/store-subscriptions.mjs, lancé par store-subscriptions.yml).
 name: Fiche App Store — contrôle
 
 on:
@@ -26,3 +26,5 @@ jobs:
       - run: node scripts/store-check.mjs
       - run: node --test scripts/store-push.test.mjs
       - run: node scripts/store-push.mjs --dry-run
+      - run: node --test scripts/store-subscriptions.test.mjs
+      - run: node scripts/store-subscriptions.mjs --dry-run
