@@ -180,7 +180,7 @@
     - achat de bout en bout sur simulateur avec un fichier de configuration StoreKit (`.storekit`) branché au
       schéma, la feuille d'achat de test touchée par XCUITest.
   - [~] Groupe et abonnements dans App Store Connect (A4 fait le 1/11, contrat « Paid Applications » actif) : créés
-    par l'API, pas par le propriétaire (`scripts/store-subscriptions.mjs`, 8 tests, workflow « Abonnements App Store —
+    par l'API, pas par le propriétaire (`scripts/store-subscriptions.mjs`, 9 tests, workflow « Abonnements App Store —
     création ») : Gold mensuel 9,99 €, Silver annuel 29,99 € avec 2 semaines d'essai, Silver mensuel 4,99 €, en
     France ; reste la capture d'écran pour l'examen de chaque abonnement (écran d'achat, à prendre en CI quand
     l'achat ouvrira) ; la soumission, avec une version de l'app, reste au propriétaire.

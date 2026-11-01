@@ -203,8 +203,15 @@ export async function ensureSubscriptions({ token, fetchImpl = fetch, log = () =
 
     const prices = currentPrices(await api('GET', `/v1/subscriptions/${id}/prices?filter[territory]=${TERRITORY}&include=subscriptionPricePoint&limit=50`))
     if (prices.length === 0) {
-      const points = await all(`/v1/subscriptions/${id}/pricePoints?filter[territory]=${TERRITORY}&limit=200`)
-      await api('POST', '/v1/subscriptionPrices', bodies.price(id, pricePointFor(points, s.price).id))
+      const pointsPath = `/v1/subscriptions/${id}/pricePoints?filter[territory]=${TERRITORY}&limit=200`
+      let point
+      try {
+        point = pricePointFor(await all(pointsPath), s.price)
+      } catch {
+        // Plusieurs paliers au même prix (paiement « UPFRONT » et « MONTHLY » d'Apple) : celui du paiement d'avance
+        point = pricePointFor(await all(`${pointsPath}&filter[planType]=UPFRONT`), s.price)
+      }
+      await api('POST', '/v1/subscriptionPrices', bodies.price(id, point.id))
       done.push(`prix ${s.price.replace('.', ',')} € fixé`)
     } else if (!prices.some((p) => samePrice(p, s.price))) {
       drift.push(`${s.productId} : prix ${prices.join(' / ')} € en place, ${s.price} € décidé (non modifié)`)

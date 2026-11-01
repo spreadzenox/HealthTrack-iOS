@@ -82,7 +82,7 @@ test('currentPrices : prix clients en place lus dans les paliers inclus', () => 
 })
 
 /** App Store Connect simulé : juste ce que le script lit et crée. */
-function fakeAsc({ prePrice = null } = {}) {
+function fakeAsc({ prePrice = null, monthlyPlans = false } = {}) {
   const db = { groups: [], groupLocs: [], subs: [], locs: [], avail: {}, prices: {}, offers: {} }
   const calls = []
   let n = 0
@@ -136,8 +136,10 @@ function fakeAsc({ prePrice = null } = {}) {
       })
     }
     if ((m = /^\/v1\/subscriptions\/(\w+)\/pricePoints$/.exec(path))) {
-      // Deux pages, pour vérifier que le script suit `links.next`
-      const all = pricePoints(m[1])
+      // Deux pages, pour vérifier que le script suit `links.next` ; avec `monthlyPlans`, des paliers « MONTHLY »
+      // au même prix que ceux du paiement d'avance, sauf si l'on filtre sur UPFRONT
+      const upfront = u.searchParams.get('filter[planType]') === 'UPFRONT'
+      const all = [...pricePoints(m[1]), ...(monthlyPlans && !upfront ? pricePoints(`${m[1]}m`) : [])]
       const second = u.searchParams.get('cursor') === '2'
       return json(200, second ? { data: all.slice(3), links: {} } : { data: all.slice(0, 3), links: { next: `${url}&cursor=2` } })
     }
@@ -198,4 +200,12 @@ test('ensureSubscriptions : un prix déjà en place n’est jamais modifié, l�
   assert.equal(drift.length, 3)
   assert.match(drift[0], /prix 0\.99 € en place, 9\.99 € décidé \(non modifié\)/)
   assert.equal(asc.calls.filter((c) => c === 'POST /v1/subscriptionPrices').length, 0)
+})
+
+test('ensureSubscriptions : deux paliers au même prix (paiement mensuel d’Apple) → celui du paiement d’avance', async () => {
+  const asc = fakeAsc({ monthlyPlans: true })
+  const { drift } = await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl })
+  assert.deepEqual(drift, [])
+  for (const s of asc.db.subs) assert.equal(asc.db.prices[s.id].length, 1)
+  assert.equal(asc.calls.filter((c) => c === 'POST /v1/subscriptionPrices').length, 3)
 })
