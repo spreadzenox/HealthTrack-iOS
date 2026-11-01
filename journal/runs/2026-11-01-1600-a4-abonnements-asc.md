@@ -12,8 +12,10 @@
 - « il reste des choses à faire par moi avant la mise en production ? » : réponse dans la conversation, dans l'ordre :
   transmettre le message à la routine Android (relais), décider pour la copie de secours dans iCloud (directive 5.1.3,
   recommandation : l'exclure de la sauvegarde), A5, A6 (iPhone 12), puis relecture et soumission.
-- A5 commencé par le propriétaire (capture « Data Collection ») : guidé dans la conversation avec les réponses de
-  `store/app-store/confidentialite.md` (cinq types de données, usage « App Functionality », aucun pistage).
+- **A5 fait par le propriétaire**, guidé dans la conversation avec les réponses de `store/app-store/confidentialite.md` :
+  cinq types (position approximative, photos, autre contenu, identifiant d'appareil, achats), usage « App
+  Functionality » seulement, aucun pistage ; « Purchase History » d'abord répondu « non lié », corrigé en « lié » ;
+  résumé relu sur sa capture, conforme ; reste le clic « Publish » (fait de son côté).
 
 ## Ce qui a été fait
 - #177 (Gold dans le plugin App Store, montée Silver → Gold testée par StoreKit) : **mergée**.

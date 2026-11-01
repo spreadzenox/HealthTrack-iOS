@@ -18,6 +18,9 @@
 - **Transmettre à la routine Android le message prêt à coller** en tête de `journal/DEMANDES.md` : c'est maintenant
   ce qui bloque la vente sur iPhone. Son relais doit vérifier les achats de l'App Store (sans cela, un achat sur iPhone
   ne débloquerait rien).
+- ✅ **A5 fait le 1/11** (confidentialité de l'app, réponses de `store/app-store/confidentialite.md`, relues sur votre
+  capture : position non liée, photos, autre contenu, identifiant d'appareil et achats liés, tout pour le
+  fonctionnement de l'app, aucun pistage) ; il ne restait qu'à cliquer « Publish ».
 - ✅ **A4 fait le 1/11** : contrat **Paid Applications actif**, compte bancaire, formulaire fiscal et DAC7 actifs ;
   le statut de professionnel (DSA) est **en examen chez Apple** : rien à faire, Apple prévient par e-mail. La routine
   crée les trois abonnements par l'API (Silver annuel avec essai de 14 jours, Silver mensuel, Gold mensuel, aux prix
@@ -290,7 +293,7 @@ via TestFlight.
 | 1/11 14:00 | Android v681, Gold | Android v681 : l'abonnement Gold existe sur Google Play (9,99 €/mois, sans essai), annoncé par ce qu'il apporte de vérifiable (20 analyses de repas par jour) tant que le test sur des repas pesés n'a pas prouvé qu'il se trompe moins ; même offre et mêmes textes prévus pour l'iPhone (PR #174, mergée) ; **la 681 est sur TestFlight (681.175)**, même version qu'Android. Parité : 48 % | #174 (mergée) |
 | 1/11 15:00 | Android v683, Gold | Android v683 : l'écran d'abonnement propose Silver et Gold sur Google Play ; sur iPhone, l'abonnement App Store n'est pas encore ouvert (l'écran le dit) ; un test de l'iPhone adapté avant même la publication d'Android (PR #176, mergée, vue en image) ; **la 683 est sur TestFlight (683.177)**, même version qu'Android ; Gold ajouté au module d'achat App Store de l'iPhone, avec un essai qui vérifie qu'on ne paie qu'un abonnement en passant de Silver à Gold (PR #177, en vérification). Parité : 48 % | #176 (mergée), #177 |
 | 1/11 16:00 | votre décision : abonnements | vous avez demandé ce qu'il reste avant la mise en production, puis décidé de **sortir l'iPhone avec les abonnements** : chemin noté en tête (A4 d'abord, message prêt à coller pour la routine Android) ; la routine créera les abonnements par l'API dès A4 actif. Parité : 48 % | #177, #178 |
-| 1/11 17:00 | A4 fait, abonnements | vous avez terminé A4 dans App Store Connect : contrat de vente, banque, fiscalité et DAC7 actifs, statut de professionnel en examen chez Apple ; Gold ajouté au module d'achat de l'iPhone (PR #177, mergée) ; le script qui crée les trois abonnements dans App Store Connect est prêt et testé (PR #180) ; Android v685 et v687 suivies (passage de Silver à Gold sur Google Play, banc d'essai côté serveur : rien de visible sur iPhone, PR #179) ; vous avez commencé A5 (confidentialité de l'app), guidé pas à pas. Parité : 48 % | #177 (mergée), #179, #180 |
+| 1/11 17:00 | A4 fait, abonnements | vous avez terminé A4 dans App Store Connect : contrat de vente, banque, fiscalité et DAC7 actifs, statut de professionnel en examen chez Apple ; Gold ajouté au module d'achat de l'iPhone (PR #177, mergée) ; le script qui crée les trois abonnements dans App Store Connect est prêt et testé (PR #180) ; Android v685 et v687 suivies (passage de Silver à Gold sur Google Play, banc d'essai côté serveur : rien de visible sur iPhone, PR #179) ; vous avez fait A5 (confidentialité de l'app), guidé pas à pas et relu sur capture. Parité : 48 % | #177 (mergée), #179, #180 |
 
 ---
 
