@@ -15,9 +15,14 @@
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** — **décision du 1/11 vers 15:00 : l'iPhone sort avec les abonnements**, comme Google Play
-- **Transmettre à la routine Android le message prêt à coller** en tête de `journal/DEMANDES.md` : c'est maintenant
-  ce qui bloque la vente sur iPhone. Son relais doit vérifier les achats de l'App Store (sans cela, un achat sur iPhone
-  ne débloquerait rien).
+- **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès), créer dans
+  TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la version d'iOS de son
+  iPhone 12 (Réglages → Général → Informations). Ensuite, il ne restera que la relecture et la soumission, quand
+  l'achat sera ouvert sur iPhone.
+- ✅ **Message transmis à la routine Android le 1/11 vers 17:15** (vérification des achats de l'App Store par son
+  relais, nom du magasin dans l'écran d'abonnement) : l'achat s'ouvrira sur iPhone dès que son relais sera prêt.
+- ✅ **Décidé le 1/11 vers 17:15 : la copie de secours sort de la sauvegarde iCloud** (directive 5.1.3 d'Apple) ;
+  sur un nouvel iPhone, on reprend ses données par l'export. En cours (routine).
 - ✅ **A5 fait le 1/11** (confidentialité de l'app, réponses de `store/app-store/confidentialite.md`, relues sur votre
   capture : position non liée, photos, autre contenu, identifiant d'appareil et achats liés, tout pour le
   fonctionnement de l'app, aucun pistage) ; il ne restait qu'à cliquer « Publish ».

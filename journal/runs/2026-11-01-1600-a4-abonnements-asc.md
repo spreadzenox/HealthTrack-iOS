@@ -17,6 +17,11 @@
   Functionality » seulement, aucun pistage ; « Purchase History » d'abord répondu « non lié », corrigé en « lié » ;
   résumé relu sur sa capture, conforme ; reste le clic « Publish » (fait de son côté).
 
+- « c'est bon pour A5 d'autres trucs ? » : réponse : le message pour Android (texte donné dans la conversation), la
+  décision sur la copie de secours, A6.
+- « exclure 🙂 pour 2) » : **décision : la copie de secours sort de la sauvegarde iCloud** (directive 5.1.3).
+- « j'ai transmis à la routine android » : **message transmis** (vérification des achats App Store, point 6 compris).
+
 ## Ce qui a été fait
 - #177 (Gold dans le plugin App Store, montée Silver → Gold testée par StoreKit) : **mergée**.
 - Android v685 (#600, #601 : passage de Silver à Gold sans second abonnement sur Google Play) : 35 correctifs tels

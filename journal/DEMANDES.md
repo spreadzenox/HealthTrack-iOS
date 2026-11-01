@@ -6,7 +6,7 @@
 
 
 > **À coller tel quel à la routine Android (préparé le 1/11 à 15:00, après votre décision « sortir avec les
-> abonnements » ; point 6 ajouté à 17:10 après Android v685)** :
+> abonnements » ; point 6 ajouté à 17:10 après Android v685) — ✅ transmis par le propriétaire le 1/11 vers 17:15** :
 >
 > « La version iPhone sort avec les abonnements, comme Google Play. Pour cela le relais doit vérifier les achats de
 > l'App Store (tâche I6-RELAIS de ton BACKLOG), sans rien changer au chemin Google Play :
