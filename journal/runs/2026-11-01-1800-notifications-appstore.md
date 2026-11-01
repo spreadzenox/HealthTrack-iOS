@@ -1,6 +1,6 @@
 # 2026-11-01 18:00 UTC — Android v691 (notifications de l'App Store au relais) ; adresse réglée par l'API ; brouillon de la vente
 
-**Étape** : I6 (abonnement), suivi d'Android  ·  **PR** : #182 (rappel de fin d'essai, v691, notifications) mergée ; journal (#178) ; branche `claude/ios-achat-iphone-011815` (brouillon, sans PR)  ·  **Android suivi** : v691 (`0f0d705`)  ·  **iOS** : 689 sur `main` et sur TestFlight (689.181)  ·  **Parité** : 48 % (23/48)
+**Étape** : I6 (abonnement), suivi d'Android  ·  **PR** : #182 (rappel de fin d'essai, v691, notifications) mergée ; journal (#178) ; branche `claude/ios-achat-iphone-011815` (brouillon, sans PR)  ·  **Android suivi** : v691 (`0f0d705`)  ·  **iOS** : 691 sur `main` et sur TestFlight (691.183)  ·  **Parité** : 48 % (23/48)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun.
@@ -30,6 +30,7 @@
   plugin, aucune erreur JS ni texte d'Android) ; **mergée** ; TestFlight 691 lancé ; **« Abonnements App Store —
   création » relancé : adresse des notifications serveur réglée (V2, production et sandbox)**, abonnements déjà en
   place, rien de recréé, toujours `MISSING_METADATA` (capture pour l'examen).
+- **TestFlight 691.183** (19:41) ; fiche renvoyée sans captures (version 689 renommée 691).
 
 ## Suite
 - Dès I6-RELAIS-6 chez Android : PR d'ouverture de l'achat sur la branche du brouillon (`FEATURES.billing`, captures
