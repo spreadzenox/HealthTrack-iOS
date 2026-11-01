@@ -10,18 +10,18 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v667 (1/11) | **667 sur TestFlight** (build 667.151) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v670 (1/11) | **670 sur TestFlight** (build 670.153) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **31/10 : installez la build la plus récente (667.151), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
+- **31/10 : installez la build la plus récente (670.153), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (667.151 aujourd'hui) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (670.153 aujourd'hui) ; elle installe l'app TestFlight sur son
   iPhone 12.
-- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 667, « Prête à
+- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 670, « Prête à
   soumettre ») : textes, 8 captures, catégorie Santé et forme, âge 18+. Rien n'est soumis. Avant une soumission,
   relisez-la, en particulier les réponses du questionnaire d'âge (`store/app-store/README.md`).
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
@@ -63,7 +63,7 @@
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 667.151) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 670.153) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -268,7 +268,8 @@ via TestFlight.
 | 31/10 23:00 | Android v661, relais en Gold | Android v659 à v661 : les signes à signaler au médecin citent aussi les antécédents familiaux, la réintroduction rappelle la durée d'éviction, aussi sur iPhone (PR #145, mergée, vue en image), et la 661 est sur TestFlight (661.146) ; la routine Android a basculé le relais : Gold sur Gemini 3.8 Flash avec réflexion, plafonds de coût du mois. Les requêtes de l'iPhone sont pour l'instant servies comme « gratuit » (Flash-Lite) : pour mettre la testeuse en Gold tout de suite, la routine Android peut ajouter son installation à la liste Gold du relais (demande mise à jour). Parité : 48 % | #145 (mergée) |
 | 1/11 00:00 | Android v663 | Android v663 : le relais sert Gold sur le dernier modèle Flash, et l'app ne montre plus le nom du modèle, aussi sur iPhone (PR #146, mergée), et la 663 est sur TestFlight (663.147), même version qu'Android ; une adaptation de l'iPhone a été refaite pour suivre ce changement ; la prochaine version d'Android (une seule mention « pas un diagnostic » aux endroits clés au lieu de la répéter partout) est déjà vérifiée côté iPhone. Parité : 48 % | #146 (mergée) |
 | 1/11 01:00 | Android v665 | Android v665 : la phrase « une estimation, pas un diagnostic » n'est plus répétée sous chaque carte, elle est dite une fois aux endroits clés (découverte de la lecture du visage, historique du bien-être, rapport PDF) ; aussi sur iPhone, où le nouveau test d'Android passe sur nos textes (PR #148, mergée, vue en image) ; **la 665 est sur TestFlight (665.149)**, même version qu'Android. Parité : 48 % | #148 (mergée) |
-| 1/11 02:00 | Android v667 | Android v667 : les cartes de pistes disent « à vérifier avant d'y croire » au lieu de répéter « pas des causes », la règle étant expliquée une fois dans « Comment c'est calculé » ; les pistes restent des liens à vérifier, aussi sur iPhone (PR #150, mergée, vue en image) ; **la 667 est sur TestFlight (667.151)**, même version qu'Android ; les captures de la fiche sont refaites pour montrer la nouvelle phrase ; Android v669 (textes des repas, plus courts) sera suivi au prochain run. Parité : 48 % | #150 (mergée) |
+| 1/11 02:00 | Android v667 | Android v667 : les cartes de pistes disent « à vérifier avant d'y croire » au lieu de répéter « pas des causes », la règle étant expliquée une fois dans « Comment c'est calculé » ; les pistes restent des liens à vérifier, aussi sur iPhone (PR #150, mergée, vue en image) ; **la 667 est sur TestFlight (667.151)**, même version qu'Android ; les captures de la fiche sont refaites pour montrer la nouvelle phrase ; Android v668 (textes des repas, plus courts) sera suivi au prochain run. Parité : 48 % | #150 (mergée) |
+| 1/11 03:00 | Android v670 | Android v668 à v670 : des textes plus courts pour les repas (ce qui est envoyé à l'IA, en trois phrases), les premiers pas et les détails de la lecture du visage dans Sources ; aussi sur iPhone (PR #152, mergée, vue en image) ; **la 670 est sur TestFlight (670.153)**, même version qu'Android ; une note des Nouveautés d'Android parle de Health Connect : remplacée sur iPhone par une note propre ; **les captures de la fiche App Store sont refaites et envoyées** : la capture des analyses dit « à vérifier avant d'y croire », et Apple les a toutes acceptées. Parité : 48 % | #152 (mergée) |
 
 ---
 
