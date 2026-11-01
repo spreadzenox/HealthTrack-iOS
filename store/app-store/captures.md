@@ -7,20 +7,21 @@ l'autorisation Temps d'écran ; ni app Android, ni montre Huawei en direct). Les
 `captures/store` (jamais dans `main`) ; `store-push.yml`, option « captures », les envoie par l'API d'App Store
 Connect dans l'ordre du tableau, à la place des précédentes.
 
-Sélection du 29/10. Captures refaites le 31/10 au soir (`dd9328f`, Android v658, build 658.141) et regardées :
+Sélection du 29/10. Captures refaites le 1/11 (`88a5c5d`, Android v667, build 667.151) et regardées :
 - barre d'état à 9:41, aucune bannière du système, aucun mot d'Android, aucune erreur JavaScript ;
-- Sources en couleur (#140) : lecture du visage en menthe, temps d'écran en lilas ; sous l'Apple Watch, « Jamais
-  reçu : SpO₂ » seulement (#127) ;
-- Accueil (clair et sombre), pris le soir : la carte « Votre ventre » pose la question du soir, en texte simple ;
-- les cinq autres sont identiques au pixel près à celles de la v648, regardées le même jour.
+- Analyses (capture 2) : « Des liens repérés dans vos données, à vérifier avant d'y croire » (Android v667) au lieu
+  de « pas des causes ni un diagnostic », avec « Piste solide » et « À confirmer » ;
+- Accueil (clair et sombre), pris le matin : la carte « Votre ventre » propose Calme, Gêne, Douleur ; le bouton
+  « + 1 cigarette » de la démo est visible, comme le déclare la classification par âge ;
+- Sources : lecture du visage en menthe, temps d'écran en lilas ; sous l'Apple Watch, « Jamais reçu : SpO₂ » seulement.
 
-Envoyées par l'API le 31/10. Dans l'ordre d'affichage ; les trois premières sont celles qu'on voit sans faire
-défiler :
+Envoyées par l'API le 1/11, à la place de celles du 31/10. Dans l'ordre d'affichage ; les trois premières sont
+celles qu'on voit sans faire défiler :
 
 | # | Fichier (`captures/store`) | Ce qu'elle montre |
 |---|---|---|
-| 1 | `iphone-17-pro-max-demo-clair-accueil.png` | « Votre journée » : bien-être, sommeil, VFC, pas, la carte « Votre ventre » et « Photo du repas » |
-| 2 | `iphone-17-pro-max-demo-clair-recommendations.png` | « Vos analyses » : pistes « Nuits plus longues → meilleur bien-être », « des liens, pas des causes ni un diagnostic » |
+| 1 | `iphone-17-pro-max-demo-clair-accueil.png` | « Votre journée » : bien-être, sommeil, VFC, pas, la carte « Votre ventre », « Photo du repas » et « + 1 cigarette » |
+| 2 | `iphone-17-pro-max-demo-clair-recommendations.png` | « Vos analyses » : « des liens repérés dans vos données, à vérifier avant d'y croire », pistes « Nuits plus longues → meilleur bien-être » (piste solide) et « Plus de pas » (à confirmer) |
 | 3 | `iphone-17-pro-max-demo-clair-food.png` | Repas : « Photo du repas » en grand bouton, repas habituels, derniers repas avec leurs calories |
 | 4 | `iphone-17-pro-max-demo-clair-reintroduction.png` | Réintroduction guidée des FODMAP, groupe par groupe |
 | 5 | `iphone-17-pro-max-demo-clair-tendances.png` | Tendances : votre forme face à votre propre norme (FC au repos, VFC, sommeil) |
