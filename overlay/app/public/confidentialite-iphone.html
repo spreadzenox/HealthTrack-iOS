@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Politique de confidentialité — Halcya pour iPhone</title>
   <!-- Version iPhone de app/public/privacypolicy.html (HealthTrack), réécrite d'après le code de la variante
-       appstore : app Santé, copie de secours et iCloud, ni montre Huawei en direct, ni temps d'écran, ni Withings,
-       ni achat pour l'instant. Embarquée dans l'app (Réglages → Confidentialité). Quand la page d'Android change,
+       appstore : app Santé, copie de secours hors d'iCloud, abonnements de l'App Store (I6), ni montre Huawei en
+       direct, ni Withings. Embarquée dans l'app (Réglages → Confidentialité). Quand la page d'Android change,
        overlay/app/src/ios/privacyPolicyIphone.test.js échoue : relire cette page, puis mettre à jour l'empreinte.
        Brouillon à faire relire par un juriste, comme celle d'Android. -->
   <style>
@@ -47,7 +47,7 @@
     <p><strong>En bref</strong></p>
     <ul>
       <li>Vos données restent sur votre iPhone, par défaut. Halcya n'a ni compte, ni serveur qui les garde, ni publicité, ni outil de mesure d'audience.</li>
-      <li>Rien ne quitte l'iPhone sans une action de votre part : l'analyse IA d'un repas, la météo, l'export d'une sauvegarde.</li>
+      <li>Rien ne quitte l'iPhone sans une action de votre part : l'analyse IA d'un repas, la météo, l'export d'une sauvegarde, un abonnement (vérifié auprès du serveur de Halcya, payé chez Apple).</li>
       <li>La lecture du visage se fait sur l'iPhone : aucune image n'est gardée ni envoyée.</li>
       <li>La copie de secours de l'app reste sur l'iPhone : elle n'est pas incluse dans la sauvegarde iCloud.</li>
       <li>Vous pouvez tout exporter, et tout effacer, à tout moment.</li>
@@ -147,10 +147,19 @@
     Sans analyse lancée, rien ne part.
   </p>
 
-  <h2>Achats</h2>
+  <h2>Abonnement (achats intégrés de l'App Store)</h2>
   <p>
-    L'app iPhone ne propose pour l'instant aucun achat : rien n'est envoyé à ce sujet. Quand un abonnement par
-    l'App Store sera proposé, cette page sera mise à jour avant, et le paiement sera entièrement géré par Apple.
+    Si vous vous abonnez à Silver ou à Gold, le paiement est entièrement géré par Apple : Halcya ne voit jamais votre
+    moyen de paiement, votre nom ni votre adresse e-mail. Pour ouvrir les fonctions de l'abonnement, l'app envoie au
+    serveur de Halcya la transaction signée par Apple (abonnement acheté, dates d'achat et d'échéance, essai,
+    renouvellement), aussi jointe à chaque analyse IA pour appliquer vos droits, avec l'identifiant aléatoire
+    d'installation décrit plus haut. Le serveur vérifie la signature d'Apple et renvoie seulement l'état de
+    l'abonnement (actif, essai, période de grâce…) et sa date d'échéance. Il ne garde pas la transaction : ses
+    journaux techniques n'en notent qu'une courte empreinte. Lors de l'achat, l'app transmet à Apple une empreinte
+    de cet identifiant d'installation, qui ne permet pas de vous identifier. Apple prévient aussi le serveur des
+    renouvellements, remboursements et fins d'abonnement : après un remboursement ou une expiration, le serveur garde
+    seulement l'état de l'abonnement, sous une empreinte de son numéro, sans rien qui vous identifie. Sans
+    abonnement, aucun achat n'est envoyé.
   </p>
 
   <h2>Notifications</h2>

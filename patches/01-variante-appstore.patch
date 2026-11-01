@@ -1,5 +1,5 @@
 diff --git a/app/src/config/distribution.js b/app/src/config/distribution.js
-index c609be5..334442f 100644
+index 8300dd8..6badcfd 100644
 --- a/app/src/config/distribution.js
 +++ b/app/src/config/distribution.js
 @@ -5,10 +5,11 @@
@@ -15,7 +15,7 @@ index c609be5..334442f 100644
  
  export function resolveDistribution(value) {
    const v = String(value ?? '').trim().toLowerCase()
-@@ -24,10 +25,10 @@ export function featuresFor(distribution) {
+@@ -24,13 +25,14 @@ export function featuresFor(distribution) {
      // Lecture du visage au déverrouillage, app fermée (service caméra de premier plan, BuildConfig.FACE_UNLOCK)
      faceUnlock: d === 'sideload',
      // … ou, en play, à l'ouverture de l'app (app à l'écran, indicateur visible) : l'une ou l'autre, jamais les deux
@@ -27,8 +27,13 @@ index c609be5..334442f 100644
 +    aiRelay: d === 'play' || d === 'appstore',
      // Abonnement Google Play (droits établis par le relais, jalon 6c) ; la sideload n'a pas Play Billing et ne perd
      // aucune fonction
-     billing: d === 'play',
-@@ -45,6 +46,8 @@ export function featuresFor(distribution) {
+-    billing: d === 'play',
++    // Version iOS (dépôt HealthTrack-iOS) : abonnement App Store (StoreKit 2), vérifié par le même relais (v689)
++    billing: d === 'play' || d === 'appstore',
+     // Réglage « Mode diagnostic » affiché d'emblée ; en play, caché derrière 7 touches sur le numéro de version
+     // (Paramètres), pour le support et les testeurs (VC-4)
+     debugMenu: d === 'sideload',
+@@ -45,6 +47,8 @@ export function featuresFor(distribution) {
      cigaretteSetting: d === 'sideload',
      // Nom technique du modèle d'IA (détails de la carte de résultat) : jamais dans la variante play (31/10)
      aiModelName: d === 'sideload',
