@@ -21,11 +21,23 @@ describe("conditions d'utilisation sur iPhone", () => {
     expect(sha, "la page d'Android a changé : relire conditions-iphone.html, puis mettre à jour l'empreinte").toBe(ANDROID_CONDITIONS_RELUES)
   })
 
-  it("ne parlent d'aucun service ni d'aucun achat absents de l'iPhone", () => {
-    for (const absent of [/Android/i, /Google/i, /Health Connect/i, /Huawei/i, /Withings/i, /sideload|hors App Store/i,
-      /essai gratuit/i, /période de grâce/i, /Restaurer un achat/i, /\d+ ?€/]) {
+  it("ne parlent d'aucun service absent de l'iPhone, ni d'un prix écrit en dur (celui de l'App Store fait foi)", () => {
+    for (const absent of [/Android/i, /Google/i, /Health Connect/i, /Huawei/i, /Withings/i, /sideload|hors App Store/i, /\d+ ?€/]) {
       expect(text, String(absent)).not.toMatch(absent)
     }
+  })
+
+  it("décrivent les abonnements Silver et Gold de l'App Store comme Apple l'exige (I6, achat ouvert)", () => {
+    expect(text).toMatch(/Abonnements Silver et Gold \(achats intégrés de l'App Store\)/)
+    expect(text).toMatch(/10 analyses par jour/)
+    expect(text).toMatch(/20 analyses par jour/)
+    expect(text).toMatch(/Essai gratuit.*une fois par\s+compte Apple/s)
+    expect(text).toMatch(/Renouvellement automatique.*au moins 24 heures avant la fin de la période/s)
+    expect(text).toMatch(/débité dans les 24 heures/)
+    expect(text).toMatch(/Réglages → votre nom → Abonnements → Halcya/)
+    expect(text).toMatch(/Restaurer un achat/)
+    expect(text).toMatch(/traités par Apple/)
+    expect(text).not.toMatch(/moins d'erreurs|plus précis/) // promesse de Gold non confirmée par le banc (GOLD-b6)
   })
 
   it("gardent ce que l'app n'est pas, et ce que l'iPhone fait vraiment", () => {
@@ -35,7 +47,6 @@ describe("conditions d'utilisation sur iPhone", () => {
     expect(text).toMatch(/ne pose pas de diagnostic/)
     expect(text).not.toMatch(/pas des causes|estimation, pas un diagnostic/)
     expect(text).toMatch(/18 ans et plus/)
-    expect(text).toMatch(/ne propose aucun achat/)
     expect(text).toMatch(/achats intégrés de l'App Store/)
     expect(text).toMatch(/app Santé/)
     expect(text).toMatch(/sauvegarde iCloud/)

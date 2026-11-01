@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { resolveDistribution, featuresFor, DISTRIBUTIONS } from './distribution'
+import { resolveDistribution, featuresFor, DISTRIBUTIONS, storeFor, storeOfPurchase } from './distribution'
 
 // Variante iOS (App Store), ajoutée par le dépôt HealthTrack-iOS (patches/01-variante-appstore.patch)
 describe('variante appstore (iOS)', () => {
@@ -22,8 +22,16 @@ describe('variante appstore (iOS)', () => {
     })
   })
 
-  it("pas encore d'abonnement App Store (étape I6) : rien n'appelle Google Play Billing", () => {
-    expect(featuresFor('appstore').billing).toBe(false)
+  it("abonnement App Store ouvert (étape I6) : le relais d'Android vérifie les achats de l'iPhone depuis la v689", () => {
+    expect(featuresFor('appstore').billing).toBe(true)
+  })
+
+  it("le magasin de l'iPhone se nomme l'App Store, avec la gestion des abonnements d'Apple (VITE_STORE=appstore)", () => {
+    const store = storeFor('appstore')
+    expect(store).toMatchObject({ id: 'appstore', name: 'l’App Store', Name: 'L’App Store', account: 'ce compte Apple', inStore: 'dans l’App Store' })
+    expect(store.manageUrl('halcya_gold')).toBe('https://apps.apple.com/account/subscriptions')
+    // Un achat garde le magasin d'où il vient, même lu dans l'autre version
+    expect(storeOfPurchase('appstore', storeFor('play')).id).toBe('appstore')
   })
 
   it('ne nomme jamais le modèle d’IA derrière l’analyse des repas (décision du 31/10, formules Silver et Gold)', () => {

@@ -65,6 +65,7 @@ jobs:
         working-directory: upstream/app
         env:
           VITE_DISTRIBUTION: appstore
+          VITE_STORE: appstore # nom du magasin dans les textes (« l’App Store », compte Apple ; distribution.js d’Android)
         run: |
           npm ci --no-audit --no-fund
           CORE="$(node -p "require('@capacitor/core/package.json').version")"
