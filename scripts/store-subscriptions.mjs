@@ -322,6 +322,46 @@ export function readReviewScreenshot(path) {
   return { name: basename(path), bytes }
 }
 
+/**
+ * Relevé sans écriture, quand Apple dit un abonnement « métadonnées manquantes » : état de chaque pièce qu'App Store
+ * Connect exige avant une soumission (nom et description, capture pour l'examen, prix, territoires, nom du groupe).
+ * Rend une ligne par abonnement.
+ */
+export async function diagnose({ token, fetchImpl = fetch }) {
+  const { api, all } = client(token, fetchImpl)
+  const app = (await api('GET', `/v1/apps?filter[bundleId]=${BUNDLE_ID}`)).data?.[0]
+  const group = (await all(`/v1/apps/${app.id}/subscriptionGroups?limit=50`)).find((g) => g.attributes?.referenceName === GROUP.referenceName)
+  const lines = []
+  if (!group) return ['aucun groupe « Halcya »']
+  const groupLocs = await all(`/v1/subscriptionGroups/${group.id}/subscriptionGroupLocalizations?limit=50`)
+  lines.push(`groupe : ${groupLocs.map((l) => `${l.attributes?.locale} « ${l.attributes?.name} » ${l.attributes?.state ?? '?'}`).join(', ') || 'aucun nom affiché'}`)
+  for (const sub of await all(`/v1/subscriptionGroups/${group.id}/subscriptions?limit=50`)) {
+    const id = sub.id
+    const parts = [`état ${sub.attributes?.state}`]
+    const locs = await all(`/v1/subscriptions/${id}/subscriptionLocalizations?limit=50`)
+    parts.push(`noms ${locs.map((l) => `${l.attributes?.locale} ${l.attributes?.state ?? '?'}`).join(', ') || 'aucun'}`)
+    let shot = null
+    try {
+      shot = (await api('GET', `/v1/subscriptions/${id}/appStoreReviewScreenshot`)).data
+    } catch (e) {
+      if (e.status !== 404) throw e
+    }
+    const delivery = shot?.attributes?.assetDeliveryState
+    parts.push(`capture ${shot ? `${delivery?.state ?? '?'}${delivery?.errors?.length ? ` (${delivery.errors.map((x) => x.code || x.description).join(', ')})` : ''}` : 'absente'}`)
+    const prices = await api('GET', `/v1/subscriptions/${id}/prices?filter[territory]=${TERRITORY}&include=subscriptionPricePoint&limit=50`)
+    parts.push(`prix en ${TERRITORY} ${currentPrices(prices).join(' / ') || 'aucun'}`)
+    let availability = null
+    try {
+      availability = await api('GET', `/v1/subscriptions/${id}/subscriptionAvailability?include=availableTerritories`)
+    } catch (e) {
+      if (e.status !== 404) throw e
+    }
+    parts.push(`territoires ${(availability?.included || []).map((t) => t.id).join(', ') || 'aucun'}`)
+    lines.push(`${sub.attributes?.productId} : ${parts.join(' ; ')}`)
+  }
+  return lines
+}
+
 function dryRun(log) {
   log(`Notifications serveur de l'App Store : ${NOTIFICATIONS.url} (${NOTIFICATIONS.version}, production et sandbox)`)
   log(`Groupe « ${GROUP.referenceName} » (nom affiché ${LOCALE} : « ${GROUP.name} »), en vente en ${TERRITORY} seulement`)
@@ -346,7 +386,8 @@ async function main() {
   for (const d of drift) console.log(`::warning::${d}`)
   const missing = Object.entries(states).filter(([, st]) => st === 'MISSING_METADATA').map(([id]) => id)
   if (missing.length) {
-    console.log(`Encore « métadonnées manquantes » chez Apple : ${missing.join(', ')} (attendu tant que la capture d'écran pour l'examen n'est pas envoyée)`)
+    console.log(`Encore « métadonnées manquantes » chez Apple : ${missing.join(', ')} ; relevé, sans écriture :`)
+    for (const line of await diagnose({ token })) console.log(`  ${line}`)
   }
   console.log('Rien n\'a été soumis à l\'examen d\'Apple : la première soumission des abonnements se fait avec une version de l\'app, par le propriétaire.')
 }
