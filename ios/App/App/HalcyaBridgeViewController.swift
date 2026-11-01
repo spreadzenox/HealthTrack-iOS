@@ -9,6 +9,7 @@ class HalcyaBridgeViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(PortionReminderPlugin())
         bridge?.registerPluginInstance(BackupMarkerPlugin())
         bridge?.registerPluginInstance(AppStoreBillingPlugin()) // inactif côté JS tant que FEATURES.billing est faux
+        bridge?.registerPluginInstance(TrialReminderPlugin()) // rappel de fin d'essai (I6), même condition
         bridge?.registerPluginInstance(FaceSensePlugin()) // lecture du visage à l'ouverture de l'app (I7)
         bridge?.registerPluginInstance(VoiceProbePlugin())
         bridge?.registerPluginInstance(PhoneUsagePlugin()) // temps d'écran (I8, iOS 26.4+, UE) ; branché côté JS plus tard

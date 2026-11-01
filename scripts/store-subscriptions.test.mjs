@@ -8,7 +8,7 @@ import assert from 'node:assert/strict'
 import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { SUBSCRIPTIONS, LIMITS, TERRITORY, GROUP, bodies, pricePointFor, currentPrices, ensureSubscriptions, readReviewScreenshot } from './store-subscriptions.mjs'
+import { SUBSCRIPTIONS, LIMITS, TERRITORY, GROUP, NOTIFICATIONS, bodies, pricePointFor, currentPrices, ensureSubscriptions, readReviewScreenshot, notificationsPlan } from './store-subscriptions.mjs'
 
 const root = new URL('..', import.meta.url)
 const read = (path) => readFileSync(new URL(path, root), 'utf8')
@@ -85,8 +85,8 @@ test('currentPrices : prix clients en place lus dans les paliers inclus', () => 
 })
 
 /** App Store Connect simulé : juste ce que le script lit et crée. */
-function fakeAsc({ prePrice = null, monthlyPlans = false } = {}) {
-  const db = { groups: [], groupLocs: [], subs: [], locs: [], avail: {}, prices: {}, offers: {}, shots: {}, uploads: [], deleted: [] }
+function fakeAsc({ prePrice = null, monthlyPlans = false, app = {} } = {}) {
+  const db = { app: { ...app }, groups: [], groupLocs: [], subs: [], locs: [], avail: {}, prices: {}, offers: {}, shots: {}, uploads: [], deleted: [] }
   const calls = []
   let n = 0
   const id = (p) => `${p}${++n}`
@@ -98,7 +98,11 @@ function fakeAsc({ prePrice = null, monthlyPlans = false } = {}) {
     const data = body && typeof body === 'string' ? JSON.parse(body).data : null
     calls.push(`${method} ${path}`)
     let m
-    if (method === 'GET' && path === '/v1/apps') return json(200, { data: [{ id: 'app1', type: 'apps' }] })
+    if (method === 'GET' && path === '/v1/apps') return json(200, { data: [{ id: 'app1', type: 'apps', attributes: { ...db.app } }] })
+    if (method === 'PATCH' && path === '/v1/apps/app1') {
+      Object.assign(db.app, data.attributes)
+      return json(200, { data: { id: 'app1', type: 'apps', attributes: { ...db.app } } })
+    }
     if (method === 'GET' && path === '/v1/apps/app1/subscriptionGroups') return json(200, { data: db.groups })
     if (method === 'POST' && path === '/v1/subscriptionGroups') {
       const g = { id: id('g'), type: 'subscriptionGroups', attributes: data.attributes }
@@ -276,4 +280,37 @@ test('readReviewScreenshot : un PNG seulement, avec son nom de fichier', () => {
   const bad = join(dir, 'faux.png')
   writeFileSync(bad, 'pas une image')
   assert.throws(() => readReviewScreenshot(bad), /n'est pas un PNG/)
+})
+
+test('notifications serveur : adresse du relais d’Android en production et en sandbox, version 2', () => {
+  assert.match(NOTIFICATIONS.url, /^https:\/\/halcya-relay-[0-9]+\.europe-west1\.run\.app\/appstore\/notifications$/)
+  assert.equal(NOTIFICATIONS.version, 'V2')
+  assert.match(read('store/app-store/abonnements.md'), new RegExp(NOTIFICATIONS.url.replace(/[.]/g, '\\.')))
+  assert.deepEqual(notificationsPlan({}).attributes, {
+    subscriptionStatusUrl: NOTIFICATIONS.url, subscriptionStatusUrlVersion: 'V2',
+    subscriptionStatusUrlForSandbox: NOTIFICATIONS.url, subscriptionStatusUrlVersionForSandbox: 'V2',
+  })
+  const done = { subscriptionStatusUrl: NOTIFICATIONS.url, subscriptionStatusUrlVersion: 'V2', subscriptionStatusUrlForSandbox: NOTIFICATIONS.url, subscriptionStatusUrlVersionForSandbox: 'V2' }
+  assert.deepEqual(notificationsPlan(done), { attributes: {}, drift: [] })
+  // Version 1 déjà réglée sur la bonne adresse : passée en version 2
+  assert.deepEqual(notificationsPlan({ ...done, subscriptionStatusUrlVersion: 'V1' }).attributes, { subscriptionStatusUrlVersion: 'V2' })
+  // Une autre adresse en place n'est jamais remplacée, l'écart est signalé
+  const other = notificationsPlan({ ...done, subscriptionStatusUrlForSandbox: 'https://exemple.fr/notif' })
+  assert.deepEqual(other.attributes, {})
+  assert.match(other.drift[0], /sandbox.*non modifiée/)
+})
+
+test('ensureSubscriptions : l’adresse des notifications est réglée une fois, puis laissée telle quelle', async () => {
+  const asc = fakeAsc()
+  await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl })
+  assert.equal(asc.db.app.subscriptionStatusUrl, NOTIFICATIONS.url)
+  assert.equal(asc.db.app.subscriptionStatusUrlForSandbox, NOTIFICATIONS.url)
+  assert.equal(asc.db.app.subscriptionStatusUrlVersionForSandbox, 'V2')
+  await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl })
+  assert.equal(asc.calls.filter((c) => c === 'PATCH /v1/apps/app1').length, 1)
+  const kept = fakeAsc({ app: { subscriptionStatusUrl: 'https://exemple.fr/notif', subscriptionStatusUrlVersion: 'V2' } })
+  const { drift } = await ensureSubscriptions({ token: 't', fetchImpl: kept.fetchImpl })
+  assert.equal(kept.db.app.subscriptionStatusUrl, 'https://exemple.fr/notif')
+  assert.equal(kept.db.app.subscriptionStatusUrlForSandbox, NOTIFICATIONS.url, 'la sandbox vide est réglée')
+  assert.match(drift.join(' ; '), /production.*non modifiée/)
 })
