@@ -3,8 +3,8 @@ import 'fake-indexeddb/auto'
 import { IDBFactory } from 'fake-indexeddb'
 import { createEntry, countAllEntries } from '../storage/localHealthStorage'
 
-// Version iOS (HealthTrack-iOS) : la copie de secours de Documents (overlay/app/src/ios/snapshot.js) contient toutes
-// les entrées et le profil, et part dans la sauvegarde iCloud ; « Supprimer toutes mes données » l'efface aussi
+// Version iOS (HealthTrack-iOS) : la copie de secours (overlay/app/src/ios/snapshot.js) contient toutes les entrées et
+// le profil ; « Supprimer toutes mes données » l'efface aussi
 const order = []
 vi.mock('../ios/snapshot.js', () => ({
   deleteDeviceSnapshot: vi.fn(async () => {

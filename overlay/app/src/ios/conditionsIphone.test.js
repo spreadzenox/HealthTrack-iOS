@@ -39,6 +39,7 @@ describe("conditions d'utilisation sur iPhone", () => {
     expect(text).toMatch(/achats intégrés de l'App Store/)
     expect(text).toMatch(/app Santé/)
     expect(text).toMatch(/sauvegarde iCloud/)
+    expect(text).toMatch(/elle n'est pas incluse dans la sauvegarde iCloud/) // 1/11, directive 5.1.3 (ii)
     expect(text).toMatch(/droit français/)
   })
 
