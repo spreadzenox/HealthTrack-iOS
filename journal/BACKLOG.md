@@ -227,7 +227,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -261,7 +261,9 @@
     ne reçoit que des builds de même numéro → `store-push.mjs` renomme la version « Prête à soumettre » au versionCode
     d'`upstream.json` à chaque envoi (PR #129, 31/10) : « 1.0 » renommée 648 le 31/10 à 15:21. État des captures chez
     Apple lu à chaque envoi (PR #132) : 7/8 traitées à 15:25, **8/8 traitées à 16:02** (run 41217672289), aucune
-    refusée. Refaites sur la 658 (Sources en couleur) et renvoyées le 31/10 à 20:11 (run 41237667780) : 8/8 traitées. Après chaque envoi TestFlight d'une nouvelle version : `store-push.yml` sans « captures », pour que la
+    refusée. Refaites sur la 658 (Sources en couleur) et renvoyées le 31/10 à 20:11 (run 41237667780) : 8/8 traitées.
+    La capture 2 (Analyses) montrait encore « pas des causes ni un diagnostic », remplacé par « à vérifier avant d'y
+    croire » depuis Android v667 (1/11) : captures refaites sur la 667 (lancées le 1/11 à 01:40), à regarder et renvoyer. Après chaque envoi TestFlight d'une nouvelle version : `store-push.yml` sans « captures », pour que la
     version de la fiche suive (charte §4). Reste la relecture du propriétaire.
   - [x] Catégorie (Santé et forme) et classification par âge (18 ans et plus, comme sur Google Play) envoyées par l'API
     (`store/app-store/classification.json`, PR #130, acceptées le 31/10 à 15:21) : réponses au plus prudent (informations médicales et
