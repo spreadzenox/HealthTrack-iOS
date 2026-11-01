@@ -183,8 +183,8 @@
     **créés par l'API le 1/11 à 17:48** (`scripts/store-subscriptions.mjs`, 9 tests, workflow « Abonnements App Store
     — création », PR #180) : groupe « Halcya » (nom affiché fr-FR), Gold mensuel 9,99 € (niveau 1), Silver annuel
     29,99 € avec 2 semaines d'essai et Silver mensuel 4,99 € (niveau 2), noms et descriptions fr-FR, en vente en France.
-  - [ ] Capture d'écran pour l'examen de chaque abonnement (état chez Apple : `MISSING_METADATA` tant qu'elle
-    manque) : l'écran d'achat de l'app, à prendre en CI et envoyer par l'API quand l'achat ouvrira sur iPhone ;
+  - [~] Capture d'écran pour l'examen de chaque abonnement : **envoyée le 1/11 à 22:24** (écran d'achat 6,9",
+    « premium-2 » de `captures/store`) ; état chez Apple à revérifier (`MISSING_METADATA` juste après l'envoi) : l'écran d'achat de l'app, à prendre en CI et envoyer par l'API quand l'achat ouvrira sur iPhone ;
     adresse des notifications serveur V2 (relais d'Android, v691) réglée par le script (PR #182) ; la soumission,
     avec une version de l'app, reste au propriétaire.
   - [x] Natif et branchement JS (PR #33, mergée le 28/10) : `BillingRule` (5 tests XCTest), plugin `AppStoreBilling`,
