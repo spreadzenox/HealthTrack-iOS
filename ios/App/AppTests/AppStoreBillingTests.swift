@@ -4,7 +4,8 @@ import XCTest
 @testable import App
 
 /// Abonnement App Store (étape I6), sans compte Apple : StoreKit Test, avec le fichier `Halcya.storekit` de cette
-/// cible (deux formules, essai gratuit de 2 semaines sur l'annuel, prix d'essai fictifs). Cible hébergée par l'app :
+/// cible (Silver annuel et mensuel, essai gratuit de 2 semaines sur l'annuel ; Gold mensuel, au niveau au-dessus,
+/// sans essai ; prix d'essai fictifs). Cible hébergée par l'app :
 /// une session créée depuis un test d'interface, dans un autre processus, est refusée (`journal/RECHERCHE.md`, 28/10).
 final class AppStoreBillingTests: XCTestCase {
     private var session: SKTestSession!
@@ -36,6 +37,32 @@ final class AppStoreBillingTests: XCTestCase {
         XCTAssertEqual(annuel.subscription?.introductoryOffer?.paymentMode, .freeTrial)
         let eligible = await annuel.subscription?.isEligibleForIntroOffer
         XCTAssertEqual(eligible, true)
+        // Gold (Android v681) : même groupe, mensuel, sans essai
+        let gold = try await formules(["halcya_gold_mensuel"])
+        let goldMensuel = try XCTUnwrap(gold.first)
+        XCTAssertEqual(goldMensuel.subscription?.subscriptionGroupID, annuel.subscription?.subscriptionGroupID)
+        XCTAssertEqual(goldMensuel.subscription?.subscriptionPeriod.unit, .month)
+        XCTAssertNil(goldMensuel.subscription?.introductoryOffer)
+    }
+
+    /// Passer de Silver à Gold : un seul groupe, donc Apple remplace Silver par Gold ; l'app ne voit plus que Gold,
+    /// rendu comme un achat Play de `halcya_gold` (pas de double facturation, le piège GOLD-b2 de Google Play)
+    func testMonteeDeSilverAGoldUnSeulAbonnementEnCours() async throws {
+        let silvers = try await formules(["halcya_premium_mensuel"]) // pas d'await dans XCTUnwrap
+        let silver = try XCTUnwrap(silvers.first)
+        guard case .success(let achatSilver) = try await silver.purchase() else { return XCTFail("achat Silver non abouti") }
+        if case .verified(let t) = achatSilver { await t.finish() }
+        let golds = try await formules(["halcya_gold_mensuel"])
+        let gold = try XCTUnwrap(golds.first)
+        guard case .success(let achatGold) = try await gold.purchase() else { return XCTFail("achat Gold non abouti") }
+        if case .verified(let t) = achatGold { await t.finish() }
+        let rendu = try XCTUnwrap(AppStoreBillingPlugin.purchase(achatGold))
+        XCTAssertEqual(rendu["products"] as? [String], ["halcya_gold"])
+        var enCours: [String] = []
+        for await droit in Transaction.currentEntitlements {
+            if let achat = AppStoreBillingPlugin.purchase(droit) { enCours += (achat["products"] as? [String]) ?? [] }
+        }
+        XCTAssertEqual(enCours, ["halcya_gold"])
     }
 
     func testAchatDEssaiRenduCommeUnAchatPlayEtGardeDansLesAbonnementsEnCours() async throws {

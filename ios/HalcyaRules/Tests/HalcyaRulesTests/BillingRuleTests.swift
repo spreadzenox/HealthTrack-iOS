@@ -37,11 +37,32 @@ final class BillingRuleTests: XCTestCase {
         XCTAssertNil(BillingRule.offer(storeId: "autre", displayPrice: "1 €", price: 1, currency: "EUR", period: .init(value: 1, unit: "M"), trial: nil))
     }
 
-    func testUnSeulProduitHalcyaPremiumAvecSesFormules() throws {
+    func testProduitHalcyaPremiumAvecSesFormules() throws {
         let product = BillingRule.product(offers: [["basePlanId": "annuel"], ["basePlanId": "mensuel"]])
         XCTAssertEqual(product["productId"] as? String, "halcya_premium")
         XCTAssertEqual((product["offers"] as? [[String: Any]])?.count, 2)
-        XCTAssertEqual(BillingRule.storeIds, ["halcya_premium_annuel", "halcya_premium_mensuel"])
+    }
+
+    /// Gold (Android v681) : `halcya_gold`, formule mensuelle, rendu comme son abonnement de Google Play
+    func testGoldMensuelRenduCommeLaFormuleDeHalcyaGold() throws {
+        let offer = try XCTUnwrap(BillingRule.offer(
+            storeId: "halcya_gold_mensuel", displayPrice: "9,99 €", price: Decimal(string: "9.99")!, currency: "EUR",
+            period: .init(value: 1, unit: "M"), trial: nil
+        ))
+        XCTAssertEqual(offer["basePlanId"] as? String, "mensuel")
+        XCTAssertEqual(offer["offerToken"] as? String, "halcya_gold_mensuel")
+        XCTAssertEqual((offer["phases"] as? [[String: Any]])?.first?["priceMicros"] as? Int, 9_990_000)
+        XCTAssertEqual(BillingRule.product(BillingRule.goldProductId, offers: [offer])["productId"] as? String, "halcya_gold")
+    }
+
+    /// Un produit App Store par durée → l'abonnement de Google Play qu'il représente ; seuls les produits demandés
+    func testProduitsAppStoreParAbonnementDemande() {
+        XCTAssertEqual(BillingRule.storeIds, ["halcya_premium_annuel", "halcya_premium_mensuel", "halcya_gold_mensuel"])
+        XCTAssertEqual(BillingRule.storeIds(for: ["halcya_premium"]), ["halcya_premium_annuel", "halcya_premium_mensuel"])
+        XCTAssertEqual(BillingRule.storeIds(for: ["halcya_premium", "halcya_gold"]).count, 3)
+        XCTAssertEqual(BillingRule.productId(storeId: "halcya_gold_mensuel"), "halcya_gold")
+        XCTAssertEqual(BillingRule.productId(storeId: "halcya_premium_annuel"), "halcya_premium")
+        XCTAssertNil(BillingRule.productId(storeId: "autre"))
     }
 
     /// `appAccountToken` est un UUID : tiré de l'empreinte SHA-256 (hex) que l'app donne déjà à Google Play
