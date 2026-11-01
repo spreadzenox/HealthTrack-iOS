@@ -4,6 +4,7 @@
 // « Halcya », Gold au niveau 1 et Silver au niveau 2 (store/app-store/abonnements.md), en France seulement et en
 // euros, comme les produits d'Android sur Google Play (app/scripts/play/subscriptions.mjs : région FR).
 //
+// Règle aussi l'adresse des notifications serveur de l'App Store (V2) sur celle du relais d'Android (I6-RELAIS-3).
 // Idempotent, comme le script d'Android : on lit d'abord et on ne crée que ce qui manque. Un prix, un niveau ou un
 // essai déjà en place n'est jamais modifié ici (un changement touche les abonnés : décision du propriétaire) ; un
 // écart est seulement signalé. Rien n'est soumis à l'examen d'Apple (geste du propriétaire, avec une version de
@@ -22,6 +23,15 @@ export const LOCALE = 'fr-FR'
 /** Comme Google Play (région FR) : en vente en France, pas dans les territoires qu'Apple ajoutera. */
 export const TERRITORY = 'FRA'
 export const GROUP = { referenceName: 'Halcya', name: 'Halcya' }
+/**
+ * Notifications serveur de l'App Store (version 2) : le relais d'Android les reçoit depuis la v691 (I6-RELAIS-3,
+ * `relay/README.md` de HealthTrack) ; même adresse en production et en sandbox (TestFlight). Réglée sur l'app si elle
+ * est vide ; une autre adresse déjà en place n'est jamais remplacée ici (écart signalé).
+ */
+export const NOTIFICATIONS = {
+  url: 'https://halcya-relay-81378799481.europe-west1.run.app/appstore/notifications',
+  version: 'V2',
+}
 /** Limites d'App Store Connect pour la fiche d'un abonnement (caractères). */
 export const LIMITS = { name: 30, description: 45, referenceName: 64 }
 
@@ -88,6 +98,30 @@ export const bodies = {
   }),
 }
 
+/**
+ * Réglage des notifications serveur de l'app (attributs `subscriptionStatusUrl…` d'App Store Connect) : ce qu'il faut
+ * envoyer (`attributes`, vide si tout est en place) et les écarts à signaler (`drift`), pour la production et la sandbox.
+ */
+export function notificationsPlan(appAttributes = {}) {
+  const attributes = {}
+  const drift = []
+  for (const [urlKey, versionKey, label] of [
+    ['subscriptionStatusUrl', 'subscriptionStatusUrlVersion', 'production'],
+    ['subscriptionStatusUrlForSandbox', 'subscriptionStatusUrlVersionForSandbox', 'sandbox'],
+  ]) {
+    const url = appAttributes?.[urlKey] || null
+    if (!url) {
+      attributes[urlKey] = NOTIFICATIONS.url
+      attributes[versionKey] = NOTIFICATIONS.version
+    } else if (url !== NOTIFICATIONS.url) {
+      drift.push(`notifications serveur (${label}) : ${url} en place, adresse du relais attendue (non modifiée)`)
+    } else if (appAttributes?.[versionKey] !== NOTIFICATIONS.version) {
+      attributes[versionKey] = NOTIFICATIONS.version
+    }
+  }
+  return { attributes, drift }
+}
+
 const samePrice = (a, b) => Math.round(Number(a) * 100) === Math.round(Number(b) * 100)
 
 /** Palier de prix d'Apple dont le prix client est `price` (« 4.99 »). Erreur s'il n'y en a pas exactement un. */
@@ -150,6 +184,13 @@ export async function ensureSubscriptions({ token, fetchImpl = fetch, log = () =
   const apps = await api('GET', `/v1/apps?filter[bundleId]=${BUNDLE_ID}`)
   const app = apps.data?.[0]
   if (!app) throw new Error(`aucune app ${BUNDLE_ID} dans App Store Connect`)
+
+  const plan = notificationsPlan(app.attributes)
+  drift.push(...plan.drift)
+  if (Object.keys(plan.attributes).length) {
+    await api('PATCH', `/v1/apps/${app.id}`, { data: { type: 'apps', id: app.id, attributes: plan.attributes } })
+    say(`Notifications serveur de l'App Store (V2, production et sandbox) : adresse du relais réglée`)
+  } else if (!plan.drift.length) say(`Notifications serveur de l'App Store : déjà réglées`)
 
   const groups = await all(`/v1/apps/${app.id}/subscriptionGroups?limit=50`)
   let group = groups.find((g) => g.attributes?.referenceName === GROUP.referenceName)
@@ -282,6 +323,7 @@ export function readReviewScreenshot(path) {
 }
 
 function dryRun(log) {
+  log(`Notifications serveur de l'App Store : ${NOTIFICATIONS.url} (${NOTIFICATIONS.version}, production et sandbox)`)
   log(`Groupe « ${GROUP.referenceName} » (nom affiché ${LOCALE} : « ${GROUP.name} »), en vente en ${TERRITORY} seulement`)
   for (const s of SUBSCRIPTIONS) {
     const trial = s.trial ? `, essai ${s.trial.duration} (${s.trial.offerMode})` : ''
