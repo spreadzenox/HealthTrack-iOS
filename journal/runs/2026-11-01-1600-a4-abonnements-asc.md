@@ -1,6 +1,6 @@
 # 2026-11-01 16:00 UTC — A4 fait ; abonnements App Store créés par l'API ; Android v685
 
-**Étape** : I6 (abonnement), I9 (A5), suivi d'Android  ·  **PR** : #177 (mergée), #179 (v685 et v687), #180 (abonnements), journal (#178)  ·  **Android suivi** : v687 (`d2089b6`)  ·  **iOS** : 683 sur TestFlight (683.177)  ·  **Parité** : 48 % (23/48)
+**Étape** : I6 (abonnement), I9 (A5), suivi d'Android  ·  **PR** : #177 (mergée), #179 (v685 et v687), #180 (abonnements), #181 (copie hors d'iCloud), journal (#178)  ·  **Android suivi** : v687 (`d2089b6`)  ·  **iOS** : 683 sur TestFlight (683.177)  ·  **Parité** : 48 % (23/48)
 
 ## Messages du propriétaire depuis le run précédent
 - A4 fait pas à pas dans la conversation (captures d'App Store Connect) : contrat **Paid Applications actif**, compte
@@ -42,9 +42,14 @@
   « l'App Store ») pris d'une constante dans l'écran d'abonnement, et le lien « Gérer mon abonnement » d'Apple, pour
   éviter un correctif iPhone de plus sur un écran qui change d'heure en heure.
 
+- **Copie de secours hors de la sauvegarde iCloud** (PR #181), aussitôt la décision prise : dossier « Copie de
+  secours » de Documents marqué exclu par l'app (`SnapshotFolder.swift`, 3 tests XCTest) ; la page y écrit la copie,
+  lit encore l'ancienne et ne la retire qu'après avoir écrit la nouvelle ; « Supprimer toutes mes données » efface
+  les deux ; sonde de la CI qui échoue si le dossier n'est pas exclu ; textes (confidentialité, conditions, fiche,
+  assistance, notes pour l'examen) et note de Nouveautés de l'iPhone ; 3062 tests, build appstore.
+
 ## Suite
 - #179 : CI, merge, TestFlight 687, envoi de la fiche (sans captures).
 - #180 : merge, puis lancer « Abonnements App Store — création » et lire son compte rendu.
-- Copie de secours dans iCloud (directive 5.1.3) : attend la décision du propriétaire (recommandation : l'exclure de
-  la sauvegarde) ; à faire dès sa réponse.
+- #181 : CI (sonde `[sauvegarde]` : dossier exclu), captures de Vos données et de l'onboarding, merge après #179.
 - Run de lundi 2/11, 00:00 à Paris (dimanche 23:00 UTC) : archiver le résumé de la semaine S44.
