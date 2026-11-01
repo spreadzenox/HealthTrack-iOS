@@ -7,13 +7,15 @@ l'autorisation Temps d'écran ; ni app Android, ni montre Huawei en direct). Les
 `captures/store` (jamais dans `main`) ; `store-push.yml`, option « captures », les envoie par l'API d'App Store
 Connect dans l'ordre du tableau, à la place des précédentes.
 
-Sélection du 29/10. Captures refaites le 1/11 (`88a5c5d`, Android v667, build 667.151) et regardées :
+Sélection du 29/10. Captures refaites le 1/11 (`88b79f3`, Android v673, build 673.159) et regardées :
 - barre d'état à 9:41, aucune bannière du système, aucun mot d'Android, aucune erreur JavaScript ;
 - Analyses (capture 2) : « Des liens repérés dans vos données, à vérifier avant d'y croire » (Android v667) au lieu
   de « pas des causes ni un diagnostic », avec « Piste solide » et « À confirmer » ;
 - Accueil (clair et sombre), pris le matin : la carte « Votre ventre » propose Calme, Gêne, Douleur ; le bouton
   « + 1 cigarette » de la démo est visible, comme le déclare la classification par âge ;
-- Sources : lecture du visage en menthe, temps d'écran en lilas ; sous l'Apple Watch, « Jamais reçu : SpO₂ » seulement.
+- Sources : « Les apps et appareils qui envoient vos mesures. Elles restent sur ce téléphone. » (Android v673, au lieu
+  de « jamais chez Halcya ») ; lecture du visage en menthe, temps d'écran en lilas ; sous l'Apple Watch, « Jamais reçu :
+  SpO₂ » seulement.
 
 Envoyées par l'API le 1/11, à la place de celles du 31/10. Dans l'ordre d'affichage ; les trois premières sont
 celles qu'on voit sans faire défiler :
@@ -26,7 +28,7 @@ celles qu'on voit sans faire défiler :
 | 4 | `iphone-17-pro-max-demo-clair-reintroduction.png` | Réintroduction guidée des FODMAP, groupe par groupe |
 | 5 | `iphone-17-pro-max-demo-clair-tendances.png` | Tendances : votre forme face à votre propre norme (FC au repos, VFC, sommeil) |
 | 6 | `iphone-17-pro-max-demo-clair-journal.png` | Journal : vos derniers jours, mesure par mesure |
-| 7 | `iphone-17-pro-max-demo-clair-connectors.png` | Sources : Apple Watch par l'app Santé, lecture du visage, temps d'écran, « rangées sur ce téléphone, jamais chez Halcya » |
+| 7 | `iphone-17-pro-max-demo-clair-connectors.png` | Sources : Apple Watch par l'app Santé, lecture du visage, temps d'écran, « Elles restent sur ce téléphone » |
 | 8 | `iphone-17-pro-max-demo-sombre-accueil.png` | L'accueil en mode sombre |
 
 Écartées :

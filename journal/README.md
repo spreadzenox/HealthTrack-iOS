@@ -10,18 +10,18 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v673 (1/11) | **673 sur TestFlight** (build 673.159) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v674 (1/11) | **674 sur TestFlight** (build 674.161) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **31/10 : installez la build la plus récente (673.159), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
+- **31/10 : installez la build la plus récente (674.161), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (673.159 aujourd'hui) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (674.161 aujourd'hui) ; elle installe l'app TestFlight sur son
   iPhone 12.
-- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 673, « Prête à
+- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 674, « Prête à
   soumettre ») : textes, 8 captures, catégorie Santé et forme, âge 18+. Rien n'est soumis. Avant une soumission,
   relisez-la, en particulier les réponses du questionnaire d'âge (`store/app-store/README.md`).
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
@@ -63,7 +63,7 @@
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 673.159) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 674.161) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -273,6 +273,7 @@ via TestFlight.
 | 1/11 04:00 | Android v671 | Android v671 : la politique de confidentialité, les conditions et la fiche de l'app ne répètent plus « pas un diagnostic » ni « pas des causes » ; l'iPhone a ses propres pages, relues et alignées (sans la lecture au déverrouillage, qui n'existe que sur Android), et la description App Store suit la nouvelle fiche, envoyée à Apple (PR #154, mergée, vue en image) ; **la 671 est sur TestFlight (671.155)**, même version qu'Android. Parité : 48 % | #154 (mergée) |
 | 1/11 05:00 | Android v672 | Android v672 : les anciennes notes des Nouveautés sont relues et plus courtes, sans la mise en garde répétée ; une note propre à l'iPhone (temps d'écran) a été relue de la même façon, et les textes propres à l'iPhone (conditions, confidentialité, fiche App Store) sont désormais vérifiés avec les mêmes règles d'écriture qu'Android (PR #156, mergée, vue en image) ; **la 672 est sur TestFlight (672.157)**, même version qu'Android. Parité : 48 % | #156 (mergée) |
 | 1/11 06:00 | Android v673 | Android v673 : les écrans Sources et Nutrition sont plus courts à lire, et « vos données restent sur le téléphone » n'est dit qu'une fois, en tête de Sources ; cinq adaptations de l'iPhone refaites sur ces nouveaux textes (l'app Santé, les guides des montres, le temps d'écran, le poids) (PR #158, mergée, vue en image) ; **la 673 est sur TestFlight (673.159)**, même version qu'Android ; la capture de Sources de la fiche App Store est en train d'être refaite. Parité : 48 % | #158 (mergée) |
+| 1/11 07:00 | Android v674, capture de Sources | Android v674 : les écrans Paramètres et Données sont plus courts à lire ; cinq adaptations de l'iPhone suivies, dont une refaite sur la nouvelle phrase de « Vos données » (PR #160, mergée, vue en image) ; **la 674 est sur TestFlight (674.161)**, même version qu'Android ; **la capture de Sources de la fiche App Store est refaite et acceptée par Apple** : elle dit « Elles restent sur ce téléphone ». Parité : 48 % | #160 (mergée) |
 
 ---
 
