@@ -183,6 +183,8 @@
     **créés par l'API le 1/11 à 17:48** (`scripts/store-subscriptions.mjs`, 9 tests, workflow « Abonnements App Store
     — création », PR #180) : groupe « Halcya » (nom affiché fr-FR), Gold mensuel 9,99 € (niveau 1), Silver annuel
     29,99 € avec 2 semaines d'essai et Silver mensuel 4,99 € (niveau 2), noms et descriptions fr-FR, en vente en France.
+  - [ ] Plugin Swift `TrialReminder` (PR #182) inutilisé depuis Android v697 (#612 : pas de rappel d'essai promis sur
+    l'App Store) : le retirer si la décision tient, ou le rebrancher si Android revient dessus.
   - [~] Capture d'écran pour l'examen de chaque abonnement : **envoyée le 1/11 à 22:24** (écran d'achat 6,9",
     « premium-2 » de `captures/store`) ; état chez Apple à revérifier (`MISSING_METADATA` juste après l'envoi) : l'écran d'achat de l'app, à prendre en CI et envoyer par l'API quand l'achat ouvrira sur iPhone ;
     adresse des notifications serveur V2 (relais d'Android, v691) réglée par le script (PR #182) ; la soumission,
@@ -256,7 +258,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ; **693.185 (1/11 21:59, achat ouvert)** ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ; **693.185 (1/11 21:59, achat ouvert)** ; 697.189 (2/11 00:05) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
