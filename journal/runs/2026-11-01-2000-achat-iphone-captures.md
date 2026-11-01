@@ -1,6 +1,6 @@
 # 2026-11-01 20:00 UTC — Achat sur iPhone : CI verte, capture défilée de l'écran d'abonnement
 
-**Étape** : I6 (abonnement)  ·  **PR** : #184 (achat sur iPhone, v693), journal  ·  **Android suivi** : v693 (`066a6e4`)  ·  **iOS** : 691 sur `main` et sur TestFlight (691.183)  ·  **Parité** : 48 % (23/48)
+**Étape** : I6 (abonnement)  ·  **PR** : #184 (achat sur iPhone, v693) mergée ; journal  ·  **Android suivi** : v693 (`066a6e4`)  ·  **iOS** : 691 sur `main` et sur TestFlight (691.183)  ·  **Parité** : 48 % (23/48)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun ; la question sur la période de lancement (soumettre après le 20/11, ou l'exclure pour l'iPhone) attend sa
@@ -18,8 +18,12 @@
 - Capture défilée ajoutée (`/premium` dans `SCROLLS` : « premium-2 ») pour voir les prix, l'essai, le renouvellement
   et les liens, et pour servir de capture pour l'examen d'Apple ; seconde CI en cours.
 
+- Seconde CI verte ; **capture « premium-2 » relue : l'écran d'achat est complet** (Silver / Gold, annuel 29,99 €
+  « soit 2,50 € par mois » et −50 %, mensuel 4,99 €, frise de l'essai, « Essayer 14 jours gratuitement », « Puis
+  29,99 € par an. Rappel 2 jours avant la fin de l'essai. Annulable à tout moment dans l'App Store. », « Restaurer un
+  achat · Conditions · Confidentialité ») ; **#184 mergée** ; TestFlight 693 et captures 6,9" lancés.
+
 ## Suite
-- #184 : CI, capture « premium-2 » relue, merge, TestFlight 693, fiche (paragraphe « Abonnements facultatifs ») ;
-  captures 6,9" (`ios-build`, `devices: iPhone 17 Pro Max`) puis capture pour l'examen envoyée
-  (`capture_examen: iphone-17-pro-max-demo-clair-premium-2.png`).
+- TestFlight 693 ; fiche (paragraphe « Abonnements facultatifs ») ; capture pour l'examen envoyée
+  (`capture_examen: iphone-17-pro-max-demo-clair-premium-2.png`) ; journal mergé en dernier.
 - Run de dimanche 23:00 UTC : archiver le résumé de la semaine S44.
