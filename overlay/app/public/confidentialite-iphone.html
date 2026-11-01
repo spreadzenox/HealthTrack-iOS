@@ -49,7 +49,7 @@
       <li>Vos données restent sur votre iPhone, par défaut. Halcya n'a ni compte, ni serveur qui les garde, ni publicité, ni outil de mesure d'audience.</li>
       <li>Rien ne quitte l'iPhone sans une action de votre part : l'analyse IA d'un repas, la météo, l'export d'une sauvegarde.</li>
       <li>La lecture du visage se fait sur l'iPhone : aucune image n'est gardée ni envoyée.</li>
-      <li>Si la sauvegarde iCloud de votre iPhone est activée, iOS y inclut la copie de secours de l'app (chiffrée, gérée par iOS, jamais lue par Halcya).</li>
+      <li>La copie de secours de l'app reste sur l'iPhone : elle n'est pas incluse dans la sauvegarde iCloud.</li>
       <li>Vous pouvez tout exporter, et tout effacer, à tout moment.</li>
     </ul>
   </div>
@@ -70,15 +70,15 @@
     envoyées à aucun serveur de l'éditeur : il n'en existe pas.
   </p>
 
-  <h2 id="sauvegarde">Copie de secours et sauvegarde iCloud</h2>
+  <h2 id="sauvegarde">Copie de secours, sur l'iPhone seulement</h2>
   <p>
     Halcya tient à jour, dans ses propres fichiers sur l'iPhone, une <strong>copie de secours</strong> de vos
-    saisies, de votre profil et de vos réglages (visible dans l'app Fichiers, Sur mon iPhone → Halcya). Si la
-    sauvegarde iCloud de votre iPhone est activée, iOS y inclut cette copie, comme les fichiers des autres
-    applications : elle est chiffrée, gardée par Apple dans votre compte iCloud et gérée par iOS, et Halcya ne peut
-    pas la lire. Sur un nouvel iPhone restauré depuis cette sauvegarde, l'app vous propose de reprendre vos données.
-    L'identifiant qui compte vos analyses IA (voir plus bas) n'en fait pas partie. Pour ne pas sauvegarder Halcya, retirez-la des
-    apps sauvegardées dans les réglages iCloud de l'iPhone.
+    saisies, de votre profil et de vos réglages (visible dans l'app Fichiers, Sur mon iPhone → Halcya → Copie de
+    secours). Elle sert si iOS efface la base de l'app pour libérer de la place. Elle reste sur l'iPhone : Halcya
+    l'exclut de la sauvegarde iCloud, et la base de l'app n'y est pas non plus. Pour changer d'iPhone, exportez vos
+    données sur l'ancien (Réglages → Données → Exporter), puis importez le fichier sur le nouveau. Un fichier que vous
+    exportez reste là où vous le rangez. L'identifiant qui compte vos analyses IA (voir plus bas) ne fait pas partie de
+    la copie.
   </p>
 
   <h2>App Santé</h2>

@@ -7,9 +7,10 @@ import { readDeviceSnapshot, restoreSnapshotSettings } from './snapshot.js'
 const measures = (n) => `${n.toLocaleString(appLocale())} ${n > 1 ? 'mesures' : 'mesure'}`
 
 /**
- * Version iOS (dépôt HealthTrack-iOS) : premier écran de l'onboarding. La sauvegarde iCloud n'emporte pas la base de
- * l'app (WebKit l'exclut, mesuré le 28/10), seulement la copie de secours de Documents (overlay/app/src/ios/snapshot.js) ;
- * après une restauration, ou si iOS a repris la base, l'onboarding revient et la copie est proposée d'emblée.
+ * Version iOS (dépôt HealthTrack-iOS) : premier écran de l'onboarding. Si iOS a repris la base faute de place, la
+ * copie de secours (overlay/app/src/ios/snapshot.js) reste sur l'iPhone : l'onboarding revient et la copie est
+ * proposée d'emblée. Ni la base (WebKit l'exclut, mesuré le 28/10) ni, depuis le 1/11, la copie ne sont dans la
+ * sauvegarde iCloud (directive 5.1.3 (ii)) : après une restauration ou sur un nouvel iPhone, c'est l'export.
  * « Reprendre » = l'import « ajouter » de Vos données (entrées et profil), plus les réglages gardés dans la copie
  * (`SNAPSHOT_SETTINGS`) ; l'onboarding continue ensuite (les
  * autorisations sont à redonner sur un nouveau téléphone). Hors de l'app iPhone, `readDeviceSnapshot` rend null : rien.
