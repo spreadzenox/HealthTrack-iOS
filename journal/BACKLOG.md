@@ -179,8 +179,14 @@
     - adaptateur en Vitest ;
     - achat de bout en bout sur simulateur avec un fichier de configuration StoreKit (`.storekit`) branché au
       schéma, la feuille d'achat de test touchée par XCUITest.
-  - Propriétaire, après A1 à A4 : créer le groupe et les deux produits dans App Store Connect avec ces ids (valeurs
-    exactes préparées le moment venu).
+  - [x] Groupe et abonnements dans App Store Connect (A4 fait le 1/11, contrat « Paid Applications » actif) :
+    **créés par l'API le 1/11 à 17:48** (`scripts/store-subscriptions.mjs`, 9 tests, workflow « Abonnements App Store
+    — création », PR #180) : groupe « Halcya » (nom affiché fr-FR), Gold mensuel 9,99 € (niveau 1), Silver annuel
+    29,99 € avec 2 semaines d'essai et Silver mensuel 4,99 € (niveau 2), noms et descriptions fr-FR, en vente en France.
+  - [ ] Capture d'écran pour l'examen de chaque abonnement (état chez Apple : `MISSING_METADATA` tant qu'elle
+    manque) : l'écran d'achat de l'app, à prendre en CI et envoyer par l'API quand l'achat ouvrira sur iPhone ;
+    adresse des notifications serveur V2 (celle du relais d'Android) à renseigner dans App Store Connect quand elle
+    existera ; la soumission, avec une version de l'app, reste au propriétaire.
   - [x] Natif et branchement JS (PR #33, mergée le 28/10) : `BillingRule` (5 tests XCTest), plugin `AppStoreBilling`,
     correctif 24, contrat avec `describePlans` (Vitest). Inactifs tant que `FEATURES.billing` est faux.
   - [x] Achat d'essai sur simulateur : cible de tests unitaires hébergée par l'app + fichier `.storekit` +
@@ -190,7 +196,9 @@
     test dit désormais pourquoi (`StoreKit Test : transaction non vérifiée …`) ; repassé sans faute sur la CI suivante.
   - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
     l'`appAccountToken`.
-  - [ ] **Sortie avec les abonnements (décision du propriétaire, 1/11 vers 15:00)**. Ordre : A4 (propriétaire) → groupe
+  - [ ] **Sortie avec les abonnements (décision du propriétaire, 1/11 vers 15:00)** — avancement au 1/11 17:50 : A4 ✅,
+    abonnements créés par l'API ✅, message au relais d'Android transmis ✅ (attente de son relais), A5 ✅, copie de
+    secours hors d'iCloud (PR #181). Ordre : A4 (propriétaire) → groupe
     « Halcya » et trois abonnements créés par l'API (`store/app-store/abonnements.md` : Silver annuel 29,99 € avec essai de
     2 semaines, Silver mensuel 4,99 €, Gold mensuel 9,99 € ; noms, descriptions, prix en euros, disponibilité, adresse des
     notifications serveur V2 du relais) ; relais d'Android qui vérifie les achats Apple (message prêt à coller dans
@@ -200,9 +208,10 @@
     compte Google Play » de la v685), rappel de fin d'essai en notification locale, partie vente des conditions, de la
     confidentialité et de la fiche ; essai sur l'iPhone 12 par TestFlight (achats de test gratuits) ; soumission des
     abonnements avec la version (propriétaire).
-  - [~] Gold dans le plugin (1/11, PR #177, après Android v681 et v683) : `halcya_gold_mensuel` → `halcya_gold`, un produit
+  - [x] Gold dans le plugin (1/11, PR #177, mergée, après Android v681 et v683) : `halcya_gold_mensuel` → `halcya_gold`, un produit
     rendu par abonnement demandé, Gold au niveau 1 du groupe dans le fichier StoreKit de la CI, achat d'essai Silver →
     Gold (un seul abonnement en cours).
+  - [ ] À l'ouverture de l'achat sur iPhone (Android v685, GOLD-b2) : le bouton « Passer à Gold », réservé par Android aux abonnés venus de Google Play, et `ALREADY_GOLD_MESSAGE` (« compte Google Play ») demandent un texte iPhone (« compte Apple ») ; le plugin `AppStoreBilling` ignore `oldPurchaseToken` et `replacementMode`, Apple fait le passage dans le groupe.
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : mêmes modèles qu'Android, mêmes scores sur ses vecteurs de référence.
   Étude du 28/10 (`RECHERCHE.md`) : ni Vision ni ARKit, qui changeraient les scores. Valence et éveil (HSEmotion, poids
   AffectNet) éteints tant que la licence n'est pas tranchée (`DEMANDES.md`). Étapes :

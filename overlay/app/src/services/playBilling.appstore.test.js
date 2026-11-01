@@ -23,6 +23,17 @@ const fromStoreKit = [
       },
     ],
   },
+  // Gold (Android v681) : `halcya_gold_mensuel` chez Apple, rendu comme la formule `mensuel` de `halcya_gold`
+  {
+    productId: 'halcya_gold',
+    offers: [
+      {
+        basePlanId: 'mensuel',
+        offerToken: 'halcya_gold_mensuel',
+        phases: [{ priceMicros: 9_990_000, formattedPrice: '9,99 €', billingPeriod: 'P1M', currency: 'EUR' }],
+      },
+    ],
+  },
 ]
 
 describe('formules App Store lues par describePlans (contrat avec BillingRule.swift)', () => {
@@ -31,6 +42,12 @@ describe('formules App Store lues par describePlans (contrat avec BillingRule.sw
       // Depuis Android v682 (GOLD-b4), chaque formule dit son produit et son niveau (Silver ou Gold)
       { basePlanId: 'annuel', offerToken: 'halcya_premium_annuel', productId: 'halcya_premium', tier: 'silver', period: 'year', price: '29,99 €', priceMicros: 29_990_000, currency: 'EUR', trialDays: 14 },
       { basePlanId: 'mensuel', offerToken: 'halcya_premium_mensuel', productId: 'halcya_premium', tier: 'silver', period: 'month', price: '2,99 €', priceMicros: 2_990_000, currency: 'EUR', trialDays: null },
+    ])
+  })
+
+  it('Gold : la formule mensuelle de `halcya_gold`, sans essai ; le jeton d’offre est l’id du produit App Store', () => {
+    expect(describePlans(fromStoreKit, 'halcya_gold')).toEqual([
+      { basePlanId: 'mensuel', offerToken: 'halcya_gold_mensuel', productId: 'halcya_gold', tier: 'gold', period: 'month', price: '9,99 €', priceMicros: 9_990_000, currency: 'EUR', trialDays: null },
     ])
   })
 
@@ -54,7 +71,7 @@ describe('plugin natif sur iPhone', () => {
     const { loadBillingPlugin, loadPlans } = await import('./playBilling')
     const plugin = await loadBillingPlugin()
     expect(registered).toEqual(['AppStoreBilling'])
-    expect((await loadPlans({ native: plugin })).map((p) => p.basePlanId)).toEqual(['annuel', 'mensuel'])
+    expect((await loadPlans({ native: plugin })).map((p) => `${p.tier}:${p.basePlanId}`)).toEqual(['silver:annuel', 'silver:mensuel', 'gold:mensuel'])
     vi.doUnmock('@capacitor/core')
     vi.doUnmock('../config/distribution')
   })

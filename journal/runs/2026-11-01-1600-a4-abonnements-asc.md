@@ -1,6 +1,6 @@
 # 2026-11-01 16:00 UTC — A4 fait ; abonnements App Store créés par l'API ; Android v685
 
-**Étape** : I6 (abonnement), I9 (A5), suivi d'Android  ·  **PR** : #177 (mergée), #179 (v685 et v687), #180 (abonnements), #181 (copie hors d'iCloud), journal (#178)  ·  **Android suivi** : v687 (`d2089b6`)  ·  **iOS** : 683 sur TestFlight (683.177)  ·  **Parité** : 48 % (23/48)
+**Étape** : I6 (abonnement), I9 (A5), suivi d'Android  ·  **PR** : #177, #179 (v685 et v687), #180 (abonnements) mergées ; #181 (copie hors d'iCloud), journal (#178)  ·  **Android suivi** : v687 (`d2089b6`)  ·  **iOS** : 683 sur TestFlight (683.177)  ·  **Parité** : 48 % (23/48)
 
 ## Messages du propriétaire depuis le run précédent
 - A4 fait pas à pas dans la conversation (captures d'App Store Connect) : contrat **Paid Applications actif**, compte
@@ -48,8 +48,14 @@
   les deux ; sonde de la CI qui échoue si le dossier n'est pas exclu ; textes (confidentialité, conditions, fiche,
   assistance, notes pour l'examen) et note de Nouveautés de l'iPhone ; 3062 tests, build appstore.
 
+- #179 : CI macOS verte, captures relues (Premium inchangé, Nouveautés « Version installée : 687 », aucun texte
+  d'Android ni erreur JS) ; **mergée** ; TestFlight 687 lancé.
+- #180 : remise à jour sur main, contrôle vert, **mergée** ; **« Abonnements App Store — création » lancé : groupe
+  « Halcya » et nom affiché fr-FR créés ; `halcya_gold_mensuel`, `halcya_premium_annuel` (essai gratuit de 2 semaines)
+  et `halcya_premium_mensuel` créés, nom et description fr-FR, en vente en France, prix 9,99 €, 29,99 € et 4,99 €
+  fixés** ; état chez Apple `MISSING_METADATA` (capture pour l'examen, attendue) ; rien de soumis.
+
 ## Suite
-- #179 : CI, merge, TestFlight 687, envoi de la fiche (sans captures).
-- #180 : merge, puis lancer « Abonnements App Store — création » et lire son compte rendu.
+- TestFlight 687, puis envoi de la fiche (sans captures).
 - #181 : CI (sonde `[sauvegarde]` : dossier exclu), captures de Vos données et de l'onboarding, merge après #179.
 - Run de lundi 2/11, 00:00 à Paris (dimanche 23:00 UTC) : archiver le résumé de la semaine S44.

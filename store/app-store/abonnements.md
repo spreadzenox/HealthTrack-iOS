@@ -1,4 +1,4 @@
-# Abonnements App Store : Silver et Gold (brouillon, I6)
+# Abonnements App Store : Silver et Gold (I6)
 
 Décision du propriétaire du 31/10, prise avec la routine Android : deux formules.
 
@@ -61,7 +61,17 @@ seront branchées :
   des quantités » seulement après confirmation par le banc d'essai.
 - « **Silver** : l'analyse des repas par photo ou description, avec des crédits chaque mois. »
 
-Reste à décider par le propriétaire : l'offre Gold (P35 d'Android : mensuel seul, annuel plus tard, pas d'essai) ; les
-crédits (10 et 20 par jour) suivent la proposition d'Android.
-Les produits seront créés par l'API App Store Connect (autorisation permanente) une fois le contrat « Paid
-Applications » signé (A4).
+Les crédits (10 et 20 par jour) suivent Android.
+
+**Création** : le contrat « Paid Applications » est actif depuis le 1/11 (A4). Le groupe et les trois abonnements
+sont créés par l'API App Store Connect (autorisation permanente) : `scripts/store-subscriptions.mjs`, lancé à la main
+par le workflow « Abonnements App Store — création » sur `main`.
+- **Zone et prix** : en France seulement et en euros, comme sur Google Play (région FR). Prix fixés par palier d'Apple
+  dont le prix client est exactement celui du tableau.
+- **Ce que le script ne fait jamais** :
+  - il ne crée que ce qui manque ;
+  - un prix, un niveau ou un essai déjà en place n'est jamais modifié (l'écart est signalé) ;
+  - rien n'est soumis à l'examen d'Apple.
+- **Avant la première soumission** (propriétaire, avec une version de l'app), chaque abonnement doit avoir sa capture
+  d'écran pour l'examen d'Apple : l'écran d'achat de l'app. Elle sera prise par la CI quand l'achat ouvrira sur
+  iPhone. D'ici là, App Store Connect les dit « métadonnées manquantes », ce qui est attendu.

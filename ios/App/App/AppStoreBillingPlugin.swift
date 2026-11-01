@@ -35,13 +35,18 @@ public class AppStoreBillingPlugin: CAPPlugin, CAPBridgedPlugin {
         updates?.cancel()
     }
 
+    /// `getProducts({ productIds })` comme Play Billing : un produit par abonnement de Google Play demandé (Silver
+    /// `halcya_premium`, Gold `halcya_gold`), avec ses formules ; un abonnement sans formule chez Apple est omis.
     @objc func getProducts(_ call: CAPPluginCall) {
+        let wanted = call.getArray("productIds", String.self) ?? [BillingRule.productId]
         Task {
             do {
-                let products = try await Product.products(for: BillingRule.storeIds)
-                var offers: [[String: Any]] = []
-                for storeId in BillingRule.storeIds {
-                    guard let product = products.first(where: { $0.id == storeId }), let subscription = product.subscription else { continue }
+                let storeIds = BillingRule.storeIds(for: wanted)
+                let products = try await Product.products(for: storeIds)
+                var byProduct: [String: [[String: Any]]] = [:]
+                for storeId in storeIds {
+                    guard let product = products.first(where: { $0.id == storeId }), let subscription = product.subscription,
+                          let productId = BillingRule.productId(storeId: storeId) else { continue }
                     // Comme Google, l'essai n'est proposé qu'à qui y a droit
                     let intro = subscription.introductoryOffer
                     let eligible = await subscription.isEligibleForIntroOffer
@@ -50,10 +55,11 @@ public class AppStoreBillingPlugin: CAPPlugin, CAPBridgedPlugin {
                         storeId: product.id, displayPrice: product.displayPrice, price: product.price,
                         currency: product.priceFormatStyle.currencyCode, period: Self.period(subscription.subscriptionPeriod), trial: trial
                     ) {
-                        offers.append(offer)
+                        byProduct[productId, default: []].append(offer)
                     }
                 }
-                call.resolve(["products": offers.isEmpty ? [] : [BillingRule.product(offers: offers)]])
+                let result = wanted.compactMap { id in byProduct[id].map { BillingRule.product(id, offers: $0) } }
+                call.resolve(["products": result])
             } catch {
                 call.reject("formules indisponibles")
             }
@@ -101,9 +107,10 @@ public class AppStoreBillingPlugin: CAPPlugin, CAPBridgedPlugin {
 
     /// Achat sous la forme de Play ; `purchaseToken` = la transaction signée par Apple, vérifiée par le relais.
     static func purchase(_ result: VerificationResult<Transaction>) -> [String: Any]? {
-        guard case .verified(let transaction) = result, BillingRule.storeIds.contains(transaction.productID),
-              transaction.revocationDate == nil else { return nil }
-        return ["state": "purchased", "products": [BillingRule.productId], "purchaseToken": result.jwsRepresentation]
+        // Un abonnement remplacé par une montée de formule (Silver → Gold) n'est plus un droit : Apple ne facture que Gold
+        guard case .verified(let transaction) = result, let productId = BillingRule.productId(storeId: transaction.productID),
+              transaction.revocationDate == nil, !transaction.isUpgraded else { return nil }
+        return ["state": "purchased", "products": [productId], "purchaseToken": result.jwsRepresentation]
     }
 
     private static func period(_ period: Product.SubscriptionPeriod) -> BillingRule.Period {
