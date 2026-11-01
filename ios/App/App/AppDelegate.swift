@@ -1,6 +1,7 @@
 import UIKit
 import Capacitor
 import UserNotifications
+import HalcyaRules
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -13,7 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let center = UNUserNotificationCenter.current()
         center.setNotificationCategories(Set(EveningNotifications.all.map(\.notificationCategory)))
         center.delegate = HalcyaNotificationHandler.shared
+        Self.prepareSnapshotFolder()
         return true
+    }
+
+    /// Copie de secours hors de la sauvegarde iCloud (directive 5.1.3 (ii), décision du 1/11) : le dossier est créé et
+    /// marqué avant que la page ne l'écrive, puis marqué de nouveau à chaque passage en arrière-plan ou au premier plan
+    /// (s'il a été supprimé dans Fichiers, la page le recrée sans la marque).
+    static func prepareSnapshotFolder() {
+        try? SnapshotFolder.prepare(in: FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0])
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -22,11 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
+        Self.prepareSnapshotFolder()
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
+        Self.prepareSnapshotFolder()
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
 

@@ -2,12 +2,25 @@
  * Copie de secours de la base, version iOS (dépôt HealthTrack-iOS).
  *
  * Dans WKWebView, IndexedDB n'est pas durable : iOS peut le reprendre quand le téléphone manque de place (guide
- * « Data Storage » de Capacitor, politique de stockage de WebKit ; journal/RECHERCHE.md). L'app tient donc à jour,
- * dans son dossier Documents (visible dans Fichiers › Sur mon iPhone › Halcya, et sauvegardé par iCloud avec le
- * reste de l'app), le même fichier JSON que « Télécharger la sauvegarde » : il se restaure par « Importer ».
+ * « Data Storage » de Capacitor, politique de stockage de WebKit ; journal/RECHERCHE.md). L'app tient donc à jour le
+ * même fichier JSON que « Télécharger la sauvegarde », qui se restaure par « Importer », dans le dossier
+ * « Copie de secours » de Documents (visible dans Fichiers › Sur mon iPhone › Halcya).
+ *
+ * **Ce dossier est exclu de la sauvegarde iCloud** (directive 5.1.3 (ii) d'Apple : pas de données de santé
+ * personnelles dans iCloud ; décision du propriétaire du 1/11) : l'app le crée et le marque à chaque lancement
+ * (`SnapshotFolder.swift`, `AppDelegate`). Pour changer de téléphone, c'est l'export. Jusqu'au 1/11, la copie était à
+ * la racine de Documents, donc dans la sauvegarde : elle est encore lue, puis retirée dès que la nouvelle est écrite.
  * Rien ne quitte le téléphone ; une base vide n'écrase jamais la copie existante.
  */
 export const SNAPSHOT_FILE = 'Halcya-copie-de-secours.json'
+/** Dossier de Documents exclu de la sauvegarde iCloud : même nom que `SnapshotFolder.name` (Swift). */
+export const SNAPSHOT_DIR = 'Copie de secours'
+export const SNAPSHOT_PATH = `${SNAPSHOT_DIR}/${SNAPSHOT_FILE}`
+/** Emplacements lus, dans l'ordre : le dossier exclu, puis l'ancienne copie de la racine (avant le 1/11). */
+const LOCATIONS = [
+  { dir: SNAPSHOT_DIR, path: SNAPSHOT_PATH },
+  { dir: '', path: SNAPSHOT_FILE },
+]
 
 /**
  * Réglages gardés dans la copie (champ `iosSettings`, ignoré par l'import) : la sauvegarde iCloud n'emporte pas le
@@ -26,17 +39,25 @@ function pickSettings(storage) {
   return Object.keys(settings).length ? settings : null
 }
 
-/** Écrit la copie si la base contient quelque chose. Rend `true` si elle a été écrite ; ne lève jamais. */
-export async function saveSnapshot({ countAllEntries, exportToJson, writeFile, storage }) {
+/**
+ * Écrit la copie dans le dossier exclu de la sauvegarde si la base contient quelque chose, puis seulement alors retire
+ * l'ancienne copie de la racine (`removeLegacy`). Rend `true` si la copie a été écrite ; ne lève jamais.
+ */
+export async function saveSnapshot({ countAllEntries, exportToJson, writeFile, storage, removeLegacy }) {
   try {
     if ((await countAllEntries()) === 0) return false
     const json = await exportToJson()
     const settings = pickSettings(storage)
-    await writeFile(SNAPSHOT_FILE, settings ? JSON.stringify({ ...JSON.parse(json), iosSettings: settings }, null, 2) : json)
-    return true
+    await writeFile(SNAPSHOT_PATH, settings ? JSON.stringify({ ...JSON.parse(json), iosSettings: settings }, null, 2) : json)
   } catch {
     return false
   }
+  try {
+    await removeLegacy?.()
+  } catch {
+    // retirée à la prochaine copie
+  }
+  return true
 }
 
 /** Rétablit les réglages de la liste trouvés dans une copie ; rend leurs clés. Ne lève jamais. */
@@ -52,20 +73,39 @@ export function restoreSnapshotSettings(text, storage = globalThis.localStorage)
   }
 }
 
+/** Fichiers d'un dossier de Documents (`[]` s'il n'existe pas encore). */
+async function filesIn(fs, dir) {
+  try {
+    return (await fs.list(dir)) || []
+  } catch {
+    return []
+  }
+}
+
 /**
- * La copie de secours (`{ text, savedAt }`), ou null s'il n'y en a pas. `fs.list()` rend les fichiers de Documents
- * (`{ name, mtime }`) : on n'interroge jamais un fichier absent, que Capacitor écrirait en erreur dans la console.
- * Ne lève jamais.
+ * La copie de secours (`{ text, savedAt }`), ou null s'il n'y en a pas : celle du dossier exclu, sinon l'ancienne de
+ * la racine. `fs.list(dossier)` rend les fichiers d'un dossier de Documents (`{ name, mtime }`) : on n'interroge
+ * jamais un fichier absent, que Capacitor écrirait en erreur dans la console. Ne lève jamais.
  */
 export async function readSnapshot(fs) {
   try {
-    const entry = (await fs.list()).find((f) => f.name === SNAPSHOT_FILE)
-    if (!entry) return null
-    const { data } = await fs.readFile(SNAPSHOT_FILE)
-    return { text: String(data), savedAt: new Date(entry.mtime).toISOString() }
+    for (const { dir, path } of LOCATIONS) {
+      const entry = (await filesIn(fs, dir)).find((f) => f.name === SNAPSHOT_FILE)
+      if (!entry) continue
+      const { data } = await fs.readFile(path)
+      return { text: String(data), savedAt: new Date(entry.mtime).toISOString() }
+    }
+    return null
   } catch {
     return null
   }
+}
+
+/** Retire l'ancienne copie de la racine de Documents (dans la sauvegarde iCloud) si elle y est. */
+export async function removeLegacySnapshot(fs) {
+  if (!(await filesIn(fs, '')).some((f) => f.name === SNAPSHOT_FILE)) return false
+  await fs.deleteFile(SNAPSHOT_FILE)
+  return true
 }
 
 /** Lecture réelle, dans l'app iPhone seulement. */
@@ -74,7 +114,7 @@ export async function readDeviceSnapshot() {
     const [{ Capacitor }, { Filesystem, Directory, Encoding }] = await Promise.all([import('@capacitor/core'), import('@capacitor/filesystem')])
     if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== 'ios') return null
     return readSnapshot({
-      list: async () => (await Filesystem.readdir({ path: '', directory: Directory.Documents })).files,
+      list: async (dir) => (await Filesystem.readdir({ path: dir, directory: Directory.Documents })).files,
       readFile: (path) => Filesystem.readFile({ path, directory: Directory.Documents, encoding: Encoding.UTF8 }),
     })
   } catch {
@@ -83,18 +123,22 @@ export async function readDeviceSnapshot() {
 }
 
 /**
- * « Supprimer toutes mes données » : la copie contient toutes les entrées et le profil, et part dans la sauvegarde
- * iCloud ; elle est effacée aussi (les sauvegardes exportées par la personne restent). Rend `true` si elle l'a été ;
- * ne lève jamais.
+ * « Supprimer toutes mes données » : la copie contient toutes les entrées et le profil ; elle est effacée aussi, au
+ * dossier exclu comme à l'ancienne place (les sauvegardes exportées par la personne restent). Rend `true` si une copie
+ * l'a été ; ne lève jamais.
  */
 export async function deleteSnapshot(fs) {
-  try {
-    if (!(await fs.list()).some((f) => f.name === SNAPSHOT_FILE)) return false
-    await fs.deleteFile(SNAPSHOT_FILE)
-    return true
-  } catch {
-    return false
+  let deleted = false
+  for (const { dir, path } of LOCATIONS) {
+    try {
+      if (!(await filesIn(fs, dir)).some((f) => f.name === SNAPSHOT_FILE)) continue
+      await fs.deleteFile(path)
+      deleted = true
+    } catch {
+      // l'autre emplacement est tout de même essayé
+    }
   }
+  return deleted
 }
 
 /** Effacement réel, dans l'app iPhone seulement. */
@@ -103,7 +147,7 @@ export async function deleteDeviceSnapshot() {
     const [{ Capacitor }, { Filesystem, Directory }] = await Promise.all([import('@capacitor/core'), import('@capacitor/filesystem')])
     if (!Capacitor.isNativePlatform() || Capacitor.getPlatform() !== 'ios') return false
     return deleteSnapshot({
-      list: async () => (await Filesystem.readdir({ path: '', directory: Directory.Documents })).files,
+      list: async (dir) => (await Filesystem.readdir({ path: dir, directory: Directory.Documents })).files,
       deleteFile: (path) => Filesystem.deleteFile({ path, directory: Directory.Documents }),
     })
   } catch {
@@ -142,7 +186,12 @@ export async function startSnapshots() {
       countAllEntries: storage.countAllEntries,
       exportToJson: storage.exportToJson,
       storage: window.localStorage,
-      writeFile: (path, data) => Filesystem.writeFile({ path, data, directory: Directory.Documents, encoding: Encoding.UTF8 }),
+      writeFile: (path, data) => Filesystem.writeFile({ path, data, directory: Directory.Documents, encoding: Encoding.UTF8, recursive: true }),
+      removeLegacy: () =>
+        removeLegacySnapshot({
+          list: async (dir) => (await Filesystem.readdir({ path: dir, directory: Directory.Documents })).files,
+          deleteFile: (path) => Filesystem.deleteFile({ path, directory: Directory.Documents }),
+        }),
     })
   } catch {
     // jamais bloquant pour l'app

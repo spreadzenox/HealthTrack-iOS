@@ -127,8 +127,11 @@ run_device() { # <udid> <nom>
   [ "$(cat "$data/Documents/capture/ready.txt" 2>/dev/null)" = fin ] || echo "::warning::$name : parcours des pages inachevé ($seen capture(s))"
   # Données (I3) : la copie de secours s'écrit 10 s après le dernier chargement ; où WKWebView range IndexedDB
   sleep 12
-  { echo "== Documents"; ls -la "$data/Documents"; echo "== Library/WebKit"; find "$data/Library/WebKit" -maxdepth 6 2>/dev/null | sed "s|$data/||" | head -60; } > "$OUT/$dev-donnees.txt" 2>&1
+  { echo "== Documents"; ls -la "$data/Documents"; echo "== Documents/Copie de secours"; ls -la "$data/Documents/Copie de secours"; echo "== Library/WebKit"; find "$data/Library/WebKit" -maxdepth 6 2>/dev/null | sed "s|$data/||" | head -60; } > "$OUT/$dev-donnees.txt" 2>&1
   grep -q "Halcya-copie-de-secours.json" "$OUT/$dev-donnees.txt" && echo "copie de secours : présente" || echo "::warning::$name : pas de copie de secours dans Documents"
+  # Copie de secours hors de la sauvegarde iCloud (directive 5.1.3 (ii), décision du 1/11) : dossier marqué exclu
+  if grep -a '\[sauvegarde\] Documents/Copie de secours {' "$log" | grep -q '"excluded":true'; then echo "copie de secours : exclue de la sauvegarde iCloud"
+  else echo "::error::$name : le dossier de la copie de secours n'est pas exclu de la sauvegarde iCloud (sonde [sauvegarde])"; fi
   xcrun simctl terminate "$udid" "$BUNDLE" 2>/dev/null || true
   sleep 1; kill "$pid" 2>/dev/null || true
   xcrun simctl shutdown "$udid" || true
