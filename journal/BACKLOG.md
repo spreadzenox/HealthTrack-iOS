@@ -190,6 +190,16 @@
     test dit désormais pourquoi (`StoreKit Test : transaction non vérifiée …`) ; repassé sans faute sur la CI suivante.
   - Relais (Android, « I6-RELAIS ») : préciser dans `DEMANDES.md` l'en-tête ou le champ du JWS et la règle de
     l'`appAccountToken`.
+  - [ ] **Sortie avec les abonnements (décision du propriétaire, 1/11 vers 15:00)**. Ordre : A4 (propriétaire) → groupe
+    « Halcya » et trois abonnements créés par l'API (`store/app-store/abonnements.md` : Silver annuel 29,99 € avec essai de
+    2 semaines, Silver mensuel 4,99 €, Gold mensuel 9,99 € ; noms, descriptions, prix en euros, disponibilité, adresse des
+    notifications serveur V2 du relais) ; relais d'Android qui vérifie les achats Apple (message prêt à coller dans
+    `DEMANDES.md`) ; puis côté app iPhone : `FEATURES.billing` vrai pour appstore, « Restaurer les achats », prix,
+    durée et renouvellement automatique près du bouton d'achat, liens vers les conditions et la confidentialité,
+    « Gérer l'abonnement » vers l'App Store, textes « compte Apple » (le message d'Android « Vous avez déjà Gold sur ce
+    compte Google Play » de la v685), rappel de fin d'essai en notification locale, partie vente des conditions, de la
+    confidentialité et de la fiche ; essai sur l'iPhone 12 par TestFlight (achats de test gratuits) ; soumission des
+    abonnements avec la version (propriétaire).
   - [~] Gold dans le plugin (1/11, PR #177, après Android v681 et v683) : `halcya_gold_mensuel` → `halcya_gold`, un produit
     rendu par abonnement demandé, Gold au niveau 1 du groupe dans le fichier StoreKit de la CI, achat d'essai Silver →
     Gold (un seul abonnement en cours).

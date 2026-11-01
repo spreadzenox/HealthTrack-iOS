@@ -14,7 +14,17 @@
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
-**👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
+**👉 Prochaine action du propriétaire** — **décision du 1/11 vers 15:00 : l'iPhone sort avec les abonnements**, comme Google Play
+- **A4 maintenant (le plus long : Apple vérifie banque et fiscalité en 1 à 3 jours)** : App Store Connect → **Business**
+  (« Accords, taxes et services bancaires ») → accepter le contrat **Paid Applications** ; **compte bancaire** (titulaire
+  = votre statut d'entrepreneur individuel, IBAN, BIC, paiement en euros) ; **fiscalité** (formulaire américain
+  **W-8BEN**, personne physique hors États-Unis, et ce qu'Apple demande pour la France) ; **contacts** (responsable,
+  finance, juridique, technique) ; **statut de professionnel (DSA)**, obligatoire pour vendre dans l'Union
+  européenne : adresse, téléphone et e-mail de contact affichés sur la fiche. Rien à m'envoyer : dites seulement quand
+  le contrat est « Actif ». Ensuite, la routine crée les trois abonnements par l'API (Silver annuel avec essai de 14
+  jours, Silver mensuel, Gold mensuel, aux prix d'Android).
+- **Transmettre à la routine Android le message prêt à coller** en tête de `journal/DEMANDES.md` : son relais doit
+  vérifier les achats de l'App Store (sans cela, un achat sur iPhone ne débloquerait rien).
 - **31/10 : installez la build la plus récente (683.177), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
@@ -284,6 +294,7 @@ via TestFlight.
 | 1/11 13:00 | Android v680 | Android v680 : le serveur d'analyse reconnaît maintenant l'abonnement Gold de Google Play (20 analyses par jour) ; rien de visible sur iPhone ; pour que Gold marche aussi sur iPhone, la demande à Android précise comment reconnaître les abonnements Gold de l'App Store (PR #172, mergée) ; **la 680 est sur TestFlight (680.173)**, même version qu'Android. Parité : 48 % | #172 (mergée) |
 | 1/11 14:00 | Android v681, Gold | Android v681 : l'abonnement Gold existe sur Google Play (9,99 €/mois, sans essai), annoncé par ce qu'il apporte de vérifiable (20 analyses de repas par jour) tant que le test sur des repas pesés n'a pas prouvé qu'il se trompe moins ; même offre et mêmes textes prévus pour l'iPhone (PR #174, mergée) ; **la 681 est sur TestFlight (681.175)**, même version qu'Android. Parité : 48 % | #174 (mergée) |
 | 1/11 15:00 | Android v683, Gold | Android v683 : l'écran d'abonnement propose Silver et Gold sur Google Play ; sur iPhone, l'abonnement App Store n'est pas encore ouvert (l'écran le dit) ; un test de l'iPhone adapté avant même la publication d'Android (PR #176, mergée, vue en image) ; **la 683 est sur TestFlight (683.177)**, même version qu'Android ; Gold ajouté au module d'achat App Store de l'iPhone, avec un essai qui vérifie qu'on ne paie qu'un abonnement en passant de Silver à Gold (PR #177, en vérification). Parité : 48 % | #176 (mergée), #177 |
+| 1/11 16:00 | votre décision : abonnements | vous avez demandé ce qu'il reste avant la mise en production, puis décidé de **sortir l'iPhone avec les abonnements** : chemin noté en tête (A4 d'abord, message prêt à coller pour la routine Android) ; la routine créera les abonnements par l'API dès A4 actif. Parité : 48 % | #177, #178 |
 
 ---
 

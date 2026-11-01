@@ -4,6 +4,25 @@
 > le propriétaire décide et, s'il le veut, le transmet à la routine Android. Une ligne par demande : date, quoi,
 > pourquoi iOS en a besoin, contournement en attendant, état.
 
+
+> **À coller tel quel à la routine Android (préparé le 1/11 à 15:00, après votre décision « sortir avec les
+> abonnements »)** :
+>
+> « La version iPhone sort avec les abonnements, comme Google Play. Pour cela le relais doit vérifier les achats de
+> l'App Store (tâche I6-RELAIS de ton BACKLOG), sans rien changer au chemin Google Play :
+> 1. `/v1/subscription/verify` accepte, dans le même champ `purchaseToken`, une transaction StoreKit 2 signée par Apple
+>    (JWS en trois parties) : vérifier la signature et la chaîne `x5c` jusqu'à la racine d'Apple, `bundleId`
+>    `fr.jpesquet.sante`, `expiresDate`, `revocationDate`, environnement Sandbox (TestFlight) ou Production ; rattacher
+>    à l'installation par `appAccountToken` = les 32 premiers chiffres de `accountIdFor(installation)` au format UUID.
+> 2. Niveau : `productId` qui commence par `halcya_gold` → Gold, par `halcya_premium` → Silver (produits iPhone :
+>    `halcya_premium_annuel`, `halcya_premium_mensuel`, `halcya_gold_mensuel` ; Apple n'a pas de formules dans un produit).
+> 3. Une route pour les notifications serveur V2 d'App Store (`signedPayload`, même vérification) : renouvellement,
+>    expiration, remboursement, révocation, période de grâce, changement de formule.
+> 4. Mêmes droits en sortie (`premium`, `tier`, `state`, `expiresAt`, `autoRenewing`, `trial`, `source: 'appstore'`) et
+>    mêmes crédits (10 par jour en Silver, 20 en Gold).
+> 5. Plus tard : App Attest pour l'iPhone, comme Play Integrity pour Android.
+> Le détail est dans `journal/DEMANDES.md` de spreadzenox/HealthTrack-iOS (lignes du 28/10 et du 31/10). »
+
 | Date | Demande | Pourquoi | Contournement | État |
 |---|---|---|---|---|
 | 27/10 | **Avant de passer le relais en `INTEGRITY_MODE=enforce`** (prévu « quand quelques testeurs auront envoyé des jetons », BACKLOG d'Android) : laisser passer les requêtes de l'app iPhone (en-tête de plateforme ou identifiant d'installation iOS), ou n'exiger le jeton Play Integrity que des requêtes Android, jusqu'à ce qu'App Attest soit accepté (I6) | sur iPhone, il n'y a pas de jeton Play Integrity : en `enforce`, l'analyse IA des repas serait refusée (403) pour tous les utilisateurs iOS | aucun côté iOS (le relais décide) ; aujourd'hui le relais est en `observe`, tout passe. 28/10 (v536, #451) : sans jeton, l'app envoie la raison dans `X-Integrity-Status` ; sur iPhone c'est `no_plugin`, comme un Android sans plugin : un en-tête de plateforme (`X-Platform: ios`, à ajouter côté iOS si le relais le lit) les distinguerait | ✅ repris par Android le 28/10 (#468, v553) : le relais reconnaît l'iPhone (`X-Platform: ios`, ou `X-Integrity-Status: no_plugin` que l'app iPhone envoie déjà), statut `not_android`, jamais bloqué en `enforce` ; plafonds inchangés. Côté iOS : rien à faire ; ajouter `X-Platform: ios` serait plus net (à voir avec I6) |
