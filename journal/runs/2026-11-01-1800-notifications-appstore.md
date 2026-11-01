@@ -1,6 +1,6 @@
 # 2026-11-01 18:00 UTC — Android v691 (notifications de l'App Store au relais) ; adresse réglée par l'API ; brouillon de la vente
 
-**Étape** : I6 (abonnement), suivi d'Android  ·  **PR** : #182 (rappel de fin d'essai, v691, notifications), journal (#178) ; branche `claude/ios-achat-iphone-011815` (brouillon, sans PR)  ·  **Android suivi** : v691 (`0f0d705`)  ·  **iOS** : 689 sur `main` et sur TestFlight (689.181)  ·  **Parité** : 48 % (23/48)
+**Étape** : I6 (abonnement), suivi d'Android  ·  **PR** : #182 (rappel de fin d'essai, v691, notifications) mergée ; journal (#178) ; branche `claude/ios-achat-iphone-011815` (brouillon, sans PR)  ·  **Android suivi** : v691 (`0f0d705`)  ·  **iOS** : 689 sur `main` et sur TestFlight (689.181)  ·  **Parité** : 48 % (23/48)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun.
@@ -26,9 +26,12 @@
   l'App Store, empreinte seulement), fiche (paragraphe « Abonnements facultatifs » avec le lien vers les conditions,
   exigé par Apple ; 3908/4000 caractères).
 
+- #182 : CI macOS verte (4 tests `TrialReminderRuleTests` et 3 `SnapshotFolderTests` passés, l'app compile avec le
+  plugin, aucune erreur JS ni texte d'Android) ; **mergée** ; TestFlight 691 lancé ; **« Abonnements App Store —
+  création » relancé : adresse des notifications serveur réglée (V2, production et sandbox)**, abonnements déjà en
+  place, rien de recréé, toujours `MISSING_METADATA` (capture pour l'examen).
+
 ## Suite
-- #182 : CI, merge, TestFlight 691, puis « Abonnements App Store — création » (adresse des notifications) ; journal
-  (#178) ensuite.
 - Dès I6-RELAIS-6 chez Android : PR d'ouverture de l'achat sur la branche du brouillon (`FEATURES.billing`, captures
   de l'écran d'achat avec les trois formules, capture pour l'examen envoyée, tests des pages adaptés).
 - Run de dimanche 23:00 UTC : archiver le résumé de la semaine S44.
