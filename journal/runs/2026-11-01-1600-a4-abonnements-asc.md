@@ -1,6 +1,6 @@
 # 2026-11-01 16:00 UTC — A4 fait ; abonnements App Store créés par l'API ; Android v685
 
-**Étape** : I6 (abonnement), I9 (A5), suivi d'Android  ·  **PR** : #177, #179 (v685 et v687), #180 (abonnements) mergées ; #181 (copie hors d'iCloud), journal (#178)  ·  **Android suivi** : v687 (`d2089b6`)  ·  **iOS** : 683 sur TestFlight (683.177)  ·  **Parité** : 48 % (23/48)
+**Étape** : I6 (abonnement), I9 (A5), suivi d'Android  ·  **PR** : #177, #179 (v685 et v687), #180 (abonnements) mergées ; #181 (copie hors d'iCloud), journal (#178)  ·  **Android suivi** : v687 (`d2089b6`)  ·  **iOS** : 687 sur `main` et sur TestFlight (687.179)  ·  **Parité** : 48 % (23/48)
 
 ## Messages du propriétaire depuis le run précédent
 - A4 fait pas à pas dans la conversation (captures d'App Store Connect) : contrat **Paid Applications actif**, compte
@@ -55,7 +55,11 @@
   et `halcya_premium_mensuel` créés, nom et description fr-FR, en vente en France, prix 9,99 €, 29,99 € et 4,99 €
   fixés** ; état chez Apple `MISSING_METADATA` (capture pour l'examen, attendue) ; rien de soumis.
 
+- **TestFlight 687.179** envoyée (17:51) ; fiche envoyée sans captures : version 683 renommée 687, textes, catégorie
+  et âge à jour, 8/8 captures traitées chez Apple.
+
 ## Suite
-- TestFlight 687, puis envoi de la fiche (sans captures).
+- Après #181 : relancer l'envoi de la fiche (sans captures), pour la nouvelle phrase de la description sur la copie de
+  secours.
 - #181 : CI (sonde `[sauvegarde]` : dossier exclu), captures de Vos données et de l'onboarding, merge après #179.
 - Run de lundi 2/11, 00:00 à Paris (dimanche 23:00 UTC) : archiver le résumé de la semaine S44.
