@@ -115,12 +115,12 @@ index 055efa7..486fee2 100644
                </div>
              )
 diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
-index 4dbfd4e..d15ee14 100644
+index 65b6c3f..18181a9 100644
 --- a/app/src/pages/Onboarding.jsx
 +++ b/app/src/pages/Onboarding.jsx
 @@ -26,6 +26,11 @@ const WATCHES = [
-   { id: 'huawei', label: 'Une montre compatible Huawei', hint: 'reliée directement en Bluetooth' },
-   { id: 'none', label: 'Pas de montre', hint: 'le téléphone et vos notes suffisent pour commencer' },
+   { id: 'huawei', label: 'Une montre compatible Huawei', hint: 'reliée en Bluetooth' },
+   { id: 'none', label: 'Pas de montre', hint: 'le téléphone et vos notes suffisent' },
  ]
 +// Version iOS (HealthTrack-iOS) : les montres passent par l'app Santé d'Apple (étape I4), pas de montre Huawei en direct
 +const WATCHES_IOS = [
@@ -131,7 +131,7 @@ index 4dbfd4e..d15ee14 100644
  /**
   * Écrans dans l'ordre (jalon 4a : 1 à 3 ; 4b : Health Connect puis import et « aha », seulement avec une montre
 @@ -156,7 +161,7 @@ function WatchStep({ watch, onWatch }) {
-       <p className="onb-lead">Rien n’est demandé à cette étape : vous choisirez ce que l’app peut lire juste après.</p>
+       <p className="onb-lead">Aucune autorisation pour l’instant. Vous choisirez ensuite ce que l’app peut lire.</p>
        <fieldset className="onb-choices">
          <legend className="onb-sr">Votre montre</legend>
 -        {WATCHES.map((w) => (
@@ -146,17 +146,16 @@ index 4dbfd4e..d15ee14 100644
 -      <h1 className="onb-title">Vos données Health Connect</h1>
 +      <h1 className="onb-title">{FEATURES.iosStore ? 'Vos données de l’app Santé' : 'Vos données Health Connect'}</h1>
        <p className="onb-lead">
-         Sommeil, pas, cœur, VFC et activité de vos 30 derniers jours, lus sur le téléphone. Rien n’est envoyé.
+         L’app lit sur le téléphone vos 30 derniers jours de sommeil, de pas et de cœur. Rien n’est envoyé.
        </p>
-@@ -236,13 +241,16 @@ function HealthStep({ health, onHealth }) {
+@@ -236,12 +241,16 @@ function HealthStep({ health, onHealth }) {
        )}
        {health === 'unavailable' && (
          <p className="onb-note" role="status">
--          Health Connect n’est pas disponible sur ce téléphone pour l’instant. Vous pourrez le relier plus tard depuis
--          l’onglet Sources.
+-          Health Connect n’est pas disponible sur ce téléphone. Vous pourrez le relier plus tard depuis l’onglet Sources.
 +          {FEATURES.iosStore
 +            ? 'L’app Santé n’est pas disponible sur cet appareil. Vos notes suffisent pour commencer.'
-+            : 'Health Connect n’est pas disponible sur ce téléphone pour l’instant. Vous pourrez le relier plus tard depuis l’onglet Sources.'}
++            : 'Health Connect n’est pas disponible sur ce téléphone. Vous pourrez le relier plus tard depuis l’onglet Sources.'}
          </p>
        )}
        {health !== 'granted' && health !== 'unavailable' && (
@@ -168,7 +167,7 @@ index 4dbfd4e..d15ee14 100644
          </button>
        )}
      </>
-@@ -307,7 +315,7 @@ function AhaStep({ imported, onImported, onReady }) {
+@@ -306,7 +315,7 @@ function AhaStep({ imported, onImported, onReady }) {
          <div
            className="onb-import-bar"
            role="progressbar"
