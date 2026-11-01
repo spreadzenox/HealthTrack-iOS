@@ -314,7 +314,7 @@ via TestFlight.
 | 1/11 20:00 | l'achat s'ouvre sur iPhone | Android v693 nomme le magasin selon la version (« l'App Store », « compte Apple ») ; **l'achat est ouvert sur iPhone** : Silver et Gold s'achètent dans l'app, par l'App Store, avec le rappel avant la fin de l'essai, les conditions et la fiche de vente (PR #184, mergée ; écran d'achat vérifié en image) ; jusqu'au 20/11, Gold reste offert à tous, donc rien à payer sur TestFlight. Parité : 48 % | #184 (mergée) |
 | 1/11 21:00 | la 693 sur TestFlight | **la 693 est sur TestFlight (693.185)** : première avec l'achat ouvert ; l'écran d'achat a été vérifié en image (prix, essai de 14 jours, renouvellement, « Restaurer un achat », conditions) ; la fiche App Store dit maintenant les abonnements et leurs prix ; la capture de l'écran d'achat est chez Apple pour l'examen des abonnements ; Apple les dit encore incomplets, un coup d'œil de votre part dira pourquoi. Parité : 48 % | #185, #186 (mergées) |
 | 1/11 23:00 | suivi d'Android v697 | Android a décidé que l'écran d'abonnement de l'App Store ne promet pas de rappel avant la fin de l'essai (Apple envoie le sien) : l'iPhone suit, conditions et note de Nouveautés adaptées ; les Réglages montrent l'empreinte de l'installation, qui sert à Android pour offrir Gold aux testeurs (PR #188, mergée). Parité : 48 % | #188 (mergée) |
-| 2/11 00:00 | v697 mergée | **la 697 est sur TestFlight (697.189)** ; Android v698 (serveur seulement) suivie (PR #189). Parité : 48 % | #189 |
+| 2/11 00:00 | v697 mergée | **la 697 est sur TestFlight (697.189)** ; Android v698 (serveur seulement) suivie (PR #189, mergée), la 698 part sur TestFlight. Parité : 48 % | #189 (mergée) |
 
 ---
 
