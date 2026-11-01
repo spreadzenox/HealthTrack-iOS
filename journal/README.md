@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v663 (31/10) | **663 sur TestFlight** (build 663.147 ; la 638.121 fut la première avec la phrase exigée par Apple) : même version qu'Android |
+| Dernière version | v665 (1/11) | **663 sur TestFlight** (build 663.147 ; la 638.121 fut la première avec la phrase exigée par Apple) ; v665 en vérification |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -267,6 +267,7 @@ via TestFlight.
 | 31/10 22:00 | vos questions, modèle d'analyse des repas | vous avez demandé ce qu'il vous reste à faire (réponse dans la conversation : d'abord A6, l'iPhone 12) et un modèle d'IA plus précis pour lire les repas : demande précise prête dans `DEMANDES.md` pour la routine Android (le relais est commun aux deux apps), avec un essai sur vos repas pesés avant de basculer ; Android n'a rien publié de nouveau (son prochain changement s'appliquera tel quel). **Puis, à 22:00, vos décisions** : modèles 3.8, formules Silver et Gold (Gold à 10 €/mois, moins d'erreurs mis en avant, Gold par défaut pour les bêta-testeurs et vous), cache plus tard : notées, plan de l'abonnement iPhone revu. Parité : 48 % | #144 |
 | 31/10 23:00 | Android v661, relais en Gold | Android v659 à v661 : les signes à signaler au médecin citent aussi les antécédents familiaux, la réintroduction rappelle la durée d'éviction, aussi sur iPhone (PR #145, mergée, vue en image), et la 661 est sur TestFlight (661.146) ; la routine Android a basculé le relais : Gold sur Gemini 3.8 Flash avec réflexion, plafonds de coût du mois. Les requêtes de l'iPhone sont pour l'instant servies comme « gratuit » (Flash-Lite) : pour mettre la testeuse en Gold tout de suite, la routine Android peut ajouter son installation à la liste Gold du relais (demande mise à jour). Parité : 48 % | #145 (mergée) |
 | 1/11 00:00 | Android v663 | Android v663 : le relais sert Gold sur le dernier modèle Flash, et l'app ne montre plus le nom du modèle, aussi sur iPhone (PR #146, mergée), et la 663 est sur TestFlight (663.147), même version qu'Android ; une adaptation de l'iPhone a été refaite pour suivre ce changement ; la prochaine version d'Android (une seule mention « pas un diagnostic » aux endroits clés au lieu de la répéter partout) est déjà vérifiée côté iPhone. Parité : 48 % | #146 (mergée) |
+| 1/11 01:00 | Android v665 | Android v665 : la phrase « une estimation, pas un diagnostic » n'est plus répétée sous chaque carte, elle est dite une fois aux endroits clés (découverte de la lecture du visage, historique du bien-être, rapport PDF) ; aussi sur iPhone, où le nouveau test d'Android passe sur nos textes (PR #148, en vérification). Parité : 48 % | #148 |
 
 ---
 
