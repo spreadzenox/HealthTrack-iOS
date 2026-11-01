@@ -185,8 +185,8 @@
     29,99 € avec 2 semaines d'essai et Silver mensuel 4,99 € (niveau 2), noms et descriptions fr-FR, en vente en France.
   - [ ] Capture d'écran pour l'examen de chaque abonnement (état chez Apple : `MISSING_METADATA` tant qu'elle
     manque) : l'écran d'achat de l'app, à prendre en CI et envoyer par l'API quand l'achat ouvrira sur iPhone ;
-    adresse des notifications serveur V2 (celle du relais d'Android) à renseigner dans App Store Connect quand elle
-    existera ; la soumission, avec une version de l'app, reste au propriétaire.
+    adresse des notifications serveur V2 (relais d'Android, v691) réglée par le script (PR #182) ; la soumission,
+    avec une version de l'app, reste au propriétaire.
   - [x] Natif et branchement JS (PR #33, mergée le 28/10) : `BillingRule` (5 tests XCTest), plugin `AppStoreBilling`,
     correctif 24, contrat avec `describePlans` (Vitest). Inactifs tant que `FEATURES.billing` est faux.
   - [x] Achat d'essai sur simulateur : cible de tests unitaires hébergée par l'app + fichier `.storekit` +
@@ -201,7 +201,8 @@
     de secours hors d'iCloud (PR #181), rappel de fin d'essai en Swift (PR #182), capture pour l'examen par l'API
     (PR #183) ; restent : textes « Google Play » de l'écran d'abonnement (I6-RELAIS-6 chez Android, sinon correctif),
     `FEATURES.billing` vrai, captures de l'écran d'achat, partie vente des conditions, de la confidentialité et de la
-    fiche, notifications serveur V2 (I6-RELAIS-3 chez Android), essai sur l'iPhone 12. Ordre : A4 (propriétaire) → groupe
+    fiche (brouillon prêt sur `claude/ios-achat-iphone-011815`), essai sur l'iPhone 12 ; notifications serveur V2 :
+    relais prêt (v691, #607), adresse réglée par `store-subscriptions.mjs` (PR #182). Ordre : A4 (propriétaire) → groupe
     « Halcya » et trois abonnements créés par l'API (`store/app-store/abonnements.md` : Silver annuel 29,99 € avec essai de
     2 semaines, Silver mensuel 4,99 €, Gold mensuel 9,99 € ; noms, descriptions, prix en euros, disponibilité, adresse des
     notifications serveur V2 du relais) ; relais d'Android qui vérifie les achats Apple (message prêt à coller dans
