@@ -10,18 +10,18 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v677 (1/11) | **677 sur TestFlight** (build 677.167) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
+| Dernière version | v678 (1/11) | **678 sur TestFlight** (build 678.169) : même version qu'Android (la 638.121 fut la première avec la phrase exigée par Apple) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire** (rien d'urgent : tout avance d'abord sur simulateur)
-- **31/10 : installez la build la plus récente (677.167), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
+- **31/10 : installez la build la plus récente (678.169), ou au moins la 638.121** : les builds d'avant manquaient d'une phrase exigée par Apple
   (votre e-mail du 31/10, ITMS-90683) ; la 638.121 l'a. Si Apple renvoie un e-mail pour elle, transmettez-le.
 - **A6 maintenant : mettre l'app entre les mains de votre compagne** (pas à pas dans la conversation du 30/10) :
   l'inviter dans App Store Connect (Utilisateurs et accès, rôle « Customer Support »), puis créer dans TestFlight un
-  groupe de test interne avec elle et la build la plus récente (677.167 aujourd'hui) ; elle installe l'app TestFlight sur son
+  groupe de test interne avec elle et la build la plus récente (678.169 aujourd'hui) ; elle installe l'app TestFlight sur son
   iPhone 12.
-- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 677, « Prête à
+- (quand vous voulez) **La fiche App Store est complète** dans App Store Connect (Halcya → iOS 678, « Prête à
   soumettre ») : textes, 8 captures, catégorie Santé et forme, âge 18+. Rien n'est soumis. Avant une soumission,
   relisez-la, en particulier les réponses du questionnaire d'âge (`store/app-store/README.md`).
 - ✅ **Premier envoi sur TestFlight le 30/10** : Halcya 616 (build 616.97) signée par Apple et reçue par App Store Connect.
@@ -65,7 +65,7 @@
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
-**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 677.167) : Sources › « Temps d'écran et sommeil » › Activer,
+**À essayer sur l'iPhone 12 dès l'installation** (build la plus récente, 678.169) : Sources › « Temps d'écran et sommeil » › Activer,
 puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus et un iPhone de l'Union
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
@@ -279,6 +279,7 @@ via TestFlight.
 | 1/11 08:00 | Android v675 | Android v675 : les écrans de bienvenue d'un nouvel utilisateur sont plus courts et plus directs ; l'adaptation de l'iPhone (app Santé au lieu de Health Connect) refaite sur ces nouveaux textes (PR #162, mergée, vue en image) ; **la 675 est sur TestFlight (675.163)**, même version qu'Android. Parité : 48 % | #162 (mergée) |
 | 1/11 09:00 | offre Gold sur iPhone | Android n'a rien publié de nouveau ; il vous propose une offre Gold (Gold au mois seulement au lancement, annuel plus tard, pas d'essai), reportée telle quelle pour l'iPhone ; les noms des abonnements iPhone sont corrigés avant leur création (Silver garde le nom de l'abonnement Android) ; sur iPhone, Apple évite d'office de facturer deux fois quelqu'un qui passe de Silver à Gold. Parité : 48 % | (ce run) |
 | 1/11 10:00 | Android v677 | Android v677 : l'écran Analyses est plus court à lire (chaque lien en une phrase, la mise en garde dite une seule fois) ; aussi sur iPhone, sans rien à adapter (PR #166, mergée, vue en image) ; **la 677 est sur TestFlight (677.167)**, même version qu'Android. Parité : 48 % | #166 (mergée) |
+| 1/11 11:00 | Android v678 | Android v678 : les consignes de la réintroduction FODMAP tiennent en deux phrases ; aussi sur iPhone, sans rien à adapter (PR #168, mergée, vue en image) ; **la 678 est sur TestFlight (678.169)**, même version qu'Android ; les captures de la fiche App Store sont en train d'être refaites (Analyses et réintroduction ont changé). Parité : 48 % | #168 (mergée) |
 
 ---
 
