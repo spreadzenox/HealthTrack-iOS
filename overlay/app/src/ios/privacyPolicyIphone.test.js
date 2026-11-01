@@ -12,8 +12,9 @@ const iphone = read('public/confidentialite-iphone.html')
 const text = iphone.replace(/<!--[\s\S]*?-->/g, '').replace(/<style>[\s\S]*?<\/style>/, '').replace(/<[^>]+>/g, ' ')
   .replace(/\s+/g, ' ')
 
-// Empreinte de app/public/privacypolicy.html d'Android lue en dernier (mise à jour du 28 octobre 2026, v574)
-const ANDROID_POLICY_RELUE = 'ee5226dc8ebd8c678ee60631c301eefc8dac0b1211e55ada873ccd4b12843bba'
+// Empreinte de app/public/privacypolicy.html d'Android lue en dernier (mise à jour du 1er novembre 2026, v671 ; la
+// lecture au déverrouillage qu'elle ajoute n'existe pas sur iPhone)
+const ANDROID_POLICY_RELUE = '9be1e5fa63cbf0ff14c0d192638cea02235ae76d245730ac5571bce736718a66'
 
 describe('politique de confidentialité sur iPhone', () => {
   it("suit la dernière version relue de la page d'Android", () => {

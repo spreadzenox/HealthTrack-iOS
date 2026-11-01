@@ -12,8 +12,8 @@ const iphone = read('public/conditions-iphone.html')
 const text = iphone.replace(/<!--[\s\S]*?-->/g, '').replace(/<style>[\s\S]*?<\/style>/, '').replace(/<[^>]+>/g, ' ')
   .replace(/\s+/g, ' ')
 
-// Empreinte de app/public/conditions.html d'Android lue en dernier (version du 24 octobre 2026, relue sur v588)
-const ANDROID_CONDITIONS_RELUES = '6fdccbc9fff59848dbdda1fbd9e7eb35b0b4b2f8f0173be706af3f4cc704924f'
+// Empreinte de app/public/conditions.html d'Android lue en dernier (version du 1er novembre 2026, relue sur v671)
+const ANDROID_CONDITIONS_RELUES = '7d52926ca69138f39aa0f8221bb94d958803f3d0e1afd86cc9f58b4afe2f51c9'
 
 describe("conditions d'utilisation sur iPhone", () => {
   it("suivent la dernière version relue de la page d'Android", () => {
@@ -31,8 +31,9 @@ describe("conditions d'utilisation sur iPhone", () => {
   it("gardent ce que l'app n'est pas, et ce que l'iPhone fait vraiment", () => {
     expect(text).toMatch(/n'est pas un dispositif médical/)
     expect(text).toMatch(/appelez le 15 ou le 112/)
-    expect(text).toMatch(/pistes ?, pas des causes/)
-    expect(text).toMatch(/estimation, pas un diagnostic/)
+    expect(text).toMatch(/piste à vérifier : il ne prouve pas que l'un entraîne l'autre/)
+    expect(text).toMatch(/ne pose pas de diagnostic/)
+    expect(text).not.toMatch(/pas des causes|estimation, pas un diagnostic/)
     expect(text).toMatch(/18 ans et plus/)
     expect(text).toMatch(/ne propose aucun achat/)
     expect(text).toMatch(/achats intégrés de l'App Store/)
