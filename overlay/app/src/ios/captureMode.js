@@ -547,10 +547,11 @@ export async function probeDataRoundtrip({ log, storage, files }) {
 
 /**
  * Essai de la sauvegarde du téléphone (étape I3) : la sauvegarde iCloud emporte Documents et Library, sauf ce qui est
- * marqué « exclu de la sauvegarde » (et Library/Caches). La sonde relève, pour la copie de secours (Documents) et la
- * base de WKWebView (dossiers IndexedDB sous Library/WebKit), cette marque et la taille (plugin `CaptureProbe`, build
- * de captures seulement) ; le repère propre au téléphone (`BackupMarker`) doit, lui, être exclu, et `restoreGuard.js`
- * le lire (`restored: false` sans `unavailable`). Résultats dans la console (`[sauvegarde] …`).
+ * marqué « exclu de la sauvegarde » (et Library/Caches). La sonde relève, pour Documents, la base de WKWebView
+ * (dossiers IndexedDB sous Library/WebKit) et le dossier « Copie de secours », cette marque et la taille (plugin
+ * `CaptureProbe`, build de captures seulement). Doivent être exclus : le repère propre au téléphone (`BackupMarker`),
+ * que `restoreGuard.js` doit lire (`restored: false` sans `unavailable`), et, depuis le 1/11, le dossier de la copie
+ * de secours (directive 5.1.3 (ii) : pas de données de santé dans iCloud). Résultats dans la console (`[sauvegarde] …`).
  */
 export async function probeBackup({ log, plugin, checkRestore }) {
   const say = (what, value) => log(`[sauvegarde] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
@@ -570,8 +571,8 @@ export async function probeBackup({ log, plugin, checkRestore }) {
 }
 
 /**
- * Essai de « Supprimer toutes mes données » (étape I3), en tout dernier : la base est vidée, et la copie de secours de
- * Documents (toutes les entrées et le profil, qui partiraient dans la sauvegarde iCloud) effacée aussi (correctif 22).
+ * Essai de « Supprimer toutes mes données » (étape I3), en tout dernier : la base est vidée, et la copie de secours
+ * (toutes les entrées et le profil) effacée aussi (correctif 22).
  * Résultats dans la console (`[suppression] …`).
  */
 export async function probeDeleteAll({ log, storage, readSnapshot, deleteAll }) {
@@ -736,8 +737,9 @@ function clickButton(label) {
 }
 
 /**
- * Essai de la copie de secours proposée à l'onboarding (étape I3, correctif 23) : ce que voit la personne après une
- * restauration iCloud (la base n'y est pas, la copie de Documents si). La copie est mise à jour, la base vidée sans
+ * Essai de la copie de secours proposée à l'onboarding (étape I3, correctif 23) : ce que voit la personne quand iOS a
+ * repris la base faute de place, la copie de secours restant sur l'iPhone (elle n'est plus dans la sauvegarde iCloud
+ * depuis le 1/11 : après une restauration, c'est l'export qui ramène les données). La copie est mise à jour, la base vidée sans
  * toucher la copie, l'onboarding rouvert sans recharger la page (le mode capture ne reprend pas après un
  * rechargement), capturé ; puis « Reprendre mes données » est touché et capturé, la base recomptée et le thème
  * (retiré du localStorage comme sur un nouvel iPhone) vérifié revenu avec la copie. L'onboarding est
@@ -753,7 +755,7 @@ export async function probeSnapshotWelcome({ log, signal, waitAck, wait, storage
       writeSnapshot ??
       (async () => {
         const [{ saveSnapshot }, { Filesystem, Directory, Encoding }] = await Promise.all([import('./snapshot.js'), import('@capacitor/filesystem')])
-        const writeFile = (path, data) => Filesystem.writeFile({ path, data, directory: Directory.Documents, encoding: Encoding.UTF8 })
+        const writeFile = (path, data) => Filesystem.writeFile({ path, data, directory: Directory.Documents, encoding: Encoding.UTF8, recursive: true })
         return saveSnapshot({ countAllEntries: db.countAllEntries, exportToJson: db.exportToJson, writeFile, storage: localStorage })
       })
     const go =
