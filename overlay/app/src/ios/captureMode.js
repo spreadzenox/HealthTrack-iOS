@@ -22,7 +22,8 @@ export const DARK_ROUTES = ['/', '/journal', '/recommendations']
 export const EMPTY_ROUTES = ['/', '/journal', '/tendances', '/food', '/nutrition', '/recommendations', '/bien-etre',
   '/connectors']
 // Pages longues : écrans suivants, défilés d'environ 80 % de l'écran chacun (`-2`, `-3`…)
-export const SCROLLS = { '/connectors': 2, '/data': 1, '/settings': 1 }
+// (I6) Écran d'abonnement défilé : formules, prix, bouton, renouvellement et liens, sous le pli (capture pour Apple)
+export const SCROLLS = { '/connectors': 2, '/data': 1, '/settings': 1, '/premium': 1 }
 // États vides défilés de même : Sources vierge, pour la carte du temps d'écran sous le pli (« Activer »)
 export const EMPTY_SCROLLS = { '/connectors': 1 }
 // Volets repliés à ouvrir puis capturer : bouton touché (`click`, texte exact), `<details>` ouvert (`open`, id),
