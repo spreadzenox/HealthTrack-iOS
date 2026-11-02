@@ -4,9 +4,10 @@
 // Secure Enclave (plugin Swift `AppAttest`), attestée une fois sur un défi à usage unique du relais, puis une assertion
 // par requête sensible (analyse, crédits) sur « halcya-assert:<installation>:<horodatage ms>:<SHA-256 du corps> ».
 // Aucune donnée de santé : la clé est tirée au hasard, le corps n'entre que par son condensat. Branché sur l'analyse
-// des repas par le correctif 38 (aiRelay.js › postRelay), sur iPhone seulement ; côté relais, App Attest est coupé
-// tant qu'Android n'a pas réglé APP_ATTEST_MODE et le Team ID : l'enregistrement est alors retenté au plus une fois
-// par heure, sans requête de plus à chaque analyse.
+// des repas par le correctif 38 (aiRelay.js › postRelay), sur iPhone seulement, avec `X-Platform: ios` (platform.js).
+// Côté relais, App Attest est en observation depuis Android v721 (APP_ATTEST_MODE=observe et le Team ID, 2/11) ; si
+// l'enregistrement échoue, il est retenté au plus une fois par heure, sans requête de plus à chaque analyse.
+import { IOS_PLATFORM_HEADER } from './platform.js'
 
 export const APP_ATTEST_KEY = 'halcya_appattest'
 export const ATTEST_RETRY_MS = 60 * 60_000
@@ -88,14 +89,19 @@ export async function appAttestHeaders({ plugin, installId, body = '', now = Dat
 
 let nativePlugin = null
 
-/** Pour aiRelay.js (correctif 38) : en-têtes App Attest sur iPhone seulement ; ailleurs ou en cas d'erreur, rien. */
+/**
+ * Pour aiRelay.js (correctif 38) : sur iPhone, `X-Platform: ios` et les en-têtes App Attest (seulement
+ * `X-Platform` si l'attestation échoue) ; ailleurs, rien.
+ */
 export async function iosAttestHeaders({ platform, plugin, ...rest } = {}) {
+  let ios = false
   try {
     const core = platform && plugin ? null : await import('@capacitor/core')
     if ((platform ?? core.Capacitor.getPlatform()) !== 'ios') return {}
+    ios = true
     const native = plugin ?? (nativePlugin ??= core.registerPlugin('AppAttest'))
-    return await appAttestHeaders({ plugin: native, ...rest })
+    return { ...IOS_PLATFORM_HEADER, ...(await appAttestHeaders({ plugin: native, ...rest })) }
   } catch {
-    return {}
+    return ios ? { ...IOS_PLATFORM_HEADER } : {}
   }
 }

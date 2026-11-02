@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v718 (commit `0218f6a`, 2/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v721 (commit `bd7d5ac`, 2/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 2/11 22:00 | #635, #636, #637 (v721) | #637 : période de lancement prolongée (Gold offert à toute installation jusqu'au 27/11 inclus, iPhone compris : le relais ne distingue pas les plateformes) ; « Gold estime mieux les quantités » sur la page d'abonnement (P36, sans chiffre de précision) ; App Attest du relais en mode « observe » avec le Team ID (P38) ; note de Nouveautés réservée à Google Play ; #635 : mesure de performance de Tendances ; #636 : idées (fiche Play, noms Silver / Gold) ; côté iPhone : les 36 correctifs passent tels quels ; tests de la page d'abonnement mis à jour ; note de Nouveautés iOS sans date (Paramètres dit la date rendue par le relais) ; **correctif 40** : `X-Platform: ios` sur la vérification des droits et sur chaque analyse (`src/ios/platform.js`), repère dont le relais a besoin pour arrêter la période de lancement le 6/11 sur iPhone (décision du propriétaire du 2/11) et qui ne disparaît plus sur le simulateur (App Attest y remplaçait `no_plugin` par `unsupported`) ; description de l'abonnement Gold d'Apple alignée (lot de la fiche) ; 37 correctifs | — |
 | 2/11 19:45 | #634 (v718) | #634 : « 1er » et « 21e » avec le même exposant, dans la police Figtree (composant `Ordinal`, POL-PLAY-101) ; note de Nouveautés pour toutes les variantes, vraie sur iPhone ; côté iPhone : correctif 23 refait (l'import de `SnapshotWelcome` placé après celui d'`Ordinal` dans `Onboarding.jsx`) ; 36 correctifs, 3150 tests | — |
 | 2/11 18:30 | #631, #632, #633 (v717) | #632 : page « Licences » (Réglages → Licences : bibliothèques, polices, modèles du visage, tables d'aliments, avec leur licence) ; #633 : rien d'Android sur l'App Store, `IOS_LICENSES` à remplir par la routine iOS (notre demande du 2/11) ; #631 : journal ; côté iPhone : correctif 26 refait (ligne « Licences » dans `More.jsx`, sous-titre « Conditions » aligné sur Android depuis l'ouverture de l'achat), correctif 39 (TensorFlow Lite C, Capacitor pour iOS ; modèles valence / éveil tus, éteints sur iPhone), page ajoutée aux captures, note de Nouveautés iOS ; 36 correctifs | — |
 | 2/11 16:00 | #630 (v714) | #630 : aucun nom technique des modèles du visage (« HSEmotion ») hors sideload, `modelLabel` et `faceModelTag` (POL-PLAY-100), note pour Google Play seulement ; côté iPhone : correctif 15 refait (Android importe désormais lui-même `FEATURES` dans `today.js` : le bloc de l'import retiré) ; rien de visible sur iPhone (valence et éveil y sont éteints, licence en attente) ; 35 correctifs, 3131 tests | — |

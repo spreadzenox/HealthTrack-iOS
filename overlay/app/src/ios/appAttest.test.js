@@ -93,14 +93,18 @@ describe('App Attest sur iPhone (contrat I6-RELAIS-5)', () => {
     expect(await appAttestHeaders({ plugin: null, installId: 'install-1', body: CORPS, relayUrl: RELAY })).toEqual({})
   })
 
-  it('pour aiRelay.js (correctif 38) : iPhone seulement ; ailleurs ou en cas d’erreur, rien', async () => {
+  it('pour aiRelay.js (correctif 38) : iPhone seulement, toujours avec X-Platform: ios ; ailleurs, rien', async () => {
     const plugin = fakePlugin()
     expect(await iosAttestHeaders({ platform: 'web', plugin, installId: 'install-1', body: CORPS, relayUrl: RELAY, fetchImpl: fakeRelay() })).toEqual({})
     expect(plugin.isSupported).not.toHaveBeenCalled()
     expect(await iosAttestHeaders({ platform: 'android', plugin, installId: 'install-1', body: CORPS, relayUrl: RELAY, fetchImpl: fakeRelay() })).toEqual({})
     const headers = await iosAttestHeaders({ platform: 'ios', plugin, installId: 'install-1', body: CORPS, now: 5, relayUrl: RELAY, fetchImpl: fakeRelay() })
-    expect(headers).toMatchObject({ 'X-AppAttest-Key': 'cle-1', 'X-AppAttest-Time': '5' })
+    expect(headers).toMatchObject({ 'X-Platform': 'ios', 'X-AppAttest-Key': 'cle-1', 'X-AppAttest-Time': '5' })
+    // Attestation impossible : l'iPhone se signale quand même (sinon le relais le prendrait pour un Android)
     const broken = { isSupported: vi.fn(async () => { throw new Error('pont absent') }) }
-    expect(await iosAttestHeaders({ platform: 'ios', plugin: broken, installId: 'install-1', body: CORPS, relayUrl: RELAY })).toEqual({})
+    expect(await iosAttestHeaders({ platform: 'ios', plugin: broken, installId: 'install-1', body: CORPS, relayUrl: RELAY })).toEqual({ 'X-Platform': 'ios' })
+    // Simulateur (pas de Secure Enclave) : `unsupported` remplace `no_plugin`, `X-Platform` garde la plateforme
+    expect(await iosAttestHeaders({ platform: 'ios', plugin: fakePlugin({ supported: false }), installId: 'install-1', body: CORPS, relayUrl: RELAY }))
+      .toEqual({ 'X-Platform': 'ios', 'X-Integrity-Status': 'unsupported' })
   })
 })
