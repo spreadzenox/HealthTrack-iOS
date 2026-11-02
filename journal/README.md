@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v714 (2/11) | **714 sur TestFlight** (build 714.213), achat ouvert ; même version qu'Android |
+| Dernière version | v717 (2/11) | **714 sur TestFlight** (build 714.213), achat ouvert ; 717 en préparation (vérifications en cours) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -89,6 +89,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 14:00 | protection contre les abus | Android v713 suivie (PR #210) : le serveur sait désormais vérifier chaque analyse venue d'un iPhone (encore éteint) ; l'app iPhone joint maintenant sa preuve à chaque analyse de repas. Il vous reste une petite action quand vous pouvez (voir en haut) ; **la 713 est sur TestFlight (713.211)**. Parité : 67 % | #210 (mergée) |
 | 2/11 16:00 | suivi d'Android v714 | Android v714 suivie (PR #212) : la version Google Play ne montre plus le nom technique des modèles du visage ; rien ne change sur iPhone (ces modèles y sont éteints) ; une adaptation de l'iPhone remise à jour ; **la 714 est sur TestFlight (714.213)**. Parité : 67 % | #212 (mergée) |
 | 2/11 17:30 | préparation | Android n'a rien publié ; sa prochaine nouveauté, une page « Licences », a été essayée à l'avance : sur iPhone elle citerait des éléments propres à Android ; la version iPhone est préparée (liste propre, demande à Android). Parité : 67 % | — |
+| 2/11 18:30 | page « Licences » | Android v717 suivie (PR #215) : la nouvelle page Réglages → Licences existe aussi sur iPhone, avec les composants propres à l'iPhone et rien d'Android (Android a repris notre demande) ; « Conditions » annonce maintenant l'abonnement et les remboursements. Parité : 67 % | #215 (en vérification) |
 
 ---
 
