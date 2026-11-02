@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v698 (1/11) | **698 sur TestFlight** (build 698.190), achat ouvert ; même version qu'Android |
+| Dernière version | v700 (2/11) | **698 sur TestFlight** (build 698.190), achat ouvert ; même version qu'Android |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -67,6 +67,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | Date (Paris) | Run | Ce qui a été fait | PR |
 |---|---|---|---|
 | 2/11 01:00 | nouvelle semaine | résumé de la semaine S44 archivé (`semaines/2026-S44.md`) ; Android n'a changé que son serveur (prix de l'IA au 1er janvier) ; **la 698 est sur TestFlight (698.190)**. Parité : 48 % | — |
+| 2/11 02:00 | suivi d'Android v700 | Android v700 (serveur seulement) suivie (PR #192, en vérification) ; la prochaine version d'Android (grands nombres plus lisibles) a été essayée à l'avance : rien ne cassera sur iPhone. Parité : 48 % | #192 |
 
 ---
 
