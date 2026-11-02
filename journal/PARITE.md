@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v713 (commit `ce528bf`, 2/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v714 (commit `df3f8e5`, 2/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 2/11 16:00 | #630 (v714) | #630 : aucun nom technique des modèles du visage (« HSEmotion ») hors sideload, `modelLabel` et `faceModelTag` (POL-PLAY-100), note pour Google Play seulement ; côté iPhone : correctif 15 refait (Android importe désormais lui-même `FEATURES` dans `today.js` : le bloc de l'import retiré) ; rien de visible sur iPhone (valence et éveil y sont éteints, licence en attente) ; 35 correctifs, 3131 tests | — |
 | 2/11 14:00 | #629 (v713) | #629 : la garde du relais vérifie l'assertion App Attest de chaque analyse iPhone sur le corps brut (`X-AppAttest-Key`, `-Assertion`, `-Time` ; `attest_passed` / `missing` / `rejected` / `unavailable`), coupée par défaut (I6-RELAIS-5d-2) ; rien dans l'app ; côté iPhone : App Attest branché sur l'analyse des repas (correctif 38, PR #210), enregistrement retenté au plus une fois par heure tant que les routes sont coupées ; 35 correctifs, 3127 tests | — |
 | 2/11 13:00 | #627, #628 (v712) | #627 : un test d'Android (Premium) rendu stable ; #628 : routes App Attest du relais, défi et enregistrement, coupées par défaut (`APP_ATTEST_MODE=off`, I6-RELAIS-5d-1) ; rien dans l'app ; côté iPhone : `src/ios/appAttest.js` aligné sur les routes réelles (enregistrement en JSON `{ keyId, attestation, challenge }`, en-tête `X-AppAttest-Key` autorisé par le CORS, au lieu de `X-AppAttest-KeyId` de la spécification) ; 34 correctifs, 3125 tests | — |
 | 2/11 12:00 | #626 (v710) | #626 : assertions App Attest et registre des clés dans le relais (I6-RELAIS-5c : compteur, clé déjà liée, horloge à ±5 min) ; rien dans l'app ; côté iPhone : clientData identique à celui de #203 (« halcya-assert:<installation>:<ms>:<SHA-256 hex du corps> ») ; 34 correctifs, 3125 tests | — |
