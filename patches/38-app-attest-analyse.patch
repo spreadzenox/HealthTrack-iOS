@@ -1,0 +1,32 @@
+diff --git a/app/src/services/aiRelay.js b/app/src/services/aiRelay.js
+index 0f0846f..20a55b9 100644
+--- a/app/src/services/aiRelay.js
++++ b/app/src/services/aiRelay.js
+@@ -12,6 +12,8 @@ import { prepareImageForGemini } from './imagePrep.js'
+ import { MEAL_TEXT_MAX_LENGTH, toMealResult } from './geminiStandalone.js'
+ import { isTestDevice, requestIntegrity } from './playIntegrity.js'
+ import { localeDate } from '../i18n/locale.js'
++// Version iOS : assertion App Attest de l'iPhone sur l'analyse des repas (correctif 38)
++import { iosAttestHeaders } from '../ios/appAttest.js'
+ 
+ export const RELAY_URL = (import.meta.env?.VITE_RELAY_URL || 'https://halcya-relay-81378799481.europe-west1.run.app')
+   .replace(/\/+$/, '')
+@@ -162,6 +164,9 @@ async function postRelay(body, { fetchImpl = globalThis.fetch, timeoutMs = RELAY
+   else if (result?.reason) headers['X-Integrity-Status'] = result.reason
+   // Robots du rapport de pré-lancement de Google : comptés à part dans les bilans du relais (INSTALLS-21)
+   if (await testDevice()) headers['X-Test-Device'] = '1'
++  // Version iOS : le relais vérifie l'assertion sur le corps brut, donc sur ce texte exact (correctif 38)
++  const payload = JSON.stringify(body)
++  Object.assign(headers, await iosAttestHeaders({ installId: headers['X-Install-Id'], body: payload, relayUrl: RELAY_URL, fetchImpl }))
+   const controller = typeof AbortController === 'function' ? new AbortController() : null
+   const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null
+   let res
+@@ -169,7 +174,7 @@ async function postRelay(body, { fetchImpl = globalThis.fetch, timeoutMs = RELAY
+     res = await fetchImpl(`${RELAY_URL}/v1/meal/analyze`, {
+       method: 'POST',
+       headers,
+-      body: JSON.stringify(body),
++      body: payload,
+       ...(controller ? { signal: controller.signal } : {}),
+     })
+   } catch (err) {
