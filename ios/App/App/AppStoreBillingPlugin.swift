@@ -25,8 +25,9 @@ public class AppStoreBillingPlugin: CAPPlugin, CAPBridgedPlugin {
         updates = Task { [weak self] in
             for await result in Transaction.updates {
                 if case .verified(let transaction) = result { await transaction.finish() }
+                let purchase = await AppStoreBillingPlugin.purchase(result)
                 guard let self else { return }
-                self.notifyListeners("purchasesUpdated", data: ["code": 0, "purchases": [Self.purchase(result)].compactMap { $0 }])
+                self.notifyListeners("purchasesUpdated", data: ["code": 0, "purchases": [purchase].compactMap { $0 }])
             }
         }
     }
@@ -80,7 +81,8 @@ public class AppStoreBillingPlugin: CAPPlugin, CAPBridgedPlugin {
                 switch try await product.purchase(options: options) {
                 case .success(let result):
                     if case .verified(let transaction) = result { await transaction.finish() }
-                    call.resolve(["status": "ok", "purchases": [Self.purchase(result)].compactMap { $0 }])
+                    let purchase = await Self.purchase(result)
+                    call.resolve(["status": "ok", "purchases": [purchase].compactMap { $0 }])
                 case .pending:
                     call.resolve(["status": "pending", "purchases": []])
                 case .userCancelled:
@@ -99,18 +101,35 @@ public class AppStoreBillingPlugin: CAPPlugin, CAPBridgedPlugin {
         Task {
             var purchases: [[String: Any]] = []
             for await result in Transaction.currentEntitlements {
-                if let purchase = Self.purchase(result) { purchases.append(purchase) }
+                if let purchase = await Self.purchase(result) { purchases.append(purchase) }
             }
             call.resolve(["purchases": purchases])
         }
     }
 
-    /// Achat sous la forme de Play ; `purchaseToken` = la transaction signée par Apple, vérifiée par le relais.
-    static func purchase(_ result: VerificationResult<Transaction>) -> [String: Any]? {
+    /// Achat sous la forme de Play ; `purchaseToken` = la transaction signée par Apple, vérifiée par le relais ;
+    /// `renewalInfo` = les informations de renouvellement signées par Apple (renouvellement automatique, période de
+    /// grâce), que le relais d'Android lit à côté de la transaction (v689, `body.renewalInfo`).
+    static func purchase(_ result: VerificationResult<Transaction>) async -> [String: Any]? {
         // Un abonnement remplacé par une montée de formule (Silver → Gold) n'est plus un droit : Apple ne facture que Gold
         guard case .verified(let transaction) = result, let productId = BillingRule.productId(storeId: transaction.productID),
               transaction.revocationDate == nil, !transaction.isUpgraded else { return nil }
-        return ["state": "purchased", "products": [productId], "purchaseToken": result.jwsRepresentation]
+        var purchase: [String: Any] = ["state": "purchased", "products": [productId], "purchaseToken": result.jwsRepresentation]
+        if let renewal = await renewalInfo(for: transaction) { purchase["renewalInfo"] = renewal }
+        return purchase
+    }
+
+    /// Informations de renouvellement de l'abonnement de cette transaction (même `originalID`), telles que signées par
+    /// Apple ; nil si StoreKit ne les donne pas (le relais déduit alors les droits de la seule transaction).
+    static func renewalInfo(for transaction: Transaction) async -> String? {
+        guard let group = transaction.subscriptionGroupID,
+              let statuses = try? await Product.SubscriptionInfo.status(for: group) else { return nil }
+        for status in statuses {
+            if case .verified(let current) = status.transaction, current.originalID == transaction.originalID {
+                return status.renewalInfo.jwsRepresentation
+            }
+        }
+        return nil
     }
 
     private static func period(_ period: Product.SubscriptionPeriod) -> BillingRule.Period {
