@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v708 (commit `a62aad6`, 2/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v709 (commit `57eddec`, 2/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 2/11 11:00 | #625 (v709) | #625 : vérification de l'attestation App Attest dans le relais (I6-RELAIS-5b : chaîne jusqu'à la racine d'Apple, nonce, keyId, rpId, aaguid, catégorie) ; rien dans l'app ; côté iPhone : contrat inchangé pour #203 (keyId et attestation en base64, `clientDataHash` = SHA-256 du défi) ; 34 correctifs, 3125 tests | — |
 | 2/11 10:00 | #623, #624 (v708) | #623 : App Attest pour l'iPhone spécifié (journal) ; #624 : lecteur CBOR et `authData` dans le relais (I6-RELAIS-5a) ; rien dans l'app ; côté iPhone : rien à adapter (plugin et module App Attest préparés dans #203, mergée) ; 34 correctifs, 3125 tests | — |
 | 2/11 09:00 | #623 (journal) | #623 : App Attest pour l'iPhone spécifié chez Android (relais : défi, enregistrement, assertions, `APP_ATTEST_MODE`, découpage I6-RELAIS-5a à 5e) ; rien dans l'app, pas de nouvelle version (« Play — AAB » sur v706) ; côté iPhone : préparé tout de suite (PR #203) | — |
 | 2/11 08:00 | #622 (v706) | #622 : « 1er » pour le premier jour du mois partout (Journal, Repas, Accueil, bien-être, Données, Nouveautés), nouvelle fonction `localeDate` (POL-PLAY-99) ; note de Nouveautés pour toutes les variantes, vraie sur iPhone ; côté iPhone : correctifs 06, 12, 15, 21 et 25 refaits (ligne d'import de `i18n/locale.js` changée dans leur contexte) ; aucune date propre à l'iPhone ne contourne `localeDate` ; 34 correctifs, 3118 tests | — |
