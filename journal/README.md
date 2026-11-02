@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v703 (2/11) | **703 sur TestFlight** (build 703.197), achat ouvert ; même version qu'Android |
+| Dernière version | v705 (2/11) | **705 en préparation** (vérifications en cours) ; 703 sur TestFlight (build 703.197), achat ouvert |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -71,7 +71,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 03:00 | suivi d'Android v702 | Android v702 suivie (PR #194) : les grands nombres gardent une espace visible (« 1 039 kcal ») ; Paramètres dit le bon nombre d'analyses IA par jour (Silver 10, Gold 20, et 20 pendant le test), avec sa note de Nouveautés sur iPhone ; le passage de Silver à Gold depuis l'iPhone est vérifié par un test ; **la 702 est sur TestFlight (702.195)**. Parité : 48 % | #194 (mergée) |
 | 2/11 04:00 | suivi d'Android v703 | Android v703 suivie (PR #196) : sur la page d'abonnement, la formule mensuelle ne répète plus son prix sous le bouton (il reste sur la formule et sur le bouton) ; note de Nouveautés sur iPhone ; **la 703 est sur TestFlight (703.197)**. Parité : 48 % | #196 (mergée) |
 | 2/11 05:00 | bilan de la parité | Android n'a rien publié ; sa prochaine version (sodium « sous la limite » sur la page Nutrition) a été essayée à l'avance : rien ne cassera sur iPhone ; tableau des fonctions recompté ligne par ligne et remis à jour : l'achat, les conditions avec leur partie vente, la confidentialité de l'app (A5), la fiche et l'envoi sur TestFlight à chaque version comptent désormais. Parité : 67 % (au lieu de 48 %) | — |
-| 2/11 06:00 | renouvellement des abonnements | Android n'a rien publié ; sa prochaine version (habitudes en attente rangées dans « Bientôt ») a été essayée à l'avance : rien ne cassera sur iPhone ; trou comblé avant les premiers abonnés : l'iPhone envoie désormais au serveur l'information d'Apple qui dit si l'abonnement se renouvelle (sinon Paramètres aurait dit « actif jusqu'au … » au lieu de « renouvellement le … »). Parité : 67 % | #199 (en vérification) |
+| 2/11 06:00 | renouvellement des abonnements | Android n'a rien publié ; sa prochaine version (habitudes en attente rangées dans « Bientôt ») a été essayée à l'avance : rien ne cassera sur iPhone ; trou comblé avant les premiers abonnés : l'iPhone envoie désormais au serveur l'information d'Apple qui dit si l'abonnement se renouvelle (sinon Paramètres aurait dit « actif jusqu'au … » au lieu de « renouvellement le … »). Parité : 67 % | #199 (mergée) |
+| 2/11 07:00 | suivi d'Android v705 | Android v705 suivie (PR #200) : sodium « sous la limite » sur la page Nutrition, habitudes en attente rangées dans « Bientôt » ; réparé un test automatique de l'iPhone qui ne vérifiait plus le rapport PDF pour le médecin depuis l'ouverture de l'achat. Parité : 67 % | #200 (en vérification) |
 
 ---
 

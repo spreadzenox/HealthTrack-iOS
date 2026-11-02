@@ -33,6 +33,9 @@
   depuis #184 (« Créer le PDF » introuvable : le faux magasin des captures met l'app en version gratuite, la carte
   montre « Débloquer ») ; inscrit au BACKLOG.
 
+- Deuxième CI de #199 verte (StoreKit Test : les 3 tests passent, `renewalInfo` présent ; captures, Vitest ; aucune
+  erreur JS ni texte d'Android) ; **mergée** (au run suivant, 06:40 UTC). Pas de TestFlight propre : la v705 qui suit
+  l'emporte.
+
 ## Suite
-- #199 : deuxième CI macOS, merge, TestFlight.
-- Faux magasin des captures limité à l'écran d'achat (BACKLOG).
+- Faux magasin des captures limité à l'écran d'achat (BACKLOG) : PR #200, avec Android v705.
