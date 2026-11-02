@@ -1,6 +1,6 @@
 # 2026-11-02 13:00 UTC — Android v713 ; App Attest branché sur l'analyse des repas
 
-**Étape** : I6 (anti-abus), suivi d'Android  ·  **PR** : #210, journal  ·  **Android suivi** : v713 (`ce528bf`)  ·  **iOS** : 712 sur TestFlight (712.209) ; 713 sur la branche de #210  ·  **Parité** : 67 % (30/45)
+**Étape** : I6 (anti-abus), suivi d'Android  ·  **PR** : #210, journal  ·  **Android suivi** : v713 (`ce528bf`)  ·  **iOS** : 713 sur `main` et sur TestFlight (713.211)  ·  **Parité** : 67 % (30/45)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun ; deux questions attendent (date de soumission et période de lancement ; page d'un abonnement dans App Store
@@ -21,6 +21,9 @@
 - README : l'action du propriétaire pour App Attest devient concrète (capacité de l'identifiant, Team ID à Android,
   me prévenir pour le droit).
 
+- #210 : CI macOS verte (aucune erreur JS ni texte d'Android, copie de secours présente et exclue d'iCloud, geste
+  réel du rapport PDF ✓ ; l'analyse IA n'est pas lancée par les captures) ; aucun écran touché ; **mergée** ;
+  **TestFlight 713.211** ; fiche renvoyée.
+
 ## Suite
-- #210 : CI, merge, TestFlight 713, fiche renvoyée.
 - Le droit App Attest (`production`) dès que le propriétaire aura coché la capacité.
