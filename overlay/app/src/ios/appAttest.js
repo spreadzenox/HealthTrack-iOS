@@ -3,10 +3,13 @@
 // relay/src/attestroutes.js : enregistrement en JSON, en-tête X-AppAttest-Key du CORS). Une clé tirée dans la
 // Secure Enclave (plugin Swift `AppAttest`), attestée une fois sur un défi à usage unique du relais, puis une assertion
 // par requête sensible (analyse, crédits) sur « halcya-assert:<installation>:<horodatage ms>:<SHA-256 du corps> ».
-// Aucune donnée de santé : la clé est tirée au hasard, le corps n'entre que par son condensat. Pas encore branché sur
-// aiRelay.js : le relais n'a pas ses routes avant I6-RELAIS-5d d'Android.
+// Aucune donnée de santé : la clé est tirée au hasard, le corps n'entre que par son condensat. Branché sur l'analyse
+// des repas par le correctif 38 (aiRelay.js › postRelay), sur iPhone seulement ; côté relais, App Attest est coupé
+// tant qu'Android n'a pas réglé APP_ATTEST_MODE et le Team ID : l'enregistrement est alors retenté au plus une fois
+// par heure, sans requête de plus à chaque analyse.
 
 export const APP_ATTEST_KEY = 'halcya_appattest'
+export const ATTEST_RETRY_MS = 60 * 60_000
 
 export async function sha256Hex(text, subtle = globalThis.crypto?.subtle) {
   const digest = await subtle.digest('SHA-256', new TextEncoder().encode(text))
@@ -36,21 +39,26 @@ function writeKey(storage, value) {
 }
 
 /** Clé de cet iPhone, attestée auprès du relais ; null tant que le relais ne l'a pas enregistrée. */
-async function attestedKey({ plugin, installId, relayUrl, fetchImpl, storage }) {
+async function attestedKey({ plugin, installId, relayUrl, fetchImpl, storage, now }) {
   const saved = readKey(storage)
   if (saved?.registered) return saved.keyId
+  if (saved?.retryAt > now) return null
   const keyId = saved?.keyId ?? (await plugin.generateKey()).keyId
-  writeKey(storage, { keyId, registered: false })
+  const later = () => {
+    writeKey(storage, { keyId, registered: false, retryAt: now + ATTEST_RETRY_MS })
+    return null
+  }
+  later()
   const res = await fetchImpl(`${relayUrl}/v1/attest/challenge`, { method: 'POST', headers: { 'X-Install-Id': installId } })
   const challenge = res.ok ? (await res.json().catch(() => null))?.challenge : null
-  if (typeof challenge !== 'string') return null
+  if (typeof challenge !== 'string') return later()
   const { attestation } = await plugin.attestKey({ keyId, challenge })
   const registered = await fetchImpl(`${relayUrl}/v1/attest/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Install-Id': installId },
     body: JSON.stringify({ keyId, attestation, challenge }),
   })
-  if (!registered.ok) return null
+  if (!registered.ok) return later()
   writeKey(storage, { keyId, registered: true })
   return keyId
 }
@@ -63,7 +71,7 @@ export async function appAttestHeaders({ plugin, installId, body = '', now = Dat
   if (!plugin) return {}
   try {
     if (!(await plugin.isSupported())?.supported) return { 'X-Integrity-Status': 'unsupported' }
-    const keyId = await attestedKey({ plugin, installId, relayUrl, fetchImpl, storage })
+    const keyId = await attestedKey({ plugin, installId, relayUrl, fetchImpl, storage, now })
     if (!keyId) return {}
     const clientData = await clientDataFor({ installId, timeMs: now, body })
     try {
@@ -73,6 +81,20 @@ export async function appAttestHeaders({ plugin, installId, body = '', now = Dat
       if (err?.code === 'invalid_key') writeKey(storage, null) // clé perdue : une neuve à la requête suivante
       return {}
     }
+  } catch {
+    return {}
+  }
+}
+
+let nativePlugin = null
+
+/** Pour aiRelay.js (correctif 38) : en-têtes App Attest sur iPhone seulement ; ailleurs ou en cas d'erreur, rien. */
+export async function iosAttestHeaders({ platform, plugin, ...rest } = {}) {
+  try {
+    const core = platform && plugin ? null : await import('@capacitor/core')
+    if ((platform ?? core.Capacitor.getPlatform()) !== 'ios') return {}
+    const native = plugin ?? (nativePlugin ??= core.registerPlugin('AppAttest'))
+    return await appAttestHeaders({ plugin: native, ...rest })
   } catch {
     return {}
   }
