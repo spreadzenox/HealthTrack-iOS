@@ -365,15 +365,19 @@
     `claude/ios-attest-fiche-022000`) : reste le merge et la première build signée.
 - [ ] **Soumission du 7 ou du 8/11 (décision du propriétaire du 2/11)** : période de lancement coupée sur iPhone le
   6/11 inclus (demande du propriétaire à la routine Android ; repère `X-Platform: ios`, correctif 40). À vérifier avant :
-  - [ ] relais : `/v1/subscription/verify` avec `X-Platform: ios` ne rend plus `source: 'launch'` après le 6/11 (sans
-    l'en-tête : la date de Google Play) ;
+  - [~] relais : `/v1/subscription/verify` avec `X-Platform: ios` ne rend plus `source: 'launch'` après le 6/11 (sans
+    l'en-tête : la date de Google Play). **Fait par Android v722** (#638, `iosUntil`, déployé le 2/11 vers 22:00 UTC ;
+    `X-Platform: ios` ajouté par le code partagé) ; reste l'essai sur TestFlight (avant le 7/11 : « jusqu'au 6 nov. » ;
+    après : Silver / Gold et l'achat en bac à sable) ;
   - [ ] écran d'achat sur iPhone avec les trois abonnements, chemin des notes d'examen juste (roue en haut à droite →
     « Paramètres » → « Découvrir le premium ») ; aucune date fausse dans l'app d'ici là (note de Nouveautés sans date,
     Paramètres affiche celle du relais) ;
   - [~] captures iPad 13" (choix « B », #217), `notes-examen.md` (lot « App Attest et fiche ») et droit App Attest
     prêts avant le 7/11 ;
   - [ ] build finale le 6/11 : version d'App Store Connect renommée à son numéro (la 717 garde 717.216 jusque-là ; une
-    build ne s'attache qu'à la version du même numéro), puis numéro exact de la build donné au propriétaire ;
+    build ne s'attache qu'à la version du même numéro ; option `version_des_builds` de `store-push.yml`, PR #219 ; si
+    Apple refuse le renommage avec une build attachée, le propriétaire le fait dans la page de la version), puis numéro
+    exact de la build donné au propriétaire ;
   - [ ] abonnements encore `MISSING_METADATA` par l'API le 2/11 à 21:15 alors que tout le relevé est en place (nom du
     groupe, noms, capture `COMPLETE`, prix, France) ; l'interface dit « Prepare for Submission » : à relire avec la
     version de la build finale (la section des abonnements de la page de version n'apparaît pas encore).

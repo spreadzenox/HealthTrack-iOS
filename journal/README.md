@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v721 (2/11) | **718 sur TestFlight** (build 718.217), achat ouvert ; 721 en préparation (vérifications en cours) ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v722 (2/11) | **718 sur TestFlight** (build 718.217), achat ouvert ; 722 en préparation (vérifications en cours) ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -30,7 +30,8 @@
   routine Android).
 
 **Soumission prévue le 7 ou le 8/11** (votre décision du 2/11). Avant cette date, je vérifie :
-- que le serveur coupe la période de lancement sur iPhone : l'app iPhone se signale désormais au serveur (PR #218) ;
+- que le serveur coupe bien la période de lancement sur iPhone : la routine Android l'a réglé ce soir (fin le 6/11
+  inclus sur iPhone, Google Play garde le 27/11) ;
 - l'écran d'achat avec les trois abonnements, et le chemin des notes d'examen (roue, Paramètres, Découvrir le premium) ;
 - les captures iPad, les notes d'examen et App Attest.
 
@@ -101,6 +102,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 19:45 | vos gestes avant la mise en vente | à votre demande, la liste de ce qui vous reste avant la production, puis un prompt pour une session sur votre PC (avec Chrome) qui vous guide dans App Store Connect ; Android v718 suivie (PR #216 : « 1er » et « 21e » dans la bonne police). Parité : 67 % | #216 (en vérification) |
 | 2/11 20:00 | votre compte rendu App Store Connect, l'iPad | **la 718 est sur TestFlight (718.217)** ; la fiche n'a pas été renvoyée : l'envoi aurait renommé la version 717 et détaché la build que vous avez choisie (garde-fou écrit, PR #217) ; captures iPad 13" faites et regardées : rien de coupé, mais « téléphone » sur 3 écrans, donc rien envoyé avant votre choix ; lot prêt : App Attest dans l'app, mot-clé « humeur » remplacé par « bien-être », notes pour l'examen à jour, abonnements nommés Silver comme dans l'app. Parité : 67 % | #216 (mergée), #217 |
 | 2/11 22:00 | captures iPad, Android v721 | votre choix « B » appliqué : **8 captures iPad envoyées à Apple** (Nutrition à la place de Sources ; aucune refusée, 4 encore en traitement à la relecture ; version 717 et build 717.216 intactes) ; l'iPhone se signale désormais au serveur, pour que Gold offert s'y arrête le 6/11 comme vous l'avez décidé (PR #218) ; Android v721 suivie : Gold offert jusqu'au 27/11 (iPhone compris), « Gold estime mieux les quantités » sur la page d'abonnement (aussi dans la description d'Apple), et le serveur observe App Attest avec votre Team ID. Parité : 67 % | #217 (mergée), #218 (en vérification) |
+| 2/11 23:00 | Android v722, préparation de la soumission | la routine Android a réglé votre décision : Gold offert s'arrête le 6/11 inclus sur iPhone (Google Play garde le 27/11), et l'app d'Android se signale elle-même comme iPhone ; nos deux adaptations devenues inutiles sont retirées (PR #218) ; lot prêt pour la soumission (PR #219) : App Attest dans l'app, notes pour l'examen à jour, abonnements nommés Silver, et de quoi passer la version au numéro de la build finale. Parité : 67 % | #218, #219 (en vérification) |
 
 ---
 
