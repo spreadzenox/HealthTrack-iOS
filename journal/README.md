@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v708 (2/11) | **706 sur TestFlight** (build 706.202), achat ouvert ; 708 en préparation (vérifications en cours) |
+| Dernière version | v709 (2/11) | **708 sur TestFlight** (build 708.205), achat ouvert ; 709 en préparation (vérifications en cours) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -25,7 +25,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (706.202 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
+- Installez la build la plus récente de TestFlight (708.205 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
 
 **Où on en est pour vendre sur iPhone** : contrat de vente, banque et fiscalité actifs (A4) ; confidentialité de l'app
 remplie (A5) ; trois abonnements créés chez Apple (Gold 9,99 €/mois, Premium 29,99 €/an avec 2 semaines d'essai,
@@ -75,7 +75,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 07:00 | suivi d'Android v705 | Android v705 suivie (PR #200) : sodium « sous la limite » sur la page Nutrition, habitudes en attente rangées dans « Bientôt » ; réparé un test automatique de l'iPhone qui ne vérifiait plus le rapport PDF pour le médecin depuis l'ouverture de l'achat ; **la 705 est sur TestFlight (705.201)**. Parité : 67 % | #200 (mergée) |
 | 2/11 08:00 | suivi d'Android v706 | Android v706 suivie (PR #201) : « 1er novembre » partout dans les dates ; cinq adaptations de l'iPhone remises à jour (simple changement de ligne chez Android) ; un faux avertissement des tests automatiques sur la copie de secours corrigé ; **la 706 est sur TestFlight (706.202)**. Parité : 67 % | #201 (mergée) |
 | 2/11 09:00 | anti-abus de l'iPhone | Android a décrit comment son serveur reconnaîtra la vraie app sur un vrai iPhone (App Attest, l'équivalent iPhone de la protection de Google Play) ; la partie iPhone est écrite et testée tout de suite, branchée quand le serveur sera prêt. Parité : 67 % | #203 (mergée) |
-| 2/11 10:00 | suivi d'Android v708 | Android v708 suivie (PR #204) : son serveur commence à savoir lire les preuves d'App Attest ; rien ne change dans l'app. Parité : 67 % | #204 (en vérification) |
+| 2/11 10:00 | suivi d'Android v708 | Android v708 suivie (PR #204) : son serveur commence à savoir lire les preuves d'App Attest ; rien ne change dans l'app ; **la 708 est sur TestFlight (708.205)**. Parité : 67 % | #204 (mergée) |
+| 2/11 11:00 | suivi d'Android v709 | Android v709 suivie (PR #205) : son serveur sait maintenant vérifier la preuve d'App Attest d'un iPhone ; rien ne change dans l'app. Parité : 67 % | #205 (en vérification) |
 
 ---
 
