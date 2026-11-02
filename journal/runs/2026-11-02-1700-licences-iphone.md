@@ -1,6 +1,6 @@
 # 2026-11-02 17:00 UTC — Android v717 : page « Licences », version iPhone
 
-**Étape** : suivi d'Android  ·  **PR** : #215 (v717), journal  ·  **Android suivi** : v717 (`1981d25`)  ·  **iOS** : 714 sur TestFlight (714.213) ; 717 sur la branche de #215  ·  **Parité** : 67 % (30/45)
+**Étape** : suivi d'Android  ·  **PR** : #215 (v717), journal  ·  **Android suivi** : v717 (`1981d25`)  ·  **iOS** : 717 sur `main` et sur TestFlight (717.216)  ·  **Parité** : 67 % (30/45)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun ; la date de soumission (période de lancement) et la page d'un abonnement dans App Store Connect attendent ;
@@ -20,5 +20,8 @@
 - 36 correctifs, 3146 tests, build appstore. PR #215.
 - DEMANDES : la demande « Licences » close.
 
+- #215 : CI macOS verte ; captures regardées (Licences : TensorFlow Lite C et Capacitor pour iOS, rien d'Android ;
+  Réglages : « Conditions » en « Utilisation, abonnement et remboursements », ligne « Licences ») ; aucune erreur JS ni
+  texte d'Android ; **mergée** ; **TestFlight 717.216** ; fiche renvoyée.
+
 ## Suite
-- #215 : CI, captures (`licences`, `plus`), merge, TestFlight 717, fiche renvoyée.

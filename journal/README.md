@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v717 (2/11) | **714 sur TestFlight** (build 714.213), achat ouvert ; 717 en préparation (vérifications en cours) |
+| Dernière version | v718 (2/11) | **717 sur TestFlight** (build 717.216), achat ouvert ; 718 en préparation (vérifications en cours) |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -25,7 +25,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (714.213 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
+- Installez la build la plus récente de TestFlight (717.216 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
 - (quand vous pouvez, le serveur d'Android est prêt depuis le 2/11) **Protection contre les abus sur iPhone** :
   1. developer.apple.com → Certificates, Identifiers & Profiles → Identifiers → `fr.jpesquet.sante` → cocher
      « App Attest » → Save ;
@@ -89,7 +89,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 14:00 | protection contre les abus | Android v713 suivie (PR #210) : le serveur sait désormais vérifier chaque analyse venue d'un iPhone (encore éteint) ; l'app iPhone joint maintenant sa preuve à chaque analyse de repas. Il vous reste une petite action quand vous pouvez (voir en haut) ; **la 713 est sur TestFlight (713.211)**. Parité : 67 % | #210 (mergée) |
 | 2/11 16:00 | suivi d'Android v714 | Android v714 suivie (PR #212) : la version Google Play ne montre plus le nom technique des modèles du visage ; rien ne change sur iPhone (ces modèles y sont éteints) ; une adaptation de l'iPhone remise à jour ; **la 714 est sur TestFlight (714.213)**. Parité : 67 % | #212 (mergée) |
 | 2/11 17:30 | préparation | Android n'a rien publié ; sa prochaine nouveauté, une page « Licences », a été essayée à l'avance : sur iPhone elle citerait des éléments propres à Android ; la version iPhone est préparée (liste propre, demande à Android). Parité : 67 % | — |
-| 2/11 18:30 | page « Licences » | Android v717 suivie (PR #215) : la nouvelle page Réglages → Licences existe aussi sur iPhone, avec les composants propres à l'iPhone et rien d'Android (Android a repris notre demande) ; « Conditions » annonce maintenant l'abonnement et les remboursements. Parité : 67 % | #215 (en vérification) |
+| 2/11 18:30 | page « Licences » | Android v717 suivie (PR #215) : la nouvelle page Réglages → Licences existe aussi sur iPhone, avec les composants propres à l'iPhone et rien d'Android (Android a repris notre demande) ; « Conditions » annonce maintenant l'abonnement et les remboursements ; **la 717 est sur TestFlight (717.216)**. Parité : 67 % | #215 (mergée) |
+| 2/11 19:45 | vos gestes avant la mise en vente | à votre demande, la liste de ce qui vous reste avant la production, puis un prompt pour une session sur votre PC (avec Chrome) qui vous guide dans App Store Connect ; Android v718 suivie (PR #216 : « 1er » et « 21e » dans la bonne police). Parité : 67 % | #216 (en vérification) |
 
 ---
 
