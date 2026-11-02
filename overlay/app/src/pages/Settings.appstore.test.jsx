@@ -37,5 +37,28 @@ describe('Paramètres sur iPhone : abonnement de l’App Store', () => {
     expect(await screen.findByTestId('ai-credits')).toBeInTheDocument()
     const block = screen.getByText('Analyse des repas (IA)').closest('.settings-block')
     expect(block).toHaveTextContent(/Sans abonnement : 10 analyses offertes/)
+    expect(block).toHaveTextContent(/Silver : 10 par jour, Gold : 20\./)
+  })
+
+  it('Gold acheté dans l’App Store : 20 analyses par jour (Android v702, POL-PLAY-95)', async () => {
+    const gold = { ...subscribed, tier: 'gold', productId: 'halcya_gold_mensuel' }
+    localStorage.setItem('halcya_entitlement', JSON.stringify(gold))
+    globalThis.fetch = relayAnswer(gold)
+    renderSettings()
+    expect(await screen.findByText('Avec Gold : jusqu’à 20 analyses par jour.')).toBeInTheDocument()
+  })
+
+  it('Premium acheté dans l’App Store : Silver, 10 analyses par jour', async () => {
+    const silver = { ...subscribed, productId: 'halcya_premium_mensuel' }
+    localStorage.setItem('halcya_entitlement', JSON.stringify(silver))
+    globalThis.fetch = relayAnswer(silver)
+    renderSettings()
+    expect(await screen.findByText('Avec Silver : jusqu’à 10 analyses par jour.')).toBeInTheDocument()
+  })
+
+  it('période de test : Gold offert sur iPhone aussi, donc 20 analyses par jour', async () => {
+    globalThis.fetch = relayAnswer({ premium: true, source: 'launch', launchUntil: '2099-11-19T23:00:00.000Z' })
+    renderSettings()
+    expect(await screen.findByText('Pendant le test : jusqu’à 20 analyses par jour, sans rien payer.')).toBeInTheDocument()
   })
 })
