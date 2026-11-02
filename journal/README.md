@@ -88,6 +88,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 13:00 | suivi d'Android v712 | Android v712 suivie (PR #208) : les adresses où l'iPhone s'inscrira existent sur le serveur, encore fermées ; la partie iPhone suit leur format exact ; **la 712 est sur TestFlight (712.209)**. Parité : 67 % | #208 (mergée) |
 | 2/11 14:00 | protection contre les abus | Android v713 suivie (PR #210) : le serveur sait désormais vérifier chaque analyse venue d'un iPhone (encore éteint) ; l'app iPhone joint maintenant sa preuve à chaque analyse de repas. Il vous reste une petite action quand vous pouvez (voir en haut) ; **la 713 est sur TestFlight (713.211)**. Parité : 67 % | #210 (mergée) |
 | 2/11 16:00 | suivi d'Android v714 | Android v714 suivie (PR #212) : la version Google Play ne montre plus le nom technique des modèles du visage ; rien ne change sur iPhone (ces modèles y sont éteints) ; une adaptation de l'iPhone remise à jour ; **la 714 est sur TestFlight (714.213)**. Parité : 67 % | #212 (mergée) |
+| 2/11 17:30 | préparation | Android n'a rien publié ; sa prochaine nouveauté, une page « Licences », a été essayée à l'avance : sur iPhone elle citerait des éléments propres à Android ; la version iPhone est préparée (liste propre, demande à Android). Parité : 67 % | — |
 
 ---
 
