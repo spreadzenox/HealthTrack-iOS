@@ -5,9 +5,12 @@
 // .github/workflows/store-push.yml avec la clé de l'environnement `appstore` (ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8),
 // jamais affichée. `--dry-run` : montre ce qui serait envoyé, sans réseau ni clé. `--captures <dossier>` : envoie aussi
 // les captures 6,9" de store/app-store/captures.md (branche captures/store), dans l'ordre du tableau, à la place des
-// précédentes. Le numéro de cette version prend celui des builds (versionCode d'Android suivi, `upstream.json`).
+// précédentes. `--captures-ipad <dossier>` : de même pour l'iPad 13" (section « iPad 13" » de captures.md, branche
+// captures/store-ipad ; Nutrition y remplace Sources, choix du propriétaire du 2/11).
+// Le numéro de cette version prend celui des builds (versionCode d'Android suivi, `upstream.json`), sauf quand une
+// build y est attachée : c'est alors le choix du propriétaire, la version garde son numéro (2/11).
 // Catégorie et classification par âge : store/app-store/classification.json.
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { createHash, sign } from 'node:crypto'
 import { pathToFileURL } from 'node:url'
@@ -18,6 +21,8 @@ const UPSTREAM_JSON = join(import.meta.dirname, '..', 'upstream.json')
 const CLASSIFICATION_JSON = join(import.meta.dirname, '..', 'store', 'app-store', 'classification.json')
 /** Captures 6,9" (1320 × 2868) : App Store Connect les reprend pour les iPhone plus petits. */
 const DISPLAY_TYPE = 'APP_IPHONE_67'
+/** Captures iPad 13" (2064 × 2752 ou 2048 × 2732) : exigées par Apple, l'app étant aussi pour iPad (« 1,2 »). */
+export const IPAD_DISPLAY_TYPE = 'APP_IPAD_PRO_3GEN_129'
 const API = 'https://api.appstoreconnect.apple.com'
 const BUNDLE_ID = 'fr.jpesquet.sante'
 const LOCALE = 'fr-FR'
@@ -61,9 +66,31 @@ export function classification(path = CLASSIFICATION_JSON) {
   return JSON.parse(readFileSync(path, 'utf8'))
 }
 
-/** Fichiers des captures de la fiche, dans l'ordre d'affichage (tableau de store/app-store/captures.md). */
-export function captureFiles(md = readFileSync(CAPTURES_MD, 'utf8')) {
-  return [...md.matchAll(/^\|\s*\d+\s*\|\s*`([^`]+\.png)`\s*\|/gm)].map((m) => m[1])
+/**
+ * Fichiers des captures de la fiche, dans l'ordre d'affichage : tableau iPhone 6,9" de store/app-store/captures.md, ou
+ * (`device` = 'ipad') celui de sa section « ## iPad 13" ».
+ */
+export function captureFiles(md = readFileSync(CAPTURES_MD, 'utf8'), device = 'iphone') {
+  const [iphone, ipad = ''] = md.split(/^## iPad\b.*$/m)
+  return [...(device === 'ipad' ? ipad : iphone).matchAll(/^\|\s*\d+\s*\|\s*`([^`]+\.png)`\s*\|/gm)].map((m) => m[1])
+}
+
+/** Les captures listées, toutes présentes dans le dossier : une seule manquante (ou une liste vide) arrête tout. */
+export function presentFiles(listed, dirFiles) {
+  if (!listed.length) throw new Error('aucune capture listée dans captures.md')
+  const missing = listed.filter((name) => !dirFiles.includes(name))
+  if (missing.length) throw new Error(`capture absente : ${missing.join(', ')}`)
+  return listed
+}
+
+/**
+ * Numéro de la version : celui des builds (`wanted`), sauf si une build y est déjà attachée (choisie par le
+ * propriétaire pour la soumission) : la renommer la détacherait.
+ */
+export function versionPlan({ current, wanted, attachedBuild }) {
+  if (current === wanted) return { rename: false, keep: current, reason: null }
+  if (attachedBuild) return { rename: false, keep: current, reason: `build ${attachedBuild} attachée` }
+  return { rename: true, keep: wanted, reason: null }
 }
 
 /** Empreinte MD5 qu'App Store Connect vérifie à la fin de l'envoi d'une capture. */
@@ -142,10 +169,10 @@ export function screenshotStates(items) {
   return out
 }
 
-/** Lit l'état des captures 6,9" de la fiche ; attend jusqu'à `waitMs` que le traitement d'Apple se termine. */
-async function screenshotReport(token, localizationId, { waitMs = 0 } = {}) {
+/** Lit l'état des captures d'un format de la fiche ; attend jusqu'à `waitMs` que le traitement d'Apple se termine. */
+async function screenshotReport(token, localizationId, { waitMs = 0, displayType = DISPLAY_TYPE } = {}) {
   const sets = await api(token, 'GET', `/v1/appStoreVersionLocalizations/${localizationId}/appScreenshotSets?limit=50`)
-  const set = (sets.data || []).find((x) => x.attributes?.screenshotDisplayType === DISPLAY_TYPE)
+  const set = (sets.data || []).find((x) => x.attributes?.screenshotDisplayType === displayType)
   if (!set) return null
   const until = Date.now() + waitMs
   for (;;) {
@@ -156,15 +183,14 @@ async function screenshotReport(token, localizationId, { waitMs = 0 } = {}) {
   }
 }
 
-/** Captures de la fiche remplacées par celles du dossier, dans l'ordre de captures.md. */
-async function uploadScreenshots(token, localizationId, dir) {
-  const files = captureFiles()
+/** Captures d'un format de la fiche remplacées par celles du dossier, dans l'ordre de captures.md. */
+async function uploadScreenshots(token, localizationId, dir, { displayType = DISPLAY_TYPE, files = captureFiles() } = {}) {
   const sets = await api(token, 'GET', `/v1/appStoreVersionLocalizations/${localizationId}/appScreenshotSets?limit=50`)
-  let set = (sets.data || []).find((s) => s.attributes?.screenshotDisplayType === DISPLAY_TYPE)
+  let set = (sets.data || []).find((s) => s.attributes?.screenshotDisplayType === displayType)
   if (!set) {
     set = (await api(token, 'POST', '/v1/appScreenshotSets', {
       data: {
-        type: 'appScreenshotSets', attributes: { screenshotDisplayType: DISPLAY_TYPE },
+        type: 'appScreenshotSets', attributes: { screenshotDisplayType: displayType },
         relationships: { appStoreVersionLocalization: { data: { type: 'appStoreVersionLocalizations', id: localizationId } } },
       },
     })).data
@@ -203,6 +229,10 @@ async function main() {
   const at = process.argv.indexOf('--captures')
   const capturesDir = at > 0 ? process.argv[at + 1] : null
   if (capturesDir || process.argv.includes('--dry-run')) console.log(`Captures (${DISPLAY_TYPE}) : ${captureFiles().join(', ')}`)
+  const atIpad = process.argv.indexOf('--captures-ipad')
+  const ipadDir = atIpad > 0 ? process.argv[atIpad + 1] : null
+  const ipadFiles = ipadDir ? presentFiles(captureFiles(undefined, 'ipad'), readdirSync(ipadDir)) : null
+  if (ipadFiles) console.log(`Captures (${IPAD_DISPLAY_TYPE}) : ${ipadFiles.join(', ')}`)
   const c = classification()
   console.log(`Catégorie : ${c.primaryCategory} ; âge : ${c.ageRating.ageRatingOverrideV2}`)
   const wanted = versionString()
@@ -221,10 +251,14 @@ async function main() {
   const versions = await api(token, 'GET', `/v1/apps/${app.id}/appStoreVersions?filter[platform]=IOS&limit=20`)
   const version = editable(versions.data)
   if (!version) throw new Error('aucune version iOS « Prête à soumettre » : rien à modifier (version en examen ou en vente)')
-  if (version.attributes?.versionString !== wanted) {
+  const attached = (await api(token, 'GET', `/v1/appStoreVersions/${version.id}/build?fields[builds]=version`)).data
+  const plan = versionPlan({ current: version.attributes?.versionString, wanted, attachedBuild: attached?.attributes?.version ?? null })
+  if (plan.rename) {
     await api(token, 'PATCH', `/v1/appStoreVersions/${version.id}`, { data: { type: 'appStoreVersions', id: version.id, attributes: { versionString: wanted } } })
     console.log(`Version ${version.attributes?.versionString} renommée ${wanted}`)
     version.attributes = { ...version.attributes, versionString: wanted }
+  } else if (plan.reason) {
+    console.log(`Version ${plan.keep} gardée (${plan.reason}, choisie par le propriétaire) ; builds en ${wanted}`)
   }
   const v = await upsertLocalization(token, {
     listPath: `/v1/appStoreVersions/${version.id}/appStoreVersionLocalizations`,
@@ -233,6 +267,12 @@ async function main() {
   })
   console.log(`Version ${version.attributes?.versionString} : fiche ${LOCALE} ${v.action} (description, mots-clés, texte promotionnel, assistance)`)
   if (capturesDir) console.log(`Captures : ${await uploadScreenshots(token, v.id, capturesDir)} envoyées dans l'ordre de captures.md`)
+  if (ipadFiles) {
+    console.log(`Captures iPad : ${await uploadScreenshots(token, v.id, ipadDir, { displayType: IPAD_DISPLAY_TYPE, files: ipadFiles })} envoyées dans l'ordre de captures.md`)
+    const ipad = await screenshotReport(token, v.id, { waitMs: 120000, displayType: IPAD_DISPLAY_TYPE })
+    console.log(`Captures (${IPAD_DISPLAY_TYPE}) chez Apple : ${ipad.complete}/${ipad.total} traitées, ${ipad.pending} en cours, ${ipad.failed.length} refusées`)
+    if (ipad.failed.length) throw new Error(`captures iPad refusées par Apple : ${ipad.failed.join(' ; ')}`)
+  }
   const shots = await screenshotReport(token, v.id, { waitMs: capturesDir ? 120000 : 0 })
   if (!shots) console.log(`Captures (${DISPLAY_TYPE}) : aucune dans la fiche`)
   else {

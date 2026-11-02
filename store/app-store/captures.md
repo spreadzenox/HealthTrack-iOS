@@ -46,3 +46,26 @@ Directives relues :
 
 À refaire à chaque changement visible de ces écrans : relancer les captures sur `main`, regarder la planche, mettre ce
 tableau à jour.
+
+## iPad 13" (2064 × 2752)
+
+L'app reste aussi pour iPad (décision du propriétaire du 2/11) : App Store Connect exige des captures « iPad 13"
+display ». Faites par la CI (`ios-build.yml`, lancement manuel avec `devices: iPad Pro 13-inch (M5)`), publiées sur la
+branche `captures/store-ipad` ; `store-push.yml`, option « captures_ipad », les envoie dans l'ordre de ce tableau.
+
+Série du 2/11 (`9d7db16`, Android v717, build 717.217), regardée écran par écran :
+- l'app garde la colonne de l'iPhone, centrée, avec des marges blanches ; rien n'est coupé ni recouvert, zones sûres
+  respectées en portrait ; poignée de redimensionnement d'iPadOS 26 dans le coin bas droit ;
+- l'accueil (clair et sombre) dit encore « sur le téléphone » ; la page Sources (« Elles restent sur ce téléphone »,
+  temps d'écran) est remplacée par **Nutrition** (choix « B » du propriétaire, 2/11).
+
+| # | Fichier (`captures/store-ipad`) | Ce qu'elle montre |
+|---|---|---|
+| 1 | `ipad-pro-13-inch-(m5)-demo-clair-accueil.png` | « Votre journée » |
+| 2 | `ipad-pro-13-inch-(m5)-demo-clair-recommendations.png` | « Vos analyses » : des pistes à vérifier |
+| 3 | `ipad-pro-13-inch-(m5)-demo-clair-food.png` | Repas : « Photo du repas », repas habituels, derniers repas |
+| 4 | `ipad-pro-13-inch-(m5)-demo-clair-reintroduction.png` | Réintroduction guidée des FODMAP |
+| 5 | `ipad-pro-13-inch-(m5)-demo-clair-tendances.png` | Tendances face à votre propre norme |
+| 6 | `ipad-pro-13-inch-(m5)-demo-clair-journal.png` | Journal : vos derniers jours |
+| 7 | `ipad-pro-13-inch-(m5)-demo-clair-nutrition.png` | Nutrition : vos apports moyens face aux repères (protéines, fibres, vitamines, minéraux) |
+| 8 | `ipad-pro-13-inch-(m5)-demo-sombre-accueil.png` | L'accueil en mode sombre |
