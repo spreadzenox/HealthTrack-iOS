@@ -4,7 +4,9 @@ Texte à coller par le propriétaire dans App Store Connect au moment de la soum
 des équipes d'examen (4 000 caractères au plus ; celui-ci en fait environ 2 500). À relire juste avant : chaque
 phrase doit rester vraie pour la version envoyée. Le paragraphe « Backup copy » dépend de la décision sur la
 directive 5.1.3 (ii) (`journal/BACKLOG.md`, I9) ; le paragraphe « Purchases » (2/11, achat ouvert) n'est vrai que si l'écran d'achat est visible sur iPhone le jour de
-l'examen : soumission après le 20/11, ou période de lancement réservée à Google Play (décision du propriétaire) ; les trois adresses de la fin attendent A8 (GitHub Pages).
+l'examen : décision du propriétaire du 2/11, période de lancement coupée sur iPhone le 6/11 inclus (relais, repère
+`X-Platform: ios`) et soumission le 7 ou le 8/11 ; à vérifier sur la build soumise avant de coller le texte. Les trois
+adresses de la fin attendent A8 (GitHub Pages).
 
 ---
 
@@ -44,7 +46,8 @@ it.
 
 Purchases: three auto-renewable subscriptions in one group (« Halcya »): Silver yearly (29.99 EUR, 2-week free
 trial), Silver monthly (4.99 EUR) and Gold monthly (9.99 EUR). They add more AI meal analyses per day (10 or 20), the
-meal-to-gut insights, the guided FODMAP reintroduction and the PDF report; everything else stays free. To reach the
+meal-to-gut insights, the guided FODMAP reintroduction and the PDF report; Gold also estimates portion sizes better.
+Everything else stays free. To reach the
 subscription screen: gear icon (top right) → « Paramètres » → « Découvrir le premium » (« Restaurer un achat » is on
 the same screen). No account is needed: purchases go through the App Store.
 
