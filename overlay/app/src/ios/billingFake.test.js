@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { fakeAppStoreBilling, installBillingFake } from './captureMode.js'
+import { fakeAppStoreBilling, installBillingFake, needsBillingFake, buildPlan, ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS } from './captureMode.js'
 import { describePlans, loadPlans } from '../services/playBilling'
 
 // Version iOS (HealthTrack-iOS), étape I6 : l'écran d'achat des captures (et de la capture pour l'examen d'Apple)
@@ -36,5 +36,13 @@ describe('faux plugin d’achat des captures', () => {
     expect(await target.fetch('https://relais.example/v1/analyze')).toBe('réseau')
     expect(storage.removeItem).toHaveBeenCalledWith('halcya_entitlement')
     expect(pushed).toEqual(['/plus', '/premium'])
+  })
+
+  it('posé seulement pour les captures de l’écran d’achat : ailleurs, le rapport PDF reste ouvert aux gestes réels (Gold du test)', () => {
+    const plan = buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS)
+    const faked = plan.filter(needsBillingFake).map((step) => step.name)
+    expect(faked).toEqual(['demo-clair-premium', 'demo-clair-premium-2'])
+    expect(needsBillingFake(plan.find((step) => step.route === '/data'))).toBe(false)
+    expect(needsBillingFake(undefined)).toBe(false) // captures finies : gestes réels de uitests/
   })
 })
