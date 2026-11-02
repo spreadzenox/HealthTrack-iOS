@@ -272,7 +272,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ; **693.185 (1/11 21:59, achat ouvert)** ; 697.189 (2/11 00:05) ; 698.190 (2/11 00:57) ; 700.193 (2/11 02:52) ; 702.195 (2/11 03:58) ; 703.197 (2/11 04:49) ; 705.201 (2/11 08:10) ; 706.202 (2/11 09:08) ; 708.205 (2/11 11:09) ; 709.206 (2/11 11:42) ; 710.208 (2/11 13:20) ; 712.209 (2/11 13:59) ; 713.211 (2/11 15:04) ; 714.213 (2/11 17:12) ; 717.216 (2/11 19:43) ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ; **693.185 (1/11 21:59, achat ouvert)** ; 697.189 (2/11 00:05) ; 698.190 (2/11 00:57) ; 700.193 (2/11 02:52) ; 702.195 (2/11 03:58) ; 703.197 (2/11 04:49) ; 705.201 (2/11 08:10) ; 706.202 (2/11 09:08) ; 708.205 (2/11 11:09) ; 709.206 (2/11 11:42) ; 710.208 (2/11 13:20) ; 712.209 (2/11 13:59) ; 713.211 (2/11 15:04) ; 714.213 (2/11 17:12) ; 717.216 (2/11 19:43) ; 718.217 (2/11 19:48) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -359,9 +359,24 @@
     coupé par défaut).
   - [ ] Vérifier sur l'iPhone 12 (le simulateur n'a pas de Secure Enclave) quand le relais sera en `observe` : bilan
     « iPhone : attest_passed / missing / rejected » du déploiement d'Android.
-  - [ ] Droit `com.apple.developer.devicecheck.appattest-environment = production` : seulement après la capacité
-    « App Attest » sur l'identifiant `fr.jpesquet.sante` (sinon la signature de TestFlight échoue) ; Team ID à donner à
-    Android (P38 de son BACKLOG). Action du propriétaire, à préparer pas à pas quand le relais sera prêt.
+  - [~] Droit `com.apple.developer.devicecheck.appattest-environment = production` : capacité « App Attest » cochée
+    (compte rendu du propriétaire du 2/11) ; Team ID transmis, relais en `observe` depuis Android v721 (2/11). Droit
+    écrit et vérifié dans l'app signée par `testflight.yml` (lot « App Attest et fiche », branche
+    `claude/ios-attest-fiche-022000`) : reste le merge et la première build signée.
+- [ ] **Soumission du 7 ou du 8/11 (décision du propriétaire du 2/11)** : période de lancement coupée sur iPhone le
+  6/11 inclus (demande du propriétaire à la routine Android ; repère `X-Platform: ios`, correctif 40). À vérifier avant :
+  - [ ] relais : `/v1/subscription/verify` avec `X-Platform: ios` ne rend plus `source: 'launch'` après le 6/11 (sans
+    l'en-tête : la date de Google Play) ;
+  - [ ] écran d'achat sur iPhone avec les trois abonnements, chemin des notes d'examen juste (roue en haut à droite →
+    « Paramètres » → « Découvrir le premium ») ; aucune date fausse dans l'app d'ici là (note de Nouveautés sans date,
+    Paramètres affiche celle du relais) ;
+  - [~] captures iPad 13" (choix « B », #217), `notes-examen.md` (lot « App Attest et fiche ») et droit App Attest
+    prêts avant le 7/11 ;
+  - [ ] build finale le 6/11 : version d'App Store Connect renommée à son numéro (la 717 garde 717.216 jusque-là ; une
+    build ne s'attache qu'à la version du même numéro), puis numéro exact de la build donné au propriétaire ;
+  - [ ] abonnements encore `MISSING_METADATA` par l'API le 2/11 à 21:15 alors que tout le relevé est en place (nom du
+    groupe, noms, capture `COMPLETE`, prix, France) ; l'interface dit « Prepare for Submission » : à relire avec la
+    version de la build finale (la section des abonnements de la page de version n'apparaît pas encore).
 - [ ] **Plus tard, quand il y aura plus d'utilisateurs (décision du 31/10)** : la stratégie de cache décidée avec la
   routine Android pour l'analyse des repas, côté relais. Aujourd'hui, les consignes commencent par la longue liste des
   ingrédients, identique d'un appel à l'autre, que Vertex AI met en cache implicitement (`relay/src/prompts.js`
