@@ -217,7 +217,7 @@
   - [x] Gold dans le plugin (1/11, PR #177, mergée, après Android v681 et v683) : `halcya_gold_mensuel` → `halcya_gold`, un produit
     rendu par abonnement demandé, Gold au niveau 1 du groupe dans le fichier StoreKit de la CI, achat d'essai Silver →
     Gold (un seul abonnement en cours).
-  - [ ] À l'ouverture de l'achat sur iPhone (Android v685, GOLD-b2) : le bouton « Passer à Gold », réservé par Android aux abonnés venus de Google Play, et `ALREADY_GOLD_MESSAGE` (« compte Google Play ») demandent un texte iPhone (« compte Apple ») ; le plugin `AppStoreBilling` ignore `oldPurchaseToken` et `replacementMode`, Apple fait le passage dans le groupe.
+  - [x] À l'ouverture de l'achat sur iPhone (Android v685, GOLD-b2) : le bouton « Passer à Gold », réservé par Android aux abonnés venus de Google Play, et `ALREADY_GOLD_MESSAGE` (« compte Google Play ») demandent un texte iPhone (« compte Apple ») ; le plugin `AppStoreBilling` ignore `oldPurchaseToken` et `replacementMode`, Apple fait le passage dans le groupe. **Fait chez Android** (v693, #609 : nom du magasin, « ce compte Apple » ; I6-RELAIS-6 : pas d'ancien jeton sur l'App Store) ; **vérifié sur iPhone le 2/11** (PR #194, `Premium.appstore.test.jsx`) : un abonné Silver de l'App Store voit « Passer à Gold · 9,99 € / mois », l'achat demande le Gold mensuel sans ancien jeton. Reste l'essai réel sur l'iPhone 12 (achats de test de TestFlight).
 - [ ] **I7 — Bien-être par le visage** à l'ouverture de l'app : mêmes modèles qu'Android, mêmes scores sur ses vecteurs de référence.
   Étude du 28/10 (`RECHERCHE.md`) : ni Vision ni ARKit, qui changeraient les scores. Valence et éveil (HSEmotion, poids
   AffectNet) éteints tant que la licence n'est pas tranchée (`DEMANDES.md`). Étapes :

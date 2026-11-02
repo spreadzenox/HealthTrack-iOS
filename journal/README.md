@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v700 (2/11) | **700 sur TestFlight** (build 700.193), achat ouvert ; même version qu'Android |
+| Dernière version | v702 (2/11) | **702 en préparation** (vérifications en cours) ; 700 sur TestFlight (build 700.193), achat ouvert |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -68,6 +68,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 |---|---|---|---|
 | 2/11 01:00 | nouvelle semaine | résumé de la semaine S44 archivé (`semaines/2026-S44.md`) ; Android n'a changé que son serveur (prix de l'IA au 1er janvier) ; **la 698 est sur TestFlight (698.190)**. Parité : 48 % | — |
 | 2/11 02:00 | suivi d'Android v700 | Android v700 (serveur seulement) suivie (PR #192, mergée) : **la 700 est sur TestFlight (700.193)** ; la prochaine version d'Android (grands nombres plus lisibles) a été essayée à l'avance : rien ne cassera sur iPhone. Parité : 48 % | #192 (mergée) |
+| 2/11 03:00 | suivi d'Android v702 | Android v702 suivie (PR #194) : les grands nombres gardent une espace visible (« 1 039 kcal ») ; Paramètres dit le bon nombre d'analyses IA par jour (Silver 10, Gold 20, et 20 pendant le test), avec sa note de Nouveautés sur iPhone ; le passage de Silver à Gold depuis l'iPhone est vérifié par un test. Parité : 48 % | #194 (en vérification) |
 
 ---
 
