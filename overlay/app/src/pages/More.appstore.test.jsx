@@ -19,11 +19,13 @@ describe('Réglages sur iPhone (variante appstore)', () => {
     expect(link).toHaveTextContent(/Ce qui reste sur le téléphone/)
   })
 
-  it('ouvre les conditions d’utilisation de l’iPhone (sans Google Play ni abonnement), embarquées dans l’app', () => {
+  it('ouvre les conditions d’utilisation de l’iPhone (abonnement et remboursements par Apple, sans Google Play), embarquées dans l’app', () => {
     render(<MemoryRouter initialEntries={['/plus']}><More changelog={[]} /></MemoryRouter>)
     const link = screen.getByRole('link', { name: /Conditions/ })
     expect(link).toHaveAttribute('href', '/conditions-iphone.html')
-    expect(link).not.toHaveTextContent(/abonnement|remboursement/i)
+    // Achat ouvert sur iPhone depuis le 1/11 (#184) : même sous-titre qu'Android (correctif 26, refait le 2/11)
+    expect(link).toHaveTextContent('Utilisation, abonnement et remboursements')
+    expect(link).not.toHaveTextContent(/Google/)
     expect(screen.getByRole('link', { name: /Nouveautés/ })).toBeInTheDocument()
   })
 })

@@ -15,7 +15,7 @@ const SEEDED_KEY = 'halcya_ios_capture_seeded'
 // Les mêmes pages que `npm run visual` d'Android (scripts/visual/visual-check.mjs, DEFAULT_ROUTES), sauf /bienvenue et
 // /montre (montre Huawei en direct : aucun lien vers cette page sur iPhone)
 export const ROUTES = ['/', '/journal', '/tendances', '/food', '/nutrition', '/data', '/connectors', '/recommendations',
-  '/settings', '/plus', '/nouveautes', '/premium', '/bien-etre', '/reintroduction']
+  '/settings', '/plus', '/nouveautes', '/premium', '/bien-etre', '/reintroduction', '/licences']
 export const DARK_ROUTES = ['/', '/journal', '/recommendations']
 // États vides : onboarding fini, base vide (installation neuve sans source branchée ; `npm run visual -- --empty`
 // d'Android), pour voir sur iPhone ce que chaque page dit avant la première donnée
