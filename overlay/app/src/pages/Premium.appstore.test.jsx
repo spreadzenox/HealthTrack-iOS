@@ -31,6 +31,14 @@ describe('Premium sur iPhone (variante appstore)', () => {
     expect(container).not.toHaveTextContent(/Google|arrive bientôt/)
   })
 
+  it('Gold : « estime mieux les quantités », sans pourcentage de précision (Android v721, P36)', async () => {
+    const { container } = render(<MemoryRouter initialEntries={['/premium']}><Premium /></MemoryRouter>)
+    expect(await screen.findByText('Silver ou Gold : Gold analyse plus de repas par jour et estime mieux les quantités.')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('radio', { name: /Gold/ }))
+    expect(screen.getByText('Gold estime mieux les quantités')).toBeInTheDocument()
+    expect(container).not.toHaveTextContent(/\d+ ?%/)
+  })
+
   it('formule mensuelle : prix dit sur la formule et le bouton, pas répété sous le bouton (Android v703, POL-PLAY-96)', async () => {
     render(<MemoryRouter initialEntries={['/premium']}><Premium /></MemoryRouter>)
     fireEvent.click(await screen.findByRole('radio', { name: /Mensuel/ }))
@@ -47,7 +55,8 @@ describe('Premium sur iPhone (variante appstore)', () => {
     billing.purchase = vi.fn(async () => ({ status: 'cancelled' }))
     window.__HT_PLAY_BILLING__ = billing
     const { container } = render(<MemoryRouter initialEntries={['/premium']}><Premium /></MemoryRouter>)
-    expect(await screen.findByText('Passer à Gold : 20 analyses IA par jour au lieu de 10.')).toBeInTheDocument()
+    // Android v721 (P36) : Gold annonce aussi ses quantités mieux estimées, sans chiffre de précision
+    expect(await screen.findByText('Passer à Gold : 20 analyses IA par jour au lieu de 10, et des quantités mieux estimées.')).toBeInTheDocument()
     fireEvent.click(screen.getByRole('button', { name: 'Passer à Gold · 9,99 € / mois' }))
     await waitFor(() => expect(billing.purchase).toHaveBeenCalledTimes(1))
     const args = billing.purchase.mock.calls[0][0]
