@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { APP_ATTEST_KEY, clientDataFor, appAttestHeaders, sha256Hex } from './appAttest.js'
 
-// Version iOS (HealthTrack-iOS), étape I6 : App Attest selon le contrat du relais spécifié par Android le 2/11
-// (journal/IDEES.md de HealthTrack, I6-RELAIS-5) : clé attestée une fois (défi à usage unique, /v1/attest/register),
-// puis une assertion par requête sensible, en en-têtes X-AppAttest-*.
+// Version iOS (HealthTrack-iOS), étape I6 : App Attest selon les routes du relais d'Android (v712, #628,
+// relay/src/attestroutes.js) : clé attestée une fois (défi à usage unique ; /v1/attest/register reçoit en JSON
+// { keyId, attestation, challenge }), puis une assertion par requête sensible, en en-têtes X-AppAttest-Key,
+// -Assertion et -Time (ceux qu'autorise le CORS du relais).
 const RELAY = 'https://relais.example'
 const CORPS = '{"dish":"salade"}'
 
@@ -20,7 +21,7 @@ function fakePlugin({ supported = true, assertionError = null } = {}) {
 }
 function fakeRelay({ registerOk = true } = {}) {
   return vi.fn(async (url) => {
-    if (url.endsWith('/v1/attest/challenge')) return { ok: true, json: async () => ({ challenge: 'Bw'.padEnd(43, 'A') + '=' }) }
+    if (url.endsWith('/v1/attest/challenge')) return { ok: true, json: async () => ({ challenge: 'Bw'.padEnd(43, 'A') + '=', expiresInSec: 300 }) }
     if (url.endsWith('/v1/attest/register')) return { ok: registerOk, json: async () => ({ ok: registerOk }) }
     return { ok: false, json: async () => ({}) }
   })
@@ -40,10 +41,13 @@ describe('App Attest sur iPhone (contrat I6-RELAIS-5)', () => {
     const fetchImpl = fakeRelay()
     const headers = await appAttestHeaders({ plugin, installId: 'install-1', body: CORPS, now: 1762070400000, relayUrl: RELAY, fetchImpl })
     expect(plugin.attestKey).toHaveBeenCalledWith({ keyId: 'cle-1', challenge: expect.any(String) })
+    const challenge = fetchImpl.mock.calls.find(([url]) => url.endsWith('/v1/attest/challenge'))
+    expect(challenge[1]).toMatchObject({ method: 'POST', headers: { 'X-Install-Id': 'install-1' } })
     const register = fetchImpl.mock.calls.find(([url]) => url.endsWith('/v1/attest/register'))
-    expect(register[1].headers).toMatchObject({ 'X-Install-Id': 'install-1', 'X-AppAttest-KeyId': 'cle-1', 'X-AppAttest-Attestation': 'YXR0ZXN0YXRpb24=' })
+    expect(register[1]).toMatchObject({ method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Install-Id': 'install-1' } })
+    expect(JSON.parse(register[1].body)).toEqual({ keyId: 'cle-1', attestation: 'YXR0ZXN0YXRpb24=', challenge: 'Bw'.padEnd(43, 'A') + '=' })
     expect(plugin.generateAssertion).toHaveBeenCalledWith({ keyId: 'cle-1', clientData: await clientDataFor({ installId: 'install-1', timeMs: 1762070400000, body: CORPS }) })
-    expect(headers).toEqual({ 'X-AppAttest-KeyId': 'cle-1', 'X-AppAttest-Assertion': 'YXNzZXJ0aW9u', 'X-AppAttest-Time': '1762070400000' })
+    expect(headers).toEqual({ 'X-AppAttest-Key': 'cle-1', 'X-AppAttest-Assertion': 'YXNzZXJ0aW9u', 'X-AppAttest-Time': '1762070400000' })
     expect(JSON.parse(localStorage.getItem(APP_ATTEST_KEY))).toEqual({ keyId: 'cle-1', registered: true })
   })
 
