@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v705 (commit `354be50`, 2/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v706 (commit `b7b7147`, 2/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 2/11 08:00 | #622 (v706) | #622 : « 1er » pour le premier jour du mois partout (Journal, Repas, Accueil, bien-être, Données, Nouveautés), nouvelle fonction `localeDate` (POL-PLAY-99) ; note de Nouveautés pour toutes les variantes, vraie sur iPhone ; côté iPhone : correctifs 06, 12, 15, 21 et 25 refaits (ligne d'import de `i18n/locale.js` changée dans leur contexte) ; aucune date propre à l'iPhone ne contourne `localeDate` ; 34 correctifs, 3118 tests | — |
 | 2/11 07:00 | #620, #621 (v705) | #620 : Nutrition, le sodium sous son maximum s'affiche « sous la limite » (sa couleur) au lieu de « atteint », « incertain » quand des repas manquent (POL-PLAY-97) ; #621 : Analyses, une habitude pas encore comparable a sa ligne dans « Bientôt » avec ce qui manque (POL-PLAY-98) ; notes de Nouveautés pour toutes les variantes, vraies sur iPhone ; côté iPhone : rien à adapter (essais à blanc des deux PR) ; 34 correctifs (avec le 37, #199), 3113 tests | — |
 | 2/11 04:00 | #619 (v703) | #619 : page d'abonnement, formule mensuelle : le prix n'est plus répété sous le bouton (déjà sur la formule et sur le bouton), POL-PLAY-96 ; règle 3.1.2 d'Apple tenue (prix et durée sur le bouton) ; côté iPhone : test App Store (« S’abonner · 4,99 € / mois », « Annulable à tout moment dans l’App Store. ») et note de Nouveautés iOS, celle d'Android étant réservée à Google Play ; 33 correctifs | — |
 | 2/11 03:00 | #617, #618 (v702) | #617 : espace fine des milliers élargie à l'affichage (« 1 039 kcal », POL-PLAY-94), vraie aussi sur iPhone (sa note de Nouveautés vaut pour toutes les variantes) ; #618 : Paramètres donne les analyses IA par jour selon la formule (Silver 10, Gold 20, test = Gold), POL-PLAY-95 ; côté iPhone : tests App Store (Gold acheté chez Apple → 20, Premium → 10, période de test → 20) et note de Nouveautés iOS, celle d'Android étant réservée à Google Play ; 33 correctifs, 3100 tests | — |
