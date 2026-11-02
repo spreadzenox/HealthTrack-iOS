@@ -116,6 +116,9 @@ test('version : jamais renommée quand une build y est attachée (le propriétai
   assert.deepEqual(versionPlan({ current: '717', wanted: '718', attachedBuild: '717.216' }), { rename: false, keep: '717', reason: 'build 717.216 attachée' })
   assert.deepEqual(versionPlan({ current: '717', wanted: '718', attachedBuild: null }), { rename: true, keep: '718', reason: null })
   assert.deepEqual(versionPlan({ current: '718', wanted: '718', attachedBuild: '718.220' }), { rename: false, keep: '718', reason: null })
+  // Build finale d'une soumission (--version-des-builds) : renommée quand même, la nouvelle build est à choisir
+  assert.deepEqual(versionPlan({ current: '717', wanted: '723', attachedBuild: '717.216', followBuilds: true }), { rename: true, keep: '723', reason: 'build 717.216 à remplacer par une 723.x' })
+  assert.deepEqual(versionPlan({ current: '717', wanted: '723', attachedBuild: null, followBuilds: true }), { rename: true, keep: '723', reason: null })
 })
 
 test('captures iPad 13" : tableau de la section iPad de captures.md (Nutrition à la place de Sources), toutes présentes', async () => {
