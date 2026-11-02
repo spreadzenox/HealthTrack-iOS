@@ -183,6 +183,11 @@
     **créés par l'API le 1/11 à 17:48** (`scripts/store-subscriptions.mjs`, 9 tests, workflow « Abonnements App Store
     — création », PR #180) : groupe « Halcya » (nom affiché fr-FR), Gold mensuel 9,99 € (niveau 1), Silver annuel
     29,99 € avec 2 semaines d'essai et Silver mensuel 4,99 € (niveau 2), noms et descriptions fr-FR, en vente en France.
+  - [x] **Renouvellement des abonnements iPhone (2/11, PR #199)** : le relais lit depuis v689 le `renewalInfo` signé par
+    Apple, que ni le plugin ni le code partagé n'envoyaient : un abonné aurait lu « actif · jusqu'au … » au lieu de
+    « renouvellement le … », et une période de grâce ne serait jamais repérée. Le plugin `AppStoreBilling` le joint
+    à chaque achat (`Product.SubscriptionInfo.status`), le correctif 37 le transmet (achat, restauration, événement) ;
+    5 tests Vitest, XCTest StoreKit. À retirer si Android reprend la demande du 1/11 (`DEMANDES.md`).
   - [ ] Plugin Swift `TrialReminder` (PR #182) inutilisé depuis Android v697 (#612 : pas de rappel d'essai promis sur
     l'App Store) : le retirer si la décision tient, ou le rebrancher si Android revient dessus.
   - [~] Capture d'écran pour l'examen de chaque abonnement : **envoyée le 1/11 à 22:24** (écran d'achat 6,9",
