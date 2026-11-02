@@ -347,7 +347,7 @@
   contrôle avant les crédits payants de l'iPhone :
   - [x] Plugin Swift `AppAttest` (clé dans la Secure Enclave, attestation, assertion ; 4 XCTest `AppAttestRule`) et
     `src/ios/appAttest.js` (clé attestée une fois, en-têtes `X-AppAttest-*`, « unsupported » sans Secure Enclave ;
-    7 Vitest) : PR #203, non branchés.
+    7 Vitest) : PR #203 (mergée le 2/11), non branchés.
   - [ ] Brancher sur `aiRelay.js` (analyse, crédits) quand Android aura livré I6-RELAIS-5d (routes
     `/v1/attest/challenge` et `/v1/attest/register`) ; vérifier sur l'iPhone 12 (le simulateur n'a pas de Secure Enclave).
   - [ ] Droit `com.apple.developer.devicecheck.appattest-environment = production` : seulement après la capacité
