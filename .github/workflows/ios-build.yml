@@ -187,7 +187,8 @@ jobs:
       - name: Publier les captures sur une branche dédiée
         if: always() && hashFiles('captures/*.png') != ''
         env:
-          BRANCH: captures/${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || inputs.devices != '' && 'store' || github.ref_name }}
+          # Captures de la fiche : iPhone sur captures/store, iPad sur captures/store-ipad (l'une n'écrase pas l'autre)
+          BRANCH: captures/${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.pull_request.number) || inputs.devices != '' && (contains(inputs.devices, 'iPad') && 'store-ipad' || 'store') || github.ref_name }}
           GH_TOKEN: ${{ github.token }}
         run: |
           cd captures
