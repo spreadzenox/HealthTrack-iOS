@@ -39,7 +39,7 @@ remplie (A5) ; trois abonnements chez Apple, prêts à partir avec une version (
 9,99 €/mois, Silver 29,99 €/an avec 2 semaines d'essai, Silver 4,99 €/mois, en France. Le serveur d'Android vérifie
 les achats faits sur iPhone, et **l'achat est ouvert dans l'app**. App Attest est coché et le serveur l'observe depuis
 le 2/11 ; le droit arrive dans l'app avec la prochaine build. Captures iPad 13" : choix « B » (Nutrition à la place de
-Sources), envoi en cours.
+Sources), 8 envoyées le 2/11 (aucune refusée).
 
 Restent :
 - Content Rights ;
@@ -100,7 +100,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 18:30 | page « Licences » | Android v717 suivie (PR #215) : la nouvelle page Réglages → Licences existe aussi sur iPhone, avec les composants propres à l'iPhone et rien d'Android (Android a repris notre demande) ; « Conditions » annonce maintenant l'abonnement et les remboursements ; **la 717 est sur TestFlight (717.216)**. Parité : 67 % | #215 (mergée) |
 | 2/11 19:45 | vos gestes avant la mise en vente | à votre demande, la liste de ce qui vous reste avant la production, puis un prompt pour une session sur votre PC (avec Chrome) qui vous guide dans App Store Connect ; Android v718 suivie (PR #216 : « 1er » et « 21e » dans la bonne police). Parité : 67 % | #216 (en vérification) |
 | 2/11 20:00 | votre compte rendu App Store Connect, l'iPad | **la 718 est sur TestFlight (718.217)** ; la fiche n'a pas été renvoyée : l'envoi aurait renommé la version 717 et détaché la build que vous avez choisie (garde-fou écrit, PR #217) ; captures iPad 13" faites et regardées : rien de coupé, mais « téléphone » sur 3 écrans, donc rien envoyé avant votre choix ; lot prêt : App Attest dans l'app, mot-clé « humeur » remplacé par « bien-être », notes pour l'examen à jour, abonnements nommés Silver comme dans l'app. Parité : 67 % | #216 (mergée), #217 |
-| 2/11 22:00 | captures iPad, Android v721 | votre choix « B » appliqué : Nutrition à la place de Sources sur iPad ; Android v721 suivie : Gold offert jusqu'au 27/11 (iPhone compris), « Gold estime mieux les quantités » sur la page d'abonnement (aussi dans la description d'Apple), et le serveur observe App Attest avec votre Team ID. Parité : 67 % | #217, v721 (en vérification) |
+| 2/11 22:00 | captures iPad, Android v721 | votre choix « B » appliqué : **8 captures iPad envoyées à Apple** (Nutrition à la place de Sources ; aucune refusée, 4 encore en traitement à la relecture ; version 717 et build 717.216 intactes) ; l'iPhone se signale désormais au serveur, pour que Gold offert s'y arrête le 6/11 comme vous l'avez décidé (PR #218) ; Android v721 suivie : Gold offert jusqu'au 27/11 (iPhone compris), « Gold estime mieux les quantités » sur la page d'abonnement (aussi dans la description d'Apple), et le serveur observe App Attest avec votre Team ID. Parité : 67 % | #217 (mergée), #218 (en vérification) |
 
 ---
 
