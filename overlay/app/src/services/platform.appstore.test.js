@@ -1,16 +1,18 @@
 import { describe, it, expect, vi } from 'vitest'
 
-// Version iOS (HealthTrack-iOS) : l'app iPhone se signale au relais par `X-Platform: ios` (correctif 40 pour la
-// vérification des droits, src/ios/platform.js). Décision du propriétaire du 2/11 : la période de lancement s'arrête
-// sur iPhone le 6/11 inclus, plus tôt que sur Google Play ; sans cet en-tête, le relais ne peut pas distinguer une
-// installation iPhone sans achat d'une installation Android.
+// Version iOS (HealthTrack-iOS) : l'app iPhone se signale au relais par `X-Platform: ios`. Décision du propriétaire du
+// 2/11 : la période de lancement s'arrête sur iPhone le 6/11 inclus, plus tôt que sur Google Play ; le relais
+// d'Android (v722, #638, `iosUntil`) s'appuie sur cet en-tête, que l'app d'Android ajoute elle-même depuis v722
+// (`platformHeaders` d'aiRelay.js, quand `VITE_STORE=appstore`). Vérifié ici dans la variante de l'iPhone (le correctif
+// 40, qui l'ajoutait côté iOS, est retiré).
 vi.mock('../config/distribution', async (importOriginal) => {
   const actual = await importOriginal()
   return { ...actual, DISTRIBUTION: 'appstore', FEATURES: actual.featuresFor('appstore'), STORE: actual.storeFor('appstore') }
 })
 
 import { refreshEntitlement } from './entitlement'
-import { platformHeaders } from '../ios/platform.js'
+import { platformHeaders } from './aiRelay'
+import { storeFor } from '../config/distribution'
 
 const relais = (payload = { ok: true, premium: true, source: 'launch', launchUntil: '2026-11-06T23:00:00Z' }) =>
   vi.fn(async () => ({ ok: true, status: 200, json: async () => payload }))
@@ -34,8 +36,8 @@ describe('plateforme iPhone signalée au relais', () => {
   })
 
   it('jamais sur Android ni en sideload', () => {
-    expect(platformHeaders('appstore')).toEqual({ 'X-Platform': 'ios' })
-    expect(platformHeaders('play')).toEqual({})
-    expect(platformHeaders('sideload')).toEqual({})
+    expect(platformHeaders()).toEqual({ 'X-Platform': 'ios' })
+    expect(platformHeaders(storeFor('play'))).toEqual({})
+    expect(platformHeaders(storeFor('sideload'))).toEqual({})
   })
 })

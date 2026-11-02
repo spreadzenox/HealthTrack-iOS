@@ -3,7 +3,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 // Version iOS (HealthTrack-iOS), étape I6 : le plugin d'achat de l'iPhone joint à chaque achat les informations de
 // renouvellement signées par Apple (`renewalInfo`) ; le relais d'Android les lit déjà (v689, `body.renewalInfo`). Sans
 // elles, un abonnement qui se renouvelle serait dit « actif · jusqu'au … » et une période de grâce jamais repérée.
-// Correctif 37, en attendant que la demande du 1/11 (`journal/DEMANDES.md`) soit reprise par Android.
+// Correctif 37 du 2/11, repris par Android v722 (#638) dans le code partagé : ces tests le vérifient sur iPhone.
 import { purchasePlan, restorePurchases, handlePurchasesUpdated } from './playBilling'
 import { refreshEntitlement } from './entitlement'
 
