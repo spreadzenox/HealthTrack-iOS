@@ -15,21 +15,24 @@
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
-- **La date de soumission** : Android vient de prolonger Gold offert à toute installation **jusqu'au 27/11 inclus**
-  (au lieu du 20/11), iPhone compris. D'ici là, l'écran d'abonnement de l'iPhone n'a rien à vendre, alors qu'Apple
-  doit pouvoir trouver l'achat pendant l'examen. Deux choix :
-  - soumettre après le 27/11 (rien à faire d'ici là) ;
-  - ou demander à la routine Android que la période de lancement ne vaille que pour Google Play.
-
-  Dites-moi lequel.
 - **Content Rights** (App Store Connect → Halcya → Informations sur l'app) : l'app utilise des contenus de tiers sous
   licence (tables d'aliments, modèles, polices, cités dans Réglages → Licences). Je propose « Oui, elle contient du
   contenu de tiers, et j'ai les droits nécessaires ». Répondez « ok Content Rights » et je l'envoie par l'API, ou
   cochez-le vous-même.
+- **Le 6 ou le 7/11, avant de soumettre** : je vous donnerai le numéro exact de la build à attacher. La version
+  changera de numéro (717 → celui de la build finale, 72x), car Apple n'attache une build qu'à la version du même
+  numéro ; la build 717.216 n'a ni App Attest ni le repère iPhone dont le serveur a besoin.
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (718.217 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 27/11).
+- Installez la build la plus récente de TestFlight (718.217 aujourd'hui) : l'achat y est ouvert ; Gold y reste offert
+  jusqu'à la fin de la période de lancement (6/11 sur iPhone, selon votre décision, une fois le serveur réglé par la
+  routine Android).
+
+**Soumission prévue le 7 ou le 8/11** (votre décision du 2/11). Avant cette date, je vérifie :
+- que le serveur coupe la période de lancement sur iPhone : l'app iPhone se signale désormais au serveur (PR #218) ;
+- l'écran d'achat avec les trois abonnements, et le chemin des notes d'examen (roue, Paramètres, Découvrir le premium) ;
+- les captures iPad, les notes d'examen et App Attest.
 
 **Où on en est pour vendre sur iPhone** : contrat de vente, banque et fiscalité actifs (A4) ; confidentialité de l'app
 remplie (A5) ; trois abonnements chez Apple, prêts à partir avec une version (« Prepare for Submission ») : Gold
@@ -40,7 +43,6 @@ Sources), envoi en cours.
 
 Restent :
 - Content Rights ;
-- la date de soumission ;
 - l'essai sur l'iPhone 12 ;
 - votre relecture, puis votre soumission. La section des abonnements apparaîtra sur la page de la version : cochez-y
   les trois.
