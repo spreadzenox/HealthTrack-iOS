@@ -343,6 +343,16 @@
     conditions, fiche, assistance, notes pour l'examen, Nouveautés de l'iPhone. Pour changer d'iPhone : l'export.
     Reste ouvert : les fichiers que la personne exporte elle-même vont à la racine de Documents (donc dans la
     sauvegarde iCloud) avant la feuille de partage ; c'est son geste, à revoir si Apple le relève.
+- [ ] **App Attest sur iPhone (I6, contrat d'Android du 2/11, #623)** — l'équivalent de Play Integrity, seule porte sans
+  contrôle avant les crédits payants de l'iPhone :
+  - [x] Plugin Swift `AppAttest` (clé dans la Secure Enclave, attestation, assertion ; 4 XCTest `AppAttestRule`) et
+    `src/ios/appAttest.js` (clé attestée une fois, en-têtes `X-AppAttest-*`, « unsupported » sans Secure Enclave ;
+    7 Vitest) : PR #203, non branchés.
+  - [ ] Brancher sur `aiRelay.js` (analyse, crédits) quand Android aura livré I6-RELAIS-5d (routes
+    `/v1/attest/challenge` et `/v1/attest/register`) ; vérifier sur l'iPhone 12 (le simulateur n'a pas de Secure Enclave).
+  - [ ] Droit `com.apple.developer.devicecheck.appattest-environment = production` : seulement après la capacité
+    « App Attest » sur l'identifiant `fr.jpesquet.sante` (sinon la signature de TestFlight échoue) ; Team ID à donner à
+    Android (P38 de son BACKLOG). Action du propriétaire, à préparer pas à pas quand le relais sera prêt.
 - [ ] **Plus tard, quand il y aura plus d'utilisateurs (décision du 31/10)** : la stratégie de cache décidée avec la
   routine Android pour l'analyse des repas, côté relais. Aujourd'hui, les consignes commencent par la longue liste des
   ingrédients, identique d'un appel à l'autre, que Vertex AI met en cache implicitement (`relay/src/prompts.js`
