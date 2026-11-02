@@ -122,6 +122,9 @@ public class AppStoreBillingPlugin: CAPPlugin, CAPBridgedPlugin {
     /// Informations de renouvellement de l'abonnement de cette transaction (même `originalID`), telles que signées par
     /// Apple ; nil si StoreKit ne les donne pas (le relais déduit alors les droits de la seule transaction).
     static func renewalInfo(for transaction: Transaction) async -> String? {
+        if #available(iOS 17.0, *), let status = await transaction.subscriptionStatus {
+            return status.renewalInfo.jwsRepresentation
+        }
         guard let group = transaction.subscriptionGroupID,
               let statuses = try? await Product.SubscriptionInfo.status(for: group) else { return nil }
         for status in statuses {
