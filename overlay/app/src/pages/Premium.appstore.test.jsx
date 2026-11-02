@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { fakeAppStoreBilling } from '../ios/captureMode.js'
 
@@ -29,5 +29,23 @@ describe('Premium sur iPhone (variante appstore)', () => {
     expect(screen.getByRole('link', { name: 'Conditions' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Confidentialité' })).toBeInTheDocument()
     expect(container).not.toHaveTextContent(/Google|arrive bientôt/)
+  })
+
+  it('abonné Silver de l’App Store : « Passer à Gold », achat du Gold mensuel sans ancien jeton (Apple fait le passage)', async () => {
+    const silver = { ok: true, premium: true, source: 'appstore', state: 'active', tier: 'silver', productId: 'halcya_premium_annuel', expiresAt: '2099-01-01T00:00:00.000Z' }
+    localStorage.setItem('halcya_entitlement', JSON.stringify(silver))
+    globalThis.fetch = vi.fn(() => Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve(silver) }))
+    const billing = fakeAppStoreBilling()
+    billing.purchase = vi.fn(async () => ({ status: 'cancelled' }))
+    window.__HT_PLAY_BILLING__ = billing
+    const { container } = render(<MemoryRouter initialEntries={['/premium']}><Premium /></MemoryRouter>)
+    expect(await screen.findByText('Passer à Gold : 20 analyses IA par jour au lieu de 10.')).toBeInTheDocument()
+    fireEvent.click(screen.getByRole('button', { name: 'Passer à Gold · 9,99 € / mois' }))
+    await waitFor(() => expect(billing.purchase).toHaveBeenCalledTimes(1))
+    const args = billing.purchase.mock.calls[0][0]
+    expect(args).toMatchObject({ productId: 'halcya_gold', offerToken: 'halcya_gold_mensuel' })
+    expect(args).not.toHaveProperty('oldPurchaseToken')
+    expect(args).not.toHaveProperty('replacementMode')
+    expect(container).not.toHaveTextContent(/Google/)
   })
 })
