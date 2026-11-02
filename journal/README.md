@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v713 (2/11) | **713 sur TestFlight** (build 713.211), achat ouvert ; même version qu'Android |
+| Dernière version | v714 (2/11) | **714 sur TestFlight** (build 714.213), achat ouvert ; même version qu'Android |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -25,7 +25,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (713.211 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
+- Installez la build la plus récente de TestFlight (714.213 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
 - (quand vous pouvez, le serveur d'Android est prêt depuis le 2/11) **Protection contre les abus sur iPhone** :
   1. developer.apple.com → Certificates, Identifiers & Profiles → Identifiers → `fr.jpesquet.sante` → cocher
      « App Attest » → Save ;
@@ -87,6 +87,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 12:00 | suivi d'Android v710 | Android v710 suivie (PR #207) : son serveur vérifie maintenant chaque requête signée par un iPhone ; il ne lui reste qu'à ouvrir les adresses où l'iPhone s'inscrit ; rien ne change dans l'app ; **la 710 est sur TestFlight (710.208)**. Parité : 67 % | #207 (mergée) |
 | 2/11 13:00 | suivi d'Android v712 | Android v712 suivie (PR #208) : les adresses où l'iPhone s'inscrira existent sur le serveur, encore fermées ; la partie iPhone suit leur format exact ; **la 712 est sur TestFlight (712.209)**. Parité : 67 % | #208 (mergée) |
 | 2/11 14:00 | protection contre les abus | Android v713 suivie (PR #210) : le serveur sait désormais vérifier chaque analyse venue d'un iPhone (encore éteint) ; l'app iPhone joint maintenant sa preuve à chaque analyse de repas. Il vous reste une petite action quand vous pouvez (voir en haut) ; **la 713 est sur TestFlight (713.211)**. Parité : 67 % | #210 (mergée) |
+| 2/11 16:00 | suivi d'Android v714 | Android v714 suivie (PR #212) : la version Google Play ne montre plus le nom technique des modèles du visage ; rien ne change sur iPhone (ces modèles y sont éteints) ; une adaptation de l'iPhone remise à jour ; **la 714 est sur TestFlight (714.213)**. Parité : 67 % | #212 (mergée) |
 
 ---
 
