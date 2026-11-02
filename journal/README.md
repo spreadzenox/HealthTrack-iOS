@@ -12,7 +12,7 @@
 |---|---|---|
 | Dernière version | v703 (2/11) | **703 sur TestFlight** (build 703.197), achat ouvert ; même version qu'Android |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
-| Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
+| Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
 - **Une décision pour la date de soumission** : jusqu'au 20/11, Android offre Gold à toute installation (période de
@@ -70,6 +70,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 02:00 | suivi d'Android v700 | Android v700 (serveur seulement) suivie (PR #192, mergée) : **la 700 est sur TestFlight (700.193)** ; la prochaine version d'Android (grands nombres plus lisibles) a été essayée à l'avance : rien ne cassera sur iPhone. Parité : 48 % | #192 (mergée) |
 | 2/11 03:00 | suivi d'Android v702 | Android v702 suivie (PR #194) : les grands nombres gardent une espace visible (« 1 039 kcal ») ; Paramètres dit le bon nombre d'analyses IA par jour (Silver 10, Gold 20, et 20 pendant le test), avec sa note de Nouveautés sur iPhone ; le passage de Silver à Gold depuis l'iPhone est vérifié par un test ; **la 702 est sur TestFlight (702.195)**. Parité : 48 % | #194 (mergée) |
 | 2/11 04:00 | suivi d'Android v703 | Android v703 suivie (PR #196) : sur la page d'abonnement, la formule mensuelle ne répète plus son prix sous le bouton (il reste sur la formule et sur le bouton) ; note de Nouveautés sur iPhone ; **la 703 est sur TestFlight (703.197)**. Parité : 48 % | #196 (mergée) |
+| 2/11 05:00 | bilan de la parité | Android n'a rien publié ; sa prochaine version (sodium « sous la limite » sur la page Nutrition) a été essayée à l'avance : rien ne cassera sur iPhone ; tableau des fonctions recompté ligne par ligne et remis à jour : l'achat, les conditions avec leur partie vente, la confidentialité de l'app (A5), la fiche et l'envoi sur TestFlight à chaque version comptent désormais. Parité : 67 % (au lieu de 48 %) | — |
 
 ---
 
