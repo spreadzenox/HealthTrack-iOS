@@ -188,11 +188,15 @@
     « renouvellement le … », et une période de grâce ne serait jamais repérée. Le plugin `AppStoreBilling` le joint
     à chaque achat (`Product.SubscriptionInfo.status`), le correctif 37 le transmet (achat, restauration, événement) ;
     5 tests Vitest, XCTest StoreKit. À retirer si Android reprend la demande du 1/11 (`DEMANDES.md`).
-  - [ ] **Régression des tests de la CI (vue le 2/11)** : depuis #184, le faux magasin des captures (`installBillingFake`,
+  - [x] **Régression des tests de la CI (vue le 2/11, réparée par #200)** : depuis #184, le faux magasin des captures (`installBillingFake`,
     « sans abonnement ») vaut pour toute la session de captures ; la carte « Rapport PDF pour mon médecin » montre alors
     « Débloquer », et le geste réel `DonneesUITests/testEnregistrerLeRapportDansFichiers` échoue (« « Créer le PDF »
     introuvable », simple avertissement dans la CI, sur `main` aussi, #196). À faire : ne poser le faux magasin que pour
-    la capture de l'écran d'achat, ou rendre Gold aux gestes réels.
+    la capture de l'écran d'achat, ou rendre Gold aux gestes réels. **Fait (PR #200, `needsBillingFake`)** : le geste
+    réel du rapport PDF repasse sur les deux iPhone.
+  - [ ] Avertissement « pas de copie de secours dans Documents » de la CI (`scripts/ios-captures.sh`, ligne 131) : il
+    cherche encore `Halcya-copie-de-secours.json` à la racine de Documents, alors que la copie vit dans « Copie de
+    secours/ » depuis #181 (la sonde `[sauvegarde]` la trouve bien) ; viser le dossier.
   - [ ] Plugin Swift `TrialReminder` (PR #182) inutilisé depuis Android v697 (#612 : pas de rappel d'essai promis sur
     l'App Store) : le retirer si la décision tient, ou le rebrancher si Android revient dessus.
   - [~] Capture d'écran pour l'examen de chaque abonnement : **envoyée le 1/11 à 22:24** (écran d'achat 6,9",
