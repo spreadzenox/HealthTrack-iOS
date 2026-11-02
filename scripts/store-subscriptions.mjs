@@ -322,6 +322,15 @@ export function readReviewScreenshot(path) {
   return { name: basename(path), bytes }
 }
 
+/** Une lecture du relevé qui ne doit pas l'interrompre : son résultat, ou « illisible (statut) ». */
+async function readable(read, show) {
+  try {
+    return show(await read())
+  } catch (e) {
+    return `illisible (${e.status ?? e.message})`
+  }
+}
+
 /**
  * Relevé sans écriture, quand Apple dit un abonnement « métadonnées manquantes » : état de chaque pièce qu'App Store
  * Connect exige avant une soumission (nom et description, capture pour l'examen, prix, territoires, nom du groupe).
@@ -357,6 +366,12 @@ export async function diagnose({ token, fetchImpl = fetch }) {
       if (e.status !== 404) throw e
     }
     parts.push(`territoires ${(availability?.included || []).map((t) => t.id).join(', ') || 'aucun'}`)
+    // Pièces plus récentes de l'API (4.5) : note pour l'examen, formules de paiement (MONTHLY / UPFRONT) et versions
+    // de l'abonnement (« Prepare for Submission » de l'interface) ; lues sans jamais faire échouer le relevé
+    const note = sub.attributes?.reviewNote
+    parts.push(`note pour l'examen ${note ? `${[...note].length} car.` : 'absente'}`)
+    parts.push(`formules ${await readable(() => all(`/v1/subscriptions/${id}/planAvailabilities?limit=50`), (list) => list.map((x) => x.attributes?.planType ?? '?').join(', ') || 'aucune')}`)
+    parts.push(`versions ${await readable(() => all(`/v1/subscriptions/${id}/versions?limit=50`), (list) => list.map((x) => `${x.attributes?.version ?? '?'} ${x.attributes?.state ?? '?'}`).join(', ') || 'aucune')}`)
     lines.push(`${sub.attributes?.productId} : ${parts.join(' ; ')}`)
   }
   return lines
