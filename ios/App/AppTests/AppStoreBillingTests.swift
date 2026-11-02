@@ -56,11 +56,12 @@ final class AppStoreBillingTests: XCTestCase {
         let gold = try XCTUnwrap(golds.first)
         guard case .success(let achatGold) = try await gold.purchase() else { return XCTFail("achat Gold non abouti") }
         if case .verified(let t) = achatGold { await t.finish() }
-        let rendu = try XCTUnwrap(AppStoreBillingPlugin.purchase(achatGold))
+        let renduGold = await AppStoreBillingPlugin.purchase(achatGold) // pas d'await dans XCTUnwrap
+        let rendu = try XCTUnwrap(renduGold)
         XCTAssertEqual(rendu["products"] as? [String], ["halcya_gold"])
         var enCours: [String] = []
         for await droit in Transaction.currentEntitlements {
-            if let achat = AppStoreBillingPlugin.purchase(droit) { enCours += (achat["products"] as? [String]) ?? [] }
+            if let achat = await AppStoreBillingPlugin.purchase(droit) { enCours += (achat["products"] as? [String]) ?? [] }
         }
         XCTAssertEqual(enCours, ["halcya_gold"])
     }
@@ -73,7 +74,10 @@ final class AppStoreBillingTests: XCTestCase {
             return XCTFail("achat d'essai non abouti")
         }
         // Échec d'une fois (30/10, PR #77, iPhone 16e sous iOS 26.2) : conversion vide sans dire pourquoi ; le dire
-        if AppStoreBillingPlugin.purchase(resultat) == nil {
+        // Comme le plugin : la transaction est terminée avant d'être rendue (statut de l'abonnement à jour)
+        if case .verified(let t) = resultat { await t.finish() }
+        let rendu = await AppStoreBillingPlugin.purchase(resultat) // pas d'await dans XCTUnwrap
+        if rendu == nil {
             switch resultat {
             case .unverified(let transaction, let erreur):
                 print("StoreKit Test : transaction non vérifiée (\(transaction.productID)) : \(erreur)")
@@ -83,13 +87,18 @@ final class AppStoreBillingTests: XCTestCase {
                 print("StoreKit Test : résultat d'achat inconnu")
             }
         }
-        let achat = try XCTUnwrap(AppStoreBillingPlugin.purchase(resultat))
+        let achat = try XCTUnwrap(rendu)
         XCTAssertEqual(achat["state"] as? String, "purchased")
         XCTAssertEqual(achat["products"] as? [String], ["halcya_premium"])
         XCTAssertEqual((achat["purchaseToken"] as? String)?.split(separator: ".").count, 3) // JWS signé
+        // Renouvellement automatique et période de grâce, pour le relais (sinon « actif jusqu'au » au lieu de « renouvellement le »)
+        if achat["renewalInfo"] == nil, case .verified(let t) = resultat {
+            let statuts = (try? await Product.SubscriptionInfo.status(for: t.subscriptionGroupID ?? "")) ?? []
+            print("StoreKit Test : pas de renewalInfo ; groupe \(t.subscriptionGroupID ?? "?"), \(statuts.count) statut(s)")
+        }
+        XCTAssertEqual((achat["renewalInfo"] as? String)?.split(separator: ".").count, 3) // JWS signé
         guard case .verified(let transaction) = resultat else { return XCTFail("transaction non vérifiée") }
         XCTAssertEqual(transaction.appAccountToken, compte)
-        await transaction.finish()
         var enCours: [String] = []
         for await droit in Transaction.currentEntitlements {
             if case .verified(let t) = droit { enCours.append(t.productID) }
