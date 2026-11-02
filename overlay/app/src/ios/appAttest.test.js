@@ -1,0 +1,82 @@
+import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { APP_ATTEST_KEY, clientDataFor, appAttestHeaders, sha256Hex } from './appAttest.js'
+
+// Version iOS (HealthTrack-iOS), étape I6 : App Attest selon le contrat du relais spécifié par Android le 2/11
+// (journal/IDEES.md de HealthTrack, I6-RELAIS-5) : clé attestée une fois (défi à usage unique, /v1/attest/register),
+// puis une assertion par requête sensible, en en-têtes X-AppAttest-*.
+const RELAY = 'https://relais.example'
+const CORPS = '{"dish":"salade"}'
+
+function fakePlugin({ supported = true, assertionError = null } = {}) {
+  return {
+    isSupported: vi.fn(async () => ({ supported })),
+    generateKey: vi.fn(async () => ({ keyId: 'cle-1' })),
+    attestKey: vi.fn(async () => ({ attestation: 'YXR0ZXN0YXRpb24=' })),
+    generateAssertion: vi.fn(async () => {
+      if (assertionError) throw Object.assign(new Error('assertion refusée'), { code: assertionError })
+      return { assertion: 'YXNzZXJ0aW9u' }
+    }),
+  }
+}
+function fakeRelay({ registerOk = true } = {}) {
+  return vi.fn(async (url) => {
+    if (url.endsWith('/v1/attest/challenge')) return { ok: true, json: async () => ({ challenge: 'Bw'.padEnd(43, 'A') + '=' }) }
+    if (url.endsWith('/v1/attest/register')) return { ok: registerOk, json: async () => ({ ok: registerOk }) }
+    return { ok: false, json: async () => ({}) }
+  })
+}
+
+describe('App Attest sur iPhone (contrat I6-RELAIS-5)', () => {
+  beforeEach(() => localStorage.clear())
+
+  it('clientData : « halcya-assert:<installation>:<horodatage ms>:<SHA-256 du corps> »', async () => {
+    expect(await sha256Hex('')).toBe('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')
+    expect(await clientDataFor({ installId: 'install-1', timeMs: 1762070400000, body: '' }))
+      .toBe('halcya-assert:install-1:1762070400000:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')
+  })
+
+  it('première requête : clé tirée, attestée sur le défi du relais, enregistrée, puis assertion en en-têtes', async () => {
+    const plugin = fakePlugin()
+    const fetchImpl = fakeRelay()
+    const headers = await appAttestHeaders({ plugin, installId: 'install-1', body: CORPS, now: 1762070400000, relayUrl: RELAY, fetchImpl })
+    expect(plugin.attestKey).toHaveBeenCalledWith({ keyId: 'cle-1', challenge: expect.any(String) })
+    const register = fetchImpl.mock.calls.find(([url]) => url.endsWith('/v1/attest/register'))
+    expect(register[1].headers).toMatchObject({ 'X-Install-Id': 'install-1', 'X-AppAttest-KeyId': 'cle-1', 'X-AppAttest-Attestation': 'YXR0ZXN0YXRpb24=' })
+    expect(plugin.generateAssertion).toHaveBeenCalledWith({ keyId: 'cle-1', clientData: await clientDataFor({ installId: 'install-1', timeMs: 1762070400000, body: CORPS }) })
+    expect(headers).toEqual({ 'X-AppAttest-KeyId': 'cle-1', 'X-AppAttest-Assertion': 'YXNzZXJ0aW9u', 'X-AppAttest-Time': '1762070400000' })
+    expect(JSON.parse(localStorage.getItem(APP_ATTEST_KEY))).toEqual({ keyId: 'cle-1', registered: true })
+  })
+
+  it('requêtes suivantes : ni nouvelle clé ni nouvelle attestation', async () => {
+    localStorage.setItem(APP_ATTEST_KEY, JSON.stringify({ keyId: 'cle-1', registered: true }))
+    const plugin = fakePlugin()
+    const fetchImpl = fakeRelay()
+    await appAttestHeaders({ plugin, installId: 'install-1', body: CORPS, now: 1, relayUrl: RELAY, fetchImpl })
+    expect(plugin.generateKey).not.toHaveBeenCalled()
+    expect(fetchImpl).not.toHaveBeenCalled()
+  })
+
+  it('simulateur (pas de Secure Enclave) : « X-Integrity-Status: unsupported », rien d’autre', async () => {
+    const plugin = fakePlugin({ supported: false })
+    expect(await appAttestHeaders({ plugin, installId: 'install-1', body: CORPS, relayUrl: RELAY, fetchImpl: fakeRelay() })).toEqual({ 'X-Integrity-Status': 'unsupported' })
+    expect(plugin.generateKey).not.toHaveBeenCalled()
+  })
+
+  it('relais sans la route (pas encore livrée) ou enregistrement refusé : aucun en-tête, nouvel essai plus tard', async () => {
+    const plugin = fakePlugin()
+    expect(await appAttestHeaders({ plugin, installId: 'install-1', body: CORPS, relayUrl: RELAY, fetchImpl: fakeRelay({ registerOk: false }) })).toEqual({})
+    expect(JSON.parse(localStorage.getItem(APP_ATTEST_KEY))).toEqual({ keyId: 'cle-1', registered: false })
+    expect(plugin.generateAssertion).not.toHaveBeenCalled()
+  })
+
+  it('clé perdue (restauration sur un autre iPhone) : oubliée, une neuve sera tirée à la requête suivante', async () => {
+    localStorage.setItem(APP_ATTEST_KEY, JSON.stringify({ keyId: 'cle-1', registered: true }))
+    const headers = await appAttestHeaders({ plugin: fakePlugin({ assertionError: 'invalid_key' }), installId: 'install-1', body: CORPS, relayUrl: RELAY, fetchImpl: fakeRelay() })
+    expect(headers).toEqual({})
+    expect(localStorage.getItem(APP_ATTEST_KEY)).toBeNull()
+  })
+
+  it('sans plugin (autre plateforme) : aucun en-tête', async () => {
+    expect(await appAttestHeaders({ plugin: null, installId: 'install-1', body: CORPS, relayUrl: RELAY })).toEqual({})
+  })
+})
