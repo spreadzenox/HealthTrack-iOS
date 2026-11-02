@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v706 (2/11) | **705 sur TestFlight** (build 705.201), achat ouvert ; 706 en préparation (vérifications en cours) |
+| Dernière version | v706 (2/11) | **706 sur TestFlight** (build 706.202), achat ouvert ; même version qu'Android |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -25,7 +25,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (705.201 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
+- Installez la build la plus récente de TestFlight (706.202 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
 
 **Où on en est pour vendre sur iPhone** : contrat de vente, banque et fiscalité actifs (A4) ; confidentialité de l'app
 remplie (A5) ; trois abonnements créés chez Apple (Gold 9,99 €/mois, Premium 29,99 €/an avec 2 semaines d'essai,
@@ -73,7 +73,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 05:00 | bilan de la parité | Android n'a rien publié ; sa prochaine version (sodium « sous la limite » sur la page Nutrition) a été essayée à l'avance : rien ne cassera sur iPhone ; tableau des fonctions recompté ligne par ligne et remis à jour : l'achat, les conditions avec leur partie vente, la confidentialité de l'app (A5), la fiche et l'envoi sur TestFlight à chaque version comptent désormais. Parité : 67 % (au lieu de 48 %) | — |
 | 2/11 06:00 | renouvellement des abonnements | Android n'a rien publié ; sa prochaine version (habitudes en attente rangées dans « Bientôt ») a été essayée à l'avance : rien ne cassera sur iPhone ; trou comblé avant les premiers abonnés : l'iPhone envoie désormais au serveur l'information d'Apple qui dit si l'abonnement se renouvelle (sinon Paramètres aurait dit « actif jusqu'au … » au lieu de « renouvellement le … »). Parité : 67 % | #199 (mergée) |
 | 2/11 07:00 | suivi d'Android v705 | Android v705 suivie (PR #200) : sodium « sous la limite » sur la page Nutrition, habitudes en attente rangées dans « Bientôt » ; réparé un test automatique de l'iPhone qui ne vérifiait plus le rapport PDF pour le médecin depuis l'ouverture de l'achat ; **la 705 est sur TestFlight (705.201)**. Parité : 67 % | #200 (mergée) |
-| 2/11 08:00 | suivi d'Android v706 | Android v706 suivie (PR #201) : « 1er novembre » partout dans les dates ; cinq adaptations de l'iPhone remises à jour (simple changement de ligne chez Android). Parité : 67 % | #201 (en vérification) |
+| 2/11 08:00 | suivi d'Android v706 | Android v706 suivie (PR #201) : « 1er novembre » partout dans les dates ; cinq adaptations de l'iPhone remises à jour (simple changement de ligne chez Android) ; un faux avertissement des tests automatiques sur la copie de secours corrigé ; **la 706 est sur TestFlight (706.202)**. Parité : 67 % | #201 (mergée) |
 
 ---
 
