@@ -282,6 +282,13 @@ export function fakeAppStoreBilling() {
  * relais offre Gold et l'écran n'a rien à vendre) ; c'est aussi la capture pour l'examen des abonnements. Le mode est
  * chargé après le premier rendu : une page d'abonnement déjà affichée est remontée, sans recharger l'app.
  */
+/**
+ * Le faux magasin ne vaut que pour les captures de l'écran d'achat : ailleurs, l'app garde les droits du vrai relais
+ * (Gold offert pendant le test), sans quoi le rapport PDF montre « Débloquer » et le geste réel de uitests/ qui
+ * l'enregistre dans Fichiers ne trouve pas « Créer le PDF » (vu le 2/11, depuis #184).
+ */
+export const needsBillingFake = (step) => step?.route === '/premium'
+
 export function installBillingFake({ target = window, storage = window.localStorage, location = window.location, history = window.history } = {}) {
   target.__HT_PLAY_BILLING__ = fakeAppStoreBilling()
   if (!target.__htFakeVerify && typeof target.fetch === 'function') {
@@ -317,8 +324,9 @@ export async function installCaptureMode() {
     const file = { directory: Directory.Documents, encoding: Encoding.UTF8 }
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
     const plan = buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS)
-    if (plan[Number(window.localStorage.getItem(STEP_KEY) ?? 0)]?.data === 'demo') installPhoneUsageFake()
-    installBillingFake()
+    const step = plan[Number(window.localStorage.getItem(STEP_KEY) ?? 0)]
+    if (step?.data === 'demo') installPhoneUsageFake()
+    if (needsBillingFake(step)) installBillingFake()
     await runCaptureStep(plan, {
       storage,
       demoEntries: () => iphoneDemoEntries(demo.generateDemoEntries()),
