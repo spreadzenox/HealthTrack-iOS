@@ -272,7 +272,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ; **693.185 (1/11 21:59, achat ouvert)** ; 697.189 (2/11 00:05) ; 698.190 (2/11 00:57) ; 700.193 (2/11 02:52) ; 702.195 (2/11 03:58) ; 703.197 (2/11 04:49) ; 705.201 (2/11 08:10) ; 706.202 (2/11 09:08) ; 708.205 (2/11 11:09) ; 709.206 (2/11 11:42) ; 710.208 (2/11 13:20) ; 712.209 (2/11 13:59) ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ; **693.185 (1/11 21:59, achat ouvert)** ; 697.189 (2/11 00:05) ; 698.190 (2/11 00:57) ; 700.193 (2/11 02:52) ; 702.195 (2/11 03:58) ; 703.197 (2/11 04:49) ; 705.201 (2/11 08:10) ; 706.202 (2/11 09:08) ; 708.205 (2/11 11:09) ; 709.206 (2/11 11:42) ; 710.208 (2/11 13:20) ; 712.209 (2/11 13:59) ; 713.211 (2/11 15:04) ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -348,8 +348,11 @@
   - [x] Plugin Swift `AppAttest` (clé dans la Secure Enclave, attestation, assertion ; 4 XCTest `AppAttestRule`) et
     `src/ios/appAttest.js` (clé attestée une fois, en-têtes `X-AppAttest-*`, « unsupported » sans Secure Enclave ;
     7 Vitest) : PR #203 (mergée le 2/11), non branchés.
-  - [ ] Brancher sur `aiRelay.js` (analyse, crédits) quand Android aura livré I6-RELAIS-5d (routes
-    `/v1/attest/challenge` et `/v1/attest/register`) ; vérifier sur l'iPhone 12 (le simulateur n'a pas de Secure Enclave).
+  - [x] Branché sur l'analyse des repas (PR #210, correctif 38, 2/11) : en-têtes signés sur le corps exact ; enregistrement
+    retenté au plus une fois par heure tant que les routes du relais sont coupées (Android v713 a tout livré, 5a à 5d,
+    coupé par défaut).
+  - [ ] Vérifier sur l'iPhone 12 (le simulateur n'a pas de Secure Enclave) quand le relais sera en `observe` : bilan
+    « iPhone : attest_passed / missing / rejected » du déploiement d'Android.
   - [ ] Droit `com.apple.developer.devicecheck.appattest-environment = production` : seulement après la capacité
     « App Attest » sur l'identifiant `fr.jpesquet.sante` (sinon la signature de TestFlight échoue) ; Team ID à donner à
     Android (P38 de son BACKLOG). Action du propriétaire, à préparer pas à pas quand le relais sera prêt.
