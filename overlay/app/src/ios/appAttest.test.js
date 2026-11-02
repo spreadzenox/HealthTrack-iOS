@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { APP_ATTEST_KEY, clientDataFor, appAttestHeaders, sha256Hex } from './appAttest.js'
+import { APP_ATTEST_KEY, ATTEST_RETRY_MS, clientDataFor, appAttestHeaders, iosAttestHeaders, sha256Hex } from './appAttest.js'
 
 // Version iOS (HealthTrack-iOS), étape I6 : App Attest selon les routes du relais d'Android (v712, #628,
 // relay/src/attestroutes.js) : clé attestée une fois (défi à usage unique ; /v1/attest/register reçoit en JSON
@@ -66,11 +66,20 @@ describe('App Attest sur iPhone (contrat I6-RELAIS-5)', () => {
     expect(plugin.generateKey).not.toHaveBeenCalled()
   })
 
-  it('relais sans la route (pas encore livrée) ou enregistrement refusé : aucun en-tête, nouvel essai plus tard', async () => {
+  it('relais sans la route (coupée par défaut) ou enregistrement refusé : aucun en-tête, nouvel essai dans une heure', async () => {
     const plugin = fakePlugin()
-    expect(await appAttestHeaders({ plugin, installId: 'install-1', body: CORPS, relayUrl: RELAY, fetchImpl: fakeRelay({ registerOk: false }) })).toEqual({})
-    expect(JSON.parse(localStorage.getItem(APP_ATTEST_KEY))).toEqual({ keyId: 'cle-1', registered: false })
+    const fetchImpl = fakeRelay({ registerOk: false })
+    expect(await appAttestHeaders({ plugin, installId: 'install-1', body: CORPS, now: 1000, relayUrl: RELAY, fetchImpl })).toEqual({})
+    expect(JSON.parse(localStorage.getItem(APP_ATTEST_KEY))).toEqual({ keyId: 'cle-1', registered: false, retryAt: 1000 + ATTEST_RETRY_MS })
     expect(plugin.generateAssertion).not.toHaveBeenCalled()
+    // Dans l'heure : aucune requête de plus vers le relais à chaque analyse
+    fetchImpl.mockClear()
+    expect(await appAttestHeaders({ plugin, installId: 'install-1', body: CORPS, now: 1000 + ATTEST_RETRY_MS - 1, relayUrl: RELAY, fetchImpl })).toEqual({})
+    expect(fetchImpl).not.toHaveBeenCalled()
+    // Une heure après : nouvel essai, avec la même clé
+    await appAttestHeaders({ plugin, installId: 'install-1', body: CORPS, now: 1000 + ATTEST_RETRY_MS, relayUrl: RELAY, fetchImpl })
+    expect(fetchImpl).toHaveBeenCalled()
+    expect(plugin.generateKey).toHaveBeenCalledTimes(1)
   })
 
   it('clé perdue (restauration sur un autre iPhone) : oubliée, une neuve sera tirée à la requête suivante', async () => {
@@ -82,5 +91,16 @@ describe('App Attest sur iPhone (contrat I6-RELAIS-5)', () => {
 
   it('sans plugin (autre plateforme) : aucun en-tête', async () => {
     expect(await appAttestHeaders({ plugin: null, installId: 'install-1', body: CORPS, relayUrl: RELAY })).toEqual({})
+  })
+
+  it('pour aiRelay.js (correctif 38) : iPhone seulement ; ailleurs ou en cas d’erreur, rien', async () => {
+    const plugin = fakePlugin()
+    expect(await iosAttestHeaders({ platform: 'web', plugin, installId: 'install-1', body: CORPS, relayUrl: RELAY, fetchImpl: fakeRelay() })).toEqual({})
+    expect(plugin.isSupported).not.toHaveBeenCalled()
+    expect(await iosAttestHeaders({ platform: 'android', plugin, installId: 'install-1', body: CORPS, relayUrl: RELAY, fetchImpl: fakeRelay() })).toEqual({})
+    const headers = await iosAttestHeaders({ platform: 'ios', plugin, installId: 'install-1', body: CORPS, now: 5, relayUrl: RELAY, fetchImpl: fakeRelay() })
+    expect(headers).toMatchObject({ 'X-AppAttest-Key': 'cle-1', 'X-AppAttest-Time': '5' })
+    const broken = { isSupported: vi.fn(async () => { throw new Error('pont absent') }) }
+    expect(await iosAttestHeaders({ platform: 'ios', plugin: broken, installId: 'install-1', body: CORPS, relayUrl: RELAY })).toEqual({})
   })
 })
