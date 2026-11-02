@@ -110,3 +110,20 @@ test('état des captures chez Apple : traitées, en cours, refusées (avec la ra
   assert.deepEqual(r, { total: 5, complete: 1, pending: 3, failed: ['d.png : trop grande'] })
   assert.deepEqual(screenshotStates([]), { total: 0, complete: 0, pending: 0, failed: [] })
 })
+
+test('version : jamais renommée quand une build y est attachée (le propriétaire l\'a choisie)', async () => {
+  const { versionPlan } = await import('./store-push.mjs')
+  assert.deepEqual(versionPlan({ current: '717', wanted: '718', attachedBuild: '717.216' }), { rename: false, keep: '717', reason: 'build 717.216 attachée' })
+  assert.deepEqual(versionPlan({ current: '717', wanted: '718', attachedBuild: null }), { rename: true, keep: '718', reason: null })
+  assert.deepEqual(versionPlan({ current: '718', wanted: '718', attachedBuild: '718.220' }), { rename: false, keep: '718', reason: null })
+})
+
+test('captures iPad 13" : mêmes écrans et même ordre que la fiche iPhone (captures.md)', async () => {
+  const { deviceFiles, captureFiles, IPAD_DISPLAY_TYPE } = await import('./store-push.mjs')
+  assert.equal(IPAD_DISPLAY_TYPE, 'APP_IPAD_PRO_3GEN_129')
+  const iphone = ['iphone-17-pro-max-demo-clair-accueil.png', 'iphone-17-pro-max-demo-sombre-accueil.png']
+  const dir = ['ipad-pro-13-inch-m5-demo-sombre-accueil.png', 'ipad-pro-13-inch-m5-demo-clair-accueil.png', 'ipad-pro-13-inch-m5-console.txt']
+  assert.deepEqual(deviceFiles(iphone, dir), ['ipad-pro-13-inch-m5-demo-clair-accueil.png', 'ipad-pro-13-inch-m5-demo-sombre-accueil.png'])
+  assert.throws(() => deviceFiles(iphone, dir.filter((f) => !f.includes('clair'))), /demo-clair-accueil/)
+  assert.equal(captureFiles().length, 8)
+})
