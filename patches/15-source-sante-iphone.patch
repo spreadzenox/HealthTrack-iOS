@@ -40,14 +40,6 @@ diff --git a/app/src/services/today.js b/app/src/services/today.js
 index 4e0bfc2..c7f1b73 100644
 --- a/app/src/services/today.js
 +++ b/app/src/services/today.js
-@@ -11,6 +11,7 @@
- import { localDateKey } from './analysisEngine'
- import { isDaytimeHrv } from './hrv'
- import { appLocale, localeDate } from '../i18n/locale.js'
-+import { FEATURES } from '../config/distribution'
- 
- export const GUT_TYPE = 'gut'
- export const GUT_SOURCE = 'app_gut'
 @@ -142,6 +143,8 @@ export const SOURCE_LABELS = {
    scale: 'Balance connectée',
    phone_usage: 'Téléphone',
