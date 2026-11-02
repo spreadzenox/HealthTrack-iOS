@@ -25,5 +25,14 @@
   StoreKit (JWS en trois parties à l'achat d'essai) ; 34 correctifs, 3110 tests et la build appstore passent dans le
   conteneur.
 
+- Première CI de #199 : Swift compilé, Vitest vert ; StoreKit Test rouge : `renewalInfo` vide à l'achat d'essai (la
+  conversion précédait `finish()`). Correctif poussé : statut lu sur la transaction (`subscriptionStatus`, iOS 17+),
+  sinon sur le groupe ; le test termine la transaction avant de la rendre, comme le plugin, et dit pourquoi s'il
+  manque encore.
+- Vu dans la même CI, sans lien avec #199 et déjà présent sur `main` (#196) : le geste réel du rapport PDF échoue
+  depuis #184 (« Créer le PDF » introuvable : le faux magasin des captures met l'app en version gratuite, la carte
+  montre « Débloquer ») ; inscrit au BACKLOG.
+
 ## Suite
-- #199 : CI macOS (compilation du Swift, StoreKit Test), merge, TestFlight.
+- #199 : deuxième CI macOS, merge, TestFlight.
+- Faux magasin des captures limité à l'écran d'achat (BACKLOG).
