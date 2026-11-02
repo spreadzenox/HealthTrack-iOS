@@ -194,9 +194,9 @@
     introuvable », simple avertissement dans la CI, sur `main` aussi, #196). À faire : ne poser le faux magasin que pour
     la capture de l'écran d'achat, ou rendre Gold aux gestes réels. **Fait (PR #200, `needsBillingFake`)** : le geste
     réel du rapport PDF repasse sur les deux iPhone.
-  - [ ] Avertissement « pas de copie de secours dans Documents » de la CI (`scripts/ios-captures.sh`, ligne 131) : il
-    cherche encore `Halcya-copie-de-secours.json` à la racine de Documents, alors que la copie vit dans « Copie de
-    secours/ » depuis #181 (la sonde `[sauvegarde]` la trouve bien) ; viser le dossier.
+  - [x] Avertissement « pas de copie de secours dans Documents » de la CI (`scripts/ios-captures.sh`) : la vérification
+    lisait Documents après « Supprimer toutes mes données », qui efface la copie (dossier vide ensuite) ; elle lit
+    désormais la sonde `[sauvegarde]` (Documents/Copie de secours, 1 fichier, exclu d'iCloud), prise avant (PR #201).
   - [ ] Plugin Swift `TrialReminder` (PR #182) inutilisé depuis Android v697 (#612 : pas de rappel d'essai promis sur
     l'App Store) : le retirer si la décision tient, ou le rebrancher si Android revient dessus.
   - [~] Capture d'écran pour l'examen de chaque abonnement : **envoyée le 1/11 à 22:24** (écran d'achat 6,9",
