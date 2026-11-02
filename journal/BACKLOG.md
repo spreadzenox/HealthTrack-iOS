@@ -348,8 +348,11 @@
   - [x] Plugin Swift `AppAttest` (clé dans la Secure Enclave, attestation, assertion ; 4 XCTest `AppAttestRule`) et
     `src/ios/appAttest.js` (clé attestée une fois, en-têtes `X-AppAttest-*`, « unsupported » sans Secure Enclave ;
     7 Vitest) : PR #203 (mergée le 2/11), non branchés.
-  - [ ] Brancher sur `aiRelay.js` (analyse, crédits) quand Android aura livré I6-RELAIS-5d (routes
-    `/v1/attest/challenge` et `/v1/attest/register`) ; vérifier sur l'iPhone 12 (le simulateur n'a pas de Secure Enclave).
+  - [x] Branché sur l'analyse des repas (PR #210, correctif 38, 2/11) : en-têtes signés sur le corps exact ; enregistrement
+    retenté au plus une fois par heure tant que les routes du relais sont coupées (Android v713 a tout livré, 5a à 5d,
+    coupé par défaut).
+  - [ ] Vérifier sur l'iPhone 12 (le simulateur n'a pas de Secure Enclave) quand le relais sera en `observe` : bilan
+    « iPhone : attest_passed / missing / rejected » du déploiement d'Android.
   - [ ] Droit `com.apple.developer.devicecheck.appattest-environment = production` : seulement après la capacité
     « App Attest » sur l'identifiant `fr.jpesquet.sante` (sinon la signature de TestFlight échoue) ; Team ID à donner à
     Android (P38 de son BACKLOG). Action du propriétaire, à préparer pas à pas quand le relais sera prêt.
