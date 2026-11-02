@@ -31,6 +31,14 @@ describe('Premium sur iPhone (variante appstore)', () => {
     expect(container).not.toHaveTextContent(/Google|arrive bientôt/)
   })
 
+  it('formule mensuelle : prix dit sur la formule et le bouton, pas répété sous le bouton (Android v703, POL-PLAY-96)', async () => {
+    render(<MemoryRouter initialEntries={['/premium']}><Premium /></MemoryRouter>)
+    fireEvent.click(await screen.findByRole('radio', { name: /Mensuel/ }))
+    expect(screen.getByRole('button', { name: 'S’abonner · 4,99 € / mois' })).toBeInTheDocument()
+    expect(screen.getByText('Annulable à tout moment dans l’App Store.')).toBeInTheDocument()
+    expect(screen.queryByText(/^4,99 € par mois\./)).toBeNull()
+  })
+
   it('abonné Silver de l’App Store : « Passer à Gold », achat du Gold mensuel sans ancien jeton (Apple fait le passage)', async () => {
     const silver = { ok: true, premium: true, source: 'appstore', state: 'active', tier: 'silver', productId: 'halcya_premium_annuel', expiresAt: '2099-01-01T00:00:00.000Z' }
     localStorage.setItem('halcya_entitlement', JSON.stringify(silver))
