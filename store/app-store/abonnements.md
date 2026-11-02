@@ -30,8 +30,8 @@ L'iPhone suit la même offre.
 |---|---|---|---|---|---|
 | `halcya_gold_mensuel` | 1 | 1 mois | — | Halcya Gold | Analyse IA des repas, 20 par jour |
 | `halcya_gold_annuel` | 1 | 1 an | — | Halcya Gold annuel | Analyse IA des repas, 20 par jour |
-| `halcya_premium_annuel` | 2 | 1 an | essai gratuit de 2 semaines | Halcya Premium annuel | Analyse IA des repas, 10 par jour |
-| `halcya_premium_mensuel` | 2 | 1 mois | — | Halcya Premium | Analyse IA des repas, 10 par jour |
+| `halcya_premium_annuel` | 2 | 1 an | essai gratuit de 2 semaines | Halcya Silver annuel | Analyse IA des repas, 10 par jour |
+| `halcya_premium_mensuel` | 2 | 1 mois | — | Halcya Silver | Analyse IA des repas, 10 par jour |
 
 Noms et descriptions repris des produits d'Android sur Google Play (v681) : Silver s'y appelle toujours « Halcya
 Premium », Gold « Halcya Gold » ; « Analyse IA des repas, 10 (ou 20) par jour » est leur ligne d'avantage.
@@ -79,3 +79,6 @@ par le workflow « Abonnements App Store — création » sur `main`.
 - **Avant la première soumission** (propriétaire, avec une version de l'app), chaque abonnement doit avoir sa capture
   d'écran pour l'examen d'Apple : l'écran d'achat de l'app. Elle sera prise par la CI quand l'achat ouvrira sur
   iPhone. D'ici là, App Store Connect les dit « métadonnées manquantes », ce qui est attendu.
+
+2/11 : noms affichés « Halcya Silver annuel » et « Halcya Silver » (au lieu de « Halcya Premium… ») : ceux de l'app
+(Silver, Gold), comme Android le prévoit pour Google Play (I209). Identifiants de produit inchangés (jamais renommés).

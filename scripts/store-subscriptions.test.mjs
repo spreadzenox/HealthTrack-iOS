@@ -326,3 +326,12 @@ test('diagnose : relevé sans écriture de chaque pièce exigée par Apple', asy
   assert.equal(lines.length, 5)
   assert.match(lines[2], /^halcya_gold_mensuel : état MISSING_METADATA ; noms fr-FR .* ; capture absente ; prix en FRA 9\.99 ; territoires FRA$/)
 })
+
+test('noms affichés par Apple (feuille d\'achat, réglages d\'abonnement) : ceux de l\'app, Silver et Gold, jamais « Premium »', async () => {
+  const { SUBSCRIPTIONS } = await import('./store-subscriptions.mjs')
+  const byId = Object.fromEntries(SUBSCRIPTIONS.map((s) => [s.productId, s.name]))
+  assert.equal(byId.halcya_gold_mensuel, 'Halcya Gold')
+  assert.equal(byId.halcya_premium_annuel, 'Halcya Silver annuel')
+  assert.equal(byId.halcya_premium_mensuel, 'Halcya Silver')
+  for (const s of SUBSCRIPTIONS) assert.doesNotMatch(`${s.name} ${s.description}`, /Premium/)
+})

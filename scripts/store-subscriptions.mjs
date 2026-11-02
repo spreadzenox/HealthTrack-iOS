@@ -48,12 +48,12 @@ export const SUBSCRIPTIONS = [
   },
   {
     productId: 'halcya_premium_annuel', referenceName: 'Halcya Premium annuel', groupLevel: 2, period: 'ONE_YEAR',
-    price: '29.99', name: 'Halcya Premium annuel', description: 'Analyse IA des repas, 10 par jour',
+    price: '29.99', name: 'Halcya Silver annuel', description: 'Analyse IA des repas, 10 par jour',
     trial: { offerMode: 'FREE_TRIAL', duration: 'TWO_WEEKS', numberOfPeriods: 1 },
   },
   {
     productId: 'halcya_premium_mensuel', referenceName: 'Halcya Premium mensuel', groupLevel: 2, period: 'ONE_MONTH',
-    price: '4.99', name: 'Halcya Premium', description: 'Analyse IA des repas, 10 par jour', trial: null,
+    price: '4.99', name: 'Halcya Silver', description: 'Analyse IA des repas, 10 par jour', trial: null,
   },
 ]
 
