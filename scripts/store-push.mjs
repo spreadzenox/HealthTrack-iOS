@@ -5,7 +5,8 @@
 // .github/workflows/store-push.yml avec la clé de l'environnement `appstore` (ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8),
 // jamais affichée. `--dry-run` : montre ce qui serait envoyé, sans réseau ni clé. `--captures <dossier>` : envoie aussi
 // les captures 6,9" de store/app-store/captures.md (branche captures/store), dans l'ordre du tableau, à la place des
-// précédentes. `--captures-ipad <dossier>` : de même pour l'iPad 13" (mêmes écrans, branche captures/store-ipad).
+// précédentes. `--captures-ipad <dossier>` : de même pour l'iPad 13" (section « iPad 13" » de captures.md, branche
+// captures/store-ipad ; Nutrition y remplace Sources, choix du propriétaire du 2/11).
 // Le numéro de cette version prend celui des builds (versionCode d'Android suivi, `upstream.json`), sauf quand une
 // build y est attachée : c'est alors le choix du propriétaire, la version garde son numéro (2/11).
 // Catégorie et classification par âge : store/app-store/classification.json.
@@ -65,22 +66,21 @@ export function classification(path = CLASSIFICATION_JSON) {
   return JSON.parse(readFileSync(path, 'utf8'))
 }
 
-/** Fichiers des captures de la fiche, dans l'ordre d'affichage (tableau de store/app-store/captures.md). */
-export function captureFiles(md = readFileSync(CAPTURES_MD, 'utf8')) {
-  return [...md.matchAll(/^\|\s*\d+\s*\|\s*`([^`]+\.png)`\s*\|/gm)].map((m) => m[1])
+/**
+ * Fichiers des captures de la fiche, dans l'ordre d'affichage : tableau iPhone 6,9" de store/app-store/captures.md, ou
+ * (`device` = 'ipad') celui de sa section « ## iPad 13" ».
+ */
+export function captureFiles(md = readFileSync(CAPTURES_MD, 'utf8'), device = 'iphone') {
+  const [iphone, ipad = ''] = md.split(/^## iPad\b.*$/m)
+  return [...(device === 'ipad' ? ipad : iphone).matchAll(/^\|\s*\d+\s*\|\s*`([^`]+\.png)`\s*\|/gm)].map((m) => m[1])
 }
 
-/**
- * Captures d'un autre appareil pour les mêmes écrans que la fiche iPhone, dans le même ordre : « …-demo-clair-accueil.png »
- * de l'iPhone → le fichier du dossier qui commence par `prefix` et finit pareil. Une capture manquante arrête tout.
- */
-export function deviceFiles(iphoneFiles, dirFiles, prefix = 'ipad') {
-  return iphoneFiles.map((name) => {
-    const suffix = name.match(/(?:demo|vide|vierge)-.+\.png$/)?.[0]
-    const hit = suffix && dirFiles.find((f) => f.startsWith(prefix) && f.endsWith(`-${suffix}`))
-    if (!hit) throw new Error(`capture ${prefix} absente pour ${suffix ?? name}`)
-    return hit
-  })
+/** Les captures listées, toutes présentes dans le dossier : une seule manquante (ou une liste vide) arrête tout. */
+export function presentFiles(listed, dirFiles) {
+  if (!listed.length) throw new Error('aucune capture listée dans captures.md')
+  const missing = listed.filter((name) => !dirFiles.includes(name))
+  if (missing.length) throw new Error(`capture absente : ${missing.join(', ')}`)
+  return listed
 }
 
 /**
@@ -231,7 +231,7 @@ async function main() {
   if (capturesDir || process.argv.includes('--dry-run')) console.log(`Captures (${DISPLAY_TYPE}) : ${captureFiles().join(', ')}`)
   const atIpad = process.argv.indexOf('--captures-ipad')
   const ipadDir = atIpad > 0 ? process.argv[atIpad + 1] : null
-  const ipadFiles = ipadDir ? deviceFiles(captureFiles(), readdirSync(ipadDir)) : null
+  const ipadFiles = ipadDir ? presentFiles(captureFiles(undefined, 'ipad'), readdirSync(ipadDir)) : null
   if (ipadFiles) console.log(`Captures (${IPAD_DISPLAY_TYPE}) : ${ipadFiles.join(', ')}`)
   const c = classification()
   console.log(`Catégorie : ${c.primaryCategory} ; âge : ${c.ageRating.ageRatingOverrideV2}`)

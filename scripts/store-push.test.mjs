@@ -118,12 +118,22 @@ test('version : jamais renommée quand une build y est attachée (le propriétai
   assert.deepEqual(versionPlan({ current: '718', wanted: '718', attachedBuild: '718.220' }), { rename: false, keep: '718', reason: null })
 })
 
-test('captures iPad 13" : mêmes écrans et même ordre que la fiche iPhone (captures.md)', async () => {
-  const { deviceFiles, captureFiles, IPAD_DISPLAY_TYPE } = await import('./store-push.mjs')
+test('captures iPad 13" : tableau de la section iPad de captures.md (Nutrition à la place de Sources), toutes présentes', async () => {
+  const { presentFiles, captureFiles, IPAD_DISPLAY_TYPE } = await import('./store-push.mjs')
   assert.equal(IPAD_DISPLAY_TYPE, 'APP_IPAD_PRO_3GEN_129')
-  const iphone = ['iphone-17-pro-max-demo-clair-accueil.png', 'iphone-17-pro-max-demo-sombre-accueil.png']
-  const dir = ['ipad-pro-13-inch-m5-demo-sombre-accueil.png', 'ipad-pro-13-inch-m5-demo-clair-accueil.png', 'ipad-pro-13-inch-m5-console.txt']
-  assert.deepEqual(deviceFiles(iphone, dir), ['ipad-pro-13-inch-m5-demo-clair-accueil.png', 'ipad-pro-13-inch-m5-demo-sombre-accueil.png'])
-  assert.throws(() => deviceFiles(iphone, dir.filter((f) => !f.includes('clair'))), /demo-clair-accueil/)
-  assert.equal(captureFiles().length, 8)
+  const md = '| 1 | `iphone-a.png` | A |\n## iPad 13"\n| 1 | `ipad-a.png` | A |\n| 2 | `ipad-b.png` | B |\n'
+  assert.deepEqual(captureFiles(md), ['iphone-a.png'])
+  assert.deepEqual(captureFiles(md, 'ipad'), ['ipad-a.png', 'ipad-b.png'])
+  assert.deepEqual(captureFiles('| 1 | `iphone-a.png` | A |\n', 'ipad'), [])
+  const dir = ['ipad-b.png', 'ipad-a.png', 'ipad-console.txt']
+  assert.deepEqual(presentFiles(['ipad-a.png', 'ipad-b.png'], dir), ['ipad-a.png', 'ipad-b.png'])
+  assert.throws(() => presentFiles(['ipad-a.png', 'ipad-c.png'], dir), /ipad-c\.png/)
+  assert.throws(() => presentFiles([], dir), /aucune capture/)
+  const iphone = captureFiles()
+  const ipad = captureFiles(undefined, 'ipad')
+  assert.equal(iphone.length, 8)
+  assert.equal(ipad.length, 8)
+  assert.ok(ipad.every((f) => /^ipad-pro-13-inch-\(m5\)-.+\.png$/.test(f)))
+  assert.ok(ipad.some((f) => f.endsWith('-demo-clair-nutrition.png')))
+  assert.ok(!ipad.some((f) => f.includes('connectors')))
 })
