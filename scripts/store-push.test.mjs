@@ -110,3 +110,30 @@ test('état des captures chez Apple : traitées, en cours, refusées (avec la ra
   assert.deepEqual(r, { total: 5, complete: 1, pending: 3, failed: ['d.png : trop grande'] })
   assert.deepEqual(screenshotStates([]), { total: 0, complete: 0, pending: 0, failed: [] })
 })
+
+test('version : jamais renommée quand une build y est attachée (le propriétaire l\'a choisie)', async () => {
+  const { versionPlan } = await import('./store-push.mjs')
+  assert.deepEqual(versionPlan({ current: '717', wanted: '718', attachedBuild: '717.216' }), { rename: false, keep: '717', reason: 'build 717.216 attachée' })
+  assert.deepEqual(versionPlan({ current: '717', wanted: '718', attachedBuild: null }), { rename: true, keep: '718', reason: null })
+  assert.deepEqual(versionPlan({ current: '718', wanted: '718', attachedBuild: '718.220' }), { rename: false, keep: '718', reason: null })
+})
+
+test('captures iPad 13" : tableau de la section iPad de captures.md (Nutrition à la place de Sources), toutes présentes', async () => {
+  const { presentFiles, captureFiles, IPAD_DISPLAY_TYPE } = await import('./store-push.mjs')
+  assert.equal(IPAD_DISPLAY_TYPE, 'APP_IPAD_PRO_3GEN_129')
+  const md = '| 1 | `iphone-a.png` | A |\n## iPad 13"\n| 1 | `ipad-a.png` | A |\n| 2 | `ipad-b.png` | B |\n'
+  assert.deepEqual(captureFiles(md), ['iphone-a.png'])
+  assert.deepEqual(captureFiles(md, 'ipad'), ['ipad-a.png', 'ipad-b.png'])
+  assert.deepEqual(captureFiles('| 1 | `iphone-a.png` | A |\n', 'ipad'), [])
+  const dir = ['ipad-b.png', 'ipad-a.png', 'ipad-console.txt']
+  assert.deepEqual(presentFiles(['ipad-a.png', 'ipad-b.png'], dir), ['ipad-a.png', 'ipad-b.png'])
+  assert.throws(() => presentFiles(['ipad-a.png', 'ipad-c.png'], dir), /ipad-c\.png/)
+  assert.throws(() => presentFiles([], dir), /aucune capture/)
+  const iphone = captureFiles()
+  const ipad = captureFiles(undefined, 'ipad')
+  assert.equal(iphone.length, 8)
+  assert.equal(ipad.length, 8)
+  assert.ok(ipad.every((f) => /^ipad-pro-13-inch-\(m5\)-.+\.png$/.test(f)))
+  assert.ok(ipad.some((f) => f.endsWith('-demo-clair-nutrition.png')))
+  assert.ok(!ipad.some((f) => f.includes('connectors')))
+})
