@@ -343,6 +343,12 @@
     conditions, fiche, assistance, notes pour l'examen, Nouveautés de l'iPhone. Pour changer d'iPhone : l'export.
     Reste ouvert : les fichiers que la personne exporte elle-même vont à la racine de Documents (donc dans la
     sauvegarde iCloud) avant la feuille de partage ; c'est son geste, à revoir si Apple le relève.
+- [ ] **Page « Licences » d'Android (PR #632, à sa publication)** : essai à blanc du 2/11 : le correctif 26 ne
+  s'applique plus (`More.jsx` : ligne « Licences » avant la fin de la liste) ; ses tests passent avec nos correctifs.
+  À faire : refaire le correctif 26 (et aligner au passage la description « Conditions » de l'iPhone sur celle
+  d'Android, « Utilisation, abonnement et remboursements », vraie depuis l'ouverture de l'achat) ; sur iPhone, ni Play
+  Billing / Play Integrity ni AndroidX / LiteRT / ONNX, mais TensorFlow Lite C (Apache-2.0) et Capacitor iOS (MIT) ;
+  modèles valence / éveil tus (éteints) ; licences vérifiées ; capture de la page ; demande à Android (`DEMANDES.md`).
 - [ ] **App Attest sur iPhone (I6, contrat d'Android du 2/11, #623)** — l'équivalent de Play Integrity, seule porte sans
   contrôle avant les crédits payants de l'iPhone :
   - [x] Plugin Swift `AppAttest` (clé dans la Secure Enclave, attestation, assertion ; 4 XCTest `AppAttestRule`) et
