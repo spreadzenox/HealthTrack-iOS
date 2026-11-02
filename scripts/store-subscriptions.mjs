@@ -44,7 +44,7 @@ export const LIMITS = { name: 30, description: 45, referenceName: 64 }
 export const SUBSCRIPTIONS = [
   {
     productId: 'halcya_gold_mensuel', referenceName: 'Halcya Gold mensuel', groupLevel: 1, period: 'ONE_MONTH',
-    price: '9.99', name: 'Halcya Gold', description: 'Analyse IA des repas, 20 par jour', trial: null,
+    price: '9.99', name: 'Halcya Gold', description: 'IA : 20 par jour, quantités mieux estimées', trial: null,
   },
   {
     productId: 'halcya_premium_annuel', referenceName: 'Halcya Premium annuel', groupLevel: 2, period: 'ONE_YEAR',

@@ -28,13 +28,15 @@ L'iPhone suit la même offre.
 
 | Identifiant | Niveau | Durée | Offre de lancement | Nom affiché (30 car. max) | Description (45 car. max) |
 |---|---|---|---|---|---|
-| `halcya_gold_mensuel` | 1 | 1 mois | — | Halcya Gold | Analyse IA des repas, 20 par jour |
-| `halcya_gold_annuel` | 1 | 1 an | — | Halcya Gold annuel | Analyse IA des repas, 20 par jour |
+| `halcya_gold_mensuel` | 1 | 1 mois | — | Halcya Gold | IA : 20 par jour, quantités mieux estimées |
+| `halcya_gold_annuel` | 1 | 1 an | — | Halcya Gold annuel | IA : 20 par jour, quantités mieux estimées |
 | `halcya_premium_annuel` | 2 | 1 an | essai gratuit de 2 semaines | Halcya Silver annuel | Analyse IA des repas, 10 par jour |
 | `halcya_premium_mensuel` | 2 | 1 mois | — | Halcya Silver | Analyse IA des repas, 10 par jour |
 
 Noms et descriptions repris des produits d'Android sur Google Play (v681) : Silver s'y appelle toujours « Halcya
-Premium », Gold « Halcya Gold » ; « Analyse IA des repas, 10 (ou 20) par jour » est leur ligne d'avantage.
+Premium », Gold « Halcya Gold » ; « Analyse IA des repas, 10 par jour » est la ligne d'avantage de Silver. Gold suit
+Android v721 (2/11, « Gold estime mieux les quantités », P36) : « IA : 20 par jour, quantités mieux estimées », sans
+chiffre de précision, comme sur Google Play.
 
 `halcya_gold_annuel` n'est créé que si l'annuel Gold est décidé.
 
