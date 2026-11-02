@@ -1,5 +1,6 @@
 // Version iOS (HealthTrack-iOS), étape I6 : App Attest, l'équivalent iPhone de Play Integrity, selon le contrat du
-// relais spécifié par Android le 2/11 (journal/IDEES.md de HealthTrack, I208, I6-RELAIS-5). Une clé tirée dans la
+// relais spécifié par Android le 2/11 (journal/IDEES.md de HealthTrack, I208, I6-RELAIS-5) et ses routes (v712, #628,
+// relay/src/attestroutes.js : enregistrement en JSON, en-tête X-AppAttest-Key du CORS). Une clé tirée dans la
 // Secure Enclave (plugin Swift `AppAttest`), attestée une fois sur un défi à usage unique du relais, puis une assertion
 // par requête sensible (analyse, crédits) sur « halcya-assert:<installation>:<horodatage ms>:<SHA-256 du corps> ».
 // Aucune donnée de santé : la clé est tirée au hasard, le corps n'entre que par son condensat. Pas encore branché sur
@@ -46,7 +47,8 @@ async function attestedKey({ plugin, installId, relayUrl, fetchImpl, storage }) 
   const { attestation } = await plugin.attestKey({ keyId, challenge })
   const registered = await fetchImpl(`${relayUrl}/v1/attest/register`, {
     method: 'POST',
-    headers: { 'X-Install-Id': installId, 'X-AppAttest-KeyId': keyId, 'X-AppAttest-Attestation': attestation },
+    headers: { 'Content-Type': 'application/json', 'X-Install-Id': installId },
+    body: JSON.stringify({ keyId, attestation, challenge }),
   })
   if (!registered.ok) return null
   writeKey(storage, { keyId, registered: true })
@@ -66,7 +68,7 @@ export async function appAttestHeaders({ plugin, installId, body = '', now = Dat
     const clientData = await clientDataFor({ installId, timeMs: now, body })
     try {
       const { assertion } = await plugin.generateAssertion({ keyId, clientData })
-      return { 'X-AppAttest-KeyId': keyId, 'X-AppAttest-Assertion': assertion, 'X-AppAttest-Time': String(now) }
+      return { 'X-AppAttest-Key': keyId, 'X-AppAttest-Assertion': assertion, 'X-AppAttest-Time': String(now) }
     } catch (err) {
       if (err?.code === 'invalid_key') writeKey(storage, null) // clé perdue : une neuve à la requête suivante
       return {}
