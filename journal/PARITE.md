@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v706 (commit `b7b7147`, 2/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v708 (commit `a62aad6`, 2/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 2/11 10:00 | #623, #624 (v708) | #623 : App Attest pour l'iPhone spécifié (journal) ; #624 : lecteur CBOR et `authData` dans le relais (I6-RELAIS-5a) ; rien dans l'app ; côté iPhone : rien à adapter (plugin et module App Attest préparés dans #203) ; 34 correctifs, 3118 tests | — |
 | 2/11 08:00 | #622 (v706) | #622 : « 1er » pour le premier jour du mois partout (Journal, Repas, Accueil, bien-être, Données, Nouveautés), nouvelle fonction `localeDate` (POL-PLAY-99) ; note de Nouveautés pour toutes les variantes, vraie sur iPhone ; côté iPhone : correctifs 06, 12, 15, 21 et 25 refaits (ligne d'import de `i18n/locale.js` changée dans leur contexte) ; aucune date propre à l'iPhone ne contourne `localeDate` ; 34 correctifs, 3118 tests | — |
 | 2/11 07:00 | #620, #621 (v705) | #620 : Nutrition, le sodium sous son maximum s'affiche « sous la limite » (sa couleur) au lieu de « atteint », « incertain » quand des repas manquent (POL-PLAY-97) ; #621 : Analyses, une habitude pas encore comparable a sa ligne dans « Bientôt » avec ce qui manque (POL-PLAY-98) ; notes de Nouveautés pour toutes les variantes, vraies sur iPhone ; côté iPhone : rien à adapter (essais à blanc des deux PR) ; 34 correctifs (avec le 37, #199), 3113 tests | — |
 | 2/11 04:00 | #619 (v703) | #619 : page d'abonnement, formule mensuelle : le prix n'est plus répété sous le bouton (déjà sur la formule et sur le bouton), POL-PLAY-96 ; règle 3.1.2 d'Apple tenue (prix et durée sur le bouton) ; côté iPhone : test App Store (« S’abonner · 4,99 € / mois », « Annulable à tout moment dans l’App Store. ») et note de Nouveautés iOS, celle d'Android étant réservée à Google Play ; 33 correctifs | — |
