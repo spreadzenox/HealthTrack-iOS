@@ -44,16 +44,16 @@ export const LIMITS = { name: 30, description: 45, referenceName: 64 }
 export const SUBSCRIPTIONS = [
   {
     productId: 'halcya_gold_mensuel', referenceName: 'Halcya Gold mensuel', groupLevel: 1, period: 'ONE_MONTH',
-    price: '9.99', name: 'Halcya Gold', description: 'Analyse IA des repas, 20 par jour', trial: null,
+    price: '9.99', name: 'Halcya Gold', description: 'IA : 20 par jour, quantités mieux estimées', trial: null,
   },
   {
     productId: 'halcya_premium_annuel', referenceName: 'Halcya Premium annuel', groupLevel: 2, period: 'ONE_YEAR',
-    price: '29.99', name: 'Halcya Premium annuel', description: 'Analyse IA des repas, 10 par jour',
+    price: '29.99', name: 'Halcya Silver annuel', description: 'Analyse IA des repas, 10 par jour',
     trial: { offerMode: 'FREE_TRIAL', duration: 'TWO_WEEKS', numberOfPeriods: 1 },
   },
   {
     productId: 'halcya_premium_mensuel', referenceName: 'Halcya Premium mensuel', groupLevel: 2, period: 'ONE_MONTH',
-    price: '4.99', name: 'Halcya Premium', description: 'Analyse IA des repas, 10 par jour', trial: null,
+    price: '4.99', name: 'Halcya Silver', description: 'Analyse IA des repas, 10 par jour', trial: null,
   },
 ]
 
@@ -322,6 +322,15 @@ export function readReviewScreenshot(path) {
   return { name: basename(path), bytes }
 }
 
+/** Une lecture du relevé qui ne doit pas l'interrompre : son résultat, ou « illisible (statut) ». */
+async function readable(read, show) {
+  try {
+    return show(await read())
+  } catch (e) {
+    return `illisible (${e.status ?? e.message})`
+  }
+}
+
 /**
  * Relevé sans écriture, quand Apple dit un abonnement « métadonnées manquantes » : état de chaque pièce qu'App Store
  * Connect exige avant une soumission (nom et description, capture pour l'examen, prix, territoires, nom du groupe).
@@ -357,6 +366,12 @@ export async function diagnose({ token, fetchImpl = fetch }) {
       if (e.status !== 404) throw e
     }
     parts.push(`territoires ${(availability?.included || []).map((t) => t.id).join(', ') || 'aucun'}`)
+    // Pièces plus récentes de l'API (4.5) : note pour l'examen, formules de paiement (MONTHLY / UPFRONT) et versions
+    // de l'abonnement (« Prepare for Submission » de l'interface) ; lues sans jamais faire échouer le relevé
+    const note = sub.attributes?.reviewNote
+    parts.push(`note pour l'examen ${note ? `${[...note].length} car.` : 'absente'}`)
+    parts.push(`formules ${await readable(() => all(`/v1/subscriptions/${id}/planAvailabilities?limit=50`), (list) => list.map((x) => x.attributes?.planType ?? '?').join(', ') || 'aucune')}`)
+    parts.push(`versions ${await readable(() => all(`/v1/subscriptions/${id}/versions?limit=50`), (list) => list.map((x) => `${x.attributes?.version ?? '?'} ${x.attributes?.state ?? '?'}`).join(', ') || 'aucune')}`)
     lines.push(`${sub.attributes?.productId} : ${parts.join(' ; ')}`)
   }
   return lines

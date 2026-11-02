@@ -18,6 +18,10 @@ on:
         description: "Envoyer aussi les captures iPad 13\" de la branche captures/store-ipad (à refaire et regarder avant)"
         type: boolean
         default: false
+      version_des_builds:
+        description: "Build finale d'une soumission : renommer la version au numéro des builds même si une build y est attachée (le propriétaire choisit ensuite la nouvelle)"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -57,4 +61,4 @@ jobs:
           ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
           ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
-        run: node scripts/store-push.mjs ${{ inputs.captures && '--captures captures-store' || '' }} ${{ inputs.captures_ipad && '--captures-ipad captures-ipad' || '' }}
+        run: node scripts/store-push.mjs ${{ inputs.captures && '--captures captures-store' || '' }} ${{ inputs.captures_ipad && '--captures-ipad captures-ipad' || '' }} ${{ inputs.version_des_builds && '--version-des-builds' || '' }}

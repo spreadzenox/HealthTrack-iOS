@@ -195,6 +195,10 @@ function fakeAsc({ prePrice = null, monthlyPlans = false, app = {} } = {}) {
       }
     }
     if ((m = /^\/v1\/subscriptions\/(\w+)$/.exec(path)) && method === 'GET') return json(200, { data: db.subs.find((s) => s.id === m[1]) })
+    if (/^\/v1\/subscriptions\/\w+\/planAvailabilities$/.test(path) && method === 'GET') return json(200, { data: [] })
+    if (/^\/v1\/subscriptions\/\w+\/versions$/.test(path) && method === 'GET' && !db.noVersions) {
+      return json(200, { data: [{ id: 'v1', type: 'subscriptionVersions', attributes: { version: 1, state: 'PREPARE_FOR_SUBMISSION' } }] })
+    }
     return json(500, { errors: [{ title: `route non simulée ${method} ${path}` }] })
   }
   return { db, calls, fetchImpl }
@@ -324,5 +328,20 @@ test('diagnose : relevé sans écriture de chaque pièce exigée par Apple', asy
   assert.match(lines[0], /^app : langue principale /)
   assert.match(lines[1], /^groupe : fr-FR « Halcya »/)
   assert.equal(lines.length, 5)
-  assert.match(lines[2], /^halcya_gold_mensuel : état MISSING_METADATA ; noms fr-FR .* ; capture absente ; prix en FRA 9\.99 ; territoires FRA$/)
+  assert.match(lines[2], /^halcya_gold_mensuel : état MISSING_METADATA ; noms fr-FR .* ; capture absente ; prix en FRA 9\.99 ; territoires FRA ; note pour l'examen absente ; formules aucune ; versions 1 PREPARE_FOR_SUBMISSION$/)
+  // Une pièce que l'API ne sait pas lire n'interrompt pas le relevé
+  const broken = fakeAsc()
+  await ensureSubscriptions({ token: 't', fetchImpl: broken.fetchImpl })
+  broken.db.noVersions = true
+  const partial = await diagnose({ token: 't', fetchImpl: broken.fetchImpl })
+  assert.match(partial[2], /versions illisible \(500\)$/)
+})
+
+test('noms affichés par Apple (feuille d\'achat, réglages d\'abonnement) : ceux de l\'app, Silver et Gold, jamais « Premium »', async () => {
+  const { SUBSCRIPTIONS } = await import('./store-subscriptions.mjs')
+  const byId = Object.fromEntries(SUBSCRIPTIONS.map((s) => [s.productId, s.name]))
+  assert.equal(byId.halcya_gold_mensuel, 'Halcya Gold')
+  assert.equal(byId.halcya_premium_annuel, 'Halcya Silver annuel')
+  assert.equal(byId.halcya_premium_mensuel, 'Halcya Silver')
+  for (const s of SUBSCRIPTIONS) assert.doesNotMatch(`${s.name} ${s.description}`, /Premium/)
 })
