@@ -11,7 +11,7 @@ Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) ·
 **Parité** : **48 %** au 31/10 10:00 (23 ✅ sur 48 lignes faisables ; 2 ⛔ et 3 — exclues, comptées dans la colonne « État » de chaque tableau ; le temps d'écran, passé de 🔬 à 🟡 en cours, compte désormais parmi les lignes faisables, d'où 48 au lieu de 47) = ✅ / (toutes les lignes
 des sections 1 à 4 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas
 vérifié sur iOS.
-**Dernière version Android suivie** : v702 (commit `5e663e5`, 2/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v703 (commit `a798e1f`, 2/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -100,6 +100,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 2/11 04:00 | #619 (v703) | #619 : page d'abonnement, formule mensuelle : le prix n'est plus répété sous le bouton (déjà sur la formule et sur le bouton), POL-PLAY-96 ; règle 3.1.2 d'Apple tenue (prix et durée sur le bouton) ; côté iPhone : test App Store (« S’abonner · 4,99 € / mois », « Annulable à tout moment dans l’App Store. ») et note de Nouveautés iOS, celle d'Android étant réservée à Google Play ; 33 correctifs | — |
 | 2/11 03:00 | #617, #618 (v702) | #617 : espace fine des milliers élargie à l'affichage (« 1 039 kcal », POL-PLAY-94), vraie aussi sur iPhone (sa note de Nouveautés vaut pour toutes les variantes) ; #618 : Paramètres donne les analyses IA par jour selon la formule (Silver 10, Gold 20, test = Gold), POL-PLAY-95 ; côté iPhone : tests App Store (Gold acheté chez Apple → 20, Premium → 10, période de test → 20) et note de Nouveautés iOS, celle d'Android étant réservée à Google Play ; 33 correctifs, 3100 tests | — |
 | 2/11 02:10 | #615, #616 (v700) | #616 : prix de Vertex doublés au 1er janvier 2027 appliqués d'office dans le relais (GOLD-a4) ; rien dans l'app ; côté iPhone : rien à faire (même relais) ; #615 : journal ; 33 correctifs, 3097 tests | — |
 | 2/11 00:10 | #614 (v698) | #614 : bilan des analyses Gold en production (GOLD-a2) dans le déploiement du relais ; rien dans l'app ; côté iPhone : rien à faire (même relais) ; 33 correctifs, 3097 tests | — |
