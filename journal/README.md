@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v698 (1/11) | **697 sur TestFlight** (build 697.189), achat ouvert ; la 698 en cours d'envoi |
+| Dernière version | v698 (1/11) | **698 sur TestFlight** (build 698.190), achat ouvert ; même version qu'Android |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | 48 % (23 fonctions vérifiées sur 48 faisables : le temps d'écran, devenu faisable, attend l'essai sur l'iPhone 12) |
 
@@ -25,7 +25,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (697.189 aujourd'hui) : c'est la première avec l'achat ouvert.
+- Installez la build la plus récente de TestFlight (698.190 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
 
 **Où on en est pour vendre sur iPhone** : contrat de vente, banque et fiscalité actifs (A4) ; confidentialité de l'app
 remplie (A5) ; trois abonnements créés chez Apple (Gold 9,99 €/mois, Premium 29,99 €/an avec 2 semaines d'essai,
@@ -66,7 +66,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 
 | Date (Paris) | Run | Ce qui a été fait | PR |
 |---|---|---|---|
-| 2/11 01:00 | nouvelle semaine | résumé de la semaine S44 archivé (`semaines/2026-S44.md`) ; Android n'a changé que son serveur (prix de l'IA au 1er janvier) ; la 698 part sur TestFlight. Parité : 48 % | — |
+| 2/11 01:00 | nouvelle semaine | résumé de la semaine S44 archivé (`semaines/2026-S44.md`) ; Android n'a changé que son serveur (prix de l'IA au 1er janvier) ; **la 698 est sur TestFlight (698.190)**. Parité : 48 % | — |
 
 ---
 
