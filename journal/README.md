@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v710 (2/11) | **709 sur TestFlight** (build 709.206), achat ouvert ; 710 en préparation (vérifications en cours) |
+| Dernière version | v712 (2/11) | **709 sur TestFlight** (build 709.206), achat ouvert ; 710 en route vers TestFlight, 712 en préparation |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -81,7 +81,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 09:00 | anti-abus de l'iPhone | Android a décrit comment son serveur reconnaîtra la vraie app sur un vrai iPhone (App Attest, l'équivalent iPhone de la protection de Google Play) ; la partie iPhone est écrite et testée tout de suite, branchée quand le serveur sera prêt. Parité : 67 % | #203 (mergée) |
 | 2/11 10:00 | suivi d'Android v708 | Android v708 suivie (PR #204) : son serveur commence à savoir lire les preuves d'App Attest ; rien ne change dans l'app ; **la 708 est sur TestFlight (708.205)**. Parité : 67 % | #204 (mergée) |
 | 2/11 11:00 | suivi d'Android v709 | Android v709 suivie (PR #205) : son serveur sait maintenant vérifier la preuve d'App Attest d'un iPhone ; rien ne change dans l'app ; **la 709 est sur TestFlight (709.206)**. Parité : 67 % | #205 (mergée) |
-| 2/11 12:00 | suivi d'Android v710 | Android v710 suivie (PR #207) : son serveur vérifie maintenant chaque requête signée par un iPhone ; il ne lui reste qu'à ouvrir les adresses où l'iPhone s'inscrit ; rien ne change dans l'app. Parité : 67 % | #207 (en vérification) |
+| 2/11 12:00 | suivi d'Android v710 | Android v710 suivie (PR #207) : son serveur vérifie maintenant chaque requête signée par un iPhone ; il ne lui reste qu'à ouvrir les adresses où l'iPhone s'inscrit ; rien ne change dans l'app. Parité : 67 % | #207 (mergée) |
+| 2/11 13:00 | suivi d'Android v712 | Android v712 suivie (PR #208) : les adresses où l'iPhone s'inscrira existent sur le serveur, encore fermées ; la partie iPhone suit leur format exact. Parité : 67 % | #208 (en vérification) |
 
 ---
 
