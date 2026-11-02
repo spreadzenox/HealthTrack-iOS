@@ -385,6 +385,11 @@
 
 ## Idées et questions ouvertes
 
+- **Médiateur de la consommation (P26 d'Android), reporté par le propriétaire le 2/11** : à traiter aux 10 premiers
+  utilisateurs payants (adhérer, ou se renseigner clairement ; candidats : Médiation Solution, CM2C, SMP). Ne bloque
+  pas la mise en vente ; **ne pas le redemander d'ici là**. Le jour venu, les conditions de l'iPhone
+  (`overlay/app/public/conditions-iphone.html`) devront nommer le médiateur choisi, comme celles d'Android.
+
 - Sur l'iPhone 12 : toucher « Prendre une photo » (repas) et « Utiliser ma position approximative » (Météo) ; les phrases d'usage sont en place depuis le 28/10 (PR #45), le simulateur n'a ni caméra ni position réelle.
 
 - Raccourci ou widget « Lire mon bien-être » pour compenser l'absence de lecture au déverrouillage.
