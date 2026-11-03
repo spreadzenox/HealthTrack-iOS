@@ -20,8 +20,16 @@ import { jwt, md5, slices } from './store-push.mjs'
 const API = 'https://api.appstoreconnect.apple.com'
 const BUNDLE_ID = 'fr.jpesquet.sante'
 export const LOCALE = 'fr-FR'
-/** Comme Google Play (région FR) : en vente en France, pas dans les territoires qu'Apple ajoutera. */
+/** Territoire de référence (prix décidés en euros, relevé détaillé). */
 export const TERRITORY = 'FRA'
+/**
+ * Pays de vente, comme Google Play (décision P32 du propriétaire, 2/11 : France, Belgique, Suisse, Luxembourg, Canada ;
+ * jamais les États-Unis ; Royaume-Uni et reste de l'UE avec l'anglais). Pas dans les territoires qu'Apple ajoutera.
+ */
+export const TERRITORIES = ['FRA', 'BEL', 'LUX', 'CHE', 'CAN']
+export const CURRENCY = { FRA: '€', BEL: '€', LUX: '€', CHE: 'CHF', CAN: '$CA' }
+/** Prix d'un abonnement dans chaque pays : zone euro au prix français ; Suisse et Canada comme Google Play (P32). */
+const localPrices = (eur, chf, cad) => ({ FRA: eur, BEL: eur, LUX: eur, CHE: chf, CAN: cad })
 export const GROUP = { referenceName: 'Halcya', name: 'Halcya' }
 /**
  * Notifications serveur de l'App Store (version 2) : le relais d'Android les reçoit depuis la v691 (I6-RELAIS-3,
@@ -44,16 +52,16 @@ export const LIMITS = { name: 30, description: 45, referenceName: 64 }
 export const SUBSCRIPTIONS = [
   {
     productId: 'halcya_gold_mensuel', referenceName: 'Halcya Gold mensuel', groupLevel: 1, period: 'ONE_MONTH',
-    price: '9.99', name: 'Halcya Gold', description: 'IA : 20 par jour, quantités mieux estimées', trial: null,
+    price: '9.99', prices: localPrices('9.99', '9.90', '12.99'), name: 'Halcya Gold', description: 'IA : 20 par jour, quantités mieux estimées', trial: null,
   },
   {
     productId: 'halcya_premium_annuel', referenceName: 'Halcya Premium annuel', groupLevel: 2, period: 'ONE_YEAR',
-    price: '29.99', name: 'Halcya Silver annuel', description: 'Analyse IA des repas, 10 par jour',
+    price: '29.99', prices: localPrices('29.99', '29.00', '39.99'), name: 'Halcya Silver annuel', description: 'Analyse IA des repas, 10 par jour',
     trial: { offerMode: 'FREE_TRIAL', duration: 'TWO_WEEKS', numberOfPeriods: 1 },
   },
   {
     productId: 'halcya_premium_mensuel', referenceName: 'Halcya Premium mensuel', groupLevel: 2, period: 'ONE_MONTH',
-    price: '4.99', name: 'Halcya Silver', description: 'Analyse IA des repas, 10 par jour', trial: null,
+    price: '4.99', prices: localPrices('4.99', '4.90', '6.99'), name: 'Halcya Silver', description: 'Analyse IA des repas, 10 par jour', trial: null,
   },
 ]
 
@@ -75,25 +83,25 @@ export const bodies = {
   localization: (s, subscriptionId) => ({
     data: { type: 'subscriptionLocalizations', attributes: { locale: LOCALE, name: s.name, description: s.description }, relationships: { subscription: rel('subscriptions', subscriptionId) } },
   }),
-  availability: (subscriptionId) => ({
+  availability: (subscriptionId, territories = TERRITORIES) => ({
     data: {
       type: 'subscriptionAvailabilities',
       attributes: { availableInNewTerritories: false },
-      relationships: { subscription: rel('subscriptions', subscriptionId), availableTerritories: { data: [{ type: 'territories', id: TERRITORY }] } },
+      relationships: { subscription: rel('subscriptions', subscriptionId), availableTerritories: { data: territories.map((id) => ({ type: 'territories', id })) } },
     },
   }),
-  price: (subscriptionId, pricePointId) => ({
+  price: (subscriptionId, pricePointId, territory = TERRITORY) => ({
     data: {
       type: 'subscriptionPrices',
       attributes: { preserveCurrentPrice: false },
-      relationships: { subscription: rel('subscriptions', subscriptionId), subscriptionPricePoint: rel('subscriptionPricePoints', pricePointId), territory: rel('territories', TERRITORY) },
+      relationships: { subscription: rel('subscriptions', subscriptionId), subscriptionPricePoint: rel('subscriptionPricePoints', pricePointId), territory: rel('territories', territory) },
     },
   }),
-  trial: (s, subscriptionId) => ({
+  trial: (s, subscriptionId, territory = TERRITORY) => ({
     data: {
       type: 'subscriptionIntroductoryOffers',
       attributes: { ...s.trial },
-      relationships: { subscription: rel('subscriptions', subscriptionId), territory: rel('territories', TERRITORY) },
+      relationships: { subscription: rel('subscriptions', subscriptionId), territory: rel('territories', territory) },
     },
   }),
 }
@@ -125,9 +133,9 @@ export function notificationsPlan(appAttributes = {}) {
 const samePrice = (a, b) => Math.round(Number(a) * 100) === Math.round(Number(b) * 100)
 
 /** Palier de prix d'Apple dont le prix client est `price` (« 4.99 »). Erreur s'il n'y en a pas exactement un. */
-export function pricePointFor(points, price) {
+export function pricePointFor(points, price, territory = TERRITORY) {
   const found = (points || []).filter((p) => samePrice(p?.attributes?.customerPrice, price))
-  if (found.length !== 1) throw new Error(`palier de prix ${price} € : ${found.length} trouvé(s) en ${TERRITORY}`)
+  if (found.length !== 1) throw new Error(`palier de prix ${price} ${CURRENCY[territory] ?? ''} : ${found.length} trouvé(s) en ${territory}`)
   return found[0]
 }
 
@@ -239,39 +247,63 @@ export async function ensureSubscriptions({ token, fetchImpl = fetch, log = () =
     } catch (e) {
       if (e.status !== 404) throw e
     }
-    if (!availability?.data) {
-      await api('POST', '/v1/subscriptionAvailabilities', bodies.availability(id))
-      done.push(`en vente en ${TERRITORY}`)
-    } else {
-      const territories = (availability.data.relationships?.availableTerritories?.data || availability.included || []).map((t) => t.id)
-      if (!territories.includes(TERRITORY)) drift.push(`${s.productId} : pas en vente en ${TERRITORY} (${territories.join(', ') || 'aucun territoire'})`)
+    const inPlace = availability?.data
+      ? (availability.data.relationships?.availableTerritories?.data || availability.included || []).map((t) => t.id)
+      : []
+    const missingTerritories = TERRITORIES.filter((t) => !inPlace.includes(t))
+    if (missingTerritories.length) {
+      // Une disponibilité neuve remplace la précédente : les pays déjà ouverts sont gardés, ceux de P32 ajoutés
+      const wanted = [...new Set([...inPlace, ...TERRITORIES])]
+      try {
+        await api('POST', '/v1/subscriptionAvailabilities', bodies.availability(id, wanted))
+        done.push(`en vente en ${wanted.join(', ')}`)
+      } catch (e) {
+        drift.push(`${s.productId} : pays non ajoutés (${missingTerritories.join(', ')}) : ${e.message}`)
+      }
     }
 
-    const prices = currentPrices(await api('GET', `/v1/subscriptions/${id}/prices?filter[territory]=${TERRITORY}&include=subscriptionPricePoint&limit=50`))
-    if (prices.length === 0) {
-      const pointsPath = `/v1/subscriptions/${id}/pricePoints?filter[territory]=${TERRITORY}&limit=200`
-      let point
-      try {
-        point = pricePointFor(await all(pointsPath), s.price)
-      } catch {
-        // Plusieurs paliers au même prix (paiement « UPFRONT » et « MONTHLY » d'Apple) : celui du paiement d'avance
-        point = pricePointFor(await all(`${pointsPath}&filter[planType]=UPFRONT`), s.price)
+    for (const territory of TERRITORIES) {
+      const price = s.prices?.[territory] ?? (territory === TERRITORY ? s.price : null)
+      if (!price) continue
+      const unit = CURRENCY[territory]
+      const prices = currentPrices(await api('GET', `/v1/subscriptions/${id}/prices?filter[territory]=${territory}&include=subscriptionPricePoint&limit=50`))
+      if (prices.length === 0) {
+        const pointsPath = `/v1/subscriptions/${id}/pricePoints?filter[territory]=${territory}&limit=200`
+        try {
+          let point
+          try {
+            point = pricePointFor(await all(pointsPath), price, territory)
+          } catch {
+            // Plusieurs paliers au même prix (paiement « UPFRONT » et « MONTHLY » d'Apple) : celui du paiement d'avance
+            point = pricePointFor(await all(`${pointsPath}&filter[planType]=UPFRONT`), price, territory)
+          }
+          await api('POST', '/v1/subscriptionPrices', bodies.price(id, point.id, territory))
+          done.push(`prix ${price.replace('.', ',')} ${unit} fixé en ${territory}`)
+        } catch (e) {
+          drift.push(`${s.productId} : prix ${price} ${unit} non fixé en ${territory} : ${e.message}`)
+        }
+      } else if (!prices.some((p) => samePrice(p, price))) {
+        drift.push(`${s.productId} : prix ${prices.join(' / ')} ${unit} en place en ${territory}, ${price} ${unit} décidé (non modifié)`)
       }
-      await api('POST', '/v1/subscriptionPrices', bodies.price(id, point.id))
-      done.push(`prix ${s.price.replace('.', ',')} € fixé`)
-    } else if (!prices.some((p) => samePrice(p, s.price))) {
-      drift.push(`${s.productId} : prix ${prices.join(' / ')} € en place, ${s.price} € décidé (non modifié)`)
     }
 
     if (s.trial) {
       const offers = await all(`/v1/subscriptions/${id}/introductoryOffers?include=territory&limit=50`)
-      const here = offers.filter((o) => (o.relationships?.territory?.data?.id ?? TERRITORY) === TERRITORY)
-      if (here.length === 0) {
-        await api('POST', '/v1/subscriptionIntroductoryOffers', bodies.trial(s, id))
-        done.push('essai gratuit de 2 semaines créé')
-      } else if (!here.some((o) => o.attributes?.offerMode === s.trial.offerMode && o.attributes?.duration === s.trial.duration)) {
-        drift.push(`${s.productId} : offre de lancement en place différente de l'essai de 2 semaines (non modifiée)`)
+      const created = []
+      for (const territory of TERRITORIES) {
+        const here = offers.filter((o) => (o.relationships?.territory?.data?.id ?? TERRITORY) === territory)
+        if (here.length === 0) {
+          try {
+            await api('POST', '/v1/subscriptionIntroductoryOffers', bodies.trial(s, id, territory))
+            created.push(territory)
+          } catch (e) {
+            drift.push(`${s.productId} : essai non créé en ${territory} : ${e.message}`)
+          }
+        } else if (!here.some((o) => o.attributes?.offerMode === s.trial.offerMode && o.attributes?.duration === s.trial.duration)) {
+          drift.push(`${s.productId} : offre de lancement en place en ${territory} différente de l'essai de 2 semaines (non modifiée)`)
+        }
       }
+      if (created.length) done.push(`essai gratuit de 2 semaines créé en ${created.join(', ')}`)
     }
 
     if (reviewScreenshot) {
@@ -322,6 +354,14 @@ export function readReviewScreenshot(path) {
   return { name: basename(path), bytes }
 }
 
+/** Pays de l'app, résumés par rapport à ceux de P32 : nombre, États-Unis ou non, pays de P32 manquants. */
+export function appTerritories(ids) {
+  const missing = TERRITORIES.filter((t) => !ids.includes(t))
+  const extra = ids.filter((t) => !TERRITORIES.includes(t))
+  const head = `app disponible dans ${ids.length} pays${ids.includes('USA') ? ', États-Unis compris' : ''}`
+  return [head, missing.length ? `manquent ${missing.join(', ')}` : 'les 5 de P32', extra.length ? `${extra.length} hors P32` : null].filter(Boolean).join(', ')
+}
+
 /** Une lecture du relevé qui ne doit pas l'interrompre : son résultat, ou « illisible (statut) ». */
 async function readable(read, show) {
   try {
@@ -340,7 +380,13 @@ export async function diagnose({ token, fetchImpl = fetch }) {
   const { api, all } = client(token, fetchImpl)
   const app = (await api('GET', `/v1/apps?filter[bundleId]=${BUNDLE_ID}`)).data?.[0]
   const group = (await all(`/v1/apps/${app.id}/subscriptionGroups?limit=50`)).find((g) => g.attributes?.referenceName === GROUP.referenceName)
-  const lines = [`app : langue principale ${app.attributes?.primaryLocale ?? '?'}`]
+  // Pays où l'app elle-même est disponible (réglage du propriétaire, « Prix et disponibilité ») : sans eux, un
+  // abonnement en vente ailleurs ne sert à rien, et l'inverse laisse l'écran d'achat vide
+  const where = await readable(async () => {
+    const av = (await api('GET', `/v1/apps/${app.id}/appAvailabilityV2`)).data
+    return all(`/v2/appAvailabilities/${av.id}/territoryAvailabilities?include=territory&limit=200`)
+  }, (list) => appTerritories(list.filter((x) => x.attributes?.available).map((x) => x.relationships?.territory?.data?.id).filter(Boolean)))
+  const lines = [`app : langue principale ${app.attributes?.primaryLocale ?? '?'} ; ${where}`]
   if (!group) return [...lines, 'aucun groupe « Halcya »']
   const groupLocs = await all(`/v1/subscriptionGroups/${group.id}/subscriptionGroupLocalizations?limit=50`)
   lines.push(`groupe : ${groupLocs.map((l) => `${l.attributes?.locale} « ${l.attributes?.name} » ${l.attributes?.state ?? '?'}`).join(', ') || 'aucun nom affiché'}`)
@@ -357,8 +403,12 @@ export async function diagnose({ token, fetchImpl = fetch }) {
     }
     const delivery = shot?.attributes?.assetDeliveryState
     parts.push(`capture ${shot ? `${delivery?.state ?? '?'}${delivery?.errors?.length ? ` (${delivery.errors.map((x) => x.code || x.description).join(', ')})` : ''}` : 'absente'}`)
-    const prices = await api('GET', `/v1/subscriptions/${id}/prices?filter[territory]=${TERRITORY}&include=subscriptionPricePoint&limit=50`)
-    parts.push(`prix en ${TERRITORY} ${currentPrices(prices).join(' / ') || 'aucun'}`)
+    const byTerritory = []
+    for (const territory of TERRITORIES) {
+      const prices = await api('GET', `/v1/subscriptions/${id}/prices?filter[territory]=${territory}&include=subscriptionPricePoint&limit=50`)
+      byTerritory.push(`${territory} ${currentPrices(prices).join(' / ') || 'aucun'}`)
+    }
+    parts.push(`prix ${byTerritory.join(', ')}`)
     let availability = null
     try {
       availability = await api('GET', `/v1/subscriptions/${id}/subscriptionAvailability?include=availableTerritories`)
@@ -379,10 +429,11 @@ export async function diagnose({ token, fetchImpl = fetch }) {
 
 function dryRun(log) {
   log(`Notifications serveur de l'App Store : ${NOTIFICATIONS.url} (${NOTIFICATIONS.version}, production et sandbox)`)
-  log(`Groupe « ${GROUP.referenceName} » (nom affiché ${LOCALE} : « ${GROUP.name} »), en vente en ${TERRITORY} seulement`)
+  log(`Groupe « ${GROUP.referenceName} » (nom affiché ${LOCALE} : « ${GROUP.name} »), en vente en ${TERRITORIES.join(', ')} (P32)`)
   for (const s of SUBSCRIPTIONS) {
     const trial = s.trial ? `, essai ${s.trial.duration} (${s.trial.offerMode})` : ''
-    log(`- ${s.productId} : niveau ${s.groupLevel}, ${s.period}, ${s.price} €${trial} ; « ${s.name} » / « ${s.description} »`)
+    const local = TERRITORIES.map((t) => `${t} ${s.prices[t]} ${CURRENCY[t]}`).join(', ')
+    log(`- ${s.productId} : niveau ${s.groupLevel}, ${s.period}, ${s.price} €${trial} ; « ${s.name} » / « ${s.description} » ; ${local}`)
   }
 }
 

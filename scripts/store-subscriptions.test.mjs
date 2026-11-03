@@ -8,7 +8,7 @@ import assert from 'node:assert/strict'
 import { readFileSync, writeFileSync, mkdtempSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { SUBSCRIPTIONS, LIMITS, TERRITORY, GROUP, NOTIFICATIONS, bodies, pricePointFor, currentPrices, ensureSubscriptions, readReviewScreenshot, notificationsPlan, diagnose } from './store-subscriptions.mjs'
+import { SUBSCRIPTIONS, LIMITS, TERRITORY, TERRITORIES, GROUP, NOTIFICATIONS, bodies, pricePointFor, currentPrices, ensureSubscriptions, readReviewScreenshot, notificationsPlan, diagnose, appTerritories } from './store-subscriptions.mjs'
 
 const root = new URL('..', import.meta.url)
 const read = (path) => readFileSync(new URL(path, root), 'utf8')
@@ -56,15 +56,18 @@ test('catalogue : jamais de promesse de précision ni de nom de modèle dans les
   }
 })
 
-test('corps des requêtes : France seulement, pas de partage familial, niveau et durée du catalogue', () => {
+test('corps des requêtes : les 5 pays de P32, pas de partage familial, niveau et durée du catalogue', () => {
   const gold = SUBSCRIPTIONS[0]
   assert.deepEqual(bodies.subscription(gold, 'g1').data.attributes, {
     name: 'Halcya Gold mensuel', productId: 'halcya_gold_mensuel', subscriptionPeriod: 'ONE_MONTH', groupLevel: 1, familySharable: false,
   })
   const av = bodies.availability('s1').data
   assert.equal(av.attributes.availableInNewTerritories, false)
-  assert.deepEqual(av.relationships.availableTerritories.data, [{ type: 'territories', id: 'FRA' }])
+  assert.deepEqual(av.relationships.availableTerritories.data.map((t) => t.id), ['FRA', 'BEL', 'LUX', 'CHE', 'CAN'])
+  assert.ok(!TERRITORIES.includes('USA'), 'jamais les États-Unis (P32)')
   assert.equal(bodies.price('s1', 'pp').data.relationships.territory.data.id, TERRITORY)
+  assert.equal(bodies.price('s1', 'pp', 'CHE').data.relationships.territory.data.id, 'CHE')
+  assert.equal(bodies.trial(SUBSCRIPTIONS[1], 's1', 'CAN').data.relationships.territory.data.id, 'CAN')
   assert.equal(bodies.groupLocalization('g1').data.attributes.name, GROUP.name)
 })
 
@@ -86,12 +89,15 @@ test('currentPrices : prix clients en place lus dans les paliers inclus', () => 
 
 /** App Store Connect simulé : juste ce que le script lit et crée. */
 function fakeAsc({ prePrice = null, monthlyPlans = false, app = {} } = {}) {
-  const db = { app: { ...app }, groups: [], groupLocs: [], subs: [], locs: [], avail: {}, prices: {}, offers: {}, shots: {}, uploads: [], deleted: [] }
+  const db = { app: { ...app }, groups: [], groupLocs: [], subs: [], locs: [], avail: {}, prices: {}, pricesBy: {}, postedPrices: [], offers: {}, shots: {}, uploads: [], deleted: [] }
   const calls = []
   let n = 0
   const id = (p) => `${p}${++n}`
   const json = (status, body) => ({ ok: status < 300, status, json: async () => body })
-  const pricePoints = (subId) => ['0.99', '4.99', '9.99', '29.99', '79.99'].map((c) => ({ id: `${subId}-pp-${c}`, type: 'subscriptionPricePoints', attributes: { customerPrice: c } }))
+  const pricePoints = (subId) => ['0.99', '4.90', '4.99', '6.99', '9.90', '9.99', '12.99', '29.00', '29.99', '39.99', '79.99']
+    .map((c) => ({ id: `${subId}-pp-${c}`, type: 'subscriptionPricePoints', attributes: { customerPrice: c } }))
+  // Prix par pays : db.prices[abonnement] pour la France (comme avant), db.pricesBy[« abonnement|pays »] ailleurs
+  const pricesOf = (sub, t) => (t === 'FRA' ? db.prices[sub] : db.pricesBy[`${sub}|${t}`]) || []
   const fetchImpl = async (url, { method, body }) => {
     const u = new URL(url)
     const path = u.pathname
@@ -135,8 +141,7 @@ function fakeAsc({ prePrice = null, monthlyPlans = false, app = {} } = {}) {
       return json(201, { data: {} })
     }
     if ((m = /^\/v1\/subscriptions\/(\w+)\/prices$/.exec(path))) {
-      assert.equal(u.searchParams.get('filter[territory]'), 'FRA')
-      const list = db.prices[m[1]] || []
+      const list = pricesOf(m[1], u.searchParams.get('filter[territory]'))
       return json(200, {
         data: list.map((c, i) => ({ id: `${m[1]}-p${i}`, relationships: { subscriptionPricePoint: { data: { id: `${m[1]}-pp-${c}` } } } })),
         included: list.map((c) => ({ type: 'subscriptionPricePoints', id: `${m[1]}-pp-${c}`, attributes: { customerPrice: c } })),
@@ -153,14 +158,16 @@ function fakeAsc({ prePrice = null, monthlyPlans = false, app = {} } = {}) {
     if (method === 'POST' && path === '/v1/subscriptionPrices') {
       const sub = data.relationships.subscription.data.id
       const c = data.relationships.subscriptionPricePoint.data.id.split('-pp-')[1]
-      assert.equal(data.relationships.territory.data.id, 'FRA')
-      db.prices[sub] = [...(db.prices[sub] || []), c]
+      const t = data.relationships.territory.data.id
+      db.postedPrices.push(t)
+      if (t === 'FRA') db.prices[sub] = [...(db.prices[sub] || []), c]
+      else db.pricesBy[`${sub}|${t}`] = [...(db.pricesBy[`${sub}|${t}`] || []), c]
       return json(201, { data: {} })
     }
     if ((m = /^\/v1\/subscriptions\/(\w+)\/introductoryOffers$/.exec(path))) return json(200, { data: db.offers[m[1]] || [] })
     if (method === 'POST' && path === '/v1/subscriptionIntroductoryOffers') {
       const sub = data.relationships.subscription.data.id
-      db.offers[sub] = [{ id: id('o'), attributes: data.attributes, relationships: { territory: { data: data.relationships.territory.data } } }]
+      db.offers[sub] = [...(db.offers[sub] || []), { id: id('o'), attributes: data.attributes, relationships: { territory: { data: data.relationships.territory.data } } }]
       return json(201, { data: {} })
     }
     if ((m = /^\/v1\/subscriptions\/(\w+)\/appStoreReviewScreenshot$/.exec(path))) {
@@ -196,6 +203,10 @@ function fakeAsc({ prePrice = null, monthlyPlans = false, app = {} } = {}) {
     }
     if ((m = /^\/v1\/subscriptions\/(\w+)$/.exec(path)) && method === 'GET') return json(200, { data: db.subs.find((s) => s.id === m[1]) })
     if (/^\/v1\/subscriptions\/\w+\/planAvailabilities$/.test(path) && method === 'GET') return json(200, { data: [] })
+    if (method === 'GET' && path === '/v1/apps/app1/appAvailabilityV2') return json(200, { data: { id: 'av1', type: 'appAvailabilities' } })
+    if (method === 'GET' && path === '/v2/appAvailabilities/av1/territoryAvailabilities') {
+      return json(200, { data: (db.appTerritories || ['FRA']).map((t) => ({ type: 'territoryAvailabilities', attributes: { available: true }, relationships: { territory: { data: { type: 'territories', id: t } } } })) })
+    }
     if (/^\/v1\/subscriptions\/\w+\/versions$/.test(path) && method === 'GET' && !db.noVersions) {
       return json(200, { data: [{ id: 'v1', type: 'subscriptionVersions', attributes: { version: 1, state: 'PREPARE_FOR_SUBMISSION' } }] })
     }
@@ -219,10 +230,16 @@ test('ensureSubscriptions : tout se crée au premier passage, rien au second (id
   assert.deepEqual(priceOf('halcya_gold_mensuel'), ['9.99'])
   assert.deepEqual(priceOf('halcya_premium_annuel'), ['29.99'])
   assert.deepEqual(priceOf('halcya_premium_mensuel'), ['4.99'])
+  // Ailleurs qu'en France, les prix de P32 : zone euro au prix français, Suisse et Canada comme Google Play
+  const localOf = (pid, t) => asc.db.pricesBy[`${asc.db.subs.find((s) => s.attributes.productId === pid).id}|${t}`]
+  assert.deepEqual(['BEL', 'LUX', 'CHE', 'CAN'].map((t) => localOf('halcya_premium_mensuel', t)), [['4.99'], ['4.99'], ['4.90'], ['6.99']])
+  assert.deepEqual(['CHE', 'CAN'].map((t) => localOf('halcya_premium_annuel', t)), [['29.00'], ['39.99']])
+  assert.deepEqual(['CHE', 'CAN'].map((t) => localOf('halcya_gold_mensuel', t)), [['9.90'], ['12.99']])
   const offers = Object.entries(asc.db.offers)
   assert.equal(offers.length, 1, 'un seul essai : Silver annuel')
   assert.equal(asc.db.subs.find((s) => s.id === offers[0][0]).attributes.productId, 'halcya_premium_annuel')
-  assert.equal(offers[0][1][0].attributes.duration, 'TWO_WEEKS')
+  assert.deepEqual(offers[0][1].map((o) => o.relationships.territory.data.id), TERRITORIES, 'essai dans les 5 pays')
+  assert.ok(offers[0][1].every((o) => o.attributes.duration === 'TWO_WEEKS'))
   assert.ok(Object.values(asc.db.avail).every((a) => a.attributes.availableInNewTerritories === false))
   assert.deepEqual(first.states, { halcya_gold_mensuel: 'MISSING_METADATA', halcya_premium_annuel: 'MISSING_METADATA', halcya_premium_mensuel: 'MISSING_METADATA' })
   assert.ok(lines.some((l) => /halcya_premium_annuel : créé, .*essai gratuit/.test(l)))
@@ -240,8 +257,8 @@ test('ensureSubscriptions : un prix déjà en place n’est jamais modifié, l�
   const asc = fakeAsc({ prePrice: '0.99' })
   const { drift } = await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl })
   assert.equal(drift.length, 3)
-  assert.match(drift[0], /prix 0\.99 € en place, 9\.99 € décidé \(non modifié\)/)
-  assert.equal(asc.calls.filter((c) => c === 'POST /v1/subscriptionPrices').length, 0)
+  assert.match(drift[0], /prix 0\.99 € en place en FRA, 9\.99 € décidé \(non modifié\)/)
+  assert.ok(!asc.db.postedPrices.includes('FRA'), 'prix français jamais modifié')
 })
 
 test('ensureSubscriptions : deux paliers au même prix (paiement mensuel d’Apple) → celui du paiement d’avance', async () => {
@@ -249,7 +266,7 @@ test('ensureSubscriptions : deux paliers au même prix (paiement mensuel d’App
   const { drift } = await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl })
   assert.deepEqual(drift, [])
   for (const s of asc.db.subs) assert.equal(asc.db.prices[s.id].length, 1)
-  assert.equal(asc.calls.filter((c) => c === 'POST /v1/subscriptionPrices').length, 3)
+  assert.equal(asc.calls.filter((c) => c === 'POST /v1/subscriptionPrices').length, 3 * TERRITORIES.length)
 })
 
 test('capture pour l’examen : envoyée pour chaque abonnement, morceaux et empreinte MD5, la précédente remplacée', async () => {
@@ -328,7 +345,8 @@ test('diagnose : relevé sans écriture de chaque pièce exigée par Apple', asy
   assert.match(lines[0], /^app : langue principale /)
   assert.match(lines[1], /^groupe : fr-FR « Halcya »/)
   assert.equal(lines.length, 5)
-  assert.match(lines[2], /^halcya_gold_mensuel : état MISSING_METADATA ; noms fr-FR .* ; capture absente ; prix en FRA 9\.99 ; territoires FRA ; note pour l'examen absente ; formules aucune ; versions 1 PREPARE_FOR_SUBMISSION$/)
+  assert.match(lines[0], /; app disponible dans 1 pays, manquent BEL, LUX, CHE, CAN$/)
+  assert.match(lines[2], /^halcya_gold_mensuel : état MISSING_METADATA ; noms fr-FR .* ; capture absente ; prix FRA 9\.99, BEL 9\.99, LUX 9\.99, CHE 9\.90, CAN 12\.99 ; territoires FRA, BEL, LUX, CHE, CAN ; note pour l'examen absente ; formules aucune ; versions 1 PREPARE_FOR_SUBMISSION$/)
   // Une pièce que l'API ne sait pas lire n'interrompt pas le relevé
   const broken = fakeAsc()
   await ensureSubscriptions({ token: 't', fetchImpl: broken.fetchImpl })
@@ -344,4 +362,46 @@ test('noms affichés par Apple (feuille d\'achat, réglages d\'abonnement) : ceu
   assert.equal(byId.halcya_premium_annuel, 'Halcya Silver annuel')
   assert.equal(byId.halcya_premium_mensuel, 'Halcya Silver')
   for (const s of SUBSCRIPTIONS) assert.doesNotMatch(`${s.name} ${s.description}`, /Premium/)
+})
+
+test('pays de P32 : un abonnement déjà en vente en France seulement est ouvert aux 4 autres, sans toucher au prix français', async () => {
+  const asc = fakeAsc()
+  await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl })
+  // État d'avant P32 : France seulement, prix et essai français en place
+  for (const sub of asc.db.subs) {
+    asc.db.avail[sub.id].relationships.availableTerritories.data = [{ type: 'territories', id: 'FRA' }]
+    for (const t of ['BEL', 'LUX', 'CHE', 'CAN']) delete asc.db.pricesBy[`${sub.id}|${t}`]
+    if (asc.db.offers[sub.id]) asc.db.offers[sub.id] = asc.db.offers[sub.id].filter((o) => o.relationships.territory.data.id === 'FRA')
+  }
+  asc.db.postedPrices.length = 0
+  const lines = []
+  const { drift } = await ensureSubscriptions({ token: 't', fetchImpl: asc.fetchImpl, log: (l) => lines.push(l) })
+  assert.deepEqual(drift, [])
+  for (const sub of asc.db.subs) assert.deepEqual(asc.db.avail[sub.id].relationships.availableTerritories.data.map((t) => t.id), TERRITORIES)
+  assert.ok(!asc.db.postedPrices.includes('FRA'), 'prix français jamais renvoyé')
+  assert.equal(asc.db.postedPrices.length, 3 * 4)
+  const annual = asc.db.subs.find((s) => s.attributes.productId === 'halcya_premium_annuel')
+  assert.deepEqual(asc.db.offers[annual.id].map((o) => o.relationships.territory.data.id).sort(), [...TERRITORIES].sort())
+  assert.ok(lines.some((l) => /halcya_premium_annuel : en vente en FRA, BEL, LUX, CHE, CAN, .*prix 29,00 CHF fixé en CHE.*essai gratuit de 2 semaines créé en BEL, LUX, CHE, CAN/.test(l)))
+})
+
+test('pays de P32 : un palier absent chez Apple est signalé, sans arrêter les autres pays', async () => {
+  const asc = fakeAsc()
+  const fetchImpl = async (url, init) => {
+    const u = new URL(url)
+    // Apple sans palier à 4,90 CHF
+    if (/\/pricePoints$/.test(u.pathname) && u.searchParams.get('filter[territory]') === 'CHE') {
+      return { ok: true, status: 200, json: async () => ({ data: [{ id: 'x', attributes: { customerPrice: '5.00' } }] }) }
+    }
+    return asc.fetchImpl(url, init)
+  }
+  const { drift } = await ensureSubscriptions({ token: 't', fetchImpl })
+  assert.equal(drift.length, 3)
+  assert.match(drift.find((d) => d.startsWith('halcya_premium_mensuel')), /prix 4\.90 CHF non fixé en CHE : palier de prix 4\.90 CHF : 0 trouvé\(s\) en CHE/)
+  assert.equal(asc.db.postedPrices.filter((t) => t === 'CAN').length, 3)
+})
+
+test('pays de l\'app : résumé par rapport aux 5 pays de P32', () => {
+  assert.equal(appTerritories(['FRA', 'BEL', 'LUX', 'CHE', 'CAN']), 'app disponible dans 5 pays, les 5 de P32')
+  assert.equal(appTerritories(['FRA', 'USA', 'DEU']), 'app disponible dans 3 pays, États-Unis compris, manquent BEL, LUX, CHE, CAN, 2 hors P32')
 })

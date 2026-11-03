@@ -68,8 +68,22 @@ Les crédits (10 et 20 par jour) suivent Android.
 **Création** : le contrat « Paid Applications » est actif depuis le 1/11 (A4). Le groupe et les trois abonnements
 sont créés par l'API App Store Connect (autorisation permanente) : `scripts/store-subscriptions.mjs`, lancé à la main
 par le workflow « Abonnements App Store — création » sur `main`.
-- **Zone et prix** : en France seulement et en euros, comme sur Google Play (région FR). Prix fixés par palier d'Apple
-  dont le prix client est exactement celui du tableau.
+- **Pays et prix** : depuis le 3/11, les 5 pays de la production décidés par le propriétaire (P32, 2/11), comme sur
+  Google Play (Android #641) : France, Belgique, Luxembourg, Suisse, Canada ; jamais les États-Unis. Royaume-Uni,
+  Irlande et le reste de l'UE viendront avec l'anglais. Prix fixés par palier d'Apple dont le prix client est
+  exactement celui-ci :
+
+  | Abonnement | France, Belgique, Luxembourg | Suisse | Canada |
+  |---|---|---|---|
+  | `halcya_gold_mensuel` | 9,99 € | 9,90 CHF | 12,99 $CA |
+  | `halcya_premium_annuel` (essai de 2 semaines dans les 5 pays) | 29,99 € | 29,00 CHF | 39,99 $CA |
+  | `halcya_premium_mensuel` | 4,99 € | 4,90 CHF | 6,99 $CA |
+
+  Suisse et Canada : les prix d'Android (`app/scripts/play/subscriptions.mjs`, `SALE_REGIONS`). Au Canada, Apple
+  ajoute les taxes, comme Google. Un palier absent chez Apple est signalé, sans toucher aux autres pays. Avant le
+  3/11, les abonnements étaient en France seulement.
+- **Pays de l'app** (« Prix et disponibilité », réglage du propriétaire) : le relevé du workflow les compare aux 5 pays
+  de P32.
 - **Ce que le script ne fait jamais** :
   - il ne crée que ce qui manque ;
   - un prix, un niveau ou un essai déjà en place n'est jamais modifié (l'écart est signalé) ;
