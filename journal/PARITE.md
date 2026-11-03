@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 18:00 | #659 (journal) | journal seulement (première lecture `testenv`) ; rien à suivre | — |
 | 3/11 17:00 | #657, #658 (v742) | #658 (INSTALLS-21b-2) : répartition `testenv` dans le journal du déploiement du relais (workflow) ; #657 : journal ; rien dans `app/src` ni dans `relay/src` ; côté iPhone : 35 correctifs tels quels | — |
 | 3/11 16:00 | #656 (v740) | #656 (POL-PLAY-11) : ressources Android inutilisées retirées de la version Google Play (`shrinkResources`, `keep.xml`) ; rien dans le code web partagé hormis un test ; côté iPhone : sans objet, 35 correctifs tels quels | — |
 | 3/11 14:00 | #654, #655 (v739) | #655 (POL-PLAY-105) : rapport PDF, les semaines d'avant la première note sont résumées en une ligne quand la période dépasse le journal, et « 1er » du mois aussi dans le rapport ; note de Nouveautés pour toutes les variantes, vraie sur iPhone (même rapport, enregistré dans Fichiers) ; #654 : journal (P43, Android vitals) ; côté iPhone : 35 correctifs tels quels | — |
