@@ -406,3 +406,9 @@
 - Raccourci ou widget « Lire mon bien-être » pour compenser l'absence de lecture au déverrouillage.
 - Apple Watch : HealthKit couvre déjà sommeil, FC, VFC, pas — atout de la version iOS.
 - Huawei Santé sur iOS écrit une partie de ses données dans Santé : vérifier lesquelles (sommeil ? VFC ?).
+- « FC nuit » sur iPhone (Android v746, MONTRE-SCORE) : Android l'affiche dans « Vos derniers jours » à partir du
+  résumé de nuit de la montre Huawei en direct ; sur iPhone, la même pastille pourrait se calculer avec les mesures de
+  cœur de l'app Santé prises pendant la nuit (Apple Watch, Huawei Santé). Ce serait un calcul propre à l'iPhone (une
+  moyenne pendant le sommeil compté) : à proposer à Android d'abord (`DEMANDES.md`) pour que les deux versions
+  donnent le même chiffre. Le « Score montre » n'a pas d'équivalent : le score de sommeil d'Apple n'est pas lisible par
+  les apps (forum des développeurs d'Apple, sept. 2025).
