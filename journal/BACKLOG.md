@@ -381,6 +381,12 @@
     `COMPLETE`, prix, France, note pour l'examen, formule `UPFRONT`, version 1 `PREPARE_FOR_SUBMISSION`, rien de
     manquant que l'API expose) ; l'interface dit « Prepare for Submission » : à revoir le jour de la soumission (la
     section des abonnements de la page de version doit apparaître ; sinon, relire avec le propriétaire).
+- [ ] **« Prix et disponibilité » de l'app (action du propriétaire, avant la soumission)** : vide chez Apple (relevé du
+  3/11 01:15 : `appAvailabilityV2` et `appPriceSchedule` en 404). À régler : gratuite, disponible en FRA, BEL, LUX,
+  CHE, CAN (P32), pas dans les nouveaux pays. Ou par l'API (`POST /v2/appAvailabilities`, `POST /v1/appPriceSchedules`)
+  après « ok prix et disponibilité ». Puis relire l'état des abonnements.
+- [x] Abonnements d'Apple dans les 5 pays de P32 (3/11, #224 ; run 41557291477) : prix CHF et $CA d'Android, essai de
+  2 semaines dans chaque pays.
 - [ ] **Plus tard, quand il y aura plus d'utilisateurs (décision du 31/10)** : la stratégie de cache décidée avec la
   routine Android pour l'analyse des repas, côté relais. Aujourd'hui, les consignes commencent par la longue liste des
   ingrédients, identique d'un appel à l'autre, que Vertex AI met en cache implicitement (`relay/src/prompts.js`

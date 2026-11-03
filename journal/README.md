@@ -15,6 +15,16 @@
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
+- **« Prix et disponibilité » de l'app, avant la soumission** (App Store Connect → Halcya → Distribution, ou
+  Monétisation → **Prix et disponibilité**). Apple dit que cette page n'a jamais été remplie (relevé du 3/11) ; c'est
+  sans doute pour cela que les abonnements restent « métadonnées manquantes ».
+  1. Prix de l'app : **Gratuit** (l'app est gratuite ; seuls les abonnements sont payants).
+  2. Disponibilité : **France, Belgique, Luxembourg, Suisse, Canada**, rien d'autre (surtout pas les États-Unis),
+     comme votre décision P32 pour Google Play ; ne pas la rendre disponible automatiquement dans les nouveaux pays.
+  3. Enregistrer.
+
+  Vous pouvez aussi me répondre « ok prix et disponibilité » : je le règle par l'API avec ces valeurs. Les trois
+  abonnements sont déjà en vente dans ces 5 pays (prix en CHF et en $CA comme Google Play).
 - **Content Rights** (App Store Connect → Halcya → Informations sur l'app) : l'app utilise des contenus de tiers sous
   licence (tables d'aliments, modèles, polices, cités dans Réglages → Licences). Je propose « Oui, elle contient du
   contenu de tiers, et j'ai les droits nécessaires ». Répondez « ok Content Rights » et je l'envoie par l'API, ou
@@ -36,12 +46,14 @@
 
 **Où on en est pour vendre sur iPhone** : contrat de vente, banque et fiscalité actifs (A4) ; confidentialité de l'app
 remplie (A5) ; trois abonnements chez Apple, prêts à partir avec une version (« Prepare for Submission ») : Gold
-9,99 €/mois, Silver 29,99 €/an avec 2 semaines d'essai, Silver 4,99 €/mois, en France. Le serveur d'Android vérifie
+9,99 €/mois, Silver 29,99 €/an avec 2 semaines d'essai, Silver 4,99 €/mois, dans les 5 pays de P32 (prix en CHF et $CA
+comme Google Play). Le serveur d'Android vérifie
 les achats faits sur iPhone, et **l'achat est ouvert dans l'app**. App Attest est coché, le serveur l'observe depuis
 le 2/11, et la build 722.221 l'utilise. Captures iPad 13" : choix « B » (Nutrition à la place de
 Sources), 8 envoyées le 2/11, toutes acceptées par Apple.
 
 Restent :
+- « Prix et disponibilité » de l'app (gratuite, 5 pays) ;
 - Content Rights ;
 - l'essai sur l'iPhone 12 ;
 - votre relecture, puis votre soumission. La section des abonnements apparaîtra sur la page de la version : cochez-y
@@ -104,6 +116,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 23:00 | Android v722, préparation de la soumission | la routine Android a réglé votre décision : Gold offert s'arrête le 6/11 inclus sur iPhone (Google Play garde le 27/11), et l'app d'Android se signale elle-même comme iPhone ; nos deux adaptations devenues inutiles sont retirées (PR #218) ; lot prêt pour la soumission (PR #219) : App Attest dans l'app, notes pour l'examen à jour, abonnements nommés Silver, et de quoi passer la version au numéro de la build finale ; **la 722 est sur TestFlight (722.219)**, et l'iPhone simulé affiche bien « Gold offert … jusqu'au 6 nov. ». Parité : 67 % | #218 (mergée), #219 (en vérification) |
 | 3/11 00:00 | lot de la soumission | Android n'a publié que son journal ; lot de la soumission mergé (PR #219) : **la 722.221 est sur TestFlight, première avec App Attest** (après une correction de notre vérification, PR #220) ; fiche renvoyée avec « bien-être » ; **captures iPad acceptées par Apple (8/8)** ; abonnements renommés Silver chez Apple. Apple les dit encore « métadonnées manquantes » alors que tout est en place : à revoir le jour de la soumission. Parité : 67 % | #219, #220 (mergées) |
 | 3/11 01:00 | suivi d'Android v724 | Android a renommé ses abonnements Google Play Silver et Gold, comme nous l'avons fait chez Apple ; rien ne change dans l'app ; **la 724 est sur TestFlight (724.223)**. Parité : 67 % | #222 (mergée) |
+| 3/11 02:00 | abonnements dans vos 5 pays | comme Google Play (votre décision P32), les trois abonnements d'Apple sont maintenant en vente en France, Belgique, Luxembourg, Suisse et Canada (prix en CHF et $CA identiques à Google Play, essai de 2 semaines partout) ; **découvert : la page « Prix et disponibilité » de l'app est vide chez Apple**, sans doute la raison des abonnements « métadonnées manquantes » : votre geste en tête. Parité : 67 % | #224, #225 (mergées) |
 
 ---
 
