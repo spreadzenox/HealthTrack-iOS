@@ -1,8 +1,8 @@
 # 2026-11-03 01:00 UTC — Abonnements dans les 5 pays de P32 ; l'app n'a ni prix ni pays chez Apple
 
-**Étape** : I9 (publication : préparation de la soumission du 7 ou du 8/11), suivi d'Android  ·  **PR** : #224, #225
-(mergées), v725, journal  ·  **Android suivi** : v724 (`2581cce`), v725 en cours  ·  **iOS** : 724 sur TestFlight
-(724.223) ; version 717 dans App Store Connect, build 717.216 attachée  ·  **Parité** : 67 % (30/45)
+**Étape** : I9 (publication : préparation de la soumission du 7 ou du 8/11), suivi d'Android  ·  **PR** : #224, #225,
+#226 (mergées), journal  ·  **Android suivi** : v725 (`ab16d9a`)  ·  **iOS** : 725 sur TestFlight
+(725.227) ; version 717 dans App Store Connect, build 717.216 attachée  ·  **Parité** : 67 % (30/45)
 
 ## Messages du propriétaire depuis le run précédent
 - Aucun.
@@ -33,7 +33,10 @@
     tête du résumé ; il peut aussi répondre « ok prix et disponibilité » pour que la routine le fasse par l'API
     (gratuit, 5 pays de P32).
 
+- **v725** : `scripts/upstream.sh --latest` ; 35 correctifs tels quels, 3173 tests et build appstore ; **#226 mergée**
+  (CI macOS verte, aucune erreur JS ni texte d'Android) ; **TestFlight 725.227** (run 41561126764) ; fiche renvoyée
+  (run 41561797120) : version 717 gardée, captures iPad et iPhone 8/8 traitées.
+
 ## Suite
-- Suivi d'Android v725 (scripts de Google Play seulement).
 - Après « Prix et disponibilité » : relire l'état des abonnements (workflow « Abonnements App Store »).
 - Avant le 7/11 : liste de contrôle de la soumission (BACKLOG).

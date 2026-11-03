@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v724 (3/11) | **724 sur TestFlight** (build 724.223, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v725 (3/11) | **725 sur TestFlight** (build 725.227, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -35,7 +35,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (724.223 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (725.227 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Soumission prévue le 7 ou le 8/11** (votre décision du 2/11). Avant cette date, je vérifie :
@@ -116,7 +116,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 23:00 | Android v722, préparation de la soumission | la routine Android a réglé votre décision : Gold offert s'arrête le 6/11 inclus sur iPhone (Google Play garde le 27/11), et l'app d'Android se signale elle-même comme iPhone ; nos deux adaptations devenues inutiles sont retirées (PR #218) ; lot prêt pour la soumission (PR #219) : App Attest dans l'app, notes pour l'examen à jour, abonnements nommés Silver, et de quoi passer la version au numéro de la build finale ; **la 722 est sur TestFlight (722.219)**, et l'iPhone simulé affiche bien « Gold offert … jusqu'au 6 nov. ». Parité : 67 % | #218 (mergée), #219 (en vérification) |
 | 3/11 00:00 | lot de la soumission | Android n'a publié que son journal ; lot de la soumission mergé (PR #219) : **la 722.221 est sur TestFlight, première avec App Attest** (après une correction de notre vérification, PR #220) ; fiche renvoyée avec « bien-être » ; **captures iPad acceptées par Apple (8/8)** ; abonnements renommés Silver chez Apple. Apple les dit encore « métadonnées manquantes » alors que tout est en place : à revoir le jour de la soumission. Parité : 67 % | #219, #220 (mergées) |
 | 3/11 01:00 | suivi d'Android v724 | Android a renommé ses abonnements Google Play Silver et Gold, comme nous l'avons fait chez Apple ; rien ne change dans l'app ; **la 724 est sur TestFlight (724.223)**. Parité : 67 % | #222 (mergée) |
-| 3/11 02:00 | abonnements dans vos 5 pays | comme Google Play (votre décision P32), les trois abonnements d'Apple sont maintenant en vente en France, Belgique, Luxembourg, Suisse et Canada (prix en CHF et $CA identiques à Google Play, essai de 2 semaines partout) ; **découvert : la page « Prix et disponibilité » de l'app est vide chez Apple**, sans doute la raison des abonnements « métadonnées manquantes » : votre geste en tête. Parité : 67 % | #224, #225 (mergées) |
+| 3/11 02:00 | abonnements dans vos 5 pays | comme Google Play (votre décision P32), les trois abonnements d'Apple sont maintenant en vente en France, Belgique, Luxembourg, Suisse et Canada (prix en CHF et $CA identiques à Google Play, essai de 2 semaines partout) ; **découvert : la page « Prix et disponibilité » de l'app est vide chez Apple**, sans doute la raison des abonnements « métadonnées manquantes » : votre geste en tête ; Android v725 suivie (rien dans l'app), **la 725 est sur TestFlight (725.227)**. Parité : 67 % | #224, #225, #226 (mergées) |
 
 ---
 
