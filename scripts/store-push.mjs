@@ -85,12 +85,13 @@ export function presentFiles(listed, dirFiles) {
 
 /**
  * Numéro de la version : celui des builds (`wanted`), sauf si une build y est déjà attachée (choisie par le
- * propriétaire pour la soumission) : la renommer la détacherait.
+ * propriétaire pour la soumission) : la renommer la détacherait. `followBuilds` (option `--version-des-builds`, pour
+ * la build finale d'une soumission) renomme quand même : Apple n'attache une build qu'à la version du même numéro.
  */
-export function versionPlan({ current, wanted, attachedBuild }) {
+export function versionPlan({ current, wanted, attachedBuild, followBuilds = false }) {
   if (current === wanted) return { rename: false, keep: current, reason: null }
-  if (attachedBuild) return { rename: false, keep: current, reason: `build ${attachedBuild} attachée` }
-  return { rename: true, keep: wanted, reason: null }
+  if (attachedBuild && !followBuilds) return { rename: false, keep: current, reason: `build ${attachedBuild} attachée` }
+  return { rename: true, keep: wanted, reason: attachedBuild ? `build ${attachedBuild} à remplacer par une ${wanted}.x` : null }
 }
 
 /** Empreinte MD5 qu'App Store Connect vérifie à la fin de l'envoi d'une capture. */
@@ -252,10 +253,11 @@ async function main() {
   const version = editable(versions.data)
   if (!version) throw new Error('aucune version iOS « Prête à soumettre » : rien à modifier (version en examen ou en vente)')
   const attached = (await api(token, 'GET', `/v1/appStoreVersions/${version.id}/build?fields[builds]=version`)).data
-  const plan = versionPlan({ current: version.attributes?.versionString, wanted, attachedBuild: attached?.attributes?.version ?? null })
+  const followBuilds = process.argv.includes('--version-des-builds')
+  const plan = versionPlan({ current: version.attributes?.versionString, wanted, attachedBuild: attached?.attributes?.version ?? null, followBuilds })
   if (plan.rename) {
     await api(token, 'PATCH', `/v1/appStoreVersions/${version.id}`, { data: { type: 'appStoreVersions', id: version.id, attributes: { versionString: wanted } } })
-    console.log(`Version ${version.attributes?.versionString} renommée ${wanted}`)
+    console.log(`Version ${version.attributes?.versionString} renommée ${wanted}${plan.reason ? ` (${plan.reason}, à choisir par le propriétaire)` : ''}`)
     version.attributes = { ...version.attributes, versionString: wanted }
   } else if (plan.reason) {
     console.log(`Version ${plan.keep} gardée (${plan.reason}, choisie par le propriétaire) ; builds en ${wanted}`)
@@ -267,9 +269,11 @@ async function main() {
   })
   console.log(`Version ${version.attributes?.versionString} : fiche ${LOCALE} ${v.action} (description, mots-clés, texte promotionnel, assistance)`)
   if (capturesDir) console.log(`Captures : ${await uploadScreenshots(token, v.id, capturesDir)} envoyées dans l'ordre de captures.md`)
-  if (ipadFiles) {
-    console.log(`Captures iPad : ${await uploadScreenshots(token, v.id, ipadDir, { displayType: IPAD_DISPLAY_TYPE, files: ipadFiles })} envoyées dans l'ordre de captures.md`)
-    const ipad = await screenshotReport(token, v.id, { waitMs: 120000, displayType: IPAD_DISPLAY_TYPE })
+  if (ipadFiles) console.log(`Captures iPad : ${await uploadScreenshots(token, v.id, ipadDir, { displayType: IPAD_DISPLAY_TYPE, files: ipadFiles })} envoyées dans l'ordre de captures.md`)
+  // État relu à chaque envoi de la fiche, même sans nouvelles captures (celles d'Apple se traitent en différé)
+  const ipad = await screenshotReport(token, v.id, { waitMs: ipadFiles ? 120000 : 0, displayType: IPAD_DISPLAY_TYPE })
+  if (!ipad) console.log(`Captures (${IPAD_DISPLAY_TYPE}) : aucune dans la fiche`)
+  else {
     console.log(`Captures (${IPAD_DISPLAY_TYPE}) chez Apple : ${ipad.complete}/${ipad.total} traitées, ${ipad.pending} en cours, ${ipad.failed.length} refusées`)
     if (ipad.failed.length) throw new Error(`captures iPad refusées par Apple : ${ipad.failed.join(' ; ')}`)
   }

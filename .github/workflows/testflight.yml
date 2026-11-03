@@ -130,6 +130,11 @@ jobs:
             || { echo "::error::family-controls absent de l'app signée"; exit 1; }
           grep -q 'com.apple.developer.family-controls.app-and-website-usage' "$RUNNER_TEMP/ipa-entitlements.txt" \
             || { echo "::error::family-controls.app-and-website-usage absent de l'app signée"; exit 1; }
+          # App Attest (I6) : capacité cochée par le propriétaire le 2/11 ; environnement de production, sinon le relais
+          # refuserait les attestations en « enforce » (aaguid « appattestdevelop »). codesign écrit la valeur deux
+          # lignes sous la clé ([Key], [Value], [String] production)
+          grep -A2 'com.apple.developer.devicecheck.appattest-environment' "$RUNNER_TEMP/ipa-entitlements.txt" | grep -q production \
+            || { echo "::error::App Attest (production) absent de l'app signée"; exit 1; }
           if grep -A2 "get-task-allow" "$RUNNER_TEMP/ipa-entitlements.txt" | grep -q true; then
             echo "::error::app signée en développement (get-task-allow)"; exit 1
           fi
