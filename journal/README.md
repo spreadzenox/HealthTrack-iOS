@@ -124,6 +124,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 06:00 | suivi d'Android v730 | Android a refait ses captures Google Play et son banc d'essai visuel ; rien ne change dans l'app ; **la 730 est sur TestFlight (730.235)**. Parité : 67 % | #235 (mergée) |
 | 3/11 07:00 | suivi d'Android v731 | Android améliore l'écran de la montre Huawei (lectures faites app fermée) ; cet écran n'existe pas sur iPhone, rien n'y change ; **la 731 est sur TestFlight (731.237)**. Parité : 67 % | #237 (mergée) |
 | 3/11 08:00 | run court | Android n'a publié que son journal ; tout ce qui reste avant la soumission attend vos deux réglages (« Prix et disponibilité », Content Rights) ou le 6/11. Parité : 67 % | — |
+| 3/11 09:00 | run court | Android n'a publié que des idées (production Google Play) ; tout ce qui reste avant la soumission attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 
 ---
 
