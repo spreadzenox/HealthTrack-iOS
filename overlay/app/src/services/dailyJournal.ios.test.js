@@ -38,3 +38,22 @@ describe('Journal : une nuit de l’app Santé comptée une fois (iPhone)', () =
     expect(days.map((d) => d.summary.sleepMinutes)).toEqual([420])
   })
 })
+
+// Version iOS (Android v746, MONTRE-SCORE) : « Score montre » et « FC nuit » viennent du résumé de nuit de la montre
+// Huawei (Health Kit d'Android). L'app Santé n'en donne pas (aucune API du score de sommeil d'Apple, forum des
+// développeurs d'Apple, sept. 2025) : une nuit de l'app Santé ne montre ni l'un ni l'autre, jamais un chiffre inventé
+describe('Journal : pas de score de nuit sans montre qui le donne (iPhone)', () => {
+  it('nuit Apple Watch ou Huawei Santé via l’app Santé : sommeil oui, « Score montre » et « FC nuit » non', () => {
+    const watch = [night('Apple Watch', 'light', 0, 240), night('Apple Watch', 'deep', 240, 60), night('Apple Watch', 'rem', 300, 120)]
+    const huawei = [night('Huawei Santé', 'asleep', 600 * 24, 400)]
+    for (const day of buildDailyJournal([...watch, ...huawei])) {
+      expect(day.summary.sleepMinutes).toBeGreaterThan(0)
+      expect(day.summary.watchSleepScore).toBeNull()
+      expect(day.summary.sleepHr).toBeNull()
+      const labels = summaryChips(day.summary).map(([label]) => label)
+      expect(labels).toContain('Sommeil')
+      expect(labels).not.toContain('Score montre')
+      expect(labels).not.toContain('FC nuit')
+    }
+  })
+})
