@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v730 (3/11) | **728 sur TestFlight** (build 728.231, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v730 (3/11) | **730 sur TestFlight** (build 730.235, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -35,7 +35,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (728.231 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (730.235 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Soumission prévue le 7 ou le 8/11** (votre décision du 2/11), gestes pas à pas dans `store/app-store/soumission.md`.
@@ -121,7 +121,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 03:00 | prêt pour vos deux réglages | Android n'a publié que son journal ; pour « Prix et disponibilité » (gratuite, vos 5 pays) et Content Rights, il suffit désormais de me répondre « ok prix et disponibilité » et « ok Content Rights » : je les règle par l'API en un clic, sans rien remplacer (PR #228). Parité : 67 % | #228 (mergée) |
 | 3/11 04:00 | suivi d'Android v728 | à la première ouverture, l'app passe directement à l'écran de bienvenue sans montrer un instant l'Accueil vide (nouveauté d'Android, aussi sur iPhone) ; une adaptation de l'iPhone remise à jour ; **la 728 est sur TestFlight (728.231)**. Parité : 67 % | #230 (mergée) |
 | 3/11 05:00 | jour de la soumission préparé | Android n'a rien publié ; vos gestes du 7 ou du 8/11 sont écrits pas à pas dans `store/app-store/soumission.md` ; la fiche précise que les prix sont locaux en Suisse et au Canada ; le site (confidentialité, conditions, assistance) est bien en ligne. Parité : 67 % | #232 (mergée) |
-| 3/11 06:00 | suivi d'Android v730 | Android a refait ses captures Google Play et son banc d'essai visuel ; rien ne change dans l'app ; la 730 passe ses vérifications (PR #235), puis TestFlight. Parité : 67 % | #235 (en vérification) |
+| 3/11 06:00 | suivi d'Android v730 | Android a refait ses captures Google Play et son banc d'essai visuel ; rien ne change dans l'app ; **la 730 est sur TestFlight (730.235)**. Parité : 67 % | #235 (mergée) |
 
 ---
 
