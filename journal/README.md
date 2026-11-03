@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v749 (3/11) | **749 sur TestFlight** (build 749.258, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v751 (3/11) | **749 sur TestFlight** (build 749.258, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -139,6 +139,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 21:00 | suivi d'Android v746 | sur Google Play, « Vos derniers jours » montre maintenant le score de la nuit et le cœur pendant la nuit, venus de la montre Huawei reliée en direct ; sur iPhone, rien ne les fournit (pas de liaison directe avec la montre, et Apple ne laisse pas les apps lire son score de sommeil) : les deux pastilles n'y apparaissent pas, sans chiffre inventé ; vérifié sur l'iPhone simulé ; **la 746 est sur TestFlight (746.257)**. Parité : 67 % | #257 (mergée) |
 | 3/11 22:00 | suivi d'Android v749 | sur Google Play, une carte de l'Accueil annonce maintenant la fin de Gold offert 3 jours avant ; Android la coupe sur iPhone, selon votre décision du 2/11 (l'examen d'Apple doit voir l'écran d'achat) : un test de l'iPhone vérifie qu'elle n'y apparaît pas avant le 6/11 ; noté pour Android que la carte suivante qu'il prépare (« Le test est terminé ») tomberait le 7/11 sur iPhone ; vérifié sur l'iPhone simulé (l'Accueil ne change pas) ; **la 749 est sur TestFlight (749.258)**. Parité : 67 % | #258 (mergée) |
 | 3/11 23:00 | run court | Android n'a rien publié de plus ; la 749 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
+| 4/11 00:00 | suivi d'Android v751 | sur Google Play, une carte de l'Accueil remerciera les testeurs après la fin de Gold offert ; Android l'a coupée sur iPhone de lui-même (ma demande notée hier soir n'a pas eu à vous être transmise) : un test de l'iPhone vérifie qu'elle n'y apparaît pas les 7 et 8/11 ; Android a aussi rangé son code (rien de visible) ; vérifications en cours (PR #260), puis TestFlight. Parité : 67 % | #260 (en vérification) |
 
 ---
 
