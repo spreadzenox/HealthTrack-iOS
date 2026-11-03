@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v722 (2/11) | **722 sur TestFlight** (build 722.221, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v724 (3/11) | **722 sur TestFlight** (build 722.221, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -103,6 +103,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 22:00 | captures iPad, Android v721 | votre choix « B » appliqué : **8 captures iPad envoyées à Apple** (Nutrition à la place de Sources ; aucune refusée, 4 encore en traitement à la relecture ; version 717 et build 717.216 intactes) ; l'iPhone se signale désormais au serveur, pour que Gold offert s'y arrête le 6/11 comme vous l'avez décidé (PR #218) ; Android v721 suivie : Gold offert jusqu'au 27/11 (iPhone compris), « Gold estime mieux les quantités » sur la page d'abonnement (aussi dans la description d'Apple), et le serveur observe App Attest avec votre Team ID. Parité : 67 % | #217 (mergée), #218 (en vérification) |
 | 2/11 23:00 | Android v722, préparation de la soumission | la routine Android a réglé votre décision : Gold offert s'arrête le 6/11 inclus sur iPhone (Google Play garde le 27/11), et l'app d'Android se signale elle-même comme iPhone ; nos deux adaptations devenues inutiles sont retirées (PR #218) ; lot prêt pour la soumission (PR #219) : App Attest dans l'app, notes pour l'examen à jour, abonnements nommés Silver, et de quoi passer la version au numéro de la build finale ; **la 722 est sur TestFlight (722.219)**, et l'iPhone simulé affiche bien « Gold offert … jusqu'au 6 nov. ». Parité : 67 % | #218 (mergée), #219 (en vérification) |
 | 3/11 00:00 | lot de la soumission | Android n'a publié que son journal ; lot de la soumission mergé (PR #219) : **la 722.221 est sur TestFlight, première avec App Attest** (après une correction de notre vérification, PR #220) ; fiche renvoyée avec « bien-être » ; **captures iPad acceptées par Apple (8/8)** ; abonnements renommés Silver chez Apple. Apple les dit encore « métadonnées manquantes » alors que tout est en place : à revoir le jour de la soumission. Parité : 67 % | #219, #220 (mergées) |
+| 3/11 01:00 | suivi d'Android v724 | Android a renommé ses abonnements Google Play Silver et Gold, comme nous l'avons fait chez Apple ; rien ne change dans l'app ; la 724 passe ses vérifications (PR #222), puis TestFlight. Parité : 67 % | #222 (en vérification) |
 
 ---
 
