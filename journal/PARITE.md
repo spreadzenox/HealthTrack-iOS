@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v744 (commit `2ebf24a`, 3/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v746 (commit `83e261d`, 3/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 21:00 | #662 (v746) | #662 (MONTRE-SCORE) : « Vos derniers jours » montre le score de la nuit calculé par la montre Huawei (« Score montre », sur 100) et sa FC moyenne de la nuit (« FC nuit »), déjà reçus par la synchro de la montre en direct et jusque-là affichés seulement sur l'écran Montre (`dailyJournal.js`, `journalChips.js`) ; note de Nouveautés réservée à Google Play et à la sideload ; #663, #664 : journal et idées d'Android ; côté iPhone : **⛔ score de nuit, pas d'API** (le score de sommeil d'Apple n'est pas lisible par les apps, réponse d'Apple sur son forum des développeurs, sept. 2025, developer.apple.com/forums/thread/800403) et sur iPhone la montre Huawei passe par l'app Santé (pas de montre en direct, I8), qui n'a pas ce résumé : les deux pastilles restent absentes, sans chiffre inventé (test iOS ajouté) ; piste notée : une « FC nuit » calculée sur iPhone à partir des mesures de cœur de l'app Santé pendant la nuit (`BACKLOG.md`) ; 35 correctifs tels quels | — |
 | 3/11 19:00 | #660 (v744) | #660 (GOLD-a3-1) : empreinte de l'installation du propriétaire dans le bilan du déploiement du relais (workflow) ; #659 (journal) comptait pour v743 ; rien dans `app/src` ni dans `relay/src` ; côté iPhone : 35 correctifs tels quels | — |
 | 3/11 18:00 | #659 (journal) | journal seulement (première lecture `testenv`) ; rien à suivre | — |
 | 3/11 17:00 | #657, #658 (v742) | #658 (INSTALLS-21b-2) : répartition `testenv` dans le journal du déploiement du relais (workflow) ; #657 : journal ; rien dans `app/src` ni dans `relay/src` ; côté iPhone : 35 correctifs tels quels | — |
