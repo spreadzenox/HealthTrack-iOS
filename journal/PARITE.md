@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v742 (commit `848cfed`, 3/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v744 (commit `2ebf24a`, 3/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 19:00 | #660 (v744) | #660 (GOLD-a3-1) : empreinte de l'installation du propriétaire dans le bilan du déploiement du relais (workflow) ; #659 (journal) comptait pour v743 ; rien dans `app/src` ni dans `relay/src` ; côté iPhone : 35 correctifs tels quels | — |
 | 3/11 18:00 | #659 (journal) | journal seulement (première lecture `testenv`) ; rien à suivre | — |
 | 3/11 17:00 | #657, #658 (v742) | #658 (INSTALLS-21b-2) : répartition `testenv` dans le journal du déploiement du relais (workflow) ; #657 : journal ; rien dans `app/src` ni dans `relay/src` ; côté iPhone : 35 correctifs tels quels | — |
 | 3/11 16:00 | #656 (v740) | #656 (POL-PLAY-11) : ressources Android inutilisées retirées de la version Google Play (`shrinkResources`, `keep.xml`) ; rien dans le code web partagé hormis un test ; côté iPhone : sans objet, 35 correctifs tels quels | — |
