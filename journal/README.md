@@ -133,6 +133,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 15:00 | run court | rien de nouveau chez Android ; la 739 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 3/11 16:00 | suivi d'Android v740 | Android a allégé sa version Google Play (fichiers inutilisés retirés) ; rien ne change sur iPhone ; **la 740 est sur TestFlight (740.250)**. Parité : 67 % | #250 (mergée) |
 | 3/11 17:00 | suivi d'Android v742 | Android n'a changé que le suivi de son serveur ; rien ne change sur iPhone ; **la 742 est sur TestFlight (742.252)**. Parité : 67 % | #252 (mergée) |
+| 3/11 18:00 | run court | Android n'a publié que son journal ; la 742 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 
 ---
 
