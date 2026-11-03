@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v731 (commit `c102065`, 3/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v734 (commit `9bd117b`, 3/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 10:00 | #650 (v734) | #650 : état des pistes Google Play dans le bilan de « Play — AAB » (scripts de Google Play) ; rien dans `app/src` ni dans `relay` depuis v731 (#648 et #649, journal, comptaient pour v732 et v733) ; côté iPhone : 35 correctifs tels quels | — |
 | 3/11 09:00 | #649 (idées) | idées sur le passage en production Google Play (I212, P42) ; journal seulement, rien à suivre | — |
 | 3/11 08:00 | #648 (journal) | journal seulement (temps de chargement mesurés, aucune page au-delà de 0,75 s) ; pas d'envoi sur Google Play, rien à suivre | — |
 | 3/11 07:00 | #647 (v731, M5) | #647 : l'écran « Données de la montre » (montre Huawei en direct) tient compte des lectures faites app fermée (« Dernière lecture en arrière-plan », `noteCaptureReads`) ; note de Nouveautés réservée à Google Play et à la sideload ; côté iPhone : la page et la montre en direct n'existent pas (BLE à l'étude, I8) ; sans plugin de montre, `importCaptures` ne rend aucune lecture et la nouvelle fonction ne fait rien ; 35 correctifs tels quels | — |
