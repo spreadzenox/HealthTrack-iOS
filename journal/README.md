@@ -38,7 +38,8 @@
 - Installez la build la plus récente de TestFlight (728.231 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
-**Soumission prévue le 7 ou le 8/11** (votre décision du 2/11). Avant cette date, je vérifie :
+**Soumission prévue le 7 ou le 8/11** (votre décision du 2/11), gestes pas à pas dans `store/app-store/soumission.md`.
+Avant cette date, je vérifie :
 - que le serveur coupe bien la période de lancement sur iPhone : réglé ce soir par la routine Android, et vérifié sur
   l'iPhone simulé (« Gold offert pendant le test, jusqu'au 6 nov. 2026 ») ; Google Play garde le 27/11 ;
 - l'écran d'achat avec les trois abonnements, et le chemin des notes d'examen (roue, Paramètres, Découvrir le premium) ;
@@ -119,6 +120,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 02:00 | abonnements dans vos 5 pays | comme Google Play (votre décision P32), les trois abonnements d'Apple sont maintenant en vente en France, Belgique, Luxembourg, Suisse et Canada (prix en CHF et $CA identiques à Google Play, essai de 2 semaines partout) ; **découvert : la page « Prix et disponibilité » de l'app est vide chez Apple**, sans doute la raison des abonnements « métadonnées manquantes » : votre geste en tête ; Android v725 suivie (rien dans l'app), **la 725 est sur TestFlight (725.227)**. Parité : 67 % | #224, #225, #226 (mergées) |
 | 3/11 03:00 | prêt pour vos deux réglages | Android n'a publié que son journal ; pour « Prix et disponibilité » (gratuite, vos 5 pays) et Content Rights, il suffit désormais de me répondre « ok prix et disponibilité » et « ok Content Rights » : je les règle par l'API en un clic, sans rien remplacer (PR #228). Parité : 67 % | #228 (mergée) |
 | 3/11 04:00 | suivi d'Android v728 | à la première ouverture, l'app passe directement à l'écran de bienvenue sans montrer un instant l'Accueil vide (nouveauté d'Android, aussi sur iPhone) ; une adaptation de l'iPhone remise à jour ; **la 728 est sur TestFlight (728.231)**. Parité : 67 % | #230 (mergée) |
+| 3/11 05:00 | jour de la soumission préparé | Android n'a rien publié ; vos gestes du 7 ou du 8/11 sont écrits pas à pas dans `store/app-store/soumission.md` ; la fiche précise que les prix sont locaux en Suisse et au Canada ; le site (confidentialité, conditions, assistance) est bien en ligne. Parité : 67 % | #232 (mergée) |
 
 ---
 
