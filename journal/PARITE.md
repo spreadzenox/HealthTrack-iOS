@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 11:00 | #651 (journal) | bilan du relais avant les testeurs : période de lancement de l'iPhone jusqu'au 6/11, App Attest sans clé enregistrée (aucune build qui signe installée) ; journal seulement, rien à suivre | — |
 | 3/11 10:00 | #650 (v734) | #650 : état des pistes Google Play dans le bilan de « Play — AAB » (scripts de Google Play) ; rien dans `app/src` ni dans `relay` depuis v731 (#648 et #649, journal, comptaient pour v732 et v733) ; côté iPhone : 35 correctifs tels quels | — |
 | 3/11 09:00 | #649 (idées) | idées sur le passage en production Google Play (I212, P42) ; journal seulement, rien à suivre | — |
 | 3/11 08:00 | #648 (journal) | journal seulement (temps de chargement mesurés, aucune page au-delà de 0,75 s) ; pas d'envoi sur Google Play, rien à suivre | — |
