@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v746 (3/11) | **744 sur TestFlight** (build 744.255, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v749 (3/11) | **744 sur TestFlight** (build 744.255, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -136,7 +136,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 18:00 | run court | Android n'a publié que son journal ; la 742 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 3/11 19:00 | suivi d'Android v744 | Android n'a changé que le bilan de son serveur ; rien ne change sur iPhone ; **la 744 est sur TestFlight (744.255)**. Parité : 67 % | #255 (mergée) |
 | 3/11 20:00 | run court | Android n'a publié que son journal ; la 744 sur TestFlight est à jour ; une demande de modification en double, sans rien de neuf, fermée ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
-| 3/11 21:00 | suivi d'Android v746 | sur Google Play, « Vos derniers jours » montre maintenant le score de la nuit et le cœur pendant la nuit, venus de la montre Huawei reliée en direct ; sur iPhone, rien ne les fournit (pas de liaison directe avec la montre, et Apple ne laisse pas les apps lire son score de sommeil) : les deux pastilles n'y apparaissent pas, sans chiffre inventé ; vérifications en cours (PR #257), puis TestFlight. Parité : 67 % | #257 (en vérification) |
+| 3/11 21:00 | suivi d'Android v746 | sur Google Play, « Vos derniers jours » montre maintenant le score de la nuit et le cœur pendant la nuit, venus de la montre Huawei reliée en direct ; sur iPhone, rien ne les fournit (pas de liaison directe avec la montre, et Apple ne laisse pas les apps lire son score de sommeil) : les deux pastilles n'y apparaissent pas, sans chiffre inventé ; vérifié sur l'iPhone simulé, la 746 part sur TestFlight. Parité : 67 % | #257 (mergée) |
+| 3/11 22:00 | suivi d'Android v749 | sur Google Play, une carte de l'Accueil annonce maintenant la fin de Gold offert 3 jours avant ; Android la coupe sur iPhone, selon votre décision du 2/11 (l'examen d'Apple doit voir l'écran d'achat) : un test de l'iPhone vérifie qu'elle n'y apparaît pas avant le 6/11 ; noté pour Android que la carte suivante qu'il prépare (« Le test est terminé ») tomberait le 7/11 sur iPhone ; vérifications en cours (PR #258). Parité : 67 % | #258 (en vérification) |
 
 ---
 
