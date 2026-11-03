@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v739 (commit `6e20c48`, 3/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v740 (commit `e1aa866`, 3/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 16:00 | #656 (v740) | #656 (POL-PLAY-11) : ressources Android inutilisées retirées de la version Google Play (`shrinkResources`, `keep.xml`) ; rien dans le code web partagé hormis un test ; côté iPhone : sans objet, 35 correctifs tels quels | — |
 | 3/11 14:00 | #654, #655 (v739) | #655 (POL-PLAY-105) : rapport PDF, les semaines d'avant la première note sont résumées en une ligne quand la période dépasse le journal, et « 1er » du mois aussi dans le rapport ; note de Nouveautés pour toutes les variantes, vraie sur iPhone (même rapport, enregistré dans Fichiers) ; #654 : journal (P43, Android vitals) ; côté iPhone : 35 correctifs tels quels | — |
 | 3/11 13:00 | #652, #653 (v737) | #652 (INSTALLS-21b-1) : l'app dit au relais comment s'est terminée sa lecture du réglage Test Lab (`testEnvironment`, en-tête `X-Test-Env`, accepté par le CORS du relais) ; #653 : plantages et ANR d'Android vitals dans le bilan de « Play — AAB » (scripts) ; pas de note de Nouveautés ; côté iPhone : correctif 38 refait (import d'App Attest après celui de `playIntegrity`, désormais `requestIntegrity, testEnvironment`) ; sans plugin Google, `env` est nul et l'en-tête n'est jamais envoyé ; 35 correctifs | — |
 | 3/11 11:00 | #651 (journal) | bilan du relais avant les testeurs : période de lancement de l'iPhone jusqu'au 6/11, App Attest sans clé enregistrée (aucune build qui signe installée) ; journal seulement, rien à suivre | — |
