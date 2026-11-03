@@ -2,10 +2,10 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
-// Version iOS (HealthTrack-iOS, Android v749, FIN-LANCEMENT-1) : la carte « Gold offert jusqu'au … » n'apparaît
-// jamais sur iPhone, même dans les 3 derniers jours de la période de l'iPhone (fin au 6/11 inclus, décision du
-// propriétaire du 2/11) : l'examen d'Apple, le 7 ou le 8/11, doit voir l'écran d'achat, et l'app n'annonce pas de date
-// d'ici là (Paramètres dit seulement « jusqu'au 6 nov. »)
+// Version iOS (HealthTrack-iOS, Android v749 et v751, FIN-LANCEMENT-1 et 2) : ni la carte « Gold offert jusqu'au … »
+// ni « Le test est terminé. Merci ! » n'apparaissent sur iPhone, alors que la période de l'iPhone (fin au 6/11 inclus,
+// décision du propriétaire du 2/11) tombe dans leurs fenêtres : l'examen d'Apple, le 7 ou le 8/11, doit voir l'écran
+// d'achat, et l'app n'annonce pas de date d'ici là (Paramètres dit seulement « jusqu'au 6 nov. »)
 const store = vi.hoisted(() => ({ id: 'appstore' }))
 vi.mock('../config/distribution', async (importOriginal) => {
   const actual = await importOriginal()
@@ -39,5 +39,30 @@ describe('Fin de Gold offert sur iPhone (variante appstore)', () => {
     store.id = 'play'
     renderCard(Date.parse(IOS_UNTIL) - DAY)
     expect(screen.getByText(/Gold offert jusqu.au 6 nov/)).toBeInTheDocument()
+  })
+})
+
+describe('Fin du test sur iPhone (variante appstore)', () => {
+  beforeEach(() => {
+    localStorage.clear()
+    store.id = 'appstore'
+    // Après le 6/11 : le relais ne sert plus la période ; l'app a retenu sa dernière fin
+    localStorage.setItem('halcya_launch_last_until', IOS_UNTIL)
+    storeEnt({ premium: false, source: null, state: null })
+  })
+
+  it('pas de « Le test est terminé » le 7 ni le 8/11 : l’écran d’achat reste ce que voit l’examen', () => {
+    for (const after of [0.4, 1, 1.9]) {
+      const { unmount } = renderCard(Date.parse(IOS_UNTIL) + after * DAY)
+      expect(screen.queryByRole('status')).not.toBeInTheDocument()
+      expect(screen.queryByText(/Le test est terminé/)).not.toBeInTheDocument()
+      unmount()
+    }
+  })
+
+  it('témoin : avec le magasin Google Play, la carte de fin du test s’affiche', () => {
+    store.id = 'play'
+    renderCard(Date.parse(IOS_UNTIL) + DAY)
+    expect(screen.getByText('Le test est terminé. Merci !')).toBeInTheDocument()
   })
 })

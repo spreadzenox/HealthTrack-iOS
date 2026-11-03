@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import process from 'node:process'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { SNAPSHOT_DIR } from './snapshot.js'

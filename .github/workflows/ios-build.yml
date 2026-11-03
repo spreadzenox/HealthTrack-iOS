@@ -43,6 +43,10 @@ jobs:
         run: |
           npm ci --no-audit --no-fund
           npm run test
+      # Même règle qu'Android depuis v751 (#667) : 0 erreur d'ESLint, correctifs et fichiers de l'iPhone compris
+      - name: Lint (ESLint, 0 erreur)
+        working-directory: upstream/app
+        run: npm run lint
 
   ios:
     name: Build iOS (simulateur) et captures
