@@ -203,7 +203,10 @@ function fakeAsc({ prePrice = null, monthlyPlans = false, app = {} } = {}) {
     }
     if ((m = /^\/v1\/subscriptions\/(\w+)$/.exec(path)) && method === 'GET') return json(200, { data: db.subs.find((s) => s.id === m[1]) })
     if (/^\/v1\/subscriptions\/\w+\/planAvailabilities$/.test(path) && method === 'GET') return json(200, { data: [] })
-    if (method === 'GET' && path === '/v1/apps/app1/appAvailabilityV2') return json(200, { data: { id: 'av1', type: 'appAvailabilities' } })
+    if (method === 'GET' && path === '/v1/apps/app1/appAvailabilityV2') {
+      return db.noAppAvailability ? json(404, { errors: [{ title: 'Not found' }] }) : json(200, { data: { id: 'av1', type: 'appAvailabilities' } })
+    }
+    if (method === 'GET' && path === '/v1/apps/app1/appPriceSchedule') return db.appPrice ? json(200, db.appPrice) : json(404, { errors: [{ title: 'Not found' }] })
     if (method === 'GET' && path === '/v2/appAvailabilities/av1/territoryAvailabilities') {
       return json(200, { data: (db.appTerritories || ['FRA']).map((t) => ({ type: 'territoryAvailabilities', attributes: { available: true }, relationships: { territory: { data: { type: 'territories', id: t } } } })) })
     }
@@ -345,7 +348,14 @@ test('diagnose : relevé sans écriture de chaque pièce exigée par Apple', asy
   assert.match(lines[0], /^app : langue principale /)
   assert.match(lines[1], /^groupe : fr-FR « Halcya »/)
   assert.equal(lines.length, 5)
-  assert.match(lines[0], /; app disponible dans 1 pays, manquent BEL, LUX, CHE, CAN$/)
+  assert.match(lines[0], /; app disponible dans 1 pays, manquent BEL, LUX, CHE, CAN ; prix de l'app non réglé$/)
+  // « Prix et disponibilité » jamais rempli : Apple répond 404, dit en clair
+  const blank = fakeAsc()
+  await ensureSubscriptions({ token: 't', fetchImpl: blank.fetchImpl })
+  blank.db.noAppAvailability = true
+  blank.db.appPrice = { data: { relationships: { baseTerritory: { data: { id: 'FRA' } } } } }
+  const blankLines = await diagnose({ token: 't', fetchImpl: blank.fetchImpl })
+  assert.match(blankLines[0], /; disponibilité de l'app non réglée \(« Prix et disponibilité » vide\) ; prix de l'app réglé \(territoire de base FRA\)$/)
   assert.match(lines[2], /^halcya_gold_mensuel : état MISSING_METADATA ; noms fr-FR .* ; capture absente ; prix FRA 9\.99, BEL 9\.99, LUX 9\.99, CHE 9\.90, CAN 12\.99 ; territoires FRA, BEL, LUX, CHE, CAN ; note pour l'examen absente ; formules aucune ; versions 1 PREPARE_FOR_SUBMISSION$/)
   // Une pièce que l'API ne sait pas lire n'interrompt pas le relevé
   const broken = fakeAsc()
