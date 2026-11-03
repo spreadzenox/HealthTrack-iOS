@@ -30,6 +30,9 @@ dans App Store Connect → Apps → **Halcya**.
 - Sur l'iPhone (TestFlight, build finale) : Paramètres ne dit plus « Gold offert pendant le test ».
 - Roue en haut à droite → « Paramètres » → « Découvrir le premium » ouvre l'écran d'achat avec Silver (annuel avec
   essai, mensuel) et Gold.
+- Une analyse de repas (photo ou description) : elle enregistre la clé App Attest de l'iPhone auprès du serveur
+  d'Android, qui la compte dans son bilan (observation, jamais bloquante). Aucune clé n'a encore été enregistrée, faute
+  d'installation d'une build qui signe.
 
 ## Le jour de la soumission (le propriétaire)
 

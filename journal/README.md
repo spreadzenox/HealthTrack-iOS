@@ -126,6 +126,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 08:00 | run court | Android n'a publié que son journal ; tout ce qui reste avant la soumission attend vos deux réglages (« Prix et disponibilité », Content Rights) ou le 6/11. Parité : 67 % | — |
 | 3/11 09:00 | run court | Android n'a publié que des idées (production Google Play) ; tout ce qui reste avant la soumission attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 3/11 10:00 | suivi d'Android v734 | Android a changé seulement ses outils de publication Google Play ; rien ne change dans l'app ; **la 734 est sur TestFlight (734.241)**, au second essai (Apple n'avait pas répondu au premier). Parité : 67 % | #241 (mergée) |
+| 3/11 11:00 | run court | Android n'a publié que son journal : sur iPhone, Gold offert s'arrête bien le 6/11 ; App Attest n'a encore vu aucun iPhone (personne n'a installé de build qui signe) ; une analyse de repas de votre part le 7/11 au matin suffira à le vérifier (ajouté à la fiche du jour de la soumission). Parité : 67 % | — |
 
 ---
 
