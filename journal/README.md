@@ -130,6 +130,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 12:00 | run court | rien de nouveau chez Android ; la 734 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 3/11 13:00 | suivi d'Android v737 | Android dit maintenant à son serveur comment il repère les robots de test de Google ; rien ne change sur iPhone ; une adaptation de l'iPhone (protection App Attest des analyses) remise à jour ; **la 737 est sur TestFlight (737.245)**. Parité : 67 % | #245 (mergée) |
 | 3/11 14:00 | suivi d'Android v739 | le rapport PDF pour votre médecin ne liste plus les semaines vides d'avant votre première note (une ligne les résume), aussi sur iPhone ; **la 739 est sur TestFlight (739.247)**. Parité : 67 % | #247 (mergée) |
+| 3/11 15:00 | run court | rien de nouveau chez Android ; la 739 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 
 ---
 
