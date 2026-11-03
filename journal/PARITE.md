@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v730 (commit `e140e2f`, 3/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v731 (commit `c102065`, 3/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 07:00 | #647 (v731, M5) | #647 : l'écran « Données de la montre » (montre Huawei en direct) tient compte des lectures faites app fermée (« Dernière lecture en arrière-plan », `noteCaptureReads`) ; note de Nouveautés réservée à Google Play et à la sideload ; côté iPhone : la page et la montre en direct n'existent pas (BLE à l'étude, I8) ; sans plugin de montre, `importCaptures` ne rend aucune lecture et la nouvelle fonction ne fait rien ; 35 correctifs tels quels | — |
 | 3/11 06:00 | #645, #646 (v730) | #645 : banc visuel d'Android (vraie date de fin de la période de lancement, audit 360 px) ; #646 : captures de la fiche Google Play refaites ; scripts et fiche Play seulement, rien dans `app/src` ni dans `relay` ; côté iPhone : 35 correctifs tels quels | — |
 | 3/11 04:00 | #643, #644 (v728) | #643 (C4, POL-PLAY-102) : au premier lancement, l'Accueil attend la réponse de l'onboarding (indicateur de chargement) au lieu de s'afficher un instant avant « Bienvenue » ; l'écran de bienvenue se télécharge pendant le comptage des entrées ; note de Nouveautés pour toutes les variantes, vraie sur iPhone ; #644 : banc visuel (scripts) ; côté iPhone : correctif 18 refait (import de `portionOpen` après celui de `fodmapReminder`, la ligne voisine important désormais `loadOnboarding`) ; 35 correctifs | — |
 | 3/11 03:00 | #642 (journal) | journal seulement (abonnements Google Play actifs dans les 5 pays, vérifiés) ; pas d'envoi sur Google Play, rien à suivre côté iPhone | — |
