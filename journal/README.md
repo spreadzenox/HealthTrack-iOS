@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v734 (3/11) | **734 sur TestFlight** (build 734.241, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v737 (3/11) | **734 sur TestFlight** (build 734.241, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -128,6 +128,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 10:00 | suivi d'Android v734 | Android a changé seulement ses outils de publication Google Play ; rien ne change dans l'app ; **la 734 est sur TestFlight (734.241)**, au second essai (Apple n'avait pas répondu au premier). Parité : 67 % | #241 (mergée) |
 | 3/11 11:00 | run court | Android n'a publié que son journal : sur iPhone, Gold offert s'arrête bien le 6/11 ; App Attest n'a encore vu aucun iPhone (personne n'a installé de build qui signe) ; une analyse de repas de votre part le 7/11 au matin suffira à le vérifier (ajouté à la fiche du jour de la soumission). Parité : 67 % | — |
 | 3/11 12:00 | run court | rien de nouveau chez Android ; la 734 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
+| 3/11 13:00 | suivi d'Android v737 | Android dit maintenant à son serveur comment il repère les robots de test de Google ; rien ne change sur iPhone ; une adaptation de l'iPhone (protection App Attest des analyses) remise à jour ; vérifications en cours (PR #245). Parité : 67 % | #245 (en vérification) |
 
 ---
 
