@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v742 (3/11) | **740 sur TestFlight** (build 740.250, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v742 (3/11) | **742 sur TestFlight** (build 742.252, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -35,7 +35,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (740.250 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (742.252 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Soumission prévue le 7 ou le 8/11** (votre décision du 2/11), gestes pas à pas dans `store/app-store/soumission.md`.
@@ -132,7 +132,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 14:00 | suivi d'Android v739 | le rapport PDF pour votre médecin ne liste plus les semaines vides d'avant votre première note (une ligne les résume), aussi sur iPhone ; **la 739 est sur TestFlight (739.247)**. Parité : 67 % | #247 (mergée) |
 | 3/11 15:00 | run court | rien de nouveau chez Android ; la 739 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 3/11 16:00 | suivi d'Android v740 | Android a allégé sa version Google Play (fichiers inutilisés retirés) ; rien ne change sur iPhone ; **la 740 est sur TestFlight (740.250)**. Parité : 67 % | #250 (mergée) |
-| 3/11 17:00 | suivi d'Android v742 | Android n'a changé que le suivi de son serveur ; rien ne change sur iPhone ; vérifications en cours (PR #252), puis TestFlight. Parité : 67 % | #252 (en vérification) |
+| 3/11 17:00 | suivi d'Android v742 | Android n'a changé que le suivi de son serveur ; rien ne change sur iPhone ; **la 742 est sur TestFlight (742.252)**. Parité : 67 % | #252 (mergée) |
 
 ---
 
