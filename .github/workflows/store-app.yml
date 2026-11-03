@@ -1,0 +1,55 @@
+# Réglages de l'app dans App Store Connect (scripts/store-app.mjs), **seulement sur l'accord explicite du
+# propriétaire** : « Prix et disponibilité » (gratuite, 5 pays de P32) et « Content Rights ». Ne remplace jamais un
+# réglage en place ; rien n'est soumis ni publié. Lancement manuel, sur main seulement (environnement `appstore` :
+# ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8, jamais affichés).
+name: App Store — prix, disponibilité et Content Rights
+
+on:
+  workflow_dispatch:
+    inputs:
+      prix_et_disponibilite:
+        description: "App gratuite, disponible en France, Belgique, Luxembourg, Suisse, Canada (P32) — seulement après le « ok prix et disponibilité » du propriétaire"
+        type: boolean
+        default: false
+      content_rights:
+        description: "Déclaration Content Rights choisie par le propriétaire (vide : ne rien toucher)"
+        type: choice
+        default: ""
+        options:
+          - ""
+          - USES_THIRD_PARTY_CONTENT
+          - DOES_NOT_USE_THIRD_PARTY_CONTENT
+
+permissions:
+  contents: read
+
+concurrency:
+  group: store-push
+  cancel-in-progress: false
+
+jobs:
+  app:
+    name: Réglages de l'app
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: appstore
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Tests du script
+        run: node --test scripts/store-app.test.mjs
+      - name: Réglages (API App Store Connect)
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+          PRIX_DISPO: ${{ inputs.prix_et_disponibilite }}
+          CONTENT_RIGHTS: ${{ inputs.content_rights }}
+        run: |
+          args=()
+          [ "$PRIX_DISPO" = "true" ] && args+=(--prix-et-disponibilite)
+          [ -n "$CONTENT_RIGHTS" ] && args+=(--content-rights "$CONTENT_RIGHTS")
+          node scripts/store-app.mjs "${args[@]}"
