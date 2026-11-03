@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v725 (3/11) | **725 sur TestFlight** (build 725.227, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v728 (3/11) | **725 sur TestFlight** (build 725.227, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -118,6 +118,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 01:00 | suivi d'Android v724 | Android a renommé ses abonnements Google Play Silver et Gold, comme nous l'avons fait chez Apple ; rien ne change dans l'app ; **la 724 est sur TestFlight (724.223)**. Parité : 67 % | #222 (mergée) |
 | 3/11 02:00 | abonnements dans vos 5 pays | comme Google Play (votre décision P32), les trois abonnements d'Apple sont maintenant en vente en France, Belgique, Luxembourg, Suisse et Canada (prix en CHF et $CA identiques à Google Play, essai de 2 semaines partout) ; **découvert : la page « Prix et disponibilité » de l'app est vide chez Apple**, sans doute la raison des abonnements « métadonnées manquantes » : votre geste en tête ; Android v725 suivie (rien dans l'app), **la 725 est sur TestFlight (725.227)**. Parité : 67 % | #224, #225, #226 (mergées) |
 | 3/11 03:00 | prêt pour vos deux réglages | Android n'a publié que son journal ; pour « Prix et disponibilité » (gratuite, vos 5 pays) et Content Rights, il suffit désormais de me répondre « ok prix et disponibilité » et « ok Content Rights » : je les règle par l'API en un clic, sans rien remplacer (PR #228). Parité : 67 % | #228 (mergée) |
+| 3/11 04:00 | suivi d'Android v728 | à la première ouverture, l'app passe directement à l'écran de bienvenue sans montrer un instant l'Accueil vide (nouveauté d'Android, aussi sur iPhone) ; une adaptation de l'iPhone remise à jour ; vérifications en cours (PR #230). Parité : 67 % | #230 (en vérification) |
 
 ---
 
