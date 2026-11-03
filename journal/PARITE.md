@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 03:00 | #642 (journal) | journal seulement (abonnements Google Play actifs dans les 5 pays, vérifiés) ; pas d'envoi sur Google Play, rien à suivre côté iPhone | — |
 | 3/11 02:00 | #641 (v725, P32) | #641 : abonnements Google Play vendables dans les 5 pays de la production (France, Belgique, Suisse, Luxembourg, Canada ; jamais les États-Unis), prix CHF et $CA ; scripts de Google Play seulement ; côté iPhone : abonnements d'Apple ouverts dans les mêmes pays aux mêmes prix (#224), « Prix et disponibilité » de l'app à régler par le propriétaire | — |
 | 3/11 01:00 | #640 (v724) | #640 : fiche Google Play et abonnements Google Play aux noms Silver / Gold (LISTING-2 : « Halcya Silver », « Halcya Gold », « Tout Silver, deux fois plus d'analyses IA par jour, quantités mieux estimées. ») ; scripts de Google Play seulement, rien dans l'app ni dans le relais depuis v722 (#639, journal, comptait pour v723) ; côté iPhone : noms déjà alignés chez Apple le 2/11 (« Halcya Silver annuel », « Halcya Silver », « Halcya Gold ») ; 35 correctifs tels quels | — |
 | 3/11 00:00 | #639 (journal) | journal seulement (Alpha 100721 en examen chez Google, invitation des testeurs prête) ; pas d'envoi sur Google Play, rien à suivre côté iPhone | — |

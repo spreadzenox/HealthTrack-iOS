@@ -383,8 +383,9 @@
     section des abonnements de la page de version doit apparaître ; sinon, relire avec le propriétaire).
 - [ ] **« Prix et disponibilité » de l'app (action du propriétaire, avant la soumission)** : vide chez Apple (relevé du
   3/11 01:15 : `appAvailabilityV2` et `appPriceSchedule` en 404). À régler : gratuite, disponible en FRA, BEL, LUX,
-  CHE, CAN (P32), pas dans les nouveaux pays. Ou par l'API (`POST /v2/appAvailabilities`, `POST /v1/appPriceSchedules`)
-  après « ok prix et disponibilité ». Puis relire l'état des abonnements.
+  CHE, CAN (P32), pas dans les nouveaux pays. Ou par l'API après « ok prix et disponibilité » : workflow « App Store —
+  prix, disponibilité et Content Rights » (#228, prêt le 3/11 ; `--content-rights` aussi, sur son choix). Puis relire
+  l'état des abonnements.
 - [x] Abonnements d'Apple dans les 5 pays de P32 (3/11, #224 ; run 41557291477) : prix CHF et $CA d'Android, essai de
   2 semaines dans chaque pays.
 - [ ] **Plus tard, quand il y aura plus d'utilisateurs (décision du 31/10)** : la stratégie de cache décidée avec la
