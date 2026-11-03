@@ -10,36 +10,44 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v714 (2/11) | **714 sur TestFlight** (build 714.213), achat ouvert ; même version qu'Android |
+| Dernière version | v722 (2/11) | **722 sur TestFlight** (build 722.221, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
-- **Une décision pour la date de soumission** : jusqu'au 20/11, Android offre Gold à toute installation (période de
-  lancement), iPhone compris ; l'écran d'abonnement de l'iPhone n'a alors rien à vendre, et Apple doit pouvoir
-  trouver l'achat pendant l'examen. Deux choix : soumettre après le 20/11 (rien à faire d'ici là), ou demander à la
-  routine Android que la période de lancement ne vaille que pour Google Play. Dites-moi lequel.
-- (sans urgence) **Un coup d'œil dans App Store Connect** : Halcya → Monétisation → Abonnements → groupe « Halcya » →
-  « Halcya Gold » : Apple y écrit ce qu'il attend encore (les trois abonnements sont « métadonnées manquantes » alors
-  que noms, prix, essai et capture pour l'examen sont en place). Envoyez-moi une capture de cette page.
+- **Content Rights** (App Store Connect → Halcya → Informations sur l'app) : l'app utilise des contenus de tiers sous
+  licence (tables d'aliments, modèles, polices, cités dans Réglages → Licences). Je propose « Oui, elle contient du
+  contenu de tiers, et j'ai les droits nécessaires ». Répondez « ok Content Rights » et je l'envoie par l'API, ou
+  cochez-le vous-même.
+- **Le 6 ou le 7/11, avant de soumettre** : je vous donnerai le numéro exact de la build à attacher. La version
+  changera de numéro (717 → celui de la build finale, 72x), car Apple n'attache une build qu'à la version du même
+  numéro ; la build 717.216 n'a ni App Attest ni le repère iPhone dont le serveur a besoin.
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (714.213 aujourd'hui) : l'achat y est ouvert (Gold offert jusqu'au 20/11).
-- (quand vous pouvez, le serveur d'Android est prêt depuis le 2/11) **Protection contre les abus sur iPhone** :
-  1. developer.apple.com → Certificates, Identifiers & Profiles → Identifiers → `fr.jpesquet.sante` → cocher
-     « App Attest » → Save ;
-  2. donner à la routine Android votre Team ID (developer.apple.com → Account → Membership details, 10 caractères ; ce
-     n'est pas un secret), pour qu'elle allume la vérification en mode « observation » ;
-  3. me dire « App Attest coché » : j'ajoute alors le droit dans l'app (sinon l'envoi sur TestFlight échouerait).
-  L'app iPhone envoie déjà la preuve à chaque analyse de repas ; rien ne change pour vous à l'usage.
+- Installez la build la plus récente de TestFlight (722.221 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+  test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
+
+**Soumission prévue le 7 ou le 8/11** (votre décision du 2/11). Avant cette date, je vérifie :
+- que le serveur coupe bien la période de lancement sur iPhone : réglé ce soir par la routine Android, et vérifié sur
+  l'iPhone simulé (« Gold offert pendant le test, jusqu'au 6 nov. 2026 ») ; Google Play garde le 27/11 ;
+- l'écran d'achat avec les trois abonnements, et le chemin des notes d'examen (roue, Paramètres, Découvrir le premium) ;
+- les captures iPad, les notes d'examen et App Attest.
 
 **Où on en est pour vendre sur iPhone** : contrat de vente, banque et fiscalité actifs (A4) ; confidentialité de l'app
-remplie (A5) ; trois abonnements créés chez Apple (Gold 9,99 €/mois, Premium 29,99 €/an avec 2 semaines d'essai,
-Premium 4,99 €/mois, en France) ; le serveur d'Android vérifie les achats faits sur iPhone ; **l'achat est ouvert
-dans l'app** (écran d'achat vérifié en image) ; la fiche App Store dit les abonnements et leurs prix. Restent : la
-raison pour laquelle Apple dit les abonnements incomplets, l'essai sur l'iPhone 12, puis votre relecture et votre
-soumission. Statut de professionnel (DSA) : en examen chez Apple.
+remplie (A5) ; trois abonnements chez Apple, prêts à partir avec une version (« Prepare for Submission ») : Gold
+9,99 €/mois, Silver 29,99 €/an avec 2 semaines d'essai, Silver 4,99 €/mois, en France. Le serveur d'Android vérifie
+les achats faits sur iPhone, et **l'achat est ouvert dans l'app**. App Attest est coché, le serveur l'observe depuis
+le 2/11, et la build 722.221 l'utilise. Captures iPad 13" : choix « B » (Nutrition à la place de
+Sources), 8 envoyées le 2/11, toutes acceptées par Apple.
+
+Restent :
+- Content Rights ;
+- l'essai sur l'iPhone 12 ;
+- votre relecture, puis votre soumission. La section des abonnements apparaîtra sur la page de la version : cochez-y
+  les trois.
+
+Statut de professionnel (DSA) : en examen chez Apple.
 
 **Ce que vous pouvez voir dès maintenant** : les captures de l'app sur iPhone simulé, refaites à chaque changement
 (taille de l'iPhone 12 et iPhone récent, clair et sombre) : https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
@@ -89,6 +97,12 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 2/11 14:00 | protection contre les abus | Android v713 suivie (PR #210) : le serveur sait désormais vérifier chaque analyse venue d'un iPhone (encore éteint) ; l'app iPhone joint maintenant sa preuve à chaque analyse de repas. Il vous reste une petite action quand vous pouvez (voir en haut) ; **la 713 est sur TestFlight (713.211)**. Parité : 67 % | #210 (mergée) |
 | 2/11 16:00 | suivi d'Android v714 | Android v714 suivie (PR #212) : la version Google Play ne montre plus le nom technique des modèles du visage ; rien ne change sur iPhone (ces modèles y sont éteints) ; une adaptation de l'iPhone remise à jour ; **la 714 est sur TestFlight (714.213)**. Parité : 67 % | #212 (mergée) |
 | 2/11 17:30 | préparation | Android n'a rien publié ; sa prochaine nouveauté, une page « Licences », a été essayée à l'avance : sur iPhone elle citerait des éléments propres à Android ; la version iPhone est préparée (liste propre, demande à Android). Parité : 67 % | — |
+| 2/11 18:30 | page « Licences » | Android v717 suivie (PR #215) : la nouvelle page Réglages → Licences existe aussi sur iPhone, avec les composants propres à l'iPhone et rien d'Android (Android a repris notre demande) ; « Conditions » annonce maintenant l'abonnement et les remboursements ; **la 717 est sur TestFlight (717.216)**. Parité : 67 % | #215 (mergée) |
+| 2/11 19:45 | vos gestes avant la mise en vente | à votre demande, la liste de ce qui vous reste avant la production, puis un prompt pour une session sur votre PC (avec Chrome) qui vous guide dans App Store Connect ; Android v718 suivie (PR #216 : « 1er » et « 21e » dans la bonne police). Parité : 67 % | #216 (en vérification) |
+| 2/11 20:00 | votre compte rendu App Store Connect, l'iPad | **la 718 est sur TestFlight (718.217)** ; la fiche n'a pas été renvoyée : l'envoi aurait renommé la version 717 et détaché la build que vous avez choisie (garde-fou écrit, PR #217) ; captures iPad 13" faites et regardées : rien de coupé, mais « téléphone » sur 3 écrans, donc rien envoyé avant votre choix ; lot prêt : App Attest dans l'app, mot-clé « humeur » remplacé par « bien-être », notes pour l'examen à jour, abonnements nommés Silver comme dans l'app. Parité : 67 % | #216 (mergée), #217 |
+| 2/11 22:00 | captures iPad, Android v721 | votre choix « B » appliqué : **8 captures iPad envoyées à Apple** (Nutrition à la place de Sources ; aucune refusée, 4 encore en traitement à la relecture ; version 717 et build 717.216 intactes) ; l'iPhone se signale désormais au serveur, pour que Gold offert s'y arrête le 6/11 comme vous l'avez décidé (PR #218) ; Android v721 suivie : Gold offert jusqu'au 27/11 (iPhone compris), « Gold estime mieux les quantités » sur la page d'abonnement (aussi dans la description d'Apple), et le serveur observe App Attest avec votre Team ID. Parité : 67 % | #217 (mergée), #218 (en vérification) |
+| 2/11 23:00 | Android v722, préparation de la soumission | la routine Android a réglé votre décision : Gold offert s'arrête le 6/11 inclus sur iPhone (Google Play garde le 27/11), et l'app d'Android se signale elle-même comme iPhone ; nos deux adaptations devenues inutiles sont retirées (PR #218) ; lot prêt pour la soumission (PR #219) : App Attest dans l'app, notes pour l'examen à jour, abonnements nommés Silver, et de quoi passer la version au numéro de la build finale ; **la 722 est sur TestFlight (722.219)**, et l'iPhone simulé affiche bien « Gold offert … jusqu'au 6 nov. ». Parité : 67 % | #218 (mergée), #219 (en vérification) |
+| 3/11 00:00 | lot de la soumission | Android n'a publié que son journal ; lot de la soumission mergé (PR #219) : **la 722.221 est sur TestFlight, première avec App Attest** (après une correction de notre vérification, PR #220) ; fiche renvoyée avec « bien-être » ; **captures iPad acceptées par Apple (8/8)** ; abonnements renommés Silver chez Apple. Apple les dit encore « métadonnées manquantes » alors que tout est en place : à revoir le jour de la soumission. Parité : 67 % | #219, #220 (mergées) |
 
 ---
 

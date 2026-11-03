@@ -272,7 +272,7 @@
   625.107 envoyée (31/10 04:00) ; 625.108 (31/10 05:00), première avec le temps d'écran ; 631.110 (31/10 05:45), même version
   qu'Android ; 631.112 (31/10 06:45), temps par catégorie d'app ; 633.114 (31/10 07:45) ; 635.116 (31/10 08:30) ; 638.118 (31/10 09:45) ; **638.121 (31/10 11:40), première avec
   `NSSpeechRecognitionUsageDescription`** (ITMS-90683 : les builds d'avant sont sans doute invalidées par Apple) ;
-  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ; **693.185 (1/11 21:59, achat ouvert)** ; 697.189 (2/11 00:05) ; 698.190 (2/11 00:57) ; 700.193 (2/11 02:52) ; 702.195 (2/11 03:58) ; 703.197 (2/11 04:49) ; 705.201 (2/11 08:10) ; 706.202 (2/11 09:08) ; 708.205 (2/11 11:09) ; 709.206 (2/11 11:42) ; 710.208 (2/11 13:20) ; 712.209 (2/11 13:59) ; 713.211 (2/11 15:04) ; 714.213 (2/11 17:12) ;
+  642.124 (31/10 13:05) ; 644.127 (31/10 13:55) ; 648.128 (31/10 14:55) ; 652.135 (31/10 16:52) ; 654.137 (31/10 17:34) ; 654.139 (31/10 18:40, poids de l'app Santé) ; 658.141 (31/10 19:57) ; 661.146 (31/10 22:57) ; 663.147 (31/10 23:34) ; 665.149 (1/11 00:55) ; 667.151 (1/11 01:41) ; 670.153 (1/11 02:55) ; 671.155 (1/11 03:46) ; 672.157 (1/11 04:51) ; 673.159 (1/11 06:00) ; 674.161 (1/11 06:59) ; 675.163 (1/11 08:02) ; 677.167 (1/11 09:54) ; 678.169 (1/11 11:02) ; 679.171 (1/11 11:53) ; 680.173 (1/11 12:47) ; 681.175 (1/11 13:55) ; 683.177 (1/11 14:47) ; 687.179 (1/11 17:51) ; 689.181 (1/11 18:45, copie de secours hors d'iCloud) ; 691.183 (1/11 19:41, rappel de fin d'essai en Swift) ; **693.185 (1/11 21:59, achat ouvert)** ; 697.189 (2/11 00:05) ; 698.190 (2/11 00:57) ; 700.193 (2/11 02:52) ; 702.195 (2/11 03:58) ; 703.197 (2/11 04:49) ; 705.201 (2/11 08:10) ; 706.202 (2/11 09:08) ; 708.205 (2/11 11:09) ; 709.206 (2/11 11:42) ; 710.208 (2/11 13:20) ; 712.209 (2/11 13:59) ; 713.211 (2/11 15:04) ; 714.213 (2/11 17:12) ; 717.216 (2/11 19:43) ; 718.217 (2/11 19:48) ; 722.219 (2/11 23:08, fin de la période de lancement sur iPhone le 6/11) ; **722.221 (2/11 23:59, première avec App Attest en production)** ;
   reste : A6 (la compagne du propriétaire, iPhone 12), puis brancher l'envoi sur chaque version (push sur `main`) une
   fois l'installation confirmée.
 - [ ] **I9 — Publication** (28/10 : fiche App Store fr-FR en brouillon, PR #35, mergée ; réponses « Confidentialité de l'app » (A5) et données collectées du manifeste, PR #39 ; `PrivacyInfo.xcprivacy` et `ITSAppUsesNonExemptEncryption` préparés, vérifiés par la
@@ -343,7 +343,7 @@
     conditions, fiche, assistance, notes pour l'examen, Nouveautés de l'iPhone. Pour changer d'iPhone : l'export.
     Reste ouvert : les fichiers que la personne exporte elle-même vont à la racine de Documents (donc dans la
     sauvegarde iCloud) avant la feuille de partage ; c'est son geste, à revoir si Apple le relève.
-- [ ] **Page « Licences » d'Android (PR #632, à sa publication)** : essai à blanc du 2/11 : le correctif 26 ne
+- [x] **Page « Licences » d'Android (#632, v716 ; #633, v717) — fait le 2/11 (PR #215, correctifs 26 et 39)** : essai à blanc du 2/11 : le correctif 26 ne
   s'applique plus (`More.jsx` : ligne « Licences » avant la fin de la liste) ; ses tests passent avec nos correctifs.
   À faire : refaire le correctif 26 (et aligner au passage la description « Conditions » de l'iPhone sur celle
   d'Android, « Utilisation, abonnement et remboursements », vraie depuis l'ouverture de l'achat) ; sur iPhone, ni Play
@@ -359,9 +359,28 @@
     coupé par défaut).
   - [ ] Vérifier sur l'iPhone 12 (le simulateur n'a pas de Secure Enclave) quand le relais sera en `observe` : bilan
     « iPhone : attest_passed / missing / rejected » du déploiement d'Android.
-  - [ ] Droit `com.apple.developer.devicecheck.appattest-environment = production` : seulement après la capacité
-    « App Attest » sur l'identifiant `fr.jpesquet.sante` (sinon la signature de TestFlight échoue) ; Team ID à donner à
-    Android (P38 de son BACKLOG). Action du propriétaire, à préparer pas à pas quand le relais sera prêt.
+  - [x] Droit `com.apple.developer.devicecheck.appattest-environment = production` : capacité « App Attest » cochée
+    (compte rendu du propriétaire du 2/11) ; Team ID transmis, relais en `observe` depuis Android v721 (2/11). Droit
+    vérifié dans l'app signée par `testflight.yml` (#219, #220) : **première build 722.221** (2/11 23:59).
+- [ ] **Soumission du 7 ou du 8/11 (décision du propriétaire du 2/11)** : période de lancement coupée sur iPhone le
+  6/11 inclus (demande du propriétaire à la routine Android ; repère `X-Platform: ios`, correctif 40). À vérifier avant :
+  - [~] relais : `/v1/subscription/verify` avec `X-Platform: ios` ne rend plus `source: 'launch'` après le 6/11 (sans
+    l'en-tête : la date de Google Play). **Fait par Android v722** (#638, `iosUntil`, déployé le 2/11 vers 22:00 UTC ;
+    `X-Platform: ios` ajouté par le code partagé) ; reste l'essai sur TestFlight (avant le 7/11 : « jusqu'au 6 nov. » ;
+    après : Silver / Gold et l'achat en bac à sable) ;
+  - [ ] écran d'achat sur iPhone avec les trois abonnements, chemin des notes d'examen juste (roue en haut à droite →
+    « Paramètres » → « Découvrir le premium ») ; aucune date fausse dans l'app d'ici là (note de Nouveautés sans date,
+    Paramètres affiche celle du relais) ;
+  - [x] captures iPad 13" (choix « B », #217 : 8/8 traitées par Apple), `notes-examen.md` (#219) et droit App Attest
+    (722.221) prêts le 2/11 ;
+  - [ ] build finale le 6/11 : version d'App Store Connect renommée à son numéro (la 717 garde 717.216 jusque-là ; une
+    build ne s'attache qu'à la version du même numéro ; option `version_des_builds` de `store-push.yml`, PR #219 ; si
+    Apple refuse le renommage avec une build attachée, le propriétaire le fait dans la page de la version), puis numéro
+    exact de la build donné au propriétaire ;
+  - [ ] abonnements encore `MISSING_METADATA` par l'API (relevé complet du 3/11 00:05 : groupe, noms, capture
+    `COMPLETE`, prix, France, note pour l'examen, formule `UPFRONT`, version 1 `PREPARE_FOR_SUBMISSION`, rien de
+    manquant que l'API expose) ; l'interface dit « Prepare for Submission » : à revoir le jour de la soumission (la
+    section des abonnements de la page de version doit apparaître ; sinon, relire avec le propriétaire).
 - [ ] **Plus tard, quand il y aura plus d'utilisateurs (décision du 31/10)** : la stratégie de cache décidée avec la
   routine Android pour l'analyse des repas, côté relais. Aujourd'hui, les consignes commencent par la longue liste des
   ingrédients, identique d'un appel à l'autre, que Vertex AI met en cache implicitement (`relay/src/prompts.js`
@@ -369,6 +388,11 @@
 - [ ] **Ensuite — suivi continu** : chaque version Android suivie, correctifs refaits, nouveautés vérifiées.
 
 ## Idées et questions ouvertes
+
+- **Médiateur de la consommation (P26 d'Android), reporté par le propriétaire le 2/11** : à traiter aux 10 premiers
+  utilisateurs payants (adhérer, ou se renseigner clairement ; candidats : Médiation Solution, CM2C, SMP). Ne bloque
+  pas la mise en vente ; **ne pas le redemander d'ici là**. Le jour venu, les conditions de l'iPhone
+  (`overlay/app/public/conditions-iphone.html`) devront nommer le médiateur choisi, comme celles d'Android.
 
 - Sur l'iPhone 12 : toucher « Prendre une photo » (repas) et « Utiliser ma position approximative » (Météo) ; les phrases d'usage sont en place depuis le 28/10 (PR #45), le simulateur n'a ni caméra ni position réelle.
 
