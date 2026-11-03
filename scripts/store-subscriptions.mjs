@@ -363,10 +363,11 @@ export function appTerritories(ids) {
 }
 
 /** Une lecture du relevé qui ne doit pas l'interrompre : son résultat, ou « illisible (statut) ». */
-async function readable(read, show) {
+async function readable(read, show, absent = null) {
   try {
     return show(await read())
   } catch (e) {
+    if (e.status === 404 && absent) return absent
     return `illisible (${e.status ?? e.message})`
   }
 }
@@ -385,8 +386,14 @@ export async function diagnose({ token, fetchImpl = fetch }) {
   const where = await readable(async () => {
     const av = (await api('GET', `/v1/apps/${app.id}/appAvailabilityV2`)).data
     return all(`/v2/appAvailabilities/${av.id}/territoryAvailabilities?include=territory&limit=200`)
-  }, (list) => appTerritories(list.filter((x) => x.attributes?.available).map((x) => x.relationships?.territory?.data?.id).filter(Boolean)))
-  const lines = [`app : langue principale ${app.attributes?.primaryLocale ?? '?'} ; ${where}`]
+  }, (list) => appTerritories(list.filter((x) => x.attributes?.available).map((x) => x.relationships?.territory?.data?.id).filter(Boolean)),
+  'disponibilité de l\'app non réglée (« Prix et disponibilité » vide)')
+  const price = await readable(
+    () => api('GET', `/v1/apps/${app.id}/appPriceSchedule?include=baseTerritory,manualPrices`),
+    (r) => `prix de l'app réglé (territoire de base ${r.data?.relationships?.baseTerritory?.data?.id ?? '?'})`,
+    'prix de l\'app non réglé',
+  )
+  const lines = [`app : langue principale ${app.attributes?.primaryLocale ?? '?'} ; ${where} ; ${price}`]
   if (!group) return [...lines, 'aucun groupe « Halcya »']
   const groupLocs = await all(`/v1/subscriptionGroups/${group.id}/subscriptionGroupLocalizations?limit=50`)
   lines.push(`groupe : ${groupLocs.map((l) => `${l.attributes?.locale} « ${l.attributes?.name} » ${l.attributes?.state ?? '?'}`).join(', ') || 'aucun nom affiché'}`)
