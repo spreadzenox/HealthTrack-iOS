@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v724 (commit `2581cce`, 3/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v725 (commit `ab16d9a`, 3/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
