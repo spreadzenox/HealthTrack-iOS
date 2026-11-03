@@ -6,7 +6,7 @@ phrase doit rester vraie pour la version envoyée. Le paragraphe « Backup copy 
 directive 5.1.3 (ii) (`journal/BACKLOG.md`, I9) ; le paragraphe « Purchases » (2/11, achat ouvert) n'est vrai que si l'écran d'achat est visible sur iPhone le jour de
 l'examen : décision du propriétaire du 2/11, période de lancement coupée sur iPhone le 6/11 inclus (relais, repère
 `X-Platform: ios`) et soumission le 7 ou le 8/11 ; à vérifier sur la build soumise avant de coller le texte. Les trois
-adresses de la fin attendent A8 (GitHub Pages).
+adresses de la fin sont en ligne (GitHub Pages, vérifiées le 3/11 : 200). Gestes du jour : `soumission.md`.
 
 ---
 
