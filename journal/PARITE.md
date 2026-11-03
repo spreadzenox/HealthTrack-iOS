@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v722 (commit `b7e583e`, 2/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v724 (commit `2581cce`, 3/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 01:00 | #640 (v724) | #640 : fiche Google Play et abonnements Google Play aux noms Silver / Gold (LISTING-2 : « Halcya Silver », « Halcya Gold », « Tout Silver, deux fois plus d'analyses IA par jour, quantités mieux estimées. ») ; scripts de Google Play seulement, rien dans l'app ni dans le relais depuis v722 (#639, journal, comptait pour v723) ; côté iPhone : noms déjà alignés chez Apple le 2/11 (« Halcya Silver annuel », « Halcya Silver », « Halcya Gold ») ; 35 correctifs tels quels | — |
 | 3/11 00:00 | #639 (journal) | journal seulement (Alpha 100721 en examen chez Google, invitation des testeurs prête) ; pas d'envoi sur Google Play, rien à suivre côté iPhone | — |
 | 2/11 23:00 | #638 (v722) | #638 : **fin de la période de lancement sur iPhone le 6/11 inclus** (décision du propriétaire du 2/11) : `iosUntil` = `2026-11-06T23:00:00Z` dans `relay/src/launch-period.json` (Google Play reste au 27/11) ; le relais reconnaît l'iPhone à `X-Platform: ios` (ou `X-Integrity-Status: no_plugin`, ou `X-AppAttest-Key`) sur la vérification des droits, les crédits et l'analyse ; dans l'app, `platformHeaders()` d'`aiRelay.js` ajoute `X-Platform: ios` quand `VITE_STORE=appstore`, et `renewalInfo` est transmis (notre correctif 37 repris) ; message dans son `journal/POUR-IOS.md` ; côté iPhone : correctifs 37 et 40 retirés (le code d'Android fait la même chose), `src/ios/platform.js` retiré, tests de l'iPhone gardés sur le code d'Android ; 35 correctifs | — |
 | 2/11 22:00 | #635, #636, #637 (v721) | #637 : période de lancement prolongée (Gold offert à toute installation jusqu'au 27/11 inclus, iPhone compris : le relais ne distingue pas les plateformes) ; « Gold estime mieux les quantités » sur la page d'abonnement (P36, sans chiffre de précision) ; App Attest du relais en mode « observe » avec le Team ID (P38) ; note de Nouveautés réservée à Google Play ; #635 : mesure de performance de Tendances ; #636 : idées (fiche Play, noms Silver / Gold) ; côté iPhone : les 36 correctifs passent tels quels ; tests de la page d'abonnement mis à jour ; note de Nouveautés iOS sans date (Paramètres dit la date rendue par le relais) ; correctif 40 (`X-Platform: ios`) écrit puis retiré avec v722, qui fait la même chose dans le code partagé ; description de l'abonnement Gold d'Apple alignée (lot de la fiche) | — |
