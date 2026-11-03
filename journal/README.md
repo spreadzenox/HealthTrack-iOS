@@ -138,6 +138,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 20:00 | run court | Android n'a publié que son journal ; la 744 sur TestFlight est à jour ; une demande de modification en double, sans rien de neuf, fermée ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 3/11 21:00 | suivi d'Android v746 | sur Google Play, « Vos derniers jours » montre maintenant le score de la nuit et le cœur pendant la nuit, venus de la montre Huawei reliée en direct ; sur iPhone, rien ne les fournit (pas de liaison directe avec la montre, et Apple ne laisse pas les apps lire son score de sommeil) : les deux pastilles n'y apparaissent pas, sans chiffre inventé ; vérifié sur l'iPhone simulé ; **la 746 est sur TestFlight (746.257)**. Parité : 67 % | #257 (mergée) |
 | 3/11 22:00 | suivi d'Android v749 | sur Google Play, une carte de l'Accueil annonce maintenant la fin de Gold offert 3 jours avant ; Android la coupe sur iPhone, selon votre décision du 2/11 (l'examen d'Apple doit voir l'écran d'achat) : un test de l'iPhone vérifie qu'elle n'y apparaît pas avant le 6/11 ; noté pour Android que la carte suivante qu'il prépare (« Le test est terminé ») tomberait le 7/11 sur iPhone ; vérifications en cours (PR #258). Parité : 67 % | #258 (en vérification) |
+| 3/11 23:00 | run court | Android n'a rien publié de plus ; fin des vérifications de la v749 (PR #258), puis TestFlight ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 
 ---
 
