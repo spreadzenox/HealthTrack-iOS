@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v734 (commit `9bd117b`, 3/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v737 (commit `eb6510a`, 3/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 3/11 13:00 | #652, #653 (v737) | #652 (INSTALLS-21b-1) : l'app dit au relais comment s'est terminée sa lecture du réglage Test Lab (`testEnvironment`, en-tête `X-Test-Env`, accepté par le CORS du relais) ; #653 : plantages et ANR d'Android vitals dans le bilan de « Play — AAB » (scripts) ; pas de note de Nouveautés ; côté iPhone : correctif 38 refait (import d'App Attest après celui de `playIntegrity`, désormais `requestIntegrity, testEnvironment`) ; sans plugin Google, `env` est nul et l'en-tête n'est jamais envoyé ; 35 correctifs | — |
 | 3/11 11:00 | #651 (journal) | bilan du relais avant les testeurs : période de lancement de l'iPhone jusqu'au 6/11, App Attest sans clé enregistrée (aucune build qui signe installée) ; journal seulement, rien à suivre | — |
 | 3/11 10:00 | #650 (v734) | #650 : état des pistes Google Play dans le bilan de « Play — AAB » (scripts de Google Play) ; rien dans `app/src` ni dans `relay` depuis v731 (#648 et #649, journal, comptaient pour v732 et v733) ; côté iPhone : 35 correctifs tels quels | — |
 | 3/11 09:00 | #649 (idées) | idées sur le passage en production Google Play (I212, P42) ; journal seulement, rien à suivre | — |
