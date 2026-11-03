@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v731 (3/11) | **731 sur TestFlight** (build 731.237, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v734 (3/11) | **734 sur TestFlight** (build 734.241, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -35,7 +35,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (731.237 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (734.241 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Soumission prévue le 7 ou le 8/11** (votre décision du 2/11), gestes pas à pas dans `store/app-store/soumission.md`.
@@ -125,6 +125,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 07:00 | suivi d'Android v731 | Android améliore l'écran de la montre Huawei (lectures faites app fermée) ; cet écran n'existe pas sur iPhone, rien n'y change ; **la 731 est sur TestFlight (731.237)**. Parité : 67 % | #237 (mergée) |
 | 3/11 08:00 | run court | Android n'a publié que son journal ; tout ce qui reste avant la soumission attend vos deux réglages (« Prix et disponibilité », Content Rights) ou le 6/11. Parité : 67 % | — |
 | 3/11 09:00 | run court | Android n'a publié que des idées (production Google Play) ; tout ce qui reste avant la soumission attend vos deux réglages ou le 6/11. Parité : 67 % | — |
+| 3/11 10:00 | suivi d'Android v734 | Android a changé seulement ses outils de publication Google Play ; rien ne change dans l'app ; **la 734 est sur TestFlight (734.241)**, au second essai (Apple n'avait pas répondu au premier). Parité : 67 % | #241 (mergée) |
 
 ---
 
