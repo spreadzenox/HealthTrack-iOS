@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v752 (4/11) | **752 sur TestFlight** (build 752.261, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v757 (4/11) | **757 sur TestFlight** (build 757.266, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -35,7 +35,7 @@
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations).
-- Installez la build la plus récente de TestFlight (752.261 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (757.266 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Soumission prévue le 7 ou le 8/11** (votre décision du 2/11), gestes pas à pas dans `store/app-store/soumission.md`.
@@ -143,6 +143,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 00:00 | suivi d'Android v751 | sur Google Play, une carte de l'Accueil remerciera les testeurs après la fin de Gold offert ; Android l'a coupée sur iPhone de lui-même (ma demande notée hier soir n'a pas eu à vous être transmise) : un test de l'iPhone vérifie qu'elle n'y apparaît pas les 7 et 8/11 ; Android a aussi rangé son code (rien de visible) ; vérifié sur l'iPhone simulé (l'Accueil ne change pas) ; **la 751 est sur TestFlight (751.260)**. Parité : 67 % | #260 (mergée) |
 | 4/11 01:00 | suivi d'Android v752 | dans les Analyses, vous pourrez masquer un lien évident ou qui ne vous parle pas (et tout réafficher), aussi sur iPhone ; les liens masqués suivent l'export et la copie de secours de l'iPhone (vérifié par un test) ; vérifié sur l'iPhone simulé ; **la 752 est sur TestFlight (752.261)**. Parité : 67 % | #261 (mergée) |
 | 4/11 02:00 | chemin de l'examen vérifié | Android n'a publié que son journal ; j'ai vérifié à l'avance sur l'iPhone simulé ce que verra l'examinateur d'Apple après le 6/11 : la roue, « Paramètres », puis « Découvrir le premium » mène à l'écran d'achat avec Silver (annuel avec 14 jours d'essai, mensuel) et Gold ; reste l'essai sur votre iPhone le 7/11 au matin. Parité : 67 % | #263 (mergée) |
+| 4/11 03:00 | suivi d'Android v755 | Android a repris de lui-même six petites demandes de l'iPhone (un bouton de l'écran de bienvenue, des notes de Nouveautés qui citaient Android) : une adaptation de l'iPhone devient inutile et disparaît ; dans les Analyses, une piste du ventre peut aussi être masquée, sur iPhone aussi ; vérifié sur l'iPhone simulé ; **la 755 est sur TestFlight (755.265)**. Parité : 67 % | #265 (mergée) |
+| 4/11 04:00 | suivi d'Android v757 | en thème sombre, la barre « Vos pistes arrivent dans … jours » se voit mieux, sur iPhone aussi ; vérifié sur l'iPhone simulé ; **la 757 est sur TestFlight (757.266)**. Parité : 67 % | #266 (mergée) |
 
 ---
 
