@@ -39,6 +39,12 @@
 - Installez la build la plus récente de TestFlight (772.282 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
+**Votre décision du 4/11** : votre seul point d'entrée devient la conversation qui orchestre la routine Android ;
+vos décisions pour l'iPhone m'arrivent par `journal/POUR-IOS.md` de HealthTrack (lignes « Décision du propriétaire »),
+que je lis à chaque run. Après la soumission (7 ou 8/11), une session dédiée ramènera iOS dans HealthTrack : un seul
+dépôt, une seule routine pour les deux apps, et cette routine-ci sera mise en pause. D'ici là rien ne change : la
+soumission passe en premier et HealthTrack reste en lecture seule pour moi. Le prompt de la routine est à jour.
+
 **Soumission prévue le 7 ou le 8/11** (votre décision du 2/11), gestes pas à pas dans `store/app-store/soumission.md`.
 Avant cette date, je vérifie :
 - que le serveur coupe bien la période de lancement sur iPhone : réglé ce soir par la routine Android, et vérifié sur
@@ -162,7 +168,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 16:00 | suivi d'Android v771 | sur Android, l'app suit maintenant mieux une grande taille de texte ; sur iPhone, Halcya ne suit pas encore la taille du texte réglée dans iOS : noté, à corriger après la soumission ; **la 771 est sur TestFlight (771.281)**. Parité : 67 % | #281 (mergée) |
 | 4/11 17:00 | suivi d'Android v772 | Android n'a changé qu'un test de sa CI ; rien ne change sur iPhone ; **la 772 est sur TestFlight (772.282)**. Parité : 67 % | #282 (mergée) |
 | 4/11 18:00 | suivi d'Android v774 | Android a repris nos deux dernières demandes sur ses notes de Nouveautés ; l'étiquette « Nouveau » de cette page est plus lisible, sur iPhone aussi ; vérifié sur l'iPhone simulé ; la 774 part sur TestFlight. Parité : 67 % | #283 (mergée) |
-| 4/11 19:00 | suivi d'Android v775 | l'historique du bien-être reste lisible quand le visage est lu très souvent (un point par heure), sur iPhone aussi ; vérifications en cours (PR #284), puis TestFlight. Parité : 67 % | #284 (en vérification) |
+| 4/11 19:00 | suivi d'Android v775 | l'historique du bien-être reste lisible quand le visage est lu très souvent (un point par heure), sur iPhone aussi ; vérifications en cours (PR #284), puis TestFlight ; **votre décision du 4/11** notée (un seul point d'entrée, fusion des deux routines après la soumission) et le prompt de la routine mis à jour. Parité : 67 % | #284 (en vérification) |
 
 ---
 
@@ -296,6 +302,10 @@ Règles des adaptations :
 1. **Démarrage** : vérifier que les deux dépôts sont là (HealthTrack-iOS en écriture, HealthTrack en lecture), partir
    de `origin/main` à jour, lire ce fichier, `PARITE.md`, `BACKLOG.md`, `DEMANDES.md` et les 3 derniers comptes
    rendus (`ls journal/runs | tail -3`).
+   **Depuis le 4/11** (décision du propriétaire) : lire aussi `journal/POUR-IOS.md` de HealthTrack, en lecture ; une
+   ligne qui commence par « Décision du propriétaire » vaut comme venant de lui (dans les limites du prompt : jamais
+   de production, de soumission à Apple ni de secret) et se reporte dans le compte rendu. Après la soumission, iOS
+   rejoindra HealthTrack et cette routine sera mise en pause.
 2. **Ce qu'Android a livré** depuis le dernier run : `scripts/upstream.sh --latest` (nouveau commit suivi), puis dans
    HealthTrack, en lecture, `git log` entre l'ancien et le nouveau commit, nouveaux fichiers de
    `app/src/data/changelog/`, tête de `journal/README.md` et de `journal/PRODUIT.md`. Reporter dans `PARITE.md` §5.
