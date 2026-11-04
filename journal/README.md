@@ -160,6 +160,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 14:00 | suivi d'Android v769 | Android n'a changé que ses contrôles automatiques ; son serveur sert toujours Gold offert jusqu'au 6/11 sur iPhone ; **la 769 est sur TestFlight (769.278)**. Parité : 67 % | #278 (mergée) |
 | 4/11 15:00 | run court | Android n'a rien publié de plus ; la 769 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 4/11 16:00 | suivi d'Android v771 | sur Android, l'app suit maintenant mieux une grande taille de texte ; sur iPhone, Halcya ne suit pas encore la taille du texte réglée dans iOS : noté, à corriger après la soumission ; vérifications en cours (PR #281), puis TestFlight. Parité : 67 % | #281 (en vérification) |
+| 4/11 17:00 | suivi d'Android v772 | Android n'a changé qu'un test de sa CI ; suivi après la v771. Parité : 67 % | — |
 
 ---
 
