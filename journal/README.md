@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v763 (4/11) | **763 sur TestFlight** (build 763.274, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v767 (4/11) | **763 sur TestFlight** (build 763.274, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -34,7 +34,8 @@
   numéro ; la build 717.216 n'a ni App Attest ni le repère iPhone dont le serveur a besoin.
 - **A6, quand vous pouvez** : inviter votre compagne dans App Store Connect (Utilisateurs et accès, rôle « Customer
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
-  version d'iOS de son iPhone 12 (Réglages → Général → Informations).
+  version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
+  logicielle).
 - Installez la build la plus récente de TestFlight (763.274 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
@@ -152,6 +153,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 09:00 | run court | Android n'a publié que son journal ; la 761 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 4/11 10:00 | suivi d'Android v763 | Android vérifie maintenant automatiquement ce que lit le lecteur d'écran (VoiceOver sur iPhone) ; rien ne change dans l'app ; **la 763 est sur TestFlight (763.274)**. Parité : 67 % | #274 (mergée) |
 | 4/11 11:00 | run court | Android n'a publié que des idées ; la 763 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
+| 4/11 12:00 | suivi d'Android v767 | Android a corrigé un écran blanc sur les vieux téléphones Android ; la même cause touchait les iPhone restés en iOS 15.0 à 15.3 : l'app demande maintenant iOS 15.4 au moins (tout iPhone de cette époque peut se mettre à jour) ; dans Tendances, « Horaires variables » est en gris neutre ; vérifications en cours (PR #276), puis TestFlight. Parité : 67 % | #276 (en vérification) |
 
 ---
 
