@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v771 (commit `a355cd8`, 4/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v772 (commit `4350236`, 4/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 4/11 17:20 | #689 (v772) | #689 (FONT-SCALE-2) : grande police d'Android testée sur l'émulateur API 32, dans sa CI ; rien dans le code partagé ; côté iPhone : rien à reprendre ; 34 correctifs tels quels | — |
 | 4/11 16:00 | #687, #688 (v771) | #688 (FONT-SCALE-1) : avec une grande taille de police d'Android, « Utiliser ma position approximative » (Sources) passe à la ligne et « Douleur » reste dans son bouton (`Connectors.css`, `TodayCards.css`) ; #687 : journal (relais toujours au 6/11 pour l'iPhone) ; code partagé, sans effet visible sur iPhone : **la WebView de l'iPhone ne suit pas la taille du texte d'iOS** (ni Dynamic Type ni plugin TextZoom), alors que celle d'Android suit la police du système → **écart d'accessibilité noté** (`BACKLOG.md`, après la soumission) ; note de Nouveautés cachée sur iPhone (« si vous avez agrandi le texte… » n'y change rien ; correctif 28, test) ; 34 correctifs | — |
 | 4/11 13:40 | #686 (v769) | #686 (PLUGIN-API-2) : contrôle des méthodes natives sous Android 12L dans la CI d'Android (job émulateur API 32) ; rien dans le code partagé ; côté iPhone : rien à reprendre ; 34 correctifs tels quels | — |
 | 4/11 13:00 | #685 (v768) | #685 (PLUGIN-API-2) : Android Lint « NewApi » sur le code natif d'Android dans sa CI (`build.gradle`, trois plugins Java annotés) ; rien dans le code partagé ; côté iPhone : rien à reprendre (le pendant iPhone est `iosMinimum.test.js`, v767) ; 34 correctifs tels quels | — |
