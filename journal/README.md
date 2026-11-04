@@ -162,6 +162,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 16:00 | suivi d'Android v771 | sur Android, l'app suit maintenant mieux une grande taille de texte ; sur iPhone, Halcya ne suit pas encore la taille du texte réglée dans iOS : noté, à corriger après la soumission ; **la 771 est sur TestFlight (771.281)**. Parité : 67 % | #281 (mergée) |
 | 4/11 17:00 | suivi d'Android v772 | Android n'a changé qu'un test de sa CI ; rien ne change sur iPhone ; **la 772 est sur TestFlight (772.282)**. Parité : 67 % | #282 (mergée) |
 | 4/11 18:00 | suivi d'Android v774 | Android a repris nos deux dernières demandes sur ses notes de Nouveautés ; l'étiquette « Nouveau » de cette page est plus lisible, sur iPhone aussi ; vérifications en cours (PR #283), puis TestFlight. Parité : 67 % | #283 (en vérification) |
+| 4/11 19:00 | suivi d'Android v775 | l'historique du bien-être reste lisible quand le visage est lu très souvent (un point par heure), sur iPhone aussi ; suivi après la v774. Parité : 67 % | — |
 
 ---
 
