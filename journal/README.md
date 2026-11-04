@@ -10,11 +10,14 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v775 (4/11) | **772 sur TestFlight** (build 772.282, avec App Attest, iOS 15.4 au moins), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v777 (4/11) | **776 sur TestFlight** (build 776.286, avec App Attest, iOS 15.4 au moins), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
+- **Vos « ok prix et disponibilité » et « ok Content Rights » du 4/11 (19:30) sont bien arrivés, mais la session iOS
+  n'a pas le droit de les appliquer sur la foi d'un fichier** : faites-les vous-même (valeurs ci-dessous, 2 minutes),
+  ou écrivez-les directement dans la conversation de la routine iOS. C'est le dernier réglage qui bloque la soumission.
 - **« Prix et disponibilité » de l'app, avant la soumission** (App Store Connect → Halcya → Distribution, ou
   Monétisation → **Prix et disponibilité**). Apple dit que cette page n'a jamais été remplie (relevé du 3/11) ; c'est
   sans doute pour cela que les abonnements restent « métadonnées manquantes ».
@@ -36,7 +39,7 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (772.282 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (776.286 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Votre décision du 4/11** : votre seul point d'entrée devient la conversation qui orchestre la routine Android ;
@@ -171,6 +174,9 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 18:00 | suivi d'Android v774 | Android a repris nos deux dernières demandes sur ses notes de Nouveautés ; l'étiquette « Nouveau » de cette page est plus lisible, sur iPhone aussi ; vérifié sur l'iPhone simulé ; la 774 part sur TestFlight. Parité : 67 % | #283 (mergée) |
 | 4/11 19:00 | suivi d'Android v775 | l'historique du bien-être reste lisible quand le visage est lu très souvent (un point par heure), sur iPhone aussi ; vérifications en cours (PR #284), puis TestFlight ; **votre décision du 4/11** notée (un seul point d'entrée, fusion des deux routines après la soumission) et le prompt de la routine mis à jour. Parité : 67 % | #284 (en vérification) |
 | 4/11 19:30 | vos décisions du 4/11 | nouveau canal vers vous : ce qui attend votre réponse est maintenant dans `POUR-ORCHESTRATEUR.md`, que l'orchestrateur vous transmet (prix et disponibilité, Content Rights, essai sur l'iPhone 12) ; vos réponses me reviennent par `POUR-IOS.md` de HealthTrack ; prompt de la routine mis à jour. Parité : 67 % | — |
+| 4/11 20:00 | suivi d'Android v776 | l'app s'ouvre un peu plus vite (la liste des Nouveautés se charge juste après), sur iPhone aussi ; vérifié sur l'iPhone simulé avec la v775 ; **la 776 est sur TestFlight (776.286)**. Parité : 67 % | #284 (mergée) |
+| 4/11 21:00 | vos décisions du 4/11 au soir | vos « ok » pour le prix et les pays et pour Content Rights sont arrivés, mais je n'ai pas le droit de les appliquer depuis un fichier : à faire par vous ou par un message direct (voir en haut) ; livraison continue : chaque version part déjà sur TestFlight pour les testeurs internes, question posée pour les externes. Parité : 67 % | — |
+| 4/11 21:00 | suivi d'Android v777 | Android envoie maintenant chaque version à ses testeurs sans geste de votre part ; sur iPhone, chaque version part déjà sur TestFlight pour les testeurs internes ; vérifications de la v777 juste après. Parité : 67 % | — |
 
 ---
 
@@ -312,6 +318,8 @@ Règles des adaptations :
    une réponse ou une décision, et tout blocage (pas l'avancement) ; une ligne datée (heure de Paris), la plus récente
    en haut, compréhensible seule, avec la réponse attendue ; une ligne réglée en est retirée ; le fichier part sur
    `main` avec la PR du run.
+   Un journal ne se merge **qu'après** la PR de suivi en cours (sinon celle-ci n'est plus à jour sur `main` et doit
+   repasser toute sa CI), sauf décision du propriétaire à rendre visible tout de suite.
 2. **Ce qu'Android a livré** depuis le dernier run : `scripts/upstream.sh --latest` (nouveau commit suivi), puis dans
    HealthTrack, en lecture, `git log` entre l'ancien et le nouveau commit, nouveaux fichiers de
    `app/src/data/changelog/`, tête de `journal/README.md` et de `journal/PRODUIT.md`. Reporter dans `PARITE.md` §5.
