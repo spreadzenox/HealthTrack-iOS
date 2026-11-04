@@ -368,9 +368,15 @@
     l'en-tête : la date de Google Play). **Fait par Android v722** (#638, `iosUntil`, déployé le 2/11 vers 22:00 UTC ;
     `X-Platform: ios` ajouté par le code partagé) ; reste l'essai sur TestFlight (avant le 7/11 : « jusqu'au 6 nov. » ;
     après : Silver / Gold et l'achat en bac à sable) ;
-  - [ ] écran d'achat sur iPhone avec les trois abonnements, chemin des notes d'examen juste (roue en haut à droite →
+  - [~] écran d'achat sur iPhone avec les trois abonnements, chemin des notes d'examen juste (roue en haut à droite →
     « Paramètres » → « Découvrir le premium ») ; aucune date fausse dans l'app d'ici là (note de Nouveautés sans date,
-    Paramètres affiche celle du relais) ;
+    Paramètres affiche celle du relais) ; **vérifié à l'avance le 4/11** : sur l'iPhone simulé, l'écran d'achat (faux
+    magasin « sans abonnement » des captures) montre Silver annuel 29,99 € avec 14 jours d'essai, Silver mensuel
+    4,99 € et Gold ; la roue ouvre « Réglages », dont la ligne « Paramètres » mène à Paramètres ; test iOS
+    (`Settings.appstore.test.jsx`) : relais sans période après le 6/11 → « Découvrir le premium » vers `/premium` et
+    « Restaurer un achat », rien sur Gold offert ; pendant la période, pas encore ce lien ; les cartes de fin de Gold
+    offert d'Android sont coupées sur iPhone (v749, v751, tests) ; reste l'essai réel le 7/11 au matin sur TestFlight
+    (vrais prix de l'App Store en bac à sable) ;
   - [x] captures iPad 13" (choix « B », #217 : 8/8 traitées par Apple), `notes-examen.md` (#219) et droit App Attest
     (722.221) prêts le 2/11 ;
   - [ ] build finale le 6/11 : version d'App Store Connect renommée à son numéro (la 717 garde 717.216 jusque-là ; une
