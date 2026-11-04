@@ -150,7 +150,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 07:00 | suivi d'Android v760 | quelques petits boutons et liens (« Restaurer un achat », « Comment c'est calculé », les Licences) sont plus faciles à toucher, sur iPhone aussi (c'est aussi la règle d'Apple) ; vérifié sur l'iPhone simulé ; **la 760 est sur TestFlight (760.271)**. Parité : 67 % | #271 (mergée) |
 | 4/11 08:00 | suivi d'Android v761 | les petites étiquettes vertes (« Reçu », « Automatique », « Dans votre norme ») sont écrites plus foncé, plus lisibles en plein soleil, sur iPhone aussi ; vérifié sur l'iPhone simulé ; **la 761 est sur TestFlight (761.272)**. Parité : 67 % | #272 (mergée) |
 | 4/11 09:00 | run court | Android n'a publié que son journal ; la 761 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
-| 4/11 10:00 | suivi d'Android v763 | Android vérifie maintenant automatiquement ce que lit le lecteur d'écran (VoiceOver sur iPhone) ; rien ne change dans l'app ; vérifications en cours (PR #274), puis TestFlight. Parité : 67 % | #274 (en vérification) |
+| 4/11 10:00 | suivi d'Android v763 | Android vérifie maintenant automatiquement ce que lit le lecteur d'écran (VoiceOver sur iPhone) ; rien ne change dans l'app. Parité : 67 % | #274 (mergée) |
 
 ---
 
