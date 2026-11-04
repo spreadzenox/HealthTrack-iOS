@@ -24,11 +24,6 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
   it('cache les notes d’Android fausses sur iPhone, en attendant leurs variants', () => {
     // v578 : « l'écran Premium dit jusqu'à quand tout est débloqué » : sur iPhone, pas de période de lancement
     expect(APPSTORE_HIDDEN.has('2026-10-29-0533-paywall-lancement')).toBe(true)
-    // v590 : « les sources branchées (météo, Health Connect, temps d'écran…) » : ni l'un ni l'autre sur iPhone
-    expect(APPSTORE_HIDDEN.has('2026-10-29-1737-sources-titre')).toBe(true)
-    // v596 : « le stress de la montre s'affiche « 46 · normal » » : montre en direct, absente sur iPhone (pas de stress
-    // dans l'app Santé)
-    expect(APPSTORE_HIDDEN.has('2026-10-29-2333-repas-actions')).toBe(true)
     // v607 : « votre montre et Health Connect (Samsung Health, Health Sync…) » : la correction vaut sur iPhone (deux
     // apps qui écrivent la même nuit dans l'app Santé), mais pas ces noms
     expect(APPSTORE_HIDDEN.has('2026-10-30-0933-sommeil-une-source')).toBe(true)
@@ -40,8 +35,11 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
   it('notes reprises par Android (v755, #671) : sorties de la liste, toujours absentes sur iPhone', () => {
     // `variants: ["play", "sideload"]` posés par Android (VFC nuit, page de la montre en direct, Sources en couleur) ;
     // « phrases d'aide » et « compteur d'écrans » reformulées, mais d'avant la version iPhone (30/10, 21:00)
+    // v774 (#690) : « Sources : ce que lit Halcya » marquée Google Play ; « Repas : des cartes plus légères » scindée
+    // (le stress de la montre dans une note Google Play), toutes deux d'avant la version iPhone
     const repris = ['2026-10-30-0233-phrases-aide', '2026-10-30-1133-onboarding-compteur', '2026-10-30-1433-vfc-nuit',
-      '2026-10-31-1033-montre-compacte', '2026-10-31-1833-sources-couleur']
+      '2026-10-31-1033-montre-compacte', '2026-10-31-1833-sources-couleur', '2026-10-29-1737-sources-titre',
+      '2026-10-29-2333-repas-actions']
     const ios = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
     const all = ALL_CHANGELOG.map((e) => e.id)
     for (const id of repris) {
@@ -49,7 +47,8 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
       expect(APPSTORE_HIDDEN.has(id), id).toBe(false)
       expect(ios, id).not.toContain(id)
     }
-    for (const id of ['2026-10-30-1433-vfc-nuit', '2026-10-31-1033-montre-compacte', '2026-10-31-1833-sources-couleur']) {
+    for (const id of ['2026-10-30-1433-vfc-nuit', '2026-10-31-1033-montre-compacte', '2026-10-31-1833-sources-couleur',
+      '2026-10-29-1737-sources-titre', '2026-10-29-2334-stress-montre']) {
       expect(ALL_CHANGELOG.find((e) => e.id === id).variants, id).toEqual(['play', 'sideload'])
     }
     // L'iPhone garde sa propre note « Sources en couleur »
