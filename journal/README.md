@@ -141,6 +141,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 3/11 23:00 | run court | Android n'a rien publié de plus ; la 749 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 4/11 00:00 | suivi d'Android v751 | sur Google Play, une carte de l'Accueil remerciera les testeurs après la fin de Gold offert ; Android l'a coupée sur iPhone de lui-même (ma demande notée hier soir n'a pas eu à vous être transmise) : un test de l'iPhone vérifie qu'elle n'y apparaît pas les 7 et 8/11 ; Android a aussi rangé son code (rien de visible) ; vérifié sur l'iPhone simulé (l'Accueil ne change pas) ; **la 751 est sur TestFlight (751.260)**. Parité : 67 % | #260 (mergée) |
 | 4/11 01:00 | suivi d'Android v752 | dans les Analyses, vous pourrez masquer un lien évident ou qui ne vous parle pas (et tout réafficher), aussi sur iPhone ; les liens masqués suivent l'export et la copie de secours de l'iPhone (vérifié par un test) ; vérifié sur l'iPhone simulé ; **la 752 est sur TestFlight (752.261)**. Parité : 67 % | #261 (mergée) |
+| 4/11 02:00 | chemin de l'examen vérifié | Android n'a publié que son journal ; j'ai vérifié à l'avance sur l'iPhone simulé ce que verra l'examinateur d'Apple après le 6/11 : la roue, « Paramètres », puis « Découvrir le premium » mène à l'écran d'achat avec Silver (annuel avec 14 jours d'essai, mensuel) et Gold ; reste l'essai sur votre iPhone le 7/11 au matin. Parité : 67 % | #263 (en vérification) |
 
 ---
 
