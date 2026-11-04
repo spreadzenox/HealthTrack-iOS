@@ -417,6 +417,13 @@
 - Raccourci ou widget « Lire mon bien-être » pour compenser l'absence de lecture au déverrouillage.
 - Apple Watch : HealthKit couvre déjà sommeil, FC, VFC, pas — atout de la version iOS.
 - Huawei Santé sur iOS écrit une partie de ses données dans Santé : vérifier lesquelles (sommeil ? VFC ?).
+- **Livraison continue (décision du propriétaire du 04/11 19:45)** : chaque version verte part déjà sur TestFlight
+  (interne, envoi lancé à chaque merge). Pistes : `testflight.yml` sur chaque push de `main` qui change l'app (au lieu
+  d'un lancement à la main) ; testeurs **externes** seulement avec l'accord du propriétaire, car la première build de
+  chaque version passe par l'examen d'Apple (« Beta App Review »). Question dans `POUR-ORCHESTRATEUR.md`.
+- **Retours des utilisateurs (même décision)** : « Votre avis » dans l'app, vers une route du relais `/v1/feedback`
+  (I219 d'Android, à l'étude) ; l'iPhone l'appellera avec `X-Platform: ios` quand Android annoncera la route dans
+  `POUR-IOS.md`.
 - **Taille du texte d'iOS** (écart vu avec Android v771, FONT-SCALE-1) : sur Android, la WebView suit la taille de
   police du système ; sur iPhone, la WebView ne suit ni Dynamic Type ni « Taille du texte » (Réglages → Luminosité et
   affichage). Pistes : plugin officiel `@capacitor/text-zoom` (licence MIT, à vérifier) qui applique la préférence

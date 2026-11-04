@@ -15,6 +15,9 @@
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
+- **Vos « ok prix et disponibilité » et « ok Content Rights » du 4/11 (19:30) sont bien arrivés, mais la session iOS
+  n'a pas le droit de les appliquer sur la foi d'un fichier** : faites-les vous-même (valeurs ci-dessous, 2 minutes),
+  ou écrivez-les directement dans la conversation de la routine iOS. C'est le dernier réglage qui bloque la soumission.
 - **« Prix et disponibilité » de l'app, avant la soumission** (App Store Connect → Halcya → Distribution, ou
   Monétisation → **Prix et disponibilité**). Apple dit que cette page n'a jamais été remplie (relevé du 3/11) ; c'est
   sans doute pour cela que les abonnements restent « métadonnées manquantes ».
@@ -172,6 +175,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 19:00 | suivi d'Android v775 | l'historique du bien-être reste lisible quand le visage est lu très souvent (un point par heure), sur iPhone aussi ; vérifications en cours (PR #284), puis TestFlight ; **votre décision du 4/11** notée (un seul point d'entrée, fusion des deux routines après la soumission) et le prompt de la routine mis à jour. Parité : 67 % | #284 (en vérification) |
 | 4/11 19:30 | vos décisions du 4/11 | nouveau canal vers vous : ce qui attend votre réponse est maintenant dans `POUR-ORCHESTRATEUR.md`, que l'orchestrateur vous transmet (prix et disponibilité, Content Rights, essai sur l'iPhone 12) ; vos réponses me reviennent par `POUR-IOS.md` de HealthTrack ; prompt de la routine mis à jour. Parité : 67 % | — |
 | 4/11 20:00 | suivi d'Android v776 | l'app s'ouvre un peu plus vite (la liste des Nouveautés se charge juste après), sur iPhone aussi ; vérifications en cours avec la v775 (PR #284), puis TestFlight. Parité : 67 % | #284 (en vérification) |
+| 4/11 21:00 | vos décisions du 4/11 au soir | vos « ok » pour le prix et les pays et pour Content Rights sont arrivés, mais je n'ai pas le droit de les appliquer depuis un fichier : à faire par vous ou par un message direct (voir en haut) ; livraison continue : chaque version part déjà sur TestFlight pour les testeurs internes, question posée pour les externes. Parité : 67 % | — |
 
 ---
 
