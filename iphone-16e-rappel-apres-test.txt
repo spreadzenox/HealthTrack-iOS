@@ -1,0 +1,49 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /Users/runner/work/_temp/dd-tests/Build/Products/HalcyaUITests_iphonesimulator26.5-arm64-x86_64.xctestrun -destination id=F6F146B6-18AA-4FE2-9F0B-AA6D02028DDA "-only-testing:HalcyaUITests/NotificationsUITests/testToucherLeRappelDePortion"
+
+2026-11-04 13:08:17.646 xcodebuild[44558:125878] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-11-04 13:08:17.786 xcodebuild[44558:125878] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:F6F146B6-18AA-4FE2-9F0B-AA6D02028DDA, OS:26.2, name:iPhone 16e }
+{ platform:iOS Simulator, arch:x86_64, id:F6F146B6-18AA-4FE2-9F0B-AA6D02028DDA, OS:26.2, name:iPhone 16e }
+2026-11-04 13:08:28.709 xcodebuild[44558:125878] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-11-04 13:08:39.755364+0000 HalcyaUITests-Runner[45746:128795] [Default] Running tests...
+    t =      nans Interface orientation changed to Portrait
+Test Suite 'Selected tests' started at 2026-11-04 13:08:42.433.
+Test Suite 'HalcyaUITests.xctest' started at 2026-11-04 13:08:42.435.
+Test Suite 'NotificationsUITests' started at 2026-11-04 13:08:42.435.
+Test Case '-[HalcyaUITests.NotificationsUITests testToucherLeRappelDePortion]' started.
+    t =     0.00s Start Test at 2026-11-04 13:08:42.437
+    t =     0.28s Set Up
+    t =     0.28s Pressing Home button
+    t =     0.93s Waiting 90.0s for Any (First Match) to exist
+    t =     2.07s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     2.08s         Checking existence of `Any (First Match)`
+    t =     3.32s         Capturing element debug description
+    t =     3.96s     Checking `Expect predicate `existsNoRetry == 1` for object Any (First Match)`
+    t =     3.98s         Checking existence of `Any (First Match)`
+    t =     4.31s Tap Any (First Match)
+    t =     4.31s     Wait for com.apple.springboard to idle
+    t =     4.91s     Find the Any (First Match)
+    t =     5.08s     Check for interrupting elements affecting "NotificationShortLookView" BannerNotification
+    t =     5.38s     Synthesize event
+    t =     6.45s     Wait for com.apple.springboard to idle
+    t =     7.15s Wait for fr.jpesquet.sante to become Running Foreground
+    t =     7.15s Tear Down
+Test Case '-[HalcyaUITests.NotificationsUITests testToucherLeRappelDePortion]' passed (7.321 seconds).
+Test Suite 'NotificationsUITests' passed at 2026-11-04 13:08:49.759.
+	 Executed 1 test, with 0 failures (0 unexpected) in 7.321 (7.324) seconds
+Test Suite 'HalcyaUITests.xctest' passed at 2026-11-04 13:08:49.763.
+	 Executed 1 test, with 0 failures (0 unexpected) in 7.321 (7.328) seconds
+Test Suite 'Selected tests' passed at 2026-11-04 13:08:49.764.
+	 Executed 1 test, with 0 failures (0 unexpected) in 7.321 (7.331) seconds
+2026-11-04 13:08:50.539 xcodebuild[44558:125878] [MT] IDETestOperationsObserverDebug: 21.811 elapsed -- Testing started completed.
+2026-11-04 13:08:50.539 xcodebuild[44558:125878] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-11-04 13:08:50.540 xcodebuild[44558:125878] [MT] IDETestOperationsObserverDebug: 21.811 sec, +21.810 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/HalcyaUITests-cjdjctpdjifsxganriutjxnkpjio/Logs/Test/Test-HalcyaUITests-2026.11.04_13-08-17-+0000.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started
