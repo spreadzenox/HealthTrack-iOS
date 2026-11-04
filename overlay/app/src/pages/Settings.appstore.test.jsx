@@ -61,4 +61,25 @@ describe('Paramètres sur iPhone : abonnement de l’App Store', () => {
     renderSettings()
     expect(await screen.findByText('Pendant le test : jusqu’à 20 analyses par jour, sans rien payer.')).toBeInTheDocument()
   })
+  // Soumission du 7 ou du 8/11 (décision du propriétaire du 2/11) : après le 6/11, le relais ne sert plus Gold offert
+  // à l'iPhone ; les notes pour l'examen d'Apple (store/app-store/notes-examen.md) disent « roue en haut à droite →
+  // Paramètres → Découvrir le premium », qui doit alors mener à l'écran d'achat
+  it('après la période de l’iPhone : « Découvrir le premium » mène à l’écran d’achat (chemin des notes d’examen)', async () => {
+    localStorage.setItem('halcya_launch_last_until', '2026-11-06T23:00:00Z')
+    localStorage.setItem('halcya_entitlement', JSON.stringify({ premium: true, source: 'launch', tier: 'gold', launchUntil: '2026-11-06T23:00:00Z' }))
+    globalThis.fetch = relayAnswer({ premium: false, source: null })
+    const { container } = renderSettings()
+    const discover = await screen.findByRole('link', { name: 'Découvrir le premium' })
+    expect(discover).toHaveAttribute('href', '/premium')
+    expect(screen.getByRole('button', { name: 'Restaurer un achat' })).toBeInTheDocument()
+    expect(container).not.toHaveTextContent(/Gold offert/)
+    expect(container).not.toHaveTextContent(/Google Play/)
+  })
+
+  it('pendant la période : pas encore de « Découvrir le premium » (Gold déjà offert)', async () => {
+    globalThis.fetch = relayAnswer({ premium: true, source: 'launch', tier: 'gold', launchUntil: '2026-11-06T23:00:00Z' })
+    renderSettings()
+    expect(await screen.findByText('Pendant le test : jusqu’à 20 analyses par jour, sans rien payer.')).toBeInTheDocument()
+    expect(screen.queryByRole('link', { name: 'Découvrir le premium' })).not.toBeInTheDocument()
+  })
 })
