@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v763 (commit `af87468`, 4/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v767 (commit `dd0a542`, 4/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 4/11 12:00 | #681, #683, #684 (v767) | #681 (PLUGIN-API, WEBVIEW-MIN) : plantage à l'ouverture sous Android ≤ 12 corrigé (`CompanionPlugin.java`) ; WebView minimale déclarée (`android.minWebViewVersion` 93, car le code utilise `Object.hasOwn` et `.at()`) et page d'erreur embarquée `webview-ancienne.html` (`server.errorPath`, qui vaut aussi sur iOS en cas d'échec de chargement) ; bandeau des Nouveautés à 44 px ; deux notes réservées à Google Play, celle du bandeau vraie sur iPhone ; #684 (règle 6) : « Horaires variables » en gris neutre (Tendances), note vraie sur iPhone ; #683 : journal ; côté iPhone : **même cause, même correctif** : `Object.hasOwn` et `.at()` n'existent qu'à partir d'iOS 15.4 alors que l'app visait iOS 15.0 (écran blanc possible de 15.0 à 15.3, et la page d'erreur y aurait affiché son texte Android) → **iOS minimal relevé à 15.4** (`IPHONEOS_DEPLOYMENT_TARGET`), test iOS `iosMinimum.test.js` (même liste de fonctions qu'Android, version d'iOS de chacune ; dès 15.4 la page d'erreur ne montre que « Halcya ne s'est pas ouverte », sans Play Store) ; 34 correctifs tels quels | — |
 | 4/11 10:00 | #678, #679 (v763) | #679 (A11Y-3) : contrôle du lecteur d'écran (`screenReader.test.js`, banc `visual-check.mjs`) : test seulement, rien ne change dans l'app ; #678 : journal ; #680 : idées (retours des testeurs), pas d'envoi sur Google Play ; côté iPhone : le test passe sur le code de l'iPhone (VoiceOver lit les mêmes rôles et étiquettes) ; 34 correctifs tels quels | — |
 | 4/11 08:00 | #677 (v761) | #677 (A11Y-2) : contrastes vérifiés, étiquettes vertes « Reçu », « Automatique » (Sources) et « Dans votre norme » (Tendances) écrites plus foncé (`MyDevices.css`, `BaselineCards.css`) et test (`badgeContrast.test.js`) ; #678 : journal ; note de Nouveautés vraie sur iPhone ; code partagé, **vrai sur iPhone** ; 34 correctifs tels quels | — |
 | 4/11 07:00 | #676 (v760) | #676 (A11Y-1) : cibles tactiles d'au moins 44 px (« Comment c'est calculé », « Restaurer un achat » du paywall, « Désactiver », liens de la page Licences ; `--tap-min`, 8 fichiers CSS) et test qui parcourt tout le CSS (`tapTargets.test.js`) ; note de Nouveautés vraie sur iPhone ; code partagé, **vrai sur iPhone**, où c'est aussi la règle d'Apple (44 points) ; le test d'Android passe sur nos fichiers iOS ; 34 correctifs tels quels | — |
