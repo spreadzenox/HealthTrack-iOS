@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v761 (4/11) | **761 sur TestFlight** (build 761.272, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v763 (4/11) | **761 sur TestFlight** (build 761.272, avec App Attest), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -150,6 +150,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 07:00 | suivi d'Android v760 | quelques petits boutons et liens (« Restaurer un achat », « Comment c'est calculé », les Licences) sont plus faciles à toucher, sur iPhone aussi (c'est aussi la règle d'Apple) ; vérifié sur l'iPhone simulé ; **la 760 est sur TestFlight (760.271)**. Parité : 67 % | #271 (mergée) |
 | 4/11 08:00 | suivi d'Android v761 | les petites étiquettes vertes (« Reçu », « Automatique », « Dans votre norme ») sont écrites plus foncé, plus lisibles en plein soleil, sur iPhone aussi ; vérifié sur l'iPhone simulé ; **la 761 est sur TestFlight (761.272)**. Parité : 67 % | #272 (mergée) |
 | 4/11 09:00 | run court | Android n'a publié que son journal ; la 761 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
+| 4/11 10:00 | suivi d'Android v763 | Android vérifie maintenant automatiquement ce que lit le lecteur d'écran (VoiceOver sur iPhone) ; rien ne change dans l'app ; vérifications en cours (PR #274), puis TestFlight. Parité : 67 % | #274 (en vérification) |
 
 ---
 
