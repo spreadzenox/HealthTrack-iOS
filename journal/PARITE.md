@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v768 (commit `5592f99`, 4/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v769 (commit `3e422db`, 4/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 4/11 13:40 | #686 (v769) | #686 (PLUGIN-API-2) : contrôle des méthodes natives sous Android 12L dans la CI d'Android (job émulateur API 32) ; rien dans le code partagé ; côté iPhone : rien à reprendre ; 34 correctifs tels quels | — |
 | 4/11 13:00 | #685 (v768) | #685 (PLUGIN-API-2) : Android Lint « NewApi » sur le code natif d'Android dans sa CI (`build.gradle`, trois plugins Java annotés) ; rien dans le code partagé ; côté iPhone : rien à reprendre (le pendant iPhone est `iosMinimum.test.js`, v767) ; 34 correctifs tels quels | — |
 | 4/11 12:00 | #681, #683, #684 (v767) | #681 (PLUGIN-API, WEBVIEW-MIN) : plantage à l'ouverture sous Android ≤ 12 corrigé (`CompanionPlugin.java`) ; WebView minimale déclarée (`android.minWebViewVersion` 93, car le code utilise `Object.hasOwn` et `.at()`) et page d'erreur embarquée `webview-ancienne.html` (`server.errorPath`, qui vaut aussi sur iOS en cas d'échec de chargement) ; bandeau des Nouveautés à 44 px ; deux notes réservées à Google Play, celle du bandeau vraie sur iPhone ; #684 (règle 6) : « Horaires variables » en gris neutre (Tendances), note vraie sur iPhone ; #683 : journal ; côté iPhone : **même cause, même correctif** : `Object.hasOwn` et `.at()` n'existent qu'à partir d'iOS 15.4 alors que l'app visait iOS 15.0 (écran blanc possible de 15.0 à 15.3, et la page d'erreur y aurait affiché son texte Android) → **iOS minimal relevé à 15.4** (`IPHONEOS_DEPLOYMENT_TARGET`), test iOS `iosMinimum.test.js` (même liste de fonctions qu'Android, version d'iOS de chacune ; dès 15.4 la page d'erreur ne montre que « Halcya ne s'est pas ouverte », sans Play Store) ; 34 correctifs tels quels | — |
 | 4/11 10:00 | #678, #679 (v763) | #679 (A11Y-3) : contrôle du lecteur d'écran (`screenReader.test.js`, banc `visual-check.mjs`) : test seulement, rien ne change dans l'app ; #678 : journal ; #680 : idées (retours des testeurs), pas d'envoi sur Google Play ; côté iPhone : le test passe sur le code de l'iPhone (VoiceOver lit les mêmes rôles et étiquettes) ; 34 correctifs tels quels | — |
