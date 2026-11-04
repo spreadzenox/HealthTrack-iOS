@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v759 (commit `514bf1c`, 4/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v760 (commit `34073c9`, 4/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 4/11 07:00 | #676 (v760) | #676 (A11Y-1) : cibles tactiles d'au moins 44 px (« Comment c'est calculé », « Restaurer un achat » du paywall, « Désactiver », liens de la page Licences ; `--tap-min`, 8 fichiers CSS) et test qui parcourt tout le CSS (`tapTargets.test.js`) ; note de Nouveautés vraie sur iPhone ; code partagé, **vrai sur iPhone**, où c'est aussi la règle d'Apple (44 points) ; le test d'Android passe sur nos fichiers iOS ; 34 correctifs tels quels | — |
 | 4/11 05:00 | #675 (v759) | #675 : notes de version envoyées à Google Play filtrées par variante (`publish.mjs`) ; #674 : journal ; outil de publication d'Android seulement, rien dans l'app ; côté iPhone : nos envois (`store-push.yml`, `testflight.yml`) n'écrivent pas de notes depuis les Nouveautés ; 34 correctifs tels quels | — |
 | 4/11 04:00 | #673 (v757) | #673 (POL-PLAY-105) : rail de la barre « Vos pistes arrivent dans … jours » visible en thème sombre (`--lilac-track`, `tokens.css`, `TodayCards.css`) ; #672 : journal d'Android ; note de Nouveautés vraie sur iPhone ; code partagé, **vrai sur iPhone** ; 34 correctifs tels quels | — |
 | 4/11 03:00 | #670, #671 (v755) | #670 (I86, suite) : « Masquer cette piste » aussi dans « Votre ventre et vos repas » (`GutLinks.jsx`, même réglage local que #668, suit l'export) ; note vraie sur iPhone ; code partagé, **vrai sur iPhone** ; #671 (IOS-ONB-ACTION) : **nos demandes du 29 au 31/10 reprises par Android** (lues dans `DEMANDES.md`, message dans son `journal/POUR-IOS.md`) : ① bouton « Autoriser » de l'écran de bienvenue à sa hauteur (`.onb-action { flex: 0 0 auto }`) → **correctif 29 retiré** (34 correctifs), test iOS gardé ; ② notes de Nouveautés VFC nuit, montre compacte, Sources en couleur marquées `["play", "sideload"]`, « phrases d'aide » et « compteur d'écrans » reformulées → 5 entrées sorties d'`APPSTORE_HIDDEN` (correctif 28), rien ne change sur iPhone (d'avant la version iPhone ou réservées à Google Play ; test iOS) ; sa note « Bienvenue : un bouton à sa taille » cachée sur iPhone, qui avait ce bouton juste dès sa première version | — |
