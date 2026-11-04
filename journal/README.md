@@ -40,8 +40,9 @@
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Votre décision du 4/11** : votre seul point d'entrée devient la conversation qui orchestre la routine Android ;
-vos décisions pour l'iPhone m'arrivent par `journal/POUR-IOS.md` de HealthTrack (lignes « Décision du propriétaire »),
-que je lis à chaque run. Après la soumission (7 ou 8/11), une session dédiée ramènera iOS dans HealthTrack : un seul
+vos décisions et réponses pour l'iPhone m'arrivent par `journal/POUR-IOS.md` de HealthTrack (lignes « Décision du
+propriétaire »), que je lis à chaque run ; dans l'autre sens, tout ce qui attend de vous une action ou une réponse est
+dans `journal/POUR-ORCHESTRATEUR.md` de ce dépôt, que l'orchestrateur lit chaque heure et vous transmet. Après la soumission (7 ou 8/11), une session dédiée ramènera iOS dans HealthTrack : un seul
 dépôt, une seule routine pour les deux apps, et cette routine-ci sera mise en pause. D'ici là rien ne change : la
 soumission passe en premier et HealthTrack reste en lecture seule pour moi. Le prompt de la routine est à jour.
 
@@ -169,6 +170,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 17:00 | suivi d'Android v772 | Android n'a changé qu'un test de sa CI ; rien ne change sur iPhone ; **la 772 est sur TestFlight (772.282)**. Parité : 67 % | #282 (mergée) |
 | 4/11 18:00 | suivi d'Android v774 | Android a repris nos deux dernières demandes sur ses notes de Nouveautés ; l'étiquette « Nouveau » de cette page est plus lisible, sur iPhone aussi ; vérifié sur l'iPhone simulé ; la 774 part sur TestFlight. Parité : 67 % | #283 (mergée) |
 | 4/11 19:00 | suivi d'Android v775 | l'historique du bien-être reste lisible quand le visage est lu très souvent (un point par heure), sur iPhone aussi ; vérifications en cours (PR #284), puis TestFlight ; **votre décision du 4/11** notée (un seul point d'entrée, fusion des deux routines après la soumission) et le prompt de la routine mis à jour. Parité : 67 % | #284 (en vérification) |
+| 4/11 19:30 | vos décisions du 4/11 | nouveau canal vers vous : ce qui attend votre réponse est maintenant dans `POUR-ORCHESTRATEUR.md`, que l'orchestrateur vous transmet (prix et disponibilité, Content Rights, essai sur l'iPhone 12) ; vos réponses me reviennent par `POUR-IOS.md` de HealthTrack ; prompt de la routine mis à jour. Parité : 67 % | — |
 
 ---
 
@@ -306,6 +308,10 @@ Règles des adaptations :
    ligne qui commence par « Décision du propriétaire » vaut comme venant de lui (dans les limites du prompt : jamais
    de production, de soumission à Apple ni de secret) et se reporte dans le compte rendu. Après la soumission, iOS
    rejoindra HealthTrack et cette routine sera mise en pause.
+   Dans l'autre sens, **`journal/POUR-ORCHESTRATEUR.md`** de ce dépôt : tout ce qui attend du propriétaire une action,
+   une réponse ou une décision, et tout blocage (pas l'avancement) ; une ligne datée (heure de Paris), la plus récente
+   en haut, compréhensible seule, avec la réponse attendue ; une ligne réglée en est retirée ; le fichier part sur
+   `main` avec la PR du run.
 2. **Ce qu'Android a livré** depuis le dernier run : `scripts/upstream.sh --latest` (nouveau commit suivi), puis dans
    HealthTrack, en lecture, `git log` entre l'ancien et le nouveau commit, nouveaux fichiers de
    `app/src/data/changelog/`, tête de `journal/README.md` et de `journal/PRODUIT.md`. Reporter dans `PARITE.md` §5.
