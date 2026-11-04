@@ -198,7 +198,10 @@
     lisait Documents après « Supprimer toutes mes données », qui efface la copie (dossier vide ensuite) ; elle lit
     désormais la sonde `[sauvegarde]` (Documents/Copie de secours, 1 fichier, exclu d'iCloud), prise avant (PR #201).
   - [ ] Plugin Swift `TrialReminder` (PR #182) inutilisé depuis Android v697 (#612 : pas de rappel d'essai promis sur
-    l'App Store) : le retirer si la décision tient, ou le rebrancher si Android revient dessus.
+    l'App Store) : le retirer si la décision tient, ou le rebrancher si Android revient dessus. **Revu le 4/11 (v759)** :
+    toujours inutilisé (`trialReminderPlugin` rend `null` hors Google Play, Apple envoie son propre rappel) ; retrait
+    **après la soumission** : il touche au projet Xcode (`project.pbxproj`, `HalcyaBridgeViewController.swift`,
+    `HalcyaRules`), à ne pas remuer avant la build finale du 6/11, et du code mort ne gêne pas l'examen.
   - [~] Capture d'écran pour l'examen de chaque abonnement : **envoyée le 1/11 à 22:24** (écran d'achat 6,9",
     « premium-2 » de `captures/store`) ; état chez Apple à revérifier (`MISSING_METADATA` juste après l'envoi) : l'écran d'achat de l'app, à prendre en CI et envoyer par l'API quand l'achat ouvrira sur iPhone ;
     adresse des notifications serveur V2 (relais d'Android, v691) réglée par le script (PR #182) ; la soumission,

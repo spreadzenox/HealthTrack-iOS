@@ -146,6 +146,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 03:00 | suivi d'Android v755 | Android a repris de lui-même six petites demandes de l'iPhone (un bouton de l'écran de bienvenue, des notes de Nouveautés qui citaient Android) : une adaptation de l'iPhone devient inutile et disparaît ; dans les Analyses, une piste du ventre peut aussi être masquée, sur iPhone aussi ; vérifié sur l'iPhone simulé ; **la 755 est sur TestFlight (755.265)**. Parité : 67 % | #265 (mergée) |
 | 4/11 04:00 | suivi d'Android v757 | en thème sombre, la barre « Vos pistes arrivent dans … jours » se voit mieux, sur iPhone aussi ; vérifié sur l'iPhone simulé ; **la 757 est sur TestFlight (757.266)**. Parité : 67 % | #266 (mergée) |
 | 4/11 05:00 | suivi d'Android v759 | Android n'a changé que son outil d'envoi sur Google Play ; rien ne change sur iPhone ; **la 759 est sur TestFlight (759.268)**. Parité : 67 % | #268 (mergée) |
+| 4/11 06:00 | run court | Android n'a rien publié de plus ; la 759 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 
 ---
 
