@@ -155,7 +155,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 11:00 | run court | Android n'a publié que des idées ; la 763 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 4/11 12:00 | suivi d'Android v767 | Android a corrigé un écran blanc sur les vieux téléphones Android ; la même cause touchait les iPhone restés en iOS 15.0 à 15.3 : l'app demande maintenant iOS 15.4 au moins (tout iPhone de cette époque peut se mettre à jour) ; dans Tendances, « Horaires variables » est en gris neutre ; vérifié sur l'iPhone simulé ; **la 767 est sur TestFlight (767.276)**. Parité : 67 % | #276 (mergée) |
 | 4/11 13:00 | suivi d'Android v768 | Android n'a changé qu'un contrôle de son code Android ; rien ne change sur iPhone ; **la 768 est sur TestFlight (768.277)** ; Android a ensuite publié un autre contrôle de son code (v769), suivi dans la foulée (PR #278). Parité : 67 % | #277 (mergée), #278 |
-| 4/11 14:00 | suivi d'Android v769 | Android n'a changé que ses contrôles automatiques ; son serveur sert toujours Gold offert jusqu'au 6/11 sur iPhone ; vérifications en cours (PR #278), puis TestFlight. Parité : 67 % | #278 (en vérification) |
+| 4/11 14:00 | suivi d'Android v769 | Android n'a changé que ses contrôles automatiques ; son serveur sert toujours Gold offert jusqu'au 6/11 sur iPhone ; vérifié sur l'iPhone simulé. Parité : 67 % | #278 (mergée) |
 
 ---
 
