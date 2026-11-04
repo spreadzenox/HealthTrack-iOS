@@ -56,6 +56,15 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
     expect(ios).toContain('2026-10-31-1834-sources-couleur-iphone')
   })
 
+  it('v771 : « si vous avez agrandi le texte dans les réglages du téléphone » cachée : l’app iPhone ne suit pas encore la taille du texte d’iOS', () => {
+    // Android (WebView) suit la taille de police du système ; la WebView de l'iPhone non (ni Dynamic Type ni TextZoom) :
+    // sur iPhone, ce réglage ne change rien dans Halcya, la note n'y décrirait rien (PARITE, BACKLOG)
+    expect(ALL_CHANGELOG.map((e) => e.id)).toContain('2026-11-04-1435-grande-police')
+    expect(APPSTORE_HIDDEN.has('2026-11-04-1435-grande-police')).toBe(true)
+    expect(changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)).not.toContain('2026-11-04-1435-grande-police')
+    expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-11-04-1435-grande-police')
+  })
+
   it('v755 : « le bouton « Autoriser » ne remplit plus tout l’écran » cachée, l’iPhone l’avait dès sa première version', () => {
     // Correctif 29 de l'iPhone (29/10, avant le premier TestFlight du 30/10), repris par Android en v755 (#671)
     expect(ALL_CHANGELOG.map((e) => e.id)).toContain('2026-11-04-0235-bouton-bienvenue')
