@@ -148,7 +148,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 05:00 | suivi d'Android v759 | Android n'a changé que son outil d'envoi sur Google Play ; rien ne change sur iPhone ; **la 759 est sur TestFlight (759.268)**. Parité : 67 % | #268 (mergée) |
 | 4/11 06:00 | run court | Android n'a rien publié de plus ; la 759 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 4/11 07:00 | suivi d'Android v760 | quelques petits boutons et liens (« Restaurer un achat », « Comment c'est calculé », les Licences) sont plus faciles à toucher, sur iPhone aussi (c'est aussi la règle d'Apple) ; vérifié sur l'iPhone simulé ; **la 760 est sur TestFlight (760.271)**. Parité : 67 % | #271 (mergée) |
-| 4/11 08:00 | suivi d'Android v761 | les petites étiquettes vertes (« Reçu », « Automatique », « Dans votre norme ») sont écrites plus foncé, plus lisibles en plein soleil, sur iPhone aussi ; vérifications en cours (PR #272), puis TestFlight. Parité : 67 % | #272 (en vérification) |
+| 4/11 08:00 | suivi d'Android v761 | les petites étiquettes vertes (« Reçu », « Automatique », « Dans votre norme ») sont écrites plus foncé, plus lisibles en plein soleil, sur iPhone aussi ; vérifié sur l'iPhone simulé. Parité : 67 % | #272 (mergée) |
 
 ---
 
