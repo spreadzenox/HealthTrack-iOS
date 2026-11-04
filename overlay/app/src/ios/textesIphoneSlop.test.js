@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import process from 'node:process'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { SLOP_WORDING } from '../data/wordingRules.js'

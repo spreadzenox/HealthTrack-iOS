@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest'
+import process from 'node:process'
 import { readFileSync, existsSync } from 'node:fs'
 import { resolve } from 'node:path'
 

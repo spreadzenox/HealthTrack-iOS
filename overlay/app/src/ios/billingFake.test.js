@@ -1,4 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
+import process from 'node:process'
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { fakeAppStoreBilling, installBillingFake, needsBillingFake, buildPlan, ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS } from './captureMode.js'
