@@ -421,10 +421,10 @@
   `testflight.yml` part seul sur chaque push de `main` qui change l'app (plus de lancement à la main).
 - [ ] Livraison continue aux testeurs **externes** : seulement avec l'accord du propriétaire, car la première build de
   chaque version passe par l'examen d'Apple (« Beta App Review »). Question dans `POUR-ORCHESTRATEUR.md`.
-- **Retours des utilisateurs (même décision)** : « Votre avis » dans l'app, vers la route du relais `POST /v1/feedback`
-  (Android #697, v780, 04/11 22:35 : écrite, pas encore déployée ; `X-Install-Id`, `X-Platform: ios` et l'assertion
-  App Attest comme l'analyse ; corps `{ text ≤ 2 000, version, variant: "ios" }`, 5 par jour). Le formulaire viendra
-  à l'étape 2 d'Android (code partagé) : vérifier alors sur iPhone les en-têtes (correctif 38, App Attest) et le texte.
+- [x] **Retours des utilisateurs (même décision)**, « Votre avis » : formulaire d'Android v782 (AVIS-RELAIS-2) repris
+  sur iPhone le 5/11 : `variant: "ios"`, `X-Platform: ios`, assertion App Attest sur le corps exact (correctif 38),
+  lien de secours vers un ticket du dépôt de l'iPhone (correctif 27), section dans la confidentialité de l'iPhone.
+  À vérifier quand Android annonce le relais déployé : un avis envoyé depuis TestFlight arrive bien (bilan du relais).
 - **Taille du texte d'iOS** (écart vu avec Android v771, FONT-SCALE-1) : sur Android, la WebView suit la taille de
   police du système ; sur iPhone, la WebView ne suit ni Dynamic Type ni « Taille du texte » (Réglages → Luminosité et
   affichage). Pistes : plugin officiel `@capacitor/text-zoom` (licence MIT, à vérifier) qui applique la préférence

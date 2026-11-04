@@ -41,13 +41,13 @@
   <!-- L'iPhone n'a pas de bouton retour : sans ce lien, la page serait une impasse dans l'app (/plus = Réglages) -->
   <a class="back" href="/plus">‹ Revenir à Halcya</a>
   <h1>Politique de confidentialité</h1>
-  <p class="updated">Halcya pour iPhone · mise à jour du 1er novembre 2026</p>
+  <p class="updated">Halcya pour iPhone · mise à jour du 4 novembre 2026</p>
 
   <div class="summary">
     <p><strong>En bref</strong></p>
     <ul>
       <li>Vos données restent sur votre iPhone, par défaut. Halcya n'a ni compte, ni serveur qui les garde, ni publicité, ni outil de mesure d'audience.</li>
-      <li>Rien ne quitte l'iPhone sans une action de votre part : l'analyse IA d'un repas, la météo, l'export d'une sauvegarde, un abonnement (vérifié auprès du serveur de Halcya, payé chez Apple).</li>
+      <li>Rien ne quitte l'iPhone sans une action de votre part : l'analyse IA d'un repas, la météo, l'export d'une sauvegarde, un avis que vous nous envoyez, un abonnement (vérifié auprès du serveur de Halcya, payé chez Apple).</li>
       <li>La lecture du visage se fait sur l'iPhone : aucune image n'est gardée ni envoyée.</li>
       <li>La copie de secours de l'app reste sur l'iPhone : elle n'est pas incluse dans la sauvegarde iCloud.</li>
       <li>Vous pouvez tout exporter, et tout effacer, à tout moment.</li>
@@ -162,6 +162,19 @@
     abonnement, aucun achat n'est envoyé.
   </p>
 
+  <h2 id="avis">Votre avis (seulement si vous l'envoyez)</h2>
+  <p>
+    Dans Réglages → Paramètres → « Votre avis », vous pouvez nous écrire. Quand vous touchez « Envoyer », et
+    seulement à ce moment, le serveur de Halcya (Google Cloud, Belgique) reçoit votre texte, le numéro de version
+    de l'app et sa version (iPhone). Aucune donnée de santé n'est jointe. Avant de l'enregistrer, le serveur masque
+    les adresses e-mail et les longs numéros (téléphone, par exemple) que le texte contiendrait. L'identifiant
+    aléatoire d'installation et la preuve App Attest d'Apple (une signature de l'iPhone qui montre que l'envoi vient
+    bien de l'app) accompagnent l'envoi : ils servent seulement à limiter le nombre d'avis par jour contre les abus,
+    et ne sont pas gardés avec l'avis. Le texte est conservé 90 jours au plus dans une base de Google Cloud en Europe
+    (Firestore, Belgique), puis effacé automatiquement. Nous en tirons des résumés anonymes pour améliorer l'app.
+    N'y écrivez ni votre nom, ni votre adresse, ni une information sur votre santé.
+  </p>
+
   <h2>Notifications</h2>
   <p>
     Les rappels (par exemple la note du soir) et les notifications de l'app sont programmés sur l'iPhone. Vous
@@ -178,7 +191,7 @@
   <h2 id="vos-droits">Vos droits et le contrôle de vos données</h2>
   <ul>
     <li><strong>Exporter</strong> : Réglages → Données → Exporter crée un fichier de sauvegarde que vous gardez où vous voulez.</li>
-    <li><strong>Supprimer</strong> : chaque saisie se supprime dans le Journal ; pour tout effacer, utilisez Réglages → Données → « Supprimer toutes mes données » dans l'application (un export vous est proposé juste avant ; la copie de secours est effacée aussi), ou supprimez l'app. Rien ne reste chez nous, puisque rien n'y est envoyé. Une copie peut rester dans une sauvegarde iCloud plus ancienne de votre iPhone (voir « Copie de secours et sauvegarde iCloud »).</li>
+    <li><strong>Supprimer</strong> : chaque saisie se supprime dans le Journal ; pour tout effacer, utilisez Réglages → Données → « Supprimer toutes mes données » dans l'application (un export vous est proposé juste avant ; la copie de secours est effacée aussi), ou supprimez l'app. Rien de votre journal ne reste chez nous, puisque rien n'y est envoyé (un avis envoyé s'efface seul au bout de 90 jours). Une copie peut rester dans une sauvegarde iCloud plus ancienne de votre iPhone (voir « Copie de secours et sauvegarde iCloud »).</li>
     <li><strong>Retirer un accès</strong> : app Santé, caméra, position et Bluetooth se retirent dans les Réglages de l'iPhone.</li>
   </ul>
   <p>
