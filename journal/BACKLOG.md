@@ -417,9 +417,9 @@
 - Raccourci ou widget « Lire mon bien-être » pour compenser l'absence de lecture au déverrouillage.
 - Apple Watch : HealthKit couvre déjà sommeil, FC, VFC, pas — atout de la version iOS.
 - Huawei Santé sur iOS écrit une partie de ses données dans Santé : vérifier lesquelles (sommeil ? VFC ?).
-- **Livraison continue (décision du propriétaire du 04/11 19:45)** : chaque version verte part déjà sur TestFlight
-  (interne, envoi lancé à chaque merge). Pistes : `testflight.yml` sur chaque push de `main` qui change l'app (au lieu
-  d'un lancement à la main) ; testeurs **externes** seulement avec l'accord du propriétaire, car la première build de
+- [x] **Livraison continue (décision du propriétaire du 04/11 19:45)**, test interne : depuis le 04/11 au soir,
+  `testflight.yml` part seul sur chaque push de `main` qui change l'app (plus de lancement à la main).
+- [ ] Livraison continue aux testeurs **externes** : seulement avec l'accord du propriétaire, car la première build de
   chaque version passe par l'examen d'Apple (« Beta App Review »). Question dans `POUR-ORCHESTRATEUR.md`.
 - **Retours des utilisateurs (même décision)** : « Votre avis » dans l'app, vers une route du relais `/v1/feedback`
   (I219 d'Android, à l'étude) ; l'iPhone l'appellera avec `X-Platform: ios` quand Android annoncera la route dans

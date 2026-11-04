@@ -7,7 +7,14 @@
 # créer de certificat de développement à chaque passage (la limite du compte serait vite atteinte).
 name: iOS — TestFlight
 
+# Livraison continue (décision du propriétaire du 04/11, 19:45) : chaque merge sur main qui change l'app part sur
+# TestFlight sans geste de personne, comme Android vers Alpha. Toute PR passe ses vérifications (dont la build iOS et les
+# captures) avant son merge sur main ; le journal, la fiche et le site n'envoient rien. Les testeurs internes la
+# reçoivent ; l'App Store reste le clic du propriétaire, jamais automatisé.
 on:
+  push:
+    branches: [main]
+    paths: ["upstream.json", "patches/**", "overlay/**", "ios/**", "scripts/upstream.sh", "scripts/face-models.sh"]
   workflow_dispatch:
 
 permissions:

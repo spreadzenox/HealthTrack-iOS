@@ -281,6 +281,10 @@ Règles des adaptations :
 - **Version de la fiche App Store** : elle porte le même numéro que les builds (une version n'accepte que des builds
   de même numéro). Après chaque envoi TestFlight d'une nouvelle version, lancer `store-push.yml` sans « captures » :
   il renomme la version « Prête à soumettre » et dit l'état des captures chez Apple (31/10, #129, #132).
+- **Livraison continue** (décision du propriétaire du 04/11, 19:45) : `testflight.yml` part seul à chaque merge sur
+  `main` qui change l'app (`upstream.json`, `patches/`, `overlay/`, `ios/`, scripts de préparation) ; le journal, la
+  fiche et le site n'envoient rien. Ne plus le lancer à la main après un tel merge (deux builds du même commit) ;
+  relever « Version X, build Y » dans le run déclenché par le commit de merge.
 - **Nouveautés in-app** : variante `appstore` (correctif de `app/src/config/distribution.js`) ; les entrées de
   changelog propres à iOS vont dans `overlay/app/src/data/changelog/` avec `"variants": ["appstore"]`, et
   l'historique iOS commence au lancement iOS (équivalent de `PLAY_CHANGELOG_SINCE`).
