@@ -417,6 +417,12 @@
 - Raccourci ou widget « Lire mon bien-être » pour compenser l'absence de lecture au déverrouillage.
 - Apple Watch : HealthKit couvre déjà sommeil, FC, VFC, pas — atout de la version iOS.
 - Huawei Santé sur iOS écrit une partie de ses données dans Santé : vérifier lesquelles (sommeil ? VFC ?).
+- **Taille du texte d'iOS** (écart vu avec Android v771, FONT-SCALE-1) : sur Android, la WebView suit la taille de
+  police du système ; sur iPhone, la WebView ne suit ni Dynamic Type ni « Taille du texte » (Réglages → Luminosité et
+  affichage). Pistes : plugin officiel `@capacitor/text-zoom` (licence MIT, à vérifier) qui applique la préférence
+  d'iOS, ou police `-apple-system-body` à la racine. Touche toutes les mises en page : après la soumission, avec des
+  captures en grande taille sur l'iPhone 12 simulé ; ensuite, la note d'Android du 4/11 (`grande-police`) pourra
+  revenir sur iPhone.
 - « FC nuit » sur iPhone (Android v746, MONTRE-SCORE) : Android l'affiche dans « Vos derniers jours » à partir du
   résumé de nuit de la montre Huawei en direct ; sur iPhone, la même pastille pourrait se calculer avec les mesures de
   cœur de l'app Santé prises pendant la nuit (Apple Watch, Huawei Santé). Ce serait un calcul propre à l'iPhone (une
