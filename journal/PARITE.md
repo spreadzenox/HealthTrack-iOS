@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v778 (commit `5d403aa`, 4/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v780 (commit `dde491e`, 4/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 4/11 23:00 | #696, #697 (v779, v780) | #696 : journal d'Android seulement (premier envoi automatique sur Alpha). #697 (AVIS-RELAIS-1) : le relais accepte `POST /v1/feedback` (« Votre avis », étape 1 ; `X-Platform: ios` et l'assertion App Attest comme l'analyse ; corps `{ text, version, variant: "ios" }`), pas encore déployé ; rien dans `app/` entre v778 et v780 ; le formulaire viendra à l'étape 2 (code partagé, à suivre) ; 34 correctifs tels quels ; 3325 tests, build appstore et lint passent | — (rien dans l'app) |
 | 4/11 22:00 | #695 (v778) | #695 (VENTRE-BE-1) : dans Analyses, chaque piste porte une étiquette « Ventre » (orange) ou « Bien-être » (vert) (`DomainTag.jsx` et `.css`, `GutLinks.jsx`, `Recommendations.jsx`, `pageStyles.js`) ; code web partagé, aussi sur iPhone ; note de Nouveautés `2026-11-04-2135-pistes-ventre-bien-etre` pour toutes les variantes, valable sur iPhone ; 34 correctifs tels quels ; 3325 tests, build appstore et lint passent | ✅ (captures de la PR) |
 | 4/11 21:00 | #694 (v777) | #694 : livraison continue vers Alpha chez Google Play (workflow `play-alpha.yml`, `alphaGate.mjs`), décision du propriétaire du 04/11 19:45 ; outils de publication d'Android seulement, rien dans l'app ; côté iPhone : chaque version verte part déjà sur TestFlight en test interne ; testeurs externes à décider (examen d'Apple, `POUR-ORCHESTRATEUR.md`) ; 34 correctifs tels quels | — |
 | 4/11 20:00 | #693 (v776) | #693 (PERF-CHANGELOG) : les Nouveautés se chargent après le premier affichage (`useChangelog.js`, `SettingsButton.jsx`, `WhatsNewBanner.jsx` ; le code lu au démarrage baisse d'un quart) ; `changelog.js` inchangé, le correctif 28 s'applique tel quel et le chargement différé passe par le même `CHANGELOG` filtré pour l'iPhone ; note vraie sur iPhone ; code partagé, **vrai sur iPhone** ; 34 correctifs | — |
