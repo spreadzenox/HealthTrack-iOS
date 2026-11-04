@@ -13,9 +13,9 @@ const iphone = read('public/confidentialite-iphone.html')
 const text = iphone.replace(/<!--[\s\S]*?-->/g, '').replace(/<style>[\s\S]*?<\/style>/, '').replace(/<[^>]+>/g, ' ')
   .replace(/\s+/g, ' ')
 
-// Empreinte de app/public/privacypolicy.html d'Android lue en dernier (mise à jour du 1er novembre 2026, v671 ; la
-// lecture au déverrouillage qu'elle ajoute n'existe pas sur iPhone)
-const ANDROID_POLICY_RELUE = '9be1e5fa63cbf0ff14c0d192638cea02235ae76d245730ac5571bce736718a66'
+// Empreinte de app/public/privacypolicy.html d'Android lue en dernier (mise à jour du 4 novembre 2026, v782 : section
+// « Votre avis », reprise sur iPhone avec App Attest au lieu de Play Integrity)
+const ANDROID_POLICY_RELUE = '16671345ed82e807cdae06e9fe386e752844f67a77c3e0b7cdf0c958bdb86c0c'
 
 describe('politique de confidentialité sur iPhone', () => {
   it("suit la dernière version relue de la page d'Android", () => {
@@ -55,6 +55,12 @@ describe('politique de confidentialité sur iPhone', () => {
     expect(text).toMatch(/Temps d'écran \(facultatif\)/)
     expect(text).toMatch(/autorisation Temps d'écran/)
     expect(text).toMatch(/par application/)
+    // « Votre avis » (Android v782, AVIS-RELAIS-2) : le texte part seulement sur « Envoyer », effacé après 90 jours
+    expect(text).toMatch(/Votre avis \(seulement si vous l'envoyez\)/)
+    expect(text).toMatch(/un avis que vous nous envoyez/)
+    expect(text).toMatch(/App Attest/)
+    expect(text).toMatch(/90 jours au plus/)
+    expect(text).toMatch(/un avis envoyé s'efface seul au bout de 90 jours/)
   })
 
   it("ramène à l'app, faute de bouton retour sur iPhone", () => {

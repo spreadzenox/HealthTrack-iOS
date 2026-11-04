@@ -13,4 +13,11 @@ describe('« Votre avis » sur iPhone (variante appstore)', () => {
     expect(link.label).toBe('Envoyer un avis')
     expect(link.hint).not.toMatch(/Play|Google|Android/)
   })
+
+  // Android v782 (AVIS-RELAIS-2) : le lien devient le secours du formulaire « Votre avis », sous « Autre moyen : »
+  it('a un texte de secours, sans Play Store', () => {
+    const link = feedbackLink('appstore', '782')
+    expect(link.fallback).toBe('un ticket GitHub')
+    expect(link.fallback).not.toMatch(/Play|Google|Android/)
+  })
 })
