@@ -29,22 +29,39 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
     // v596 : « le stress de la montre s'affiche « 46 · normal » » : montre en direct, absente sur iPhone (pas de stress
     // dans l'app Santé)
     expect(APPSTORE_HIDDEN.has('2026-10-29-2333-repas-actions')).toBe(true)
-    // v600 : « dans Paramètres, Premium et l'écran de la montre » : cet écran (montre en direct) n'existe pas sur iPhone
-    expect(APPSTORE_HIDDEN.has('2026-10-30-0233-phrases-aide')).toBe(true)
     // v607 : « votre montre et Health Connect (Samsung Health, Health Sync…) » : la correction vaut sur iPhone (deux
     // apps qui écrivent la même nuit dans l'app Santé), mais pas ces noms
     expect(APPSTORE_HIDDEN.has('2026-10-30-0933-sommeil-une-source')).toBe(true)
-    // v609 : « quand vous choisissez une montre Health Connect » : sur iPhone, c'est « une montre ou une bague qui
-    // écrit dans l'app Santé » (le compteur, lui, ne grimpe plus non plus)
-    expect(APPSTORE_HIDDEN.has('2026-10-30-1133-onboarding-compteur')).toBe(true)
-    // v612 : « VFC nuit » dans le Journal et l'étiquette « premium » de la réintroduction : sur iPhone, la VFC de l'app
-    // Santé s'appelle « VFC (SDNN) » et rien n'est vendu (l'étiquette n'y apparaît jamais)
-    expect(APPSTORE_HIDDEN.has('2026-10-30-1433-vfc-nuit')).toBe(true)
-    // v640 : « Données de la montre : plus courte » : cette page (montre Huawei en direct) n'existe pas sur iPhone
-    expect(APPSTORE_HIDDEN.has('2026-10-31-1033-montre-compacte')).toBe(true)
     const ids = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
     for (const id of APPSTORE_HIDDEN) expect(ids).not.toContain(id)
     expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-10-29-0533-paywall-lancement')
+  })
+
+  it('notes reprises par Android (v755, #671) : sorties de la liste, toujours absentes sur iPhone', () => {
+    // `variants: ["play", "sideload"]` posés par Android (VFC nuit, page de la montre en direct, Sources en couleur) ;
+    // « phrases d'aide » et « compteur d'écrans » reformulées, mais d'avant la version iPhone (30/10, 21:00)
+    const repris = ['2026-10-30-0233-phrases-aide', '2026-10-30-1133-onboarding-compteur', '2026-10-30-1433-vfc-nuit',
+      '2026-10-31-1033-montre-compacte', '2026-10-31-1833-sources-couleur']
+    const ios = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
+    const all = ALL_CHANGELOG.map((e) => e.id)
+    for (const id of repris) {
+      expect(all, id).toContain(id)
+      expect(APPSTORE_HIDDEN.has(id), id).toBe(false)
+      expect(ios, id).not.toContain(id)
+    }
+    for (const id of ['2026-10-30-1433-vfc-nuit', '2026-10-31-1033-montre-compacte', '2026-10-31-1833-sources-couleur']) {
+      expect(ALL_CHANGELOG.find((e) => e.id === id).variants, id).toEqual(['play', 'sideload'])
+    }
+    // L'iPhone garde sa propre note « Sources en couleur »
+    expect(ios).toContain('2026-10-31-1834-sources-couleur-iphone')
+  })
+
+  it('v755 : « le bouton « Autoriser » ne remplit plus tout l’écran » cachée, l’iPhone l’avait dès sa première version', () => {
+    // Correctif 29 de l'iPhone (29/10, avant le premier TestFlight du 30/10), repris par Android en v755 (#671)
+    expect(ALL_CHANGELOG.map((e) => e.id)).toContain('2026-11-04-0235-bouton-bienvenue')
+    expect(APPSTORE_HIDDEN.has('2026-11-04-0235-bouton-bienvenue')).toBe(true)
+    expect(changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)).not.toContain('2026-11-04-0235-bouton-bienvenue')
+    expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-11-04-0235-bouton-bienvenue')
   })
 
   it('les notes de l’iPhone commencent au premier TestFlight (30/10) et aucune ne parle de Google Play ni d’Android', () => {
