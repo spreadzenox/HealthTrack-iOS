@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v769 (4/11) | **769 sur TestFlight** (build 769.278, avec App Attest, iOS 15.4 au moins), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v771 (4/11) | **769 sur TestFlight** (build 769.278, avec App Attest, iOS 15.4 au moins), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -72,6 +72,8 @@ puis accepter la demande de l'iPhone (Face ID ou code). Il faut iOS 26.4 ou plus
 européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'écran de la veille et une nuit estimée.
 
 **Ce qui ne pourra pas marcher pareil sur iPhone** (à confirmer, détail dans `PARITE.md`)
+- **Taille du texte réglée dans iOS** : Halcya ne la suit pas encore (Android, si) ; possible sur iPhone, prévu après
+  la soumission.
 - Lecture du visage **au déverrouillage** : iOS ne laisse pas une app utiliser la caméra en arrière-plan → lecture à
   l'ouverture de l'app (comme la version Google Play actuelle), raccourci ou widget à étudier.
 - **Temps d'écran** du téléphone : possible seulement **dans l'Union européenne, avec iOS 26.4 ou plus** (règle
@@ -157,6 +159,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 13:00 | suivi d'Android v768 | Android n'a changé qu'un contrôle de son code Android ; rien ne change sur iPhone ; **la 768 est sur TestFlight (768.277)** ; Android a ensuite publié un autre contrôle de son code (v769), suivi dans la foulée (PR #278). Parité : 67 % | #277 (mergée), #278 |
 | 4/11 14:00 | suivi d'Android v769 | Android n'a changé que ses contrôles automatiques ; son serveur sert toujours Gold offert jusqu'au 6/11 sur iPhone ; **la 769 est sur TestFlight (769.278)**. Parité : 67 % | #278 (mergée) |
 | 4/11 15:00 | run court | Android n'a rien publié de plus ; la 769 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
+| 4/11 16:00 | suivi d'Android v771 | sur Android, l'app suit maintenant mieux une grande taille de texte ; sur iPhone, Halcya ne suit pas encore la taille du texte réglée dans iOS : noté, à corriger après la soumission ; vérifications en cours (PR #281), puis TestFlight. Parité : 67 % | #281 (en vérification) |
 
 ---
 
