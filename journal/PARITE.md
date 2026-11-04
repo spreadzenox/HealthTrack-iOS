@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v776 (commit `653e48c`, 4/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v777 (commit `4226c49`, 4/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 4/11 21:00 | #694 (v777) | #694 : livraison continue vers Alpha chez Google Play (workflow `play-alpha.yml`, `alphaGate.mjs`), décision du propriétaire du 04/11 19:45 ; outils de publication d'Android seulement, rien dans l'app ; côté iPhone : chaque version verte part déjà sur TestFlight en test interne ; testeurs externes à décider (examen d'Apple, `POUR-ORCHESTRATEUR.md`) ; 34 correctifs tels quels | — |
 | 4/11 20:00 | #693 (v776) | #693 (PERF-CHANGELOG) : les Nouveautés se chargent après le premier affichage (`useChangelog.js`, `SettingsButton.jsx`, `WhatsNewBanner.jsx` ; le code lu au démarrage baisse d'un quart) ; `changelog.js` inchangé, le correctif 28 s'applique tel quel et le chargement différé passe par le même `CHANGELOG` filtré pour l'iPhone ; note vraie sur iPhone ; code partagé, **vrai sur iPhone** ; 34 correctifs | — |
 | 4/11 19:00 | #692 (v775) | #692 (I83) : historique du bien-être, vue « Jour » : au-delà de 24 lectures, un point par heure (moyenne du jour sur toutes les lectures ; `wellbeingHistory.js`, `WellbeingHistory.jsx`) ; note vraie sur iPhone ; code partagé, **vrai sur iPhone** (lecture du visage à l'ouverture de l'app, rarement plus de 24 par jour) ; 34 correctifs tels quels | — |
 | 4/11 18:00 | #690, #691 (v774) | #690 : **nos deux dernières demandes du 29/10 reprises par Android** (note « Sources : ce que lit Halcya » marquée `["play", "sideload"]`, note « Repas » scindée : le stress de la montre dans une note Google Play) → 2 entrées sorties d'`APPSTORE_HIDDEN`, rien ne change sur iPhone (d'avant sa version ; test) ; étiquette « Nouveau » des Nouveautés plus lisible (`WhatsNew.css`), note vraie sur iPhone ; #691 : vérification visage ↔ notes mémoïsée (`mood/gate.js`, perf, même résultat) ; code partagé, **vrai sur iPhone** ; 34 correctifs | — |
