@@ -42,7 +42,8 @@
 Avant cette date, je vérifie :
 - que le serveur coupe bien la période de lancement sur iPhone : réglé ce soir par la routine Android, et vérifié sur
   l'iPhone simulé (« Gold offert pendant le test, jusqu'au 6 nov. 2026 ») ; Google Play garde le 27/11 ;
-- l'écran d'achat avec les trois abonnements, et le chemin des notes d'examen (roue, Paramètres, Découvrir le premium) ;
+- l'écran d'achat avec les trois abonnements, et le chemin des notes d'examen (roue, Paramètres, Découvrir le premium) :
+  vérifié à l'avance sur l'iPhone simulé le 4/11, reste l'essai sur votre iPhone le 7/11 au matin ;
 - les captures iPad, les notes d'examen et App Attest.
 
 **Où on en est pour vendre sur iPhone** : contrat de vente, banque et fiscalité actifs (A4) ; confidentialité de l'app
