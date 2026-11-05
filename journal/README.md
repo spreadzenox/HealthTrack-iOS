@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v813 (5/11) | **809 sur TestFlight** (build 809.308, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v813 (5/11) | **813 sur TestFlight** (build 813.309, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -39,7 +39,7 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (809.308 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (813.309 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Votre décision du 5/11 (vers 12:00)** : « ok test interne » ; TestFlight reste en test interne jusqu'à la
@@ -200,7 +200,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 15:00 | suivi d'Android v807 | le serveur d'Android sait maintenant estimer la forme des selles sur une photo ; rien ne change encore dans l'app (l'écran viendra plus tard, je relirai alors la confidentialité sur iPhone) ; **la 807 est partie seule sur TestFlight (807.305)**. Parité : 67 % | #305 (mergée) |
 | 5/11 16:00 | run court | Android n'a publié que son journal ; la 807 sur TestFlight est à jour ; demain 6/11 : build finale et numéro exact à attacher pour la soumission. Parité : 67 % | — |
 | 5/11 17:00 | suivi d'Android v809 | Android ajoute la photo des selles (l'IA en estime la forme) ; **sur iPhone, je l'ai masquée jusqu'à la soumission** : il faudrait d'abord une case de plus de votre part dans la « Confidentialité de l'app » chez Apple ; votre avis est demandé (« ok selles masquées » ou « selles dans la soumission ») ; **la 809 est partie seule sur TestFlight (809.308)**, sans la photo des selles. Parité : 67 % | #307, #308 (mergées) |
-| 5/11 18:00 | suivi d'Android v813 | Android compte les corrections faites sur la photo des selles et résume chaque matin les avis du Play Store ; sur iPhone, rien de visible (la photo des selles reste masquée en attendant votre réponse) ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 5/11 18:00 | suivi d'Android v813 | Android compte les corrections faites sur la photo des selles et résume chaque matin les avis du Play Store ; sur iPhone, rien de visible (la photo des selles reste masquée en attendant votre réponse) ; **la 813 est partie seule sur TestFlight (813.309)**. Parité : 67 % | #309 (mergée) |
+| 5/11 19:00 | run court | Android n'a publié que son journal ; la 813 sur TestFlight est à jour ; j'attends votre réponse sur la photo des selles (demain, la build finale se fait avec ou sans) ; prix et pays, Content Rights : toujours en attente. Parité : 67 % | — |
 
 ---
 
