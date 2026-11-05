@@ -64,19 +64,12 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
     expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-11-04-1435-grande-police')
   })
 
-  it('v809 : « Forme des selles : estimez-la avec une photo » cachée, la fonction est masquée sur iPhone (correctif 42)', () => {
-    // Masquée jusqu'à la soumission à Apple (caméra, confidentialité de l'iPhone et « Confidentialité de l'app » à
-    // mettre à jour avant) ; la note annoncerait un bouton absent du Journal de l'iPhone
-    expect(ALL_CHANGELOG.map((e) => e.id)).toContain('2026-11-05-1535-selles-photo')
-    expect(APPSTORE_HIDDEN.has('2026-11-05-1535-selles-photo')).toBe(true)
-    expect(changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)).not.toContain('2026-11-05-1535-selles-photo')
-    expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-11-05-1535-selles-photo')
-  })
-
-  it('v810 : « Selles en photo : vos corrections comptées » cachée de même (correctif 42)', () => {
-    expect(ALL_CHANGELOG.map((e) => e.id)).toContain('2026-11-05-1635-selles-photo-fiabilite')
-    expect(APPSTORE_HIDDEN.has('2026-11-05-1635-selles-photo-fiabilite')).toBe(true)
-    expect(changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)).not.toContain('2026-11-05-1635-selles-photo-fiabilite')
+  it('v809 et v810 : les notes de la photo des selles valent sur iPhone (décision du propriétaire du 05/11 vers 20:15)', () => {
+    const ios = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
+    for (const id of ['2026-11-05-1535-selles-photo', '2026-11-05-1635-selles-photo-fiabilite']) {
+      expect(APPSTORE_HIDDEN.has(id), id).toBe(false)
+      expect(ios, id).toContain(id)
+    }
   })
 
   it('v755 : « le bouton « Autoriser » ne remplit plus tout l’écran » cachée, l’iPhone l’avait dès sa première version', () => {

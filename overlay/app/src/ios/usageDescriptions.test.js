@@ -35,6 +35,11 @@ describe('phrases d’usage de l’iPhone (Info.plist)', () => {
     expect(usage('NSCameraUsageDescription')).toMatch(/caméra.*repas/)
   })
 
+  it('la photo des selles (Android v809, décision du 05/11) : la phrase de la caméra la cite, photo effacée après l’analyse', () => {
+    expect(usage('NSCameraUsageDescription')).toMatch(/forme de vos selles/)
+    expect(usage('NSCameraUsageDescription')).toMatch(/effacée/)
+  })
+
   it('la lecture du visage (plugin FaceSense) : la phrase de la caméra le dit, images gardées sur l’iPhone', () => {
     expect(usage('NSCameraUsageDescription')).toMatch(/lire votre visage.*restent sur cet iPhone/)
   })

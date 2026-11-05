@@ -1,7 +1,7 @@
 # Notes pour l'examen d'Apple (App Review Information → Notes)
 
 Texte à coller par le propriétaire dans App Store Connect au moment de la soumission (A6), en anglais, la langue
-des équipes d'examen (4 000 caractères au plus ; celui-ci en fait environ 2 500). À relire juste avant : chaque
+des équipes d'examen (4 000 caractères au plus ; celui-ci en fait environ 3 700, compté le 5/11). À relire juste avant : chaque
 phrase doit rester vraie pour la version envoyée. Le paragraphe « Backup copy » dépend de la décision sur la
 directive 5.1.3 (ii) (`journal/BACKLOG.md`, I9) ; le paragraphe « Purchases » (2/11, achat ouvert) n'est vrai que si l'écran d'achat est visible sur iPhone le jour de
 l'examen : décision du propriétaire du 2/11, période de lancement coupée sur iPhone le 6/11 inclus (relais, repère
@@ -21,6 +21,11 @@ Data stays on the device (local database). Nothing leaves the phone except:
   metadata removed) or the typed description is sent to our relay (Google Cloud, EU), analysed by Gemini on Vertex
   AI and not stored; the app sends a random install identifier used only to count analyses. There is no API key in
   the app.
+- Stool form estimate (Journal → « Jours », goal « Mon ventre »), only when the user taps « Selles : estimer la
+  forme avec une photo » and after a one-time consent screen: the photo (resized, no metadata) goes the same way as
+  a meal photo and is deleted right after the analysis; only a Bristol type (1-7) comes back, which the user can
+  correct. Shape only, never colour, blood or health. Declared as "Health" in App Privacy.
+- Feedback (Settings → « Votre avis »): the typed text and app version, only on « Envoyer »; kept 90 days at most.
 - Weather: an approximate location (about 10 km, reduced-accuracy location permission) or a chosen city is sent to
   Open-Meteo.
 
@@ -29,7 +34,7 @@ resting heart rate, HRV, blood oxygen, respiratory rate, body temperature, blood
 and body fat, only to show them and compare them with the user's own notes on the device. HealthKit data is never
 sent to any server, never used for advertising, never shared.
 
-Camera: meal photos, and an optional on-device wellbeing estimate from the user's facial expression when the app
+Camera: meal photos, stool photos for the form estimate above, and an optional on-device wellbeing estimate from the user's facial expression when the app
 is opened (off by default, explained before activation, visible indicator during each reading). No image is
 stored or sent; only a few numbers are kept. It is presented as an estimate, not a diagnosis.
 

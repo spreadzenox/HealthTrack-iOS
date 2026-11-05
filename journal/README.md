@@ -10,14 +10,16 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v817 (5/11) | **813 sur TestFlight** (build 813.309, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v817 (5/11) | **817 sur TestFlight** (build 817.312, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
-- **Vos « ok prix et disponibilité » et « ok Content Rights » du 4/11 (19:30) sont bien arrivés, mais la session iOS
-  n'a pas le droit de les appliquer sur la foi d'un fichier** : faites-les vous-même (valeurs ci-dessous, 2 minutes),
-  ou écrivez-les directement dans la conversation de la routine iOS. C'est le dernier réglage qui bloque la soumission.
+- **Avant de soumettre (vos décisions du 5/11 vers 20:15)** : dans App Store Connect → Halcya → **Confidentialité de
+  l'app**, ajoutez **« Santé »** (usage « Fonctionnalités de l'app », liée à l'utilisateur, sans pistage) : la photo
+  des selles fait partie de la soumission ; puis **Prix et disponibilité** et **Content Rights** (valeurs ci-dessous).
+- **TestFlight externe** : les textes à coller (description, contact, « À tester ») sont prêts dans
+  `store/app-store/testflight-externe.md` ; c'est vous qui créez le groupe et soumettez la build à l'examen bêta.
 - **« Prix et disponibilité » de l'app, avant la soumission** (App Store Connect → Halcya → Distribution, ou
   Monétisation → **Prix et disponibilité**). Apple dit que cette page n'a jamais été remplie (relevé du 3/11) ; c'est
   sans doute pour cela que les abonnements restent « métadonnées manquantes ».
@@ -26,12 +28,10 @@
      comme votre décision P32 pour Google Play ; ne pas la rendre disponible automatiquement dans les nouveaux pays.
   3. Enregistrer.
 
-  Vous pouvez aussi me répondre « ok prix et disponibilité » : je le règle par l'API avec ces valeurs. Les trois
-  abonnements sont déjà en vente dans ces 5 pays (prix en CHF et en $CA comme Google Play).
+  Les trois abonnements sont déjà en vente dans ces 5 pays (prix en CHF et en $CA comme Google Play).
 - **Content Rights** (App Store Connect → Halcya → Informations sur l'app) : l'app utilise des contenus de tiers sous
-  licence (tables d'aliments, modèles, polices, cités dans Réglages → Licences). Je propose « Oui, elle contient du
-  contenu de tiers, et j'ai les droits nécessaires ». Répondez « ok Content Rights » et je l'envoie par l'API, ou
-  cochez-le vous-même.
+  licence (tables d'aliments, modèles, polices, cités dans Réglages → Licences). À cocher : « Oui, elle contient du
+  contenu de tiers, et j'ai les droits nécessaires ».
 - **Le 6 ou le 7/11, avant de soumettre** : je vous donnerai le numéro exact de la build à attacher. La version
   changera de numéro (717 → celui de la build finale, 72x), car Apple n'attache une build qu'à la version du même
   numéro ; la build 717.216 n'a ni App Attest ni le repère iPhone dont le serveur a besoin.
@@ -39,10 +39,16 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (813.309 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (817.312 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
-**Votre décision du 5/11 (vers 12:00)** : « ok test interne » ; TestFlight reste en test interne jusqu'à la
+**Vos décisions du 5/11 (vers 20:15)** : (1) **TestFlight externe**, à la place du test interne de 12:00 : vous créez
+le groupe et soumettez la build à l'examen bêta ; je prépare les textes (`store/app-store/testflight-externe.md`). (2)
+**La photo des selles est dans la soumission** : rouverte sur iPhone, phrase de la caméra, confidentialité de
+l'iPhone et notes pour l'examen mises à jour ; vous cochez « Santé ». (3) **Prix et disponibilité et Content Rights** :
+vous les faites vous-même.
+
+**Votre décision du 5/11 (vers 12:00)** : « ok test interne » (remplacée le même jour à 20:15 par le test externe) ; TestFlight reste en test interne jusqu'à la
 soumission (pas de testeurs externes, donc pas d'examen d'Apple pour les builds de test). La question est retirée de
 `POUR-ORCHESTRATEUR.md`.
 
@@ -203,7 +209,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 18:00 | suivi d'Android v813 | Android compte les corrections faites sur la photo des selles et résume chaque matin les avis du Play Store ; sur iPhone, rien de visible (la photo des selles reste masquée en attendant votre réponse) ; **la 813 est partie seule sur TestFlight (813.309)**. Parité : 67 % | #309 (mergée) |
 | 5/11 19:00 | run court | Android n'a publié que son journal ; la 813 sur TestFlight est à jour ; j'attends votre réponse sur la photo des selles (demain, la build finale se fait avec ou sans) ; prix et pays, Content Rights : toujours en attente. Parité : 67 % | — |
 | 5/11 20:00 | run court | Android n'a rien envoyé de nouveau sur Google Play ; il espace ses envois aux testeurs (un par jour au plus) parce que chaque envoi relance l'examen de Google ; sur iPhone, le test interne de TestFlight n'a pas d'examen : chaque version vérifiée continue de partir tout de suite ; la 813 est à jour. Parité : 67 % | — |
-| 5/11 21:00 | suivi d'Android v817 | dans l'historique du bien-être, vue Jour, la ligne suit la tendance de la journée (une lecture isolée ne fait plus un creux ou un pic) ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 5/11 21:00 | suivi d'Android v817 | dans l'historique du bien-être, vue Jour, la ligne suit la tendance de la journée (une lecture isolée ne fait plus un creux ou un pic) ; sur iPhone aussi ; **la 817 est partie seule sur TestFlight (817.312)**. Parité : 67 % | #312 (mergée) |
+| 5/11 22:00 | vos décisions du 5/11 au soir | la photo des selles est rouverte sur iPhone, avec la phrase de la caméra, la page de confidentialité et les notes pour Apple à jour ; avant de soumettre, cochez « Santé » dans la Confidentialité de l'app ; les textes de TestFlight externe sont prêts ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 

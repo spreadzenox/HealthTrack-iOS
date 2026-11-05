@@ -14,7 +14,8 @@ const text = iphone.replace(/<!--[\s\S]*?-->/g, '').replace(/<style>[\s\S]*?<\/s
   .replace(/\s+/g, ' ')
 
 // Empreinte de app/public/privacypolicy.html d'Android lue en dernier (mise à jour du 5 novembre 2026, v809 : section
-// « Forme des selles estimée par photo », pas reprise sur iPhone tant que la fonction y est masquée, correctif 42 ;
+// « Forme des selles estimée par photo », reprise sur iPhone avec App Attest au lieu de Play Integrity (décision du
+// propriétaire du 05/11 vers 20:15) ;
 // v782 : « Votre avis », reprise avec App Attest au lieu de Play Integrity)
 const ANDROID_POLICY_RELUE = 'dfd633d2d27009895de3cc184e32ffdbac6670e0b6d0a4582e43280fa97ecd6d'
 
@@ -62,6 +63,11 @@ describe('politique de confidentialité sur iPhone', () => {
     expect(text).toMatch(/App Attest/)
     expect(text).toMatch(/90 jours au plus/)
     expect(text).toMatch(/un avis envoyé s'efface seul au bout de 90 jours/)
+    // Selles en photo (Android v809, décision du 05/11) : sur geste, accord d'abord, photo effacée, pas de diagnostic
+    expect(text).toMatch(/Forme des selles estimée par photo \(seulement si vous la lancez\)/)
+    expect(text).toMatch(/échelle de Bristol/)
+    expect(text).toMatch(/n'est gardée ni sur l'iPhone ni sur le serveur/)
+    expect(text).toMatch(/ne juge ni la couleur, ni la présence de sang, ni votre santé/)
   })
 
   it("ramène à l'app, faute de bouton retour sur iPhone", () => {

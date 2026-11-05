@@ -42,8 +42,10 @@ function collectedTypes(xml) {
 }
 
 // « Confidentialité de l'app » (A5) : les mêmes données que la « Sécurité des données » de Google Play d'Android
-// (app/store/data-safety/answers.mjs), dans les catégories d'Apple. Santé et forme n'y sont pas : elles restent
-// sur le téléphone et ne partent jamais à l'IA.
+// (app/store/data-safety/answers.mjs), dans les catégories d'Apple, plus « Santé » : depuis Android v809, la photo
+// des selles part à l'IA sur geste, et Apple la compte comme donnée de santé (décision du propriétaire du 05/11 vers
+// 20:15 : il coche « Santé », liée, Fonctionnalités de l'app, sans pistage). Le reste de la santé et la forme restent
+// sur le téléphone.
 const PLAY_TO_APPLE = {
   PSL_APPROX_LOCATION: 'NSPrivacyCollectedDataTypeCoarseLocation',
   PSL_PHOTOS: 'NSPrivacyCollectedDataTypePhotosorVideos',
@@ -57,7 +59,7 @@ describe('données collectées déclarées à Apple (A5)', () => {
 
   it('les mêmes types que la déclaration de Google Play d’Android, rien de plus', async () => {
     const { DECLARED_DATA_TYPES } = await import('../../store/data-safety/answers.mjs')
-    expect(Object.keys(types()).sort()).toEqual(DECLARED_DATA_TYPES.map((t) => PLAY_TO_APPLE[t]).sort())
+    expect(Object.keys(types()).sort()).toEqual([...DECLARED_DATA_TYPES.map((t) => PLAY_TO_APPLE[t]), 'NSPrivacyCollectedDataTypeHealth'].sort())
   })
 
   it('jamais de pistage, seulement pour faire fonctionner l’app ; la position arrondie n’est liée à rien', () => {
@@ -67,13 +69,13 @@ describe('données collectées déclarées à Apple (A5)', () => {
     }
     expect(types().NSPrivacyCollectedDataTypeCoarseLocation.linked).toBe(false)
     // Envoyés au relais avec l'identifiant d'installation : liés à l'installation (choix prudent)
-    for (const t of ['PhotosorVideos', 'OtherUserContent', 'DeviceID', 'PurchaseHistory']) {
+    for (const t of ['PhotosorVideos', 'OtherUserContent', 'DeviceID', 'PurchaseHistory', 'Health']) {
       expect(types()[`NSPrivacyCollectedDataType${t}`].linked, t).toBe(true)
     }
   })
 
-  it('ni santé ni forme : ces données ne quittent pas le téléphone', () => {
-    expect(Object.keys(types())).not.toContain('NSPrivacyCollectedDataTypeHealth')
+  it('santé : seulement la photo des selles (déclarée) ; jamais la forme', () => {
+    expect(Object.keys(types())).toContain('NSPrivacyCollectedDataTypeHealth')
     expect(Object.keys(types())).not.toContain('NSPrivacyCollectedDataTypeFitness')
   })
 })
