@@ -51,7 +51,9 @@ jobs:
   ios:
     name: Build iOS (simulateur) et captures
     runs-on: macos-latest
-    timeout-minutes: 70
+    # 90 min : sur un runner lent (5/11, #303), les captures ont pris 60 min au lieu de 40 et le test d'achat a été
+    # coupé à 70 min alors que tout le reste était bon
+    timeout-minutes: 90
     permissions:
       contents: write # publication des captures sur la branche captures/<pr-N | main>
     steps:
