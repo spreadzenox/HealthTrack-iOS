@@ -426,8 +426,8 @@
   lien de secours vers un ticket du dépôt de l'iPhone (correctif 27), section dans la confidentialité de l'iPhone.
   À vérifier quand Android annonce le relais déployé : un avis envoyé depuis TestFlight arrive bien (bilan du relais).
   Depuis Android v784 (AVIS-RELAIS-3), le résumé anonyme quotidien (`journal/AVIS.md` d'Android, lu sans y toucher)
-  compte les avis par variante : la ligne `ios` dira si les avis de l'iPhone arrivent. Relais déployé le 5/11 vers
-  01:30 (Paris, Android #702) : 0 avis au premier bilan.
+  compte les avis par variante : la ligne `ios` dira si les avis de l'iPhone arrivent. Relais déployé (bilan
+  d'Android du 5/11, #702) : 0 avis au premier résumé.
 - **Taille du texte d'iOS** (écart vu avec Android v771, FONT-SCALE-1) : sur Android, la WebView suit la taille de
   police du système ; sur iPhone, la WebView ne suit ni Dynamic Type ni « Taille du texte » (Réglages → Luminosité et
   affichage). Pistes : plugin officiel `@capacitor/text-zoom` (licence MIT, à vérifier) qui applique la préférence
