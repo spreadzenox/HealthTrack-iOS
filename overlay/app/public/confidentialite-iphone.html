@@ -41,13 +41,13 @@
   <!-- L'iPhone n'a pas de bouton retour : sans ce lien, la page serait une impasse dans l'app (/plus = Réglages) -->
   <a class="back" href="/plus">‹ Revenir à Halcya</a>
   <h1>Politique de confidentialité</h1>
-  <p class="updated">Halcya pour iPhone · mise à jour du 4 novembre 2026</p>
+  <p class="updated">Halcya pour iPhone · mise à jour du 5 novembre 2026</p>
 
   <div class="summary">
     <p><strong>En bref</strong></p>
     <ul>
       <li>Vos données restent sur votre iPhone, par défaut. Halcya n'a ni compte, ni serveur qui les garde, ni publicité, ni outil de mesure d'audience.</li>
-      <li>Rien ne quitte l'iPhone sans une action de votre part : l'analyse IA d'un repas, la météo, l'export d'une sauvegarde, un avis que vous nous envoyez, un abonnement (vérifié auprès du serveur de Halcya, payé chez Apple).</li>
+      <li>Rien ne quitte l'iPhone sans une action de votre part : l'analyse IA d'un repas ou de la forme des selles, la météo, l'export d'une sauvegarde, un avis que vous nous envoyez, un abonnement (vérifié auprès du serveur de Halcya, payé chez Apple).</li>
       <li>La lecture du visage se fait sur l'iPhone : aucune image n'est gardée ni envoyée.</li>
       <li>La copie de secours de l'app reste sur l'iPhone : elle n'est pas incluse dans la sauvegarde iCloud.</li>
       <li>Vous pouvez tout exporter, et tout effacer, à tout moment.</li>
@@ -145,6 +145,20 @@
     automatiquement 13 mois après la dernière analyse. L'app lui renvoie le dernier état de ses compteurs pour
     qu'ils restent justes. Rien d'autre n'est envoyé : ni votre ventre, ni votre sommeil, ni vos autres mesures.
     Sans analyse lancée, rien ne part.
+  </p>
+
+  <h2>Forme des selles estimée par photo (seulement si vous la lancez)</h2>
+  <p>
+    Dans le Journal, si vous suivez votre ventre, vous pouvez photographier vos selles pour que l'app en estime la
+    forme (un type de l'échelle de Bristol, de 1 à 7). La photo est prise avec l'appareil photo, sans passer par vos
+    photos, puis réduite et débarrassée de ses métadonnées. Elle part par le même chemin que l'analyse des repas
+    (même serveur en Europe, même modèle de Google sur Vertex AI, même identifiant aléatoire, même preuve App Attest
+    d'Apple, une analyse décomptée) et l'app vous le demande une première fois avant tout envoi. Seul le type estimé
+    revient ; le modèle ne juge ni la couleur, ni la présence de sang, ni votre santé. La
+    photo est effacée juste après : elle n'est gardée ni sur l'iPhone ni sur le serveur, et les
+    journaux techniques ne contiennent ni la photo ni le résultat. Vous pouvez corriger l'estimation avant de
+    l'enregistrer ; l'app garde alors, sur l'iPhone seulement, la forme choisie et celle qui était proposée, pour vous
+    dire plus tard si l'estimation vous convient.
   </p>
 
   <h2>Abonnement (achats intégrés de l'App Store)</h2>
