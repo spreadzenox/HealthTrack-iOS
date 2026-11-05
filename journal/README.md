@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v792 (5/11) | **792 sur TestFlight** (build 792.298, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v795 (5/11) | **792 sur TestFlight** (build 792.298, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -188,6 +188,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 06:00 | run court | Android n'a rien publié de nouveau ; la 791 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 5/11 07:00 | suivi d'Android v792 | votre retour (5) du 4/11 : dès 3 jours avec une note de bien-être, le bien-être estimé par le visage se recale sur ce que vous notez (si le visage est lu plus triste ou plus gai que vous ne l'êtes) ; sur iPhone aussi ; **la 792 est partie seule sur TestFlight (792.298)**. Parité : 67 % | #298 (mergée) |
 | 5/11 08:00 | run court | Android n'a publié que son journal ; la 792 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou demain, 6/11 (build finale). Parité : 67 % | — |
+| 5/11 09:00 | suivi d'Android v795 | les 3 premiers jours de la lecture du visage, la carte « Bien-être estimé » demande une note par jour pour se caler sur vous ; dans l'historique du bien-être, des flèches (ou un glissement du doigt sur la courbe) remontent le temps ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
