@@ -202,6 +202,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 17:00 | suivi d'Android v809 | Android ajoute la photo des selles (l'IA en estime la forme) ; **sur iPhone, je l'ai masquée jusqu'à la soumission** : il faudrait d'abord une case de plus de votre part dans la « Confidentialité de l'app » chez Apple ; votre avis est demandé (« ok selles masquées » ou « selles dans la soumission ») ; **la 809 est partie seule sur TestFlight (809.308)**, sans la photo des selles. Parité : 67 % | #307, #308 (mergées) |
 | 5/11 18:00 | suivi d'Android v813 | Android compte les corrections faites sur la photo des selles et résume chaque matin les avis du Play Store ; sur iPhone, rien de visible (la photo des selles reste masquée en attendant votre réponse) ; **la 813 est partie seule sur TestFlight (813.309)**. Parité : 67 % | #309 (mergée) |
 | 5/11 19:00 | run court | Android n'a publié que son journal ; la 813 sur TestFlight est à jour ; j'attends votre réponse sur la photo des selles (demain, la build finale se fait avec ou sans) ; prix et pays, Content Rights : toujours en attente. Parité : 67 % | — |
+| 5/11 20:00 | run court | Android n'a rien envoyé de nouveau sur Google Play ; il espace ses envois aux testeurs (un par jour au plus) parce que chaque envoi relance l'examen de Google ; sur iPhone, le test interne de TestFlight n'a pas d'examen : chaque version vérifiée continue de partir tout de suite ; la 813 est à jour. Parité : 67 % | — |
 
 ---
 
