@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v813 (5/11) | **813 sur TestFlight** (build 813.309, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v817 (5/11) | **813 sur TestFlight** (build 813.309, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -203,6 +203,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 18:00 | suivi d'Android v813 | Android compte les corrections faites sur la photo des selles et résume chaque matin les avis du Play Store ; sur iPhone, rien de visible (la photo des selles reste masquée en attendant votre réponse) ; **la 813 est partie seule sur TestFlight (813.309)**. Parité : 67 % | #309 (mergée) |
 | 5/11 19:00 | run court | Android n'a publié que son journal ; la 813 sur TestFlight est à jour ; j'attends votre réponse sur la photo des selles (demain, la build finale se fait avec ou sans) ; prix et pays, Content Rights : toujours en attente. Parité : 67 % | — |
 | 5/11 20:00 | run court | Android n'a rien envoyé de nouveau sur Google Play ; il espace ses envois aux testeurs (un par jour au plus) parce que chaque envoi relance l'examen de Google ; sur iPhone, le test interne de TestFlight n'a pas d'examen : chaque version vérifiée continue de partir tout de suite ; la 813 est à jour. Parité : 67 % | — |
+| 5/11 21:00 | suivi d'Android v817 | dans l'historique du bien-être, vue Jour, la ligne suit la tendance de la journée (une lecture isolée ne fait plus un creux ou un pic) ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
