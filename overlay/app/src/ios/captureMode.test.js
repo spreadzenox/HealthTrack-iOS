@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { buildPlan, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow, fakePhoneUsage, installPhoneUsageFake } from './captureMode'
+import { buildPlan, MORE_ONBOARDING, ROUTES, EMPTY_ROUTES, EMPTY_SCROLLS, iphoneDemoEntries, runCaptureStep, STEP_KEY, probeHealthKit, probeGutEvening, probeEveningNote, probePortionReminder, probeDataRoundtrip, probeBackup, probeVoice, probeFace, probeFileImport, IMPORT_TEST_FILE, probeShareExport, probeShareReport, probeSnapshotWelcome, probeDeleteAll, waitForAck, watchRejections, lastSeenChangelogId, androidWords, pageText, healthSampleWindow, fakePhoneUsage, installPhoneUsageFake } from './captureMode'
 import { phoneUsageEntriesFromSegments, summarizeSegmentsDay } from './phoneUsageIos'
 import { summarizeSegmentsApps } from './phoneAppsIos'
 
@@ -38,6 +38,14 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
     expect(plan[1]).toMatchObject({ route: '/bienvenue', data: null, onboarding: { goal: 'energy', step: 2 } })
     expect(plan[2]).toMatchObject({ route: '/', data: 'demo', theme: 'light' })
     expect(plan[4]).toMatchObject({ route: '/', data: 'demo', theme: 'dark' })
+  })
+
+  // Android v786 (ANALYSES-ONGLETS-1) : sous-onglet « Ventre » d'Analyses, aussi dans `npm run visual` d'Android
+  // (« recommendations-ventre ») ; une page à deux niveaux donne un nom de fichier sans « / »
+  it('plan : le sous-onglet Ventre d’Analyses est capturé, sous un nom de fichier plat', () => {
+    expect(ROUTES).toContain('/recommendations/ventre')
+    const plan = buildPlan(['/recommendations/ventre'], [], {})
+    expect(plan.map((s) => s.name)).toContain('demo-clair-recommendations-ventre')
   })
 
   it('plan : les autres écrans de l’onboarding de l’iPhone, après celui de la montre (suivi, Santé, visage, geste)', () => {

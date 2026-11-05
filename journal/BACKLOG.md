@@ -388,6 +388,10 @@
     build ne s'attache qu'à la version du même numéro ; option `version_des_builds` de `store-push.yml`, PR #219 ; si
     Apple refuse le renommage avec une build attachée, le propriétaire le fait dans la page de la version), puis numéro
     exact de la build donné au propriétaire ;
+  - [ ] (facultatif, le 6/11) captures de la fiche refaites ? Celles de `captures/store` datent d'avant les
+    sous-onglets d'Analyses (Android v786, 5/11) : l'écran « Vos analyses » (capture 2) n'y a pas la rangée Bien-être,
+    Ventre, FODMAP, Tendances. Rien d'obligatoire pour Apple (les captures montrent l'app, pas une version exacte) ;
+    à refaire seulement si la build finale change l'allure d'un écran montré ;
   - [ ] abonnements encore `MISSING_METADATA` par l'API (relevé complet du 3/11 00:05 : groupe, noms, capture
     `COMPLETE`, prix, France, note pour l'examen, formule `UPFRONT`, version 1 `PREPARE_FOR_SUBMISSION`, rien de
     manquant que l'API expose) ; l'interface dit « Prepare for Submission » : à revoir le jour de la soumission (la
