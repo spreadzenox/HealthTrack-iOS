@@ -81,6 +81,23 @@ jobs:
           # Le mode captures (sondes, écriture dans Santé) n'est compilé qu'avec VITE_IOS_CAPTURE=1 : jamais ici
           if grep -rq "\[healthkit\] base" dist; then echo "::error::mode captures présent dans la build"; exit 1; fi
           npx -y -p "@capacitor/cli@$CORE" cap sync ios
+      # 5/11 (795.300) : un raté de réseau au téléchargement des paquets Swift (« Could not resolve package
+      # dependencies ») a fait échouer l'archive ; avec la livraison continue, personne ne relance : jusqu'à 3 essais,
+      # dans le même dossier que l'archive, qui réutilise ensuite les paquets téléchargés
+      - name: Paquets Swift (jusqu'à 3 essais)
+        working-directory: upstream/app/ios/App
+        run: |
+          for attempt in 1 2 3; do
+            if xcodebuild -resolvePackageDependencies -project App.xcodeproj -scheme App \
+              -derivedDataPath "$RUNNER_TEMP/dd" > "$RUNNER_TEMP/spm-$attempt.log" 2>&1; then
+              echo "Paquets Swift résolus (essai $attempt)"
+              exit 0
+            fi
+            grep -E "error:" "$RUNNER_TEMP/spm-$attempt.log" | head -5 || true
+            sleep $((attempt * 20))
+          done
+          echo "::error::Paquets Swift non résolus après 3 essais"
+          exit 1
       - name: Archive (signature ad hoc, entitlements gardés pour l'export)
         working-directory: upstream/app/ios/App
         run: |
