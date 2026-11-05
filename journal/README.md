@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v786 (5/11) | **784 sur TestFlight** (build 784.293, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v787 (5/11) | **784 sur TestFlight** (build 784.293, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -183,6 +183,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 01:00 | suivi d'Android v784 | Android résume chaque matin les avis reçus, sans aucun texte ni nom (les avis envoyés depuis l'iPhone y sont comptés à part) ; rien ne change dans l'app ; **la 784 est partie seule sur TestFlight (784.293)**. Parité : 67 % | #293 (mergée) |
 | 5/11 02:00 | run court | Android n'a publié que son journal (son serveur reçoit maintenant les avis, aucun pour l'instant) ; la 784 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
 | 5/11 03:00 | suivi d'Android v786 | votre retour (4) du 4/11 : Analyses est rangée en onglets (Bien-être, Ventre, FODMAP, Tendances), et Tendances quitte le Journal ; sur iPhone aussi ; la nouvelle page « Ventre » est ajoutée aux captures de l'iPhone simulé ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 5/11 04:00 | suivi d'Android v787 | dans Analyses, chaque onglet compte maintenant ses propres jours (jours notés pour le bien-être, jours notés pour le ventre), et l'onglet Ventre prend la couleur pêche du ventre ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
