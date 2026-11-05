@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v782 (commit `b481d9e`, 4/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v784 (commit `11104dd`, 5/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 5/11 01:00 | #700, #701 (v783, v784) | #700 : journal d'Android. #701 (AVIS-RELAIS-3) : résumé anonyme quotidien des avis par le relais (workflow `feedback-digest.yml` d'Android, 05:47 UTC ; comptes par variante, version et thème, aucun texte), tenu dans `journal/AVIS.md` d'Android, avis iPhone compris (`variant: "ios"`) ; rien dans `app/` ; 34 correctifs tels quels ; 3334 tests, build appstore et lint passent | — (rien dans l'app) |
 | 5/11 00:00 | #698, #699 (v781, v782) | #698 : journal d'Android. #699 (AVIS-RELAIS-2) : formulaire « Votre avis » dans Paramètres (`FeedbackBlock`), `sendFeedback()` dans `aiRelay.js` (corps `{ text, version, variant }`, `variant: "ios"` avec `VITE_STORE=appstore`) ; `postRelay` réorganisé (`addIntegrityHeaders`) → **correctif 38 refait**, l'assertion App Attest signe aussi le corps exact de l'avis (demande de `POUR-IOS.md` du 04/11 23:35) ; `feedbackLink` gagne `fallback` → ajouté à la branche iPhone du correctif 27 (« un ticket GitHub ») ; `privacypolicy.html` gagne « Votre avis » → même section dans `confidentialite-iphone.html` (App Attest au lieu de Play Integrity), empreinte relue ; « Confidentialité de l'app » d'Apple : rien à changer (contenu de l'utilisateur déjà coché) ; note de Nouveautés `2026-11-04-2335-votre-avis` valable sur iPhone ; 3334 tests, build appstore et lint passent | ✅ (captures de la PR) |
 | 4/11 23:00 | #696, #697 (v779, v780) | #696 : journal d'Android seulement (premier envoi automatique sur Alpha). #697 (AVIS-RELAIS-1) : le relais accepte `POST /v1/feedback` (« Votre avis », étape 1 ; `X-Platform: ios` et l'assertion App Attest comme l'analyse ; corps `{ text, version, variant: "ios" }`), pas encore déployé ; rien dans `app/` entre v778 et v780 ; le formulaire viendra à l'étape 2 (code partagé, à suivre) ; 34 correctifs tels quels ; 3325 tests, build appstore et lint passent | — (rien dans l'app) |
 | 4/11 22:00 | #695 (v778) | #695 (VENTRE-BE-1) : dans Analyses, chaque piste porte une étiquette « Ventre » (orange) ou « Bien-être » (vert) (`DomainTag.jsx` et `.css`, `GutLinks.jsx`, `Recommendations.jsx`, `pageStyles.js`) ; code web partagé, aussi sur iPhone ; note de Nouveautés `2026-11-04-2135-pistes-ventre-bien-etre` pour toutes les variantes, valable sur iPhone ; 34 correctifs tels quels ; 3325 tests, build appstore et lint passent | ✅ (captures de la PR) |

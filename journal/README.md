@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v782 (4/11) | **780 sur TestFlight** (build 780.291, avec App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v784 (5/11) | **782 sur TestFlight** (build 782.292, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -39,7 +39,7 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (780.291 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (782.292 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Votre décision du 4/11** : votre seul point d'entrée devient la conversation qui orchestre la routine Android ;
@@ -179,7 +179,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 4/11 21:00 | suivi d'Android v777 | Android envoie maintenant chaque version à ses testeurs sans geste de votre part ; **la 777 est sur TestFlight (777.288)** ; et comme vous l'avez décidé, l'iPhone fait pareil : chaque nouvelle version vérifiée part maintenant seule sur TestFlight pour les testeurs internes, sans que je la lance. Parité : 67 % | #288, #289 (mergées) |
 | 4/11 22:00 | suivi d'Android v778 | dans Analyses, chaque piste porte une étiquette « Ventre » (orange) ou « Bien-être » (vert), sur iPhone aussi (vu sur l'iPhone simulé) ; **la 778 est partie seule sur TestFlight (778.290)**, premier envoi sans geste. Parité : 67 % | #290 (mergée) |
 | 4/11 23:00 | suivi d'Android v780 | Android prépare « Votre avis » (son serveur sait recevoir un avis) ; rien ne change dans l'app ; **la 780 est partie seule sur TestFlight (780.291)**. Parité : 67 % | #291 (mergée) |
-| 5/11 00:00 | « Votre avis » sur iPhone | nouveauté d'Android, aussi sur iPhone : dans Paramètres, « Votre avis » permet de nous écrire directement depuis l'app ; seuls le texte et la version partent, avec la protection de l'iPhone contre les abus (App Attest) ; la page de confidentialité de l'iPhone le dit ; rien à changer dans « Confidentialité de l'app » chez Apple ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 5/11 00:00 | « Votre avis » sur iPhone | nouveauté d'Android, aussi sur iPhone : dans Paramètres, « Votre avis » permet de nous écrire directement depuis l'app ; seuls le texte et la version partent, avec la protection de l'iPhone contre les abus (App Attest) ; la page de confidentialité de l'iPhone le dit (aussi en ligne) ; rien à changer dans « Confidentialité de l'app » chez Apple ; **la 782 est partie seule sur TestFlight (782.292)**. Parité : 67 % | #292 (mergée) |
+| 5/11 01:00 | suivi d'Android v784 | Android résume chaque matin les avis reçus, sans aucun texte ni nom (les avis envoyés depuis l'iPhone y sont comptés à part) ; rien ne change dans l'app ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
