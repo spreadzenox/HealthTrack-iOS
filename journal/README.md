@@ -42,6 +42,10 @@
 - Installez la build la plus récente de TestFlight (798.302 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
+**Votre décision du 5/11 (vers 12:00)** : « ok test interne » ; TestFlight reste en test interne jusqu'à la
+soumission (pas de testeurs externes, donc pas d'examen d'Apple pour les builds de test). La question est retirée de
+`POUR-ORCHESTRATEUR.md`.
+
 **Votre décision du 4/11** : votre seul point d'entrée devient la conversation qui orchestre la routine Android ;
 vos décisions et réponses pour l'iPhone m'arrivent par `journal/POUR-IOS.md` de HealthTrack (lignes « Décision du
 propriétaire »), que je lis à chaque run ; dans l'autre sens, tout ce qui attend de vous une action ou une réponse est

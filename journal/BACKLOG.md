@@ -423,8 +423,9 @@
 - Huawei Santé sur iOS écrit une partie de ses données dans Santé : vérifier lesquelles (sommeil ? VFC ?).
 - [x] **Livraison continue (décision du propriétaire du 04/11 19:45)**, test interne : depuis le 04/11 au soir,
   `testflight.yml` part seul sur chaque push de `main` qui change l'app (plus de lancement à la main).
-- [ ] Livraison continue aux testeurs **externes** : seulement avec l'accord du propriétaire, car la première build de
-  chaque version passe par l'examen d'Apple (« Beta App Review »). Question dans `POUR-ORCHESTRATEUR.md`.
+- [x] Testeurs **externes** : **décision du propriétaire du 05/11 (vers 12:00, `POUR-IOS.md`) : « ok test interne »**,
+  TestFlight reste en test interne jusqu'à la soumission du 7 ou du 8/11 (pas de testeurs externes, pas de Beta App
+  Review). À revoir après la soumission, avec la fusion des deux routines.
 - [x] **Retours des utilisateurs (même décision)**, « Votre avis » : formulaire d'Android v782 (AVIS-RELAIS-2) repris
   sur iPhone le 5/11 : `variant: "ios"`, `X-Platform: ios`, assertion App Attest sur le corps exact (correctif 38),
   lien de secours vers un ticket du dépôt de l'iPhone (correctif 27), section dans la confidentialité de l'iPhone.
