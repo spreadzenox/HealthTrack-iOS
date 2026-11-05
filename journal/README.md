@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v795 (5/11) | **795 sur TestFlight** (build 795.300, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v798 (5/11) | **795 sur TestFlight** (build 795.300, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -190,6 +190,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 08:00 | run court | Android n'a publié que son journal ; la 792 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou demain, 6/11 (build finale). Parité : 67 % | — |
 | 5/11 09:00 | suivi d'Android v795 | les 3 premiers jours de la lecture du visage, la carte « Bien-être estimé » demande une note par jour pour se caler sur vous ; dans l'historique du bien-être, des flèches (ou un glissement du doigt sur la courbe) remontent le temps ; sur iPhone aussi (vu sur l'iPhone simulé) ; **la 795 est sur TestFlight (795.300)**, au second essai : le premier envoi automatique a échoué sur un raté de réseau chez GitHub. Parité : 67 % | #300 (mergée) |
 | 5/11 10:00 | envoi automatique plus solide | Android n'a publié que des idées ; l'envoi automatique sur TestFlight réessaie maintenant jusqu'à 3 fois quand le téléchargement des composants d'Apple rate (cause de l'échec de ce matin), pour que demain la build finale parte sans accroc ; la 795 sur TestFlight est à jour. Parité : 67 % | — |
+| 5/11 11:00 | suivi d'Android v798 | dans l'historique du bien-être, chaque expression lue par le visage est comparée à votre habitude (un trait, et une phrase comme « plus de joie, moins de tristesse »), et l'écart moyen entre vos notes et les lectures s'affiche dès 3 jours notés ; sur iPhone aussi ; l'envoi de contrôle de 10:15 (795.301) a vérifié les 3 essais ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
