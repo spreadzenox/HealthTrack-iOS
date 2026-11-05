@@ -423,6 +423,8 @@
 - Huawei Santé sur iOS écrit une partie de ses données dans Santé : vérifier lesquelles (sommeil ? VFC ?).
 - [x] **Livraison continue (décision du propriétaire du 04/11 19:45)**, test interne : depuis le 04/11 au soir,
   `testflight.yml` part seul sur chaque push de `main` qui change l'app (plus de lancement à la main).
+  Pas d'espacement comme Android (CD-ALPHA-2, une version par jour sur Alpha) : le test interne n'a pas d'examen ;
+  à espacer seulement si un groupe externe est ouvert après la soumission.
 - [x] Testeurs **externes** : **décision du propriétaire du 05/11 (vers 12:00, `POUR-IOS.md`) : « ok test interne »**,
   TestFlight reste en test interne jusqu'à la soumission du 7 ou du 8/11 (pas de testeurs externes, pas de Beta App
   Review). À revoir après la soumission, avec la fusion des deux routines.
