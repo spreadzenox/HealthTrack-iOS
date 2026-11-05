@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v807 (5/11) | **807 sur TestFlight** (build 807.305, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v809 (5/11) | **807 sur TestFlight** (build 807.305, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -199,6 +199,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 14:00 | suivi d'Android v805 | dans Tendances, « Votre bien-être » montre maintenant le bien-être estimé par le visage (vos notes à part) ; une note « Gêne » ou « Douleur » du ventre fait un peu baisser le bien-être estimé du jour ; sur iPhone aussi (Tendances vue sur l'iPhone simulé) ; **la 805 est partie seule sur TestFlight (805.304)**. Parité : 67 % | #304 (mergée) |
 | 5/11 15:00 | suivi d'Android v807 | le serveur d'Android sait maintenant estimer la forme des selles sur une photo ; rien ne change encore dans l'app (l'écran viendra plus tard, je relirai alors la confidentialité sur iPhone) ; **la 807 est partie seule sur TestFlight (807.305)**. Parité : 67 % | #305 (mergée) |
 | 5/11 16:00 | run court | Android n'a publié que son journal ; la 807 sur TestFlight est à jour ; demain 6/11 : build finale et numéro exact à attacher pour la soumission. Parité : 67 % | — |
+| 5/11 17:00 | suivi d'Android v809 | Android ajoute la photo des selles (l'IA en estime la forme) ; **sur iPhone, je l'ai masquée jusqu'à la soumission** : il faudrait d'abord une case de plus de votre part dans la « Confidentialité de l'app » chez Apple ; votre avis est demandé (« ok selles masquées » ou « selles dans la soumission ») ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 

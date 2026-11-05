@@ -1,18 +1,18 @@
 diff --git a/app/src/services/aiRelay.js b/app/src/services/aiRelay.js
-index 56bb3ca..bc22cf1 100644
+index a55c8e3..a28f5cd 100644
 --- a/app/src/services/aiRelay.js
 +++ b/app/src/services/aiRelay.js
 @@ -12,6 +12,8 @@ import { STORE } from '../config/distribution'
  import { prepareImageForGemini } from './imagePrep.js'
  import { MEAL_TEXT_MAX_LENGTH, toMealResult } from './geminiStandalone.js'
  import { requestIntegrity, testEnvironment } from './playIntegrity.js'
-+// Version iOS : assertion App Attest de l'iPhone sur l'analyse des repas et sur « Votre avis » (correctif 38)
++// Version iOS : assertion App Attest de l'iPhone sur les analyses (repas, selles) et sur « Votre avis » (correctif 38)
 +import { iosAttestHeaders } from '../ios/appAttest.js'
  import { localeDate } from '../i18n/locale.js'
  
  export const RELAY_URL = (import.meta.env?.VITE_RELAY_URL || 'https://halcya-relay-81378799481.europe-west1.run.app')
-@@ -179,6 +181,9 @@ async function addIntegrityHeaders(headers, { integrity = requestIntegrity, test
- async function postRelay(body, { fetchImpl = globalThis.fetch, timeoutMs = RELAY_TIMEOUT_MS, integrity = requestIntegrity, testDevice = testEnvironment } = {}) {
+@@ -180,6 +182,9 @@ async function addIntegrityHeaders(headers, { integrity = requestIntegrity, test
+ export async function postRelay(body, { path = '/v1/meal/analyze', fetchImpl = globalThis.fetch, timeoutMs = RELAY_TIMEOUT_MS, integrity = requestIntegrity, testDevice = testEnvironment } = {}) {
    const headers = { 'Content-Type': 'application/json', ...relayHeaders() }
    await addIntegrityHeaders(headers, { integrity, testDevice })
 +  // Version iOS : le relais vérifie l'assertion sur le corps brut, donc sur ce texte exact (correctif 38)
@@ -21,8 +21,8 @@ index 56bb3ca..bc22cf1 100644
    const controller = typeof AbortController === 'function' ? new AbortController() : null
    const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null
    let res
-@@ -186,7 +191,7 @@ async function postRelay(body, { fetchImpl = globalThis.fetch, timeoutMs = RELAY
-     res = await fetchImpl(`${RELAY_URL}/v1/meal/analyze`, {
+@@ -187,7 +192,7 @@ export async function postRelay(body, { path = '/v1/meal/analyze', fetchImpl = g
+     res = await fetchImpl(`${RELAY_URL}${path}`, {
        method: 'POST',
        headers,
 -      body: JSON.stringify(body),
@@ -30,7 +30,7 @@ index 56bb3ca..bc22cf1 100644
        ...(controller ? { signal: controller.signal } : {}),
      })
    } catch (err) {
-@@ -249,6 +254,9 @@ export async function sendFeedback(text, { version, variant, fetchImpl = globalT
+@@ -250,6 +255,9 @@ export async function sendFeedback(text, { version, variant, fetchImpl = globalT
    if (clean.length > FEEDBACK_MAX_LENGTH) throw new Error(`Votre avis dépasse ${FEEDBACK_MAX_LENGTH} caractères.`)
    const headers = { 'Content-Type': 'application/json', 'X-Install-Id': getInstallId(), ...platformHeaders() }
    await addIntegrityHeaders(headers, { integrity, testDevice })
@@ -40,7 +40,7 @@ index 56bb3ca..bc22cf1 100644
    const controller = typeof AbortController === 'function' ? new AbortController() : null
    const timer = controller ? setTimeout(() => controller.abort(), timeoutMs) : null
    let res
-@@ -256,7 +264,7 @@ export async function sendFeedback(text, { version, variant, fetchImpl = globalT
+@@ -257,7 +265,7 @@ export async function sendFeedback(text, { version, variant, fetchImpl = globalT
      res = await fetchImpl(`${RELAY_URL}/v1/feedback`, {
        method: 'POST',
        headers,

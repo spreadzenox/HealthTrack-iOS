@@ -426,6 +426,12 @@
 - [x] Testeurs **externes** : **décision du propriétaire du 05/11 (vers 12:00, `POUR-IOS.md`) : « ok test interne »**,
   TestFlight reste en test interne jusqu'à la soumission du 7 ou du 8/11 (pas de testeurs externes, pas de Beta App
   Review). À revoir après la soumission, avec la fusion des deux routines.
+- [ ] **Photo des selles (Android v809, SELLES-PHOTO-2)** : masquée sur iPhone (correctif 42) jusqu'à la soumission.
+  Pour l'ouvrir : retirer le correctif 42 et la note cachée (correctif 28) ; phrase `NSCameraUsageDescription` (ajouter
+  les selles) ; section « Forme des selles » dans `confidentialite-iphone.html` (App Attest au lieu de Play Integrity) ;
+  `PrivacyInfo.xcprivacy` + `store/app-store/confidentialite.md` : type « Santé » (Health) collecté, lié, usage
+  « Fonctionnalités de l'app » ; le propriétaire coche « Santé » dans « Confidentialité de l'app ». Décision demandée
+  (`POUR-ORCHESTRATEUR.md`, 05/11 17:15). L'assertion App Attest couvre déjà `/v1/stool/analyze` (correctif 38).
 - [x] **Retours des utilisateurs (même décision)**, « Votre avis » : formulaire d'Android v782 (AVIS-RELAIS-2) repris
   sur iPhone le 5/11 : `variant: "ios"`, `X-Platform: ios`, assertion App Attest sur le corps exact (correctif 38),
   lien de secours vers un ticket du dépôt de l'iPhone (correctif 27), section dans la confidentialité de l'iPhone.
