@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v791 (5/11) | **791 sur TestFlight** (build 791.296, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v792 (5/11) | **791 sur TestFlight** (build 791.296, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -186,6 +186,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 04:00 | suivi d'Android v787 | dans Analyses, chaque onglet compte maintenant ses propres jours (jours notés pour le bien-être, jours notés pour le ventre), et l'onglet Ventre prend la couleur pêche du ventre ; sur iPhone aussi ; les captures ont montré un écran blanc possible sur la nouvelle page « Ventre » quand l'iPhone recharge l'app (après une mise en veille longue, par exemple) : corrigé avant tout envoi ; **la 787 est partie seule sur TestFlight (787.295)**, avec les trois onglets vérifiés sur l'iPhone simulé. Parité : 67 % | #295 (mergée) |
 | 5/11 05:00 | suivi d'Android v791 | dans l'historique du bien-être, toucher un point de la courbe ouvre sa lecture (note, et ce que la lecture du visage a vu) ; sur iPhone aussi (historique vu sur l'iPhone simulé) ; **la 791 est partie seule sur TestFlight (791.296)**. Parité : 67 % | #296 (mergée) |
 | 5/11 06:00 | run court | Android n'a rien publié de nouveau ; la 791 sur TestFlight est à jour ; tout ce qui reste attend vos deux réglages ou le 6/11. Parité : 67 % | — |
+| 5/11 07:00 | suivi d'Android v792 | votre retour (5) du 4/11 : dès 3 jours avec une note de bien-être, le bien-être estimé par le visage se recale sur ce que vous notez (si le visage est lu plus triste ou plus gai que vous ne l'êtes) ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
