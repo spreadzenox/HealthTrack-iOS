@@ -73,6 +73,12 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
     expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-11-05-1535-selles-photo')
   })
 
+  it('v810 : « Selles en photo : vos corrections comptées » cachée de même (correctif 42)', () => {
+    expect(ALL_CHANGELOG.map((e) => e.id)).toContain('2026-11-05-1635-selles-photo-fiabilite')
+    expect(APPSTORE_HIDDEN.has('2026-11-05-1635-selles-photo-fiabilite')).toBe(true)
+    expect(changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)).not.toContain('2026-11-05-1635-selles-photo-fiabilite')
+  })
+
   it('v755 : « le bouton « Autoriser » ne remplit plus tout l’écran » cachée, l’iPhone l’avait dès sa première version', () => {
     // Correctif 29 de l'iPhone (29/10, avant le premier TestFlight du 30/10), repris par Android en v755 (#671)
     expect(ALL_CHANGELOG.map((e) => e.id)).toContain('2026-11-04-0235-bouton-bienvenue')
