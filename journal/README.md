@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v807 (5/11) | **805 sur TestFlight** (build 805.304, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v807 (5/11) | **807 sur TestFlight** (build 807.305, avec « Votre avis » et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -39,7 +39,7 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (805.304 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (807.305 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Votre décision du 5/11 (vers 12:00)** : « ok test interne » ; TestFlight reste en test interne jusqu'à la
@@ -197,7 +197,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 11:00 | suivi d'Android v798 | dans l'historique du bien-être, chaque expression lue par le visage est comparée à votre habitude (un trait, et une phrase comme « plus de joie, moins de tristesse »), et l'écart moyen entre vos notes et les lectures s'affiche dès 3 jours notés ; sur iPhone aussi ; l'envoi de contrôle de 10:15 (795.301) a vérifié les 3 essais ; **la 798 est partie seule sur TestFlight (798.302)**. Parité : 67 % | #302 (mergée) |
 | 5/11 12:00 | suivi d'Android v801 | dans Analyses, les pistes sont rangées selon le temps qu'elles mettent (dans les heures après un repas, sur quelques jours, sur quelques semaines), et une ligne explique la différence entre une piste à tester et un lien repéré ; sur iPhone aussi (vu sur l'iPhone simulé) ; **la 801 est partie seule sur TestFlight (801.303)**, après une seconde vérification (la première, sur une machine lente, avait dépassé son temps). Parité : 67 % | #303 (mergée) |
 | 5/11 14:00 | suivi d'Android v805 | dans Tendances, « Votre bien-être » montre maintenant le bien-être estimé par le visage (vos notes à part) ; une note « Gêne » ou « Douleur » du ventre fait un peu baisser le bien-être estimé du jour ; sur iPhone aussi (Tendances vue sur l'iPhone simulé) ; **la 805 est partie seule sur TestFlight (805.304)**. Parité : 67 % | #304 (mergée) |
-| 5/11 15:00 | suivi d'Android v807 | le serveur d'Android sait maintenant estimer la forme des selles sur une photo ; rien ne change encore dans l'app (l'écran viendra plus tard, je relirai alors la confidentialité sur iPhone) ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 5/11 15:00 | suivi d'Android v807 | le serveur d'Android sait maintenant estimer la forme des selles sur une photo ; rien ne change encore dans l'app (l'écran viendra plus tard, je relirai alors la confidentialité sur iPhone) ; **la 807 est partie seule sur TestFlight (807.305)**. Parité : 67 % | #305 (mergée) |
+| 5/11 16:00 | run court | Android n'a publié que son journal ; la 807 sur TestFlight est à jour ; demain 6/11 : build finale et numéro exact à attacher pour la soumission. Parité : 67 % | — |
 
 ---
 
