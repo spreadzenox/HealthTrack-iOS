@@ -13,9 +13,10 @@ const iphone = read('public/confidentialite-iphone.html')
 const text = iphone.replace(/<!--[\s\S]*?-->/g, '').replace(/<style>[\s\S]*?<\/style>/, '').replace(/<[^>]+>/g, ' ')
   .replace(/\s+/g, ' ')
 
-// Empreinte de app/public/privacypolicy.html d'Android lue en dernier (mise à jour du 4 novembre 2026, v782 : section
-// « Votre avis », reprise sur iPhone avec App Attest au lieu de Play Integrity)
-const ANDROID_POLICY_RELUE = '16671345ed82e807cdae06e9fe386e752844f67a77c3e0b7cdf0c958bdb86c0c'
+// Empreinte de app/public/privacypolicy.html d'Android lue en dernier (mise à jour du 5 novembre 2026, v809 : section
+// « Forme des selles estimée par photo », pas reprise sur iPhone tant que la fonction y est masquée, correctif 42 ;
+// v782 : « Votre avis », reprise avec App Attest au lieu de Play Integrity)
+const ANDROID_POLICY_RELUE = 'dfd633d2d27009895de3cc184e32ffdbac6670e0b6d0a4582e43280fa97ecd6d'
 
 describe('politique de confidentialité sur iPhone', () => {
   it("suit la dernière version relue de la page d'Android", () => {
