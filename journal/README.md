@@ -15,12 +15,13 @@
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
-- **Avant de soumettre (vos décisions du 5/11 vers 20:15)** : dans App Store Connect → Halcya → **Confidentialité de
-  l'app**, ajoutez **« Santé »** (usage « Fonctionnalités de l'app », liée à l'utilisateur, sans pistage) : la photo
-  des selles fait partie de la soumission ; puis **Prix et disponibilité** et **Content Rights** (valeurs ci-dessous).
-- **TestFlight externe** : les textes à coller (description, contact, « À tester ») sont prêts dans
-  `store/app-store/testflight-externe.md` ; c'est vous qui créez le groupe et soumettez la build à l'examen bêta.
-- **« Prix et disponibilité » de l'app, avant la soumission** (App Store Connect → Halcya → Distribution, ou
+- **Vos réglages du 5/11 vers 23:00 sont faits** (prix et pays, Content Rights, « Santé », groupes TestFlight, 817.312
+  soumise à l'examen bêta). Deux points restent : (1) **les abonnements**, toujours « métadonnées manquantes » chez
+  Apple : regardez ce qu'Apple écrit en haut de chaque page d'abonnement ; (2) **Mac et Vision Pro** : je recommande de
+  les décocher pour cette première soumission (rien n'y a été essayé). Détails dans `POUR-ORCHESTRATEUR.md`.
+- **Aujourd'hui 6/11** : je prépare la build finale, je renomme la version (717 → son numéro) et je vous donne son
+  numéro exact à attacher avant de soumettre.
+- ✅ **« Prix et disponibilité » de l'app** (fait par vous le 5/11 vers 23:00 ; Mac et Vision Pro laissés ouverts) (App Store Connect → Halcya → Distribution, ou
   Monétisation → **Prix et disponibilité**). Apple dit que cette page n'a jamais été remplie (relevé du 3/11) ; c'est
   sans doute pour cela que les abonnements restent « métadonnées manquantes ».
   1. Prix de l'app : **Gratuit** (l'app est gratuite ; seuls les abonnements sont payants).
@@ -29,7 +30,7 @@
   3. Enregistrer.
 
   Les trois abonnements sont déjà en vente dans ces 5 pays (prix en CHF et en $CA comme Google Play).
-- **Content Rights** (App Store Connect → Halcya → Informations sur l'app) : l'app utilise des contenus de tiers sous
+- ✅ **Content Rights** (fait le 5/11 vers 23:00 ; App Store Connect → Halcya → Informations sur l'app) : l'app utilise des contenus de tiers sous
   licence (tables d'aliments, modèles, polices, cités dans Réglages → Licences). À cocher : « Oui, elle contient du
   contenu de tiers, et j'ai les droits nécessaires ».
 - **Le 6 ou le 7/11, avant de soumettre** : je vous donnerai le numéro exact de la build à attacher. La version
@@ -41,6 +42,11 @@
   logicielle).
 - Installez la build la plus récente de TestFlight (821.315 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
+
+**Vos réglages du 5/11 (vers 23:00)** : prix et disponibilité (gratuit, 5 pays, sans les futurs ; Mac et Vision Pro
+laissés disponibles), Content Rights (oui), « Santé » ajoutée et publiée dans Confidentialité de l'app (6 types),
+TestFlight : groupe interne « Interne Halcya » et groupe externe « Testeurs Halcya », 817.312 soumise à l'examen bêta,
+lien public gardé par vous. Aucune version envoyée à l'examen de l'App Store.
 
 **Vos décisions du 5/11 (vers 20:15)** : (1) **TestFlight externe**, à la place du test interne de 12:00 : vous créez
 le groupe et soumettez la build à l'examen bêta ; je prépare les textes (`store/app-store/testflight-externe.md`). (2)
@@ -213,6 +219,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 22:00 | vos décisions du 5/11 au soir | la photo des selles est rouverte sur iPhone, avec la phrase de la caméra, la page de confidentialité et les notes pour Apple à jour ; avant de soumettre, cochez « Santé » dans la Confidentialité de l'app ; les textes de TestFlight externe sont prêts ; **la 817.314, avec la photo des selles, est partie seule sur TestFlight** ; la page de confidentialité en ligne a sa section selles. Parité : 67 % | #313, #314 (mergées) |
 | 5/11 23:00 | suivi d'Android v821 | Android prolonge « Gold offert » au 30/11 sur Google Play ; sur iPhone, la fin reste au 6/11 au soir, pour que l'examen d'Apple voie l'écran d'achat ; rien ne change dans l'app ; **la 821 est partie seule sur TestFlight (821.315)**. Parité : 67 % | #315 (mergée) |
 | 6/11 00:00 | run court | Android n'a publié que son journal ; la 821 sur TestFlight est à jour (avec la photo des selles) ; aujourd'hui : build finale et numéro exact à attacher, dès qu'Android s'est posé ; pour vous avant de soumettre : « Santé », prix et pays, Content Rights. Parité : 67 % | — |
+| 6/11 01:00 | vos réglages d'App Store Connect | vos réglages sont notés ; deux points restent pour vous : les abonnements, encore « métadonnées manquantes » chez Apple (regardez ce qu'Apple affiche sur chaque page d'abonnement), et Mac et Vision Pro (je recommande de les décocher : rien n'y a été essayé) ; la 821 sur TestFlight est à jour. Parité : 67 % | — |
 
 ---
 

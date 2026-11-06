@@ -392,6 +392,8 @@
     sous-onglets d'Analyses (Android v786, 5/11) : l'écran « Vos analyses » (capture 2) n'y a pas la rangée Bien-être,
     Ventre, FODMAP, Tendances. Rien d'obligatoire pour Apple (les captures montrent l'app, pas une version exacte) ;
     à refaire seulement si la build finale change l'allure d'un écran montré ;
+  - [ ] (6/11 01:15, après le prix de l'app réglé par le propriétaire) toujours `MISSING_METADATA`, tout le relevé
+    rempli ; question au propriétaire (`POUR-ORCHESTRATEUR.md`) ; relevé à refaire dans la journée
   - [ ] abonnements encore `MISSING_METADATA` par l'API (relevé complet du 3/11 00:05 : groupe, noms, capture
     `COMPLETE`, prix, France, note pour l'examen, formule `UPFRONT`, version 1 `PREPARE_FOR_SUBMISSION`, rien de
     manquant que l'API expose) ; l'interface dit « Prepare for Submission » : à revoir le jour de la soumission (la
