@@ -140,3 +140,18 @@ test('captures iPad 13" : tableau de la section iPad de captures.md (Nutrition �
   assert.ok(ipad.some((f) => f.endsWith('-demo-clair-nutrition.png')))
   assert.ok(!ipad.some((f) => f.includes('connectors')))
 })
+
+// 6/11, décision du propriétaire du 05/11 vers 23:00 (« renommez-la et donnez-lui la build finale ») : `--attacher-build`
+// attache à la version la dernière build traitée par Apple du même numéro ; jamais une build d'un autre numéro, ni une
+// build expirée ou encore en traitement
+test('latestBuild : la plus récente build valide du numéro de la version, sinon rien', async () => {
+  const { latestBuild } = await import('./store-push.mjs')
+  const b = (id, version, processingState = 'VALID', expired = false) => ({ id, attributes: { version, processingState, expired } })
+  const builds = [b('a', '825.318'), b('b', '825.320'), b('c', '825.319', 'PROCESSING'), b('d', '826.321'), b('e', '825.317', 'VALID', true)]
+  assert.equal(latestBuild(builds, '825')?.id, 'b')
+  assert.equal(latestBuild(builds, '826')?.id, 'd')
+  assert.equal(latestBuild(builds, '827'), null)
+  assert.equal(latestBuild([b('x', '825.9'), b('y', '825.10')], '825')?.id, 'y')
+  assert.equal(latestBuild([b('z', '8250.1')], '825'), null)
+})
+
