@@ -19,6 +19,13 @@
 - Captures iPad 13" relancées sur `main` (`db9cb04`, run 42185050080) : à regarder puis envoyer (« captures_ipad »).
 - Message urgent retiré de `POUR-ORCHESTRATEUR.md` et du résumé (blocage levé).
 
+## Fin du run (08:55 UTC)
+- Captures iPad 13" (`db9cb04`, v830, build 830.326) regardées sur une planche des 8 : colonne centrée, rien de coupé,
+  onglets visibles, ni mot d'Android ni erreur JS. #328 (`captures.md`) : contrôle vert, mergée ; anciennes sur
+  `captures/store-ipad-0211`.
+- `store-push.yml` avec « captures_ipad » (run 42189873598) : 8 envoyées ; chez Apple, iPad 5/8 traitées (3 en cours),
+  **iPhone 8/8 traitées**, 0 refusée ; version 717 gardée.
+
 ## Android depuis le run précédent
 - Rien : dernier commit de `main` `1e39212` (v830).
 

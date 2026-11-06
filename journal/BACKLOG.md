@@ -398,8 +398,8 @@
     build ne s'attache qu'à la version du même numéro ; option `version_des_builds` de `store-push.yml`, PR #219 ; si
     Apple refuse le renommage avec une build attachée, le propriétaire le fait dans la page de la version), puis numéro
     exact de la build donné au propriétaire ;
-  - [~] **captures iPhone 6,9" refaites le 6/11, envoyées à 08:12 UTC** (8 dans l'ordre ; 4/8 traitées à la fin du run,
-    à relire au prochain envoi de la fiche) ; iPad 13" refaites (`db9cb04`, v830, build 830.326), regardées, envoyées après #328 ; anciennes sur
+  - [x] **captures iPhone 6,9" refaites le 6/11, envoyées à 08:12 UTC** (8/8 traitées par Apple à 08:55) (8 dans l'ordre ; 4/8 traitées à la fin du run,
+    à relire au prochain envoi de la fiche) ; iPad 13" refaites (`db9cb04`, v830, build 830.326), regardées, envoyées à 08:54 UTC (5/8 traitées, 3 en cours) ; anciennes sur
     `captures/store-ipad-0211` ; (`3d39633`, v828, build 828.322, regardées une à une ; `captures.md`
     à jour ; anciennes sur `captures/store-0111`) . Ancienne question : (facultatif, le 6/11) captures de la fiche refaites ? Celles de `captures/store` datent d'avant les
     sous-onglets d'Analyses (Android v786, 5/11) : l'écran « Vos analyses » (capture 2) n'y a pas la rangée Bien-être,
