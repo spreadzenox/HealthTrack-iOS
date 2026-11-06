@@ -459,9 +459,15 @@
   premier testeur iPhone », `journal/RETOURS-TESTEURS.md`) :
   - [ ] toutes les autorisations pendant l'accueil, avant d'entrer dans l'app : Santé (avec son historique), position
     approximative (météo), caméra ;
-  - [ ] retirer ou adapter la mention propre à Android qui reste dans la source Santé sur iPhone ;
-  - [ ] la source qui exige « iOS 26.4 ou plus » (temps d'écran réel) : la masquer sous cette version ou l'expliquer
-    simplement avant.
+  - [x] mention propre à Android dans la source Santé (7/11, correctif 43) : la carte App Santé héritait de la fenêtre
+    de lecture de Health Connect (`readWindowDays` = 29) : elle affichait « Android laisse lire les 30 jours qui
+    précèdent votre première autorisation » **et n'importait qu'un mois d'historique** (`syncSince`, `firstImport`,
+    `autoSync`), alors que HealthKit n'a pas cette limite. Sur iPhone : pas de fenêtre (`isIos() ? null : …`), tout
+    l'historique choisi (jusqu'à 2 ans) ; test dans `HealthConnectConnector.ios.test.js` ;
+  - [x] temps d'écran sous iOS 26.4 (7/11, correctif 44) : la carte n'est plus proposée quand `checkAccess` répond
+    `supported: false` et qu'elle n'a jamais été activée (si elle l'avait été, elle dit toujours de mettre l'iPhone à
+    jour) ; test dans `PhoneUsageCard.appstore.test.jsx`. Note de Nouveautés propre à l'iPhone
+    (`2026-11-07-0030-sources-iphone`).
   Tout part sur TestFlight ; la build 844.344 attachée pour la soumission ne change pas sauf « attacher la dernière ».
 - [ ] **Examen bêta d'Apple, relevé à chaque run (décision du propriétaire du 06/11 vers 18:20)** : état des builds du
   groupe externe « Testeurs Halcya » lu par l'API, en lecture seule (`store-beta.yml`, `scripts/store-beta.mjs`, tests :
