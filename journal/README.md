@@ -15,6 +15,8 @@
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
+- **Examen bêta d'Apple (votre décision du 6/11 vers 18:20)** : je relève son état à chaque run, en lecture seule, et je
+  vous écris en tête de `POUR-ORCHESTRATEUR.md` dès qu'une build passe en test ou est refusée.
 - **Vos réglages du 5/11 vers 23:00 sont faits** (prix et pays, Content Rights, « Santé », groupes TestFlight, 817.312
   soumise à l'examen bêta). Deux points restent : (1) **les abonnements**, toujours « métadonnées manquantes » chez
   Apple (relevés du 6/11 à 10:10 et 16:05), à régler avant de soumettre : vérifiez d'abord la langue du **groupe**
