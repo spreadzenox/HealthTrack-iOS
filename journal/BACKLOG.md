@@ -454,10 +454,19 @@
   `testflight.yml` part seul sur chaque push de `main` qui change l'app (plus de lancement à la main).
   Pas d'espacement comme Android (CD-ALPHA-2, une version par jour sur Alpha) : le test interne n'a pas d'examen ;
   à espacer seulement si un groupe externe est ouvert après la soumission.
+- [ ] **Retours du premier testeur iPhone, point (5) (décision du propriétaire du 06/11 au soir, `POUR-IOS.md` de
+  22:35)** ; les points (1) à (4) sont traités chez Android, dans le code partagé (BACKLOG d'Android « Retours du
+  premier testeur iPhone », `journal/RETOURS-TESTEURS.md`) :
+  - [ ] toutes les autorisations pendant l'accueil, avant d'entrer dans l'app : Santé (avec son historique), position
+    approximative (météo), caméra ;
+  - [ ] retirer ou adapter la mention propre à Android qui reste dans la source Santé sur iPhone ;
+  - [ ] la source qui exige « iOS 26.4 ou plus » (temps d'écran réel) : la masquer sous cette version ou l'expliquer
+    simplement avant.
+  Tout part sur TestFlight ; la build 844.344 attachée pour la soumission ne change pas sauf « attacher la dernière ».
 - [ ] **Examen bêta d'Apple, relevé à chaque run (décision du propriétaire du 06/11 vers 18:20)** : état des builds du
   groupe externe « Testeurs Halcya » lu par l'API, en lecture seule (`store-beta.yml`, `scripts/store-beta.mjs`, tests :
   que des GET, lien public jamais demandé ni affiché). À 18:17 (relevé du propriétaire) : 817.312 et 839.337 « Waiting
-  for Review ». **20:01 : 817.312 acceptée** (`APPROVED`, `BETA_APPROVED`), message au propriétaire ; 839.337 en attente. Dès qu'une build passe en test (lien public utilisable) ou est refusée : en tête de
+  for Review ». **20:01 : 817.312 acceptée** ; **7/11 00:02 : 839.337 acceptée** (message au propriétaire, #348) (`APPROVED`, `BETA_APPROVED`), message au propriétaire ; 839.337 en attente. Dès qu'une build passe en test (lien public utilisable) ou est refusée : en tête de
   `POUR-ORCHESTRATEUR.md`, avec le motif s'il est lisible (l'API ne le donne pas : App Store Connect → TestFlight ou
   l'e-mail d'Apple) et la correction proposée. Rien soumis ni changé dans App Store Connect.
 - [x] Testeurs **externes** : **fait par le propriétaire le 05/11 vers 23:00** : groupes « Interne Halcya » et
