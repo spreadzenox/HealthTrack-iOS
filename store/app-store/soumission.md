@@ -4,26 +4,24 @@ Décision du propriétaire du 2/11 : soumission le 7 ou le 8/11, après la fin d
 (6/11 inclus). **La routine ne soumet jamais** : elle prépare, le propriétaire clique. Chaque geste ci-dessous se fait
 dans App Store Connect → Apps → **Halcya**.
 
-## Avant (dès que possible)
+## Avant (fait)
 
-1. **Prix et disponibilité** (Distribution → Prix et disponibilité) :
-   - prix : **Gratuit** ;
-   - pays : **France, Belgique, Luxembourg, Suisse, Canada**, rien d'autre (décision P32) ;
-   - ne pas rendre l'app disponible automatiquement dans les nouveaux pays.
-
-   Ou répondre « ok prix et disponibilité » à la routine, qui le fait par l'API (workflow « App Store — prix,
-   disponibilité et Content Rights »).
-2. **Content Rights** (Informations sur l'app) : « Oui, l'app contient du contenu de tiers, et j'ai les droits
-   nécessaires ». Ce sont les tables d'aliments, les modèles et les polices sous licence, cités dans Réglages →
-   Licences. Ou « ok Content Rights » à la routine.
+- ✅ **Prix et disponibilité**, **Content Rights**, « Santé » dans **Confidentialité de l'app** : faits par le
+  propriétaire le 05/11 vers 23:00 (gratuit ; France, Belgique, Luxembourg, Suisse, Canada, sans les futurs pays).
+- ✅ TestFlight : groupes « Interne Halcya » et « Testeurs Halcya », build 817.312 soumise à l'examen bêta (sans lien
+  avec la soumission de l'App Store).
+- ⏳ **Mac et Vision Pro** (Prix et disponibilité, en bas) : laissés disponibles pour l'instant. Recommandation de la
+  routine (06/11 01:15, `journal/POUR-ORCHESTRATEUR.md`) : les décocher pour cette première soumission, rien n'y ayant
+  été essayé.
 
 ## Le 6/11 (la routine)
 
 - Dernière version d'Android suivie, puis build finale envoyée sur TestFlight.
-- Version d'App Store Connect renommée au numéro de cette build (« Fiche App Store — envoi », option
-  `version_des_builds`). La build 717.216 s'en détache. Si Apple refuse le renommage, le propriétaire change le numéro
-  dans la page de la version.
-- La routine donne au propriétaire **le numéro exact de la build à choisir**.
+- Version d'App Store Connect renommée au numéro de cette build et build attachée (« Fiche App Store — envoi »,
+  options `version_des_builds` et `attacher_build`). La build 717.216 s'en détache. Si Apple refuse le renommage, le
+  propriétaire change le numéro dans la page de la version, puis y ajoute la build.
+- La routine donne au propriétaire **le numéro exact de la build attachée**. Si Android sort encore une version
+  avant la soumission, la routine refait ce passage et donne le nouveau numéro.
 
 ## Le 7/11 au matin (vérification)
 
@@ -38,7 +36,7 @@ dans App Store Connect → Apps → **Halcya**.
 
 Page de la version iOS (« Prête à soumettre ») :
 
-1. **Build** : choisir la build donnée par la routine.
+1. **Build** : vérifier que c'est bien celle donnée par la routine (déjà attachée ; sinon la choisir).
 2. **Achats intégrés et abonnements** : cocher les **trois** abonnements (`halcya_gold_mensuel`,
    `halcya_premium_annuel`, `halcya_premium_mensuel`). La section apparaît quand les abonnements sont prêts. Si elle
    manque encore, le dire à la routine avant d'aller plus loin.
