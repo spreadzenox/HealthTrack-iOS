@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v830 (6/11) | **830 sur TestFlight** (build 830.323, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v831 (6/11) | **830 sur TestFlight** (build 830.323, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -227,7 +227,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 06:00 | fin du suivi de la v828 | rien de neuf chez Android depuis la v828 ; la 828 est sur TestFlight ; vos réglages d'hier soir (prix et pays, testeurs externes) cochés dans la liste des tâches ; une vérification de l'achat d'essai a raté une fois sur l'iPhone simulé puis est passée (noté, à corriger si ça revient). Parité : 67 % | #322 (mergée) |
 | 6/11 07:00 | suivi d'Android v830 | dans Analyses, tant que vos pistes ne sont pas prêtes, les onglets Bien-être et Ventre ont un lien vers la carte de l'Accueil où noter votre journée ; sur iPhone aussi ; vérifications passées et PR mergée, mais **la 830 n'est pas partie sur TestFlight : GitHub refuse de lancer les builds (« compte bloqué pour un problème de facturation »), à régler par vous** (voir en haut). Parité : 67 % | #323 (mergée) |
 | 6/11 08:00 | en attente de GitHub | rien de neuf chez Android (ses builds sont bloquées aussi) ; iOS reste au niveau de la v830. **GitHub refuse toujours de lancer les builds** (essai à 08:00) : la 830 attend, comme l'envoi des nouvelles captures de la fiche (refaites et regardées, PR ouverte). Tout repart dès que la facturation GitHub est réglée. Parité : 67 % | #326 (mergée) |
-| 6/11 09:00 | reprise après le blocage de GitHub | GitHub relance les builds (levé avant 08:49) ; **la 830 est partie sur TestFlight (830.323)** ; **nouvelles captures iPhone de la fiche envoyées à Apple** (avec les onglets d'Analyses et du Journal) ; puis **captures iPad envoyées aussi**. Rien de neuf chez Android depuis la v830. Parité : 67 % | #325, #327, #328 (mergées) |
+| 6/11 09:00 | reprise après le blocage de GitHub | GitHub relance les builds (levé avant 08:49) ; **la 830 est partie sur TestFlight (830.323)** ; **nouvelles captures iPhone de la fiche envoyées à Apple** (avec les onglets d'Analyses et du Journal) ; puis **captures iPad envoyées aussi**. Rien de neuf chez Android depuis la v830. Parité : 67 % | #325, #327, #328, #329 (mergées) |
+| 6/11 10:00 | suivi d'Android v831 | dans Analyses → Bien-être, « Sur quelques semaines » marque le milieu de l'échelle d'un trait plein, comme l'historique du bien-être ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
