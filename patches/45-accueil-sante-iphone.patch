@@ -1,0 +1,59 @@
+diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
+index 3881096..a13e21c 100644
+--- a/app/src/pages/Onboarding.jsx
++++ b/app/src/pages/Onboarding.jsx
+@@ -42,7 +42,9 @@ const WATCHES_IOS = [
+  */
+ function stepsFor(state) {
+   const steps = ['goal', 'tracks', 'watch']
+-  if (state.watch === 'health_connect') {
++  // Version iOS (HealthTrack-iOS) : l'iPhone écrit lui-même ses pas (et son sommeil) dans l'app Santé : l'étape est
++  // proposée à tous, avec ou sans montre (retours du premier testeur, 06/11)
++  if (state.watch === 'health_connect' || FEATURES.iosStore) {
+     steps.push('health')
+     if (state.health === 'granted') steps.push('aha')
+   }
+@@ -234,11 +236,15 @@ function HealthStep({ health, onHealth }) {
+       {disclosure}
+       <h1 className="onb-title">{FEATURES.iosStore ? 'Vos données de l’app Santé' : 'Vos données Health Connect'}</h1>
+       <p className="onb-lead">
+-        L’app lit sur le téléphone vos 30 derniers jours de sommeil, de pas et de cœur. Rien n’est envoyé.
++        {FEATURES.iosStore
++          ? 'L’app lit sur l’iPhone vos 6 derniers mois de sommeil, de pas et de cœur. Rien n’est envoyé.'
++          : 'L’app lit sur le téléphone vos 30 derniers jours de sommeil, de pas et de cœur. Rien n’est envoyé.'}
+       </p>
+       {health === 'granted' && (
+         <p className="onb-note onb-note-ok" role="status">
+-          C’est autorisé. Continuez pour importer vos 30 derniers jours.
++          {FEATURES.iosStore
++            ? 'C’est autorisé. Continuez pour importer vos 6 derniers mois.'
++            : 'C’est autorisé. Continuez pour importer vos 30 derniers jours.'}
+         </p>
+       )}
+       {health === 'declined' && (
+diff --git a/app/src/services/firstImport.js b/app/src/services/firstImport.js
+index 0abc153..d80054b 100644
+--- a/app/src/services/firstImport.js
++++ b/app/src/services/firstImport.js
+@@ -24,6 +24,12 @@ const DAY_MS = 24 * 3600 * 1000
+ 
+ /** Jours résumés dans le « aha ». */
+ export const AHA_DAYS = 30
++/**
++ * Version iOS (HealthTrack-iOS) : jours importés à l'accueil sur iPhone. HealthKit n'a pas la fenêtre de 30 jours de
++ * Health Connect : l'historique (6 mois, le choix par défaut de Sources) arrive dès l'accueil (retours du premier
++ * testeur, 06/11) ; le « aha » résume toujours les 30 derniers jours.
++ */
++export const IOS_FIRST_IMPORT_DAYS = 180
+ 
+ /**
+  * Lit Health Connect pour la première fois et enregistre le résultat comme une synchro normale.
+@@ -35,7 +41,7 @@ export async function runFirstImport({ connector, onProgress, now = new Date(),
+   noteFirstGrant(connector.id, now)
+   const settings = getConnectorSettings(connector.id)
+   const readWindowDays = connector.readWindowDays ?? null
+-  const since = syncSince({ now, settings, latestAt: null, historyDays: readWindowDays ?? AHA_DAYS, readWindowDays })
++  const since = syncSince({ now, settings, latestAt: null, historyDays: readWindowDays ?? (FEATURES.iosStore ? IOS_FIRST_IMPORT_DAYS : AHA_DAYS), readWindowDays })
+   const result = await connector.sync({ since, until: now, writer, onProgress })
+   if (readsAllFailed(result)) {
+     setConnectorSettings(connector.id, { lastAttemptAt: now.toISOString(), lastSyncResult: result })
