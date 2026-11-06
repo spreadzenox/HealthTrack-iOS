@@ -10,14 +10,15 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v839 (6/11) | **837 sur TestFlight** (build 837.335, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v839 (6/11) | **839 sur TestFlight** (build 839.337, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
 - **Vos réglages du 5/11 vers 23:00 sont faits** (prix et pays, Content Rights, « Santé », groupes TestFlight, 817.312
   soumise à l'examen bêta). Deux points restent : (1) **les abonnements**, toujours « métadonnées manquantes » chez
-  Apple : regardez ce qu'Apple écrit en haut de chaque page d'abonnement ; (2) **Mac et Vision Pro** : je recommande de
+  Apple (relevés du 6/11 à 10:10 et 16:05), à régler avant de soumettre : vérifiez d'abord la langue du **groupe**
+  « Halcya » (cause la plus citée par Apple), puis ce qu'Apple écrit en haut de chaque page d'abonnement ; (2) **Mac et Vision Pro** : je recommande de
   les décocher pour cette première soumission (rien n'y a été essayé). Détails dans `POUR-ORCHESTRATEUR.md`.
 - **Aujourd'hui 6/11** : je prépare la build finale, je renomme la version (717 → son numéro) et je vous donne son
   numéro exact à attacher avant de soumettre.
@@ -40,7 +41,7 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (837.335 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (839.337 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Vos réglages du 5/11 (vers 23:00)** : prix et disponibilité (gratuit, 5 pays, sans les futurs ; Mac et Vision Pro
@@ -232,8 +233,9 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 11:00 | suivi d'Android v833 | Android précise dans sa politique de confidentialité que le serveur compare l'adresse IP aux appareils de test de Google sans la garder ; c'est vrai aussi pour l'iPhone : **phrase reprise dans la politique de l'iPhone** (mise à jour du 6/11) ; rien d'autre dans l'app ; **la 833 est partie seule sur TestFlight (833.331)**, la page en ligne est à jour. Parité : 67 % | #331 (mergée) |
 | 6/11 12:00 | suivi d'Android v836 | « bien-être » ne se coupe plus en fin de ligne dans les titres et les liens d'Analyses (c'était visible sur les petits iPhone) ; sur iPhone aussi ; **la 836 est partie seule sur TestFlight (836.332)** ; le titre d'une piste (« meilleur bien- / être ») se coupe encore sur les iPhone de 390 points : demandé à Android, rien de bloquant. Parité : 67 % | #332, #333 (mergées) |
 | 6/11 13:00 | suivi d'Android v837 | rien de nouveau dans l'app (Android a seulement réglé un de ses tests) ; suivie pour garder le même numéro de version ; **la 837 est partie seule sur TestFlight (837.335)** ; guide de votre soumission remis à jour (`store/app-store/soumission.md`). Parité : 67 % | #334, #335 (mergées) |
-| 6/11 14:00 | suivi d'Android v838 | en grande police, ronds de choix et lignes de chiffres mieux tenus ; sur iPhone aussi (écrans étroits), mais la note « Mieux en grande taille de police » y reste cachée : l'app iPhone ne suit pas encore la taille du texte d'iOS ; vérifications passées (Nouveautés vérifiées sans cette note), PR mergée, TestFlight en cours. Parité : 67 % | #336 (mergée) |
-| 6/11 15:00 | suivi d'Android v839 | carte « Votre ventre » : si un mot ne tient plus à côté de son rond (petit écran), les trois choix passent le rond au-dessus, alignés ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 6/11 14:00 | suivi d'Android v838 | en grande police, ronds de choix et lignes de chiffres mieux tenus ; sur iPhone aussi (écrans étroits), mais la note « Mieux en grande taille de police » y reste cachée : l'app iPhone ne suit pas encore la taille du texte d'iOS ; vérifications passées (Nouveautés vérifiées sans cette note), PR mergée ; **la 838 est partie seule sur TestFlight (838.336)**. Parité : 67 % | #336 (mergée) |
+| 6/11 15:00 | suivi d'Android v839 | carte « Votre ventre » : si un mot ne tient plus à côté de son rond (petit écran), les trois choix passent le rond au-dessus, alignés ; sur iPhone aussi (sur l'iPhone 16e la place suffit, la carte reste sur une ligne) ; vérifications passées, PR mergée ; **la 839 est partie seule sur TestFlight (839.337)**. Parité : 67 % | #337 (mergée) |
+| 6/11 16:00 | abonnements relus | rien de neuf chez Android ; **les trois abonnements sont toujours « métadonnées manquantes » chez Apple** (relevé de 16:05) : question précisée pour vous (langue du groupe « Halcya » d'abord), à régler avant la soumission de demain. Parité : 67 % | — |
 
 ---
 
