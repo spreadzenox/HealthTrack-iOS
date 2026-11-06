@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v844 (6/11) | **844 sur TestFlight** (build 844.344, **attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v846 (6/11) | **844 sur TestFlight** (build 844.344, **attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -241,7 +241,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 17:00 | suivi d'Android v841 | sur les écrans étroits : onglets d'Analyses sur une ligne, liens sous l'offre d'abonnement mieux coupés, « 1 geste » sur une ligne au premier écran ; sur iPhone aussi (écran d'achat regardé : « Restaurer un achat », « Conditions », « Confidentialité » bien espacés) ; vérifications passées après une relance (aucun Mac libre chez GitHub au premier essai), PR mergée ; **la 841 est partie seule sur TestFlight (841.339)**. Parité : 67 % | #339, #340 (mergées) |
 | 6/11 19:00 | examen bêta suivi ; suivi d'Android v843 | **votre décision de 18:20 appliquée** : l'état de l'examen bêta d'Apple est relevé à chaque run, en lecture seule (19:03 : 839.337 et 817.312 toujours en attente) ; Android : « Vos données » ne compte plus le fuseau horaire, prix de l'abonnement mieux coupés sur petit écran ; sur iPhone aussi ; **la 843 est partie seule sur TestFlight (843.342)**. Parité : 67 % | #341, #342 (mergées) |
 | 6/11 20:00 | examen bêta ; suivi d'Android v844 | **la 817.312 est acceptée à l'examen bêta d'Apple** (relevé de 20:01 ; la 839.337 attend encore) : message pour vous en tête de `POUR-ORCHESTRATEUR.md` ; Android : carte « Votre ventre » en très grande police (un choix par ligne), sans effet sur iPhone, dont la note reste cachée ; un correctif iPhone refait ; vérifications passées, **la 844 est partie seule sur TestFlight (844.344)**. Parité : 67 % | #343, #344 (mergées) |
-| 6/11 21:00 | build finale | rien de neuf chez Android (idées seulement) ; examen bêta inchangé (817.312 acceptée, 839.337 en attente) ; **version d'App Store Connect renommée 844 et build 844.344 attachée** : prête pour votre soumission, rien de soumis. Parité : 67 % | — |
+| 6/11 21:00 | build finale | rien de neuf chez Android (idées seulement) ; examen bêta inchangé (817.312 acceptée, 839.337 en attente) ; **version d'App Store Connect renommée 844 et build 844.344 attachée** : prête pour votre soumission, rien de soumis. Parité : 67 % | #345 (mergée) |
+| 6/11 22:00 | suivi d'Android v846 | examen bêta : la 817.312 est maintenant distribuée aux testeurs (« IN_BETA_TESTING »), la 839.337 attend ; Android : premier écran en très grande police, sans effet sur iPhone (note cachée) ; la page de votre version garde 844.344 ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
