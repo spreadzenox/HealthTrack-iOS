@@ -398,7 +398,9 @@
     build ne s'attache qu'à la version du même numéro ; option `version_des_builds` de `store-push.yml`, PR #219 ; si
     Apple refuse le renommage avec une build attachée, le propriétaire le fait dans la page de la version), puis numéro
     exact de la build donné au propriétaire ;
-  - [ ] (facultatif, le 6/11) captures de la fiche refaites ? Celles de `captures/store` datent d'avant les
+  - [~] **captures iPhone 6,9" refaites le 6/11** (`3d39633`, v828, build 828.322, regardées une à une ; `captures.md`
+    à jour ; anciennes sur `captures/store-0111`) ; **à envoyer** (`store-push.yml`, « captures ») et iPad 13" à refaire
+    dès que GitHub relance les workflows. Ancienne question : (facultatif, le 6/11) captures de la fiche refaites ? Celles de `captures/store` datent d'avant les
     sous-onglets d'Analyses (Android v786, 5/11) : l'écran « Vos analyses » (capture 2) n'y a pas la rangée Bien-être,
     Ventre, FODMAP, Tendances. Rien d'obligatoire pour Apple (les captures montrent l'app, pas une version exacte) ;
     à refaire seulement si la build finale change l'allure d'un écran montré ;
