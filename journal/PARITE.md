@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v837 (commit `de50c7b`, 6/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v838 (commit `70bd559`, 6/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 6/11 14:00 | #755 (v838) | #755 (KEEP-SEGMENTS) : en grande police, les ronds de choix gardent leur taille (`Food.css`, `Premium.css`) et les lignes de chiffres (« 33 lectures · 7 jours · 6 notes à la main ») ne se coupent plus au milieu d'un élément (`keepWhole.jsx` : `keepSegments`, `WellbeingHistory.jsx`, `Recommendations.jsx`) ; code web partagé, aussi sur iPhone (utile sur écran étroit) ; **note de Nouveautés `2026-11-06-1335-grande-police` cachée sur iPhone** (correctif 28, test) : l'app iPhone ne suit pas encore la taille du texte d'iOS (Dynamic Type, après la soumission), comme la note du 4/11 ; les titres des pistes (`LeverCard`) toujours sans `keepWhole` (demande du 6/11 ouverte) ; 35 correctifs ; 3496 tests, build appstore et lint passent | ✅ (captures de la PR) |
 | 6/11 13:00 | #754 (v837) | #754 (EDGE-FLAKE) : le contrôle « Bord à bord » de l'émulateur d'Android relance l'app avant de conclure (`.github/scripts/edge-insets/check.mjs`) ; rien dans l'app ; suivi pour garder le même numéro de version ; 35 correctifs tels quels ; 3491 tests, build appstore et lint passent | — (rien dans l'app) |
 | 6/11 12:00 | #751, #752, #753 (v834 à v836) | #752 (KEEP-WHOLE) et #753 (KEEP-WHOLE-3) : « bien-être » (et tout mot composé) ne se coupe plus au trait d'union dans les titres du compte à rebours (Accueil, Analyses) ni dans les phrases des liens d'Analyses (`keepWhole.jsx`, `TodayCards.jsx`, `Recommendations.jsx`) ; vu coupé sur l'iPhone 16e le matin (« meilleur bien- / être ») ; code web partagé, aussi sur iPhone ; notes de Nouveautés `2026-11-06-1035-titres-entiers` et `2026-11-06-1135-liens-entiers` valables sur iPhone. #751 : journal d'Android ; 35 correctifs tels quels ; 3491 tests, build appstore et lint passent | ✅ (captures de la PR) |
 | 6/11 11:00 | #750 (v833), #751 | #750 (INSTALLS-21c-1) : le relais reconnaît les appareils de test de Google à l'adresse IP de la requête, comparée en mémoire aux blocs publiés de Firebase Test Lab, jamais gardée (`relay/src/testLabNet.js`, `server.js`, `integrity.js`) ; il le fait pour toutes les requêtes, iPhone compris ; phrase ajoutée à `privacypolicy.html` d'Android → **reprise dans `confidentialite-iphone.html`** (section de l'analyse, sans Google Play ; mise à jour du 6/11), empreinte relue et test de la phrase ; rien d'autre dans `app/`. #751 : journal d'Android ; 35 correctifs tels quels ; 3488 tests, build appstore et lint passent | ✅ (test de la page) |
