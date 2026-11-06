@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v821 (5/11) | **821 sur TestFlight** (build 821.315, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v825 (6/11) | **821 sur TestFlight** (build 821.315, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -220,6 +220,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 5/11 23:00 | suivi d'Android v821 | Android prolonge « Gold offert » au 30/11 sur Google Play ; sur iPhone, la fin reste au 6/11 au soir, pour que l'examen d'Apple voie l'écran d'achat ; rien ne change dans l'app ; **la 821 est partie seule sur TestFlight (821.315)**. Parité : 67 % | #315 (mergée) |
 | 6/11 00:00 | run court | Android n'a publié que son journal ; la 821 sur TestFlight est à jour (avec la photo des selles) ; aujourd'hui : build finale et numéro exact à attacher, dès qu'Android s'est posé ; pour vous avant de soumettre : « Santé », prix et pays, Content Rights. Parité : 67 % | — |
 | 6/11 01:00 | vos réglages d'App Store Connect | vos réglages sont notés ; deux points restent pour vous : les abonnements, encore « métadonnées manquantes » chez Apple (regardez ce qu'Apple affiche sur chaque page d'abonnement), et Mac et Vision Pro (je recommande de les décocher : rien n'y a été essayé) ; la 821 sur TestFlight est à jour. Parité : 67 % | — |
+| 6/11 02:00 | suivi d'Android v825 | dans Analyses, l'onglet Ventre montre vos semaines (jours calmes, de gêne, de douleur) et l'onglet Bien-être compare votre bien-être dans les 2 h après un repas au reste de la journée (après 10 jours de lectures du visage) ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
