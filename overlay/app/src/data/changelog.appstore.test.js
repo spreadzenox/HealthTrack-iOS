@@ -78,6 +78,13 @@ describe('Nouveautés sur iPhone (variante appstore)', () => {
     expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-11-06-1935-ventre-grande-police')
   })
 
+  it('v846 : « Premier écran lisible en très grande police » cachée aussi, pour la même raison', () => {
+    expect(ALL_CHANGELOG.map((e) => e.id)).toContain('2026-11-06-2135-onboarding-reperes')
+    expect(APPSTORE_HIDDEN.has('2026-11-06-2135-onboarding-reperes')).toBe(true)
+    expect(changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)).not.toContain('2026-11-06-2135-onboarding-reperes')
+    expect(changelogFor(ALL_CHANGELOG, 'play').map((e) => e.id)).toContain('2026-11-06-2135-onboarding-reperes')
+  })
+
   it('v809 et v810 : les notes de la photo des selles valent sur iPhone (décision du propriétaire du 05/11 vers 20:15)', () => {
     const ios = changelogFor(ALL_CHANGELOG, 'appstore').map((e) => e.id)
     for (const id of ['2026-11-05-1535-selles-photo', '2026-11-05-1635-selles-photo-fiabilite']) {
