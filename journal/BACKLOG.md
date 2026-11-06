@@ -384,7 +384,7 @@
     (vrais prix de l'App Store en bac à sable) ;
   - [x] captures iPad 13" (choix « B », #217 : 8/8 traitées par Apple), `notes-examen.md` (#219) et droit App Attest
     (722.221) prêts le 2/11 ;
-  - [ ] **bloqué depuis le 6/11 07:32 (Paris)** : GitHub ne démarre plus aucun job (« The job was not started because
+  - [x] **bloqué le 6/11 de 07:32 à 08:49 au plus tard (Paris), levé** : GitHub ne démarre plus aucun job (« The job was not started because
     your account is locked due to a billing issue ») ; TestFlight 830 (run 42175104845), build et modèles du visage de
     `462dd97` arrêtés avant le départ. Action du propriétaire (facturation GitHub) ; ensuite relancer ces trois runs
     (« Re-run failed jobs »), puis la fiche. Secours sans GitHub : le propriétaire renomme la version et attache

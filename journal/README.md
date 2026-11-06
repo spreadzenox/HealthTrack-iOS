@@ -10,15 +10,11 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v830 (6/11) | **828 sur TestFlight** (build 828.321, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications ; **la 830 attend : GitHub bloque les builds depuis le 6/11 07:32**), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v830 (6/11) | **828 sur TestFlight** (build 828.321, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
-- 🔴 **Urgent (6/11 07:40) : GitHub ne lance plus aucune build**, « account is locked due to a billing issue » :
-  github.com → votre photo → Settings → **Billing and plans**, réglez ce qui est signalé (moyen de paiement ou facture),
-  puis répondez « facturation GitHub réglée ». D'ici là : pas de TestFlight (la 830 attend), pas de vérification, pas de
-  mise à jour de la fiche. Solution de secours pour la soumission : `POUR-ORCHESTRATEUR.md`.
 - **Vos réglages du 5/11 vers 23:00 sont faits** (prix et pays, Content Rights, « Santé », groupes TestFlight, 817.312
   soumise à l'examen bêta). Deux points restent : (1) **les abonnements**, toujours « métadonnées manquantes » chez
   Apple : regardez ce qu'Apple écrit en haut de chaque page d'abonnement ; (2) **Mac et Vision Pro** : je recommande de
