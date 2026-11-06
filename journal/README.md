@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v843 (6/11) | **841 sur TestFlight** (build 841.339, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v844 (6/11) | **843 sur TestFlight** (build 843.342, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -43,7 +43,7 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (841.339 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (843.342 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Vos réglages du 5/11 (vers 23:00)** : prix et disponibilité (gratuit, 5 pays, sans les futurs ; Mac et Vision Pro
@@ -239,7 +239,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 15:00 | suivi d'Android v839 | carte « Votre ventre » : si un mot ne tient plus à côté de son rond (petit écran), les trois choix passent le rond au-dessus, alignés ; sur iPhone aussi (sur l'iPhone 16e la place suffit, la carte reste sur une ligne) ; vérifications passées, PR mergée ; **la 839 est partie seule sur TestFlight (839.337)**. Parité : 67 % | #337 (mergée) |
 | 6/11 16:00 | abonnements relus | rien de neuf chez Android ; **les trois abonnements sont toujours « métadonnées manquantes » chez Apple** (relevé de 16:05) : question précisée pour vous (langue du groupe « Halcya » d'abord), à régler avant la soumission de demain. Parité : 67 % | #338 (mergée) |
 | 6/11 17:00 | suivi d'Android v841 | sur les écrans étroits : onglets d'Analyses sur une ligne, liens sous l'offre d'abonnement mieux coupés, « 1 geste » sur une ligne au premier écran ; sur iPhone aussi (écran d'achat regardé : « Restaurer un achat », « Conditions », « Confidentialité » bien espacés) ; vérifications passées après une relance (aucun Mac libre chez GitHub au premier essai), PR mergée ; **la 841 est partie seule sur TestFlight (841.339)**. Parité : 67 % | #339, #340 (mergées) |
-| 6/11 19:00 | examen bêta suivi ; suivi d'Android v843 | **votre décision de 18:20 appliquée** : l'état de l'examen bêta d'Apple est relevé à chaque run, en lecture seule (19:03 : 839.337 et 817.312 toujours en attente) ; Android : « Vos données » ne compte plus le fuseau horaire, prix de l'abonnement mieux coupés sur petit écran ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | #341 (mergée) |
+| 6/11 19:00 | examen bêta suivi ; suivi d'Android v843 | **votre décision de 18:20 appliquée** : l'état de l'examen bêta d'Apple est relevé à chaque run, en lecture seule (19:03 : 839.337 et 817.312 toujours en attente) ; Android : « Vos données » ne compte plus le fuseau horaire, prix de l'abonnement mieux coupés sur petit écran ; sur iPhone aussi ; **la 843 est partie seule sur TestFlight (843.342)**. Parité : 67 % | #341, #342 (mergées) |
+| 6/11 20:00 | examen bêta ; suivi d'Android v844 | **la 817.312 est acceptée à l'examen bêta d'Apple** (relevé de 20:01 ; la 839.337 attend encore) : message pour vous en tête de `POUR-ORCHESTRATEUR.md` ; Android : carte « Votre ventre » en très grande police (un choix par ligne), sans effet sur iPhone, dont la note reste cachée ; un correctif iPhone refait ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | #343 (mergée) |
 
 ---
 
