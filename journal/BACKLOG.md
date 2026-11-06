@@ -403,13 +403,18 @@
     `COMPLETE`, prix, France, note pour l'examen, formule `UPFRONT`, version 1 `PREPARE_FOR_SUBMISSION`, rien de
     manquant que l'API expose) ; l'interface dit « Prepare for Submission » : à revoir le jour de la soumission (la
     section des abonnements de la page de version doit apparaître ; sinon, relire avec le propriétaire).
-- [ ] **« Prix et disponibilité » de l'app (action du propriétaire, avant la soumission)** : vide chez Apple (relevé du
+- [x] **« Prix et disponibilité » de l'app** : **fait par le propriétaire le 05/11 vers 23:00** (gratuite ; France,
+  Belgique, Luxembourg, Suisse, Canada, sans les futurs pays ; Content Rights : oui). Ancienne note : vide chez Apple (relevé du
   3/11 01:15 : `appAvailabilityV2` et `appPriceSchedule` en 404). À régler : gratuite, disponible en FRA, BEL, LUX,
   CHE, CAN (P32), pas dans les nouveaux pays. Ou par l'API après « ok prix et disponibilité » : workflow « App Store —
   prix, disponibilité et Content Rights » (#228, prêt le 3/11 ; `--content-rights` aussi, sur son choix). Puis relire
   l'état des abonnements.
 - [x] Abonnements d'Apple dans les 5 pays de P32 (3/11, #224 ; run 41557291477) : prix CHF et $CA d'Android, essai de
   2 semaines dans chaque pays.
+- [ ] **Achat d'essai StoreKit sur simulateur, raté une fois (6/11 04:55, #321)** : `renewalInfo` vide, StoreKit Test ne
+  donnait encore aucun statut d'abonnement juste après l'achat (iPhone 16e, iOS 26.2) ; vert à la relance, code natif
+  inchangé par la PR. Si ça revient : relire le statut deux ou trois fois dans `AppStoreBillingPlugin.renewalInfo`
+  (utile aussi sur un vrai iPhone : le relais dirait sinon « actif jusqu'au » au lieu de « renouvellement le »).
 - [ ] **Plus tard, quand il y aura plus d'utilisateurs (décision du 31/10)** : la stratégie de cache décidée avec la
   routine Android pour l'analyse des repas, côté relais. Aujourd'hui, les consignes commencent par la longue liste des
   ingrédients, identique d'un appel à l'autre, que Vertex AI met en cache implicitement (`relay/src/prompts.js`
@@ -432,7 +437,9 @@
   `testflight.yml` part seul sur chaque push de `main` qui change l'app (plus de lancement à la main).
   Pas d'espacement comme Android (CD-ALPHA-2, une version par jour sur Alpha) : le test interne n'a pas d'examen ;
   à espacer seulement si un groupe externe est ouvert après la soumission.
-- [ ] Testeurs **externes** : **décision du propriétaire du 05/11 vers 20:15 : TestFlight externe** (remplace « ok test
+- [x] Testeurs **externes** : **fait par le propriétaire le 05/11 vers 23:00** : groupes « Interne Halcya » et
+  « Testeurs Halcya », build 817.312 soumise à l'examen bêta, lien public gardé par lui (jamais écrit dans un dépôt).
+  Décision du propriétaire du 05/11 vers 20:15 : TestFlight externe (remplace « ok test
   interne » de 12:00) ; il crée le groupe et soumet la build à l'examen bêta ; textes prêts dans
   `store/app-store/testflight-externe.md` (05/11 22:00). Ancienne décision : « ok test interne »,
   TestFlight reste en test interne jusqu'à la soumission du 7 ou du 8/11 (pas de testeurs externes, pas de Beta App
