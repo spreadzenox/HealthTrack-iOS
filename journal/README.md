@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v836 (6/11) | **833 sur TestFlight** (build 833.331, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v836 (6/11) | **836 sur TestFlight** (build 836.332, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -40,7 +40,7 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (833.331 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (836.332 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Vos réglages du 5/11 (vers 23:00)** : prix et disponibilité (gratuit, 5 pays, sans les futurs ; Mac et Vision Pro
@@ -230,7 +230,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 09:00 | reprise après le blocage de GitHub | GitHub relance les builds (levé avant 08:49) ; **la 830 est partie sur TestFlight (830.323)** ; **nouvelles captures iPhone de la fiche envoyées à Apple** (avec les onglets d'Analyses et du Journal) ; puis **captures iPad envoyées aussi**. Rien de neuf chez Android depuis la v830. Parité : 67 % | #325, #327, #328, #329 (mergées) |
 | 6/11 10:00 | suivi d'Android v831 | dans Analyses → Bien-être, « Sur quelques semaines » marque le milieu de l'échelle d'un trait plein, comme l'historique du bien-être ; sur iPhone aussi ; **la 831 est partie seule sur TestFlight (831.330)** ; toutes les captures de la fiche traitées par Apple (8/8 iPhone, 8/8 iPad). Parité : 67 % | #330 (mergée) |
 | 6/11 11:00 | suivi d'Android v833 | Android précise dans sa politique de confidentialité que le serveur compare l'adresse IP aux appareils de test de Google sans la garder ; c'est vrai aussi pour l'iPhone : **phrase reprise dans la politique de l'iPhone** (mise à jour du 6/11) ; rien d'autre dans l'app ; **la 833 est partie seule sur TestFlight (833.331)**, la page en ligne est à jour. Parité : 67 % | #331 (mergée) |
-| 6/11 12:00 | suivi d'Android v836 | « bien-être » ne se coupe plus en fin de ligne dans les titres et les liens d'Analyses (c'était visible sur les petits iPhone) ; sur iPhone aussi ; vérifications passées, PR mergée, TestFlight en cours ; le titre d'une piste (« meilleur bien- / être ») se coupe encore sur les iPhone de 390 points : demandé à Android, rien de bloquant. Parité : 67 % | #332 (mergée) |
+| 6/11 12:00 | suivi d'Android v836 | « bien-être » ne se coupe plus en fin de ligne dans les titres et les liens d'Analyses (c'était visible sur les petits iPhone) ; sur iPhone aussi ; **la 836 est partie seule sur TestFlight (836.332)** ; le titre d'une piste (« meilleur bien- / être ») se coupe encore sur les iPhone de 390 points : demandé à Android, rien de bloquant. Parité : 67 % | #332 (mergée) |
 
 ---
 
