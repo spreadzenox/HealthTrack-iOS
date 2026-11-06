@@ -1,0 +1,36 @@
+# Examen bêta d'Apple (TestFlight externe) : relevé en lecture seule de l'état des builds du groupe « Testeurs Halcya »
+# (scripts/store-beta.mjs ; décision du propriétaire du 06/11 vers 18:20 : relevé à chaque run, rien soumis ni changé
+# dans App Store Connect). Que des lectures ; le lien public du groupe n'est jamais demandé ni affiché (dépôt public).
+# Lancement manuel, sur main seulement (environnement `appstore` : ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_P8, jamais affichés).
+name: TestFlight — examen bêta (relevé)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: store-beta
+  cancel-in-progress: false
+
+jobs:
+  beta:
+    name: État de l'examen bêta (lecture seule)
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: appstore
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Tests du script
+        run: node --test scripts/store-beta.test.mjs
+      - name: Relevé (API App Store Connect, lecture seule)
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+        run: node scripts/store-beta.mjs

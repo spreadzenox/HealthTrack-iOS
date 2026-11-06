@@ -448,6 +448,12 @@
   `testflight.yml` part seul sur chaque push de `main` qui change l'app (plus de lancement à la main).
   Pas d'espacement comme Android (CD-ALPHA-2, une version par jour sur Alpha) : le test interne n'a pas d'examen ;
   à espacer seulement si un groupe externe est ouvert après la soumission.
+- [ ] **Examen bêta d'Apple, relevé à chaque run (décision du propriétaire du 06/11 vers 18:20)** : état des builds du
+  groupe externe « Testeurs Halcya » lu par l'API, en lecture seule (`store-beta.yml`, `scripts/store-beta.mjs`, tests :
+  que des GET, lien public jamais demandé ni affiché). À 18:17 (relevé du propriétaire) : 817.312 et 839.337 « Waiting
+  for Review ». Dès qu'une build passe en test (lien public utilisable) ou est refusée : en tête de
+  `POUR-ORCHESTRATEUR.md`, avec le motif s'il est lisible (l'API ne le donne pas : App Store Connect → TestFlight ou
+  l'e-mail d'Apple) et la correction proposée. Rien soumis ni changé dans App Store Connect.
 - [x] Testeurs **externes** : **fait par le propriétaire le 05/11 vers 23:00** : groupes « Interne Halcya » et
   « Testeurs Halcya », build 817.312 soumise à l'examen bêta, lien public gardé par lui (jamais écrit dans un dépôt).
   Décision du propriétaire du 05/11 vers 20:15 : TestFlight externe (remplace « ok test
