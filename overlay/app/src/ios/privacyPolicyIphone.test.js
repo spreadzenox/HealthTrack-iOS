@@ -13,11 +13,13 @@ const iphone = read('public/confidentialite-iphone.html')
 const text = iphone.replace(/<!--[\s\S]*?-->/g, '').replace(/<style>[\s\S]*?<\/style>/, '').replace(/<[^>]+>/g, ' ')
   .replace(/\s+/g, ' ')
 
-// Empreinte de app/public/privacypolicy.html d'Android lue en dernier (mise à jour du 5 novembre 2026, v809 : section
+// Empreinte de app/public/privacypolicy.html d'Android lue en dernier (v833, 6 novembre 2026 : adresse IP comparée en
+// mémoire aux appareils de test de Google, jamais gardée ; le relais le fait aussi pour l'iPhone, phrase reprise sans
+// Google Play ; avant : mise à jour du 5 novembre 2026, v809 : section
 // « Forme des selles estimée par photo », reprise sur iPhone avec App Attest au lieu de Play Integrity (décision du
 // propriétaire du 05/11 vers 20:15) ;
 // v782 : « Votre avis », reprise avec App Attest au lieu de Play Integrity)
-const ANDROID_POLICY_RELUE = 'dfd633d2d27009895de3cc184e32ffdbac6670e0b6d0a4582e43280fa97ecd6d'
+const ANDROID_POLICY_RELUE = '175375632dc772f8f68857c5f86d395ad6e8e7cabfd3d9bef64dac7a9af23da4'
 
 describe('politique de confidentialité sur iPhone', () => {
   it("suit la dernière version relue de la page d'Android", () => {
@@ -30,6 +32,12 @@ describe('politique de confidentialité sur iPhone', () => {
       /données d'utilisation/i, /Play Integrity/i, /clé Gemini/i]) {
       expect(text, String(absent)).not.toMatch(absent)
     }
+  })
+
+  it("dit que l'adresse IP n'est que comparée en mémoire, jamais gardée (relais, Android v833)", () => {
+    expect(text).toMatch(/adresse IP de la requête/)
+    expect(text).toMatch(/en mémoire, aux adresses que Google publie pour ses appareils de test/)
+    expect(text).toMatch(/elle n'est ni enregistrée ni conservée/)
   })
 
   it("dit ce que l'iPhone fait vraiment", () => {
