@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v838 (6/11) | **837 sur TestFlight** (build 837.335, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v839 (6/11) | **837 sur TestFlight** (build 837.335, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -232,7 +232,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 11:00 | suivi d'Android v833 | Android précise dans sa politique de confidentialité que le serveur compare l'adresse IP aux appareils de test de Google sans la garder ; c'est vrai aussi pour l'iPhone : **phrase reprise dans la politique de l'iPhone** (mise à jour du 6/11) ; rien d'autre dans l'app ; **la 833 est partie seule sur TestFlight (833.331)**, la page en ligne est à jour. Parité : 67 % | #331 (mergée) |
 | 6/11 12:00 | suivi d'Android v836 | « bien-être » ne se coupe plus en fin de ligne dans les titres et les liens d'Analyses (c'était visible sur les petits iPhone) ; sur iPhone aussi ; **la 836 est partie seule sur TestFlight (836.332)** ; le titre d'une piste (« meilleur bien- / être ») se coupe encore sur les iPhone de 390 points : demandé à Android, rien de bloquant. Parité : 67 % | #332, #333 (mergées) |
 | 6/11 13:00 | suivi d'Android v837 | rien de nouveau dans l'app (Android a seulement réglé un de ses tests) ; suivie pour garder le même numéro de version ; **la 837 est partie seule sur TestFlight (837.335)** ; guide de votre soumission remis à jour (`store/app-store/soumission.md`). Parité : 67 % | #334, #335 (mergées) |
-| 6/11 14:00 | suivi d'Android v838 | en grande police, ronds de choix et lignes de chiffres mieux tenus ; sur iPhone aussi (écrans étroits), mais la note « Mieux en grande taille de police » y reste cachée : l'app iPhone ne suit pas encore la taille du texte d'iOS ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 6/11 14:00 | suivi d'Android v838 | en grande police, ronds de choix et lignes de chiffres mieux tenus ; sur iPhone aussi (écrans étroits), mais la note « Mieux en grande taille de police » y reste cachée : l'app iPhone ne suit pas encore la taille du texte d'iOS ; vérifications passées (Nouveautés vérifiées sans cette note), PR mergée, TestFlight en cours. Parité : 67 % | #336 (mergée) |
+| 6/11 15:00 | suivi d'Android v839 | carte « Votre ventre » : si un mot ne tient plus à côté de son rond (petit écran), les trois choix passent le rond au-dessus, alignés ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
