@@ -65,6 +65,10 @@ L'app reste aussi pour iPad (décision du propriétaire du 2/11) : App Store Con
 display ». Faites par la CI (`ios-build.yml`, lancement manuel avec `devices: iPad Pro 13-inch (M5)`), publiées sur la
 branche `captures/store-ipad` ; `store-push.yml`, option « captures_ipad », les envoie dans l'ordre de ce tableau.
 
+**Série du 6/11** (`db9cb04`, Android v830, build 830.326), regardée écran par écran : même colonne centrée, rien de
+coupé ; rangée d'onglets en haut d'Analyses (Bien-être, Ventre, FODMAP, Tendances) et du Journal (Jours, Repas,
+Nutrition) ; aucun mot d'Android, aucune erreur JavaScript. Ancienne série sur la branche `captures/store-ipad-0211`.
+
 Série du 2/11 (`9d7db16`, Android v717, build 717.217), regardée écran par écran :
 - l'app garde la colonne de l'iPhone, centrée, avec des marges blanches ; rien n'est coupé ni recouvert, zones sûres
   respectées en portrait ; poignée de redimensionnement d'iPadOS 26 dans le coin bas droit ;
@@ -74,10 +78,10 @@ Série du 2/11 (`9d7db16`, Android v717, build 717.217), regardée écran par é
 | # | Fichier (`captures/store-ipad`) | Ce qu'elle montre |
 |---|---|---|
 | 1 | `ipad-pro-13-inch-(m5)-demo-clair-accueil.png` | « Votre journée » |
-| 2 | `ipad-pro-13-inch-(m5)-demo-clair-recommendations.png` | « Vos analyses » : des pistes à vérifier |
-| 3 | `ipad-pro-13-inch-(m5)-demo-clair-food.png` | Repas : « Photo du repas », repas habituels, derniers repas |
-| 4 | `ipad-pro-13-inch-(m5)-demo-clair-reintroduction.png` | Réintroduction guidée des FODMAP |
-| 5 | `ipad-pro-13-inch-(m5)-demo-clair-tendances.png` | Tendances face à votre propre norme |
-| 6 | `ipad-pro-13-inch-(m5)-demo-clair-journal.png` | Journal : vos derniers jours |
-| 7 | `ipad-pro-13-inch-(m5)-demo-clair-nutrition.png` | Nutrition : vos apports moyens face aux repères (protéines, fibres, vitamines, minéraux) |
+| 2 | `ipad-pro-13-inch-(m5)-demo-clair-recommendations.png` | « Vos analyses », onglet Bien-être : des pistes à vérifier |
+| 3 | `ipad-pro-13-inch-(m5)-demo-clair-food.png` | Journal, onglet Repas : « Photo du repas », repas habituels, derniers repas |
+| 4 | `ipad-pro-13-inch-(m5)-demo-clair-reintroduction.png` | Analyses, onglet FODMAP : réintroduction guidée |
+| 5 | `ipad-pro-13-inch-(m5)-demo-clair-tendances.png` | Analyses, onglet Tendances : votre forme face à votre propre norme |
+| 6 | `ipad-pro-13-inch-(m5)-demo-clair-journal.png` | Journal, onglet Jours : vos derniers jours |
+| 7 | `ipad-pro-13-inch-(m5)-demo-clair-nutrition.png` | Journal, onglet Nutrition : vos apports moyens face aux repères (protéines, fibres, vitamines, minéraux) |
 | 8 | `ipad-pro-13-inch-(m5)-demo-sombre-accueil.png` | L'accueil en mode sombre |
