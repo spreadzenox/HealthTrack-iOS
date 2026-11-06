@@ -10,11 +10,15 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v830 (6/11) | **828 sur TestFlight** (build 828.321, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v830 (6/11) | **828 sur TestFlight** (build 828.321, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications ; **la 830 attend : GitHub bloque les builds depuis le 6/11 07:32**), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
+- 🔴 **Urgent (6/11 07:40) : GitHub ne lance plus aucune build**, « account is locked due to a billing issue » :
+  github.com → votre photo → Settings → **Billing and plans**, réglez ce qui est signalé (moyen de paiement ou facture),
+  puis répondez « facturation GitHub réglée ». D'ici là : pas de TestFlight (la 830 attend), pas de vérification, pas de
+  mise à jour de la fiche. Solution de secours pour la soumission : `POUR-ORCHESTRATEUR.md`.
 - **Vos réglages du 5/11 vers 23:00 sont faits** (prix et pays, Content Rights, « Santé », groupes TestFlight, 817.312
   soumise à l'examen bêta). Deux points restent : (1) **les abonnements**, toujours « métadonnées manquantes » chez
   Apple : regardez ce qu'Apple écrit en haut de chaque page d'abonnement ; (2) **Mac et Vision Pro** : je recommande de
@@ -225,7 +229,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 04:00 | suivi d'Android v826 | dans Analyses, l'onglet Bien-être montre vos semaines (une colonne par semaine, vos notes à part) ; sur iPhone aussi ; **la 826 est partie seule sur TestFlight (826.320)**. Parité : 67 % | #320 (mergée) |
 | 6/11 05:00 | suivi d'Android v828 | la carte des pistes de l'Accueil compte les mêmes jours que l'onglet Ventre (notes du ventre avec « Mon ventre », sinon jours avec un repas) ; l'onglet Ventre annonce le rapport PDF en une phrase avant la première note ; sur iPhone aussi ; **la 828 est partie seule sur TestFlight (828.321)**. Parité : 67 % | #321 (mergée) |
 | 6/11 06:00 | fin du suivi de la v828 | rien de neuf chez Android depuis la v828 ; la 828 est sur TestFlight ; vos réglages d'hier soir (prix et pays, testeurs externes) cochés dans la liste des tâches ; une vérification de l'achat d'essai a raté une fois sur l'iPhone simulé puis est passée (noté, à corriger si ça revient). Parité : 67 % | #322 (mergée) |
-| 6/11 07:00 | suivi d'Android v830 | dans Analyses, tant que vos pistes ne sont pas prêtes, les onglets Bien-être et Ventre ont un lien vers la carte de l'Accueil où noter votre journée ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 6/11 07:00 | suivi d'Android v830 | dans Analyses, tant que vos pistes ne sont pas prêtes, les onglets Bien-être et Ventre ont un lien vers la carte de l'Accueil où noter votre journée ; sur iPhone aussi ; vérifications passées et PR mergée, mais **la 830 n'est pas partie sur TestFlight : GitHub refuse de lancer les builds (« compte bloqué pour un problème de facturation »), à régler par vous** (voir en haut). Parité : 67 % | #323 (mergée) |
 
 ---
 
