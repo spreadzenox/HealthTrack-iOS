@@ -399,7 +399,8 @@
     Apple refuse le renommage avec une build attachée, le propriétaire le fait dans la page de la version), puis numéro
     exact de la build donné au propriétaire ;
   - [~] **captures iPhone 6,9" refaites le 6/11, envoyées à 08:12 UTC** (8 dans l'ordre ; 4/8 traitées à la fin du run,
-    à relire au prochain envoi de la fiche) ; iPad 13" relancées sur `main` à 08:02 UTC (run 42185050080) ; (`3d39633`, v828, build 828.322, regardées une à une ; `captures.md`
+    à relire au prochain envoi de la fiche) ; iPad 13" refaites (`db9cb04`, v830, build 830.326), regardées, envoyées après #328 ; anciennes sur
+    `captures/store-ipad-0211` ; (`3d39633`, v828, build 828.322, regardées une à une ; `captures.md`
     à jour ; anciennes sur `captures/store-0111`) . Ancienne question : (facultatif, le 6/11) captures de la fiche refaites ? Celles de `captures/store` datent d'avant les
     sous-onglets d'Analyses (Android v786, 5/11) : l'écran « Vos analyses » (capture 2) n'y a pas la rangée Bien-être,
     Ventre, FODMAP, Tendances. Rien d'obligatoire pour Apple (les captures montrent l'app, pas une version exacte) ;
