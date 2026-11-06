@@ -20,17 +20,29 @@ Sélection du 29/10. Captures refaites le 1/11 (`96835b0`, Android v678, build 6
   de « jamais chez Halcya ») ; lecture du visage en menthe, temps d'écran en lilas ; sous l'Apple Watch, « Jamais reçu :
   SpO₂ » seulement.
 
+**Captures refaites le 6/11** (`3d39633`, Android v828, build 828.322), sur la branche `captures/store`, regardées
+une à une (celles du 1/11 n'avaient pas les onglets d'Analyses ni ceux du Journal) :
+- barre d'état à 9:41, aucune bannière du système, aucun mot d'Android, aucune erreur JavaScript ;
+- Analyses (2, 4, 5) : la rangée d'onglets Bien-être, Ventre, FODMAP, Tendances en haut ; « Pistes à tester », « Piste
+  solide » et « À confirmer » ; Réintroduction dans l'onglet FODMAP ; « Vos tendances » dans l'onglet Tendances ;
+- Repas (3) et Journal (6) : onglets Jours, Repas, Nutrition ; le Journal montre « Selles : estimer la forme avec une
+  photo » (dans la soumission, décision du 05/11) ;
+- Accueil (1, 8) : carte « Votre ventre », « Photo du repas », « + 1 cigarette » (classification par âge).
+**Pas encore envoyées** : GitHub ne lance plus de workflow depuis le 6/11 07:32 (facturation du compte du
+propriétaire) ; `store-push.yml` avec « captures » dès que c'est réglé. Anciennes captures gardées
+sur la branche `captures/store-0111` (commit `b2245af`).
+
 Envoyées par l'API le 1/11, à la place de celles du 31/10. Dans l'ordre d'affichage ; les trois premières sont
 celles qu'on voit sans faire défiler :
 
 | # | Fichier (`captures/store`) | Ce qu'elle montre |
 |---|---|---|
 | 1 | `iphone-17-pro-max-demo-clair-accueil.png` | « Votre journée » : bien-être, sommeil, VFC, pas, la carte « Votre ventre », « Photo du repas » et « + 1 cigarette » |
-| 2 | `iphone-17-pro-max-demo-clair-recommendations.png` | « Vos analyses » : « des liens repérés dans vos données, à vérifier avant d'y croire », pistes « Nuits plus longues → meilleur bien-être » (piste solide) et « Plus de pas » (à confirmer) |
-| 3 | `iphone-17-pro-max-demo-clair-food.png` | Repas : « Photo du repas » en grand bouton, repas habituels, derniers repas avec leurs calories |
-| 4 | `iphone-17-pro-max-demo-clair-reintroduction.png` | Réintroduction guidée des FODMAP, groupe par groupe |
-| 5 | `iphone-17-pro-max-demo-clair-tendances.png` | Tendances : votre forme face à votre propre norme (FC au repos, VFC, sommeil) |
-| 6 | `iphone-17-pro-max-demo-clair-journal.png` | Journal : vos derniers jours, mesure par mesure |
+| 2 | `iphone-17-pro-max-demo-clair-recommendations.png` | « Vos analyses », onglet Bien-être : « des liens repérés dans vos données, à vérifier avant d'y croire », pistes « Nuits plus longues → meilleur bien-être » (piste solide) et « Plus de pas » (à confirmer) |
+| 3 | `iphone-17-pro-max-demo-clair-food.png` | Journal, onglet Repas : « Photo du repas » en grand bouton, « Galerie » et « Décrire », repas habituels, derniers repas avec leurs calories |
+| 4 | `iphone-17-pro-max-demo-clair-reintroduction.png` | Analyses, onglet FODMAP : réintroduction guidée, groupe par groupe |
+| 5 | `iphone-17-pro-max-demo-clair-tendances.png` | Analyses, onglet Tendances : votre forme face à votre propre norme (FC au repos, VFC, horaires de sommeil) |
+| 6 | `iphone-17-pro-max-demo-clair-journal.png` | Journal, onglet Jours : vos derniers jours, mesure par mesure, et la forme des selles estimée par photo |
 | 7 | `iphone-17-pro-max-demo-clair-connectors.png` | Sources : Apple Watch par l'app Santé, lecture du visage, temps d'écran, « Elles restent sur ce téléphone » |
 | 8 | `iphone-17-pro-max-demo-sombre-accueil.png` | L'accueil en mode sombre |
 
