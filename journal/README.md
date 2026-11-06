@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v844 (6/11) | **843 sur TestFlight** (build 843.342, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v844 (6/11) | **844 sur TestFlight** (build 844.344, **attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -22,8 +22,8 @@
   Apple (relevés du 6/11 à 10:10 et 16:05), à régler avant de soumettre : vérifiez d'abord la langue du **groupe**
   « Halcya » (cause la plus citée par Apple), puis ce qu'Apple écrit en haut de chaque page d'abonnement ; (2) **Mac et Vision Pro** : je recommande de
   les décocher pour cette première soumission (rien n'y a été essayé). Détails dans `POUR-ORCHESTRATEUR.md`.
-- **Aujourd'hui 6/11** : je prépare la build finale, je renomme la version (717 → son numéro) et je vous donne son
-  numéro exact à attacher avant de soumettre.
+- ✅ **Build finale : 844.344**, attachée à la version **844** dans App Store Connect (6/11 vers 21:15), rien de
+  soumis. Demain matin : vérification de l'écran d'achat sur l'iPhone, puis votre soumission (`store/app-store/soumission.md`).
 - ✅ **« Prix et disponibilité » de l'app** (fait par vous le 5/11 vers 23:00 ; Mac et Vision Pro laissés ouverts) (App Store Connect → Halcya → Distribution, ou
   Monétisation → **Prix et disponibilité**). Apple dit que cette page n'a jamais été remplie (relevé du 3/11) ; c'est
   sans doute pour cela que les abonnements restent « métadonnées manquantes ».
@@ -43,7 +43,7 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (843.342 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (844.344 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Vos réglages du 5/11 (vers 23:00)** : prix et disponibilité (gratuit, 5 pays, sans les futurs ; Mac et Vision Pro
@@ -240,7 +240,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 16:00 | abonnements relus | rien de neuf chez Android ; **les trois abonnements sont toujours « métadonnées manquantes » chez Apple** (relevé de 16:05) : question précisée pour vous (langue du groupe « Halcya » d'abord), à régler avant la soumission de demain. Parité : 67 % | #338 (mergée) |
 | 6/11 17:00 | suivi d'Android v841 | sur les écrans étroits : onglets d'Analyses sur une ligne, liens sous l'offre d'abonnement mieux coupés, « 1 geste » sur une ligne au premier écran ; sur iPhone aussi (écran d'achat regardé : « Restaurer un achat », « Conditions », « Confidentialité » bien espacés) ; vérifications passées après une relance (aucun Mac libre chez GitHub au premier essai), PR mergée ; **la 841 est partie seule sur TestFlight (841.339)**. Parité : 67 % | #339, #340 (mergées) |
 | 6/11 19:00 | examen bêta suivi ; suivi d'Android v843 | **votre décision de 18:20 appliquée** : l'état de l'examen bêta d'Apple est relevé à chaque run, en lecture seule (19:03 : 839.337 et 817.312 toujours en attente) ; Android : « Vos données » ne compte plus le fuseau horaire, prix de l'abonnement mieux coupés sur petit écran ; sur iPhone aussi ; **la 843 est partie seule sur TestFlight (843.342)**. Parité : 67 % | #341, #342 (mergées) |
-| 6/11 20:00 | examen bêta ; suivi d'Android v844 | **la 817.312 est acceptée à l'examen bêta d'Apple** (relevé de 20:01 ; la 839.337 attend encore) : message pour vous en tête de `POUR-ORCHESTRATEUR.md` ; Android : carte « Votre ventre » en très grande police (un choix par ligne), sans effet sur iPhone, dont la note reste cachée ; un correctif iPhone refait ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | #343 (mergée) |
+| 6/11 20:00 | examen bêta ; suivi d'Android v844 | **la 817.312 est acceptée à l'examen bêta d'Apple** (relevé de 20:01 ; la 839.337 attend encore) : message pour vous en tête de `POUR-ORCHESTRATEUR.md` ; Android : carte « Votre ventre » en très grande police (un choix par ligne), sans effet sur iPhone, dont la note reste cachée ; un correctif iPhone refait ; vérifications passées, **la 844 est partie seule sur TestFlight (844.344)**. Parité : 67 % | #343, #344 (mergées) |
+| 6/11 21:00 | build finale | rien de neuf chez Android (idées seulement) ; examen bêta inchangé (817.312 acceptée, 839.337 en attente) ; **version d'App Store Connect renommée 844 et build 844.344 attachée** : prête pour votre soumission, rien de soumis. Parité : 67 % | — |
 
 ---
 
