@@ -94,6 +94,19 @@ export function versionPlan({ current, wanted, attachedBuild, followBuilds = fal
   return { rename: true, keep: wanted, reason: attachedBuild ? `build ${attachedBuild} à remplacer par une ${wanted}.x` : null }
 }
 
+/**
+ * Build à attacher à la version (`--attacher-build`, décision du propriétaire du 05/11 vers 23:00) : la plus récente
+ * build traitée par Apple (VALID, non expirée) dont le numéro commence par celui de la version (« 825.320 » pour 825).
+ */
+export function latestBuild(builds, versionNumber) {
+  const ok = (builds ?? []).filter((b) => {
+    const a = b?.attributes ?? {}
+    return a.processingState === 'VALID' && !a.expired && String(a.version ?? '').startsWith(`${versionNumber}.`)
+  })
+  const rank = (b) => Number(String(b.attributes.version).split('.')[1]) || 0
+  return ok.sort((x, y) => rank(y) - rank(x))[0] ?? null
+}
+
 /** Empreinte MD5 qu'App Store Connect vérifie à la fin de l'envoi d'une capture. */
 export const md5 = (bytes) => createHash('md5').update(bytes).digest('hex')
 
@@ -261,6 +274,21 @@ async function main() {
     version.attributes = { ...version.attributes, versionString: wanted }
   } else if (plan.reason) {
     console.log(`Version ${plan.keep} gardée (${plan.reason}, choisie par le propriétaire) ; builds en ${wanted}`)
+  }
+  // Build finale (`--attacher-build`) : la plus récente build valide du numéro de la version, attachée à la version ;
+  // jamais soumise ici (la soumission à l'examen reste le geste du propriétaire)
+  if (process.argv.includes('--attacher-build')) {
+    const number = version.attributes?.versionString
+    const builds = await api(token, 'GET', `/v1/builds?filter[app]=${app.id}&filter[preReleaseVersion.version]=${number}&limit=50&fields[builds]=version,processingState,expired`)
+    const build = latestBuild(builds.data, number)
+    if (!build) {
+      console.log(`::warning::aucune build ${number}.x traitée par Apple : rien d'attaché`)
+    } else if (attached?.attributes?.version === build.attributes.version && !plan.rename) {
+      console.log(`Build ${build.attributes.version} déjà attachée à la version ${number}`)
+    } else {
+      await api(token, 'PATCH', `/v1/appStoreVersions/${version.id}/relationships/build`, { data: { type: 'builds', id: build.id } })
+      console.log(`Build ${build.attributes.version} attachée à la version ${number} (à soumettre par le propriétaire)`)
+    }
   }
   const v = await upsertLocalization(token, {
     listPath: `/v1/appStoreVersions/${version.id}/appStoreVersionLocalizations`,
