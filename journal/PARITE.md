@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v826 (commit `29acaed`, 6/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v828 (commit `fbf40c0`, 6/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 6/11 05:00 | #744, #745 (v827, v828) | #744 (PISTES-UN-COMPTE) : la carte des pistes de l'Accueil compte, avec « Mon ventre », les jours de notes du ventre (28, comme l'onglet Ventre) et, avec un autre objectif, les jours avec un repas (`TodayCards.jsx` et `.css`). #745 (POL-PLAY-VENTRE-BIENTOT) : onglet Ventre, avant la première note du ventre, le rapport PDF est annoncé en une phrase au lieu d'un bloc « Bientôt » (`Recommendations.jsx` et `.css`) ; code web partagé, aussi sur iPhone ; notes de Nouveautés `2026-11-06-0335-pistes-un-compte` et `2026-11-06-0435-ventre-rapport-ligne` valables sur iPhone ; 35 correctifs tels quels ; 3480 tests, build appstore et lint passent | ✅ (captures de la PR) |
 | 6/11 04:00 | #743 (v826) | #743 (BE-SEMAINES) : onglet Bien-être, « Sur quelques semaines » montre une colonne par semaine (bien-être estimé en moyenne, notes en point), dès 2 semaines (`wellbeingWeeks.js`, `Horizon.jsx` et `.css`, `analysisTasks.js`) ; code web partagé, aussi sur iPhone ; note de Nouveautés `2026-11-06-0235-bien-etre-semaines` valable sur iPhone ; 35 correctifs tels quels ; 3479 tests, build appstore et lint passent | ✅ (captures de la PR) |
 | 6/11 02:00 | #739 à #742 (v822 à v825) | #739, #740 : journal d'Android (dont la décision App Store Connect du propriétaire transmise). #741 : onglet Ventre d'Analyses, une colonne par semaine (jours calmes, de gêne, de douleur, la note la plus forte du jour) au lieu du lien vers Tendances (`gutWeeks.js`, `Recommendations.jsx`). #742 (ANALYSES-ONGLETS-5) : onglet Bien-être, « Dans les heures » compare le bien-être estimé par le visage dans les 2 h après un repas au reste de la journée, dès 10 jours de lectures, écart montré seulement s'il est net (`mealHours.js`, `analysisTasks.js`) ; code web partagé, aussi sur iPhone (lecture du visage 🟡, I7) ; reste une piste ; notes de Nouveautés `2026-11-06-…` valables sur iPhone ; 35 correctifs tels quels ; 3472 tests, build appstore et lint passent | ✅ (captures de la PR) |
 | 5/11 23:00 | #735 à #738 (v818 à v821) | #735 : idées d'Android (I222) et contrôle de la vieille WebView dans sa CI. #736 (CD-ALPHA-5) : fiche et abonnements de Google Play au même délai de 24 h que l'alpha, outils d'Android. #737 : journal. #738 : période « Gold offert » de Google Play prolongée au 30/11 (`relay/src/launch-period.json`, `until`) ; **`iosUntil` inchangé (6/11 23:00 UTC)** : sur iPhone, l'écran d'achat reste visible à partir du 7/11, pour l'examen d'Apple ; rien dans `app/` ; 35 correctifs tels quels ; 3453 tests, build appstore et lint passent | — (rien dans l'app) |

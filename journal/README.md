@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v826 (6/11) | **825 sur TestFlight** (build 825.318, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v828 (6/11) | **826 sur TestFlight** (build 826.320, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -40,7 +40,7 @@
   Support »), créer dans TestFlight un groupe de test interne avec elle et la build la plus récente, et me donner la
   version d'iOS de son iPhone 12 (Réglages → Général → Informations) : il faut au moins iOS 15.4 (sinon, Réglages → Général → Mise à jour
   logicielle).
-- Installez la build la plus récente de TestFlight (825.318 aujourd'hui) : Paramètres y dit « Gold offert pendant le
+- Installez la build la plus récente de TestFlight (826.320 aujourd'hui) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
 
 **Vos réglages du 5/11 (vers 23:00)** : prix et disponibilité (gratuit, 5 pays, sans les futurs ; Mac et Vision Pro
@@ -222,7 +222,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 01:00 | vos réglages d'App Store Connect | vos réglages sont notés ; deux points restent pour vous : les abonnements, encore « métadonnées manquantes » chez Apple (regardez ce qu'Apple affiche sur chaque page d'abonnement), et Mac et Vision Pro (je recommande de les décocher : rien n'y a été essayé) ; la 821 sur TestFlight est à jour. Parité : 67 % | — |
 | 6/11 02:00 | suivi d'Android v825 | dans Analyses, l'onglet Ventre montre vos semaines (jours calmes, de gêne, de douleur) et l'onglet Bien-être compare votre bien-être dans les 2 h après un repas au reste de la journée (après 10 jours de lectures du visage) ; sur iPhone aussi ; **la 825 est partie seule sur TestFlight (825.318)**. Parité : 67 % | #318 (mergée) |
 | 6/11 03:00 | build finale, préparation | comme vous l'avez demandé hier soir (« renommez-la et donnez-lui la build finale »), le renvoi de la fiche sait maintenant attacher la dernière build prête à la version ; je le ferai aujourd'hui en fin de journée et vous donnerai le numéro exact ; la 825 sur TestFlight est à jour. Parité : 67 % | — |
-| 6/11 04:00 | suivi d'Android v826 | dans Analyses, l'onglet Bien-être montre vos semaines (une colonne par semaine, vos notes à part) ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 6/11 04:00 | suivi d'Android v826 | dans Analyses, l'onglet Bien-être montre vos semaines (une colonne par semaine, vos notes à part) ; sur iPhone aussi ; **la 826 est partie seule sur TestFlight (826.320)**. Parité : 67 % | #320 (mergée) |
+| 6/11 05:00 | suivi d'Android v828 | la carte des pistes de l'Accueil compte les mêmes jours que l'onglet Ventre (notes du ventre avec « Mon ventre », sinon jours avec un repas) ; l'onglet Ventre annonce le rapport PDF en une phrase avant la première note ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
 
 ---
 
