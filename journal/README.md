@@ -249,7 +249,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 02:00 | suivi d'Android v850 | « Photo du repas » ouvre directement l'appareil photo (Accueil, Nutrition, Journal vide) ; Analyses dit seulement ce qui manque ; sur iPhone aussi ; vérifications passées (63 min, runners lents), PR mergée, TestFlight en cours. Parité : 67 % | #351 (mergée) |
 | 7/11 03:00 | retours du testeur (point 5), fin | **à l'accueil, après l'app Santé : « Ce que Halcya peut utiliser »** (position approximative pour la météo, appareil photo pour vos repas), chacun avec sa raison et « Autoriser », rien d'obligatoire ; vérifications passées, **sur TestFlight dans la 850.352** (pas dans 844.344). Parité : 67 % | #352 (mergée) |
 | 7/11 04:00 | suivi d'Android v852 | Nutrition : la provenance d'une valeur du profil s'affiche au toucher ; Analyses : « Le modèle qui prédit votre bien-être » à part ; sur iPhone aussi (un correctif refait pour le poids de l'app Santé) ; **la 852 est partie seule sur TestFlight (852.353)**. Parité : 67 % | #353 (mergée) |
-| 7/11 05:00 | suivi d'Android v853 | **la note de bien-être va de 1 à 5, avec 3 au milieu** ; vos anciennes notes ne sont pas modifiées, elles s'affichent simplement sur la nouvelle échelle ; sur iPhone aussi ; vérifications en cours, puis TestFlight tout seul. Parité : 67 % | — |
+| 7/11 05:00 | suivi d'Android v853 | **la note de bien-être va de 1 à 5, avec 3 au milieu** ; vos anciennes notes ne sont pas modifiées, elles s'affichent simplement sur la nouvelle échelle ; sur iPhone aussi (l'étape du geste de l'accueil dit encore « de 0 à 5 », chez Android aussi : signalé) ; vérifications passées, PR mergée, TestFlight en cours. Parité : 67 % | #354 (mergée) |
 
 ---
 
