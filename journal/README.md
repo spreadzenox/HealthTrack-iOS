@@ -263,6 +263,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 13:00 | suivi d'Android v860 et v861 | **l'Accueil continue de changer** : « Vos données du jour » rangées par source (montre, téléphone, ce que vous avez noté) et « Ce qui change aujourd'hui » (jusqu'à trois mesures qui s'écartent de vos 14 derniers jours) ; sur iPhone aussi, ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 14:00 | suivi d'Android v862 et v863 | captures de la v861 regardées (« Ce qui change aujourd'hui », « Vos données du jour » avec « Montre · Apple Watch ») ; v863 : un petit horizon animé dans « Votre journée », immobile si l'iPhone demande de réduire les animations ; ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 15:00 | suivi d'Android v864 | vérifications de la v863 vertes (Accueil en clair et en sombre) ; v864 : sur l'Accueil, la piste qui parle d'une mesure qui change aujourd'hui passe en premier, avec « Aujourd'hui : nuit plus courte » par exemple ; ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
+| 7/11 16:00 | attente du merge | vérifications de la v864 vertes (aucune erreur, aucun texte d'Android) ; rien de neuf chez Android ni à l'examen bêta ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 
 ---
 
