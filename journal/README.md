@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v864 (7/11) | **853 sur TestFlight** (build 853.354 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v865 (7/11) | **853 sur TestFlight** (build 853.354 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -48,6 +48,13 @@
   logicielle).
 - Installez la build la plus récente de TestFlight (852.353 aujourd'hui ; 844.344 est celle de la soumission) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
+
+**Votre décision du 7/11 (reçue à 16:00 par `POUR-IOS.md`, ligne de 15:35)** : « ventre » devient « digestif » dans
+les textes visibles (« Ma digestion », sous-onglet d'Analyses, PDF, fiche ; données et identifiants inchangés) ; nom
+App Store « Halcya — digestion & bien-être » **seulement après votre soumission à Apple**. Android le fait dans le
+code partagé (étape AUJ-7, pas encore livrée) ; je reprends ses mots, le jour même, pour ce qui est propre à l'iPhone :
+la notification du bilan du soir (« Et votre ventre aujourd'hui ? »), les notes de Nouveautés de l'iPhone et la
+fiche App Store (sous-titre, description, texte promotionnel), puis le nom après la soumission.
 
 **Vos réglages du 5/11 (vers 23:00)** : prix et disponibilité (gratuit, 5 pays, sans les futurs ; Mac et Vision Pro
 laissés disponibles), Content Rights (oui), « Santé » ajoutée et publiée dans Confidentialité de l'app (6 types),
@@ -264,6 +271,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 14:00 | suivi d'Android v862 et v863 | captures de la v861 regardées (« Ce qui change aujourd'hui », « Vos données du jour » avec « Montre · Apple Watch ») ; v863 : un petit horizon animé dans « Votre journée », immobile si l'iPhone demande de réduire les animations ; ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 15:00 | suivi d'Android v864 | vérifications de la v863 vertes (Accueil en clair et en sombre) ; v864 : sur l'Accueil, la piste qui parle d'une mesure qui change aujourd'hui passe en premier, avec « Aujourd'hui : nuit plus courte » par exemple ; ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 16:00 | attente du merge | vérifications de la v864 vertes (aucune erreur, aucun texte d'Android) ; rien de neuf chez Android ni à l'examen bêta ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
+| 7/11 17:00 | votre décision « digestif » ; suivi d'Android v865 | **votre décision reçue** (« ventre » devient « digestif », nom App Store après la soumission) : notée, appliquée sur iPhone dès qu'Android livre ses textes ; v865 : en haut de l'Accueil, une rangée de boutons (Repas, Bien-être, Digestion, Autre chose), la section « Noter » disparaît ; ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 
 ---
 

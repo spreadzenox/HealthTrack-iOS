@@ -438,6 +438,13 @@
   d'Android). Rien à faire côté iPhone, qui passe par le même relais.
 - [ ] **Ensuite — suivi continu** : chaque version Android suivie, correctifs refaits, nouveautés vérifiées.
 
+- [ ] **DIGESTIF — « ventre » devient « digestif »** (décision du propriétaire du 07/11, `POUR-IOS.md` 15:35 ; Android
+  AUJ-7) : quand Android livre ses textes, reprendre les mêmes mots dans ce qui est propre à l'iPhone :
+  `ios/App/App/EveningPlugins.swift` (« Et votre ventre aujourd'hui ? »), notes de Nouveautés de l'iPhone (sans
+  réécrire les anciennes ?), `captureMode.js`, fiche App Store `store/app-store/fr-FR/` (`subtitle.txt`,
+  `description.txt`, `promotional-text.txt`) ; données et identifiants inchangés. **Nom App Store** « Halcya —
+  digestion & bien-être » (30 caractères au plus) **seulement après la soumission** du propriétaire.
+
 ## Idées et questions ouvertes
 
 - **Médiateur de la consommation (P26 d'Android), reporté par le propriétaire le 2/11** : à traiter aux 10 premiers
