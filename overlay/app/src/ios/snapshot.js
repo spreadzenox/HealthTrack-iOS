@@ -28,7 +28,13 @@ const LOCATIONS = [
  * jamais un secret ni un état propre au téléphone (`DEVICE_BOUND_KEYS` de `restoreGuard.js`, appairages, jetons,
  * abonnement, consentement à l'IA redemandé sur le nouveau téléphone) ; l'identifiant d'installation non plus.
  */
-export const SNAPSHOT_SETTINGS = ['healthtrack_theme', 'healthtrack_evening_note', 'healthtrack_gut_evening', 'healthtrack_weather']
+export const SNAPSHOT_SETTINGS = [
+  'healthtrack_theme',
+  'healthtrack_evening_note',
+  'healthtrack_evening_note_minute', // heure du rappel du soir choisie (Android v855, `eveningNote.js`)
+  'healthtrack_gut_evening',
+  'healthtrack_weather',
+]
 
 function pickSettings(storage) {
   const settings = {}

@@ -202,6 +202,14 @@ describe('réglages dans la copie de secours (ce que la sauvegarde Android ramè
     expect(SNAPSHOT_SETTINGS).not.toContain('halcya_install_id')
   })
 
+  it('l’heure choisie pour le rappel du soir suit la copie (Android v855)', async () => {
+    const { restoreSnapshotSettings } = await import('./snapshot.js')
+    const storage = memory({})
+    const text = JSON.stringify({ entries: [], iosSettings: { healthtrack_evening_note_minute: '1230' } })
+    expect(restoreSnapshotSettings(text, storage)).toEqual(['healthtrack_evening_note_minute'])
+    expect(storage.data).toEqual({ healthtrack_evening_note_minute: '1230' })
+  })
+
   it('un export ordinaire ou un fichier illisible : rien n’est touché', async () => {
     const { restoreSnapshotSettings } = await import('./snapshot.js')
     const storage = memory({ healthtrack_theme: 'light' })

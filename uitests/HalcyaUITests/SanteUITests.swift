@@ -51,7 +51,7 @@ final class SanteUITests: XCTestCase {
 final class NotificationsUITests: XCTestCase {
     private let halcya = XCUIApplication(bundleIdentifier: "fr.jpesquet.sante")
     private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-    private let titre = "Et votre ventre aujourd’hui ?"
+    private let titre = "Et votre digestion aujourd’hui ?" // Android AUJ-7 : « ventre » devient « digestion »
 
     /// Alerte « “Halcya” souhaite vous envoyer des notifications » : « Autoriser ».
     func testAutoriserLesNotifications() throws {
@@ -91,12 +91,13 @@ final class NotificationsUITests: XCTestCase {
         halcya.activate()
     }
 
-    /// Note du soir : bannière « Votre soirée ? » dépliée ; les notes qu'iOS affiche (6 demandées) sont écrites dans le
-    /// journal du test, puis « 4 » est touché (ou la dernière affichée si iOS en coupe).
+    /// Note du soir : bannière « Votre soirée ? » dépliée ; les notes qu'iOS affiche (5 demandées, de 1 à 5) sont écrites
+    /// dans le journal du test, puis « 4 » est touché (ou la dernière affichée si iOS en coupe).
     func testNoterLaSoireeDepuisLaBanniere() throws {
         guard deplierLaBanniere("Votre soirée ?") else { return }
-        let visibles = (0...5).map(String.init).filter { springboard.buttons[$0].waitForExistence(timeout: $0 == "0" ? 10 : 1) }
-        print("actions visibles : \(visibles.joined(separator: " ")) (\(visibles.count) sur 6)")
+        let visibles = (1...5).map(String.init).filter { springboard.buttons[$0].waitForExistence(timeout: $0 == "1" ? 10 : 1) }
+        print("actions visibles : \(visibles.joined(separator: " ")) (\(visibles.count) sur 5)")
+        XCTAssertFalse(springboard.buttons["0"].exists, "plus de note 0 depuis Android v855")
         guard let choix = visibles.contains("4") ? "4" : visibles.last else {
             XCTFail("aucune note dans la bannière dépliée")
             return

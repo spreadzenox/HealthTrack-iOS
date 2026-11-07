@@ -13,8 +13,9 @@ const iphone = read('public/conditions-iphone.html')
 const text = iphone.replace(/<!--[\s\S]*?-->/g, '').replace(/<style>[\s\S]*?<\/style>/, '').replace(/<[^>]+>/g, ' ')
   .replace(/\s+/g, ' ')
 
-// Empreinte de app/public/conditions.html d'Android lue en dernier (version du 1er novembre 2026, relue sur v671)
-const ANDROID_CONDITIONS_RELUES = '7d52926ca69138f39aa0f8221bb94d958803f3d0e1afd86cc9f58b4afe2f51c9'
+// Empreinte de app/public/conditions.html d'Android lue en dernier (version du 1er novembre 2026, relue sur v671 ;
+// AUJ-7, 07/11 : « ventre » devient « digestion », mêmes remplacements sur la page iPhone)
+const ANDROID_CONDITIONS_RELUES = '43c547736c621a8a21ca2e7b2829a3389eeccf76af5083718086ef9975a80aa9'
 
 describe("conditions d'utilisation sur iPhone", () => {
   it("suivent la dernière version relue de la page d'Android", () => {

@@ -1,0 +1,16 @@
+diff --git a/app/src/config/digestifWording.test.js b/app/src/config/digestifWording.test.js
+index 1876624..a21f91f 100644
+--- a/app/src/config/digestifWording.test.js
++++ b/app/src/config/digestifWording.test.js
+@@ -9,7 +9,10 @@ import { join, relative } from 'node:path'
+  * ventre » reste reconnu) ne sont pas des textes affichés.
+  */
+ const APP = join(import.meta.dirname, '..', '..')
+-const ALLOWED = [/recommendations\/ventre/, /mal au ventre/, /signals:/]
++const ALLOWED = [
++  /recommendations\/ventre/, /mal au ventre/, /signals:/,
++  /'\d{4}-\d{2}-\d{2}-\d{4}-[a-z-]*ventre[a-z-]*'/, // Version iOS (HealthTrack-iOS) : identifiant d'une note de Nouveautés (APPSTORE_HIDDEN), jamais affiché
++]
+ 
+ function files(dir, out = []) {
+   for (const f of readdirSync(dir)) {
