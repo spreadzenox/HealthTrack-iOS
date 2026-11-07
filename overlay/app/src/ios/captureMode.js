@@ -81,12 +81,14 @@ export function pageText(root, allowed = IPHONE_OK) {
 }
 
 // Autres écrans de l'onboarding sur iPhone : objectif, suivi, montre, Santé (toujours sur iPhone, même sans montre :
-// correctif 45, retours du premier testeur du 06/11), visage, geste
+// correctif 45), autorisations (position, appareil photo : correctif 46 ; retours du premier testeur du 06/11), visage,
+// geste
 export const MORE_ONBOARDING = [
   ['suivi', { goal: 'energy', step: 1 }],
   ['sante', { goal: 'energy', step: 3, watch: 'none' }],
-  ['visage', { goal: 'energy', step: 4 }],
-  ['geste', { goal: 'energy', step: 5 }],
+  ['autorisations', { goal: 'energy', step: 4, watch: 'none' }],
+  ['visage', { goal: 'energy', step: 5 }],
+  ['geste', { goal: 'energy', step: 6 }],
 ]
 
 export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS, reveals = REVEALS, moreOnboarding = [],

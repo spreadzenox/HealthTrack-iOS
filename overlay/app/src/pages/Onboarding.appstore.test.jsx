@@ -66,6 +66,20 @@ describe('Onboarding sur iPhone (variante appstore)', () => {
     expect(screen.queryByText(/30 derniers jours/)).not.toBeInTheDocument()
   })
 
+  it('après l’app Santé : l’étape « Ce que Halcya peut utiliser » (position, appareil photo), retours du testeur', async () => {
+    saveOnboarding({ goal: 'energy', watch: 'none', health: 'declined', step: 4 })
+    render(
+      <MemoryRouter initialEntries={['/bienvenue']}>
+        <Routes>
+          <Route path="/bienvenue" element={<Onboarding />} />
+        </Routes>
+      </MemoryRouter>,
+    )
+    expect(screen.getByRole('heading', { name: 'Ce que Halcya peut utiliser' })).toBeInTheDocument()
+    expect(screen.getByText('Position approximative')).toBeInTheDocument()
+    expect(cont()).toBeEnabled()
+  })
+
   it('app Santé disponible : « Autoriser l’app Santé »', async () => {
     hc.availabilityDetails.mockResolvedValue({ available: true, platform: 'ios' })
     saveOnboarding({ goal: 'energy', watch: 'health_connect', step: 3 })
