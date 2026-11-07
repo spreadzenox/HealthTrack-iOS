@@ -44,6 +44,7 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
   // (« recommendations-ventre ») ; une page à deux niveaux donne un nom de fichier sans « / »
   it('plan : le sous-onglet Ventre d’Analyses est capturé, sous un nom de fichier plat', () => {
     expect(ROUTES).toContain('/recommendations/ventre')
+    expect(ROUTES).toContain('/agir') // onglet Agir (Android #803, ORG-1)
     const plan = buildPlan(['/recommendations/ventre'], [], {})
     expect(plan.map((s) => s.name)).toContain('demo-clair-recommendations-ventre')
   })
