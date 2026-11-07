@@ -457,14 +457,17 @@
 - [ ] **Retours du premier testeur iPhone, point (5) (décision du propriétaire du 06/11 au soir, `POUR-IOS.md` de
   22:35)** ; les points (1) à (4) sont traités chez Android, dans le code partagé (BACKLOG d'Android « Retours du
   premier testeur iPhone », `journal/RETOURS-TESTEURS.md`) :
-  - [~] toutes les autorisations pendant l'accueil, avant d'entrer dans l'app : Santé (avec son historique), position
+  - [x] toutes les autorisations pendant l'accueil, avant d'entrer dans l'app : Santé (avec son historique), position
     approximative (météo), caméra. **Santé fait (7/11, correctif 45)** : l'étape est proposée à tous sur iPhone (avec
     ou sans montre : l'iPhone écrit ses pas dans Santé) et le premier import remonte 6 mois (`IOS_FIRST_IMPORT_DAYS`
     = 180, comme Sources) au lieu de 30 jours ; avant, un nouvel utilisateur restait à un mois d'historique (le choix
     de Sources n'apparaît plus après le premier import). Tests dans `Onboarding.appstore.test.jsx` et
-    `firstImport.appstore.test.js`. **Reste : position (météo) et caméra** : une étape « Autorisations » propre à
-    l'iPhone, un bouton « Autoriser » par accès et « Plus tard » (Apple demande que chaque demande ait une raison
-    claire ; la position passe par `navigator.geolocation` dans la WebView, la caméra par `AVCaptureDevice`) ;
+    `firstImport.appstore.test.js`. **Position et caméra faites (7/11, correctif 46)** : étape « Ce que Halcya peut
+    utiliser » propre à l'iPhone, après Santé (`overlay/app/src/ios/PermissionsStep.jsx`) : une ligne par accès avec sa
+    raison et « Autoriser » ; la position suit le chemin de la carte météo (explication `location`, lue une fois, arrondie
+    ≈ 10 km, météo branchée) ; l'appareil photo par `FaceSense.requestCamera` (nouvelle méthode native, n'active pas la
+    lecture du visage) ; « Continuer » toujours possible. Tests (`PermissionsStep.appstore.test.jsx`, accueil, plan des
+    captures : autorisations à l'écran 4, visage 5, geste 6) ;
   - [x] mention propre à Android dans la source Santé (7/11, correctif 43) : la carte App Santé héritait de la fenêtre
     de lecture de Health Connect (`readWindowDays` = 29) : elle affichait « Android laisse lire les 30 jours qui
     précèdent votre première autorisation » **et n'importait qu'un mois d'historique** (`syncSince`, `firstImport`,

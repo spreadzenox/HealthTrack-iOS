@@ -48,15 +48,16 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
     expect(plan.map((s) => s.name)).toContain('demo-clair-recommendations-ventre')
   })
 
-  it('plan : les autres écrans de l’onboarding de l’iPhone, après celui de la montre (suivi, Santé, visage, geste)', () => {
+  it('plan : les autres écrans de l’onboarding de l’iPhone, après celui de la montre (suivi, Santé, autorisations, visage, geste)', () => {
     const plan = buildPlan(['/'], [], {}, {}, MORE_ONBOARDING)
     expect(plan.map((s) => s.name)).toEqual([
       'vierge-onboarding', 'vierge-onboarding-montre', 'vierge-onboarding-suivi', 'vierge-onboarding-sante',
-      'vierge-onboarding-visage', 'vierge-onboarding-geste', 'demo-clair-accueil',
+      'vierge-onboarding-autorisations', 'vierge-onboarding-visage', 'vierge-onboarding-geste', 'demo-clair-accueil',
     ])
-    // Santé proposée même sans montre sur iPhone (correctif 45) : écran 3, puis visage (4) et geste (5)
+    // Santé proposée même sans montre sur iPhone (correctif 45) : écran 3, puis autorisations (4, correctif 46),
+    // visage (5) et geste (6)
     expect(plan[3]).toMatchObject({ route: '/bienvenue', data: null, onboarding: { goal: 'energy', step: 3, watch: 'none' } })
-    expect(plan.slice(4, 6).map((s) => s.onboarding.step)).toEqual([4, 5])
+    expect(plan.slice(4, 7).map((s) => s.onboarding.step)).toEqual([4, 5, 6])
   })
 
   it('plan : états vides (onboarding fini, base vide), après l’onboarding et avant les données de démo', () => {
