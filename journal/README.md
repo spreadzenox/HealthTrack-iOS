@@ -10,15 +10,17 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v871 (7/11) | **853 sur TestFlight** (build 853.354 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v871 (7/11) | **871 sur TestFlight** (build 871.370 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
-- **7/11 18:00 : votre chantier du soir (chaque run sur TestFlight) est bloqué par le même refus.**
-- **Nouveau (7/11 07:00) : le merge de mes PR est refusé par les permissions de la session.** Mergez la PR #356
-  (v854, vérifications vertes) ou autorisez le merge des PR de HealthTrack-iOS dans les réglages de permissions de la
-  session ; sans cela, les versions suivantes d'Android n'arrivent plus sur TestFlight. Votre build 844.344 n'est pas touchée.
+- **Vos autorisations du 7/11 vers 18:30 (votre message dans la session de la routine, inscrites dans sa consigne)** :
+  (1) je merge moi-même mes PR (squash) dès que les garde-fous sont verts, de façon permanente ; (2) chaque nuit,
+  après la dernière version d'Android (Alpha à 23:45), la dernière build TestFlight est ajoutée au groupe externe
+  « Testeurs Halcya » et soumise à l'examen bêta d'Apple par la CI (`store-beta-submit.yml`), jamais la version de
+  l'App Store ; (3) ce soir jusqu'à minuit, chaque run reprend la dernière version d'Android et la merge. Rien ne vous
+  est demandé ; vous avez mergé la #356 à 18:38 : **la 871 est sur TestFlight (871.370)**.
 - **Examen bêta d'Apple (votre décision du 6/11 vers 18:20)** : je relève son état à chaque run, en lecture seule, et je
   vous écris en tête de `POUR-ORCHESTRATEUR.md` dès qu'une build passe en test ou est refusée.
 - **Vos réglages du 5/11 vers 23:00 sont faits** (prix et pays, Content Rights, « Santé », groupes TestFlight, 817.312
@@ -273,7 +275,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 15:00 | suivi d'Android v864 | vérifications de la v863 vertes (Accueil en clair et en sombre) ; v864 : sur l'Accueil, la piste qui parle d'une mesure qui change aujourd'hui passe en premier, avec « Aujourd'hui : nuit plus courte » par exemple ; ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 16:00 | attente du merge | vérifications de la v864 vertes (aucune erreur, aucun texte d'Android) ; rien de neuf chez Android ni à l'examen bêta ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 17:00 | votre décision « digestif » ; suivi d'Android v865 | **votre décision reçue** (« ventre » devient « digestif », nom App Store après la soumission) : notée, appliquée sur iPhone dès qu'Android livre ses textes ; v865 : en haut de l'Accueil, une rangée de boutons (Repas, Bien-être, Digestion, Autre chose), la section « Noter » disparaît ; ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
-| 7/11 18:00 | « digestion » sur l'iPhone ; suivi d'Android v866 à v871 ; votre chantier du soir | **« ventre » devient « digestion » sur l'iPhone aussi** : bilan du soir (« Et votre digestion aujourd'hui ? »), pages de confidentialité et de conditions, fiche App Store (sous-titre « Repas, digestion et sommeil », description) ; le nom attend votre soumission ; Android v866 à v871 : « Bien-être aujourd'hui », une couleur par thème ; **votre décision de 17:15 (chaque run sur TestFlight) est bloquée** : le merge est encore refusé par les permissions de la session ; examen bêta inchangé. Parité : 67 % | #356 (ouverte) |
+| 7/11 18:00 | « digestion » sur l'iPhone ; suivi d'Android v866 à v871 ; votre chantier du soir | **« ventre » devient « digestion » sur l'iPhone aussi** : bilan du soir (« Et votre digestion aujourd'hui ? »), pages de confidentialité et de conditions, fiche App Store (sous-titre « Repas, digestion et sommeil », description) ; le nom attend votre soumission ; Android v866 à v871 : « Bien-être aujourd'hui », une couleur par thème ; votre décision de 17:15 (chaque run sur TestFlight) : vous avez mergé la #356 à 18:38, **la 871 est partie sur TestFlight (871.370)** et la fiche App Store renvoyée (description « digestion », version 844 gardée avec 844.344) ; examen bêta inchangé. Parité : 67 % | #356 (mergée par vous) |
+| 7/11 19:00 | vos autorisations du soir | **votre message reçu** : je merge moi-même mes PR dès que les garde-fous sont verts ; chaque nuit, la dernière build TestFlight part au groupe « Testeurs Halcya » et à l'examen bêta d'Apple (jamais la version de l'App Store) ; les deux sont inscrites dans la consigne de la routine ; nouveau workflow `store-beta-submit.yml`, lancé cette nuit après la dernière version d'Android. Parité : 67 % | PR examen bêta |
 
 ---
 
