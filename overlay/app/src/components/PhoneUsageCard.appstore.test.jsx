@@ -49,6 +49,14 @@ describe('Temps d’écran et sommeil sur iPhone', () => {
     expect(container.textContent).not.toMatch(ANDROID)
   })
 
+  it('avant iOS 26.4, pas encore activée : la carte n’est pas proposée (retours du premier testeur, 06/11)', async () => {
+    const p = props({ checkAccess: vi.fn(async () => ({ granted: false, supported: false })) })
+    const { container } = render(<PhoneUsageCard {...p} />)
+    await waitFor(() => expect(p.checkAccess).toHaveBeenCalled())
+    await waitFor(() => expect(container).toBeEmptyDOMElement())
+    expect(screen.queryByRole('button', { name: 'Activer' })).toBeNull()
+  })
+
   it('avant iOS 26.4 : dit de mettre l’iPhone à jour, sans bouton « Autoriser »', async () => {
     enablePhoneUsage()
     const p = props({ checkAccess: vi.fn(async () => ({ granted: false, supported: false })) })

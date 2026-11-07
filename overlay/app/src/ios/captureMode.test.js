@@ -54,7 +54,9 @@ describe('mode captures iOS : parcours des pages piloté par l’app', () => {
       'vierge-onboarding', 'vierge-onboarding-montre', 'vierge-onboarding-suivi', 'vierge-onboarding-sante',
       'vierge-onboarding-visage', 'vierge-onboarding-geste', 'demo-clair-accueil',
     ])
-    expect(plan[3]).toMatchObject({ route: '/bienvenue', data: null, onboarding: { goal: 'energy', step: 3, watch: 'health_connect' } })
+    // Santé proposée même sans montre sur iPhone (correctif 45) : écran 3, puis visage (4) et geste (5)
+    expect(plan[3]).toMatchObject({ route: '/bienvenue', data: null, onboarding: { goal: 'energy', step: 3, watch: 'none' } })
+    expect(plan.slice(4, 6).map((s) => s.onboarding.step)).toEqual([4, 5])
   })
 
   it('plan : états vides (onboarding fini, base vide), après l’onboarding et avant les données de démo', () => {

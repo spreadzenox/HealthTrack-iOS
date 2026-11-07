@@ -35,6 +35,15 @@ afterEach(() => {
 })
 
 describe('HealthConnectConnector sur iPhone (HealthKit)', () => {
+  it('pas de fenêtre de 30 jours sur iPhone : l’app Santé laisse lire tout l’historique (retours du testeur, 06/11)', () => {
+    // Health Connect ne lit que les 30 jours avant la première autorisation (sans READ_HEALTH_DATA_HISTORY) ; HealthKit
+    // n'a pas cette limite. Avec la fenêtre d'Android, l'iPhone n'importait qu'un mois et Sources affichait
+    // « Android laisse lire les 30 jours… »
+    expect(new HealthConnectConnector().readWindowDays).toBeNull()
+    window.Capacitor = { isNativePlatform: () => true, getPlatform: () => 'android' }
+    expect(new HealthConnectConnector().readWindowDays).toBe(29)
+  })
+
   it('disponible quand HealthKit l’est, indisponible (raison « ios ») sinon', async () => {
     const connector = new HealthConnectConnector()
     expect(await connector.availabilityDetails()).toMatchObject({ available: true, platform: 'ios' })

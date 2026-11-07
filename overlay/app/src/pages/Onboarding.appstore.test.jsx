@@ -49,6 +49,23 @@ describe('Onboarding sur iPhone (variante appstore)', () => {
     expect(cont()).toBeEnabled()
   })
 
+  it('sans montre : l’étape de l’app Santé reste proposée, avec 6 mois d’historique (retours du testeur, 06/11)', async () => {
+    // L'iPhone écrit lui-même ses pas (et son sommeil s'il est programmé) dans l'app Santé : pas besoin de montre
+    hc.availabilityDetails.mockResolvedValue({ available: true, platform: 'ios' })
+    saveOnboarding({ goal: 'energy', watch: 'none', step: 3 })
+    render(
+      <MemoryRouter initialEntries={['/bienvenue']}>
+        <Routes>
+          <Route path="/bienvenue" element={<Onboarding />} />
+        </Routes>
+      </MemoryRouter>,
+    )
+    expect(screen.getByRole('heading', { name: 'Vos données de l’app Santé' })).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: 'Autoriser l’app Santé' })).toBeInTheDocument()
+    expect(screen.getByText(/vos 6 derniers mois/)).toBeInTheDocument()
+    expect(screen.queryByText(/30 derniers jours/)).not.toBeInTheDocument()
+  })
+
   it('app Santé disponible : « Autoriser l’app Santé »', async () => {
     hc.availabilityDetails.mockResolvedValue({ available: true, platform: 'ios' })
     saveOnboarding({ goal: 'energy', watch: 'health_connect', step: 3 })

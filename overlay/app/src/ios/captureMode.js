@@ -80,13 +80,13 @@ export function pageText(root, allowed = IPHONE_OK) {
   return allowed.flatMap((sel) => [...root.querySelectorAll(sel)]).reduce((t, el) => t.replace(text(el), ''), text(root))
 }
 
-// Autres écrans de l'onboarding sur iPhone : objectif, suivi, montre, [Santé si une montre écrit dans Santé], visage,
-// geste (pas d'abonnement tant qu'I6 n'est pas là)
+// Autres écrans de l'onboarding sur iPhone : objectif, suivi, montre, Santé (toujours sur iPhone, même sans montre :
+// correctif 45, retours du premier testeur du 06/11), visage, geste
 export const MORE_ONBOARDING = [
   ['suivi', { goal: 'energy', step: 1 }],
-  ['sante', { goal: 'energy', step: 3, watch: 'health_connect' }],
-  ['visage', { goal: 'energy', step: 3 }],
-  ['geste', { goal: 'energy', step: 4 }],
+  ['sante', { goal: 'energy', step: 3, watch: 'none' }],
+  ['visage', { goal: 'energy', step: 4 }],
+  ['geste', { goal: 'energy', step: 5 }],
 ]
 
 export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS, reveals = REVEALS, moreOnboarding = [],
