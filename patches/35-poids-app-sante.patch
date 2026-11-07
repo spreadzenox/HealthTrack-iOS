@@ -1,5 +1,5 @@
 diff --git a/app/src/components/BodyProfileCard.jsx b/app/src/components/BodyProfileCard.jsx
-index 20126f0..ea17978 100644
+index ed3e466..5918d64 100644
 --- a/app/src/components/BodyProfileCard.jsx
 +++ b/app/src/components/BodyProfileCard.jsx
 @@ -7,6 +7,7 @@ import { computeDailyEnergyKcal, ACTIVITY_LEVELS, activityLevel } from '../servi
@@ -21,16 +21,16 @@ index 20126f0..ea17978 100644
  function compositionParts(payload) {
    if (!payload) return []
    return COMPOSITION_FIELDS
-@@ -204,7 +209,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
+@@ -225,7 +230,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
            Complétez votre profil pour des repères ajustés à vous.
          </p>
          {compositionLine.length > 0 && (
--          <p className="nutrition-profile-line">{compositionLine.join(SEP)}<Hint>(Withings)</Hint></p>
-+          <p className="nutrition-profile-line">{compositionLine.join(SEP)}<Hint>({compositionSource(composition)})</Hint></p>
+-          <p className="nutrition-profile-line"><Sourced value={compositionLine.join(SEP)} hint="(Withings)" /></p>
++          <p className="nutrition-profile-line"><Sourced value={compositionLine.join(SEP)} hint={`(${compositionSource(composition)})`} /></p>
          )}
        </div>
      )
-@@ -212,11 +217,13 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
+@@ -233,11 +238,13 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
  
    const weightHint = () => (origins.weight === 'withings'
      ? `(Withings, ${formatDayMonth(profile.weightAt)})`
@@ -40,18 +40,18 @@ index 20126f0..ea17978 100644
 +      : `(saisi le ${formatDayMonth(profile.weightAt)})`)
    const join = (parts) => parts.filter(Boolean).map((p, i) => <span key={i}>{i > 0 && SEP}{p}</span>)
    const bodyParts = join([
-     known('weight') && <><span>{formatNumber(profile.weightKg)} kg</span><Hint>{weightHint()}</Hint></>,
--    known('height') && <><span>{profile.heightCm} cm</span>{origins.height === 'withings' && <Hint>(Withings)</Hint>}</>,
-+    known('height') && <><span>{profile.heightCm} cm</span>{origins.height === 'withings' && <Hint>(Withings)</Hint>}{origins.height === 'health' && <Hint>({HEALTH_APP})</Hint>}</>,
+     known('weight') && <Sourced value={`${formatNumber(profile.weightKg)} kg`} hint={weightHint()} />,
+-    known('height') && <Sourced value={`${profile.heightCm} cm`} hint={origins.height === 'withings' ? '(Withings)' : null} />,
++    known('height') && <Sourced value={`${profile.heightCm} cm`} hint={origins.height === 'withings' ? '(Withings)' : origins.height === 'health' ? `(${HEALTH_APP})` : null} />,
      details && bmi != null && <span>IMC{'\u00a0'}{formatNumber(bmi)}</span>,
    ])
    const energyParts = join([
-@@ -238,7 +245,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
+@@ -260,7 +267,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
        {head}
        {bodyParts.length > 0 && <p className="nutrition-profile-line">{bodyParts}</p>}
        {compositionLine.length > 0 && (
--        <p className="nutrition-profile-line">{compositionLine.join(SEP)}<Hint>(Withings)</Hint></p>
-+        <p className="nutrition-profile-line">{compositionLine.join(SEP)}<Hint>({compositionSource(composition)})</Hint></p>
+-        <p className="nutrition-profile-line"><Sourced value={compositionLine.join(SEP)} hint="(Withings)" /></p>
++        <p className="nutrition-profile-line"><Sourced value={compositionLine.join(SEP)} hint={`(${compositionSource(composition)})`} /></p>
        )}
        <p className="nutrition-profile-line">{energyParts}</p>
        {missing.length > 0 && (
