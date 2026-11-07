@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v861 (7/11) | **853 sur TestFlight** (build 853.354 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v863 (7/11) | **853 sur TestFlight** (build 853.354 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -261,6 +261,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 11:00 | suivi d'Android v858 et v859 | **l'Accueil change** : en tête, une carte « Votre journée » dit comment se passe la journée (de 1 à 5, d'après votre visage ou votre note) ; une section « Noter » réunit la photo du repas et le bien-être ; sur iPhone aussi, ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 12:00 | attente du merge | vérifications de la #356 vertes avec la v859 ; captures de l'Accueil regardées (carte « Votre journée », section « Noter » avec la photo du repas et « Mon bien-être, 1 à 5 ») ; rien de neuf chez Android ni à l'examen bêta ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 13:00 | suivi d'Android v860 et v861 | **l'Accueil continue de changer** : « Vos données du jour » rangées par source (montre, téléphone, ce que vous avez noté) et « Ce qui change aujourd'hui » (jusqu'à trois mesures qui s'écartent de vos 14 derniers jours) ; sur iPhone aussi, ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
+| 7/11 14:00 | suivi d'Android v862 et v863 | captures de la v861 regardées (« Ce qui change aujourd'hui », « Vos données du jour » avec « Montre · Apple Watch ») ; v863 : un petit horizon animé dans « Votre journée », immobile si l'iPhone demande de réduire les animations ; ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 
 ---
 
