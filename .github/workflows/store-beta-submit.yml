@@ -1,0 +1,45 @@
+# Examen bêta d'Apple chaque nuit (message du propriétaire du 07/11 vers 18:30, inscrit dans la consigne de la routine) :
+# la dernière build TestFlight traitée par Apple (ou celle demandée) est ajoutée au groupe externe « Testeurs Halcya »
+# et soumise à l'examen bêta (scripts/store-beta-submit.mjs). Jamais la version de l'App Store : sa soumission et sa
+# mise en production restent au propriétaire (le script refuse tout chemin qui la touche). Le lien public du groupe
+# n'est jamais lu. Lancement manuel par la routine, sur main seulement (environnement `appstore` : ASC_KEY_ID,
+# ASC_ISSUER_ID, ASC_KEY_P8, jamais affichés).
+name: TestFlight — examen bêta (soumission)
+
+on:
+  workflow_dispatch:
+    inputs:
+      build:
+        description: "Build à soumettre (ex. 871.370) ; vide : la plus récente traitée par Apple"
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: store-beta
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    name: Groupe externe et examen bêta
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: appstore
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Tests du script
+        run: node --test scripts/store-beta-submit.test.mjs
+      - name: Soumission (API App Store Connect)
+        env:
+          ASC_KEY_ID: ${{ secrets.ASC_KEY_ID }}
+          ASC_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
+          ASC_KEY_P8: ${{ secrets.ASC_KEY_P8 }}
+          BUILD: ${{ inputs.build }}
+        run: |
+          if [ -n "$BUILD" ]; then node scripts/store-beta-submit.mjs --build "$BUILD"; else node scripts/store-beta-submit.mjs; fi
