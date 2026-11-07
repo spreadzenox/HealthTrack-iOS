@@ -110,7 +110,7 @@ public class GutEveningPlugin: EveningPlugin, CAPBridgedPlugin {
     override var evening: EveningNotifications { .gut }
 }
 
-/// Note du soir d'un geste : « Votre soirée ? », les 6 notes de bien-être.
+/// Note du soir d'un geste : « Votre soirée ? », les 5 notes de bien-être (1 à 5).
 @objc(EveningNotePlugin)
 public class EveningNotePlugin: EveningPlugin, CAPBridgedPlugin {
     public let identifier = "EveningNotePlugin"
@@ -125,9 +125,9 @@ final class EveningNotifications {
     static let gut = EveningNotifications(
         kind: .gut, category: "gut-evening", title: "Et votre ventre aujourd’hui ?", body: "Dans l’ensemble, d’un geste.",
         actions: Array(zip(GutEveningRule.levels, GutEveningRule.labels)))
-    /// Note du soir : les 6 notes, comme les boutons d'Android (`notification_evening_note.xml`).
+    /// Note du soir : les 5 notes (1 à 5), comme les boutons d'Android (`notification_evening_note.xml`, v855).
     static let note = EveningNotifications(
-        kind: .note, category: "evening-note", title: "Votre soirée ?", body: "0 = très bas, 5 = très bien",
+        kind: .note, category: "evening-note", title: "Votre soirée ?", body: "1 = très bas, 5 = très bien",
         actions: EveningNoteRule.scores.map { ("\($0)", "\($0)") })
     static let all = [gut, note]
 
