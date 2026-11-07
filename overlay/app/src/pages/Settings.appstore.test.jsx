@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 
@@ -21,6 +21,7 @@ const relayAnswer = (ent) => vi.fn((url) => Promise.resolve({
 
 describe('Paramètres sur iPhone : abonnement de l’App Store', () => {
   beforeEach(() => localStorage.clear())
+  afterEach(() => vi.useRealTimers())
 
   it('abonné : « Gérer mon abonnement dans l’App Store » mène aux abonnements du compte Apple', async () => {
     localStorage.setItem('halcya_entitlement', JSON.stringify(subscribed))
@@ -77,6 +78,9 @@ describe('Paramètres sur iPhone : abonnement de l’App Store', () => {
   })
 
   it('pendant la période : pas encore de « Découvrir le premium » (Gold déjà offert)', async () => {
+    // Horloge figée la veille de la fin (6/11 23:00 UTC) : après cette heure, la période se lit comme terminée
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(Date.parse('2026-11-05T12:00:00Z'))
     globalThis.fetch = relayAnswer({ premium: true, source: 'launch', tier: 'gold', launchUntil: '2026-11-06T23:00:00Z' })
     renderSettings()
     expect(await screen.findByText('Pendant le test : jusqu’à 20 analyses par jour, sans rien payer.')).toBeInTheDocument()

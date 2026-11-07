@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v846 (6/11) | **846 sur TestFlight** (build 846.346 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v848 (6/11) | **846 sur TestFlight** (build 846.346 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -243,7 +243,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 6/11 20:00 | examen bêta ; suivi d'Android v844 | **la 817.312 est acceptée à l'examen bêta d'Apple** (relevé de 20:01 ; la 839.337 attend encore) : message pour vous en tête de `POUR-ORCHESTRATEUR.md` ; Android : carte « Votre ventre » en très grande police (un choix par ligne), sans effet sur iPhone, dont la note reste cachée ; un correctif iPhone refait ; vérifications passées, **la 844 est partie seule sur TestFlight (844.344)**. Parité : 67 % | #343, #344 (mergées) |
 | 6/11 21:00 | build finale | rien de neuf chez Android (idées seulement) ; examen bêta inchangé (817.312 acceptée, 839.337 en attente) ; **version d'App Store Connect renommée 844 et build 844.344 attachée** : prête pour votre soumission, rien de soumis. Parité : 67 % | #345 (mergée) |
 | 6/11 22:00 | suivi d'Android v846 | examen bêta : la 817.312 est maintenant distribuée aux testeurs (« IN_BETA_TESTING »), la 839.337 attend ; Android : premier écran en très grande police, sans effet sur iPhone (note cachée) ; la page de votre version garde 844.344 ; vérifications passées, **la 846 est partie seule sur TestFlight (846.346)**. Parité : 67 % | #346 (mergée) |
-| 6/11 23:00 | veille de la soumission | rien de neuf chez Android ni à l'examen bêta (817.312 distribuée, 839.337 en attente) ; la fiche renvoyée garde la version 844 avec 844.344 ; la période « Gold offert » de l'iPhone se termine à minuit : demain matin, l'écran d'achat doit montrer Silver et Gold. Parité : 67 % | — |
+| 6/11 23:00 | veille de la soumission | rien de neuf chez Android ni à l'examen bêta (817.312 distribuée, 839.337 en attente) ; la fiche renvoyée garde la version 844 avec 844.344 ; la période « Gold offert » de l'iPhone se termine à minuit : demain matin, l'écran d'achat doit montrer Silver et Gold. Parité : 67 % | #347 (mergée) |
+| 7/11 00:00 | examen bêta ; retours du testeur ; suivi d'Android v848 | **la 839.337 est acceptée à l'examen bêta** (les testeurs du lien public la reçoivent) ; **vos décisions sur les retours du premier testeur iPhone reçues** (point 5 : autorisations pendant l'accueil, mention d'Android dans la source Santé, temps d'écran qui exige iOS 26.4), traitées à partir de maintenant, sur TestFlight ; Android : premier repas en un bouton, Accueil simplifié, sur iPhone aussi ; deux tests de l'iPhone liés à l'heure de fin de la période corrigés ; vérifications en cours. Parité : 67 % | #348 (mergée) |
 
 ---
 

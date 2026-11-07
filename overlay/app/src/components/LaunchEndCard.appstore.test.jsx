@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 
@@ -19,8 +19,14 @@ const DAY = 86_400_000
 const storeEnt = (ent) => localStorage.setItem('halcya_entitlement', JSON.stringify({ checkedAt: new Date().toISOString(), ...ent }))
 const renderCard = (now) => render(<MemoryRouter><LaunchEndCard now={now} /></MemoryRouter>)
 
+// Horloge figée dans chaque scénario (avant, puis après la fin de la période) : depuis le 6/11 23:00 UTC, l'heure réelle
+// est passée et le droit enregistré se lisait comme expiré (les témoins échouaient sans que l'app ait changé)
+afterEach(() => vi.useRealTimers())
+
 describe('Fin de Gold offert sur iPhone (variante appstore)', () => {
   beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(Date.parse(IOS_UNTIL) - DAY)
     localStorage.clear()
     store.id = 'appstore'
     storeEnt({ premium: true, source: 'launch', state: 'active', tier: 'gold', launchUntil: IOS_UNTIL })
@@ -44,6 +50,8 @@ describe('Fin de Gold offert sur iPhone (variante appstore)', () => {
 
 describe('Fin du test sur iPhone (variante appstore)', () => {
   beforeEach(() => {
+    vi.useFakeTimers({ toFake: ['Date'] })
+    vi.setSystemTime(Date.parse(IOS_UNTIL) + DAY)
     localStorage.clear()
     store.id = 'appstore'
     // Après le 6/11 : le relais ne sert plus la période ; l'app a retenu sa dernière fin
