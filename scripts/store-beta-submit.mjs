@@ -114,8 +114,9 @@ export async function submitForBetaReview({ token, fetchImpl = fetch, whatsNew, 
     log('« À tester » (fr-FR) déjà là, gardé.')
   }
 
-  const inGroups = await all(`/v1/builds/${build.id}/betaGroups?fields[betaGroups]=name&limit=50`)
-  if (!inGroups.some((g) => g.id === group.id)) {
+  // Apple refuse la lecture de /v1/builds/{id}/betaGroups (403, 07/11) : on lit les builds du groupe, comme le relevé
+  const groupBuilds = await all(`/v1/betaGroups/${group.id}/builds?fields[builds]=version&limit=200`)
+  if (!groupBuilds.some((b) => b.id === build.id)) {
     await api('POST', `/v1/betaGroups/${group.id}/relationships/builds`, { data: [{ type: 'builds', id: build.id }] })
     done.push('groupe')
     log(`Ajoutée au groupe externe « ${GROUP_NAME} ».`)

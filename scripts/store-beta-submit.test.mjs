@@ -46,7 +46,7 @@ function fakeApple({ processing = 'VALID', inGroup = false, submitted = null, lo
     },
     'GET /v1/builds': { data: [build('b-old', '853.354'), build('b-new', '871.370', processing)] },
     'GET /v1/builds/b-new/betaBuildLocalizations': { data: localized ? [{ id: 'l1', attributes: { locale: 'fr-FR', whatsNew: 'déjà' } }] : [] },
-    'GET /v1/builds/b-new/betaGroups': { data: inGroup ? [{ id: 'g-ext' }] : [{ id: 'g-int' }] },
+    'GET /v1/betaGroups/g-ext/builds': { data: inGroup ? [{ id: 'b-old' }, { id: 'b-new' }] : [{ id: 'b-old' }] },
     'GET /v1/builds/b-new/betaAppReviewSubmission': submitted ? { data: { attributes: { betaReviewState: submitted } } } : null,
     'POST /v1/betaBuildLocalizations': { data: { id: 'l2' } },
     'POST /v1/betaGroups/g-ext/relationships/builds': {},
@@ -77,6 +77,8 @@ test('build neuve : « À tester », groupe externe, puis examen bêta, et rien 
   assert.deepEqual(writes[1].body.data, [{ type: 'builds', id: 'b-new' }])
   assert.equal(writes[2].body.data.relationships.build.data.id, 'b-new')
   assert.ok(calls.every((c) => !isForbidden(c.path)))
+  // Apple refuse GET /v1/builds/{id}/betaGroups (403 du 07/11) : jamais appelé
+  assert.ok(calls.every((c) => !/\/v1\/builds\/[^/]+\/betaGroups/.test(c.path)))
   assert.ok(calls.every((c) => !/[=,]publicLink(,|&|$)/.test(decodeURIComponent(c.url)))) // l'adresse du lien public n'est jamais demandée
 })
 
