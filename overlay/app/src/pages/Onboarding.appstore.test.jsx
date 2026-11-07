@@ -80,6 +80,21 @@ describe('Onboarding sur iPhone (variante appstore)', () => {
     expect(cont()).toBeEnabled()
   })
 
+  it('l’écran météo d’Android (v856) n’existe pas sur iPhone : la position est demandée une seule fois, ici', async () => {
+    saveOnboarding({ goal: 'energy', watch: 'none', health: 'declined', step: 4 })
+    render(
+      <MemoryRouter initialEntries={['/bienvenue']}>
+        <Routes>
+          <Route path="/bienvenue" element={<Onboarding />} />
+        </Routes>
+      </MemoryRouter>,
+    )
+    expect(screen.getByRole('heading', { name: 'Ce que Halcya peut utiliser' })).toBeInTheDocument()
+    fireEvent.click(cont())
+    expect(await screen.findByRole('heading', { level: 1 })).not.toHaveTextContent('La météo de votre ville')
+    expect(screen.queryByText('Utiliser ma position approximative')).not.toBeInTheDocument()
+  })
+
   it('app Santé disponible : « Autoriser l’app Santé »', async () => {
     hc.availabilityDetails.mockResolvedValue({ available: true, platform: 'ios' })
     saveOnboarding({ goal: 'energy', watch: 'health_connect', step: 3 })

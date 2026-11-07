@@ -1,29 +1,31 @@
 diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
-index a13e21c..fe77274 100644
+index 37146a3..7a14a98 100644
 --- a/app/src/pages/Onboarding.jsx
 +++ b/app/src/pages/Onboarding.jsx
-@@ -19,6 +19,7 @@ import './Onboarding.css'
- import { appLocale } from '../i18n/locale.js'
+@@ -22,6 +22,7 @@ import { enableWeather, getWeatherSettings, syncWeather } from '../services/weat
+ import { NOTE_CHOICES, choiceToScore, toDisplay } from '../services/mood/wellbeingScale'
  import Ordinal from '../components/Ordinal'
  import SnapshotWelcome from '../ios/SnapshotWelcome' // Version iOS (HealthTrack-iOS)
 +import PermissionsStep from '../ios/PermissionsStep' // Version iOS (HealthTrack-iOS)
  
  const WATCHES = [
    {
-@@ -48,6 +49,8 @@ function stepsFor(state) {
+@@ -52,7 +53,9 @@ function stepsFor(state) {
      steps.push('health')
      if (state.health === 'granted') steps.push('aha')
    }
-+  // Version iOS (HealthTrack-iOS) : position (météo) et appareil photo demandés à l'accueil (retours du testeur, 06/11)
-+  if (FEATURES.iosStore) steps.push('permissions')
+-  steps.push('weather')
++  // Version iOS (HealthTrack-iOS) : à la place de l'écran météo, la position (météo) et l'appareil photo sur un même
++  // écran (retours du testeur, 06/11), avec la même divulgation et la même mise en route de la météo
++  steps.push(FEATURES.iosStore ? 'permissions' : 'weather')
    if (isFaceSenseAvailable()) steps.push('face')
    steps.push('gesture')
    if (FEATURES.billing) steps.push('premium')
-@@ -719,6 +722,7 @@ export default function Onboarding() {
+@@ -779,6 +782,7 @@ export default function Onboarding() {
          {step === 'aha' && (
            <AhaStep imported={!!state.imported} onImported={() => update({ imported: true })} onReady={() => setAhaReady(true)} />
          )}
 +        {step === 'permissions' && <PermissionsStep />}
+         {step === 'weather' && <WeatherStep weather={state.weather} onWeather={(weather) => update({ weather })} />}
          {step === 'face' && (
            <FaceStep
-             face={state.face}
