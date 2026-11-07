@@ -10,7 +10,7 @@
 // Le numéro de cette version prend celui des builds (versionCode d'Android suivi, `upstream.json`), sauf quand une
 // build y est attachée : c'est alors le choix du propriétaire, la version garde son numéro (2/11).
 // Catégorie et classification par âge : store/app-store/classification.json.
-import { readFileSync, readdirSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { createHash, sign } from 'node:crypto'
 import { pathToFileURL } from 'node:url'
@@ -18,6 +18,7 @@ import { pathToFileURL } from 'node:url'
 const DIR = join(import.meta.dirname, '..', 'store', 'app-store', 'fr-FR')
 const CAPTURES_MD = join(import.meta.dirname, '..', 'store', 'app-store', 'captures.md')
 const UPSTREAM_JSON = join(import.meta.dirname, '..', 'upstream.json')
+const TESTFLIGHT_VERSION_JSON = join(import.meta.dirname, '..', 'testflight-version.json')
 const CLASSIFICATION_JSON = join(import.meta.dirname, '..', 'store', 'app-store', 'classification.json')
 /** Captures 6,9" (1320 × 2868) : App Store Connect les reprend pour les iPhone plus petits. */
 const DISPLAY_TYPE = 'APP_IPHONE_67'
@@ -47,15 +48,24 @@ export function fiche(dir = DIR) {
   }
 }
 
+/** Numéro de version fixe des builds de test pendant un cycle (testflight-version.json), ou null sans ce fichier. */
+export function testflightVersion(path = TESTFLIGHT_VERSION_JSON) {
+  if (!existsSync(path)) return null
+  const n = JSON.parse(readFileSync(path, 'utf8'))?.version
+  if (!Number.isInteger(n) || n <= 0) throw new Error('testflight-version.json : version absente ou invalide')
+  return n
+}
+
 /**
- * Numéro de la version iOS : le versionCode d'Android suivi (upstream.json), celui des builds envoyées sur TestFlight
- * (CFBundleShortVersionString, testflight.yml). App Store Connect ne laisse choisir pour une version que des builds de
- * même numéro : la version « Prête à soumettre » le reprend.
+ * Numéro de la version iOS, celui des builds envoyées sur TestFlight (CFBundleShortVersionString, testflight.yml) :
+ * le numéro fixe du cycle (testflight-version.json, décision du propriétaire du 07/11 vers 19:35), sinon le versionCode
+ * d'Android suivi (upstream.json). App Store Connect ne laisse choisir pour une version que des builds de même numéro :
+ * la version « Prête à soumettre » le reprend.
  */
-export function versionString(json = JSON.parse(readFileSync(UPSTREAM_JSON, 'utf8'))) {
+export function versionString(json = JSON.parse(readFileSync(UPSTREAM_JSON, 'utf8')), fixed = testflightVersion()) {
   const n = json?.versionCode
   if (!Number.isInteger(n) || n <= 0) throw new Error('upstream.json : versionCode absent ou invalide')
-  return String(n)
+  return String(fixed ?? n)
 }
 
 /**
@@ -250,7 +260,7 @@ async function main() {
   const c = classification()
   console.log(`Catégorie : ${c.primaryCategory} ; âge : ${c.ageRating.ageRatingOverrideV2}`)
   const wanted = versionString()
-  console.log(`Numéro de la version : ${wanted} (versionCode d'Android suivi, comme les builds de TestFlight)`)
+  console.log(`Numéro de la version : ${wanted} (${testflightVersion() ? 'numéro fixe du cycle, testflight-version.json' : "versionCode d'Android suivi"}, comme les builds de TestFlight)`)
   if (process.argv.includes('--dry-run')) return
 
   for (const name of ['ASC_KEY_ID', 'ASC_ISSUER_ID', 'ASC_KEY_P8']) {

@@ -12,28 +12,33 @@ index 8668336..171949e 100644
      ],
      accept: 'J’accepte, ouvrir l’app Santé',
 diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
-index 3881096..a13e21c 100644
+index 3c34c1c..87f31d6 100644
 --- a/app/src/pages/Onboarding.jsx
 +++ b/app/src/pages/Onboarding.jsx
-@@ -42,7 +42,9 @@ const WATCHES_IOS = [
-  */
+@@ -47,7 +47,8 @@ const WATCHES_IOS = [
  function stepsFor(state) {
    const steps = ['goal', 'tracks', 'watch']
--  if (state.watch === 'health_connect') {
-+  // Version iOS (HealthTrack-iOS) : l'iPhone écrit lui-même ses pas (et son sommeil) dans l'app Santé : l'étape est
-+  // proposée à tous, avec ou sans montre (retours du premier testeur, 06/11)
-+  if (state.watch === 'health_connect' || FEATURES.iosStore) {
+   // TESTEUR-5a-2 : Health Connect aussi sans montre (le téléphone y écrit les pas, parfois le sommeil)
+-  if (state.watch === 'health_connect' || state.watch === 'none') {
++  // Version iOS (HealthTrack-iOS) : l'étape de l'app Santé est proposée à tous, même sans choix de montre
++  if (state.watch === 'health_connect' || state.watch === 'none' || FEATURES.iosStore) {
      steps.push('health')
      if (state.health === 'granted') steps.push('aha')
    }
-@@ -234,11 +236,15 @@ function HealthStep({ health, onHealth }) {
+@@ -245,13 +246,19 @@ function HealthStep({ health, onHealth, noWatch = false }) {
        {disclosure}
        <h1 className="onb-title">{FEATURES.iosStore ? 'Vos données de l’app Santé' : 'Vos données Health Connect'}</h1>
        <p className="onb-lead">
--        L’app lit sur le téléphone vos 30 derniers jours de sommeil, de pas et de cœur. Rien n’est envoyé.
-+        {FEATURES.iosStore
-+          ? 'L’app lit sur l’iPhone vos 6 derniers mois de sommeil, de pas et de cœur. Rien n’est envoyé.'
-+          : 'L’app lit sur le téléphone vos 30 derniers jours de sommeil, de pas et de cœur. Rien n’est envoyé.'}
+-        {noWatch
+-          ? 'Votre téléphone compte vos pas, parfois votre sommeil, dans Health Connect. L’app lit vos 30 derniers jours sur le téléphone. Rien n’est envoyé.'
+-          : 'L’app lit sur le téléphone vos 30 derniers jours de sommeil, de pas et de cœur. Rien n’est envoyé.'}
++        {FEATURES.iosStore // Version iOS (HealthTrack-iOS) : l'app Santé, 6 mois importés
++          ? noWatch
++            ? 'Votre iPhone compte vos pas, parfois votre sommeil, dans l’app Santé. L’app lit vos 6 derniers mois sur l’iPhone. Rien n’est envoyé.'
++            : 'L’app lit sur l’iPhone vos 6 derniers mois de sommeil, de pas et de cœur. Rien n’est envoyé.'
++          : noWatch
++            ? 'Votre téléphone compte vos pas, parfois votre sommeil, dans Health Connect. L’app lit vos 30 derniers jours sur le téléphone. Rien n’est envoyé.'
++            : 'L’app lit sur le téléphone vos 30 derniers jours de sommeil, de pas et de cœur. Rien n’est envoyé.'}
        </p>
        {health === 'granted' && (
          <p className="onb-note onb-note-ok" role="status">
