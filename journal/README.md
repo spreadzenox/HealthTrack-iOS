@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v853 (7/11) | **852 sur TestFlight** (build 852.353 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v854 (7/11) | **853 sur TestFlight** (build 853.354 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -249,7 +249,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 02:00 | suivi d'Android v850 | « Photo du repas » ouvre directement l'appareil photo (Accueil, Nutrition, Journal vide) ; Analyses dit seulement ce qui manque ; sur iPhone aussi ; vérifications passées (63 min, runners lents), PR mergée, TestFlight en cours. Parité : 67 % | #351 (mergée) |
 | 7/11 03:00 | retours du testeur (point 5), fin | **à l'accueil, après l'app Santé : « Ce que Halcya peut utiliser »** (position approximative pour la météo, appareil photo pour vos repas), chacun avec sa raison et « Autoriser », rien d'obligatoire ; vérifications passées, **sur TestFlight dans la 850.352** (pas dans 844.344). Parité : 67 % | #352 (mergée) |
 | 7/11 04:00 | suivi d'Android v852 | Nutrition : la provenance d'une valeur du profil s'affiche au toucher ; Analyses : « Le modèle qui prédit votre bien-être » à part ; sur iPhone aussi (un correctif refait pour le poids de l'app Santé) ; **la 852 est partie seule sur TestFlight (852.353)**. Parité : 67 % | #353 (mergée) |
-| 7/11 05:00 | suivi d'Android v853 | **la note de bien-être va de 1 à 5, avec 3 au milieu** ; vos anciennes notes ne sont pas modifiées, elles s'affichent simplement sur la nouvelle échelle ; sur iPhone aussi (l'étape du geste de l'accueil dit encore « de 0 à 5 », chez Android aussi : signalé) ; vérifications passées, PR mergée, TestFlight en cours. Parité : 67 % | #354 (mergée) |
+| 7/11 05:00 | suivi d'Android v853 | **la note de bien-être va de 1 à 5, avec 3 au milieu** ; vos anciennes notes ne sont pas modifiées, elles s'affichent simplement sur la nouvelle échelle ; sur iPhone aussi (l'étape du geste de l'accueil dit encore « de 0 à 5 », chez Android aussi : signalé) ; vérifications passées, **la 853 est partie seule sur TestFlight (853.354)**. Parité : 67 % | #354, #355 (mergées) |
+| 7/11 06:00 | suivi d'Android v854 | en notant votre bien-être, **vous choisissez d'abord la note** ; les précisions (stress, alcool, café…) et la phrase libre apparaissent ensuite, facultatives ; sur iPhone aussi ; examen bêta inchangé (839.337 et 817.312 en test) ; vérifications en cours. Parité : 67 % | PR v854 |
 
 ---
 
