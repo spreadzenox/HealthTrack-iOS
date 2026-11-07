@@ -65,8 +65,12 @@ jobs:
         run: |
           ANDROID="$(node -p "require('./upstream.json').versionCode")"
           echo "ANDROID_VERSION=$ANDROID" >> "$GITHUB_ENV"
+          # Numéro de version fixe des builds de test pendant un cycle (testflight-version.json, décision du propriétaire
+          # du 07/11 vers 19:35) ; à défaut, celui d'Android. Le numéro de build et la version affichée suivent Android.
+          MARKETING="$(node -p "require('fs').existsSync('testflight-version.json') ? require('./testflight-version.json').version : require('./upstream.json').versionCode")"
+          echo "MARKETING_VERSION_IOS=$MARKETING" >> "$GITHUB_ENV"
           echo "IOS_BUILD=$ANDROID.$(git rev-list --count HEAD)" >> "$GITHUB_ENV"
-          echo "Version $ANDROID, build $ANDROID.$(git rev-list --count HEAD)"
+          echo "Version $MARKETING, build $ANDROID.$(git rev-list --count HEAD) (app : version $ANDROID d'Android)"
           xcodebuild -version
       - name: Build web (variante appstore, sans mode captures) et synchronisation Capacitor
         working-directory: upstream/app
@@ -105,7 +109,7 @@ jobs:
           xcodebuild -project App.xcodeproj -scheme App -configuration Release \
             -sdk iphoneos -destination 'generic/platform=iOS' \
             -archivePath "$RUNNER_TEMP/Halcya.xcarchive" -derivedDataPath "$RUNNER_TEMP/dd" \
-            MARKETING_VERSION="$ANDROID_VERSION" CURRENT_PROJECT_VERSION="$IOS_BUILD" \
+            MARKETING_VERSION="$MARKETING_VERSION_IOS" CURRENT_PROJECT_VERSION="$IOS_BUILD" \
             CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY=- AD_HOC_CODE_SIGNING_ALLOWED=YES \
             DEVELOPMENT_TEAM="$TEAM_ID" PROVISIONING_PROFILE_SPECIFIER= \
             archive 2>&1 | tee "$RUNNER_TEMP/archive.log" | grep -E "error:|ARCHIVE (SUCCEEDED|FAILED)" || true
@@ -163,7 +167,7 @@ jobs:
             echo "::error::app signée en développement (get-task-allow)"; exit 1
           fi
           codesign -dv "$APP" 2>&1 | grep -E "^(Authority|TeamIdentifier)=" | head -3
-          [ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Info.plist")" = "$ANDROID_VERSION" ]
+          [ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$APP/Info.plist")" = "$MARKETING_VERSION_IOS" ]
           [ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$APP/Info.plist")" = "$IOS_BUILD" ]
           [ "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$APP/Info.plist")" = "fr.jpesquet.sante" ]
           # Phrase d'écriture exigée par Apple (le plugin Santé contient l'écriture) : celle de l'app livrée, qui dit que
@@ -186,7 +190,7 @@ jobs:
             -authenticationKeyID "$ASC_KEY_ID" -authenticationKeyIssuerID "$ASC_ISSUER_ID" \
             2>&1 | tee "$RUNNER_TEMP/upload.log" | grep -E "error:|Upload|EXPORT (SUCCEEDED|FAILED)" || true
           grep -q "EXPORT SUCCEEDED" "$RUNNER_TEMP/upload.log"
-          echo "### Envoyé sur TestFlight : version $ANDROID_VERSION, build $IOS_BUILD" >> "$GITHUB_STEP_SUMMARY"
+          echo "### Envoyé sur TestFlight : version $MARKETING_VERSION_IOS, build $IOS_BUILD (app : version $ANDROID_VERSION d'Android)" >> "$GITHUB_STEP_SUMMARY"
           echo "Traitement par Apple : 10 à 30 min, puis la build apparaît dans App Store Connect › TestFlight." >> "$GITHUB_STEP_SUMMARY"
       - name: Journaux (sans secret)
         if: always()

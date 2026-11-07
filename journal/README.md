@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v887 (7/11) | **881 sur TestFlight** (build 881.372 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v893 (7/11) | **887 sur TestFlight** (build 887.373 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -19,7 +19,9 @@
   (1) je merge moi-même mes PR (squash) dès que les garde-fous sont verts, de façon permanente ; (2) chaque nuit,
   après la dernière version d'Android (Alpha à 23:45), la dernière build TestFlight est ajoutée au groupe externe
   « Testeurs Halcya » et soumise à l'examen bêta d'Apple par la CI (`store-beta-submit.yml`), jamais la version de
-  l'App Store ; (3) ce soir jusqu'à minuit, chaque run reprend la dernière version d'Android et la merge. Rien ne vous
+  l'App Store ; (3) ce soir jusqu'à minuit, chaque run reprend la dernière version d'Android et la merge.
+  **Votre réponse du 7/11 vers 19:35 : « ok même numéro de version »** : les builds de test portent le numéro fixe du
+  cycle (893, `testflight-version.json`), dès la build de cette nuit. Rien ne vous
   est demandé ; vous avez mergé la #356 à 18:38 : **la 871 est sur TestFlight (871.370)**.
 - **Examen bêta d'Apple (votre décision du 6/11 vers 18:20)** : je relève son état à chaque run, en lecture seule, et je
   vous écris en tête de `POUR-ORCHESTRATEUR.md` dès qu'une build passe en test ou est refusée.
@@ -278,7 +280,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 18:00 | « digestion » sur l'iPhone ; suivi d'Android v866 à v871 ; votre chantier du soir | **« ventre » devient « digestion » sur l'iPhone aussi** : bilan du soir (« Et votre digestion aujourd'hui ? »), pages de confidentialité et de conditions, fiche App Store (sous-titre « Repas, digestion et sommeil », description) ; le nom attend votre soumission ; Android v866 à v871 : « Bien-être aujourd'hui », une couleur par thème ; votre décision de 17:15 (chaque run sur TestFlight) : vous avez mergé la #356 à 18:38, **la 871 est partie sur TestFlight (871.370)** et la fiche App Store renvoyée (description « digestion », version 844 gardée avec 844.344) ; examen bêta inchangé. Parité : 67 % | #356 (mergée par vous) |
 | 7/11 19:00 | vos autorisations du soir | **votre message reçu** : je merge moi-même mes PR dès que les garde-fous sont verts ; chaque nuit, la dernière build TestFlight part au groupe « Testeurs Halcya » et à l'examen bêta d'Apple (jamais la version de l'App Store) ; les deux sont inscrites dans la consigne de la routine ; nouveau workflow `store-beta-submit.yml`, lancé cette nuit après la dernière version d'Android. Parité : 67 % | #357 (mergée) |
 | 7/11 20:00 | chantier du soir : Android v872 à v881 ; votre décision de 17:30 | votre décision de 17:30 (soumission quotidienne aux testeurs externes) reçue aussi par Android : déjà en place (#357) ; **question pour vous** : garder un même numéro de version pour les builds de test éviterait sans doute un examen complet chaque nuit (voir `POUR-ORCHESTRATEUR.md`) ; v872 à v881 : calibration du bien-être, vos données du jour en un bloc avec votre habitude, bloc digestif sur l'Accueil ; vérifications passées, PR mergée, **la 881 est sur TestFlight (881.372)**. Parité : 67 % | #358 (mergée) |
-| 7/11 21:00 | chantier du soir : Android v882 à v887 | **nouvel onglet Agir** (test en cours, pistes à vérifier, réintroduction FODMAP) ; Accueil : repas du jour, « + » sous chaque bloc, bouton « Selles » (la photo des selles quitte le Journal), apports du jour ; Journal › Tendances (courbes, détail d'un jour) et Jours (une icône par mesure) ; Analyses plus claires ; sur iPhone aussi ; vérifications en cours ; examen bêta inchangé. Parité : 67 % | PR v887 |
+| 7/11 21:00 | chantier du soir : Android v882 à v887 | **nouvel onglet Agir** (test en cours, pistes à vérifier, réintroduction FODMAP) ; Accueil : repas du jour, « + » sous chaque bloc, bouton « Selles » (la photo des selles quitte le Journal), apports du jour ; Journal › Tendances (courbes, détail d'un jour) et Jours (une icône par mesure) ; Analyses plus claires ; sur iPhone aussi ; vérifications passées, PR mergée, **la 887 est sur TestFlight (887.373)**. Parité : 67 % | #359 (mergée) |
+| 7/11 22:00 | votre réponse « ok même numéro de version » ; Android v888 à v893 | **votre décision appliquée** : les builds de test gardent le numéro de version **893** pendant ce cycle (fichier `testflight-version.json`) ; le numéro de build suit Android et l'app affiche toujours la version d'Android ; la version 844 et sa build 844.344 ne changent pas ; Android v888 à v893 : essais tirés au sort et habitudes dans Agir, changements durables dans Tendances ; l'accueil propose l'app Santé avec une phrase propre aux iPhone sans montre ; vérifications en cours ; examen bêta inchangé. Parité : 67 % | PR v893 |
 
 ---
 
@@ -374,6 +377,11 @@ Règles des adaptations :
   nombre que sur Google Play, affiché aussi dans Paramètres (`VITE_APP_VERSION`). Depuis le 27/10 (Android #437),
   la variante play affiche ce nombre (`versionName` = commits de `main`) mais envoie à Google Play un `versionCode`
   de 100000 + ce nombre ; `upstream.json` garde le nombre affiché, qui reste celui d'iOS.
+  **Depuis le 7/11 (décision du propriétaire vers 19:35)** : les builds de TestFlight gardent un numéro de version
+  fixe pendant un cycle, celui de la prochaine version de l'App Store (`testflight-version.json`, lu par
+  `testflight.yml`, `ios-build.yml` et `store-push.mjs`), pour que l'examen bêta ne soit pas complet à chaque build ;
+  la version affichée dans l'app reste le `versionCode` d'Android (`VITE_APP_VERSION`). Nouveau cycle après chaque
+  soumission du propriétaire : le fichier prend le numéro d'Android du moment.
 - **Numéro de build** (`CFBundleVersion`) = `<versionCode Android>.<nombre de commits de ce dépôt>` (ex. `514.12`) :
   toujours croissant, même quand seul le code iOS change.
 - **Même version** = la dernière build iOS publiée suit le dernier commit envoyé sur Google Play, et `PARITE.md`
