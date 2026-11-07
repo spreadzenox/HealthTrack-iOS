@@ -18,4 +18,10 @@ describe('Divulgation Santé sur iPhone', () => {
     expect(text).toMatch(/fréquence cardiaque, VFC, activité/)
     expect(text).not.toMatch(/Health Connect|Android/)
   })
+
+  it('annonce les 6 derniers mois importés à l’accueil, comme l’import de l’iPhone (correctif 45)', () => {
+    const text = DISCLOSURES.health_connect.points.join(' ')
+    expect(text).toMatch(/6 derniers mois sont importés tout de suite/)
+    expect(text).not.toMatch(/30 derniers jours/)
+  })
 })
