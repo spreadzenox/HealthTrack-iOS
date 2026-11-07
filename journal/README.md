@@ -15,6 +15,9 @@
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
 **👉 Prochaine action du propriétaire**
+- **Nouveau (7/11 07:00) : le merge de mes PR est refusé par les permissions de la session.** Mergez la PR #356
+  (v854, vérifications vertes) ou autorisez le merge des PR de HealthTrack-iOS dans les réglages de permissions de la
+  session ; sans cela, les versions suivantes d'Android n'arrivent plus sur TestFlight. Votre build 844.344 n'est pas touchée.
 - **Examen bêta d'Apple (votre décision du 6/11 vers 18:20)** : je relève son état à chaque run, en lecture seule, et je
   vous écris en tête de `POUR-ORCHESTRATEUR.md` dès qu'une build passe en test ou est refusée.
 - **Vos réglages du 5/11 vers 23:00 sont faits** (prix et pays, Content Rights, « Santé », groupes TestFlight, 817.312
@@ -250,7 +253,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 03:00 | retours du testeur (point 5), fin | **à l'accueil, après l'app Santé : « Ce que Halcya peut utiliser »** (position approximative pour la météo, appareil photo pour vos repas), chacun avec sa raison et « Autoriser », rien d'obligatoire ; vérifications passées, **sur TestFlight dans la 850.352** (pas dans 844.344). Parité : 67 % | #352 (mergée) |
 | 7/11 04:00 | suivi d'Android v852 | Nutrition : la provenance d'une valeur du profil s'affiche au toucher ; Analyses : « Le modèle qui prédit votre bien-être » à part ; sur iPhone aussi (un correctif refait pour le poids de l'app Santé) ; **la 852 est partie seule sur TestFlight (852.353)**. Parité : 67 % | #353 (mergée) |
 | 7/11 05:00 | suivi d'Android v853 | **la note de bien-être va de 1 à 5, avec 3 au milieu** ; vos anciennes notes ne sont pas modifiées, elles s'affichent simplement sur la nouvelle échelle ; sur iPhone aussi (l'étape du geste de l'accueil dit encore « de 0 à 5 », chez Android aussi : signalé) ; vérifications passées, **la 853 est partie seule sur TestFlight (853.354)**. Parité : 67 % | #354, #355 (mergées) |
-| 7/11 06:00 | suivi d'Android v854 | en notant votre bien-être, **vous choisissez d'abord la note** ; les précisions (stress, alcool, café…) et la phrase libre apparaissent ensuite, facultatives ; sur iPhone aussi ; examen bêta inchangé (839.337 et 817.312 en test) ; vérifications en cours. Parité : 67 % | PR v854 |
+| 7/11 06:00 | suivi d'Android v854 | en notant votre bien-être, **vous choisissez d'abord la note** ; les précisions (stress, alcool, café…) et la phrase libre apparaissent ensuite, facultatives ; sur iPhone aussi ; examen bêta inchangé (839.337 et 817.312 en test) ; vérifications passées ; **merge refusé par les permissions de la session** (voir 07:00). Parité : 67 % | #356 (ouverte) |
+| 7/11 07:00 | blocage du merge | **je ne peux plus merger mes PR** : les permissions de la session refusent le merge depuis 06:55, je ne le contourne pas ; la v854 attend dans la PR #356 (vérifications vertes) ; à vous : merger la #356 ou autoriser le merge ; rien de neuf chez Android ni à l'examen bêta (839.337 et 817.312 en test) ; votre build 844.344 n'est pas touchée. Parité : 67 % | #356 (ouverte) |
 
 ---
 
