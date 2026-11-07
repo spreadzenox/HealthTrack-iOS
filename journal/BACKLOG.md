@@ -446,7 +446,9 @@
   digestion & bien-être » (30 caractères au plus) **seulement après la soumission** du propriétaire.
 
 - [ ] **BÊTA-NUIT — examen bêta chaque nuit** (message du propriétaire du 07/11 vers 18:30, inscrit dans la consigne de
-  la routine) : `scripts/store-beta-submit.mjs` et `.github/workflows/store-beta-submit.yml` (la build la plus récente
+  la routine ; même décision par `POUR-IOS.md` à 17:35 : ne jamais toucher à la version de l'App Store ni à la build
+  844.344 ; si la clé n'a pas le droit, écrire le geste exact dans `POUR-ORCHESTRATEUR.md` ; question du même numéro de
+  version posée le 07/11 à 19:15) : `scripts/store-beta-submit.mjs` et `.github/workflows/store-beta-submit.yml` (la build la plus récente
   traitée par Apple, ou `build` ; « À tester » de `store/app-store/fr-FR/testflight-a-tester.txt` ; groupe externe
   « Testeurs Halcya » ; `betaAppReviewSubmissions`) ; refuse tout chemin de la version de l'App Store. À lancer au
   premier run après 23:45 (heure de Paris), une fois la dernière version d'Android du jour mergée et sa build traitée ;
