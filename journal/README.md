@@ -259,6 +259,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 09:00 | attente du merge | rien de neuf chez Android ni à l'examen bêta (839.337 et 817.312 en test) ; les versions 854 à 856 attendent dans la PR #356 ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 10:00 | attente du merge | vérifications de la #356 vertes et captures regardées : l'étape « Ce que Halcya peut utiliser » à sa place, la note de l'accueil de 1 à 5, la notification du soir avec les notes 1 à 5 ; Android n'a publié qu'une maquette du futur écran Aujourd'hui ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 | 7/11 11:00 | suivi d'Android v858 et v859 | **l'Accueil change** : en tête, une carte « Votre journée » dit comment se passe la journée (de 1 à 5, d'après votre visage ou votre note) ; une section « Noter » réunit la photo du repas et le bien-être ; sur iPhone aussi, ajouté à la PR #356 ; examen bêta inchangé ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
+| 7/11 12:00 | attente du merge | vérifications de la #356 vertes avec la v859 ; captures de l'Accueil regardées (carte « Votre journée », section « Noter » avec la photo du repas et « Mon bien-être, 1 à 5 ») ; rien de neuf chez Android ni à l'examen bêta ; **toujours à vous : merger la #356 ou autoriser le merge**. Parité : 67 % | #356 (ouverte) |
 
 ---
 
