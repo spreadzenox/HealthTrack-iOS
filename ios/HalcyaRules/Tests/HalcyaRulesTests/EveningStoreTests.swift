@@ -94,13 +94,14 @@ final class EveningStoreTests: XCTestCase {
         XCTAssertTrue(note.answer("4", answeredAt: date(28, 21, 2), askedAt: date(28, 21), calendar: paris))
         XCTAssertEqual(note.inbox().count, 1)
         XCTAssertEqual(gut.inbox().count, 0)
-        XCTAssertTrue(note.inbox()[0].json.hasPrefix("{\"v\":1,\"score\":4,"))
+        XCTAssertTrue(note.inbox()[0].json.hasPrefix("{\"v\":2,\"choice\":4,"))
         XCTAssertEqual(note.noteDay, "2026-10-28")
         XCTAssertNil(gut.noteDay)
     }
 
     func testNoteHorsEchelleRefusee() {
         let note = EveningStore(defaults: Memory(), kind: .note)
+        XCTAssertFalse(note.answer("0", answeredAt: date(28, 21, 2), askedAt: date(28, 21), calendar: paris)) // plus de 0 (v855)
         XCTAssertFalse(note.answer("6", answeredAt: date(28, 21, 2), askedAt: date(28, 21), calendar: paris))
         XCTAssertFalse(note.answer("calm", answeredAt: date(28, 21, 2), askedAt: date(28, 21), calendar: paris))
         XCTAssertEqual(note.inbox().count, 0)

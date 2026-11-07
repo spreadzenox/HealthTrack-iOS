@@ -9,22 +9,9 @@
 import { useState } from 'react'
 import useDisclosure from '../hooks/useDisclosure'
 import { getWeatherSettings, enableWeather, syncWeather } from '../services/weatherSync'
+import { getApproxPosition } from '../services/approxPosition' // Android v856 : la même position que son écran météo
 import { faceSensePlugin } from '../services/faceSense'
 import { requestCamera } from './cameraPermission'
-
-function defaultGetPosition() {
-  return new Promise((resolve, reject) => {
-    if (typeof navigator === 'undefined' || !navigator.geolocation) {
-      reject(new Error('unavailable'))
-      return
-    }
-    navigator.geolocation.getCurrentPosition(
-      (pos) => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
-      reject,
-      { enableHighAccuracy: false, timeout: 20000, maximumAge: 3600 * 1000 },
-    )
-  })
-}
 
 const weatherOn = () => {
   const w = getWeatherSettings()
@@ -57,7 +44,7 @@ function Permission({ title, text, state, onAllow, busy, messages }) {
  * @param {{ getPosition?: Function, sync?: Function, camera?: Function, cameraAvailable?: boolean }} props
  */
 export default function PermissionsStep({
-  getPosition = defaultGetPosition,
+  getPosition = getApproxPosition,
   sync = syncWeather,
   camera = requestCamera,
   cameraAvailable = faceSensePlugin() != null,

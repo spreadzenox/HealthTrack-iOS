@@ -101,7 +101,7 @@ enum NotificationAuthorization {
     }
 }
 
-/// Bilan du ventre du soir : « Et votre ventre aujourd'hui ? », Calme / Gêne / Douleur.
+/// Bilan digestif du soir : « Et votre digestion aujourd'hui ? », Calme / Gêne / Douleur (Android, AUJ-7).
 @objc(GutEveningPlugin)
 public class GutEveningPlugin: EveningPlugin, CAPBridgedPlugin {
     public let identifier = "GutEveningPlugin"
@@ -110,7 +110,7 @@ public class GutEveningPlugin: EveningPlugin, CAPBridgedPlugin {
     override var evening: EveningNotifications { .gut }
 }
 
-/// Note du soir d'un geste : « Votre soirée ? », les 6 notes de bien-être.
+/// Note du soir d'un geste : « Votre soirée ? », les 5 notes de bien-être (1 à 5).
 @objc(EveningNotePlugin)
 public class EveningNotePlugin: EveningPlugin, CAPBridgedPlugin {
     public let identifier = "EveningNotePlugin"
@@ -121,13 +121,13 @@ public class EveningNotePlugin: EveningPlugin, CAPBridgedPlugin {
 
 /// Notifications d'un rappel du soir : catégorie à actions, programmation des soirs, gestes.
 final class EveningNotifications {
-    /// Bilan du ventre : Calme / Gêne / Douleur.
+    /// Bilan digestif : Calme / Gêne / Douleur.
     static let gut = EveningNotifications(
-        kind: .gut, category: "gut-evening", title: "Et votre ventre aujourd’hui ?", body: "Dans l’ensemble, d’un geste.",
+        kind: .gut, category: "gut-evening", title: "Et votre digestion aujourd’hui ?", body: "Dans l’ensemble, d’un geste.",
         actions: Array(zip(GutEveningRule.levels, GutEveningRule.labels)))
-    /// Note du soir : les 6 notes, comme les boutons d'Android (`notification_evening_note.xml`).
+    /// Note du soir : les 5 notes (1 à 5), comme les boutons d'Android (`notification_evening_note.xml`, v855).
     static let note = EveningNotifications(
-        kind: .note, category: "evening-note", title: "Votre soirée ?", body: "0 = très bas, 5 = très bien",
+        kind: .note, category: "evening-note", title: "Votre soirée ?", body: "1 = très bas, 5 = très bien",
         actions: EveningNoteRule.scores.map { ("\($0)", "\($0)") })
     static let all = [gut, note]
 
