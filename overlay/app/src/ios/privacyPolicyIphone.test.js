@@ -18,8 +18,9 @@ const text = iphone.replace(/<!--[\s\S]*?-->/g, '').replace(/<style>[\s\S]*?<\/s
 // Google Play ; avant : mise à jour du 5 novembre 2026, v809 : section
 // « Forme des selles estimée par photo », reprise sur iPhone avec App Attest au lieu de Play Integrity (décision du
 // propriétaire du 05/11 vers 20:15) ;
-// v782 : « Votre avis », reprise avec App Attest au lieu de Play Integrity)
-const ANDROID_POLICY_RELUE = '175375632dc772f8f68857c5f86d395ad6e8e7cabfd3d9bef64dac7a9af23da4'
+// v782 : « Votre avis », reprise avec App Attest au lieu de Play Integrity ;
+// AUJ-7 (07/11) : « ventre » devient « digestion », mêmes remplacements sur la page iPhone)
+const ANDROID_POLICY_RELUE = 'ae4fea560466d4ea8900b5e6606565a7b559b9fa4097e724668e87ba022d2174'
 
 describe('politique de confidentialité sur iPhone', () => {
   it("suit la dernière version relue de la page d'Android", () => {

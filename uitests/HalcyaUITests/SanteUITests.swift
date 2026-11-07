@@ -51,7 +51,7 @@ final class SanteUITests: XCTestCase {
 final class NotificationsUITests: XCTestCase {
     private let halcya = XCUIApplication(bundleIdentifier: "fr.jpesquet.sante")
     private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
-    private let titre = "Et votre ventre aujourd’hui ?"
+    private let titre = "Et votre digestion aujourd’hui ?" // Android AUJ-7 : « ventre » devient « digestion »
 
     /// Alerte « “Halcya” souhaite vous envoyer des notifications » : « Autoriser ».
     func testAutoriserLesNotifications() throws {

@@ -438,7 +438,7 @@
   d'Android). Rien à faire côté iPhone, qui passe par le même relais.
 - [ ] **Ensuite — suivi continu** : chaque version Android suivie, correctifs refaits, nouveautés vérifiées.
 
-- [ ] **DIGESTIF — « ventre » devient « digestif »** (décision du propriétaire du 07/11, `POUR-IOS.md` 15:35 ; Android
+- [x] **DIGESTIF — « ventre » devient « digestif »** (fait le 7/11 à 18:00 sur la PR #356, après Android #785 ; reste le nom App Store, après la soumission) (décision du propriétaire du 07/11, `POUR-IOS.md` 15:35 ; Android
   AUJ-7) : quand Android livre ses textes, reprendre les mêmes mots dans ce qui est propre à l'iPhone :
   `ios/App/App/EveningPlugins.swift` (« Et votre ventre aujourd'hui ? »), notes de Nouveautés de l'iPhone (sans
   réécrire les anciennes ?), `captureMode.js`, fiche App Store `store/app-store/fr-FR/` (`subtitle.txt`,
