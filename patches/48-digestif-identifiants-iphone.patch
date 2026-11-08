@@ -1,14 +1,14 @@
 diff --git a/app/src/config/digestifWording.test.js b/app/src/config/digestifWording.test.js
-index 1876624..a21f91f 100644
+index 1a868322..a20b763a 100644
 --- a/app/src/config/digestifWording.test.js
 +++ b/app/src/config/digestifWording.test.js
-@@ -9,7 +9,10 @@ import { join, relative } from 'node:path'
-  * ventre » reste reconnu) ne sont pas des textes affichés.
+@@ -10,7 +10,10 @@ import { join, relative } from 'node:path'
   */
  const APP = join(import.meta.dirname, '..', '..')
--const ALLOWED = [/recommendations\/ventre/, /mal au ventre/, /signals:/]
+ // « Et votre ventre ? » (première note de l'accueil, ACC-7) : texte exact validé par le propriétaire le 08/11
+-const ALLOWED = [/recommendations\/ventre/, /mal au ventre/, /signals:/, /Et votre ventre ?/]
 +const ALLOWED = [
-+  /recommendations\/ventre/, /mal au ventre/, /signals:/,
++  /recommendations\/ventre/, /mal au ventre/, /signals:/, /Et votre ventre ?/,
 +  /'\d{4}-\d{2}-\d{2}-\d{4}-[a-z-]*ventre[a-z-]*'/, // Version iOS (HealthTrack-iOS) : identifiant d'une note de Nouveautés (APPSTORE_HIDDEN), jamais affiché
 +]
  

@@ -80,15 +80,14 @@ export function pageText(root, allowed = IPHONE_OK) {
   return allowed.flatMap((sel) => [...root.querySelectorAll(sel)]).reduce((t, el) => t.replace(text(el), ''), text(root))
 }
 
-// Autres écrans de l'onboarding sur iPhone : objectif, suivi, montre, Santé (toujours sur iPhone, même sans montre :
-// correctif 45), autorisations (position, appareil photo : correctif 46 ; retours du premier testeur du 06/11), visage,
-// geste
+// Autres écrans de l'onboarding sur iPhone : nouvel accueil d'Android (ACC-1 à ACC-10, décision du propriétaire du
+// 08/11) ; `lastScreen` le rouvre sur l'écran voulu (FLOW_VERSION 2, sinon il repart du tuto)
 export const MORE_ONBOARDING = [
-  ['suivi', { goal: 'energy', step: 1 }],
-  ['sante', { goal: 'energy', step: 3, watch: 'none' }],
-  ['autorisations', { goal: 'energy', step: 4, watch: 'none' }],
-  ['visage', { goal: 'energy', step: 5 }],
-  ['geste', { goal: 'energy', step: 6 }],
+  ['objectifs', { flow: 2, lastScreen: 'goal' }],
+  ['sources', { flow: 2, lastScreen: 'sources' }],
+  ['trouve', { flow: 2, lastScreen: 'found' }],
+  ['visage', { flow: 2, lastScreen: 'face', goals: ['gut'] }],
+  ['premiere-note', { flow: 2, lastScreen: 'first', goals: ['gut'] }],
 ]
 
 export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = SCROLLS, reveals = REVEALS, moreOnboarding = [],
@@ -101,8 +100,8 @@ export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = S
   }
   return [
     { name: 'vierge-onboarding', route: null, data: null, theme: null },
-    // 3e écran de l'onboarding (choix de la montre), avant que les données de démo ne le marquent fait
-    { name: 'vierge-onboarding-montre', route: '/bienvenue', data: null, theme: null, onboarding: { goal: 'energy', step: 2 } },
+    // 2e carte du tuto du nouvel accueil, avant que les données de démo ne le marquent fait
+    { name: 'vierge-onboarding-tuto-2', route: '/bienvenue', data: null, theme: null, onboarding: { flow: 2, step: 0, card: 1 } },
     ...moreOnboarding.map(([name, onboarding]) => ({ name: `vierge-onboarding-${name}`, route: '/bienvenue', data: null, theme: null, onboarding })),
     ...emptyRoutes.flatMap((route) => {
       const base = { name: `vide-${pageName(route)}`, route, data: 'empty', theme: 'light' }
