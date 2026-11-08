@@ -81,7 +81,25 @@ export async function survey({ token, fetchImpl = fetch }) {
     const [b1, b2] = rank(y.version)
     return b1 - a1 || b2 - a2
   })
-  return { group, builds }
+  return { group, builds, appId: app.id }
+}
+
+/**
+ * Builds récentes de l'app en examen bêta hors du groupe externe (8/11 : la 896.376, retirée du groupe, bloquait encore
+ * la 918.396 : « Another build in the same train is already in beta review »). Que des GET.
+ */
+export async function reviewsOutsideGroup({ token, fetchImpl = fetch, appId, inGroup = [] }) {
+  const { api } = client(token, fetchImpl)
+  const recent = await api('GET', `/v1/builds?filter[app]=${appId}&sort=-uploadedDate&limit=20&fields[builds]=version`)
+  const out = []
+  for (const b of recent.data || []) {
+    const version = b.attributes?.version
+    if (!version || inGroup.includes(version)) continue
+    const review = await maybe(() => api('GET', `/v1/builds/${b.id}/betaAppReviewSubmission?fields[betaAppReviewSubmissions]=betaReviewState`))
+    const state = review?.data?.attributes?.betaReviewState ?? null
+    if (state === 'WAITING_FOR_REVIEW' || state === 'IN_REVIEW') out.push({ version, review: state })
+  }
+  return out
 }
 
 async function main() {
@@ -90,11 +108,13 @@ async function main() {
     if (!process.env[name]) throw new Error(`secret ${name} absent de l'environnement appstore`)
   }
   const token = jwt({ keyId: process.env.ASC_KEY_ID, issuerId: process.env.ASC_ISSUER_ID, p8: process.env.ASC_KEY_P8 })
-  const { group, builds } = await survey({ token })
+  const { group, builds, appId } = await survey({ token })
   log(`Groupe externe « ${group.name} » : lien public ${group.publicLinkEnabled ? 'activé' : 'désactivé'} (adresse jamais lue ici) ; ${builds.length} build(s)`)
   for (const b of builds) log(`- ${describe(b)}`)
   const by = (v) => builds.filter((b) => verdict(b) === v).map((b) => b.version)
   log(`Verdict : en test ${by('test').join(', ') || 'aucune'} ; refusées ${by('refusée').join(', ') || 'aucune'} ; en attente ${by('attente').join(', ') || 'aucune'}`)
+  const outside = await reviewsOutsideGroup({ token, appId, inGroup: builds.map((b) => b.version) })
+  log(`Hors du groupe, en examen bêta : ${outside.map((b) => `${b.version} (${b.review})`).join(', ') || 'aucune'}`)
   log('Lecture seule : rien n\'a été soumis ni changé dans App Store Connect.')
 }
 

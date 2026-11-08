@@ -1,6 +1,6 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { GROUP_FIELDS, GROUP_NAME, verdict, describe, masked, survey } from './store-beta.mjs'
+import { GROUP_FIELDS, GROUP_NAME, verdict, describe, masked, survey, reviewsOutsideGroup } from './store-beta.mjs'
 
 test('le lien public du groupe n’est jamais demandé (dépôt et journaux publics)', () => {
   assert.ok(!GROUP_FIELDS.split(',').includes('publicLink'))
@@ -65,4 +65,29 @@ test('relevé : seulement des lectures, groupe externe trouvé par son nom, buil
   assert.deepEqual(builds.map((b) => [b.version, verdict(b)]), [['839.337', 'attente'], ['817.312', 'test']])
   assert.ok(calls.every((c) => c.method === 'GET'))
   assert.ok(calls.some((c) => c.url.includes(`fields[betaGroups]=${GROUP_FIELDS}`)))
+})
+
+// 8/11 : Apple refusait la 918.396 (« Another build in the same train is already in beta review ») alors que la 896.376
+// n'était plus dans le groupe : le relevé dit aussi quelles builds récentes sont en examen bêta hors du groupe
+test('relevé : builds en examen bêta hors du groupe (lecture seule)', async () => {
+  const calls = []
+  const pages = {
+    '/v1/builds': { data: [
+      { id: 'b9', attributes: { version: '918.396' } },
+      { id: 'b8', attributes: { version: '896.376' } },
+      { id: 'b7', attributes: { version: '895.375' } },
+    ] },
+    '/v1/builds/b8/betaAppReviewSubmission': { data: { attributes: { betaReviewState: 'WAITING_FOR_REVIEW' } } },
+    '/v1/builds/b7/betaAppReviewSubmission': { data: null },
+  }
+  const fetchImpl = async (url, { method }) => {
+    const path = new URL(url).pathname
+    calls.push({ method, url })
+    const body = pages[path]
+    return { ok: Boolean(body), status: body ? 200 : 404, json: async () => body ?? { errors: [{ title: 'absent' }] } }
+  }
+  const out = await reviewsOutsideGroup({ token: 't', fetchImpl, appId: 'app1', inGroup: ['918.396'] })
+  assert.deepEqual(out, [{ version: '896.376', review: 'WAITING_FOR_REVIEW' }])
+  assert.ok(calls.every((c) => c.method === 'GET'))
+  assert.ok(!calls.some((c) => c.url.includes('/b9/')))
 })
