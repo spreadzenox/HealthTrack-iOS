@@ -1,9 +1,11 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest'
+import { render, screen, waitFor } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
+import { Capacitor } from '@capacitor/core'
 
-// Version iOS (HealthTrack-iOS) : sur iPhone, les montres passent par l'app Santé d'Apple (lue à l'étape I4) ;
-// ni Health Connect ni montre Huawei en direct dans l'onboarding
+// Version iOS (HealthTrack-iOS) : nouvel accueil d'Android (ACC-1 à ACC-10, décision du propriétaire du 08/11) joué sur
+// iPhone. La carte principale dit « Santé » (healthStoreName, code d'Android), l'iPhone importe 6 mois (correctif 45),
+// le temps d'écran parle de l'iPhone (correctif 52), et la lecture du visage n'est proposée qu'à l'ouverture d'Halcya.
 vi.mock('../config/distribution', async (importOriginal) => {
   const actual = await importOriginal()
   return { ...actual, DISTRIBUTION: 'appstore', FEATURES: actual.featuresFor('appstore') }
@@ -16,96 +18,75 @@ const hc = vi.hoisted(() => ({
   sync: vi.fn(),
 }))
 vi.mock('../connectors/connectorRegistry', () => ({ getConnector: () => hc, CONNECTORS: [hc] }))
+vi.mock('../storage/localHealthStorage', async (orig) => ({
+  ...(await orig()),
+  listEntries: vi.fn(async () => []),
+  upsertEntries: vi.fn(async () => {}),
+  countAllEntries: vi.fn(async () => 0),
+}))
+const face = vi.hoisted(() => ({ status: { enabled: false } }))
+vi.mock('../services/faceSense', async (orig) => ({
+  ...(await orig()),
+  isFaceSenseAvailable: () => true,
+  isFaceSenseEnabled: () => false,
+  getFaceSenseStatus: async () => face.status,
+}))
 
 import Onboarding from './Onboarding'
-import { saveOnboarding } from '../settings/onboarding'
+import { FLOW_VERSION, saveOnboarding } from '../settings/onboarding'
+import { resetImportForTests } from '../services/onboardingFlow'
 
-const cont = () => screen.getByRole('button', { name: 'Continuer' })
+function renderAt() {
+  return render(
+    <MemoryRouter initialEntries={['/bienvenue']}>
+      <Routes>
+        <Route path="/bienvenue" element={<Onboarding />} />
+        <Route path="/" element={<p>Page Aujourd’hui</p>} />
+      </Routes>
+    </MemoryRouter>,
+  )
+}
 
-describe('Onboarding sur iPhone (variante appstore)', () => {
+describe('nouvel accueil sur iPhone (variante appstore)', () => {
   beforeEach(() => {
     localStorage.clear()
     vi.clearAllMocks()
-    hc.availabilityDetails.mockResolvedValue({ available: false, reason: 'ios', platform: 'ios' })
+    resetImportForTests()
+    vi.spyOn(Capacitor, 'getPlatform').mockReturnValue('ios')
+    hc.availabilityDetails.mockResolvedValue({ available: true })
     hc.checkPermissions.mockResolvedValue('not_asked')
+    hc.sync.mockResolvedValue({ synced: 0, skipped: 0, errors: [] })
+  })
+  afterEach(() => {
+    vi.restoreAllMocks()
+    delete window.__healthtrackFakePhoneUsage
   })
 
-  it('montres de l’app Santé ; app Santé absente : on le dit et on continue, sans Health Connect ni Huawei', async () => {
-    saveOnboarding({ goal: 'energy', step: 2 })
-    render(
-      <MemoryRouter initialEntries={['/bienvenue']}>
-        <Routes>
-          <Route path="/bienvenue" element={<Onboarding />} />
-        </Routes>
-      </MemoryRouter>,
-    )
-    expect(screen.queryByRole('radio', { name: /Health Connect/ })).not.toBeInTheDocument()
-    expect(screen.queryByRole('radio', { name: /compatible Huawei/ })).not.toBeInTheDocument()
-    fireEvent.click(screen.getByRole('radio', { name: /écrit dans l’app Santé/ }))
-    fireEvent.click(cont())
-    expect(screen.getByRole('heading', { name: 'Vos données de l’app Santé' })).toBeInTheDocument()
-    expect(await screen.findByText(/L’app Santé n’est pas disponible sur cet appareil/)).toBeInTheDocument()
-    expect(screen.queryByText(/Health Connect/)).not.toBeInTheDocument()
-    expect(cont()).toBeEnabled()
-  })
-
-  it('sans montre : l’étape de l’app Santé reste proposée, avec 6 mois d’historique (retours du testeur, 06/11)', async () => {
-    // L'iPhone écrit lui-même ses pas (et son sommeil s'il est programmé) dans l'app Santé : pas besoin de montre
-    hc.availabilityDetails.mockResolvedValue({ available: true, platform: 'ios' })
-    saveOnboarding({ goal: 'energy', watch: 'none', step: 3 })
-    render(
-      <MemoryRouter initialEntries={['/bienvenue']}>
-        <Routes>
-          <Route path="/bienvenue" element={<Onboarding />} />
-        </Routes>
-      </MemoryRouter>,
-    )
-    expect(screen.getByRole('heading', { name: 'Vos données de l’app Santé' })).toBeInTheDocument()
-    expect(await screen.findByRole('button', { name: 'Autoriser l’app Santé' })).toBeInTheDocument()
-    expect(screen.getByText(/vos 6 derniers mois/)).toBeInTheDocument()
+  it('« Branchez vos sources » : la carte dit Santé, l’iPhone et 6 mois ; jamais Health Connect ni Huawei', async () => {
+    saveOnboarding({ flow: FLOW_VERSION, lastScreen: 'sources' })
+    renderAt()
+    expect(await screen.findByRole('button', { name: 'Connecter Santé' })).toBeInTheDocument()
+    expect(screen.getByText('votre iPhone et votre montre')).toBeInTheDocument()
+    expect(screen.getByText(/vos 6 derniers mois\. Elle n’écrit rien/)).toBeInTheDocument()
     expect(screen.queryByText(/30 derniers jours/)).not.toBeInTheDocument()
-  })
-
-  it('après l’app Santé : l’étape « Ce que Halcya peut utiliser » (position, appareil photo), retours du testeur', async () => {
-    saveOnboarding({ goal: 'energy', watch: 'none', health: 'declined', step: 4 })
-    render(
-      <MemoryRouter initialEntries={['/bienvenue']}>
-        <Routes>
-          <Route path="/bienvenue" element={<Onboarding />} />
-        </Routes>
-      </MemoryRouter>,
-    )
-    expect(screen.getByRole('heading', { name: 'Ce que Halcya peut utiliser' })).toBeInTheDocument()
-    expect(screen.getByText('Position approximative')).toBeInTheDocument()
-    expect(cont()).toBeEnabled()
-  })
-
-  it('l’écran météo d’Android (v856) n’existe pas sur iPhone : la position est demandée une seule fois, ici', async () => {
-    saveOnboarding({ goal: 'energy', watch: 'none', health: 'declined', step: 4 })
-    render(
-      <MemoryRouter initialEntries={['/bienvenue']}>
-        <Routes>
-          <Route path="/bienvenue" element={<Onboarding />} />
-        </Routes>
-      </MemoryRouter>,
-    )
-    expect(screen.getByRole('heading', { name: 'Ce que Halcya peut utiliser' })).toBeInTheDocument()
-    fireEvent.click(cont())
-    expect(await screen.findByRole('heading', { level: 1 })).not.toHaveTextContent('La météo de votre ville')
-    expect(screen.queryByText('Utiliser ma position approximative')).not.toBeInTheDocument()
-  })
-
-  it('app Santé disponible : « Autoriser l’app Santé »', async () => {
-    hc.availabilityDetails.mockResolvedValue({ available: true, platform: 'ios' })
-    saveOnboarding({ goal: 'energy', watch: 'health_connect', step: 3 })
-    render(
-      <MemoryRouter initialEntries={['/bienvenue']}>
-        <Routes>
-          <Route path="/bienvenue" element={<Onboarding />} />
-        </Routes>
-      </MemoryRouter>,
-    )
-    expect(await screen.findByRole('button', { name: 'Autoriser l’app Santé' })).toBeInTheDocument()
     expect(screen.queryByText(/Health Connect/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/Huawei/)).not.toBeInTheDocument()
+  })
+
+  it('temps d’écran : l’iPhone demande l’accord, aucun réglage d’Android', async () => {
+    window.__healthtrackFakePhoneUsage = true
+    saveOnboarding({ flow: FLOW_VERSION, lastScreen: 'sources' })
+    renderAt()
+    expect(await screen.findByText(/L’iPhone demande votre accord \(Face ID ou code\)/)).toBeInTheDocument()
+    expect(screen.queryByText(/Android/)).not.toBeInTheDocument()
+  })
+
+  it('visage : seulement « Quand vous ouvrez Halcya », jamais au déverrouillage (l’iPhone ne le permet pas)', async () => {
+    face.status = { enabled: false }
+    saveOnboarding({ flow: FLOW_VERSION, lastScreen: 'face', goals: ['gut'] })
+    renderAt()
+    await waitFor(() => expect(screen.getByRole('radio', { name: /Quand vous ouvrez Halcya/ })).toBeInTheDocument())
+    expect(screen.queryByRole('radio', { name: /déverrouillage/ })).not.toBeInTheDocument()
+    expect(screen.queryByText(/À chaque déverrouillage/)).not.toBeInTheDocument()
   })
 })

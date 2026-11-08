@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v914 (8/11) | **913 sur TestFlight** (build 913.393, version 893 ; la 914 suit ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v916 (8/11) | **914 sur TestFlight** (build 914.394, version 893 ; la 916, avec le nouvel accueil, suit ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -53,6 +53,8 @@
   logicielle).
 - Installez la build la plus récente de TestFlight (852.353 aujourd'hui ; 844.344 est celle de la soumission) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
+
+**Votre décision du 8/11 (reçue à 19:00 par `POUR-IOS.md`, ligne de 18:45)** : nouvel accueil du premier lancement (ACC-1 à ACC-10) ; sur iPhone, la carte principale dit « Santé » ; la lecture du visage seulement à l'ouverture de l'app. **Appliquée le 8/11 à 19:00** : l'accueil d'Android repris sur iPhone (Santé, 6 mois importés, temps d'écran de l'iPhone, visage « Quand vous ouvrez Halcya » seulement) ; l'ancien écran d'autorisations propre à l'iPhone est retiré, chaque accès se donne maintenant sur l'écran « Branchez vos sources » ou sur celui du visage.
 
 **Vos décisions du 7/11 au soir (reçues le 8/11 à 01:00 par `POUR-IOS.md`, lignes de 00:35)** : (A) **mode polish**
 dès le 9/11, sur Android et iPhone, à partir de la version envoyée aux testeurs dimanche 8/11 au soir : plus de
@@ -312,6 +314,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 8/11 16:00 | premier passage des personas iPhone | **la 911 est sur TestFlight** (911.391). Deux personnes simulées sur un iPhone 12 sans montre, au jour 45 (« prendre soin de soi, maigrir » et « endométriose ») : ce qui marche (noter un repas aliment par aliment, les pas cohérents partout) ; corrigé ici : « kca l » coupé dans la tuile des repas du Journal ; relayé à Android : un repas sans calories dans Jours mais pas dans Repas, des chiffres « pt » sans phrase dans Analyses, Agir vide ; idées pour vous plus tard (poids, cycle de l'app Santé). Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | #377 (mergée), PR personas |
 | 8/11 17:00 | suivi d'Android v913 | la correction « kcal » du Journal est mergée et part sur TestFlight. Android v913 répond à trois constats de nos personas : avant les premiers résultats, l'app compte en jours notés (« Encore 25 jours notés… ») ; Agir, encore vide, dit ce qui viendra le remplir ; « rapport médecin » d'Agir ouvre directement la carte du rapport. Sur iPhone, le rapport s'ouvre toujours dans la feuille de partage. Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | #378 (mergée), PR v913 |
 | 8/11 18:00 | suivi d'Android v914 | **la 913 est sur TestFlight** (913.393 : jours notés, Agir expliqué, rapport depuis Agir, « kcal » du Journal). Android v914 : sur Aujourd'hui, « Vos données du jour » ne montre plus les pas d'hier (encore un constat de nos personas). Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | #379 (mergée), PR v914 |
+| 8/11 19:00 | **votre décision : nouvel accueil** ; Android v916 | la 914 est sur TestFlight (914.394). **Le nouvel accueil du premier lancement arrive sur iPhone** : trois cartes de présentation, plusieurs raisons de venir, un seul écran « Branchez vos sources » (Santé, météo, temps d'écran), ce qui a été trouvé, le visage (seulement à l'ouverture de l'app, comme vous l'avez demandé), une première note. Sur iPhone : « Santé », 6 mois importés, le temps d'écran demande l'accord de l'iPhone. Tendances : « agréable » et « désagréable » à l'horizontale. Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | #380 (mergée), PR nouvel accueil |
 
 ---
 
