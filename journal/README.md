@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v898 (8/11) | **893 sur TestFlight** (build 893.374, première au numéro de version fixe ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v898 (8/11) | **898 sur TestFlight** (build 898.379, version 893 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -295,7 +295,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 8/11 00:00 | chantier du soir : Android v896 | sur l'Accueil, le bien-être du jour vient du même calcul que les Tendances ; « d'habitude » suit vos changements durables (note de Nouveautés propre à l'iPhone, celles d'Android étant réservées à Google Play) ; vérifications passées, PR mergée, **la 896 est sur TestFlight (896.376, version 893)**. Parité : 67 % | #362 (mergée) |
 | 8/11 00:00 | examen bêta de la nuit | la v896 est la dernière version d'Android de la journée ; sa build 896.376 est traitée par Apple ; envoi au groupe « Testeurs Halcya » : « À tester » écrit, puis une lecture refusée par Apple a arrêté le script avant l'ajout au groupe ; corrigé et relancé dans la foulée (voir le run suivant). Parité : 67 % | #363 (mergée) |
 | 8/11 01:00 | vos décisions de la nuit ; Android v897 | **la 896.376 est soumise à l'examen bêta** (correctif mergé, relancé à 00:15 : ajoutée au groupe « Testeurs Halcya », « en attente de l'examen bêta ») ; **vos décisions (A) mode polish, (B) intégrations, (C) personas reçues et notées** ; v897 : Journal › Tendances s'ouvre sur une courbe ; sur iPhone aussi ; vérifications passées, PR mergée, TestFlight. Parité : 67 % | #364 (mergée) |
-| 8/11 02:00 | suivi d'Android v898 | Tendances › Jour selon la maquette, l'ancien historique du bien-être retiré (le lien mène à Tendances) ; examen bêta : 896.376 toujours en attente chez Apple ; vérifications en cours. Parité : 67 % | PR v898 |
+| 8/11 02:00 | suivi d'Android v898 | Tendances › Jour selon la maquette, l'ancien historique du bien-être retiré (le lien mène à Tendances) ; examen bêta : 896.376 toujours en attente chez Apple ; vérifications passées, PR mergée, **la 898 est sur TestFlight (898.379)**. Parité : 67 % | #365 (mergée) |
+| 8/11 03:00 | rien de neuf | Android n'a rien publié depuis la v898 ; l'examen bêta de la 896.376 attend toujours chez Apple ; TestFlight a la 898.379. Parité : 67 % | journal |
 
 ---
 
