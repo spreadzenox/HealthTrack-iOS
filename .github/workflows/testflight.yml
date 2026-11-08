@@ -85,23 +85,42 @@ jobs:
           # Le mode captures (sondes, écriture dans Santé) n'est compilé qu'avec VITE_IOS_CAPTURE=1 : jamais ici
           if grep -rq "\[healthkit\] base" dist; then echo "::error::mode captures présent dans la build"; exit 1; fi
           npx -y -p "@capacitor/cli@$CORE" cap sync ios
+      # 8/11 : GitHub a répondu 504 aux fichiers binaires de capacitor-swift-pm (releases) pendant des heures ; gardés en cache,
+      # ils ne bloquent plus la build quand GitHub ne les sert pas
+      # Restauré ici, enregistré juste après la résolution (pas en fin de job : un échec plus loin le perdrait)
+      - name: Cache des paquets Swift (fichiers binaires de Capacitor)
+        id: spm-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/Library/Caches/org.swift.swiftpm
+          key: spm-${{ runner.os }}-${{ hashFiles('ios/App/CapApp-SPM/Package.swift') }}
       # 5/11 (795.300) : un raté de réseau au téléchargement des paquets Swift (« Could not resolve package
       # dependencies ») a fait échouer l'archive ; avec la livraison continue, personne ne relance : jusqu'à 3 essais,
       # dans le même dossier que l'archive, qui réutilise ensuite les paquets téléchargés
-      - name: Paquets Swift (jusqu'à 3 essais)
+      - name: Paquets Swift (jusqu'à 6 essais)
         working-directory: upstream/app/ios/App
         run: |
-          for attempt in 1 2 3; do
+          # 8/11 : GitHub servait les binaires de Capacitor une fois sur quatre (504) : 6 essais, de plus en plus espacés
+          for attempt in 1 2 3 4 5 6; do
             if xcodebuild -resolvePackageDependencies -project App.xcodeproj -scheme App \
               -derivedDataPath "$RUNNER_TEMP/dd" > "$RUNNER_TEMP/spm-$attempt.log" 2>&1; then
               echo "Paquets Swift résolus (essai $attempt)"
               exit 0
             fi
             grep -E "error:" "$RUNNER_TEMP/spm-$attempt.log" | head -5 || true
-            sleep $((attempt * 20))
+            # 8/11 : « Could not resolve package dependencies » seul ne dit pas quel paquet ni pourquoi : la fin du journal
+            tail -25 "$RUNNER_TEMP/spm-$attempt.log" || true
+            sleep $((attempt * 30))
           done
-          echo "::error::Paquets Swift non résolus après 3 essais"
+          echo "::error::Paquets Swift non résolus après 6 essais"
           exit 1
+      - name: Cache des paquets Swift (enregistré dès la résolution)
+        if: steps.spm-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: ~/Library/Caches/org.swift.swiftpm
+          key: ${{ steps.spm-cache.outputs.cache-primary-key }}
       - name: Archive (signature ad hoc, entitlements gardés pour l'export)
         working-directory: upstream/app/ios/App
         run: |
@@ -203,6 +222,7 @@ jobs:
             ${{ runner.temp }}/upload.log
             ${{ runner.temp }}/archive-entitlements.txt
             ${{ runner.temp }}/ipa-entitlements.txt
+            ${{ runner.temp }}/spm-*.log
           if-no-files-found: ignore
       - name: Effacer la clé
         if: always()

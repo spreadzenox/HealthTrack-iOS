@@ -481,6 +481,13 @@
   rejouer sur la build iPhone (`--store=appstore`, son POLISH-SIM-9). À faire ici avant l'envoi aux testeurs du 8/11
   au soir : lancer l'outil d'Android dans `upstream/app` en variante appstore pour les configurations iPhone, rapports
   dans `journal/simulations/` de ce dépôt, constats propres à l'iPhone en POLISH (le reste relayé par `DEMANDES.md`).
+  **8/11 09:30 : correctif 49** (`persona-browse.mjs --store=appstore`) : variante appstore et écran de 390 × 844 (iPhone
+  12). Essai : l'app s'ouvre, gestes et captures marchent. **Limites du navigateur** (à dire à chaque agent et à ne pas
+  rapporter comme défauts) : sans plateforme iOS, la source de santé s'affiche « Health Connect » au lieu de « App
+  Santé » ; sans module natif, la lecture du visage dit « Bientôt sur iPhone » ; les données de démo de l'outil sont
+  celles d'Android (« Samsung Health »). Pour lever ces limites : faire passer le navigateur pour un iPhone (plateforme
+  `ios`, faux modules comme ceux de `captureMode.js`) ; sinon, garder le passage pour les textes, la mise en page à
+  390 points et les parcours.
 
 ## Idées et questions ouvertes
 
