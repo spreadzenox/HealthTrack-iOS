@@ -34,8 +34,14 @@ App Store Connect, build 844.344 attachée  ·  **Parité** : 67 % (30/45)
   dans les deux workflows.
 - Parade pour la suite : `actions/cache` de `~/Library/Caches/org.swift.swiftpm` (clé : `CapApp-SPM/Package.swift`)
   dans `testflight.yml` et `ios-build.yml` ; le cache se remplira à la première build réussie.
+- 09:24–09:40 UTC : avec ces 6 essais, la build simulateur de cette PR échoue encore (504 aux 6 essais, sur 12 min).
+  09:43 UTC : les fichiers de release d'autres dépôts (`cli/cli`, `ionic-team/capacitor`) répondent aussi 504 : panne
+  générale des téléchargements de releases chez GitHub, pas propre à Capacitor. Parade de secours étudiée et écartée :
+  le paquet npm `@capacitor/ios` n'a que les sources (pas de projet Xcode), recompiler les binaires sans Mac serait un
+  chantier ; on attend GitHub. Une surveillance relance la build de cette PR dès que les fichiers répondent.
 - Tant que GitHub ne sert pas ces fichiers : pas de build iPhone, donc pas de merge (vérifications rouges) ni de
   TestFlight ; 904.385 reste la dernière build. Relevé à chaque run.
 
 ## Suite
-- Résultat de la relance TestFlight (905) ; passage des personas iPhone ce soir, avant l'envoi aux testeurs.
+- Android a publié après la v905 (`a4887eb`) : au run suivant. Relance de la build de cette PR quand GitHub revient,
+  merge si vert, puis TestFlight (905 ou la suivante) ; passage des personas iPhone ce soir, avant l'envoi aux testeurs.
