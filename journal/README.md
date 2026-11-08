@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v910 (8/11) | **908 sur TestFlight** (build 908.389, version 893 ; la 910 suit ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v911 (8/11) | **910 sur TestFlight** (version 893 ; la 911 suit ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -308,6 +308,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 8/11 12:00 | fin de la panne de GitHub | GitHub sert de nouveau ses fichiers (vers 11:10) : vérifications passées, PR mergée, **la 905 est sur TestFlight** (905.387) ; les binaires de Capacitor sont maintenant gardés en cache, une panne semblable ne bloquera plus les builds. Android n'a pas encore renvoyé sa v906 sur Google Play. Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | #373 (mergée), PR du run |
 | 8/11 13:00 | suivi d'Android v908 | Analyses : « Ce qui va avec votre bien-être » montre ce qui accompagne les bons comme les moins bons jours, avec l'unité « pt » ; Aujourd'hui : chaque ligne de « Vos données du jour » ouvre sa courbe dans Tendances. Le Gold offert jusqu'au 2/12 ne concerne que Google Play (sur iPhone, l'écran d'achat reste affiché). Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | PR v908 |
 | 8/11 14:00 | suivi d'Android v910 ; une correction iPhone | la 908 est sur TestFlight (908.389). Tendances : « attendu » s'écrit au-dessus de la partie pointillée de la courbe. **Correction propre à l'iPhone** : sans abonnement, chaque piste de « Pistes à tester » (Analyses) montre de nouveau sa ligne floutée au-dessus de « Débloquer » (la carte semblait vide) ; demandé aussi à Android. Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | PR v910 |
+| 8/11 15:00 | suivi d'Android v911 | la correction des pistes verrouillées (Analyses) est mergée et part sur TestFlight avec la 910. Android v911 : dans Tendances, « VFC nuit » et « FC au repos » disent leur nom complet sous la courbe ; dans Sources, les mesures sont écrites en toutes lettres (« cœur au repos », « variabilité cardiaque », « oxygène du sang ») ; sur iPhone, la VFC de l'app Santé suit : « variabilité cardiaque (SDNN) ». Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | #376 (mergée), PR v911 |
 
 ---
 
