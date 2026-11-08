@@ -1,8 +1,8 @@
 diff --git a/app/src/services/today.js b/app/src/services/today.js
-index c7f1b73..6fb5ead 100644
+index 269a05b6..1b855eb5 100644
 --- a/app/src/services/today.js
 +++ b/app/src/services/today.js
-@@ -170,6 +170,8 @@ const tileSourceLabel = (e) => (e?.source === 'huawei_watch' ? SOURCE_LABELS.hua
+@@ -227,6 +227,8 @@ const tileSourceLabel = (e) => (e?.source === 'huawei_watch' ? SOURCE_LABELS.hua
  const TILE_MATCHERS = {
    sleep: (e, day) => e.type === 'sleep' && sleepDay(e) === day,
    hrv: (e, day) => e.type === 'heart_rate' && e.payload?.subtype === 'heartRateVariability' && !isDaytimeHrv(e.payload) && localDateKey(e.at) === day,
@@ -11,16 +11,16 @@ index c7f1b73..6fb5ead 100644
    steps: (e, day) => e.type === 'steps' && localDateKey(e.at) === day,
  }
  
-@@ -198,6 +200,8 @@ export function measureTiles(summary, entries, now = new Date(), yesterday = nul
+@@ -256,6 +258,8 @@ export function measureTiles(summary, entries, now = new Date(), yesterday = nul
    }
    const sleep = pick('sleep', (s) => s.sleepMinutes != null)
    const hrv = pick('hrv', (s) => s.hrv != null)
 +  // Version iOS : sans VFC RMSSD, la tuile montre la SDNN de l'app Santé sous son nom plutôt qu'un « — »
 +  const sdnn = hrv.s.hrv == null ? pick('hrvSdnn', (s) => s.hrvSdnn != null) : null
-   const steps = pick('steps', (s) => s.steps != null)
+   // Les pas sont un total de la journée : ceux d’hier laissaient chercher ceux d’aujourd’hui (POLISH-SIM-2c)
+   const steps = pick('steps', (s) => s.steps != null, { fromYesterday: false })
    return [
-     {
-@@ -208,7 +212,9 @@ export function measureTiles(summary, entries, now = new Date(), yesterday = nul
+@@ -268,7 +272,9 @@ export function measureTiles(summary, entries, now = new Date(), yesterday = nul
        when: sleep.s.sleepMinutes == null ? null : sleep.when ? 'nuit d’avant' : 'cette nuit',
        sources: sourcesOf('sleep', sleep.d),
      },
