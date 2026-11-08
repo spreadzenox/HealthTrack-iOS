@@ -504,6 +504,11 @@
 - Raccourci ou widget « Lire mon bien-être » pour compenser l'absence de lecture au déverrouillage.
 - Apple Watch : HealthKit couvre déjà sommeil, FC, VFC, pas — atout de la version iOS.
 - Huawei Santé sur iOS écrit une partie de ses données dans Santé : vérifier lesquelles (sommeil ? VFC ?).
+  **8/11 15:10 : premier passage iPhone** (v911, deux simulations J45 en iPhone seul : persona 6 « maigrir » et 4
+  « endométriose » ; `journal/simulations/2026-11-08-1510-synthese.md`) : « kca l » du Journal corrigé (correctif 51) ;
+  limites de l'outil écartées (partage du PDF, IA des repas décrits) ; constats du code partagé relayés (`DEMANDES.md`) ;
+  idées de fonction (poids, cycle de l'app Santé, douleur plus précise) à proposer avec maquette. Prochain passage : sur
+  la dernière version du soir, avant l'examen bêta.
 - [x] **Livraison continue (décision du propriétaire du 04/11 19:45)**, test interne : depuis le 04/11 au soir,
   `testflight.yml` part seul sur chaque push de `main` qui change l'app (plus de lancement à la main).
   Pas d'espacement comme Android (CD-ALPHA-2, une version par jour sur Alpha) : le test interne n'a pas d'examen ;
