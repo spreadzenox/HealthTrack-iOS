@@ -320,6 +320,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 8/11 21:15 | examen bêta : la 918 attend la 896 | Apple refuse d'examiner la 918.396 tant que la 896.376 (en attente depuis cette nuit, 00:17) n'est pas examinée : la 918 est prête et dans le groupe, je la soumets dès qu'Apple a statué ; vous pouvez accélérer en retirant la 896 de l'examen (`POUR-ORCHESTRATEUR.md`). Parité : 67 % | PR examen bêta |
 | 8/11 21:20 | suivi d'Android v922 | Tendances : le cœur en toutes lettres dans le détail d'un jour ; le reste est le journal d'Android. Parité : 67 % | PR v922 |
 | 8/11 22:00 | suivi d'Android v923 | la 922 part sur TestFlight. Android v923 : dans Analyses, chaque facteur garde la même unité au court, moyen et long terme, et un effet invraisemblable dit « pas assez de données » (constat de nos personas). Examen bêta : la 896.376 attend toujours, la 918.396 est prête derrière elle. Parité : 67 % | #385 (mergée), PR v923 |
+| 9/11 00:00 | **votre réponse « 896 retirée »** ; examen bêta | merci : la 896.376 n'est plus dans le groupe, mais son examen continue chez Apple et bloque encore la 918.396 (refus à 00:00). Retirer du groupe ne suffit pas : il faut **faire expirer la 896.376** (geste détaillé dans `POUR-ORCHESTRATEUR.md`, ou dites « expire la 896 » et je le fais). Parité : 67 % | #388 (relevé élargi) |
 
 ---
 
