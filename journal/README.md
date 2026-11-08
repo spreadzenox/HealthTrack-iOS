@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v899 (8/11) | **898 sur TestFlight** (build 898.379, version 893 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v901 (8/11) | **898 sur TestFlight** (build 898.379, version 893 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -297,7 +297,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 8/11 01:00 | vos décisions de la nuit ; Android v897 | **la 896.376 est soumise à l'examen bêta** (correctif mergé, relancé à 00:15 : ajoutée au groupe « Testeurs Halcya », « en attente de l'examen bêta ») ; **vos décisions (A) mode polish, (B) intégrations, (C) personas reçues et notées** ; v897 : Journal › Tendances s'ouvre sur une courbe ; sur iPhone aussi ; vérifications passées, PR mergée, TestFlight. Parité : 67 % | #364 (mergée) |
 | 8/11 02:00 | suivi d'Android v898 | Tendances › Jour selon la maquette, l'ancien historique du bien-être retiré (le lien mène à Tendances) ; examen bêta : 896.376 toujours en attente chez Apple ; vérifications passées, PR mergée, **la 898 est sur TestFlight (898.379)**. Parité : 67 % | #365 (mergée) |
 | 8/11 03:00 | rien de neuf | Android n'a rien publié depuis la v898 ; l'examen bêta de la 896.376 attend toujours chez Apple ; TestFlight a la 898.379. Parité : 67 % | journal |
-| 8/11 04:00 | suivi d'Android v899 | Tendances › Jour s'ouvre sur le dernier jour qui a des lectures ; examen bêta de la 896.376 toujours en attente chez Apple ; vérifications en cours. Parité : 67 % | PR v899 |
+| 8/11 04:00 | suivi d'Android v899 | Tendances › Jour s'ouvre sur le dernier jour qui a des lectures ; examen bêta de la 896.376 toujours en attente chez Apple ; vérifications passées, PR mergée, la 899 sur TestFlight (899.381). Parité : 67 % | #367 (mergée) |
+| 8/11 05:00 | suivi d'Android v900, v901 | Tendances : le détail d'un jour dit ce qui s'est passé (« Nuits plus courtes que d'habitude (6 h 21) ») ; le repas décrit efface son message d'erreur quand vous ajoutez un aliment ; Android a fait son premier passage de personas (les configurations iPhone sont à rejouer en version iPhone : prévu avant l'envoi aux testeurs de ce soir) ; vérifications en cours. Parité : 67 % | PR v901 |
 
 ---
 
