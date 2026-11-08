@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v905 (8/11) | **904 sur TestFlight** (build 904.385, version 893 ; la 905 attend la fin d'une panne de GitHub ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v905 (8/11) | **905 sur TestFlight** (build 905.387, version 893 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -305,6 +305,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 8/11 09:00 | suivi d'Android v905 | rien de visible (outil des personas et étude Garmin et Samsung chez Android) ; le numéro de version suit (905) ; examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | PR v905 |
 | 8/11 10:00 | panne de GitHub ; outil des personas en mode iPhone | **la 905 n'a pas pu partir sur TestFlight** : depuis 09:50, GitHub ne sert plus les fichiers de ses releases (panne générale, 504), dont les binaires de Capacitor nécessaires à toute build iPhone ; les deux workflows font maintenant 6 essais et gardent ces fichiers en cache ; relance dès que GitHub revient. L'outil des personas d'Android s'ouvre en mode iPhone (correctif 49), pour le passage de ce soir. TestFlight a la 904.385 ; examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | PR #373 (vérifications rouges : panne) |
 | 8/11 11:00 | panne de GitHub, suite | la panne continue : ni la 905 iPhone ni la v906 d'Android (Analyses, « Ce qui va avec ») n'ont pu être construites ; l'iPhone reste au niveau de Google Play (v905). Relance automatique dès le retour de GitHub. Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | PR #373 |
+| 8/11 12:00 | fin de la panne de GitHub | GitHub sert de nouveau ses fichiers (vers 11:10) : vérifications passées, PR mergée, **la 905 est sur TestFlight** (905.387) ; les binaires de Capacitor sont maintenant gardés en cache, une panne semblable ne bloquera plus les builds. Android n'a pas encore renvoyé sa v906 sur Google Play. Examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | #373 (mergée), PR du run |
 
 ---
 
