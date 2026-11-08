@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v922 (8/11) | **918 sur TestFlight** (build 918.396, version 893 ; **prête pour les testeurs externes** (ajoutée au groupe ; son examen bêta attend que la 896.376 soit examinée) ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v923 (8/11) | **918 sur TestFlight** (build 918.396, version 893 ; **prête pour les testeurs externes** (ajoutée au groupe ; son examen bêta attend que la 896.376 soit examinée) ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -319,6 +319,7 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 8/11 21:00 | **envoi aux testeurs du soir : la 918** | Android a envoyé sa v918 (nouvel accueil) à ses testeurs dès 20:00 et n'enverra rien d'autre avant le 9/11 au soir : l'iPhone fait pareil, **la 918.396 (nouvel accueil, visite guidée, « ce que vos appareils envoient ») part au groupe « Testeurs Halcya » et à l'examen bêta d'Apple**, avec un texte « À tester » remis à jour. Avant l'envoi, second passage des personas (deux fois « tout mesurer », avec et sans Apple Watch) : rien de bloquant ; constats du code commun relayés à Android, un reste de « kca l » à revoir demain. Parité : 67 % | #382 (mergée), PR envoi du soir |
 | 8/11 21:15 | examen bêta : la 918 attend la 896 | Apple refuse d'examiner la 918.396 tant que la 896.376 (en attente depuis cette nuit, 00:17) n'est pas examinée : la 918 est prête et dans le groupe, je la soumets dès qu'Apple a statué ; vous pouvez accélérer en retirant la 896 de l'examen (`POUR-ORCHESTRATEUR.md`). Parité : 67 % | PR examen bêta |
 | 8/11 21:20 | suivi d'Android v922 | Tendances : le cœur en toutes lettres dans le détail d'un jour ; le reste est le journal d'Android. Parité : 67 % | PR v922 |
+| 8/11 22:00 | suivi d'Android v923 | la 922 part sur TestFlight. Android v923 : dans Analyses, chaque facteur garde la même unité au court, moyen et long terme, et un effet invraisemblable dit « pas assez de données » (constat de nos personas). Examen bêta : la 896.376 attend toujours, la 918.396 est prête derrière elle. Parité : 67 % | #385 (mergée), PR v923 |
 
 ---
 
