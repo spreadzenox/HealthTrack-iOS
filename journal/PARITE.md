@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v923 (commit `acf370e`, 8/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v924 (commit `90ebf9c`, 8/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 8/11 23:00 | #847 (v924) | #847 (POLISH-SIM-14, 15) : visite guidée, l'étiquette annonce le bon jour, le cadre suit la section montrée (`GuidedTour.jsx`, `services/tour.js`). Code partagé, note de Nouveautés pour tous ; 45 correctifs sans retouche ; 3621 tests, build appstore et lint passent | ✅ |
 | 8/11 22:00 | #846 (v923) | #846 (POLISH-SIM-16) : Analyses, une seule unité par facteur (même quantité au court, moyen et long terme) ; un effet plus grand que la note elle-même s'affiche « pas assez de données ». Répond à un constat de nos personas iPhone (« −4,7 pt », unité qui change). Code partagé, note de Nouveautés pour tous ; 45 correctifs sans retouche ; 3618 tests, build appstore et lint passent | ✅ |
 | 8/11 21:00 | #842 à #845 (v919 à v922) | #842 (POLISH-SIM-6b) : Tendances, détail du jour, « cœur au repos » et « variabilité cardiaque » en toutes lettres ; #843, #844 : journal (nouvel accueil livré, Alpha 100918 envoyé, gel des envois Alpha jusqu'au 9/11 22:00) ; #845 : passage des personas d'Android sur le nouvel accueil (journal). Code partagé, note de Nouveautés pour tous ; 45 correctifs sans retouche ; 3614 tests, build appstore et lint passent | ✅ |
 | 8/11 20:00 | #841 (v918) | #841 (ACC-8) : visite guidée sur les vrais écrans, « Voir un exemple » en bas des écrans vides ; mode exemple (`storage/exampleMode.js` : lectures de la base servies par une liste en mémoire, écritures retenues jusqu'à la sortie). **Côté iPhone** : la copie de secours de l'app Fichiers (`ios/snapshot.js`) ne s'écrit plus pendant l'exemple (le compte lisait l'exemple, l'export la vraie base : une base restaurée vide aurait écrasé sa copie) ; correctif 48 rendu stable (ajout en fin de fichier au lieu de réécrire la liste d'Android, qui change à chaque version). 45 correctifs ; 3614 tests, build appstore et lint passent | ✅ |
