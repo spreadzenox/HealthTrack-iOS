@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v904 (commit `be3409a`, 8/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v905 (commit `b02562f`, 8/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 8/11 09:00 | #827 (v905) | #827 : outil des personas corrigé et deux simulations de plus chez Android ; étude Garmin et Samsung (INTEG-1, `journal/protocoles/garmin-samsung.md` d'Android). Aucun code de l'app changé ; numéro de version suivi (905) ; 41 correctifs ; 3582 tests, build appstore et lint passent | ✅ (rien à voir à l'écran) |
 | 8/11 08:00 | #826 (v904) | #826 (POLISH-SIM-4) : Tendances, quand le bien-être du jour diffère de la note, la ligne dit ce qui s'y mêle (visage, jours voisins) ; le confort digestif rappelle son échelle (5 = calme). Code web partagé, aussi sur iPhone ; note de Nouveautés valable sur iPhone ; 41 correctifs ; 3580 tests, build appstore et lint passent | 🟡 (captures de la PR) |
 | 8/11 07:00 | #825 (v903) | #825 (POLISH-SIM-3b) : Tendances, graduations rondes et régulières (4 000, 6 000, 8 000 pas ; 6, 7, 8, 9 h). Code web partagé, aussi sur iPhone ; note de Nouveautés valable sur iPhone ; 41 correctifs ; 3576 tests, build appstore et lint passent | 🟡 (captures de la PR) |
 | 8/11 06:00 | #824 (v902) | #824 (POLISH-SIM-3, constat des personas) : Tendances, chaque axe dit son unité (/5, h, pas, ms, bpm) et prend la couleur de sa courbe. Code web partagé, aussi sur iPhone ; note de Nouveautés valable sur iPhone ; 41 correctifs ; 3572 tests, build appstore et lint passent | 🟡 (captures de la PR) |

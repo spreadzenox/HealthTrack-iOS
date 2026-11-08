@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v904 (8/11) | **898 sur TestFlight** (build 898.379, version 893 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v905 (8/11) | **898 sur TestFlight** (build 898.379, version 893 ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -301,7 +301,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 8/11 05:00 | suivi d'Android v900, v901 | Tendances : le détail d'un jour dit ce qui s'est passé (« Nuits plus courtes que d'habitude (6 h 21) ») ; le repas décrit efface son message d'erreur quand vous ajoutez un aliment ; Android a fait son premier passage de personas (les configurations iPhone sont à rejouer en version iPhone : prévu avant l'envoi aux testeurs de ce soir) ; vérifications passées, PR mergée, la 901 sur TestFlight (901.382). Parité : 67 % | #368 (mergée) |
 | 8/11 06:00 | suivi d'Android v902 | Tendances : chaque axe dit son unité et prend la couleur de sa courbe ; examen bêta de la 896.376 toujours en attente chez Apple ; vérifications passées, PR mergée, la 902 sur TestFlight (902.383). Parité : 67 % | #369 (mergée) |
 | 8/11 07:00 | suivi d'Android v903 | Tendances : graduations rondes (4 000, 6 000, 8 000 pas ; 6, 7, 8, 9 h) ; examen bêta de la 896.376 toujours en attente chez Apple ; vérifications passées, PR mergée, la 903 sur TestFlight (903.384). Parité : 67 % | #370 (mergée) |
-| 8/11 08:00 | suivi d'Android v904 | Tendances : le bien-être du jour dit d'où il vient quand il diffère de votre note ; le confort digestif rappelle son échelle ; examen bêta de la 896.376 toujours en attente chez Apple (depuis 00:17) ; vérifications en cours. Parité : 67 % | PR v904 |
+| 8/11 08:00 | suivi d'Android v904 | Tendances : le bien-être du jour dit d'où il vient quand il diffère de votre note ; le confort digestif rappelle son échelle ; examen bêta de la 896.376 toujours en attente chez Apple (depuis 00:17) ; vérifications passées, PR mergée, la 904 sur TestFlight (904.385). Parité : 67 % | #371 (mergée) |
+| 8/11 09:00 | suivi d'Android v905 | rien de visible (outil des personas et étude Garmin et Samsung chez Android) ; le numéro de version suit (905) ; examen bêta de la 896.376 toujours en attente chez Apple. Parité : 67 % | PR v905 |
 
 ---
 
