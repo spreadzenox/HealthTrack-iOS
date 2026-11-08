@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v896 (7/11) | **893 sur TestFlight** (build 893.374, première au numéro de version fixe ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
+| Dernière version | v897 (8/11) | **893 sur TestFlight** (build 893.374, première au numéro de version fixe ; **844.344 reste attachée à la version 844 pour la soumission**, avec « Votre avis », la photo des selles et App Attest, iOS 15.4 au moins ; chaque nouvelle version y part seule après ses vérifications), achat ouvert ; dans App Store Connect, la version 717 garde la build 717.216 que vous avez choisie |
 | Où l'installer | Play Store, test fermé | **TestFlight** (test interne : testeurs ajoutés par le propriétaire, action A6) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables, recompte du 2/11 : achat, conditions, fiche et TestFlight comptés depuis qu'ils marchent ; le temps d'écran, la voix et le Bluetooth attendent l'essai sur l'iPhone 12) |
 
@@ -53,6 +53,15 @@
   logicielle).
 - Installez la build la plus récente de TestFlight (852.353 aujourd'hui ; 844.344 est celle de la soumission) : Paramètres y dit « Gold offert pendant le
   test, jusqu'au 6 nov. » ; à partir du 7/11, l'écran d'achat y montre Silver et Gold (achats de test gratuits).
+
+**Vos décisions du 7/11 au soir (reçues le 8/11 à 01:00 par `POUR-IOS.md`, lignes de 00:35)** : (A) **mode polish**
+dès le 9/11, sur Android et iPhone, à partir de la version envoyée aux testeurs dimanche 8/11 au soir : plus de
+nouvelle fonction, seulement bugs, polissage, textes en trop et retraits ; une idée de fonction devient une proposition
+avec maquette (`journal/maquettes/`), jamais codée sans votre accord ; le 8/11, vos corrections passent avant tout ;
+(B) **intégrations**, seule exception, dans l'ordre : Garmin et Samsung ; Withings ; Huawei (dont **Huawei sur iPhone,
+Huawei Health Kit**) ; Xiaomi ; ce qui arrive déjà par l'app Santé se prend là ; garde-fous notés au BACKLOG ;
+(C) **simulation de personas** avant chaque envoi aux testeurs, avec les configurations iPhone de l'artefact
+« Personas et matériel » d'Android.
 
 **Votre décision du 7/11 (reçue à 16:00 par `POUR-IOS.md`, ligne de 15:35)** : « ventre » devient « digestif » dans
 les textes visibles (« Ma digestion », sous-onglet d'Analyses, PDF, fiche ; données et identifiants inchangés) ; nom
@@ -284,7 +293,8 @@ européenne ; sinon la carte le dit. Le lendemain, la carte montre le temps d'é
 | 7/11 22:00 | votre réponse « ok même numéro de version » ; Android v888 à v893 | **votre décision appliquée** : les builds de test gardent le numéro de version **893** pendant ce cycle (fichier `testflight-version.json`) ; le numéro de build suit Android et l'app affiche toujours la version d'Android ; la version 844 et sa build 844.344 ne changent pas ; Android v888 à v893 : essais tirés au sort et habitudes dans Agir, changements durables dans Tendances ; l'accueil propose l'app Santé avec une phrase propre aux iPhone sans montre ; vérifications passées, PR mergée, **la 893 est sur TestFlight (893.374)**, acceptée par Apple avec le numéro de version fixe. Parité : 67 % | #360 (mergée) |
 | 7/11 23:00 | chantier du soir : Android v894, v895 | les écarts du jour partent du dernier changement durable (sans texte nouveau) ; vérifications en cours ; examen bêta inchangé ; cette nuit, après la dernière version d'Android (23:45), la dernière build part au groupe « Testeurs Halcya » et à l'examen bêta ; vérifications passées, PR mergée. Parité : 67 % | #361 (mergée) |
 | 8/11 00:00 | chantier du soir : Android v896 | sur l'Accueil, le bien-être du jour vient du même calcul que les Tendances ; « d'habitude » suit vos changements durables (note de Nouveautés propre à l'iPhone, celles d'Android étant réservées à Google Play) ; vérifications passées, PR mergée, **la 896 est sur TestFlight (896.376, version 893)**. Parité : 67 % | #362 (mergée) |
-| 8/11 00:00 | examen bêta de la nuit | la v896 est la dernière version d'Android de la journée ; sa build 896.376 est traitée par Apple ; envoi au groupe « Testeurs Halcya » : « À tester » écrit, puis une lecture refusée par Apple a arrêté le script avant l'ajout au groupe ; corrigé et relancé dans la foulée (voir le run suivant). Parité : 67 % | PR examen bêta (correctif) |
+| 8/11 00:00 | examen bêta de la nuit | la v896 est la dernière version d'Android de la journée ; sa build 896.376 est traitée par Apple ; envoi au groupe « Testeurs Halcya » : « À tester » écrit, puis une lecture refusée par Apple a arrêté le script avant l'ajout au groupe ; corrigé et relancé dans la foulée (voir le run suivant). Parité : 67 % | #363 (mergée) |
+| 8/11 01:00 | vos décisions de la nuit ; Android v897 | **la 896.376 est soumise à l'examen bêta** (correctif mergé, relancé à 00:15 : ajoutée au groupe « Testeurs Halcya », « en attente de l'examen bêta ») ; **vos décisions (A) mode polish, (B) intégrations, (C) personas reçues et notées** ; v897 : Journal › Tendances s'ouvre sur une courbe ; sur iPhone aussi ; vérifications en cours. Parité : 67 % | PR v897 |
 
 ---
 
