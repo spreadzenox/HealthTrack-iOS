@@ -1,5 +1,5 @@
 diff --git a/app/src/config/permissionDisclosures.js b/app/src/config/permissionDisclosures.js
-index 8668336..171949e 100644
+index 8668336b..171949ee 100644
 --- a/app/src/config/permissionDisclosures.js
 +++ b/app/src/config/permissionDisclosures.js
 @@ -142,7 +142,7 @@ if (FEATURES.iosStore) {
@@ -11,8 +11,67 @@ index 8668336..171949e 100644
        'Elles restent dans vos données, sur le téléphone. Vous pouvez retirer l’accès à tout moment dans Réglages › Santé › Accès aux données et appareils.',
      ],
      accept: 'J’accepte, ouvrir l’app Santé',
+diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
+index fc62efca..1bab1c5a 100644
+--- a/app/src/pages/Onboarding.jsx
++++ b/app/src/pages/Onboarding.jsx
+@@ -52,6 +52,9 @@ import { useEntitlement } from '../hooks/useEntitlement'
+ import { STATUS_LABEL, measureStatuses } from '../devices/deviceCapabilities'
+ import { lastLaunchDay } from '../services/entitlement'
+ 
++// Version iOS (HealthTrack-iOS) : l'iPhone importe 6 mois de l'app Santé (IOS_FIRST_IMPORT_DAYS), Android 30 jours
++const IMPORT_SPAN = FEATURES.iosStore ? '6 derniers mois' : '30 derniers jours'
++
+ const withTimeout = (promise, ms, fallback) =>
+   Promise.race([promise, new Promise((resolve) => setTimeout(() => resolve(fallback), ms))])
+ 
+@@ -276,7 +279,7 @@ function HealthCard({ health, onHealth }) {
+       </h2>
+       <p className="onb-card-sub">{name === 'Santé' ? 'votre iPhone et votre montre' : 'votre téléphone, vos montres, bagues et balances'}</p>
+       <p className="onb-card-text">
+-        {APP_NAME} lit vos pas, votre sommeil, ce que vos appareils mesurent et vos 30 derniers jours. Elle n’écrit rien et
++        {APP_NAME} lit vos pas, votre sommeil, ce que vos appareils mesurent et vos {IMPORT_SPAN}. Elle n’écrit rien et
+         n’envoie rien. Vous choisissez type par type.
+       </p>
+       {health === 'granted' ? (
+@@ -478,7 +481,7 @@ function FoundStep({ health, imported, onImported, installed, huawei, onConnect
+           <div
+             className="onb-import-bar"
+             role="progressbar"
+-            aria-label="Import de vos 30 derniers jours"
++            aria-label={`Import de vos ${IMPORT_SPAN}`}
+             aria-valuemin={0}
+             aria-valuemax={progress?.total || 1}
+             aria-valuenow={progress?.done || 0}
+@@ -486,7 +489,7 @@ function FoundStep({ health, imported, onImported, installed, huawei, onConnect
+             <span style={{ width: `${pct(progress)}%` }} />
+           </div>
+           <p className="onb-import-line">
+-            Import de vos 30 derniers jours{progress ? ` · ${progress.done}/${progress.total}` : '…'}
++            Import de vos {IMPORT_SPAN}{progress ? ` · ${progress.done}/${progress.total}` : '…'}
+           </p>
+         </>
+       )}
+@@ -521,7 +524,7 @@ function FoundStep({ health, imported, onImported, installed, huawei, onConnect
+       )}
+       {facts?.length > 0 && (
+         <>
+-          <h2 className="onb-leaves-group">Vos 30 derniers jours</h2>
++          <h2 className="onb-leaves-group">Vos {IMPORT_SPAN}</h2>
+           <ul className="onb-facts">
+             {facts.map((f) => (
+               <li key={f.key} className={`onb-fact onb-fact--${f.key}`}>
+@@ -532,7 +535,7 @@ function FoundStep({ health, imported, onImported, installed, huawei, onConnect
+             ))}
+           </ul>
+           {sharedSource && <p className="onb-facts-source">D’après {sharedSource}</p>}
+-          <p className="onb-fine">Vos 30 derniers jours sont importés. {APP_NAME} les comparera à votre digestion et à votre bien-être.</p>
++          <p className="onb-fine">Vos {IMPORT_SPAN} sont importés. {APP_NAME} les comparera à votre digestion et à votre bien-être.</p>
+         </>
+       )}
+       {entries && !facts?.length && (
 diff --git a/app/src/services/firstImport.js b/app/src/services/firstImport.js
-index 0abc153..d80054b 100644
+index 0abc153e..d80054bb 100644
 --- a/app/src/services/firstImport.js
 +++ b/app/src/services/firstImport.js
 @@ -24,6 +24,12 @@ const DAY_MS = 24 * 3600 * 1000
@@ -37,62 +96,3 @@ index 0abc153..d80054b 100644
    const result = await connector.sync({ since, until: now, writer, onProgress })
    if (readsAllFailed(result)) {
      setConnectorSettings(connector.id, { lastAttemptAt: now.toISOString(), lastSyncResult: result })
-diff --git a/app/src/pages/Onboarding.jsx b/app/src/pages/Onboarding.jsx
-index b8abf5dc..b3e29270 100644
---- a/app/src/pages/Onboarding.jsx
-+++ b/app/src/pages/Onboarding.jsx
-@@ -51,6 +51,9 @@ import { GOLD_AI_DAILY } from '../config/premiumBenefits'
- import { useEntitlement } from '../hooks/useEntitlement'
- import { lastLaunchDay } from '../services/entitlement'
- 
-+// Version iOS (HealthTrack-iOS) : l'iPhone importe 6 mois de l'app Santé (IOS_FIRST_IMPORT_DAYS), Android 30 jours
-+const IMPORT_SPAN = FEATURES.iosStore ? '6 derniers mois' : '30 derniers jours'
-+
- const withTimeout = (promise, ms, fallback) =>
-   Promise.race([promise, new Promise((resolve) => setTimeout(() => resolve(fallback), ms))])
- 
-@@ -275,7 +278,7 @@ function HealthCard({ health, onHealth }) {
-       </h2>
-       <p className="onb-card-sub">{name === 'Santé' ? 'votre iPhone et votre montre' : 'votre téléphone, vos montres, bagues et balances'}</p>
-       <p className="onb-card-text">
--        {APP_NAME} lit vos pas, votre sommeil, ce que vos appareils mesurent et vos 30 derniers jours. Elle n’écrit rien et
-+        {APP_NAME} lit vos pas, votre sommeil, ce que vos appareils mesurent et vos {IMPORT_SPAN}. Elle n’écrit rien et
-         n’envoie rien. Vous choisissez type par type.
-       </p>
-       {health === 'granted' ? (
-@@ -474,7 +477,7 @@ function FoundStep({ health, imported, onImported, installed, onConnect }) {
-           <div
-             className="onb-import-bar"
-             role="progressbar"
--            aria-label="Import de vos 30 derniers jours"
-+            aria-label={`Import de vos ${IMPORT_SPAN}`}
-             aria-valuemin={0}
-             aria-valuemax={progress?.total || 1}
-             aria-valuenow={progress?.done || 0}
-@@ -482,7 +485,7 @@ function FoundStep({ health, imported, onImported, installed, onConnect }) {
-             <span style={{ width: `${pct(progress)}%` }} />
-           </div>
-           <p className="onb-import-line">
--            Import de vos 30 derniers jours{progress ? ` · ${progress.done}/${progress.total}` : '…'}
-+            Import de vos {IMPORT_SPAN}{progress ? ` · ${progress.done}/${progress.total}` : '…'}
-           </p>
-         </>
-       )}
-@@ -500,7 +503,7 @@ function FoundStep({ health, imported, onImported, installed, onConnect }) {
-       )}
-       {facts?.length > 0 && (
-         <>
--          <h2 className="onb-leaves-group">Vos 30 derniers jours</h2>
-+          <h2 className="onb-leaves-group">Vos {IMPORT_SPAN}</h2>
-           <ul className="onb-facts">
-             {facts.map((f) => (
-               <li key={f.key} className={`onb-fact onb-fact--${f.key}`}>
-@@ -511,7 +514,7 @@ function FoundStep({ health, imported, onImported, installed, onConnect }) {
-             ))}
-           </ul>
-           {sharedSource && <p className="onb-facts-source">D’après {sharedSource}</p>}
--          <p className="onb-fine">Vos 30 derniers jours sont importés. {APP_NAME} les comparera à votre digestion et à votre bien-être.</p>
-+          <p className="onb-fine">Vos {IMPORT_SPAN} sont importés. {APP_NAME} les comparera à votre digestion et à votre bien-être.</p>
-         </>
-       )}
-       {entries && !facts?.length && (
