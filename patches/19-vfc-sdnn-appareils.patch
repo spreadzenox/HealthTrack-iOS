@@ -1,13 +1,13 @@
 diff --git a/app/src/devices/healthApps.js b/app/src/devices/healthApps.js
-index c1f74a0..442448a 100644
+index a5cf9197..6b440afa 100644
 --- a/app/src/devices/healthApps.js
 +++ b/app/src/devices/healthApps.js
 @@ -123,6 +123,7 @@ export const METRICS = [
    { key: 'heartRate', label: 'cœur', watch: true },
-   { key: 'restingHeartRate', label: 'FC repos', watch: true },
-   { key: 'heartRateVariability', label: 'VFC', watch: true },
-+  { key: 'heartRateVariabilitySdnn', label: 'VFC (SDNN)' }, // Version iOS : VFC de l'app Santé, à part
-   { key: 'oxygenSaturation', label: 'SpO₂', watch: true },
+   { key: 'restingHeartRate', label: 'cœur au repos', watch: true },
+   { key: 'heartRateVariability', label: 'variabilité cardiaque', watch: true },
++  { key: 'heartRateVariabilitySdnn', label: 'variabilité cardiaque (SDNN)' }, // Version iOS : VFC de l'app Santé, à part
+   { key: 'oxygenSaturation', label: 'oxygène du sang', watch: true },
    { key: 'sleep', label: 'sommeil', watch: true },
    { key: 'steps', label: 'pas', watch: true },
 @@ -197,6 +198,7 @@ export function sourceCoverage(entries, now = new Date()) {
