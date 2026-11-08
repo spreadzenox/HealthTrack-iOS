@@ -49,7 +49,10 @@ function pickSettings(storage) {
  * Écrit la copie dans le dossier exclu de la sauvegarde si la base contient quelque chose, puis seulement alors retire
  * l'ancienne copie de la racine (`removeLegacy`). Rend `true` si la copie a été écrite ; ne lève jamais.
  */
-export async function saveSnapshot({ countAllEntries, exportToJson, writeFile, storage, removeLegacy }) {
+export async function saveSnapshot({ countAllEntries, exportToJson, writeFile, storage, removeLegacy, isExampleMode }) {
+  // Pendant l'exemple de la visite guidée (ACC-8 d'Android), le compte lit les données fictives, l'export la vraie base :
+  // pas de copie, pour ne jamais remplacer une copie par une base vide
+  if (isExampleMode?.()) return false
   try {
     if ((await countAllEntries()) === 0) return false
     const json = await exportToJson()
@@ -178,11 +181,12 @@ export async function installSnapshots(deps) {
 /** Branchement réel : Capacitor, @capacitor/app, @capacitor/filesystem et la base de l'app. */
 export async function startSnapshots() {
   try {
-    const [{ Capacitor }, { App }, { Filesystem, Directory, Encoding }, storage] = await Promise.all([
+    const [{ Capacitor }, { App }, { Filesystem, Directory, Encoding }, storage, example] = await Promise.all([
       import('@capacitor/core'),
       import('@capacitor/app'),
       import('@capacitor/filesystem'),
       import('../storage/localHealthStorage.js'),
+      import('../storage/exampleMode.js'),
     ])
     await installSnapshots({
       platform: Capacitor.isNativePlatform() ? Capacitor.getPlatform() : 'web',
@@ -191,6 +195,7 @@ export async function startSnapshots() {
       wait: (ms) => new Promise((resolve) => setTimeout(resolve, ms)),
       countAllEntries: storage.countAllEntries,
       exportToJson: storage.exportToJson,
+      isExampleMode: example.isExampleMode,
       storage: window.localStorage,
       writeFile: (path, data) => Filesystem.writeFile({ path, data, directory: Directory.Documents, encoding: Encoding.UTF8, recursive: true }),
       removeLegacy: () =>

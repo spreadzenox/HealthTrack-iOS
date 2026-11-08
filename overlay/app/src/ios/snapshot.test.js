@@ -31,6 +31,17 @@ describe('copie de secours de la base sur iPhone', () => {
     expect(order).toEqual(['écrite', 'ancienne retirée'])
   })
 
+  // Visite guidée d'Android (ACC-8, v918) : pendant « Voir un exemple », les lectures de la base rendent des données
+  // fictives (`countAllEntries` compte l'exemple) mais l'export lit la vraie base : sans garde, une installation
+  // restaurée (base vide, copie trouvée) passée en arrière-plan pendant l'exemple écraserait sa copie par une base vide
+  it('jamais pendant l’exemple de la visite guidée : la copie existante reste intacte', async () => {
+    const d = deps({ isExampleMode: () => true, removeLegacy: vi.fn() })
+    expect(await saveSnapshot(d)).toBe(false)
+    expect(d.exportToJson).not.toHaveBeenCalled()
+    expect(d.writeFile).not.toHaveBeenCalled()
+    expect(d.removeLegacy).not.toHaveBeenCalled()
+  })
+
   it('nouvelle copie non écrite : l’ancienne reste (jamais aucune copie)', async () => {
     const d = deps({ writeFile: vi.fn(async () => { throw new Error('disque plein') }), removeLegacy: vi.fn() })
     expect(await saveSnapshot(d)).toBe(false)
