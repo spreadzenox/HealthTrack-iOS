@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v913 (commit `54f01b1`, 8/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v914 (commit `d0c0e3f`, 8/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 8/11 18:00 | #837 (v914) | #837 (POLISH-SIM-2c) : Aujourd'hui, « Vos données du jour » ne reprend plus les pas d'hier (un total de la journée) ; sommeil et VFC gardent la veille. Répond au constat « Pas · hier » de nos personas iPhone. **Correctif 30 refait** (contexte de `measureTiles` changé : la VFC de l'app Santé, « VFC (SDNN) », reste dans la tuile quand il n'y a pas de VFC nuit). 44 correctifs ; 3599 tests, build appstore et lint passent | ✅ |
 | 8/11 17:00 | #835, #836 (v913) | #835 (POLISH-SIM-5) : avant les premiers résultats, Analyses et Aujourd'hui comptent en jours notés ; Digestion dit combien de jours de gêne il faut ; Agir vide dit ce qui viendra le remplir ; #836 (POLISH-SIM-12) : « rapport médecin » d'Agir ouvre la carte du rapport, période proposée bornée aux jours d'usage (`getFirstEntryAt`). Répond à trois constats de nos personas iPhone (Agir vide, compte à rebours, rapport difficile à trouver). **Correctif 09 refait** (imports de `DoctorReportCard.jsx` changés ; partage du PDF et texte « Fichiers › Sur mon iPhone » inchangés). 44 correctifs ; 3598 tests, build appstore et lint passent | ✅ |
 | 8/11 15:00 | #834 (v911) | #834 (POLISH-SIM-6) : Tendances, sous la courbe, « VFC nuit » et « FC au repos » disent leur nom complet et leur unité ; « attendu » seulement quand un futur est tracé ; Sources, ce que chaque app envoie dit « cœur au repos », « variabilité cardiaque », « oxygène du sang ». **Correctif 19 refait** (ses lignes de contexte avaient changé) : la VFC de l'app Santé y devient « variabilité cardiaque (SDNN) », dans le même esprit ; test iPhone `healthApps.appstore.test.js` aux nouveaux libellés. 43 correctifs ; 3591 tests, build appstore et lint passent | ✅ |
 | 8/11 14:00 | #832, #833 (v910) | #833 (POLISH-SIM-13) : Tendances, « attendu » écrit au-dessus de la partie pointillée de la courbe ; #832 journal seul. Code web partagé, note de Nouveautés pour tous ; 42 correctifs sans retouche. **Côté iPhone, correctif 50** : piste verrouillée d'Analyses (sans abonnement), la barre floutée redevient visible (défaut du code partagé, demandé à Android dans `DEMANDES.md`) ; note de Nouveautés propre à l'iPhone ; 3589 tests, build appstore et lint passent | ✅ |
