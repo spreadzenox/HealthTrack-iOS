@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v901 (commit `c2898f5`, 8/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v902 (commit `ee15236`, 8/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 8/11 06:00 | #824 (v902) | #824 (POLISH-SIM-3, constat des personas) : Tendances, chaque axe dit son unité (/5, h, pas, ms, bpm) et prend la couleur de sa courbe. Code web partagé, aussi sur iPhone ; note de Nouveautés valable sur iPhone ; 41 correctifs ; 3572 tests, build appstore et lint passent | 🟡 (captures de la PR) |
 | 8/11 05:00 | #822, #823 (v900, v901) | #822 : premier passage complet des personas chez Android (outil `npm run persona`, rapports dans `journal/simulations/` d'Android) et l'erreur rouge du repas décrit qui s'efface quand on ajoute un aliment à la main ; #823 (T4) : détail d'un jour de Tendances comme la maquette (habitude, « Nuits plus courtes que d'habitude (6 h 21) », effet en points sur 5). Code web partagé, aussi sur iPhone ; notes de Nouveautés valables sur iPhone ; 41 correctifs ; 3571 tests, build appstore et lint passent | 🟡 (captures de la PR) |
 | 8/11 04:00 | #821 (v899) | #821 (T3) : Tendances › Jour s'ouvre sur le dernier jour qui a des lectures (la nuit ou avant la première lecture du jour) ; captures à côté de la maquette chez Android. Code web partagé, aussi sur iPhone ; note de Nouveautés valable sur iPhone ; 41 correctifs ; 3560 tests, build appstore et lint passent | 🟡 (captures de la PR) |
 | 8/11 02:00 | #820 (v898) | #820 (T2) : vue Jour de Tendances selon la maquette ; l'ancien historique du bien-être (`WellbeingHistory.jsx`) est retiré, `/bien-etre` mène à Tendances › Jour. Code web partagé, aussi sur iPhone ; captures de `/bien-etre` gardées (redirection, comme `visual-check.mjs`) ; 41 correctifs ; 3557 tests (tests de l'ancien historique retirés par Android), build appstore et lint passent | 🟡 (captures de la PR) |
