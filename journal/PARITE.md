@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v908 (commit `3729851`, 8/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v910 (commit `ba44407`, 8/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 8/11 14:00 | #832, #833 (v910) | #833 (POLISH-SIM-13) : Tendances, « attendu » écrit au-dessus de la partie pointillée de la courbe ; #832 journal seul. Code web partagé, note de Nouveautés pour tous ; 42 correctifs sans retouche. **Côté iPhone, correctif 50** : piste verrouillée d'Analyses (sans abonnement), la barre floutée redevient visible (défaut du code partagé, demandé à Android dans `DEMANDES.md`) ; note de Nouveautés propre à l'iPhone ; 3589 tests, build appstore et lint passent | ✅ |
 | 8/11 13:00 | #828, #830, #831 (v908 ; la v906 n'est jamais partie sur Google Play, panne de GitHub) | #828 (POLISH-SIM-10, 11) : Analyses, « Ce qui va avec votre bien-être » (bons et moins bons jours), unité « pt », l'habitude d'un jour récent du Journal identique à Aujourd'hui ; #830 : chaque ligne de « Vos données du jour » ouvre sa courbe dans Tendances (`/tendances?mesure=…`), le « + » entoure un instant les boutons d'ajout ; CI d'Android plus robuste (Gradle) ; #831 : Gold offert jusqu'au 2/12 **sur Google Play seulement** (`launch-period.json` : `until` repoussé, `iosUntil` inchangé au 6/11 : rien ne change sur iPhone). Code web partagé, notes de Nouveautés pour tous ; 42 correctifs sans retouche ; 3586 tests, build appstore et lint passent | ✅ |
 | 8/11 09:00 | #827 (v905) | #827 : outil des personas corrigé et deux simulations de plus chez Android ; étude Garmin et Samsung (INTEG-1, `journal/protocoles/garmin-samsung.md` d'Android). Aucun code de l'app changé ; numéro de version suivi (905) ; 41 correctifs ; 3582 tests, build appstore et lint passent | ✅ (rien à voir à l'écran) |
 | 8/11 08:00 | #826 (v904) | #826 (POLISH-SIM-4) : Tendances, quand le bien-être du jour diffère de la note, la ligne dit ce qui s'y mêle (visage, jours voisins) ; le confort digestif rappelle son échelle (5 = calme). Code web partagé, aussi sur iPhone ; note de Nouveautés valable sur iPhone ; 41 correctifs ; 3580 tests, build appstore et lint passent | 🟡 (captures de la PR) |
