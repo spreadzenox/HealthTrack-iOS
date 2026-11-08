@@ -461,6 +461,9 @@
   polissage, textes en trop, retraits ; une idée propre à l'iPhone = proposition avec maquette dans `journal/maquettes/`
   (ou relayée par `POUR-ORCHESTRATEUR.md`), jamais codée sans accord. Le suivi d'Android continue. Le 8/11 : corrections
   du propriétaire d'abord.
+  - [x] **8/11 14:00, correctif 50** : Analyses, piste verrouillée (sans abonnement) : la barre floutée était invisible
+    (`span` vide hors conteneur flexible) ; titre verrouillé en `flex`, test CSS, note de Nouveautés iPhone ; demandé
+    à Android (`DEMANDES.md`) : à retirer quand Android l'aura corrigé.
 - [ ] **INTÉGRATIONS (seule exception au mode polish)** — 8/11 09:00 : Android a commencé par Garmin et Samsung (INTEG-1,
   étude dans `journal/protocoles/garmin-samsung.md` d'Android) ; côté iPhone, Garmin arrive déjà par l'app Santé (configuration 9) ;
   à relire quand Android choisira une voie d'accès directe.
