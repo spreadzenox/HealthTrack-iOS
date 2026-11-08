@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v897 (commit `450bdb7`, 8/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v898 (commit `34440b2`, 8/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 8/11 02:00 | #820 (v898) | #820 (T2) : vue Jour de Tendances selon la maquette ; l'ancien historique du bien-être (`WellbeingHistory.jsx`) est retiré, `/bien-etre` mène à Tendances › Jour. Code web partagé, aussi sur iPhone ; captures de `/bien-etre` gardées (redirection, comme `visual-check.mjs`) ; 41 correctifs ; 3557 tests (tests de l'ancien historique retirés par Android), build appstore et lint passent | 🟡 (captures de la PR) |
 | 8/11 01:00 | #819 (v897) | #819 (T1) : Journal › Tendances s'ouvre tout de suite sur une courbe (bien-être : la semaine dès 3 jours, sinon la journée ; sinon la première courbe disponible) ; décisions du propriétaire du 07/11 au soir inscrites chez Android (mode polish, intégrations, personas). Code web partagé, aussi sur iPhone ; note de Nouveautés valable sur iPhone ; 41 correctifs ; 3573 tests, build appstore et lint passent | 🟡 (captures de la PR) |
 | 7/11 23:00 | #818 (v896) | #818 : la valeur du bien-être du jour de l'Accueil vient de l'estimation TS-1 (`todayWellbeingState`, qui lit aussi les selles) ; VENTRE-BE-2 retiré (`gutSelfReport.js` supprimé, plus d'ajustement digestif dans la lecture du visage) ; 5a-3 : Sources ne redemande pas la météo. Notes de Nouveautés d'Android réservées à play et sideload (malgré `POUR-IOS.md` de 22:30 qui les dit valables sur iPhone) : **note propre à l'iPhone** `2026-11-07-2215-habitude-et-bien-etre-iphone` (v895 et v896) ; `DEMANDES.md`. Code web partagé, aussi sur iPhone ; 41 correctifs ; 3567 tests, build appstore et lint passent | 🟡 (captures de la PR) |
 | 7/11 22:00 | #815, #817 (v894, v895) | #817 (TS-2 normStart) : les écarts du jour partent du dernier changement durable (`dayDeviations.js`) ; #815 journal. Note de Nouveautés `2026-11-07-2150-norme-apres-changement` réservée par Android à play et sideload (reprise sur iPhone à 23:00) ; code web partagé, aussi sur iPhone ; 41 correctifs ; 3569 tests, build appstore et lint passent | 🟡 (captures de la PR) |
