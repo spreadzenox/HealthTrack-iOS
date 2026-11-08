@@ -456,6 +456,24 @@
   premier run après 23:45 (heure de Paris), une fois la dernière version d'Android du jour mergée et sa build traitée ;
   sinon au run suivant ; résultat relevé par `store-beta.yml`.
 
+- [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
+  partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
+  polissage, textes en trop, retraits ; une idée propre à l'iPhone = proposition avec maquette dans `journal/maquettes/`
+  (ou relayée par `POUR-ORCHESTRATEUR.md`), jamais codée sans accord. Le suivi d'Android continue. Le 8/11 : corrections
+  du propriétaire d'abord.
+- [ ] **INTÉGRATIONS (seule exception au mode polish)**, dans l'ordre : 1) Garmin et Samsung ; 2) Withings ; 3) Huawei
+  en direct sur Android et **Huawei sur iPhone (Huawei Health Kit)** ; 4) Xiaomi. Ce qui arrive déjà par l'app Santé se
+  prend là ; l'accès direct sert à ce qui y manque. Garde-fous : coexistence avec l'app du fabricant ; jamais le mot de
+  passe d'un autre service ; jamais de code décompilé ni de clé extraite ; secrets d'API seulement sur le relais (chez
+  Android) ; relais de passage sans stockage ; tout stockage de santé sur un serveur attend l'accord du propriétaire ;
+  comptes développeur et contrats : gestes du propriétaire, préparés pas à pas. Côté iPhone, à faire quand Android
+  attaque le point 3 : étude de Huawei Health Kit sur iOS (SDK, licence, ce qui manque dans l'app Santé).
+- [ ] **PERSONAS — simulation avant chaque envoi aux testeurs** (décision (C)) : un agent sans connaissance de l'app,
+  accès visuel seul (captures, clics, saisie), persona et matériel tirés au hasard (parts de marché), moments J1 / J14 /
+  J45 sur données de démonstration synthétiques ; configurations iPhone de l'artefact « Personas et matériel »
+  d'Android (`journal/PERSONAS.md`, `journal/simulations/`, outillage en cours chez Android). Côté iPhone : brancher le
+  passage sur les captures du simulateur avant `store-beta-submit.yml`, dès que l'outillage d'Android existe.
+
 ## Idées et questions ouvertes
 
 - **Médiateur de la consommation (P26 d'Android), reporté par le propriétaire le 2/11** : à traiter aux 10 premiers
