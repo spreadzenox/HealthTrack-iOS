@@ -21,7 +21,12 @@
 - La dernière version d'Android de la journée envoyée aux testeurs est la v918 : l'équivalent iPhone, **918.396**, est
   ajouté au groupe « Testeurs Halcya » et soumis à l'examen bêta par `store-beta-submit.yml` (build demandée
   explicitement, pour que les testeurs iPhone aient la même version que ceux d'Android, même si d'autres builds
-  arrivent sur TestFlight d'ici 23:45). Résultat ci-dessous.
+  arrivent sur TestFlight d'ici 23:45).
+- **Résultat (20:11 UTC)** : « Build 918.396 (traitée par Apple) », « À tester » (fr-FR) complété, « Ajoutée au groupe
+  externe « Testeurs Halcya » », puis `POST /v1/betaAppReviewSubmissions` : **422 « Another build in the same train is
+  already in beta review. Please submit it again once it gets completed. »** La 896.376 (même version 893) attend
+  depuis le 7/11 23:17 UTC. Rien d'autre à faire côté API sans geste du propriétaire (retirer la 896 de l'examen) :
+  `POUR-ORCHESTRATEUR.md` ; nouvelle soumission au premier run après la décision d'Apple sur la 896.
 - « À tester » remis à jour (`store/app-store/fr-FR/testflight-a-tester.txt`, 918 caractères) : nouvel accueil, visite
   guidée, Journal › Tendances, Agir.
 
