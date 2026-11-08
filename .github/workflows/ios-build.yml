@@ -107,8 +107,10 @@ jobs:
           /usr/libexec/PlistBuddy -c "Set :NSHealthUpdateUsageDescription 'Build de test : écrit des mesures de démonstration dans Santé.'" Info.plist
       # 8/11 : GitHub a répondu 504 aux fichiers binaires de capacitor-swift-pm (releases) pendant des heures ; gardés en cache,
       # ils ne bloquent plus la build quand GitHub ne les sert pas
+      # Restauré ici, enregistré juste après la résolution (pas en fin de job : un échec plus loin le perdrait)
       - name: Cache des paquets Swift (fichiers binaires de Capacitor)
-        uses: actions/cache@v4
+        id: spm-cache
+        uses: actions/cache/restore@v4
         with:
           path: ~/Library/Caches/org.swift.swiftpm
           key: spm-${{ runner.os }}-${{ hashFiles('ios/App/CapApp-SPM/Package.swift') }}
@@ -127,6 +129,13 @@ jobs:
           done
           echo "::error::Paquets Swift non résolus après 6 essais"
           exit 1
+      - name: Cache des paquets Swift (enregistré dès la résolution)
+        if: steps.spm-cache.outputs.cache-hit != 'true'
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: ~/Library/Caches/org.swift.swiftpm
+          key: ${{ steps.spm-cache.outputs.cache-primary-key }}
       # Entitlements dans les réglages de la cible App (pas en ligne de commande : ils s'appliqueraient aussi au paquet
       # de ressources des modèles du visage, qui n'en a pas)
       - name: Build Xcode (simulateur, signature à la volée)
