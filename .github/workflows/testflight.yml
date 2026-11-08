@@ -98,6 +98,8 @@ jobs:
               exit 0
             fi
             grep -E "error:" "$RUNNER_TEMP/spm-$attempt.log" | head -5 || true
+            # 8/11 : « Could not resolve package dependencies » seul ne dit pas quel paquet ni pourquoi : la fin du journal
+            tail -25 "$RUNNER_TEMP/spm-$attempt.log" || true
             sleep $((attempt * 20))
           done
           echo "::error::Paquets Swift non résolus après 3 essais"
@@ -203,6 +205,7 @@ jobs:
             ${{ runner.temp }}/upload.log
             ${{ runner.temp }}/archive-entitlements.txt
             ${{ runner.temp }}/ipa-entitlements.txt
+            ${{ runner.temp }}/spm-*.log
           if-no-files-found: ignore
       - name: Effacer la clé
         if: always()

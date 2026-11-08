@@ -13,7 +13,9 @@ App Store Connect, build 844.344 attachée  ·  **Parité** : 67 % (30/45)
 ## Fin du run précédent (v905)
 - #372 mergée (`1727a3c`) après trois vérifications vertes ; **TestFlight en échec** à l'étape « Paquets Swift (jusqu'à
   3 essais) » (« Could not resolve package dependencies » trois fois : réseau, avant toute compilation ; la même build
-  est passée dans la PR) ; tâche relancée une fois (08:50 UTC).
+  est passée dans la PR) ; tâche relancée une fois (08:50 UTC) : **même échec** (09:20 UTC). Pas d'autre relance : le
+  journal ne dit pas quel paquet ; `testflight.yml` affiche maintenant la fin du journal des paquets Swift et le joint aux
+  journaux de la build ; le merge de cette PR (qui touche `patches/`) relance TestFlight sur un nouveau commit.
 
 ## Android depuis le run précédent
 - Rien : `main` toujours à `b02562f` (v905).
