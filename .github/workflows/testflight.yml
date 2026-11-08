@@ -85,6 +85,13 @@ jobs:
           # Le mode captures (sondes, écriture dans Santé) n'est compilé qu'avec VITE_IOS_CAPTURE=1 : jamais ici
           if grep -rq "\[healthkit\] base" dist; then echo "::error::mode captures présent dans la build"; exit 1; fi
           npx -y -p "@capacitor/cli@$CORE" cap sync ios
+      # 8/11 : GitHub a répondu 504 aux fichiers binaires de capacitor-swift-pm (releases) pendant des heures ; gardés en cache,
+      # ils ne bloquent plus la build quand GitHub ne les sert pas
+      - name: Cache des paquets Swift (fichiers binaires de Capacitor)
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Caches/org.swift.swiftpm
+          key: spm-${{ runner.os }}-${{ hashFiles('ios/App/CapApp-SPM/Package.swift') }}
       # 5/11 (795.300) : un raté de réseau au téléchargement des paquets Swift (« Could not resolve package
       # dependencies ») a fait échouer l'archive ; avec la livraison continue, personne ne relance : jusqu'à 3 essais,
       # dans le même dossier que l'archive, qui réutilise ensuite les paquets téléchargés

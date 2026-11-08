@@ -24,5 +24,15 @@ App Store Connect, build 844.344 attachée  ·  **Parité** : 67 % (30/45)
 - **Correctif 49** : l'outil des personas d'Android (`npm run persona`) accepte `--store=appstore` (variante iPhone,
   écran de 390 × 844). Essai en local : ouverture, gestes, captures. Limites du navigateur notées au BACKLOG (PERSONAS).
 
+## Panne de GitHub (téléchargement des paquets Swift)
+- 09:10 UTC : la build simulateur de cette PR échoue aussi (« Could not resolve package dependencies »). Cause trouvée :
+  les fichiers binaires de `capacitor-swift-pm` 8.2.0 (`Capacitor.xcframework.zip`, `Cordova.xcframework.zip`, releases
+  de GitHub) répondent **504** (passerelle expirée), depuis ce conteneur comme depuis les runners macOS ; un autre
+  fichier de release GitHub répond 200. Panne extérieure, pas de code à corriger.
+- Parade pour la suite : `actions/cache` de `~/Library/Caches/org.swift.swiftpm` (clé : `CapApp-SPM/Package.swift`)
+  dans `testflight.yml` et `ios-build.yml` ; le cache se remplira à la première build réussie.
+- Tant que GitHub ne sert pas ces fichiers : pas de build iPhone, donc pas de merge (vérifications rouges) ni de
+  TestFlight ; 904.385 reste la dernière build. Relevé à chaque run.
+
 ## Suite
 - Résultat de la relance TestFlight (905) ; passage des personas iPhone ce soir, avant l'envoi aux testeurs.

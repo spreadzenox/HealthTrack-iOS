@@ -107,6 +107,13 @@ jobs:
           /usr/libexec/PlistBuddy -c "Set :NSHealthUpdateUsageDescription 'Build de test : écrit des mesures de démonstration dans Santé.'" Info.plist
       # Entitlements dans les réglages de la cible App (pas en ligne de commande : ils s'appliqueraient aussi au paquet
       # de ressources des modèles du visage, qui n'en a pas)
+      # 8/11 : GitHub a répondu 504 aux fichiers binaires de capacitor-swift-pm (releases) pendant des heures ; gardés en cache,
+      # ils ne bloquent plus la build quand GitHub ne les sert pas
+      - name: Cache des paquets Swift (fichiers binaires de Capacitor)
+        uses: actions/cache@v4
+        with:
+          path: ~/Library/Caches/org.swift.swiftpm
+          key: spm-${{ runner.os }}-${{ hashFiles('ios/App/CapApp-SPM/Package.swift') }}
       - name: Build Xcode (simulateur, signature à la volée)
         working-directory: upstream/app/ios/App
         run: |
