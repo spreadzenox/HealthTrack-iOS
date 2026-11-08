@@ -29,6 +29,9 @@ App Store Connect, build 844.344 attachée  ·  **Parité** : 67 % (30/45)
   les fichiers binaires de `capacitor-swift-pm` 8.2.0 (`Capacitor.xcframework.zip`, `Cordova.xcframework.zip`, releases
   de GitHub) répondent **504** (passerelle expirée), depuis ce conteneur comme depuis les runners macOS ; un autre
   fichier de release GitHub répond 200. Panne extérieure, pas de code à corriger.
+- 09:13 UTC : un essai répond 200, puis 504 de nouveau (09:20 : 3 sur 4) ; la build simulateur de cette PR échoue
+  encore. Panne intermittente : résolution des paquets à part dans `ios-build.yml` et 6 essais espacés (30 s, 60 s…)
+  dans les deux workflows.
 - Parade pour la suite : `actions/cache` de `~/Library/Caches/org.swift.swiftpm` (clé : `CapApp-SPM/Package.swift`)
   dans `testflight.yml` et `ios-build.yml` ; le cache se remplira à la première build réussie.
 - Tant que GitHub ne sert pas ces fichiers : pas de build iPhone, donc pas de merge (vérifications rouges) ni de
