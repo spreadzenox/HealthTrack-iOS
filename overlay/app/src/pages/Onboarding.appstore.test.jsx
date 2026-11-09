@@ -24,6 +24,11 @@ vi.mock('../storage/localHealthStorage', async (orig) => ({
   upsertEntries: vi.fn(async () => {}),
   countAllEntries: vi.fn(async () => 0),
 }))
+const usage = vi.hoisted(() => ({ access: { granted: false, supported: true } }))
+vi.mock('../services/phoneUsageSync', async (orig) => ({
+  ...(await orig()),
+  checkPhoneUsageAccess: vi.fn(async () => usage.access),
+}))
 const face = vi.hoisted(() => ({ status: { enabled: false } }))
 vi.mock('../services/faceSense', async (orig) => ({
   ...(await orig()),
@@ -75,6 +80,7 @@ describe('nouvel accueil sur iPhone (variante appstore)', () => {
 
   it('temps d’écran : l’iPhone demande l’accord, aucun réglage d’Android', async () => {
     window.__healthtrackFakePhoneUsage = true
+    usage.access = { granted: false, supported: true }
     saveOnboarding({ flow: FLOW_VERSION, lastScreen: 'sources' })
     renderAt()
     expect(await screen.findByText(/L’iPhone demande votre accord \(Face ID ou code\)/)).toBeInTheDocument()
@@ -88,5 +94,17 @@ describe('nouvel accueil sur iPhone (variante appstore)', () => {
     await waitFor(() => expect(screen.getByRole('radio', { name: /Quand vous ouvrez Halcya/ })).toBeInTheDocument())
     expect(screen.queryByRole('radio', { name: /déverrouillage/ })).not.toBeInTheDocument()
     expect(screen.queryByText(/À chaque déverrouillage/)).not.toBeInTheDocument()
+  })
+
+  // Correctif 55 : avant iOS 26.4, l'iPhone ne donne pas le temps d'écran aux apps ; comme la carte de Sources
+  // (correctif 44, retours du premier testeur du 06/11), la ligne de l'accueil n'est pas proposée
+  it('temps d’écran sous iOS 26.4 : pas de ligne à l’accueil', async () => {
+    window.__healthtrackFakePhoneUsage = true
+    usage.access = { granted: false, supported: false }
+    saveOnboarding({ flow: FLOW_VERSION, lastScreen: 'sources' })
+    renderAt()
+    expect(await screen.findByRole('button', { name: 'Connecter Santé' })).toBeInTheDocument()
+    await waitFor(() => expect(screen.queryByText('Temps d’écran')).not.toBeInTheDocument())
+    expect(screen.getAllByText('Météo').length).toBeGreaterThan(0)
   })
 })
