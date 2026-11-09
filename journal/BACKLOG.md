@@ -455,6 +455,19 @@
   « Testeurs Halcya » ; `betaAppReviewSubmissions`) ; refuse tout chemin de la version de l'App Store. À lancer au
   premier run après 23:45 (heure de Paris), une fois la dernière version d'Android du jour mergée et sa build traitée ;
   sinon au run suivant ; résultat relevé par `store-beta.yml`.
+- [ ] **LIVRAISON CONTINUE — expiration des builds** (décision du propriétaire du 09/11 vers 11:00, `POUR-IOS.md`
+  11:05, ses mots : « la routine doit expirer les versions précédentes à chaque fois qu'une nouvelle version arrive ; le
+  but c'est de faire du continuous deployment le plus propre possible et rapide ») :
+  `scripts/store-beta-expire.mjs` et `.github/workflows/store-beta-expire.yml` (`builds` nommées, `nettoyage`, `essai` ;
+  seule écriture permise : `expired: true` sur une build ; jamais 844.344 ni la build attachée à la version de l'App
+  Store, lue seulement ; jamais la dernière build distribuée au groupe externe ; relevé de l'examen bêta après).
+  - **Après chaque nouvelle build TestFlight** (merge → TestFlight → `store-beta-expire.yml` avec `nettoyage` →
+    `store-push.yml`) : restent la build de l'App Store, la dernière distribuée aux testeurs externes (jusqu'à ce que sa
+    remplaçante soit acceptée et distribuée), les builds en examen bêta, celles en traitement et la plus récente.
+  - **Soumission de la nuit** : si la build en examen attend depuis plus de 24 h (le script l'affiche : « En examen
+    depuis plus de 24 h ») et qu'une plus récente est prête, `builds` = celle en examen, puis `store-beta-submit.yml`
+    avec la plus récente ; sinon attendre la décision d'Apple.
+  - Chaque expiration notée dans le compte rendu ; erreur de l'API : message exact dans `POUR-ORCHESTRATEUR.md`.
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,

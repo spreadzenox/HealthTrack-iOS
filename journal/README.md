@@ -30,6 +30,10 @@
 - **Merges et examen bêta** (votre message du 7/11 vers 18:30) : je merge mes PR dès que les garde-fous sont verts ;
   chaque nuit, la dernière build part au groupe « Testeurs Halcya » et à l'examen bêta, jamais la version de l'App
   Store. **Numéro de version fixe** des builds de test (893) pendant le cycle (7/11, 19:35).
+- **Livraison continue** (9/11 vers 11:00, vos mots : « la routine doit expirer les versions précédentes à chaque fois
+  qu'une nouvelle version arrive ») : après chaque nouvelle build, j'expire celles qui ne servent plus ; restent la
+  build de votre soumission (844.344), la dernière distribuée aux testeurs externes jusqu'à ce que la suivante le soit,
+  et celle en examen chez Apple. Une build en examen depuis plus de 24 h cède sa place à une plus récente.
 - **« Digestif »** dans les textes visibles ; nom App Store « Halcya — digestion & bien-être » seulement après votre
   soumission (7/11). **Fusion des deux routines** après la soumission (4/11).
 
