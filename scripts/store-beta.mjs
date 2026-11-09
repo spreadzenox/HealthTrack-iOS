@@ -90,14 +90,15 @@ export async function survey({ token, fetchImpl = fetch }) {
  */
 export async function reviewsOutsideGroup({ token, fetchImpl = fetch, appId, inGroup = [] }) {
   const { api } = client(token, fetchImpl)
-  const recent = await api('GET', `/v1/builds?filter[app]=${appId}&sort=-uploadedDate&limit=20&fields[builds]=version`)
+  // 9/11 : demandé à Apple par l'état d'examen, sans limite d'âge (les 20 builds les plus récentes ne suffisaient plus :
+  // la 896.376 en était sortie et le relevé disait « aucune » à tort)
   const out = []
-  for (const b of recent.data || []) {
-    const version = b.attributes?.version
-    if (!version || inGroup.includes(version)) continue
-    const review = await maybe(() => api('GET', `/v1/builds/${b.id}/betaAppReviewSubmission?fields[betaAppReviewSubmissions]=betaReviewState`))
-    const state = review?.data?.attributes?.betaReviewState ?? null
-    if (state === 'WAITING_FOR_REVIEW' || state === 'IN_REVIEW') out.push({ version, review: state })
+  for (const state of ['WAITING_FOR_REVIEW', 'IN_REVIEW']) {
+    const found = await api('GET', `/v1/builds?filter[app]=${appId}&filter[betaAppReviewSubmission.betaReviewState]=${state}&limit=50&fields[builds]=version`)
+    for (const b of found.data || []) {
+      const version = b.attributes?.version
+      if (version && !inGroup.includes(version)) out.push({ version, review: state })
+    }
   }
   return out
 }
