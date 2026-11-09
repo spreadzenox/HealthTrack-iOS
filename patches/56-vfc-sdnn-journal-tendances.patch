@@ -1,9 +1,14 @@
 diff --git a/app/src/components/TodayBySource.jsx b/app/src/components/TodayBySource.jsx
-index 1aec4c98..9e1e5de1 100644
+index 291545bd..371bec5b 100644
 --- a/app/src/components/TodayBySource.jsx
 +++ b/app/src/components/TodayBySource.jsx
-@@ -73,7 +73,8 @@ export default function TodayBySource({
-             const n = norms[i.key]
+@@ -78,10 +78,12 @@ export default function TodayBySource({
+       <div className="today-data">
+         <ul className="today-data-items">
+           {items.map((i) => {
+-            const n = (FROM_YESTERDAY.has(i.when) ? norms.yesterday : norms.today)[i.key]
++            // Version iOS (HealthTrack-iOS) : la VFC de l'app Santé a sa propre habitude, en SDNN (correctif 56 ; norme : correctif 57)
++            const n = (FROM_YESTERDAY.has(i.when) ? norms.yesterday : norms.today)[i.label === 'VFC (SDNN)' ? 'hrvSdnn' : i.key]
              return (
                <li key={i.key} data-tone={measureTone(THEME_KEYS[i.key] ?? i.key)}>
 -                <Row trend={TREND_KEYS[i.key]}>
@@ -13,7 +18,7 @@ index 1aec4c98..9e1e5de1 100644
                  <span className="today-data-label">
                    {i.label}
 diff --git a/app/src/services/journalChips.js b/app/src/services/journalChips.js
-index 871e0f0e..54337042 100644
+index 871e0f0..5433704 100644
 --- a/app/src/services/journalChips.js
 +++ b/app/src/services/journalChips.js
 @@ -21,6 +21,7 @@ const CHIP_KEYS = {
@@ -25,7 +30,7 @@ index 871e0f0e..54337042 100644
    Respiration: 'respiratoryRate',
    Température: 'temperatureC',
 diff --git a/app/src/services/trendsData.js b/app/src/services/trendsData.js
-index ad8d2910..4a605bdf 100644
+index ad8d291..4a605bd 100644
 --- a/app/src/services/trendsData.js
 +++ b/app/src/services/trendsData.js
 @@ -31,6 +31,9 @@ export const TREND_MEASURES = [

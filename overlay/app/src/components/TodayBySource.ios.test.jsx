@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import TodayBySource from './TodayBySource'
 import { defaultTrendsView } from '../services/trendsData'
@@ -7,9 +7,9 @@ import { defaultTrendsView } from '../services/trendsData'
 // Version iOS (HealthTrack-iOS), correctif 56 : sur l'Accueil, la ligne « VFC (SDNN) » (la VFC de l'app Santé, que
 // le correctif 30 range sous la clé `hrv`) ouvre sa courbe SDNN dans Tendances, pas la « VFC nuit » vide sur iPhone.
 const NOW = new Date(2026, 10, 9, 10)
-const wrap = (tiles) => render(
+const wrap = (tiles, readNorms = async () => []) => render(
   <BrowserRouter>
-    <TodayBySource now={NOW} entries={[]} summary={null} tiles={tiles} readNorms={async () => []} />
+    <TodayBySource now={NOW} entries={[]} summary={null} tiles={tiles} readNorms={readNorms} />
   </BrowserRouter>,
 )
 
@@ -29,5 +29,24 @@ describe('Accueil : la VFC de l’app Santé ouvre sa courbe (iPhone)', () => {
   it('la VFC nuit (RMSSD) garde sa courbe', () => {
     wrap([{ key: 'hrv', label: 'VFC nuit', value: '42 ms', when: 'cette nuit', sources: ['Santé'] }])
     expect(screen.getByRole('link', { name: /VFC nuit.*42 ms/ })).toHaveAttribute('href', '/tendances?mesure=hrv')
+  })
+
+  // Correctif 57 (Android v937, POLISH-SIM-22 : la VFC d'hier a son « d'habitude ») : sur iPhone, la VFC de l'app
+  // Santé (SDNN) est comparée à sa propre habitude en SDNN, jamais à la RMSSD
+  it('« VFC (SDNN) » d’hier : « d’habitude » en SDNN', async () => {
+    const hist = []
+    for (let d = 24; d <= 31; d++) {
+      hist.push({ type: 'heart_rate', at: new Date(2026, 9, d, 4).toISOString(), payload: { subtype: 'heartRateVariabilitySdnn', value: 46 + (d % 3) * 2 } })
+    }
+    for (let d = 1; d <= 8; d++) {
+      const v = d === 8 ? 70 : 46 + (d % 3) * 2
+      hist.push({ type: 'heart_rate', at: new Date(2026, 10, d, 4).toISOString(), payload: { subtype: 'heartRateVariabilitySdnn', value: v } })
+      // Une RMSSD très différente le même jour ne compte jamais dans l'habitude de la SDNN
+      hist.push({ type: 'heart_rate', at: new Date(2026, 10, d, 5).toISOString(), payload: { subtype: 'heartRateVariability', value: 20 } })
+    }
+    wrap([{ key: 'hrv', label: 'VFC (SDNN)', value: '70 ms', when: 'hier', sources: ['Santé · Apple Watch'] }], async () => hist)
+    const row = screen.getByText('70 ms').closest('li')
+    await waitFor(() => expect(row).toHaveTextContent('d’habitude 48 ms'))
+    expect(within(row).getByLabelText('VFC plus haute')).toHaveTextContent('↑')
   })
 })
