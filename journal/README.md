@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v952 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **950 sur TestFlight** (build 950.424, version 893) ; **918.396 en examen bêta chez Apple** (soumise le 9/11 à 20:02) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v953 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **950 sur TestFlight** (build 950.424, version 893) ; **918.396 en cours d'examen bêta chez Apple** (soumise le 9/11 à 20:02, examen commencé avant 23:00) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (839.337 aujourd'hui) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
@@ -94,6 +94,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 9/11 20:00 | examen bêta débloqué ; suivi d'Android v950 | la 896.376 n'est plus en examen : **la 918.396 est soumise à l'examen bêta d'Apple** (20:02) ; les testeurs gardent la 839.337 en attendant. La 946 est sur TestFlight (946.422). Android v950 : dans Agir, chaque essai a pour titre ce qu'il faut faire. Android prolonge son gel des envois aux testeurs jusqu'au 10/11 au soir. Reste votre geste pour le nettoyage des anciennes builds. Parité : 67 % | #408 (mergée), PR v950 |
 | 9/11 21:00 | v950 livrée ; nettoyage refusé | votre « 896 expirée » confirmé par le relevé ; la 918.396 attend l'examen d'Apple (soumise à 20:02). La v950 (Agir : chaque essai a pour titre sa consigne) est mergée et part sur TestFlight. Le nettoyage des anciennes builds, lancé une fois comme vous l'avez demandé, a été refusé par ma session : votre geste en tête. Parité : 67 % | #410 (mergée) |
 | 9/11 22:00 | suivi d'Android v952 | la 950 est sur TestFlight (950.424). Android v952 : sur la page d'un essai (Agir), les 14 jours numérotés en deux semaines. La 918.396 attend toujours l'examen d'Apple ; le nettoyage des anciennes builds attend votre geste. Parité : 67 % | PR v952 |
+| 9/11 23:00 | suivi d'Android v953 ; examen en cours | **Apple examine la 918.396** (« en cours d'examen »). La v952 est mergée et part sur TestFlight. Android v953 : sur la page d'un essai, le résultat passe avant le calendrier. Pas d'Alpha d'Android cette nuit (gel jusqu'au 10/11 au soir) : rien d'autre à soumettre. Le nettoyage des anciennes builds attend toujours votre geste. Parité : 67 % | #412 (mergée), PR v953 |
 
 ---
 
