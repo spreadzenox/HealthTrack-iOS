@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v939 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **937 sur TestFlight** (build 937.414, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v940 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **937 sur TestFlight** (build 937.414, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (839.337 aujourd'hui) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
@@ -84,6 +84,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 9/11 10:00 | polish : VFC de l'app Santé | la 935 est sur TestFlight (935.412). Android n'a rien publié. Repéré sur les captures : dans le Journal, la VFC de l'Apple Watch (« VFC (SDNN) ») était grise, sans son icône ; Tendances n'en avait aucune courbe, et la ligne de l'Accueil ouvrait la « VFC nuit », vide sur iPhone → couleur et icône de la VFC, courbe « VFC (SDNN) » ouverte depuis l'Accueil (note de Nouveautés iPhone). Examen bêta : la 896.376 toujours en examen, la 918.396 attend votre geste. Parité : 67 % | PR polish VFC |
 | 9/11 11:00 | suivi d'Android v936, v937 | la correction de la VFC (10:00) est mergée et part sur TestFlight. Android v936 : la visite guidée ne blanchit plus le bas de l'écran ; v937 : sur Aujourd'hui, la VFC d'hier dit son « d'habitude ». Sur iPhone, la VFC vient de l'app Santé (Apple Watch) sous une autre forme, que ce calcul ne lisait pas : elle a maintenant sa propre habitude, sur Aujourd'hui et dans le Journal (note de Nouveautés iPhone). Examen bêta : la 896.376 toujours en examen, la 918.396 attend votre geste. Parité : 67 % | #399 (mergée), PR v937 |
 | 9/11 12:00 | livraison continue ; suivi d'Android v939 | votre décision « expire la 896 » et la règle de livraison continue : outil d'expiration écrit, testé et mergé (il garde toujours la 844.344, la build des testeurs et celle en examen) ; essai à blanc juste ; **l'expiration elle-même a été bloquée par les permissions de ma session** : rien n'est expiré, votre geste en tête. La 937 est sur TestFlight (937.414). Android v939 : Analyses, « pt » expliqué et « Comment c'est calculé » en deux phrases (aussi sur iPhone). Parité : 67 % | #401 (mergée), PR v939 |
+| 9/11 13:00 | suivi d'Android v940 ; livraison continue en attente | la 896.376 est toujours en examen chez Apple (votre geste de 12:15 attendu : lancer l'expiration, ou me donner la permission). Android v940 : dans le Journal, la tuile Repas dit « repas incomplets ? » quand les repas notés sont bien en dessous de la dépense du jour (aussi sur iPhone). Notre correctif de la VFC de l'app Santé refait sur ce code. Parité : 67 % | PR v939 + v940 |
 
 ---
 

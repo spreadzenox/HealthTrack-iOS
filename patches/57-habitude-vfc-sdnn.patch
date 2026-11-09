@@ -1,14 +1,14 @@
 diff --git a/app/src/components/DailyJournal.jsx b/app/src/components/DailyJournal.jsx
-index 17f7e739..c01a735b 100644
+index b7c8301c..7f271f79 100644
 --- a/app/src/components/DailyJournal.jsx
 +++ b/app/src/components/DailyJournal.jsx
 @@ -345,7 +345,8 @@ function DayCard({ day, onEdit, editingMealId, onEditMeal, onRedoMeal, normDays
          <dl className="day-summary">
-           {chips.map(([label, value]) => {
+           {chips.map(([label, value, note]) => {
              const key = chipKey(label)
--            const n = norms[NORM_KEYS[key]]
+-            const n = note ? null : norms[NORM_KEYS[key]]
 +            // Version iOS (HealthTrack-iOS) : la VFC de l'app Santé a sa propre habitude, en SDNN (correctif 57)
-+            const n = norms[label === 'VFC (SDNN)' ? 'hrvSdnn' : NORM_KEYS[key]]
++            const n = note ? null : norms[label === 'VFC (SDNN)' ? 'hrvSdnn' : NORM_KEYS[key]]
              return (
                <div key={label} className="day-summary-item" data-theme={chipTheme(label)}>
                  <dt><LineIcon name={CHIP_ICONS[key] ?? 'dots'} size={14} />{label}</dt>
