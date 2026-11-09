@@ -471,6 +471,11 @@
   - [x] **9/11 04:00, correctif 55** : nouvel accueil, ligne « Temps d'écran » proposée même avant iOS 26.4 (le
     correctif 44 ne couvrait que la carte de Sources) ; masquée quand `checkPhoneUsageAccess` répond `supported: false`,
     sauf si déjà activée ; test dans `Onboarding.appstore.test.jsx` ; note de Nouveautés iPhone.
+  - [x] **9/11 10:00, correctif 56** : VFC de l'app Santé (SDNN, Apple Watch). Journal : tuile grise avec l'icône par
+    défaut (« VFC (SDNN) » absente de `CHIP_KEYS`) → icône et couleur de la VFC, sans « d'habitude » ; Tendances : aucune
+    courbe de VFC sur iPhone → mesure `hrvSdnn` « VFC (SDNN) » (rose, en ms, à part de la RMSSD) ; Accueil : la ligne
+    « VFC (SDNN) » ouvrait `/tendances?mesure=hrv` (vide) → `hrvSdnn`. Tests `dailyJournal.ios`, `trendsData.ios`,
+    `TodayBySource.ios` ; note de Nouveautés iPhone.
 - [ ] **INTÉGRATIONS (seule exception au mode polish)** — 8/11 09:00 : Android a commencé par Garmin et Samsung (INTEG-1,
   étude dans `journal/protocoles/garmin-samsung.md` d'Android) ; côté iPhone, Garmin arrive déjà par l'app Santé (configuration 9) ;
   à relire quand Android choisira une voie d'accès directe.

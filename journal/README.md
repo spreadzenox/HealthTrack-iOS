@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v935 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **933 sur TestFlight** (build 933.410, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v935 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **935 sur TestFlight** (build 935.412, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (839.337 aujourd'hui) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
@@ -58,6 +58,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
   build 844.344 attachée à la version 844 pour votre soumission ; numéro de version fixe (893) ; « digestif » ;
   nouvel accueil ; premiers passages des personas sur iPhone ; panne de GitHub du 8/11 surmontée (paquets gardés en
   cache) ; examen bêta de la 918 bloqué par la 896 (détail dans `semaines/2026-S45.md`).
+- **Cette semaine, polish sur iPhone** : temps d'écran pas proposé à l'accueil avant iOS 26.4 ; la VFC de l'app Santé
+  (Apple Watch) a sa couleur dans le Journal et sa courbe dans Tendances ; l'iPhone a suivi Android jusqu'à la v935.
 
 **Runs de la semaine**
 
@@ -73,6 +75,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 9/11 07:00 | suivi d'Android v933 | boutons d'ajout de l'Accueil lisibles en grande police ; Tendances sans historique, sans boutons de période inutiles. Examen bêta : la 896.376 toujours en examen, la 918.396 attend votre geste. Parité : 67 % | PR v933 |
 | 9/11 08:00 | suivi d'Android v934 | la 933 est sur TestFlight. Android v934 : la phrase d'introduction des pages n'a plus l'air d'un titre ; « Version gratuite » dit plus court que vos notes restent. Examen bêta : la 896.376 toujours en examen, la 918.396 attend votre geste. Parité : 67 % | #396 (mergée), PR v934 |
 | 9/11 09:00 | suivi d'Android v935 | rien de visible (outil des personas d'Android) ; la 934 part sur TestFlight. Examen bêta : la 896.376 toujours en examen, la 918.396 attend votre geste (faire expirer la 896). Parité : 67 % | #397 (mergée), PR v935 |
+| 9/11 10:00 | polish : VFC de l'app Santé | la 935 est sur TestFlight (935.412). Android n'a rien publié. Repéré sur les captures : dans le Journal, la VFC de l'Apple Watch (« VFC (SDNN) ») était grise, sans son icône ; Tendances n'en avait aucune courbe, et la ligne de l'Accueil ouvrait la « VFC nuit », vide sur iPhone → couleur et icône de la VFC, courbe « VFC (SDNN) » ouverte depuis l'Accueil (note de Nouveautés iPhone). Examen bêta : la 896.376 toujours en examen, la 918.396 attend votre geste. Parité : 67 % | PR polish VFC |
 
 ---
 

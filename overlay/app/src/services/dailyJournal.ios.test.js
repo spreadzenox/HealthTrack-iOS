@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 import { buildDailyJournal } from './dailyJournal'
-import { summaryChips } from './journalChips'
+import { chipKey, chipTheme, summaryChips } from './journalChips'
 
 // Version iOS (HealthTrack-iOS) : la VFC de l'app Santé est en SDNN (`heartRateVariabilitySdnn`) ; le Journal la
 // montre à part, jamais comme une fréquence cardiaque ni comme la VFC RMSSD d'Android
@@ -16,6 +16,12 @@ describe('Journal : VFC en SDNN (iPhone)', () => {
     expect(chips).toContainEqual(['VFC (SDNN)', '48 ms'])
     expect(chips).toContainEqual(['FC', '70 bpm']) // la SDNN n'entre pas dans la fréquence cardiaque
     expect(chips.map(([label]) => label)).not.toContain('VFC')
+  })
+
+  // Correctif 56 (9/11) : la tuile était grise, avec l'icône par défaut ; elle a celles de la VFC, sans « d'habitude »
+  it('« VFC (SDNN) » a l’icône et la couleur de la VFC (thème corps)', () => {
+    expect(chipKey('VFC (SDNN)')).toBe('hrvDay')
+    expect(chipTheme('VFC (SDNN)')).toBe(chipTheme('VFC nuit'))
   })
 })
 
