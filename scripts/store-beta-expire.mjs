@@ -9,7 +9,8 @@
 // - `--nettoyage` : à chaque nouvelle build sur TestFlight, expire celles qui ne servent plus. Restent : la build
 //   attachée à la version de l'App Store (soumission du propriétaire, 844.344), la dernière build distribuée au groupe
 //   externe (les testeurs ont toujours une version installable, jusqu'à ce que sa remplaçante le soit), toute build en
-//   examen bêta, toute build pas encore traitée par Apple et la plus récente (la prochaine à soumettre).
+//   examen bêta, toute build du groupe externe pas encore soumise et plus récente que la distribuée, toute build pas
+//   encore traitée par Apple et la plus récente (la prochaine à soumettre).
 // `--essai` : le plan seul, rien n'est expiré.
 //
 // Seule écriture permise : `PATCH /v1/builds/{id}` avec `expired: true` (garde dans `expiryClient`). La version de
@@ -80,8 +81,11 @@ export function cleanupPlan({ builds, attached = [] }) {
   const keep = new Map()
   const add = (b, why) => { if (b && !keep.has(b.version)) keep.set(b.version, why) }
   for (const b of live) if (PROTECTED.has(b.version) || attached.includes(b.version)) add(b, 'version de l’App Store (soumission du propriétaire)')
-  add(distributed(live), 'dernière build distribuée au groupe externe')
+  const last = distributed(live)
+  add(last, 'dernière build distribuée au groupe externe')
   for (const b of live) if (IN_REVIEW.has(b.review)) add(b, 'en examen bêta')
+  // Dans le groupe externe sans examen encore (ajoutée, pas soumise : la 918.396 le 9/11) : la prochaine soumission
+  for (const b of live) if (b.inGroup && !b.review && b.state === 'VALID' && (!last || desc(b, last) < 0)) add(b, 'dans le groupe externe, à soumettre')
   for (const b of live) if (b.state !== 'VALID') add(b, 'pas encore traitée par Apple')
   add(live.filter((b) => b.state === 'VALID').sort(desc)[0], 'la plus récente')
   return {
