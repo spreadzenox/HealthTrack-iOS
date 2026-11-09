@@ -464,6 +464,10 @@
   - [x] **8/11 14:00, correctif 50** : Analyses, piste verrouillée (sans abonnement) : la barre floutée était invisible
     (`span` vide hors conteneur flexible) ; titre verrouillé en `flex`, test CSS, note de Nouveautés iPhone ; demandé
     à Android (`DEMANDES.md`) : à retirer quand Android l'aura corrigé.
+  - [x] **9/11 02:00, correctif 54** (remplace le 51, sans effet) : tuile des repas du Journal, « ≈ 1 039 kca / l » sur
+    390 points ; cause : espace insécable entre nombre et unité ajoutée à l'affichage (`frenchSpacing.js`) ; marge et
+    espacement des chiffres un peu réduits sous 400 px ; mesuré d'une ligne dans l'outil des personas ; note de
+    Nouveautés iPhone corrigée.
 - [ ] **INTÉGRATIONS (seule exception au mode polish)** — 8/11 09:00 : Android a commencé par Garmin et Samsung (INTEG-1,
   étude dans `journal/protocoles/garmin-samsung.md` d'Android) ; côté iPhone, Garmin arrive déjà par l'app Santé (configuration 9) ;
   à relire quand Android choisira une voie d'accès directe.
