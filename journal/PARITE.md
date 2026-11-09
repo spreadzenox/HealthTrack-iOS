@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v953 (commit `82f6881`, 9/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v954 (commit `6c86ac6`, 10/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 10/11 00:00 | #875 (v954) | #875 (POLISH-ESSAI-VIDE) : Agir, au début d'un essai, « Résultat en cours » montre déjà ses axes Avec / Sans et la ligne « Écart », en une phrase (`Trial.jsx`, `Act.css`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
 | 9/11 23:00 | #874 (v953) | #874 (POLISH-ESSAI-ORDRE) : Agir, sur la page d'un essai, « Résultat en cours » avant le calendrier ; la légende des 14 jours reprend la consigne (`Trial.jsx`, `Act.css`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
 | 9/11 22:00 | #871, #873 (v951, v952) | #871 : journal d'Android (relais « 896 expirée »). #873 (POLISH-ESSAI-GRILLE) : Agir, sur la page d'un essai, les 14 jours numérotés en deux lignes de 7 (`TrialDots.jsx`, `Act.css`, `Trial.jsx`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
 | 9/11 20:00 | #870, #872 (v947 à v950) | #870 : journal d'Android, gel des envois Alpha prolongé jusqu'au 10/11 22:00 (examen de 100918 chez Google ; décision du propriétaire du 9/11 vers 18:40, côté Android). #872 (POLISH-AGIR-TITRES) : Agir, un essai a pour titre sa consigne (« Dormir au moins 7 h 30 ») et dit si aujourd'hui est un jour avec ou sans ; une réintroduction s'appelle « Réintroduction : les fructanes » (`Act.jsx`, `Trial.jsx`, `act.js`). Code partagé, note pour tous. 47 correctifs sans retouche | ✅ |
