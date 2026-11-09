@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v942 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **940 sur TestFlight** (build 940.416, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v943 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **940 sur TestFlight** (build 940.416, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (839.337 aujourd'hui) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
@@ -87,6 +87,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 9/11 13:00 | suivi d'Android v940 ; livraison continue en attente | la 896.376 est toujours en examen chez Apple (votre geste de 12:15 attendu : lancer l'expiration, ou me donner la permission). Android v940 : dans le Journal, la tuile Repas dit « repas incomplets ? » quand les repas notés sont bien en dessous de la dépense du jour (aussi sur iPhone). Notre correctif de la VFC de l'app Santé refait sur ce code. Parité : 67 % | PR v939 + v940 |
 | 9/11 14:00 | livraison continue : outil plus prudent | la 940 est sur TestFlight (940.416 : « repas incomplets ? », « pt » expliqué). Android n'a rien publié. La 896.376 est toujours en examen chez Apple : votre geste de 12:15 reste attendu. L'outil d'expiration garde maintenant aussi une build déjà dans le groupe des testeurs et pas encore soumise (la 918.396), pour qu'un nettoyage ne la retire jamais avant son examen. Captures des écrans vides relues : rien à corriger. Parité : 67 % | PR outil + journal |
 | 9/11 15:00 | suivi d'Android v941, v942 | « Décrire un repas » ouvre directement le champ à écrire ; sous « En une phrase », la note de bien-être dit ce qu'elle fait de votre phrase (rien n'est gardé). Aussi sur iPhone. Essai à blanc du nettoyage : la 918.396 est bien gardée (141 anciennes builds à expirer). La 896.376 toujours en examen : votre geste de 12:15 attendu. Parité : 67 % | #403 (mergée), PR v942 |
+| 9/11 16:00 | suivi d'Android v943 | profil nutrition : le niveau d'activité automatique dit « d'après vos pas » (sur iPhone, les pas de l'app Santé). La 942 part sur TestFlight. La 896.376 toujours en examen : votre geste de 12:15 attendu. Parité : 67 % | #404 (mergée), PR v943 |
 
 ---
 
