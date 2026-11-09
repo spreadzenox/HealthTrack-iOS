@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v931 (commit `3d2b864`, 9/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v933 (commit `10551a6`, 9/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 9/11 07:00 | #855, #856 (v932, v933) | #855 (GRANDE-POLICE-1) : boutons d'ajout de l'Accueil (« Repas », « Bien-être »…) lisibles en grande police ; #856 (TEND-VIDE) : Tendances sans historique, plus de boutons de période inutiles. Code partagé, notes de Nouveautés pour tous ; 45 correctifs sans retouche ; 3643 tests, build appstore et lint passent | ✅ |
 | 9/11 05:00 | #853, #854 (v930, v931) | #853 (NAV-LIBELLE-320) : libellés des onglets entiers sur petit écran en grande police ; #854 (GRANDE-POLICE-1) : valeurs des tuiles du Journal entières, taille qui suit la tuile (`container-type`, `min(0.8rem, 15cqi)`), coupure seulement entre deux morceaux (`chipValueBreaks`), jamais en plein mot. **Règle notre « kca / l »** (demande du 8/11) : **correctif 54 retiré** avec son test. Code partagé, notes de Nouveautés pour tous ; 45 correctifs ; 3640 tests, build appstore et lint passent | ✅ |
 | 9/11 03:00 | #852 (v929) | #852 (POLISH-SIM-17) : bouton photo du repas, si l'appareil photo se ferme sans photo, un bandeau propose « Décrire le repas » (événement `cancel` du champ fichier : pris en charge par Safari depuis iOS 16.4 ; avant, rien ne s'affiche, sans autre effet). Code partagé, note de Nouveautés pour tous ; 45 correctifs sans retouche ; tests, build appstore et lint passent | ✅ |
 | 9/11 02:00 | #851 (v928) | #851 (POLISH-SIM-19) : relais, une analyse de repas sans aliment reconnu ne prend plus de crédit (`mealHasItems`, remboursement) ; même relais pour l'iPhone, donc **vaut aussi sur iPhone** : note de Nouveautés iPhone (celle d'Android est `play`). App inchangée ; 45 correctifs ; 3631 tests, build appstore et lint passent | ✅ |
