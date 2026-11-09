@@ -468,6 +468,9 @@
     390 points ; cause : espace insécable entre nombre et unité ajoutée à l'affichage (`frenchSpacing.js`) ; marge et
     espacement des chiffres un peu réduits sous 400 px ; mesuré d'une ligne dans l'outil des personas ; note de
     Nouveautés iPhone corrigée.
+  - [x] **9/11 04:00, correctif 55** : nouvel accueil, ligne « Temps d'écran » proposée même avant iOS 26.4 (le
+    correctif 44 ne couvrait que la carte de Sources) ; masquée quand `checkPhoneUsageAccess` répond `supported: false`,
+    sauf si déjà activée ; test dans `Onboarding.appstore.test.jsx` ; note de Nouveautés iPhone.
 - [ ] **INTÉGRATIONS (seule exception au mode polish)** — 8/11 09:00 : Android a commencé par Garmin et Samsung (INTEG-1,
   étude dans `journal/protocoles/garmin-samsung.md` d'Android) ; côté iPhone, Garmin arrive déjà par l'app Santé (configuration 9) ;
   à relire quand Android choisira une voie d'accès directe.
