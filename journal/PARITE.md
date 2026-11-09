@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v942 (commit `776f5fc`, 9/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v943 (commit `efa7da7`, 9/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 9/11 16:00 | #866 (v943) | #866 (POLISH-SIM-27) : profil nutrition, un niveau d'activité « Automatique » dit d'où il vient (« Modérément actif d'après vos pas ») ; le détail au toucher (`BodyProfileCard.jsx`, que touche aussi le correctif 35 : il s'applique toujours). Sur iPhone, les pas viennent de l'app Santé : même calcul. Code partagé, note pour tous. 47 correctifs sans retouche | ✅ |
 | 9/11 15:00 | #864, #865 (v941, v942) | #864 (POLISH-SIM-25) : « Autre chose › Décrire un repas » et « Décrire le repas » (appareil photo fermé) ouvrent directement le champ du repas (`AddStrip.jsx`, `MealPhotoButton.jsx`, `Food.jsx`, état `describeMeal`). #865 (POLISH-SIM-26) : sous « En une phrase », la note de bien-être dit ce qu'elle fait de la phrase (une note et des précisions proposées, la phrase n'est pas enregistrée) (`WellbeingPrompt.jsx`, que touche aussi le correctif 47 : il s'applique toujours). Code partagé, notes pour tous, valables sur iPhone. 47 correctifs sans retouche | ✅ |
 | 9/11 13:00 | #863 (v940) | #863 (POLISH-SIM-24) : Journal, la tuile Repas dit « repas incomplets ? » quand les repas notés font moins de la moitié de la dépense du jour, à la place du « d'habitude » (`journalChips.js`, `DailyJournal.jsx`, règle de Nutrition). **Correctif 57 refait** (ligne `const n = …` du Journal changée : la note passe avant la norme ; la VFC de l'app Santé garde sa norme SDNN). Code partagé, note pour tous, valable sur iPhone. 47 correctifs | ✅ |
 | 9/11 12:00 | #861, #862 (v938, v939) | #861 : journal d'Android (relais de la décision « expirer les builds » vers iOS). #862 (POLISH-SIM-23) : Analyses, une ligne dit ce que veut dire « pt » (points de votre note, sur 5) ; « Comment c'est calculé » commence par deux phrases simples, la méthode sous « Le détail » (`Recommendations.jsx`, `.css`). Code partagé, note de Nouveautés pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
