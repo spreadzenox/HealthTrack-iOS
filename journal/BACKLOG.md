@@ -485,6 +485,10 @@
     WAITING_FOR_REVIEW. Nettoyage réel lancé une fois comme demandé : **refusé par le système de permissions de la
     session** (« Irreversible Deletion »), rien expiré ; pas d'autre essai (consigne : « n'insiste pas ») ; geste du
     propriétaire ou permission demandés (`POUR-ORCHESTRATEUR.md` 21:05).
+  - **10/11 00:00** : **918.396 acceptée par Apple** (APPROVED, IN_BETA_TESTING) : c'est la build des testeurs externes ;
+    la 839.337 ne sert plus et partira au prochain nettoyage. Soumission de la nuit : aucune (pas d'Alpha d'Android,
+    gel jusqu'au 10/11 22:00 ; testeurs iPhone et Android sur la même version). Prochaine : après l'Alpha d'Android du
+    10/11 au soir, avec un passage des personas avant (décision (C)).
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
