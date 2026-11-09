@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v937 (commit `5f07981`, 9/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v939 (commit `1531123`, 9/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 9/11 12:00 | #861, #862 (v938, v939) | #861 : journal d'Android (relais de la décision « expirer les builds » vers iOS). #862 (POLISH-SIM-23) : Analyses, une ligne dit ce que veut dire « pt » (points de votre note, sur 5) ; « Comment c'est calculé » commence par deux phrases simples, la méthode sous « Le détail » (`Recommendations.jsx`, `.css`). Code partagé, note de Nouveautés pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
 | 9/11 11:00 | #859, #860 (v936, v937) | #859 (POLISH-SIM-20, 21) : visite guidée, le bas de l'écran reste assombri pendant « Voir dans 14 jours » (rideau sous le voile) ; outil des personas : capture après l'animation. #860 (POLISH-SIM-22) : sur Aujourd'hui, la VFC reprise d'hier a son « d'habitude » (`TodayBySource.jsx` : normes du jour et de la veille). **Côté iPhone** : **correctif 56 refait** (ligne de contexte changée par #860) ; la VFC de l'iPhone est la SDNN de l'app Santé, que les normes ne lisaient pas : **correctif 57** (`dayDeviations.js` : mesure `hrvSdnn` et lecture des SDNN) et ligne « VFC (SDNN) » de l'Accueil (correctif 56) et tuile du Journal (`DailyJournal.jsx`) branchées sur cette norme : la note d'Android devient vraie sur iPhone ; note de Nouveautés iPhone. 47 correctifs ; tests, build appstore et lint passent | ✅ |
 | 9/11 09:00 | #858 (v935) | #858 (POLISH-SIM-7) : outil des personas, chaque persona arrive avec son objectif d'accueil (`personaData.mjs`, `persona-browse.mjs`) ; correctif 49 (`--store=appstore`) toujours appliqué. App inchangée ; 45 correctifs ; 3647 tests et lint passent | ✅ |
 | 9/11 08:00 | #857 (v934) | #857 (INTRO-TITRE) : la phrase d'introduction des pages n'a plus le style d'un titre ; texte « Version gratuite » raccourci (`describeEntitlement`, aussi affiché sur iPhone sans abonnement). Code partagé, note de Nouveautés pour tous ; 45 correctifs sans retouche ; 3645 tests, build appstore et lint passent | ✅ |

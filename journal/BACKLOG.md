@@ -468,6 +468,10 @@
     depuis plus de 24 h ») et qu'une plus récente est prête, `builds` = celle en examen, puis `store-beta-submit.yml`
     avec la plus récente ; sinon attendre la décision d'Apple.
   - Chaque expiration notée dans le compte rendu ; erreur de l'API : message exact dans `POUR-ORCHESTRATEUR.md`.
+  - **9/11 12:00** : outil mergé (#401) ; essai à blanc juste (146 builds non expirées : gardées 844.344, 839.337,
+    896.376, 937.414 ; ≈145 à expirer, dont la 918.396 tant qu'elle n'est pas soumise : d'où l'ordre 896 → soumission
+    de la 918 → nettoyage). **Exécution réelle refusée par le système de permissions de la session** (« Irreversible
+    Deletion ») : rien d'expiré ; geste demandé au propriétaire (`POUR-ORCHESTRATEUR.md` 12:15). Sans contournement.
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
