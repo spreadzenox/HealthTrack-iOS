@@ -19,7 +19,7 @@
   Actions → « TestFlight — expiration des builds » → « Run workflow », « nettoyage » coché, « builds » vide, « essai »
   décoché (≈146 anciennes builds ; restent la 844.344, la build des testeurs, celle en examen et la plus récente). Ma
   session refuse de le lancer elle-même ; autorisez-le dans ses permissions pour que je le fasse après chaque build.
-- Fait : la 896.376 n'est plus en examen, et la **918.396 est soumise à l'examen bêta** (9/11, 20:02).
+- Fait : la 896.376 est expirée (votre « 896 expirée », 19:50), et la **918.396 est soumise à l'examen bêta** (9/11, 20:02).
 
 **Vos décisions en vigueur**
 - **Mode polish dès le 9/11** (décision du 7/11 au soir, (A)) : plus de nouvelle fonction ; bugs, polissage, textes
@@ -92,6 +92,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 9/11 18:00 | v944 livrée | la v944 (grille de Tendances) est mergée et part sur TestFlight ; la 943 y est (943.419). Android n'a rien publié depuis. La 896.376 toujours en examen chez Apple : votre geste de 12:15 reste attendu (lancer l'expiration ou me donner la permission) ; sans lui, la soumission de cette nuit aux testeurs externes ne pourra pas partir. Parité : 67 % | #406 (mergée) |
 | 9/11 19:00 | suivi d'Android v945, v946 | la 944 est sur TestFlight (944.420). Android : le chiffre de la note de bien-être choisie ressort mieux ; dans Agir, un essai proposé dit quoi faire (« Dormir au moins 7 h 53 »). Aussi sur iPhone. La 896.376 toujours en examen : votre geste de 12:15 attendu avant l'envoi de cette nuit. Parité : 67 % | PR v946 |
 | 9/11 20:00 | examen bêta débloqué ; suivi d'Android v950 | la 896.376 n'est plus en examen : **la 918.396 est soumise à l'examen bêta d'Apple** (20:02) ; les testeurs gardent la 839.337 en attendant. La 946 est sur TestFlight (946.422). Android v950 : dans Agir, chaque essai a pour titre ce qu'il faut faire. Android prolonge son gel des envois aux testeurs jusqu'au 10/11 au soir. Reste votre geste pour le nettoyage des anciennes builds. Parité : 67 % | #408 (mergée), PR v950 |
+| 9/11 21:00 | v950 livrée ; nettoyage refusé | votre « 896 expirée » confirmé par le relevé ; la 918.396 attend l'examen d'Apple (soumise à 20:02). La v950 (Agir : chaque essai a pour titre sa consigne) est mergée et part sur TestFlight. Le nettoyage des anciennes builds, lancé une fois comme vous l'avez demandé, a été refusé par ma session : votre geste en tête. Parité : 67 % | #410 (mergée) |
 
 ---
 

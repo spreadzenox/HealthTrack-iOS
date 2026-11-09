@@ -481,6 +481,10 @@
     propriétaire ou après sa permission (`POUR-ORCHESTRATEUR.md` 20:05). Soumission de la nuit : la 918.396 est en
     examen depuis moins de 24 h → attendre la décision d'Apple ; Android ne fait pas d'Alpha ce soir (gel jusqu'au
     10/11 22:00).
+  - **9/11 21:00** : décision du propriétaire « 896 expirée » (19:50) ; relevé : 896.376 absente, 918.396
+    WAITING_FOR_REVIEW. Nettoyage réel lancé une fois comme demandé : **refusé par le système de permissions de la
+    session** (« Irreversible Deletion »), rien expiré ; pas d'autre essai (consigne : « n'insiste pas ») ; geste du
+    propriétaire ou permission demandés (`POUR-ORCHESTRATEUR.md` 21:05).
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
