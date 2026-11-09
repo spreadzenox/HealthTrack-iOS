@@ -10,16 +10,16 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v946 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **944 sur TestFlight** (build 944.420, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v950 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **946 sur TestFlight** (build 946.422, version 893) ; **918.396 en examen bêta chez Apple** (soumise le 9/11 à 20:02) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (839.337 aujourd'hui) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
 **👉 Prochaine action du propriétaire**
-- **Lancer l'expiration de la 896.376** (votre décision de 11:00) : GitHub → HealthTrack-iOS → Actions →
-  « TestFlight — expiration des builds » → « Run workflow », « builds » = `896.376` (ou « Expirer la build » dans App
-  Store Connect). L'outil est prêt et testé, mais ma session refuse de l'exécuter elle-même (action irréversible, accord
-  reçu par relais) ; pour la suite, autorisez ce lancement dans ses permissions ou dites-le-moi ici. Ensuite, la 918.396
-  part à l'examen bêta et les anciennes builds sont expirées.
+- **Lancer le nettoyage des anciennes builds** (votre règle de livraison continue du 9/11) : GitHub → HealthTrack-iOS →
+  Actions → « TestFlight — expiration des builds » → « Run workflow », « nettoyage » coché, « builds » vide, « essai »
+  décoché (≈146 anciennes builds ; restent la 844.344, la build des testeurs, celle en examen et la plus récente). Ma
+  session refuse de le lancer elle-même ; autorisez-le dans ses permissions pour que je le fasse après chaque build.
+- Fait : la 896.376 n'est plus en examen, et la **918.396 est soumise à l'examen bêta** (9/11, 20:02).
 
 **Vos décisions en vigueur**
 - **Mode polish dès le 9/11** (décision du 7/11 au soir, (A)) : plus de nouvelle fonction ; bugs, polissage, textes
@@ -91,6 +91,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 9/11 17:00 | suivi d'Android v944 | Tendances : une ligne de repère à chaque graduation (aussi sur la courbe de la VFC de l'Apple Watch). La 943 part sur TestFlight, la 942 y est (942.418). La 896.376 toujours en examen : votre geste de 12:15 attendu. Parité : 67 % | #405 (mergée), PR v944 |
 | 9/11 18:00 | v944 livrée | la v944 (grille de Tendances) est mergée et part sur TestFlight ; la 943 y est (943.419). Android n'a rien publié depuis. La 896.376 toujours en examen chez Apple : votre geste de 12:15 reste attendu (lancer l'expiration ou me donner la permission) ; sans lui, la soumission de cette nuit aux testeurs externes ne pourra pas partir. Parité : 67 % | #406 (mergée) |
 | 9/11 19:00 | suivi d'Android v945, v946 | la 944 est sur TestFlight (944.420). Android : le chiffre de la note de bien-être choisie ressort mieux ; dans Agir, un essai proposé dit quoi faire (« Dormir au moins 7 h 53 »). Aussi sur iPhone. La 896.376 toujours en examen : votre geste de 12:15 attendu avant l'envoi de cette nuit. Parité : 67 % | PR v946 |
+| 9/11 20:00 | examen bêta débloqué ; suivi d'Android v950 | la 896.376 n'est plus en examen : **la 918.396 est soumise à l'examen bêta d'Apple** (20:02) ; les testeurs gardent la 839.337 en attendant. La 946 est sur TestFlight (946.422). Android v950 : dans Agir, chaque essai a pour titre ce qu'il faut faire. Android prolonge son gel des envois aux testeurs jusqu'au 10/11 au soir. Reste votre geste pour le nettoyage des anciennes builds. Parité : 67 % | #408 (mergée), PR v950 |
 
 ---
 

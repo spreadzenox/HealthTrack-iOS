@@ -475,6 +475,12 @@
   - **9/11 14:00** : le nettoyage garde aussi une build du groupe externe pas encore soumise et plus récente que la
     distribuée (« dans le groupe externe, à soumettre » : la 918.396), pour qu'il puisse tourner avant sa soumission ;
     test ajouté ; marche à suivre dans la charte (§ 4).
+  - **9/11 20:00** : la 896.376 n'est plus parmi les builds actives (expirée dans App Store Connect, pas par la routine) ;
+    **918.396 soumise à l'examen bêta** (run 42679499099 : « À tester » déjà là, déjà dans le groupe, « Soumise à
+    l'examen bêta d'Apple ») ; relevé de 20:03 : WAITING_FOR_REVIEW. Nettoyage (≈146 builds) toujours à lancer par le
+    propriétaire ou après sa permission (`POUR-ORCHESTRATEUR.md` 20:05). Soumission de la nuit : la 918.396 est en
+    examen depuis moins de 24 h → attendre la décision d'Apple ; Android ne fait pas d'Alpha ce soir (gel jusqu'au
+    10/11 22:00).
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
