@@ -1,0 +1,18 @@
+diff --git a/app/src/App.css b/app/src/App.css
+index 85197025..282ee128 100644
+--- a/app/src/App.css
++++ b/app/src/App.css
+@@ -410,6 +410,13 @@
+   overflow-wrap: anywhere;
+ }
+ 
++/* Version iOS (correctif 54) : sur un écran de 400 points ou moins (iPhone 12 à 16), « ≈ 1 039 kcal » ne tenait pas
++   dans une tuile et se coupait au milieu du mot (l'espace avant l'unité est insécable à l'affichage, frenchSpacing.js) */
++@media (max-width: 400px) {
++  .day-summary-item { padding-inline: 7px; }
++  .day-summary-item dd { letter-spacing: -0.04em; }
++}
++
+ /* Une couleur par thème (leçon 12, AUJ-8 ; src/theme/themes.js) : menthe = bien-être, pêche = digestion, lilas =
+    activité, bleu nuit = sommeil, rose framboise = corps, gris = contexte. */
+ .day-summary-item[data-theme="mint"] { background: var(--mint-bg); }
