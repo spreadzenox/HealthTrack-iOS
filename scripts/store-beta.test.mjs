@@ -69,25 +69,20 @@ test('relevé : seulement des lectures, groupe externe trouvé par son nom, buil
 
 // 8/11 : Apple refusait la 918.396 (« Another build in the same train is already in beta review ») alors que la 896.376
 // n'était plus dans le groupe : le relevé dit aussi quelles builds récentes sont en examen bêta hors du groupe
-test('relevé : builds en examen bêta hors du groupe (lecture seule)', async () => {
+test('relevé : builds en examen bêta hors du groupe, demandées par leur état (lecture seule, sans limite d’âge)', async () => {
   const calls = []
-  const pages = {
-    '/v1/builds': { data: [
-      { id: 'b9', attributes: { version: '918.396' } },
-      { id: 'b8', attributes: { version: '896.376' } },
-      { id: 'b7', attributes: { version: '895.375' } },
-    ] },
-    '/v1/builds/b8/betaAppReviewSubmission': { data: { attributes: { betaReviewState: 'WAITING_FOR_REVIEW' } } },
-    '/v1/builds/b7/betaAppReviewSubmission': { data: null },
-  }
   const fetchImpl = async (url, { method }) => {
-    const path = new URL(url).pathname
     calls.push({ method, url })
-    const body = pages[path]
-    return { ok: Boolean(body), status: body ? 200 : 404, json: async () => body ?? { errors: [{ title: 'absent' }] } }
+    const u = new URL(url)
+    const state = u.searchParams.get('filter[betaAppReviewSubmission.betaReviewState]')
+    const data = state === 'WAITING_FOR_REVIEW'
+      ? [{ id: 'b8', attributes: { version: '896.376' } }, { id: 'b9', attributes: { version: '918.396' } }]
+      : []
+    return { ok: true, status: 200, json: async () => ({ data }) }
   }
   const out = await reviewsOutsideGroup({ token: 't', fetchImpl, appId: 'app1', inGroup: ['918.396'] })
   assert.deepEqual(out, [{ version: '896.376', review: 'WAITING_FOR_REVIEW' }])
   assert.ok(calls.every((c) => c.method === 'GET'))
-  assert.ok(!calls.some((c) => c.url.includes('/b9/')))
+  assert.ok(calls.every((c) => c.url.includes('filter[app]=app1')))
+  assert.deepEqual(calls.map((c) => new URL(c.url).searchParams.get('filter[betaAppReviewSubmission.betaReviewState]')), ['WAITING_FOR_REVIEW', 'IN_REVIEW'])
 })
