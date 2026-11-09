@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v934 (commit `93a6e7e`, 9/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v935 (commit `bdc56e0`, 9/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 9/11 09:00 | #858 (v935) | #858 (POLISH-SIM-7) : outil des personas, chaque persona arrive avec son objectif d'accueil (`personaData.mjs`, `persona-browse.mjs`) ; correctif 49 (`--store=appstore`) toujours appliqué. App inchangée ; 45 correctifs ; 3647 tests et lint passent | ✅ |
 | 9/11 08:00 | #857 (v934) | #857 (INTRO-TITRE) : la phrase d'introduction des pages n'a plus le style d'un titre ; texte « Version gratuite » raccourci (`describeEntitlement`, aussi affiché sur iPhone sans abonnement). Code partagé, note de Nouveautés pour tous ; 45 correctifs sans retouche ; 3645 tests, build appstore et lint passent | ✅ |
 | 9/11 07:00 | #855, #856 (v932, v933) | #855 (GRANDE-POLICE-1) : boutons d'ajout de l'Accueil (« Repas », « Bien-être »…) lisibles en grande police ; #856 (TEND-VIDE) : Tendances sans historique, plus de boutons de période inutiles. Code partagé, notes de Nouveautés pour tous ; 45 correctifs sans retouche ; 3643 tests, build appstore et lint passent | ✅ |
 | 9/11 05:00 | #853, #854 (v930, v931) | #853 (NAV-LIBELLE-320) : libellés des onglets entiers sur petit écran en grande police ; #854 (GRANDE-POLICE-1) : valeurs des tuiles du Journal entières, taille qui suit la tuile (`container-type`, `min(0.8rem, 15cqi)`), coupure seulement entre deux morceaux (`chipValueBreaks`), jamais en plein mot. **Règle notre « kca / l »** (demande du 8/11) : **correctif 54 retiré** avec son test. Code partagé, notes de Nouveautés pour tous ; 45 correctifs ; 3640 tests, build appstore et lint passent | ✅ |
