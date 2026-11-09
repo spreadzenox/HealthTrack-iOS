@@ -27,6 +27,15 @@ test('nettoyage : gardées la build de l’App Store, la dernière distribuée, 
   assert.deepEqual(plan.expire.map((x) => x.version), ['935.413', '935.412', '817.312'])
 })
 
+test('nettoyage : une build ajoutée au groupe externe mais pas encore soumise reste (la 918.396 du 9/11)', () => {
+  const plan = cleanupPlan({ builds: today(), attached: ['844.344'] })
+  assert.ok(plan.keep.some((k) => k.version === '918.396' && /à soumettre/.test(k.why)))
+  assert.ok(!plan.expire.some((x) => x.version === '918.396'))
+  // plus ancienne que la build distribuée : elle ne sert plus
+  const old = [b('839.337', { inGroup: true, review: 'APPROVED', external: 'IN_BETA_TESTING' }), b('830.323', { inGroup: true }), b('937.414')]
+  assert.deepEqual(cleanupPlan({ builds: old }).expire.map((x) => x.version), ['830.323'])
+})
+
 test('nettoyage : la 844.344 reste même sans lecture de la version de l’App Store', () => {
   const plan = cleanupPlan({ builds: today(), attached: [] })
   assert.ok(plan.keep.some((k) => k.version === '844.344'))

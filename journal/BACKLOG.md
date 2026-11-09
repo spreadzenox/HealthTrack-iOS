@@ -472,6 +472,9 @@
     896.376, 937.414 ; ≈145 à expirer, dont la 918.396 tant qu'elle n'est pas soumise : d'où l'ordre 896 → soumission
     de la 918 → nettoyage). **Exécution réelle refusée par le système de permissions de la session** (« Irreversible
     Deletion ») : rien d'expiré ; geste demandé au propriétaire (`POUR-ORCHESTRATEUR.md` 12:15). Sans contournement.
+  - **9/11 14:00** : le nettoyage garde aussi une build du groupe externe pas encore soumise et plus récente que la
+    distribuée (« dans le groupe externe, à soumettre » : la 918.396), pour qu'il puisse tourner avant sa soumission ;
+    test ajouté ; marche à suivre dans la charte (§ 4).
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
