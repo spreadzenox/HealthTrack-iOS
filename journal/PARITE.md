@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v924 (commit `90ebf9c`, 8/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v927 (commit `f7ca443`, 9/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 9/11 01:00 | #848 à #850 (v925 à v927) | #849 : visite guidée, des pistes nettes dès le jour 14 avec des données fictives marquées (`tourData.js`, `trials.js`) ; #850 (POLISH-SIM-18) : écran Gold de l'accueil expliqué en une phrase (**sans objet sur iPhone** : pas d'offre de lancement depuis le 6/11, l'accueil montre l'écran d'achat ; note de Nouveautés `play`) ; #848 : journal (« 896 retirée »). 45 correctifs sans retouche ; 3631 tests, build appstore et lint passent | ✅ |
 | 8/11 23:00 | #847 (v924) | #847 (POLISH-SIM-14, 15) : visite guidée, l'étiquette annonce le bon jour, le cadre suit la section montrée (`GuidedTour.jsx`, `services/tour.js`). Code partagé, note de Nouveautés pour tous ; 45 correctifs sans retouche ; 3621 tests, build appstore et lint passent | ✅ |
 | 8/11 22:00 | #846 (v923) | #846 (POLISH-SIM-16) : Analyses, une seule unité par facteur (même quantité au court, moyen et long terme) ; un effet plus grand que la note elle-même s'affiche « pas assez de données ». Répond à un constat de nos personas iPhone (« −4,7 pt », unité qui change). Code partagé, note de Nouveautés pour tous ; 45 correctifs sans retouche ; 3618 tests, build appstore et lint passent | ✅ |
 | 8/11 21:00 | #842 à #845 (v919 à v922) | #842 (POLISH-SIM-6b) : Tendances, détail du jour, « cœur au repos » et « variabilité cardiaque » en toutes lettres ; #843, #844 : journal (nouvel accueil livré, Alpha 100918 envoyé, gel des envois Alpha jusqu'au 9/11 22:00) ; #845 : passage des personas d'Android sur le nouvel accueil (journal). Code partagé, note de Nouveautés pour tous ; 45 correctifs sans retouche ; 3614 tests, build appstore et lint passent | ✅ |
