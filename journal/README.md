@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v927 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **924 sur TestFlight** (build 924.403, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v928 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **924 sur TestFlight** (build 924.403, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (839.337 aujourd'hui) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
@@ -64,6 +64,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | Date (Paris) | Run | Ce qui a été fait | PR |
 |---|---|---|---|
 | 9/11 01:00 | semaine S46 ouverte ; examen bêta | résumé de la S45 archivé ; la 896.376 est toujours « en attente d'examen » hors du groupe, la 918.396 attend derrière (pas de nouvel essai : Apple refuserait) ; Android : visite guidée avec des pistes dès le jour 14, Gold expliqué en une phrase (sans objet sur iPhone) : v927 reprise, en vérification. Mode polish à partir d'aujourd'hui. Parité : 67 % | PR semaine S46 |
+| 9/11 02:00 | suivi d'Android v928 | la 927 part sur TestFlight. Serveur : une analyse IA de repas qui ne reconnaît aucun aliment ne compte plus dans vos analyses restantes, sur Android comme sur iPhone (note de Nouveautés iPhone). Examen bêta : la 896.376 toujours en examen, la 918.396 attend. Parité : 67 % | #390 (mergée), PR v928 |
 
 ---
 
