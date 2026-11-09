@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v950 (commit `2aa4385`, 9/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v952 (commit `bf683db`, 9/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 9/11 22:00 | #871, #873 (v951, v952) | #871 : journal d'Android (relais « 896 expirée »). #873 (POLISH-ESSAI-GRILLE) : Agir, sur la page d'un essai, les 14 jours numérotés en deux lignes de 7 (`TrialDots.jsx`, `Act.css`, `Trial.jsx`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
 | 9/11 20:00 | #870, #872 (v947 à v950) | #870 : journal d'Android, gel des envois Alpha prolongé jusqu'au 10/11 22:00 (examen de 100918 chez Google ; décision du propriétaire du 9/11 vers 18:40, côté Android). #872 (POLISH-AGIR-TITRES) : Agir, un essai a pour titre sa consigne (« Dormir au moins 7 h 30 ») et dit si aujourd'hui est un jour avec ou sans ; une réintroduction s'appelle « Réintroduction : les fructanes » (`Act.jsx`, `Trial.jsx`, `act.js`). Code partagé, note pour tous. 47 correctifs sans retouche | ✅ |
 | 9/11 19:00 | #868, #869 (v945, v946) | #868 (POLISH-CONTRASTE-NOTE) : note de bien-être, le chiffre choisi ressort sur son fond vert, en clair comme en sombre (`App.css`). #869 (POLISH-AGIR-PROPOSE) : Agir, un essai proposé dit quoi faire (« Dormir au moins 7 h 53 ») et le lien repéré en points sur 5 (`Act.jsx`, `trials.js`, `mealHours.js`). Code partagé, notes pour tous, valables sur iPhone. 47 correctifs sans retouche | ✅ |
 | 9/11 17:00 | #867 (v944) | #867 (POLISH-SIM-28) : Tendances, une ligne de repère à chaque graduation de l'axe (une seule ligne au milieu passait pour l'habitude) (`TrendsViewer.jsx`). Vaut aussi pour la courbe « VFC (SDNN) » de l'iPhone (correctif 56). Code partagé, note pour tous. 47 correctifs sans retouche | ✅ |

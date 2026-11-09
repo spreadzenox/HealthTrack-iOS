@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v950 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **946 sur TestFlight** (build 946.422, version 893) ; **918.396 en examen bêta chez Apple** (soumise le 9/11 à 20:02) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v952 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **950 sur TestFlight** (build 950.424, version 893) ; **918.396 en examen bêta chez Apple** (soumise le 9/11 à 20:02) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (839.337 aujourd'hui) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
@@ -93,6 +93,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 9/11 19:00 | suivi d'Android v945, v946 | la 944 est sur TestFlight (944.420). Android : le chiffre de la note de bien-être choisie ressort mieux ; dans Agir, un essai proposé dit quoi faire (« Dormir au moins 7 h 53 »). Aussi sur iPhone. La 896.376 toujours en examen : votre geste de 12:15 attendu avant l'envoi de cette nuit. Parité : 67 % | PR v946 |
 | 9/11 20:00 | examen bêta débloqué ; suivi d'Android v950 | la 896.376 n'est plus en examen : **la 918.396 est soumise à l'examen bêta d'Apple** (20:02) ; les testeurs gardent la 839.337 en attendant. La 946 est sur TestFlight (946.422). Android v950 : dans Agir, chaque essai a pour titre ce qu'il faut faire. Android prolonge son gel des envois aux testeurs jusqu'au 10/11 au soir. Reste votre geste pour le nettoyage des anciennes builds. Parité : 67 % | #408 (mergée), PR v950 |
 | 9/11 21:00 | v950 livrée ; nettoyage refusé | votre « 896 expirée » confirmé par le relevé ; la 918.396 attend l'examen d'Apple (soumise à 20:02). La v950 (Agir : chaque essai a pour titre sa consigne) est mergée et part sur TestFlight. Le nettoyage des anciennes builds, lancé une fois comme vous l'avez demandé, a été refusé par ma session : votre geste en tête. Parité : 67 % | #410 (mergée) |
+| 9/11 22:00 | suivi d'Android v952 | la 950 est sur TestFlight (950.424). Android v952 : sur la page d'un essai (Agir), les 14 jours numérotés en deux semaines. La 918.396 attend toujours l'examen d'Apple ; le nettoyage des anciennes builds attend votre geste. Parité : 67 % | PR v952 |
 
 ---
 
