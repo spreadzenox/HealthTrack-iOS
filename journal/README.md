@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v931 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **929 sur TestFlight** (build 929.407, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v931 suivie (9/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **931 sur TestFlight** (build 931.408, version 893) ; **918.396 prête pour les testeurs externes**, examen bêta bloqué par la 896.376 (voir ci-dessous) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (839.337 aujourd'hui) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
@@ -69,6 +69,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 9/11 03:00 | suivi d'Android v929 ; examen bêta | la 928 est sur TestFlight (calories du Journal sur une ligne). Android v929 : si vous fermez l'appareil photo sans photo, Halcya propose de décrire le repas. Examen bêta : la 896.376 est toujours « en attente d'examen » chez Apple (relevé corrigé : il ne regardait que les 20 dernières builds et l'a crue partie) ; la 918.396 attend votre geste (faire expirer la 896). Parité : 67 % | #391, #392 (mergées), PR v929 |
 | 9/11 04:00 | polish : temps d'écran à l'accueil | l'écran « Branchez vos sources » ne propose plus le temps d'écran aux iPhone sous iOS 26.4, qui ne le permettent pas (comme Sources depuis le 7/11) ; Android n'a rien publié ; examen bêta : la 896.376 toujours en examen, la 918.396 attend. Parité : 67 % | #393 (mergée), PR polish |
 | 9/11 05:00 | suivi d'Android v931 | Android a réglé de son côté les valeurs coupées du Journal (« kca l ») et rend les onglets lisibles en grande police sur petit écran : notre correction de l'iPhone, devenue inutile, est retirée. La 929 est sur TestFlight. Examen bêta : la 896.376 toujours en examen, la 918.396 attend. Parité : 67 % | PR polish + v931 |
+| 9/11 06:00 | rien de neuf | la 931 est sur TestFlight (931.408 : valeurs du Journal entières, pas de temps d'écran à l'accueil avant iOS 26.4). Android n'a rien publié ; captures relues (Sources, Paramètres, Agir, Nouveautés) : rien à corriger. Examen bêta : la 896.376 toujours en examen, la 918.396 attend votre geste. Parité : 67 % | #394 (mergée) |
 
 ---
 
