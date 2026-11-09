@@ -479,10 +479,11 @@
   - [x] **9/11 11:00, correctif 57** (avec la v937 d'Android, POLISH-SIM-22 : « d'habitude » de la VFC d'hier) : les
     normes (`dayDeviations.js`) ne lisaient pas la SDNN de l'app Santé ; mesure `hrvSdnn` à part (« VFC plus haute /
     basse », 4 ms au moins), SDNN lues avec les autres mesures ; la ligne « VFC (SDNN) » de l'Accueil prend cette norme
-    (correctif 56, refait sur la v937). Tests `dayDeviations.ios`, `TodayBySource.ios` ; note de Nouveautés iPhone.
-  - [ ] **« d'habitude » de la SDNN dans le Journal** : la tuile « VFC (SDNN) » a la clé `hrvDay` (icône, couleur) et
-    pas de norme (`NORM_KEYS` de `DailyJournal.jsx`) ; Android montre « ↑ d'habitude » sur la VFC nuit. Petit correctif
-    possible (clé propre `hrvSdnn` : icône, thème, norme), à faire en polish.
+    (correctif 56, refait sur la v937), et la tuile du Journal aussi (ci-dessous). Tests `dayDeviations.ios`,
+    `TodayBySource.ios` ; note de Nouveautés iPhone.
+  - [x] **« d'habitude » de la SDNN dans le Journal** (même run, correctif 57) : la tuile « VFC (SDNN) » (clé `hrvDay`
+    pour l'icône et la couleur) prend la norme `hrvSdnn` (`DailyJournal.jsx`, une ligne) ; « ↑ d'habitude » quand
+    l'écart est net, comme la VFC nuit d'Android. Test `DailyJournal.ios.test.jsx` (échoue sans le correctif).
 - [ ] **INTÉGRATIONS (seule exception au mode polish)** — 8/11 09:00 : Android a commencé par Garmin et Samsung (INTEG-1,
   étude dans `journal/protocoles/garmin-samsung.md` d'Android) ; côté iPhone, Garmin arrive déjà par l'app Santé (configuration 9) ;
   à relire quand Android choisira une voie d'accès directe.
