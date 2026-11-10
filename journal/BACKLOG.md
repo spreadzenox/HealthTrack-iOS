@@ -513,6 +513,11 @@
     `IN_BETA_TESTING` à 11:12 UTC ; 962.437 expirée ; restent 844.344 et 968.442.
   - Version d'Android sans changement dans l'app (scripts, journal) : suivie avec la suivante qui change l'app, pour
     ne pas envoyer aux testeurs une build identique (v970, #891, scripts d'envoi seulement).
+  - [x] **10/11 13:14** : 969.443 (v969) chez les testeurs ; 968.442 expirée ; restent 844.344 et 969.443.
+  - [x] **10/11 13:00, personas du jour** (version 969) : persona 4 Endométriose, iPhone seul, J14
+    (`journal/simulations/2026-11-10-1300-*`) ; constats partagés relayés (`DEMANDES.md`, 10/11).
+  - [ ] **Proposition (mode polish) : lire le cycle depuis l'app Santé sur iPhone** (règles notées dans Santé ou une
+    app de cycle) ; à préparer avec maquette, en accord avec la décision d'Android sur la saisie du cycle.
   - Personas (décision (C)) : les passages continuent (chaque jour), mais ne bloquent plus chaque envoi ; une
     régression trouvée part dans la build suivante.
   - « À tester » (`store/app-store/fr-FR/testflight-a-tester.txt`) : écrit pour la 918 ; à rafraîchir quand l'app
