@@ -517,7 +517,9 @@
   - [x] **10/11 13:00, personas du jour** (version 969) : persona 4 Endométriose, iPhone seul, J14
     (`journal/simulations/2026-11-10-1300-*`) ; constats partagés relayés (`DEMANDES.md`, 10/11).
   - [ ] **Proposition (mode polish) : lire le cycle depuis l'app Santé sur iPhone** (règles notées dans Santé ou une
-    app de cycle) ; à préparer avec maquette, en accord avec la décision d'Android sur la saisie du cycle.
+    app de cycle) ; à préparer avec maquette, en accord avec la décision d'Android sur la saisie du cycle. **10/11
+    15:15** : proposition et deux maquettes (`journal/maquettes/cycle-sante/`), question au propriétaire
+    (`POUR-ORCHESTRATEUR.md`) ; rien codé sans son accord. Liée à PROP-SIM-10 et I34 d'Android.
   - Personas (décision (C)) : les passages continuent (chaque jour), mais ne bloquent plus chaque envoi ; une
     régression trouvée part dans la build suivante.
   - « À tester » (`store/app-store/fr-FR/testflight-a-tester.txt`) : écrit pour la 918 ; à rafraîchir quand l'app
