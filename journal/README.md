@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v965 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **962.437 sur TestFlight et chez les testeurs externes** (10/11, 10:01 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v968 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **962.437 sur TestFlight et chez les testeurs externes** (10/11, 10:01 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (962.437 depuis le 10/11, 10:01) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
@@ -110,6 +110,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 09:00 (suite) | 959.434 chez les testeurs | relevé de 08:00 UTC : le groupe « Testeurs Halcya » ne contient plus que la **959.434, acceptée par Apple et en test** ; 918.396 et 839.337 en sont retirées (sans être expirées). Ce n'est pas un lancement de ma part (geste fait dans App Store Connect, par vous a priori). 159 builds actives : le nettoyage en expirerait 156 (restent 844.344, 959.434 et la plus récente). | journal |
 | 10/11 10:00 | nettoyage fait | avec votre autorisation (« sans me redemander ») : **157 anciennes builds expirées** ; restent 844.344, 959.434 (testeurs) et 962.437 (la plus récente, sur TestFlight). Je relancerai le nettoyage après chaque nouvelle build mise chez les testeurs externes. Parité : 67 % | journal |
 | 10/11 11:00 | déploiement continu | vos décisions de 09:05 (« déployé instantanément ») et 09:15 (« le plus continuous possible ») appliquées : la **962.437 soumise et acceptée en une minute**, chez les testeurs externes ; nettoyage : la 959.434 expirée ; restent 844.344 et 962.437. Android : gel Alpha levé, rien de changé dans l'app (v965 suivie). Parité : 67 % | PR v965 |
+| 10/11 12:00 | suivi d'Android v968 | Android : sur l'écran de la montre et pendant l'accueil, les mots reprennent la police du texte. Sur iPhone, notre adaptation de l'accueil (« Import de vos 6 derniers mois ») refaite sur ce code ; note de Nouveautés iPhone. La v965 et la v968 partent ensemble. Les testeurs externes ont la 962.437. Parité : 67 % | PR v965 + v968 |
 
 ---
 
