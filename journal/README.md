@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v961 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **959 sur TestFlight** (build 959.434, version 893) ; **918.396 acceptée par Apple, chez les testeurs externes** (10/11) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v962 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **959 sur TestFlight** (build 959.434, version 893) ; **918.396 acceptée par Apple, chez les testeurs externes** (10/11) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (918.396 depuis le 10/11) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
@@ -103,6 +103,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 05:00 | suivi d'Android v958, v959 | la v957 est mergée (barre « 0/28 jours » vide sur la capture iPhone) et part sur TestFlight. Android : Tendances dit la durée de la nuit même ; Nutrition, « Votre profil » plus compact. Les testeurs externes ont la 918.396. Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | #419 (mergée), PR v959 |
 | 10/11 06:00 | v959 livrée | la v959 (Nutrition : « Votre profil » resserré, vu sur la capture) est mergée et part sur TestFlight ; la 957 y est (957.433). Android n'a rien publié depuis. Les testeurs externes ont la 918.396. Ce soir, après l'Alpha d'Android (fin de son gel à 22:00) : passage des personas sur iPhone, puis soumission de la dernière build aux testeurs. Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | #420 (mergée) |
 | 10/11 07:00 | suivi d'Android v960, v961 | la 959 est sur TestFlight (959.434). Android : seuls les chiffres gardent leur police à chasse fixe (« 6 h 30 » sans grands blancs) ; les étiquettes reprennent la police du texte. Aussi sur iPhone ; deux de nos tests adaptés. Les testeurs externes ont la 918.396. Parité : 67 % | #421 (mergée), PR v961 |
+| 10/11 08:00 | suivi d'Android v962 | la v961 est mergée (« 6 h 30 » sans grands blancs sur la capture) et part sur TestFlight. Android v962 : page d'abonnement, les mots dans la police du texte. Les testeurs externes ont la 918.396. Parité : 67 % | #422 (mergée), PR v962 |
 
 ---
 
