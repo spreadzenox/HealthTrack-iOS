@@ -15,9 +15,8 @@
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
 **👉 Prochaine action du propriétaire**
-- **Dire si Halcya doit lire le cycle depuis l'app Santé sur iPhone** (règles et symptômes digestifs déjà notés dans
-  Santé, sans saisie de plus) : « ok cycle Santé », « plus tard » ou « non ». Maquettes :
-  `journal/maquettes/cycle-sante/`. Rien n'est codé sans votre accord (mode polish).
+- Aucune pour l'instant. Votre « Ok cycle » (10/11, 18:50) est noté : Android fait d'abord la brique partagée, puis
+  je branche la lecture du cycle de l'app Santé.
 - Fait : déploiement continu en place (chaque nouvelle build part chez les testeurs) ; nettoyage après chaque envoi
   (restent 844.344 et la build des testeurs).
 
@@ -42,6 +41,12 @@
   et celle en examen chez Apple. Une build en examen depuis plus de 24 h cède sa place à une plus récente.
 - **« Digestif »** dans les textes visibles ; nom App Store « Halcya — digestion & bien-être » seulement après votre
   soumission (7/11). **Fusion des deux routines** après la soumission (4/11).
+- **Cycle** (10/11 vers 18:50, vos mots : « Ok cycle », réponse à la proposition du 10/11 15:15 et à PROP-SIM-10
+  d'Android ; exception au mode polish) : Android fait la brique partagée (règles et symptômes rangés sans migration,
+  ligne « Règles · 2e jour » du Journal, jour du cycle, saisie à la main, Health Connect) ; ensuite, sur iPhone, la
+  lecture des règles et des symptômes notés dans l'app Santé, une ligne de plus dans l'autorisation de Santé et la
+  source « Suivi du cycle (Santé) ». Rien ne sort du téléphone ; dans les analyses, le cycle reste un contexte de la
+  digestion, jamais une cause ni un diagnostic.
 
 **Ce que vous pouvez voir** : les captures de l'app sur iPhone simulé, refaites à chaque changement :
 https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
