@@ -508,6 +508,11 @@
   `IN_BETA_TESTING` (accord d'Apple en ~1 min, même numéro de version) → `store-beta-expire.yml` « nettoyage ».
   - [x] **10/11 10:00** : 962.437 soumise (run 42787092826 : « À tester » complété, ajoutée au groupe, soumise),
     `IN_BETA_TESTING` au relevé de 10:01 ; nettoyage (run 42787291304) : 959.434 expirée ; restent 844.344 et 962.437.
+  - [x] **10/11 12:12** : 968.442 (v968) envoyée par la chaîne automatique (`deploy.sh` de la session : TestFlight →
+    fiche → soumission, refaite 5 min plus tard tant que la build n'était pas traitée → relevé → nettoyage) ;
+    `IN_BETA_TESTING` à 11:12 UTC ; 962.437 expirée ; restent 844.344 et 968.442.
+  - Version d'Android sans changement dans l'app (scripts, journal) : suivie avec la suivante qui change l'app, pour
+    ne pas envoyer aux testeurs une build identique (v970, #891, scripts d'envoi seulement).
   - Personas (décision (C)) : les passages continuent (chaque jour), mais ne bloquent plus chaque envoi ; une
     régression trouvée part dans la build suivante.
   - « À tester » (`store/app-store/fr-FR/testflight-a-tester.txt`) : écrit pour la 918 ; à rafraîchir quand l'app
