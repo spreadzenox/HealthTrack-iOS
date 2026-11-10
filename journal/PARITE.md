@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v979 (commit `f8e13d3`, 10/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v980 (commit `112155b`, 10/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 10/11 23:00 | #901 (v980) | #901 (CYCLE-2) : avec « Mon cycle », bouton « Règles » dans le bandeau d'ajout d'Aujourd'hui (`AddStrip.jsx`, `PeriodSheet.jsx` : Léger, Moyen, Abondant, « Retirer »), source `app_cycle`. Code partagé, note pour tous, valable sur iPhone (s'ajoute à la lecture de Santé : la saisie la plus récente d'un jour gagne). Page de confidentialité d'Android : « règles et symptômes du cycle si vous les notez » parmi les données gardées, repris sur la page iPhone (empreinte relue). 49 correctifs sans retouche | ✅ |
 | 10/11 22:00 | #899 et #900 (v978, v979) | #899 : outil des personas (faux relais), rien dans l'app. #900 (CYCLE-1b) : Journal › Jours, ligne « Règles · 2e jour · flux moyen » et symptômes sous le titre du jour, « 3e jour du cycle » à côté de la date, si « Mon cycle » ou des données de cycle (`DailyJournal.jsx`, `readCycle`) ; `SYMPTOMS` complété de `constipation` et `diarrhea` (notre demande du 10/11). **Sur iPhone, le cycle de Santé s'affiche** : `CycleRule` lit aussi constipation et diarrhée (XCTest), test de bout en bout Santé → Journal (`DailyJournal.cycle.ios.test.jsx`), note de Nouveautés iPhone. 49 correctifs sans retouche | ✅ |
 | 10/11 20:00 | #897 et #898 (v976, v977) | #897 : journal (« Ok cycle » relayé). #898 (CYCLE-1a) : brique partagée du cycle, rien d'affiché (`services/cycle.js` : entrées `type: 'cycle'` sans migration, `cycleByDay`, `cycleVisible` ; aperçu d'import « N notes de cycle » ; source `app_cycle` « Cycle (app) »). **CYCLE-iOS-1** dans la même PR : lecteur natif du cycle de l'app Santé (`CycleHealthPlugin.swift`, correspondance `CycleRule` testée par XCTest), `src/ios/cycleSante.js` (entrées de la brique partagée, source `health_connect`, Vitest), **correctif 58** (la synchro de Santé lit aussi le cycle, sur iPhone seulement). **CYCLE-iOS-2** aussi : avec « Mon cycle », le cycle dans la même feuille d'autorisation d'Apple que les autres mesures (`CycleHealth.requestAuthorization`, correctif 58 dans `requestPermissions`) ; coché plus tard dans les Paramètres, le cycle seul et 6 mois relus (**correctif 59**). Rien d'affiché tant qu'Android n'affiche pas le cycle (CYCLE-1b). 49 correctifs | ✅ |
 | 10/11 19:00 | #896 (v975) | #896 (POLISH-SIM-36b) : Journal › Jours, le « … » d'une note de digestion propose « Modifier » : Calme, Gêne ou Douleur sur place, l'heure gardée (`DailyJournal.jsx`, `GutLevelPicker`, `updateEntry`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche (le correctif 57 touche le même fichier, plus loin) | ✅ |

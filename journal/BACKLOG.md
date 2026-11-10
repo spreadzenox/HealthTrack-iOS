@@ -519,6 +519,8 @@
     lancé (975.451 sur TestFlight).
   - [x] **10/11 18:00** : v973 et v974 (Analyses sur Digestion ; tuiles du Journal → courbes, correctif 57 complété pour
     la VFC de l'app Santé) ; #436 mergée à 19:05 après captures (Journal clair, sombre et Santé), déploiement lancé.
+  - [x] **10/11 22:36** : 977.453 (v977, cycle lu et autorisé, rien d'affiché encore) chez les testeurs ; 975.451
+    expirée ; restent 844.344 et 977.453.
   - [x] **10/11 20:17** : 975.451 (v975) chez les testeurs, chaîne entière sans intervention ; 974.450 expirée ;
     restent 844.344 et 975.451.
   - [x] **10/11 19:23** : 974.450 (v974) chez les testeurs, chaîne entière sans intervention (script corrigé) ;
@@ -571,6 +573,7 @@
     confidentialité iPhone et `confidentialite.md` complétées. Reste pour les testeurs qui ont déjà « Mon cycle » :
     le bouton de la source (CYCLE-iOS-3). Leçon (build de la PR #439) : ne jamais rendre un plugin de Capacitor
     depuis une fonction `async` (il répond à `then`) : le ranger dans un objet.
+  - [x] Saisie des règles à la main (CYCLE-2 d'Android, v980) : sans travail ici ; PR v980 après #440.
   - [ ] **CYCLE-iOS-3** Sources : « Suivi du cycle (Santé) » dans « Mes appareils » (maquette 2), quand des données
     sont reçues ; avec « Mon cycle » et Santé autorisée avant CYCLE-iOS-2 (testeurs actuels), un bouton qui demande le
     cycle (`askCycleAfterOnboarding`).

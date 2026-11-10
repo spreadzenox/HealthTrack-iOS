@@ -19,8 +19,9 @@ const text = iphone.replace(/<!--[\s\S]*?-->/g, '').replace(/<style>[\s\S]*?<\/s
 // « Forme des selles estimée par photo », reprise sur iPhone avec App Attest au lieu de Play Integrity (décision du
 // propriétaire du 05/11 vers 20:15) ;
 // v782 : « Votre avis », reprise avec App Attest au lieu de Play Integrity ;
-// AUJ-7 (07/11) : « ventre » devient « digestion », mêmes remplacements sur la page iPhone)
-const ANDROID_POLICY_RELUE = 'ae4fea560466d4ea8900b5e6606565a7b559b9fa4097e724668e87ba022d2174'
+// AUJ-7 (07/11) : « ventre » devient « digestion », mêmes remplacements sur la page iPhone ;
+// v980 (CYCLE-2) : « règles et symptômes du cycle si vous les notez » parmi les données gardées, repris sur iPhone)
+const ANDROID_POLICY_RELUE = '4bcd3f03a8dc3721370f0912be63a1e6bdfe5defc96547dd091bcb80eeb7b5dc'
 
 describe('politique de confidentialité sur iPhone', () => {
   it("suit la dernière version relue de la page d'Android", () => {
