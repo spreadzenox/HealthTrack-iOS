@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v969 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **962.437 sur TestFlight et chez les testeurs externes** (10/11, 10:01 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (962.437 depuis le 10/11, 10:01) |
+| Dernière version | v969 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **968.442 sur TestFlight et chez les testeurs externes** (10/11, 12:12 ; déploiement continu) ; 969 en route ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (968.442 depuis le 10/11, 12:12) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
 **👉 Prochaine action du propriétaire**
@@ -112,6 +112,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 11:00 | déploiement continu | vos décisions de 09:05 (« déployé instantanément ») et 09:15 (« le plus continuous possible ») appliquées : la **962.437 soumise et acceptée en une minute**, chez les testeurs externes ; nettoyage : la 959.434 expirée ; restent 844.344 et 962.437. Android : gel Alpha levé, rien de changé dans l'app (v965 suivie). Parité : 67 % | PR v965 |
 | 10/11 12:00 | suivi d'Android v968 | Android : sur l'écran de la montre et pendant l'accueil, les mots reprennent la police du texte. Sur iPhone, notre adaptation de l'accueil (« Import de vos 6 derniers mois ») refaite sur ce code ; note de Nouveautés iPhone. La v965 et la v968 partent ensemble. Les testeurs externes ont la 962.437. Parité : 67 % | PR v965 + v968 |
 | 10/11 13:00 | suivi d'Android v969 | la v968 est mergée (accueil iPhone « 6 derniers mois » conservé) et part sur TestFlight puis chez les testeurs. Android v969 : la note du jour s'écrit « 3,2 » sans blancs autour de la virgule. Parité : 67 % | #428 (mergée), PR v969 |
+| 10/11 13:00 (suite) | déploiement continu, 2e tour | la **968.442** est chez les testeurs depuis 12:12 (accord d'Apple en une minute) ; la 962.437 expirée. La v969 (« 3,2 ») est mergée et suit le même chemin. Android v970 : rien dans l'app (scripts d'envoi) ; reprise avec sa prochaine version qui change l'app, pour ne pas envoyer aux testeurs une build identique. Parité : 67 % | #429 (mergée) |
 
 ---
 
