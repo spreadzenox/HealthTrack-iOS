@@ -569,7 +569,8 @@
     suit ne montre plus rien) ; jamais demandé sans « Mon cycle ». Coché plus tard dans les Paramètres (correctif 59) :
     feuille du cycle seul, puis 6 mois relus, si Santé est déjà autorisée. Phrase d'accès à Santé, page de
     confidentialité iPhone et `confidentialite.md` complétées. Reste pour les testeurs qui ont déjà « Mon cycle » :
-    le bouton de la source (CYCLE-iOS-3).
+    le bouton de la source (CYCLE-iOS-3). Leçon (build de la PR #439) : ne jamais rendre un plugin de Capacitor
+    depuis une fonction `async` (il répond à `then`) : le ranger dans un objet.
   - [ ] **CYCLE-iOS-3** Sources : « Suivi du cycle (Santé) » dans « Mes appareils » (maquette 2), quand des données
     sont reçues ; avec « Mon cycle » et Santé autorisée avant CYCLE-iOS-2 (testeurs actuels), un bouton qui demande le
     cycle (`askCycleAfterOnboarding`).

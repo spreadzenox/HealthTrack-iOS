@@ -105,3 +105,25 @@ describe('Autorisation du cycle dans Santé (iPhone)', () => {
   })
 })
 
+// Build de captures de la PR #439 : le plugin de Capacitor répond à toute propriété, `then` compris ; rendu tel quel par
+// une fonction `async`, il passait pour une promesse (« CycleHealth.then() is not implemented »), l'attente ne finissait
+// jamais et la synchro de Santé restait bloquée au cycle.
+describe('Plugin de Capacitor jamais pris pour une promesse', () => {
+  const capacitorLike = (methods) => new Proxy(methods, {
+    get: (target, key) => (key in target ? target[key] : () => Promise.reject(new Error(`CycleHealth.${String(key)}() is not implemented on ios`))),
+  })
+
+  it('la synchro et la demande d’autorisation aboutissent avec un plugin qui répond à `then`', async () => {
+    const plugin = capacitorLike({
+      readCycle: vi.fn(async () => ({ samples: [{ kind: 'spotting', start: noon(2026, 11, 8) }] })),
+      requestAuthorization: vi.fn(async () => ({ asked: true })),
+    })
+    const writer = vi.fn()
+    expect(await syncCycleFromSante({ since: new Date(2026, 10, 1), until: new Date(2026, 10, 10), writer, plugin })).toBe(1)
+    expect(await requestSanteAuthorization({ read: [], cycle: true, plugin })).toEqual({ asked: true })
+    localStorage.setItem(IOS_HEALTHKIT_ASKED_KEY, '1')
+    expect(await askCycleAfterOnboarding({ platform: 'ios', plugin, writer, now: new Date(2026, 10, 10) })).toBe(1)
+    localStorage.clear()
+  }, 2000)
+})
+
