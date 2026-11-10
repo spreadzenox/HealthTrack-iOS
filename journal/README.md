@@ -101,6 +101,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 03:00 | v956 livrée | la v956 (réintroduction rangée sous Agir, retour « ← Agir » vu sur la capture) est mergée et part sur TestFlight. Android n'a rien publié depuis. Les testeurs externes ont la 918.396. Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | #417 (mergée) |
 | 10/11 04:00 | suivi d'Android v957 | la 956 est sur TestFlight (956.431). Android v957 : au premier jour, la barre « 0/28 jours » se voit vide (elle paraissait pleine, aussi sur iPhone). Les testeurs externes ont la 918.396. Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | PR v957 |
 | 10/11 05:00 | suivi d'Android v958, v959 | la v957 est mergée (barre « 0/28 jours » vide sur la capture iPhone) et part sur TestFlight. Android : Tendances dit la durée de la nuit même ; Nutrition, « Votre profil » plus compact. Les testeurs externes ont la 918.396. Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | #419 (mergée), PR v959 |
+| 10/11 06:00 | v959 livrée | la v959 (Nutrition : « Votre profil » resserré, vu sur la capture) est mergée et part sur TestFlight ; la 957 y est (957.433). Android n'a rien publié depuis. Les testeurs externes ont la 918.396. Ce soir, après l'Alpha d'Android (fin de son gel à 22:00) : passage des personas sur iPhone, puis soumission de la dernière build aux testeurs. Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | #420 (mergée) |
 
 ---
 
