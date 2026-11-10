@@ -502,6 +502,16 @@
     résumé de la semaine et `POUR-ORCHESTRATEUR.md`) : run 42783898946, 157 builds expirées (de 961.436 à 638.121, dont
     918.396 et 839.337) ; restent 844.344, 959.434 (distribuée), 962.437 (la plus récente). Désormais : nettoyage
     réel, sans essai, après chaque nouvelle build mise chez les testeurs externes.
+- [ ] **DÉPLOIEMENT CONTINU** (décisions du propriétaire du 10/11, `POUR-IOS.md` 09:10 et 09:15, verbatim dans le résumé
+  de la semaine) : remplace BÊTA-NUIT. À chaque run (et après chaque TestFlight) : si la build la plus récente est
+  traitée (`VALID`) et pas chez les testeurs externes → `store-beta-submit.yml` (groupe + examen) ; relevé jusqu'à
+  `IN_BETA_TESTING` (accord d'Apple en ~1 min, même numéro de version) → `store-beta-expire.yml` « nettoyage ».
+  - [x] **10/11 10:00** : 962.437 soumise (run 42787092826 : « À tester » complété, ajoutée au groupe, soumise),
+    `IN_BETA_TESTING` au relevé de 10:01 ; nettoyage (run 42787291304) : 959.434 expirée ; restent 844.344 et 962.437.
+  - Personas (décision (C)) : les passages continuent (chaque jour), mais ne bloquent plus chaque envoi ; une
+    régression trouvée part dans la build suivante.
+  - « À tester » (`store/app-store/fr-FR/testflight-a-tester.txt`) : écrit pour la 918 ; à rafraîchir quand l'app
+    change de façon visible pour les testeurs.
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
