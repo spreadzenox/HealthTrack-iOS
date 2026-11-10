@@ -498,7 +498,7 @@
     9/11 19:02) : geste fait dans App Store Connect. Essai à blanc (run 42779431273) : 159 builds actives, gardées
     844.344, 959.434 (distribuée), 961.436 (la plus récente) ; 156 à expirer. Ce soir : la soumission de la nuit part
     d'une build plus récente que la 959.434, après les personas.
-  - [x] **10/11 09:20 : nettoyage réel fait** (autorisation du propriétaire dans la session, vers 09:15, verbatim dans le
+  - [x] **10/11 09:40 : nettoyage réel fait** (autorisation du propriétaire dans la session, vers 09:30, verbatim dans le
     résumé de la semaine et `POUR-ORCHESTRATEUR.md`) : run 42783898946, 157 builds expirées (de 961.436 à 638.121, dont
     918.396 et 839.337) ; restent 844.344, 959.434 (distribuée), 962.437 (la plus récente). Désormais : nettoyage
     réel, sans essai, après chaque nouvelle build mise chez les testeurs externes.
