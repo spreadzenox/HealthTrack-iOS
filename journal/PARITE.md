@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v975 (commit `ac138c7`, 10/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v977 (commit `9f5305f`, 10/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 10/11 20:00 | #897 et #898 (v976, v977) | #897 : journal (« Ok cycle » relayé). #898 (CYCLE-1a) : brique partagée du cycle, rien d'affiché (`services/cycle.js` : entrées `type: 'cycle'` sans migration, `cycleByDay`, `cycleVisible` ; aperçu d'import « N notes de cycle » ; source `app_cycle` « Cycle (app) »). **CYCLE-iOS-1** dans la même PR : lecteur natif du cycle de l'app Santé (`CycleHealthPlugin.swift`, correspondance `CycleRule` testée par XCTest), `src/ios/cycleSante.js` (entrées de la brique partagée, source `health_connect`, Vitest), **correctif 58** (la synchro de Santé lit aussi le cycle, sur iPhone seulement). Rien de visible tant que l'autorisation n'est pas demandée (CYCLE-iOS-2) et qu'Android n'affiche pas le cycle (CYCLE-1b). 48 correctifs | ✅ |
 | 10/11 19:00 | #896 (v975) | #896 (POLISH-SIM-36b) : Journal › Jours, le « … » d'une note de digestion propose « Modifier » : Calme, Gêne ou Douleur sur place, l'heure gardée (`DailyJournal.jsx`, `GutLevelPicker`, `updateEntry`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche (le correctif 57 touche le même fichier, plus loin) | ✅ |
 | 10/11 18:00 | #894 et #895 (v973, v974) | #894 (POLISH-SIM-33) : qui suit sa digestion ou son cycle trouve Analyses ouvert sur Digestion (`TabBar.jsx`). #895 (POLISH-SIM-36) : dans Journal › Jours, toucher une tuile (Sommeil, Pas, VFC, FC au repos, Écran, Bien-être) ouvre sa courbe dans Tendances (`DailyJournal.jsx`, `TREND_KEYS`). Sur iPhone, la tuile « VFC (SDNN) » (clé `hrvDay`) n'avait pas de courbe : **correctif 57 complété**, elle ouvre `/tendances?mesure=hrvSdnn`, comme sur Aujourd'hui (correctif 56) ; test iPhone (rouge puis vert). Note d'Android (« VFC nuit ») cachée sur iPhone (correctif 28), note iPhone à la place. 47 correctifs | ✅ |
 | 10/11 14:00 | #891 à #893 (v970 à v972) | #893 (POLISH-SIM-30) : Analyses, « Ce qui va avec votre bien-être », un lien pas assez net a son chiffre en gris en plus du hachurage, invisible sur les petites barres ; légende « hachuré, chiffre en gris : pas assez net » (`Recommendations.jsx`, `Recommendations.css`). Code partagé, note pour tous, valable sur iPhone. #891 (scripts Play) et #892 (captures de la fiche Play) ne changent rien à l'app : suivies avec la v972. 47 correctifs sans retouche | ✅ |

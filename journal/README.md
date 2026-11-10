@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v975 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **972.447 sur TestFlight et chez les testeurs externes** (10/11, 16:36 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (972.447 depuis le 10/11, 16:36) |
+| Dernière version | v977 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **974.450 chez les testeurs externes** (10/11, 19:23 ; déploiement continu ; la 975 suit) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (974.450 depuis le 10/11, 19:23) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
 **👉 Prochaine action du propriétaire**
@@ -126,7 +126,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 16:00 | v972 livrée | la v972 (chiffre gris d'un lien pas assez net dans Analyses) est mergée après les trois vérifications et les captures, puis part seule : TestFlight (972.447), fiche, ajout au groupe « Testeurs Halcya » et examen bêta. Android n'a rien publié depuis. Parité : 67 % | #432 (mergée) |
 | 10/11 17:00 | 972.447 chez les testeurs | Apple a accepté la **972.447** : elle est chez les testeurs externes depuis 16:36. Nettoyage : la 969.443 expirée ; restent 844.344 (votre soumission) et 972.447. La chaîne automatique s'était arrêtée au relevé (une commande de GitHub refusée par le réseau de la session) : corrigée, la suite faite à la main. La note « À tester » des testeurs, relue : toujours juste. Parité : 67 % | journal |
 | 10/11 18:00 | suivi d'Android v974 | Android v973 : Analyses s'ouvre sur Digestion pour qui suit sa digestion ou son cycle. Android v974 : dans le Journal, toucher une mesure du jour ouvre sa courbe ; sur iPhone, la VFC de l'app Santé ouvre la sienne (elle n'en aurait pas eu sans retouche). Les testeurs externes ont la 972.447 ; la 974 suivra dès sa build traitée. Parité : 67 % | #436 (mergée) |
-| 10/11 19:00 | suivi d'Android v975 | Android v975 : dans le Journal, une note de digestion se modifie sur place (Calme, Gêne ou Douleur), l'heure gardée. La v974 part la première chez les testeurs, la 975 la suit. Parité : 67 % | PR v975 |
+| 10/11 19:00 | suivi d'Android v975 | Android v975 : dans le Journal, une note de digestion se modifie sur place (Calme, Gêne ou Douleur), l'heure gardée. La v974 part la première chez les testeurs, la 975 la suit. Parité : 67 % | #437 (mergée) |
+| 10/11 20:00 | cycle, 1re étape iPhone | Votre « Ok cycle » est arrivé. Android a posé la brique commune (rien d'affiché encore) ; côté iPhone, l'app sait maintenant lire dans Santé les règles et cinq symptômes (crampes, douleur pelvienne, ballonnements, maux de tête, fatigue). Rien ne change à l'écran tant que l'autorisation n'est pas demandée (prochaine étape) et qu'Android n'affiche pas le cycle. La 974.450 est chez les testeurs depuis 19:23, la 975 suit. Parité : 67 % | #438 (mergée), PR cycle |
 
 ---
 

@@ -1,0 +1,30 @@
+diff --git a/app/src/connectors/HealthConnectConnector.js b/app/src/connectors/HealthConnectConnector.js
+index 573b597..f15d647 100644
+--- a/app/src/connectors/HealthConnectConnector.js
++++ b/app/src/connectors/HealthConnectConnector.js
+@@ -23,6 +23,7 @@
+ import { BaseConnector } from './BaseConnector'
+ import { debugInfo, debugWarn, debugError, debugDebug } from '../utils/debugLog'
+ import { HEALTH_CONNECT_READ_WINDOW_DAYS } from './syncWindow'
++import { syncCycleFromSante } from '../ios/cycleSante' // Version iOS (HealthTrack-iOS) : CYCLE-iOS-1 (correctif 58)
+ 
+ const TAG = 'HealthConnect'
+ 
+@@ -1166,6 +1167,17 @@ export class HealthConnectConnector extends BaseConnector {
+       }
+     }
+ 
++    // Version iOS (HealthTrack-iOS), CYCLE-iOS-1 : le cycle noté dans l'app Santé (règles, symptômes), lu par le
++    // plugin natif CycleHealth, rangé avec la brique partagée du cycle (correctif 58)
++    if (isIos()) {
++      try {
++        synced += await syncCycleFromSante({ since, until, writer })
++      } catch (e) {
++        debugError(TAG, `Erreur lecture du cycle : ${e?.message || e}`, { error: e })
++        errors.push(`cycle: ${e.message || e}`)
++      }
++    }
++
+     report(null)
+     debugInfo(TAG, 'Synchronisation terminée', { synced, skipped, errors })
+     return { synced, skipped, errors }

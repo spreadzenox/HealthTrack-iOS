@@ -14,6 +14,7 @@ class HalcyaBridgeViewController: CAPBridgeViewController {
         bridge?.registerPluginInstance(FaceSensePlugin()) // lecture du visage à l'ouverture de l'app (I7)
         bridge?.registerPluginInstance(VoiceProbePlugin())
         bridge?.registerPluginInstance(PhoneUsagePlugin()) // temps d'écran (I8, iOS 26.4+, UE) ; branché côté JS plus tard
+        bridge?.registerPluginInstance(CycleHealthPlugin()) // cycle noté dans l'app Santé (CYCLE-iOS-1), lecture seule
         #if DEBUG
         bridge?.registerPluginInstance(CaptureProbePlugin()) // build de captures seulement
         #endif
