@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v972 (commit `6575ddc`, 10/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v974 (commit `fa6cf29`, 10/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 10/11 18:00 | #894 et #895 (v973, v974) | #894 (POLISH-SIM-33) : qui suit sa digestion ou son cycle trouve Analyses ouvert sur Digestion (`TabBar.jsx`). #895 (POLISH-SIM-36) : dans Journal › Jours, toucher une tuile (Sommeil, Pas, VFC, FC au repos, Écran, Bien-être) ouvre sa courbe dans Tendances (`DailyJournal.jsx`, `TREND_KEYS`). Sur iPhone, la tuile « VFC (SDNN) » (clé `hrvDay`) n'avait pas de courbe : **correctif 57 complété**, elle ouvre `/tendances?mesure=hrvSdnn`, comme sur Aujourd'hui (correctif 56) ; test iPhone (rouge puis vert). Note d'Android (« VFC nuit ») cachée sur iPhone (correctif 28), note iPhone à la place. 47 correctifs | ✅ |
 | 10/11 14:00 | #891 à #893 (v970 à v972) | #893 (POLISH-SIM-30) : Analyses, « Ce qui va avec votre bien-être », un lien pas assez net a son chiffre en gris en plus du hachurage, invisible sur les petites barres ; légende « hachuré, chiffre en gris : pas assez net » (`Recommendations.jsx`, `Recommendations.css`). Code partagé, note pour tous, valable sur iPhone. #891 (scripts Play) et #892 (captures de la fiche Play) ne changent rien à l'app : suivies avec la v972. 47 correctifs sans retouche | ✅ |
 | 10/11 13:00 | #890 (v969) | #890 (MONO-VIRGULE) : la note du jour s'écrit « 3,2 » et non « 3 , 2 » ; même chose pour « +0,4 pt » (Analyses) et les niveaux d'un changement (Tendances) (`DayStatusCard.jsx`, `Recommendations.jsx`, `TrendsViewer.jsx`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
 | 10/11 12:00 | #887 à #889 (v966 à v968) | #887 (MONO-MOTS-3) : écran de la montre et accueil, mots hors de la police à chasse fixe (`Onboarding.jsx` : `monoDigits` sur la ligne d'import et les mesures trouvées ; CSS d'Analyses, d'accueil et de la montre allégées). #888 : journal. #889 : scripts d'envoi Alpha. **Correctif 45 refait** (import ajouté par Android au-dessus de `IMPORT_SPAN`, ligne d'import passée dans `monoDigits` : l'iPhone garde « 6 derniers mois »). Note d'Android cachée sur iPhone (correctif 28 : elle cite l'écran de la montre, absent, et « vos 30 derniers jours ») ; note iPhone à la place. 47 correctifs | ✅ |

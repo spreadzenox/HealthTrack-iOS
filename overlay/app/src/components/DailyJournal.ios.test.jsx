@@ -36,4 +36,15 @@ describe('Journal : « d’habitude » de la VFC de l’app Santé (iPhone)', ()
     await waitFor(() => expect(tile).toHaveTextContent('d’habitude 48 ms'))
     expect(tile.querySelector('.day-summary-usual')).toHaveAttribute('aria-label', 'VFC plus haute')
   })
+
+  // Android v974 (POLISH-SIM-36) : toucher une tuile du jour ouvre sa courbe ; sur iPhone, la VFC de l'app Santé ouvre
+  // la sienne, en SDNN (correctif 57), comme sur Aujourd'hui (correctif 56)
+  it('la tuile « VFC (SDNN) » ouvre la courbe de la VFC de l’app Santé dans Tendances', async () => {
+    const { listEntries } = await import('../storage/localHealthStorage')
+    const hist = sdnnHistory()
+    listEntries.mockImplementation(async (q = {}) => (!q.type || q.type === 'heart_rate' ? hist : []))
+    render(<BrowserRouter><DailyJournal /></BrowserRouter>)
+    const links = await screen.findAllByRole('link', { name: /^VFC \(SDNN\).*courbe/ })
+    for (const link of links) expect(link).toHaveAttribute('href', '/tendances?mesure=hrvSdnn')
+  })
 })
