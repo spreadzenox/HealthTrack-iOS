@@ -10,16 +10,13 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v962 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **961 sur TestFlight** (build 961.436, version 893) ; **959.434 chez les testeurs externes** (mise dans le groupe le 10/11 au matin, acceptée par Apple) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v962 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **962 sur TestFlight** (962.437) ; **959.434 chez les testeurs externes** (10/11, acceptée par Apple) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (959.434 depuis le 10/11 au matin) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
 **👉 Prochaine action du propriétaire**
-- **Lancer le nettoyage des anciennes builds** (votre règle de livraison continue du 9/11) : GitHub → HealthTrack-iOS →
-  Actions → « TestFlight — expiration des builds » → « Run workflow », « nettoyage » coché, « builds » vide, « essai »
-  décoché (≈146 anciennes builds ; restent la 844.344, la build des testeurs, celle en examen et la plus récente). Ma
-  session refuse de le lancer elle-même ; autorisez-le dans ses permissions pour que je le fasse après chaque build.
-- Fait : la 896.376 est expirée (votre « 896 expirée », 19:50) ; la **918.396 est acceptée par Apple et chez les testeurs externes** (10/11, 00:00).
+- Aucune pour l'instant. Fait : nettoyage des anciennes builds (10/11, 157 expirées, avec votre autorisation) ; les
+  testeurs externes ont la 959.434.
 
 **Vos décisions en vigueur**
 - **Mode polish dès le 9/11** (décision du 7/11 au soir, (A)) : plus de nouvelle fonction ; bugs, polissage, textes
@@ -31,6 +28,7 @@
 - **Merges et examen bêta** (votre message du 7/11 vers 18:30) : je merge mes PR dès que les garde-fous sont verts ;
   chaque nuit, la dernière build part au groupe « Testeurs Halcya » et à l'examen bêta, jamais la version de l'App
   Store. **Numéro de version fixe** des builds de test (893) pendant le cycle (7/11, 19:35).
+- **Nettoyage par la routine** (10/11 vers 09:15, vos mots dans cette session) : « J'autorise la routine à lancer elle-même le nettoyage réel des anciennes builds TestFlight (store-beta-expire.yml, nettoyage coché, essai décoché) après chaque mise d'une nouvelle build chez les testeurs externes, sans me redemander. »
 - **Livraison continue** (9/11 vers 11:00, vos mots : « la routine doit expirer les versions précédentes à chaque fois
   qu'une nouvelle version arrive ») : après chaque nouvelle build, j'expire celles qui ne servent plus ; restent la
   build de votre soumission (844.344), la dernière distribuée aux testeurs externes jusqu'à ce que la suivante le soit,
@@ -106,6 +104,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 08:00 | suivi d'Android v962 | la v961 est mergée (« 6 h 30 » sans grands blancs sur la capture) et part sur TestFlight. Android v962 : page d'abonnement, les mots dans la police du texte. Les testeurs externes ont la 918.396. Parité : 67 % | #422 (mergée), PR v962 |
 | 10/11 09:00 | v962 livrée | la v962 (abonnement : « premium » dans la police du texte, vu sur la capture) est mergée et part sur TestFlight ; la 961 y est (961.436). Android n'a rien publié depuis. Les testeurs externes ont la 918.396. Parité : 67 % | #423 (mergée) |
 | 10/11 09:00 (suite) | 959.434 chez les testeurs | relevé de 08:00 UTC : le groupe « Testeurs Halcya » ne contient plus que la **959.434, acceptée par Apple et en test** ; 918.396 et 839.337 en sont retirées (sans être expirées). Ce n'est pas un lancement de ma part (geste fait dans App Store Connect, par vous a priori). 159 builds actives : le nettoyage en expirerait 156 (restent 844.344, 959.434 et la plus récente). | journal |
+| 10/11 10:00 | nettoyage fait | avec votre autorisation (« sans me redemander ») : **157 anciennes builds expirées** ; restent 844.344, 959.434 (testeurs) et 962.437 (la plus récente, sur TestFlight). Je relancerai le nettoyage après chaque nouvelle build mise chez les testeurs externes. Parité : 67 % | journal |
 
 ---
 
@@ -226,7 +225,8 @@ Règles des adaptations :
   traitement et la plus récente. Soumission de la nuit : examen de plus de 24 h et build plus récente prête →
   `builds` = celle en examen, puis `store-beta-submit.yml`. Chaque expiration dans le compte rendu. **9/11 : le
   lancement réel est refusé par le système de permissions de la session** (action irréversible) tant que le
-  propriétaire ne l'y autorise pas ; essais à blanc permis.
+  propriétaire ne l'y autorise pas ; essais à blanc permis. **10/11 vers 09:15 : autorisé par le propriétaire dans la
+  session** (« sans me redemander ») : nettoyage réel après chaque nouvelle build mise chez les testeurs externes.
 - **Nouveautés in-app** : variante `appstore` (correctif de `app/src/config/distribution.js`) ; les entrées de
   changelog propres à iOS vont dans `overlay/app/src/data/changelog/` avec `"variants": ["appstore"]`, et
   l'historique iOS commence au lancement iOS (équivalent de `PLAY_CHANGELOG_SINCE`).
