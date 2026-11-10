@@ -98,6 +98,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 00:00 | 918.396 chez les testeurs ; suivi d'Android v954 | **Apple a accepté la 918.396** : le lien public des testeurs la donne (même version que les testeurs Android). La 953 est sur TestFlight (953.427). Android v954 : le résultat d'un essai est dessiné dès le premier jour. Pas de soumission cette nuit (Android en pause d'Alpha, versions alignées). Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | #413 (mergée), PR v954 |
 | 10/11 01:00 | suivi d'Android v955 | la v954 est mergée et part sur TestFlight. Android v955 : sur la page d'un essai, le graphique « Avec / Sans » sur une même échelle et une phrase qui dit l'écart et sa fourchette. Les testeurs externes ont la 918.396. Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | #415 (mergée), PR v955 |
 | 10/11 02:00 | suivi d'Android v956 | la 955 est sur TestFlight (955.430). Android v956 : la réintroduction guidée se range sous Agir (retour « ← Agir »). Les testeurs externes ont la 918.396. Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | #416 (mergée), PR v956 |
+| 10/11 03:00 | v956 livrée | la v956 (réintroduction rangée sous Agir, retour « ← Agir » vu sur la capture) est mergée et part sur TestFlight. Android n'a rien publié depuis. Les testeurs externes ont la 918.396. Le nettoyage des anciennes builds attend votre geste. Parité : 67 % | #417 (mergée) |
 
 ---
 
