@@ -515,6 +515,10 @@
     ne pas envoyer aux testeurs une build identique (v970, #891, scripts d'envoi seulement ; v971, #892, captures de la
     fiche Play) : suivies avec la v972 (#893, chiffre gris d'un lien pas assez net dans Analyses), le 10/11 à 15:00.
   - [x] **10/11 13:14** : 969.443 (v969) chez les testeurs ; 968.442 expirée ; restent 844.344 et 969.443.
+  - [x] **10/11 16:36** : 972.447 (v972) chez les testeurs (soumise par `deploy.sh` au 2e essai, la build n'étant pas
+    encore traitée au 1er) ; nettoyage (run 42850282884) : 969.443 expirée ; restent 844.344 et 972.447. `deploy.sh`
+    bloqué au relevé : `gh run list` passe par `repositories/{id}/…`, refusé par le proxy de la session (403) →
+    `latest()` en REST (`repos/…/actions/workflows/…/runs`), garde sur un identifiant vide.
   - [x] **10/11 13:00, personas du jour** (version 969) : persona 4 Endométriose, iPhone seul, J14
     (`journal/simulations/2026-11-10-1300-*`) ; constats partagés relayés (`DEMANDES.md`, 10/11).
   - [ ] **Proposition (mode polish) : lire le cycle depuis l'app Santé sur iPhone** (règles notées dans Santé ou une
@@ -524,7 +528,8 @@
   - Personas (décision (C)) : les passages continuent (chaque jour), mais ne bloquent plus chaque envoi ; une
     régression trouvée part dans la build suivante.
   - « À tester » (`store/app-store/fr-FR/testflight-a-tester.txt`) : écrit pour la 918 ; à rafraîchir quand l'app
-    change de façon visible pour les testeurs.
+    change de façon visible pour les testeurs. Relu le 10/11 à 16:30 (v972) : tout ce qu'il cite existe encore
+    (« Vos données du jour », Tendances à deux courbes, « Votre avis »), inchangé.
   - [ ] **Captures de démo, Analyses** : depuis le 10/11 (captures de la v955 et après), « Pistes à tester » dit « Aucun
     lien assez net… » au lieu de la piste verrouillée du 9/11 : les données de démo d'Android (`scripts/visual/
     demoData.mjs`) dépendent de la date. Pas une régression d'une version ; à regarder si la capture de la fiche App
