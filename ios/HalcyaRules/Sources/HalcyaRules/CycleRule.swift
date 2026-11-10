@@ -11,14 +11,16 @@ import Foundation
 public enum CycleRule {
     public static let menstrualFlow = "HKCategoryTypeIdentifierMenstrualFlow"
     public static let intermenstrualBleeding = "HKCategoryTypeIdentifierIntermenstrualBleeding"
-    /// Symptômes de Santé qui ont leur équivalent dans la brique partagée (`SYMPTOMS` de `cycle.js`). Constipation et
-    /// diarrhée attendent qu'Android les y ajoute (`journal/DEMANDES.md`, 10/11).
+    /// Symptômes de Santé qui ont leur équivalent dans la brique partagée (`SYMPTOMS` de `cycle.js`) ; constipation et
+    /// diarrhée ajoutées par Android à notre demande (CYCLE-1b, v979).
     public static let symptoms: [String: String] = [
         "HKCategoryTypeIdentifierAbdominalCramps": "cramps",
         "HKCategoryTypeIdentifierPelvicPain": "pelvic_pain",
         "HKCategoryTypeIdentifierBloating": "bloating",
         "HKCategoryTypeIdentifierHeadache": "headache",
         "HKCategoryTypeIdentifierFatigue": "fatigue",
+        "HKCategoryTypeIdentifierConstipation": "constipation",
+        "HKCategoryTypeIdentifierDiarrhea": "diarrhea",
     ]
     /// Les types lus, dans un ordre stable.
     public static var identifiers: [String] { [menstrualFlow, intermenstrualBleeding] + symptoms.keys.sorted() }

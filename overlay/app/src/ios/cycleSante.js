@@ -46,7 +46,7 @@ export function cycleEntriesFromSante(samples) {
     try {
       entry = toEntry(s, localDateKey(new Date(s.start)))
     } catch {
-      entry = null // symptôme hors de la brique partagée (constipation, diarrhée : DEMANDES.md du 10/11)
+      entry = null // symptôme hors de la brique partagée (`SYMPTOMS` de cycle.js)
     }
     if (!entry) continue
     entry.payload = { ...entry.payload, connector: 'health_connect', ...(s.sourceName ? { sourceName: s.sourceName } : {}) }
