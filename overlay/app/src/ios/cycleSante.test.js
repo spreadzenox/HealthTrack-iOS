@@ -43,9 +43,17 @@ describe('Cycle de l’app Santé → entrées partagées (iPhone)', () => {
     expect(entries.find((e) => e.payload.subtype === 'period').payload.flow).toBe('heavy')
   })
 
+  it('constipation et diarrhée de Santé : dans la brique partagée depuis Android v979 (notre demande du 10/11)', () => {
+    const entries = cycleEntriesFromSante([
+      { kind: 'symptom', symptom: 'constipation', start: noon(2026, 11, 8) },
+      { kind: 'symptom', symptom: 'diarrhea', start: noon(2026, 11, 9) },
+    ])
+    expect(entries.map((e) => e.payload.symptom)).toEqual(['constipation', 'diarrhea'])
+  })
+
   it('rien d’inconnu ni d’invalide : sous-type, symptôme ou date hors de la brique partagée ignorés', () => {
     expect(cycleEntriesFromSante([
-      { kind: 'symptom', symptom: 'constipation', start: noon(2026, 11, 8) },
+      { kind: 'symptom', symptom: 'nausea', start: noon(2026, 11, 8) },
       { kind: 'ovulation', start: noon(2026, 11, 8) },
       { kind: 'period', flow: 'medium' },
       null,

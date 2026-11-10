@@ -28,17 +28,20 @@ final class CycleRuleTests: XCTestCase {
         XCTAssertEqual(cramps?["kind"] as? String, "symptom")
         XCTAssertEqual(cramps?["symptom"] as? String, "cramps")
         XCTAssertEqual(CycleRule.row(identifier: "HKCategoryTypeIdentifierPelvicPain", value: 0, startMs: 1)?["symptom"] as? String, "pelvic_pain")
-        XCTAssertEqual(Set(CycleRule.symptoms.values), ["cramps", "pelvic_pain", "bloating", "headache", "fatigue"])
+        XCTAssertEqual(Set(CycleRule.symptoms.values), ["cramps", "pelvic_pain", "bloating", "headache", "fatigue", "constipation", "diarrhea"])
+        // constipation et diarrhée : dans la brique partagée depuis Android v979 (notre demande du 10/11)
+        XCTAssertEqual(CycleRule.row(identifier: "HKCategoryTypeIdentifierConstipation", value: 2, startMs: 1)?["symptom"] as? String, "constipation")
+        XCTAssertEqual(CycleRule.row(identifier: "HKCategoryTypeIdentifierDiarrhea", value: 0, startMs: 1)?["symptom"] as? String, "diarrhea")
     }
 
     /// Symptôme noté « absent » dans Santé, ou type que la brique partagée ne connaît pas encore : rien
     func testAbsentOuInconnu() {
         XCTAssertNil(CycleRule.row(identifier: "HKCategoryTypeIdentifierBloating", value: 1, startMs: 1000))
-        XCTAssertNil(CycleRule.row(identifier: "HKCategoryTypeIdentifierConstipation", value: 3, startMs: 1000))
+        XCTAssertNil(CycleRule.row(identifier: "HKCategoryTypeIdentifierNausea", value: 3, startMs: 1000))
     }
 
     func testTypesLus() {
-        XCTAssertEqual(CycleRule.identifiers.count, 7)
+        XCTAssertEqual(CycleRule.identifiers.count, 9)
         XCTAssertEqual(CycleRule.identifiers.first, CycleRule.menstrualFlow)
     }
 
