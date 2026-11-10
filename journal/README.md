@@ -28,7 +28,7 @@
 - **Merges et examen bêta** (votre message du 7/11 vers 18:30) : je merge mes PR dès que les garde-fous sont verts ;
   chaque nuit, la dernière build part au groupe « Testeurs Halcya » et à l'examen bêta, jamais la version de l'App
   Store. **Numéro de version fixe** des builds de test (893) pendant le cycle (7/11, 19:35).
-- **Nettoyage par la routine** (10/11 vers 09:15, vos mots dans cette session) : « J'autorise la routine à lancer elle-même le nettoyage réel des anciennes builds TestFlight (store-beta-expire.yml, nettoyage coché, essai décoché) après chaque mise d'une nouvelle build chez les testeurs externes, sans me redemander. »
+- **Nettoyage par la routine** (10/11 vers 09:30, vos mots dans cette session) : « J'autorise la routine à lancer elle-même le nettoyage réel des anciennes builds TestFlight (store-beta-expire.yml, nettoyage coché, essai décoché) après chaque mise d'une nouvelle build chez les testeurs externes, sans me redemander. »
 - **Livraison continue** (9/11 vers 11:00, vos mots : « la routine doit expirer les versions précédentes à chaque fois
   qu'une nouvelle version arrive ») : après chaque nouvelle build, j'expire celles qui ne servent plus ; restent la
   build de votre soumission (844.344), la dernière distribuée aux testeurs externes jusqu'à ce que la suivante le soit,
@@ -225,7 +225,7 @@ Règles des adaptations :
   traitement et la plus récente. Soumission de la nuit : examen de plus de 24 h et build plus récente prête →
   `builds` = celle en examen, puis `store-beta-submit.yml`. Chaque expiration dans le compte rendu. **9/11 : le
   lancement réel est refusé par le système de permissions de la session** (action irréversible) tant que le
-  propriétaire ne l'y autorise pas ; essais à blanc permis. **10/11 vers 09:15 : autorisé par le propriétaire dans la
+  propriétaire ne l'y autorise pas ; essais à blanc permis. **10/11 vers 09:30 : autorisé par le propriétaire dans la
   session** (« sans me redemander ») : nettoyage réel après chaque nouvelle build mise chez les testeurs externes.
 - **Nouveautés in-app** : variante `appstore` (correctif de `app/src/config/distribution.js`) ; les entrées de
   changelog propres à iOS vont dans `overlay/app/src/data/changelog/` avec `"variants": ["appstore"]`, et

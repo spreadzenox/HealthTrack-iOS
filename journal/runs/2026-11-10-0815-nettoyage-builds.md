@@ -4,7 +4,7 @@
 TestFlight (962.437) ; **959.434 chez les testeurs externes** ; version 844 dans App Store Connect, build 844.344
 attachée  ·  **Parité** : 67 % (30/45)
 
-## Message du propriétaire, écrit dans cette session (10/11 vers 09:15, heure de Paris)
+## Message du propriétaire, écrit dans cette session (10/11 vers 09:30, heure de Paris)
 « J'autorise la routine à lancer elle-même le nettoyage réel des anciennes builds TestFlight (store-beta-expire.yml,
 nettoyage coché, essai décoché) après chaque mise d'une nouvelle build chez les testeurs externes, sans me redemander. »
 
