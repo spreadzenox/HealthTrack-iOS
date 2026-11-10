@@ -45,7 +45,8 @@ describe('Accueil : la VFC de l’app Santé ouvre sa courbe (iPhone)', () => {
       hist.push({ type: 'heart_rate', at: new Date(2026, 10, d, 5).toISOString(), payload: { subtype: 'heartRateVariability', value: 20 } })
     }
     wrap([{ key: 'hrv', label: 'VFC (SDNN)', value: '70 ms', when: 'hier', sources: ['Santé · Apple Watch'] }], async () => hist)
-    const row = screen.getByText('70 ms').closest('li')
+    // Android v960 (MONO-CHIFFRES) découpe la valeur (chiffres en mono) : on la retrouve par son texte complet
+    const row = screen.getByText((_, el) => el?.classList?.contains('today-data-value') && el.textContent.replace(/\s+/g, ' ') === '70 ms').closest('li')
     await waitFor(() => expect(row).toHaveTextContent('d’habitude 48 ms'))
     expect(within(row).getByLabelText('VFC plus haute')).toHaveTextContent('↑')
   })

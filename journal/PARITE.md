@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v959 (commit `94bd726`, 10/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v961 (commit `9b46436`, 10/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 10/11 07:00 | #881, #882 (v960, v961) | #881 (MONO-CHIFFRES) : sur Aujourd'hui, le Journal et Tendances, seuls les chiffres gardent la police à chasse fixe (`utils/monoDigits.jsx`, valeurs découpées en `<span>`). #882 (MONO-MOTS) : étiquettes (« premium », « Jour 1 ») dans la police du texte (Réintroduction, rapport médecin, Analyses, visite guidée). Code partagé, notes pour tous. Fichiers aussi touchés par nos correctifs (09, 56, 57, `Data.jsx`) : les 47 s'appliquent ; **deux tests iPhone adaptés** (`TodayBySource.ios`, `DailyJournal.ios` : la valeur « 70 ms » se retrouve par son texte complet, comme les tests d'Android) | ✅ |
 | 10/11 05:00 | #879, #880 (v958, v959) | #879 (T4-suite) : Tendances, détail d'un jour, « Nuit plus courte que d'habitude » avec la durée de la nuit même (`trendsDay.js`, `analysisResults.js`). #880 (POLISH-PROFIL-SERRE) : Nutrition, lignes de « Votre profil » resserrées (`Nutrition.css`). Code partagé, notes pour tous, valables sur iPhone. 47 correctifs sans retouche | ✅ |
 | 10/11 04:00 | #878 (v957) | #878 (POLISH-BARRE-VIDE) : les barres de progression vides (« 0/28 jours avec une note digestive ») ont un point de départ et se voient vides (`DigestBlock.css`, `TodayCards.css`). Le défaut se voyait aussi sur la capture vierge de l'Accueil iPhone. Code partagé, note pour tous. 47 correctifs sans retouche | ✅ |
 | 10/11 02:00 | #877 (v956) | #877 (POLISH-REINTRO-AGIR) : « Réintroduction guidée » n'affiche plus les onglets d'Analyses, retour « ← Agir » comme la page d'un essai (`AnalysesTabs.jsx`, `Reintroduction.jsx`). Même route (`/reintroduction`, aussi dans le parcours des captures iPhone). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
