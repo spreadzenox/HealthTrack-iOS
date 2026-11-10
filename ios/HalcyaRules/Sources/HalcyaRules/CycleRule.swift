@@ -40,4 +40,37 @@ public enum CycleRule {
             return ["kind": "symptom", "symptom": symptom, "start": startMs]
         }
     }
+
+    // MARK: Autorisation (CYCLE-iOS-2)
+
+    /// Nom de mesure de `@capgo/capacitor-health` (`READ_TYPES` du connecteur) → type(s) HealthKit, comme le module les
+    /// demande (`HealthDataType.sampleType()` ; la tension en deux types). Sert à demander le cycle **dans la même
+    /// feuille** d'Apple que les autres mesures : après elle, la demande du module ne montre plus rien.
+    public static let readTypeIdentifiers: [String: [String]] = [
+        "steps": ["HKQuantityTypeIdentifierStepCount"],
+        "sleep": ["HKCategoryTypeIdentifierSleepAnalysis"],
+        "heartRate": ["HKQuantityTypeIdentifierHeartRate"],
+        "restingHeartRate": ["HKQuantityTypeIdentifierRestingHeartRate"],
+        "heartRateVariability": ["HKQuantityTypeIdentifierHeartRateVariabilitySDNN"],
+        "oxygenSaturation": ["HKQuantityTypeIdentifierOxygenSaturation"],
+        "calories": ["HKQuantityTypeIdentifierActiveEnergyBurned"],
+        "distance": ["HKQuantityTypeIdentifierDistanceWalkingRunning"],
+        "workouts": ["HKWorkoutTypeIdentifier"],
+        "respiratoryRate": ["HKQuantityTypeIdentifierRespiratoryRate"],
+        "bodyTemperature": ["HKQuantityTypeIdentifierBodyTemperature"],
+        "bloodPressure": ["HKQuantityTypeIdentifierBloodPressureSystolic", "HKQuantityTypeIdentifierBloodPressureDiastolic"],
+        "bloodGlucose": ["HKQuantityTypeIdentifierBloodGlucose"],
+        "weight": ["HKQuantityTypeIdentifierBodyMass"],
+        "bodyFat": ["HKQuantityTypeIdentifierBodyFatPercentage"],
+    ]
+
+    /// Les identifiants à demander en une fois : les mesures `read` (noms inconnus ignorés : le module les demandera
+    /// lui-même) et, si « Mon cycle » est coché, les types du cycle. Sans doublon, ordre stable.
+    public static func authorizationIdentifiers(read: [String], cycle: Bool) -> [String] {
+        var out: [String] = []
+        for id in read.flatMap({ readTypeIdentifiers[$0] ?? [] }) + (cycle ? identifiers : []) where !out.contains(id) {
+            out.append(id)
+        }
+        return out
+    }
 }

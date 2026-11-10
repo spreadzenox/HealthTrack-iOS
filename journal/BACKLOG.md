@@ -519,6 +519,8 @@
     lancé (975.451 sur TestFlight).
   - [x] **10/11 18:00** : v973 et v974 (Analyses sur Digestion ; tuiles du Journal → courbes, correctif 57 complété pour
     la VFC de l'app Santé) ; #436 mergée à 19:05 après captures (Journal clair, sombre et Santé), déploiement lancé.
+  - [x] **10/11 20:17** : 975.451 (v975) chez les testeurs, chaîne entière sans intervention ; 974.450 expirée ;
+    restent 844.344 et 975.451.
   - [x] **10/11 19:23** : 974.450 (v974) chez les testeurs, chaîne entière sans intervention (script corrigé) ;
     972.447 expirée ; restent 844.344 et 974.450.
   - [x] **10/11 16:36** : 972.447 (v972) chez les testeurs (soumise par `deploy.sh` au 2e essai, la build n'étant pas
@@ -561,11 +563,16 @@
   - [x] **CYCLE-iOS-1** ✅ 10/11 20:00 (PR cycle, avec Android v977) — Lecteur natif (Swift) : correspondance pure dans `ios/HalcyaRules` (XCTest), petit plugin qui lit
     ces types sur la période d'import (6 mois, puis à chaque synchro) ; côté web, les entrées faites par la brique
     partagée, source `health_connect` (comme les autres mesures de Santé sur iPhone), sans doublon (Vitest).
-  - [ ] **CYCLE-iOS-2** Autorisation : les types du cycle dans la même demande que les autres mesures de Santé (une
-    seule feuille d'Apple), phrase d'accès à Santé et `confidentialite.md` complétées ; jamais demandé si « Mon cycle »
-    n'est pas coché ? (à caler sur `cycleVisible` d'Android).
+  - [x] **CYCLE-iOS-2** ✅ 10/11 20:20 (même PR) — Autorisation : avec « Mon cycle » coché à l'accueil, les types du
+    cycle dans la **même feuille d'Apple** que les autres mesures (`CycleHealth.requestAuthorization({ read, cycle })`,
+    correspondance des 15 mesures du module dans `CycleRule.readTypeIdentifiers`, XCTest ; la demande du module qui
+    suit ne montre plus rien) ; jamais demandé sans « Mon cycle ». Coché plus tard dans les Paramètres (correctif 59) :
+    feuille du cycle seul, puis 6 mois relus, si Santé est déjà autorisée. Phrase d'accès à Santé, page de
+    confidentialité iPhone et `confidentialite.md` complétées. Reste pour les testeurs qui ont déjà « Mon cycle » :
+    le bouton de la source (CYCLE-iOS-3).
   - [ ] **CYCLE-iOS-3** Sources : « Suivi du cycle (Santé) » dans « Mes appareils » (maquette 2), quand des données
-    sont reçues.
+    sont reçues ; avec « Mon cycle » et Santé autorisée avant CYCLE-iOS-2 (testeurs actuels), un bouton qui demande le
+    cycle (`askCycleAfterOnboarding`).
   - Le Journal (« Règles · 2e jour », maquette 1) vient de CYCLE-1b d'Android, sans travail ici sauf retouche.
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à

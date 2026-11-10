@@ -16,11 +16,12 @@ vi.mock('@capgo/capacitor-health', () => ({
 }))
 
 // CYCLE-iOS-1 : le cycle de l'app Santé, lu par le plugin natif (`ios/cycleSante.js`, testé à part)
-vi.mock('../ios/cycleSante', () => ({ syncCycleFromSante: vi.fn(async () => 0) }))
+vi.mock('../ios/cycleSante', () => ({ syncCycleFromSante: vi.fn(async () => 0), requestSanteAuthorization: vi.fn(async () => ({ asked: true })) }))
 
 import { Health } from '@capgo/capacitor-health'
 import { HealthConnectConnector, _resetHealthPluginCache } from './HealthConnectConnector'
-import { syncCycleFromSante } from '../ios/cycleSante'
+import { syncCycleFromSante, requestSanteAuthorization } from '../ios/cycleSante'
+import { READ_TYPES } from './HealthConnectConnector'
 
 beforeEach(() => {
   vi.clearAllMocks()
@@ -114,5 +115,29 @@ describe('HealthConnectConnector sur iPhone (HealthKit)', () => {
     const connector = new HealthConnectConnector()
     await connector.sync({ since: new Date('2026-11-01T00:00:00Z'), until: new Date('2026-11-02T00:00:00Z'), writer: vi.fn() })
     expect(syncCycleFromSante).not.toHaveBeenCalled()
+  })
+
+  // CYCLE-iOS-2 : « Mon cycle » coché à l'accueil → le cycle dans la même feuille d'Apple que les autres mesures
+  it('avec « Mon cycle », la demande d’autorisation de Santé inclut le cycle, en une seule feuille, avant celle du module', async () => {
+    localStorage.setItem('healthtrack_onboarding', JSON.stringify({ goals: ['gut', 'cycle'] }))
+    const order = []
+    requestSanteAuthorization.mockImplementationOnce(async () => { order.push('cycle'); return { asked: true } })
+    Health.requestAuthorization.mockImplementationOnce(async () => { order.push('module'); return {} })
+    expect(await new HealthConnectConnector().requestPermissions()).toBe('granted')
+    expect(requestSanteAuthorization).toHaveBeenCalledWith({ read: READ_TYPES, cycle: true })
+    expect(order).toEqual(['cycle', 'module'])
+  })
+
+  it('sans « Mon cycle », jamais de demande pour le cycle', async () => {
+    localStorage.setItem('healthtrack_onboarding', JSON.stringify({ goals: ['gut'] }))
+    expect(await new HealthConnectConnector().requestPermissions()).toBe('granted')
+    expect(requestSanteAuthorization).not.toHaveBeenCalled()
+  })
+
+  it('une feuille du cycle en échec ne bloque pas Santé : la demande du module suit', async () => {
+    localStorage.setItem('healthtrack_onboarding', JSON.stringify({ goals: ['cycle'] }))
+    requestSanteAuthorization.mockRejectedValueOnce(new Error('refus'))
+    expect(await new HealthConnectConnector().requestPermissions()).toBe('granted')
+    expect(Health.requestAuthorization).toHaveBeenCalled()
   })
 })

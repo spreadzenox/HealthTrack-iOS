@@ -46,6 +46,9 @@ describe('politique de confidentialité sur iPhone', () => {
     for (const type of ['pas', 'sommeil', 'fréquence cardiaque au repos', 'variabilité de la fréquence cardiaque',
       'saturation en oxygène', 'tension artérielle', 'glycémie', 'masse grasse']) expect(text).toContain(type)
     expect(text).toMatch(/copie de secours/)
+    // CYCLE-iOS-2 : le cycle de Santé, seulement avec « Mon cycle », jamais envoyé
+    expect(text).toMatch(/Si vous suivez votre cycle \(« Mon cycle »\)/)
+    expect(text).toMatch(/Le cycle reste sur votre téléphone et n'est jamais envoyé/)
     // I6, achat ouvert : la transaction signée par Apple est vérifiée par le relais, sans rien qui identifie
     expect(text).toMatch(/Abonnement \(achats intégrés de l'App Store\)/)
     expect(text).toMatch(/transaction signée par Apple/)

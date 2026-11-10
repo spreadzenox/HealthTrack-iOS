@@ -7,13 +7,15 @@ import HealthKit
 /// saignements hors des règles et symptômes, lus sur le téléphone et rendus à l'app (`src/ios/cycleSante.js`), qui les
 /// range avec la brique partagée d'Android (`src/services/cycle.js`). Le module Santé utilisé pour le reste
 /// (`@capgo/capacitor-health`) ne lit pas ces types. Lecture seule, rien ne sort du téléphone. Sans autorisation de
-/// Santé pour ces types (demandée à l'étape CYCLE-iOS-2), HealthKit ne rend rien : la lecture reste vide.
+/// Santé pour ces types (demandée avec les autres mesures quand « Mon cycle » est coché, CYCLE-iOS-2), HealthKit ne
+/// rend rien : la lecture reste vide.
 @objc(CycleHealthPlugin)
 public class CycleHealthPlugin: CAPPlugin, CAPBridgedPlugin {
     public let identifier = "CycleHealthPlugin"
     public let jsName = "CycleHealth"
     public let pluginMethods: [CAPPluginMethod] = [
         CAPPluginMethod(name: "readCycle", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "requestAuthorization", returnType: CAPPluginReturnPromise),
     ]
     private let store = HKHealthStore()
 
@@ -50,5 +52,35 @@ public class CycleHealthPlugin: CAPPlugin, CAPBridgedPlugin {
         group.notify(queue: .global(qos: .userInitiated)) {
             call.resolve(["samples": rows])
         }
+    }
+
+    /// CYCLE-iOS-2 : une seule feuille d'Apple pour les mesures `read` (noms du module Santé) et, si `cycle`, les types du
+    /// cycle. Lecture seule. HealthKit ne dit jamais ce qui est accordé : `{ asked: true }` dès que la feuille est passée.
+    @objc func requestAuthorization(_ call: CAPPluginCall) {
+        guard HKHealthStore.isHealthDataAvailable() else {
+            call.resolve(["asked": false])
+            return
+        }
+        let read = call.getArray("read", String.self) ?? []
+        let ids = CycleRule.authorizationIdentifiers(read: read, cycle: call.getBool("cycle") ?? false)
+        let types = Set(ids.compactMap { Self.objectType($0) })
+        guard !types.isEmpty else {
+            call.resolve(["asked": false])
+            return
+        }
+        store.requestAuthorization(toShare: nil, read: types) { _, error in
+            if let error = error {
+                call.reject("Autorisation de Santé : \(error.localizedDescription)")
+                return
+            }
+            call.resolve(["asked": true])
+        }
+    }
+
+    private static func objectType(_ id: String) -> HKObjectType? {
+        if id == "HKWorkoutTypeIdentifier" { return HKObjectType.workoutType() }
+        if id.hasPrefix("HKQuantityTypeIdentifier") { return HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier(rawValue: id)) }
+        if id.hasPrefix("HKCategoryTypeIdentifier") { return HKObjectType.categoryType(forIdentifier: HKCategoryTypeIdentifier(rawValue: id)) }
+        return nil
     }
 }

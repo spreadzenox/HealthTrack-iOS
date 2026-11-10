@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 
 // Version iOS (HealthTrack-iOS), CYCLE-iOS-1 (décision du propriétaire du 10/11, « Ok cycle ») : le cycle noté dans
 // l'app Santé, lu par le plugin natif `CycleHealth`, rangé avec la brique partagée d'Android (`services/cycle.js`).
-import { cycleEntriesFromSante, syncCycleFromSante, CYCLE_SANTE_SOURCE } from './cycleSante'
+import { cycleEntriesFromSante, syncCycleFromSante, CYCLE_SANTE_SOURCE, requestSanteAuthorization, askCycleAfterOnboarding, IOS_HEALTHKIT_ASKED_KEY } from './cycleSante'
 import { cycleByDay, periodEntry, symptomEntry } from '../services/cycle'
 
 const noon = (y, m, d, h = 0) => new Date(y, m - 1, d, h).getTime()
@@ -72,3 +72,36 @@ describe('Cycle de l’app Santé → entrées partagées (iPhone)', () => {
     expect(writer).not.toHaveBeenCalled()
   })
 })
+
+// CYCLE-iOS-2 : une seule feuille d'Apple pour Santé et le cycle ; « Mon cycle » coché plus tard → le cycle seul
+describe('Autorisation du cycle dans Santé (iPhone)', () => {
+  it('demande les mesures et le cycle en une fois au plugin natif', async () => {
+    const plugin = { requestAuthorization: vi.fn(async () => ({ asked: true })) }
+    expect(await requestSanteAuthorization({ read: ['steps', 'sleep'], cycle: true, plugin })).toEqual({ asked: true })
+    expect(plugin.requestAuthorization).toHaveBeenCalledWith({ read: ['steps', 'sleep'], cycle: true })
+  })
+
+  it('« Mon cycle » coché dans les Paramètres après un accueil où Santé a été autorisée : feuille du cycle, puis 6 mois relus', async () => {
+    localStorage.setItem(IOS_HEALTHKIT_ASKED_KEY, '1')
+    const plugin = {
+      requestAuthorization: vi.fn(async () => ({ asked: true })),
+      readCycle: vi.fn(async () => ({ samples: [{ kind: 'period', flow: 'light', start: noon(2026, 9, 2) }] })),
+    }
+    const writer = vi.fn()
+    const now = new Date(2026, 10, 10, 20)
+    expect(await askCycleAfterOnboarding({ platform: 'ios', plugin, writer, now })).toBe(1)
+    expect(plugin.requestAuthorization).toHaveBeenCalledWith({ read: [], cycle: true })
+    const { start, end } = plugin.readCycle.mock.calls[0][0]
+    expect(Math.round((end - start) / 86400000)).toBe(183)
+    expect(writer).toHaveBeenCalledWith([expect.objectContaining({ type: 'cycle' })])
+    localStorage.clear()
+  })
+
+  it('rien sur Android, ni avant que Santé ait été autorisée à l’accueil (la feuille viendra avec les autres mesures)', async () => {
+    const plugin = { requestAuthorization: vi.fn(), readCycle: vi.fn() }
+    expect(await askCycleAfterOnboarding({ platform: 'android', plugin, writer: vi.fn() })).toBe(0)
+    expect(await askCycleAfterOnboarding({ platform: 'ios', plugin, writer: vi.fn() })).toBe(0)
+    expect(plugin.requestAuthorization).not.toHaveBeenCalled()
+  })
+})
+

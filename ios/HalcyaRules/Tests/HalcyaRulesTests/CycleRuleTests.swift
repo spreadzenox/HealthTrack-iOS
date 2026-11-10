@@ -41,4 +41,33 @@ final class CycleRuleTests: XCTestCase {
         XCTAssertEqual(CycleRule.identifiers.count, 7)
         XCTAssertEqual(CycleRule.identifiers.first, CycleRule.menstrualFlow)
     }
+
+    // CYCLE-iOS-2 : une seule feuille d'autorisation d'Apple pour les mesures de Santé et le cycle
+
+    func testAutorisationAvecLeCycle() {
+        let ids = CycleRule.authorizationIdentifiers(read: ["steps", "sleep", "bloodPressure", "workouts", "heartRateVariability"], cycle: true)
+        XCTAssertTrue(ids.contains("HKQuantityTypeIdentifierStepCount"))
+        XCTAssertTrue(ids.contains("HKCategoryTypeIdentifierSleepAnalysis"))
+        XCTAssertTrue(ids.contains("HKQuantityTypeIdentifierBloodPressureSystolic"))
+        XCTAssertTrue(ids.contains("HKQuantityTypeIdentifierBloodPressureDiastolic"))
+        XCTAssertTrue(ids.contains("HKWorkoutTypeIdentifier"))
+        XCTAssertTrue(ids.contains("HKQuantityTypeIdentifierHeartRateVariabilitySDNN"))
+        XCTAssertTrue(ids.contains(CycleRule.menstrualFlow))
+        XCTAssertTrue(ids.contains("HKCategoryTypeIdentifierBloating"))
+        XCTAssertEqual(ids.count, Set(ids).count)
+    }
+
+    /// Sans « Mon cycle » : jamais les types du cycle ; un nom inconnu est ignoré (le module Santé le demandera lui-même)
+    func testAutorisationSansLeCycle() {
+        let ids = CycleRule.authorizationIdentifiers(read: ["steps", "inconnu"], cycle: false)
+        XCTAssertEqual(ids, ["HKQuantityTypeIdentifierStepCount"])
+    }
+
+    /// Toutes les mesures lues par l'app sur iPhone (`READ_TYPES` du connecteur) ont leur type HealthKit
+    func testToutesLesMesuresDuConnecteur() {
+        for name in ["steps", "sleep", "heartRate", "restingHeartRate", "heartRateVariability", "oxygenSaturation", "calories",
+                     "distance", "workouts", "respiratoryRate", "bodyTemperature", "bloodPressure", "bloodGlucose", "weight", "bodyFat"] {
+            XCTAssertNotNil(CycleRule.readTypeIdentifiers[name], name)
+        }
+    }
 }
