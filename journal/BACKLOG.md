@@ -574,9 +574,11 @@
     le bouton de la source (CYCLE-iOS-3). Leçon (build de la PR #439) : ne jamais rendre un plugin de Capacitor
     depuis une fonction `async` (il répond à `then`) : le ranger dans un objet.
   - [x] Saisie des règles à la main (CYCLE-2 d'Android, v980) : sans travail ici ; PR v980 après #440.
-  - [ ] **CYCLE-iOS-3** Sources : « Suivi du cycle (Santé) » dans « Mes appareils » (maquette 2), quand des données
-    sont reçues ; avec « Mon cycle » et Santé autorisée avant CYCLE-iOS-2 (testeurs actuels), un bouton qui demande le
-    cycle (`askCycleAfterOnboarding`).
+  - [x] **CYCLE-iOS-3** ✅ 10/11 23:20 (PR après #441) — Sources : « cycle » parmi les mesures reçues de « Mes
+    appareils » (correctif 60, `METRICS` ; jamais « arrêté », le cycle arrive par épisodes) ; carte « Suivi du cycle
+    (Santé) » avec « Lire mon cycle dans Santé » pour qui a « Mon cycle » et a autorisé Santé avant (correctif 61,
+    `CycleSanteCard`, `shouldOfferCycleSante`), une fois : le cycle demandé est noté (`halcya_ios_cycle_asked`).
+    À relayer à Android avec CYCLE-3 : `cycle` dans `METRICS` (Health Connect aussi).
   - [x] Le Journal (« Règles · 2e jour », maquette 1) : CYCLE-1b d'Android (v979), sans retouche ; test de bout en bout
     Santé → Journal sur iPhone ; constipation et diarrhée lues (`SYMPTOMS` complété par Android à notre demande) ;
     note de Nouveautés iPhone `2026-11-10-2200-cycle-sante-iphone.json`.

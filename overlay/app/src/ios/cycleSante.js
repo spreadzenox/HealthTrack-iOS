@@ -70,6 +70,8 @@ export async function syncCycleFromSante({ since, until, writer, plugin }) {
 
 /** Même clé que le connecteur (correctif 08) : Santé a été autorisée sur cet iPhone (HealthKit ne dit pas ce qui l'est). */
 export const IOS_HEALTHKIT_ASKED_KEY = 'halcya_ios_healthkit_asked'
+/** Le cycle a été demandé à Santé sur cet iPhone (accueil, Paramètres ou Sources) : ne plus le proposer (CYCLE-iOS-3). */
+export const IOS_CYCLE_ASKED_KEY = 'halcya_ios_cycle_asked'
 /** Période relue quand le cycle est autorisé après l'accueil : celle de l'import de Santé (6 mois). */
 const BACKFILL_DAYS = 183
 
@@ -79,7 +81,33 @@ const BACKFILL_DAYS = 183
  */
 export async function requestSanteAuthorization({ read = [], cycle = false, plugin } = {}) {
   const { CycleHealth } = await cyclePlugin(plugin)
-  return CycleHealth.requestAuthorization({ read, cycle })
+  const res = await CycleHealth.requestAuthorization({ read, cycle })
+  if (cycle) store(IOS_CYCLE_ASKED_KEY, '1')
+  return res
+}
+
+const read = (key) => {
+  try {
+    return localStorage.getItem(key)
+  } catch {
+    return null
+  }
+}
+const store = (key, value) => {
+  try {
+    localStorage.setItem(key, value)
+  } catch {
+    // stockage indisponible : la proposition reviendra, sans autre effet
+  }
+}
+const platformOf = (platform) => platform ?? (typeof window !== 'undefined' ? window.Capacitor?.getPlatform?.() : undefined)
+
+/**
+ * CYCLE-iOS-3 : proposer la lecture du cycle dans Sources à qui a « Mon cycle » et a autorisé Santé avant que le
+ * cycle y soit (testeurs du 10/11) ; jamais une fois le cycle demandé.
+ */
+export function shouldOfferCycleSante({ platform, goals = [] } = {}) {
+  return platformOf(platform) === 'ios' && goals.includes('cycle') && read(IOS_HEALTHKIT_ASKED_KEY) === '1' && read(IOS_CYCLE_ASKED_KEY) !== '1'
 }
 
 /**
@@ -88,17 +116,10 @@ export async function requestSanteAuthorization({ read = [], cycle = false, plug
  * jours). Rend le nombre d'entrées écrites. Sans Santé autorisée, rien : le cycle viendra avec les autres mesures.
  */
 export async function askCycleAfterOnboarding({ platform, plugin, writer, now = new Date() } = {}) {
-  const os = platform ?? (typeof window !== 'undefined' ? window.Capacitor?.getPlatform?.() : undefined)
-  if (os !== 'ios') return 0
-  let asked = null
-  try {
-    asked = localStorage.getItem(IOS_HEALTHKIT_ASKED_KEY)
-  } catch {
-    asked = null
-  }
-  if (asked !== '1') return 0
+  if (platformOf(platform) !== 'ios' || read(IOS_HEALTHKIT_ASKED_KEY) !== '1') return 0
   const { CycleHealth } = await cyclePlugin(plugin)
   await CycleHealth.requestAuthorization({ read: [], cycle: true })
+  store(IOS_CYCLE_ASKED_KEY, '1')
   const write = writer ?? (async (entries) => (await import('../storage/localHealthStorage')).upsertEntries(entries))
   const since = new Date(now.getTime() - BACKFILL_DAYS * 86400000)
   return syncCycleFromSante({ since, until: now, writer: write, plugin: CycleHealth })
