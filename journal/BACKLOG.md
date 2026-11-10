@@ -574,7 +574,9 @@
   - [ ] **CYCLE-iOS-3** Sources : « Suivi du cycle (Santé) » dans « Mes appareils » (maquette 2), quand des données
     sont reçues ; avec « Mon cycle » et Santé autorisée avant CYCLE-iOS-2 (testeurs actuels), un bouton qui demande le
     cycle (`askCycleAfterOnboarding`).
-  - Le Journal (« Règles · 2e jour », maquette 1) vient de CYCLE-1b d'Android, sans travail ici sauf retouche.
+  - [x] Le Journal (« Règles · 2e jour », maquette 1) : CYCLE-1b d'Android (v979), sans retouche ; test de bout en bout
+    Santé → Journal sur iPhone ; constipation et diarrhée lues (`SYMPTOMS` complété par Android à notre demande) ;
+    note de Nouveautés iPhone `2026-11-10-2200-cycle-sante-iphone.json`.
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
