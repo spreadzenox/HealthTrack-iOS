@@ -15,8 +15,13 @@ vi.mock('@capgo/capacitor-health', () => ({
   },
 }))
 
+// CYCLE-iOS-1 : le cycle de l'app Santé, lu par le plugin natif (`ios/cycleSante.js`, testé à part)
+vi.mock('../ios/cycleSante', () => ({ syncCycleFromSante: vi.fn(async () => 0), requestSanteAuthorization: vi.fn(async () => ({ asked: true })) }))
+
 import { Health } from '@capgo/capacitor-health'
 import { HealthConnectConnector, _resetHealthPluginCache } from './HealthConnectConnector'
+import { syncCycleFromSante, requestSanteAuthorization } from '../ios/cycleSante'
+import { READ_TYPES } from './HealthConnectConnector'
 
 beforeEach(() => {
   vi.clearAllMocks()
@@ -83,5 +88,56 @@ describe('HealthConnectConnector sur iPhone (HealthKit)', () => {
     expect(connector.name).toBe('App Santé')
     expect(connector.description).toBe('Sommeil, cœur, pas, poids… écrits par l’Apple Watch et vos apps santé : Garmin, Withings, Oura.')
     expect(`${connector.name} ${connector.description}`).not.toMatch(/Health Connect/)
+  })
+
+  // CYCLE-iOS-1 (décision du propriétaire du 10/11, « Ok cycle ») : chaque synchro de Santé lit aussi le cycle
+  it('la synchro lit aussi le cycle noté dans l’app Santé, sur la même période, et compte ses entrées', async () => {
+    syncCycleFromSante.mockResolvedValueOnce(3)
+    const connector = new HealthConnectConnector()
+    const since = new Date('2026-05-10T00:00:00Z')
+    const until = new Date('2026-11-10T00:00:00Z')
+    const writer = vi.fn()
+    const result = await connector.sync({ since, until, writer })
+    expect(syncCycleFromSante).toHaveBeenCalledWith(expect.objectContaining({ since, until, writer }))
+    expect(result.synced).toBe(3)
+  })
+
+  it('une lecture du cycle en échec n’empêche pas le reste : l’erreur est notée, la synchro continue', async () => {
+    syncCycleFromSante.mockRejectedValueOnce(new Error('HealthKit indisponible'))
+    const connector = new HealthConnectConnector()
+    const result = await connector.sync({ since: new Date('2026-11-01T00:00:00Z'), until: new Date('2026-11-02T00:00:00Z'), writer: vi.fn() })
+    expect(result.errors).toContain('cycle: HealthKit indisponible')
+  })
+
+  it('sur Android, rien de l’iPhone : pas de lecture du cycle de Santé', async () => {
+    window.Capacitor = { isNativePlatform: () => true, getPlatform: () => 'android' }
+    Health.isAvailable.mockResolvedValue({ available: true, platform: 'android' })
+    const connector = new HealthConnectConnector()
+    await connector.sync({ since: new Date('2026-11-01T00:00:00Z'), until: new Date('2026-11-02T00:00:00Z'), writer: vi.fn() })
+    expect(syncCycleFromSante).not.toHaveBeenCalled()
+  })
+
+  // CYCLE-iOS-2 : « Mon cycle » coché à l'accueil → le cycle dans la même feuille d'Apple que les autres mesures
+  it('avec « Mon cycle », la demande d’autorisation de Santé inclut le cycle, en une seule feuille, avant celle du module', async () => {
+    localStorage.setItem('healthtrack_onboarding', JSON.stringify({ goals: ['gut', 'cycle'] }))
+    const order = []
+    requestSanteAuthorization.mockImplementationOnce(async () => { order.push('cycle'); return { asked: true } })
+    Health.requestAuthorization.mockImplementationOnce(async () => { order.push('module'); return {} })
+    expect(await new HealthConnectConnector().requestPermissions()).toBe('granted')
+    expect(requestSanteAuthorization).toHaveBeenCalledWith({ read: READ_TYPES, cycle: true })
+    expect(order).toEqual(['cycle', 'module'])
+  })
+
+  it('sans « Mon cycle », jamais de demande pour le cycle', async () => {
+    localStorage.setItem('healthtrack_onboarding', JSON.stringify({ goals: ['gut'] }))
+    expect(await new HealthConnectConnector().requestPermissions()).toBe('granted')
+    expect(requestSanteAuthorization).not.toHaveBeenCalled()
+  })
+
+  it('une feuille du cycle en échec ne bloque pas Santé : la demande du module suit', async () => {
+    localStorage.setItem('healthtrack_onboarding', JSON.stringify({ goals: ['cycle'] }))
+    requestSanteAuthorization.mockRejectedValueOnce(new Error('refus'))
+    expect(await new HealthConnectConnector().requestPermissions()).toBe('granted')
+    expect(Health.requestAuthorization).toHaveBeenCalled()
   })
 })

@@ -21,8 +21,9 @@ Reprises de la « Sécurité des données » de Google Play d'Android (`app/stor
    - **Pistage** : Non.
    - **Lié à l'utilisateur** : Non pour la localisation (envoyée sans identifiant). Oui pour les cinq autres, envoyés avec l'identifiant d'installation : choix prudent, comme Android, qui ne déclare rien « éphémère ».
 4. **À ne pas cocher** :
-   - Forme (Fitness), et le reste de la santé : sommeil, fréquence cardiaque, notes du ventre, repas notés… restent sur le
-     téléphone et ne partent jamais à l'IA (seule la photo des selles, ci-dessus, part sur geste) ;
+   - Forme (Fitness), et le reste de la santé : sommeil, fréquence cardiaque, notes du ventre, repas notés, cycle (règles et
+     symptômes lus dans Santé avec « Mon cycle », CYCLE-iOS-2)… restent sur le téléphone et ne partent jamais à l'IA
+     (seule la photo des selles, ci-dessus, part sur geste) ;
    - Données de diagnostic : aucun outil de suivi ni de plantages ;
    - Contacts, Historique de navigation, Identifiants publicitaires, Données financières hors achats ;
    - Lecture du visage : aucune image gardée ni envoyée.
