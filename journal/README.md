@@ -12,7 +12,7 @@
 |---|---|---|
 | Dernière version | v980 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **975.451 chez les testeurs externes** (10/11, 20:17 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (975.451 depuis le 10/11, 20:17) |
-| Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
+| Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
 - Aucune pour l'instant. Votre « Ok cycle » (10/11, 18:50) est noté : Android fait d'abord la brique partagée, puis
@@ -129,7 +129,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 19:00 | suivi d'Android v975 | Android v975 : dans le Journal, une note de digestion se modifie sur place (Calme, Gêne ou Douleur), l'heure gardée. La v974 part la première chez les testeurs, la 975 la suit. Parité : 67 % | #437 (mergée) |
 | 10/11 20:00 | cycle, 1re étape iPhone | Votre « Ok cycle » est arrivé. Android a posé la brique commune (rien d'affiché encore) ; côté iPhone, l'app sait maintenant lire dans Santé les règles et cinq symptômes (crampes, douleur pelvienne, ballonnements, maux de tête, fatigue). Rien ne change à l'écran tant que l'autorisation n'est pas demandée (prochaine étape) et qu'Android n'affiche pas le cycle. Et l'autorisation : si vous cochez « Mon cycle », la demande de Santé d'Apple inclut le cycle, dans la même fenêtre ; cochée plus tard dans les Paramètres, une petite demande pour le cycle seul. Jamais sans « Mon cycle », et rien ne sort du téléphone. La 975.451 est chez les testeurs depuis 20:17. Parité : 67 % | #438 (mergée), #439 |
 | 10/11 22:00 | cycle visible sur iPhone | Android affiche maintenant le cycle dans le Journal (« Règles · 2e jour · flux moyen », jour du cycle) et a ajouté constipation et diarrhée à notre demande. Sur iPhone, avec « Mon cycle », les règles et symptômes notés dans Santé s'y affichent ; note de Nouveautés. La 1re étape iPhone (#439) avait un blocage trouvé par la build (la synchro de Santé s'arrêtait au cycle) : corrigé, testé. Parité : 67 % | #439 (mergée), #440 (mergée) |
-| 10/11 23:00 | règles notées à la main | Android v980 : avec « Mon cycle », un bouton « Règles » dans le bandeau d'ajout d'Aujourd'hui (Léger, Moyen, Abondant). Sur iPhone, il s'ajoute à la lecture de Santé. La v979 (#440, cycle de Santé dans le Journal) est mergée et part chez les testeurs. Parité : 67 % | #440 (mergée), PR v980 |
+| 10/11 23:00 | règles notées à la main | Android v980 : avec « Mon cycle », un bouton « Règles » dans le bandeau d'ajout d'Aujourd'hui (Léger, Moyen, Abondant). Sur iPhone, il s'ajoute à la lecture de Santé. La v979 (#440, cycle de Santé dans le Journal) est mergée et part chez les testeurs. Parité : 67 % | #440 (mergée), #441 (mergée) |
+| 10/11 23:20 | cycle dans Sources | Dans Sources, « cycle » apparaît parmi ce que Santé envoie ; et une carte « Suivi du cycle (Santé) » propose, une fois, de lire le cycle à qui avait déjà coché « Mon cycle » avant ce soir (les testeurs actuels). Parité : 67 % (31/46) | PR cycle Sources (après #441, mergée) |
 
 ---
 

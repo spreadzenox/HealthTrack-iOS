@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest'
 
 // Version iOS (HealthTrack-iOS), CYCLE-iOS-1 (décision du propriétaire du 10/11, « Ok cycle ») : le cycle noté dans
 // l'app Santé, lu par le plugin natif `CycleHealth`, rangé avec la brique partagée d'Android (`services/cycle.js`).
-import { cycleEntriesFromSante, syncCycleFromSante, CYCLE_SANTE_SOURCE, requestSanteAuthorization, askCycleAfterOnboarding, IOS_HEALTHKIT_ASKED_KEY } from './cycleSante'
+import { cycleEntriesFromSante, syncCycleFromSante, CYCLE_SANTE_SOURCE, requestSanteAuthorization, askCycleAfterOnboarding, IOS_HEALTHKIT_ASKED_KEY, IOS_CYCLE_ASKED_KEY, shouldOfferCycleSante } from './cycleSante'
 import { cycleByDay, periodEntry, symptomEntry } from '../services/cycle'
 
 const noon = (y, m, d, h = 0) => new Date(y, m - 1, d, h).getTime()
@@ -133,5 +133,34 @@ describe('Plugin de Capacitor jamais pris pour une promesse', () => {
     expect(await askCycleAfterOnboarding({ platform: 'ios', plugin, writer, now: new Date(2026, 10, 10) })).toBe(1)
     localStorage.clear()
   }, 2000)
+})
+
+// CYCLE-iOS-3 : qui a déjà « Mon cycle » et a autorisé Santé avant que le cycle y soit (testeurs du 10/11) se voit
+// proposer la lecture du cycle dans Sources, une fois ; jamais redemandé après
+describe('Proposer le cycle de Santé dans Sources (iPhone)', () => {
+  it('proposé avec « Mon cycle » et Santé déjà autorisée, tant que le cycle n’a pas été demandé', () => {
+    localStorage.setItem(IOS_HEALTHKIT_ASKED_KEY, '1')
+    expect(shouldOfferCycleSante({ platform: 'ios', goals: ['cycle'] })).toBe(true)
+    expect(shouldOfferCycleSante({ platform: 'ios', goals: ['gut'] })).toBe(false)
+    expect(shouldOfferCycleSante({ platform: 'android', goals: ['cycle'] })).toBe(false)
+    localStorage.setItem(IOS_CYCLE_ASKED_KEY, '1')
+    expect(shouldOfferCycleSante({ platform: 'ios', goals: ['cycle'] })).toBe(false)
+    localStorage.clear()
+    // Santé jamais autorisée : la demande viendra avec les autres mesures (carte de Santé), pas ici
+    expect(shouldOfferCycleSante({ platform: 'ios', goals: ['cycle'] })).toBe(false)
+  })
+
+  it('une demande avec le cycle le note comme demandé (accueil, Paramètres ou Sources)', async () => {
+    const plugin = { requestAuthorization: vi.fn(async () => ({ asked: true })), readCycle: vi.fn(async () => ({ samples: [] })) }
+    await requestSanteAuthorization({ read: ['steps'], cycle: false, plugin })
+    expect(localStorage.getItem(IOS_CYCLE_ASKED_KEY)).toBeNull()
+    await requestSanteAuthorization({ read: ['steps'], cycle: true, plugin })
+    expect(localStorage.getItem(IOS_CYCLE_ASKED_KEY)).toBe('1')
+    localStorage.clear()
+    localStorage.setItem(IOS_HEALTHKIT_ASKED_KEY, '1')
+    await askCycleAfterOnboarding({ platform: 'ios', plugin, writer: vi.fn() })
+    expect(localStorage.getItem(IOS_CYCLE_ASKED_KEY)).toBe('1')
+    localStorage.clear()
+  })
 })
 
