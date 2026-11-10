@@ -15,8 +15,11 @@
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
 **👉 Prochaine action du propriétaire**
-- Aucune pour l'instant. Fait : déploiement continu en place (la 962.437 est chez les testeurs depuis 10:01) ;
-  nettoyage après chaque envoi (restent 844.344 et la build des testeurs).
+- **Dire si Halcya doit lire le cycle depuis l'app Santé sur iPhone** (règles et symptômes digestifs déjà notés dans
+  Santé, sans saisie de plus) : « ok cycle Santé », « plus tard » ou « non ». Maquettes :
+  `journal/maquettes/cycle-sante/`. Rien n'est codé sans votre accord (mode polish).
+- Fait : déploiement continu en place (chaque nouvelle build part chez les testeurs) ; nettoyage après chaque envoi
+  (restent 844.344 et la build des testeurs).
 
 **Vos décisions en vigueur**
 - **Mode polish dès le 9/11** (décision du 7/11 au soir, (A)) : plus de nouvelle fonction ; bugs, polissage, textes
