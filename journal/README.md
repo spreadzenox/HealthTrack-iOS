@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v962 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **961 sur TestFlight** (build 961.436, version 893) ; **918.396 acceptée par Apple, chez les testeurs externes** (10/11) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (918.396 depuis le 10/11) |
+| Dernière version | v962 suivie (10/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **961 sur TestFlight** (build 961.436, version 893) ; **959.434 chez les testeurs externes** (mise dans le groupe le 10/11 au matin, acceptée par Apple) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (959.434 depuis le 10/11 au matin) |
 | Parité des fonctions | référence | **67 %** (30 fonctions vérifiées sur 45 faisables) |
 
 **👉 Prochaine action du propriétaire**
@@ -105,6 +105,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 07:00 | suivi d'Android v960, v961 | la 959 est sur TestFlight (959.434). Android : seuls les chiffres gardent leur police à chasse fixe (« 6 h 30 » sans grands blancs) ; les étiquettes reprennent la police du texte. Aussi sur iPhone ; deux de nos tests adaptés. Les testeurs externes ont la 918.396. Parité : 67 % | #421 (mergée), PR v961 |
 | 10/11 08:00 | suivi d'Android v962 | la v961 est mergée (« 6 h 30 » sans grands blancs sur la capture) et part sur TestFlight. Android v962 : page d'abonnement, les mots dans la police du texte. Les testeurs externes ont la 918.396. Parité : 67 % | #422 (mergée), PR v962 |
 | 10/11 09:00 | v962 livrée | la v962 (abonnement : « premium » dans la police du texte, vu sur la capture) est mergée et part sur TestFlight ; la 961 y est (961.436). Android n'a rien publié depuis. Les testeurs externes ont la 918.396. Parité : 67 % | #423 (mergée) |
+| 10/11 09:00 (suite) | 959.434 chez les testeurs | relevé de 08:00 UTC : le groupe « Testeurs Halcya » ne contient plus que la **959.434, acceptée par Apple et en test** ; 918.396 et 839.337 en sont retirées (sans être expirées). Ce n'est pas un lancement de ma part (geste fait dans App Store Connect, par vous a priori). 159 builds actives : le nettoyage en expirerait 156 (restent 844.344, 959.434 et la plus récente). | journal |
 
 ---
 

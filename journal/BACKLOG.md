@@ -493,6 +493,11 @@
     après son Alpha : passage des personas iPhone (`npm run persona -- --store=appstore`, configurations iPhone de
     l'artefact d'Android) sur la build à envoyer, puis « À tester » réécrit pour elle et `store-beta-submit.yml`
     (la 918.396 est acceptée : pas de règle des 24 h à appliquer).
+  - **10/11 09:00** : le groupe externe ne contient plus que la **959.434** (APPROVED, IN_BETA_TESTING) ; 918.396 et
+    839.337 retirées du groupe, sans expiration ; aucun lancement de la routine (`store-beta-submit.yml` : dernier le
+    9/11 19:02) : geste fait dans App Store Connect. Essai à blanc (run 42779431273) : 159 builds actives, gardées
+    844.344, 959.434 (distribuée), 961.436 (la plus récente) ; 156 à expirer. Ce soir : la soumission de la nuit part
+    d'une build plus récente que la 959.434, après les personas.
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
