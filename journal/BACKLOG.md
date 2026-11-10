@@ -518,13 +518,16 @@
   - [ ] **10/11 19:00** : v975 (modifier une note de digestion dans le Journal) ; PR après #436, puis déploiement continu.
   - [x] **10/11 18:00** : v973 et v974 (Analyses sur Digestion ; tuiles du Journal → courbes, correctif 57 complété pour
     la VFC de l'app Santé) ; #436 mergée à 19:05 après captures (Journal clair, sombre et Santé), déploiement lancé.
+  - [x] **10/11 19:23** : 974.450 (v974) chez les testeurs, chaîne entière sans intervention (script corrigé) ;
+    972.447 expirée ; restent 844.344 et 974.450.
   - [x] **10/11 16:36** : 972.447 (v972) chez les testeurs (soumise par `deploy.sh` au 2e essai, la build n'étant pas
     encore traitée au 1er) ; nettoyage (run 42850282884) : 969.443 expirée ; restent 844.344 et 972.447. `deploy.sh`
     bloqué au relevé : `gh run list` passe par `repositories/{id}/…`, refusé par le proxy de la session (403) →
     `latest()` en REST (`repos/…/actions/workflows/…/runs`), garde sur un identifiant vide.
   - [x] **10/11 13:00, personas du jour** (version 969) : persona 4 Endométriose, iPhone seul, J14
     (`journal/simulations/2026-11-10-1300-*`) ; constats partagés relayés (`DEMANDES.md`, 10/11).
-  - [ ] **Proposition (mode polish) : lire le cycle depuis l'app Santé sur iPhone** (règles notées dans Santé ou une
+  - [x] **Proposition (mode polish) : lire le cycle depuis l'app Santé sur iPhone** — ✅ acceptée (« Ok cycle », 10/11
+    18:50, `POUR-IOS.md` 18:55) ; suite dans **CYCLE-iOS** ci-dessous. (règles notées dans Santé ou une
     app de cycle) ; à préparer avec maquette, en accord avec la décision d'Android sur la saisie du cycle. **10/11
     15:15** : proposition et deux maquettes (`journal/maquettes/cycle-sante/`), question au propriétaire
     (`POUR-ORCHESTRATEUR.md`) ; rien codé sans son accord. Liée à PROP-SIM-10 et I34 d'Android.
@@ -542,6 +545,27 @@
     iPhone, la capture tourne sans abonnement (fin de la période de lancement le 06/11) : « Ce qui va avec » et « À
     regarder » y sont masqués (`locked` dans `Recommendations.jsx`), d'où l'écran presque vide. Pas une régression.
     Les captures de la fiche App Store ne sont pas refaites (`captures=false`, décision du propriétaire).
+
+- [ ] **CYCLE-iOS — lire le cycle de l'app Santé** (décision du propriétaire du 10/11 vers 18:50, « Ok cycle »,
+  `POUR-IOS.md` 18:55 ; exception au mode polish). Android fait d'abord la brique partagée (CYCLE-1a à CYCLE-3 de son
+  BACKLOG) ; ici, dès qu'elle est sur son main :
+  - Brique partagée d'Android lue le 10/11 (CYCLE-1a, #898, `services/cycle.js`) : entrées ordinaires `type: 'cycle'`
+    (aucune migration) ; `periodEntry(dateKey, flow, source)` (flux `light` / `medium` / `heavy` / `unknown`),
+    `spottingEntry`, `symptomEntry` (5 symptômes : `cramps`, `pelvic_pain`, `bloating`, `headache`, `fatigue`) ;
+    `cycleByDay`, `cycleVisible(goals, hasData)`. Affichage (CYCLE-1b) pas encore là.
+  - Correspondance Santé → brique partagée : `menstrualFlow` (`HKCategoryValueVaginalBleeding` depuis iOS 18 :
+    unspecified → `unknown`, light, medium, heavy ; none → rien), `intermenstrualBleeding` → `spotting`,
+    `abdominalCramps` → `cramps`, `pelvicPain` → `pelvic_pain`, `bloating`, `headache`, `fatigue`. Constipation et
+    diarrhée (de la proposition) n'ont pas de symptôme partagé : demande dans `DEMANDES.md` (10/11).
+  - [ ] **CYCLE-iOS-1** Lecteur natif (Swift) : correspondance pure dans `ios/HalcyaRules` (XCTest), petit plugin qui lit
+    ces types sur la période d'import (6 mois, puis à chaque synchro) ; côté web, les entrées faites par la brique
+    partagée, source `health_connect` (comme les autres mesures de Santé sur iPhone), sans doublon (Vitest).
+  - [ ] **CYCLE-iOS-2** Autorisation : les types du cycle dans la même demande que les autres mesures de Santé (une
+    seule feuille d'Apple), phrase d'accès à Santé et `confidentialite.md` complétées ; jamais demandé si « Mon cycle »
+    n'est pas coché ? (à caler sur `cycleVisible` d'Android).
+  - [ ] **CYCLE-iOS-3** Sources : « Suivi du cycle (Santé) » dans « Mes appareils » (maquette 2), quand des données
+    sont reçues.
+  - Le Journal (« Règles · 2e jour », maquette 1) vient de CYCLE-1b d'Android, sans travail ici sauf retouche.
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
