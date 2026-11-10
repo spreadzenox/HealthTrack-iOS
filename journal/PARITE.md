@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612).
-**Dernière version Android suivie** : v955 (commit `d68a4ef`, 10/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v956 (commit `a5bc025`, 10/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -103,6 +103,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 10/11 02:00 | #877 (v956) | #877 (POLISH-REINTRO-AGIR) : « Réintroduction guidée » n'affiche plus les onglets d'Analyses, retour « ← Agir » comme la page d'un essai (`AnalysesTabs.jsx`, `Reintroduction.jsx`). Même route (`/reintroduction`, aussi dans le parcours des captures iPhone). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
 | 10/11 01:00 | #876 (v955) | #876 (POLISH-ESSAI-AXES) : Agir, graphique d'un essai comme la maquette, lendemains « Avec » et « Sans » sur deux lignes d'une même échelle, repères de l'écart (−1, 0, +1), une phrase avec l'écart et sa fourchette (`Trial.jsx`, `Act.css`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
 | 10/11 00:00 | #875 (v954) | #875 (POLISH-ESSAI-VIDE) : Agir, au début d'un essai, « Résultat en cours » montre déjà ses axes Avec / Sans et la ligne « Écart », en une phrase (`Trial.jsx`, `Act.css`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
 | 9/11 23:00 | #874 (v953) | #874 (POLISH-ESSAI-ORDRE) : Agir, sur la page d'un essai, « Résultat en cours » avant le calendrier ; la légende des 14 jours reprend la consigne (`Trial.jsx`, `Act.css`). Code partagé, note pour tous, valable sur iPhone. 47 correctifs sans retouche | ✅ |
