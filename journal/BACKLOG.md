@@ -515,8 +515,9 @@
     ne pas envoyer aux testeurs une build identique (v970, #891, scripts d'envoi seulement ; v971, #892, captures de la
     fiche Play) : suivies avec la v972 (#893, chiffre gris d'un lien pas assez net dans Analyses), le 10/11 à 15:00.
   - [x] **10/11 13:14** : 969.443 (v969) chez les testeurs ; 968.442 expirée ; restent 844.344 et 969.443.
-  - [ ] **10/11 18:00** : v973 et v974 (Analyses sur Digestion ; tuiles du Journal → courbes, correctif 57 complété pour
-    la VFC de l'app Santé) ; PR, puis déploiement continu.
+  - [ ] **10/11 19:00** : v975 (modifier une note de digestion dans le Journal) ; PR après #436, puis déploiement continu.
+  - [x] **10/11 18:00** : v973 et v974 (Analyses sur Digestion ; tuiles du Journal → courbes, correctif 57 complété pour
+    la VFC de l'app Santé) ; #436 mergée à 19:05 après captures (Journal clair, sombre et Santé), déploiement lancé.
   - [x] **10/11 16:36** : 972.447 (v972) chez les testeurs (soumise par `deploy.sh` au 2e essai, la build n'étant pas
     encore traitée au 1er) ; nettoyage (run 42850282884) : 969.443 expirée ; restent 844.344 et 972.447. `deploy.sh`
     bloqué au relevé : `gh run list` passe par `repositories/{id}/…`, refusé par le proxy de la session (403) →
