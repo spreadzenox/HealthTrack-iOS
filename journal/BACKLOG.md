@@ -512,6 +512,10 @@
     régression trouvée part dans la build suivante.
   - « À tester » (`store/app-store/fr-FR/testflight-a-tester.txt`) : écrit pour la 918 ; à rafraîchir quand l'app
     change de façon visible pour les testeurs.
+  - [ ] **Captures de démo, Analyses** : depuis le 10/11 (captures de la v955 et après), « Pistes à tester » dit « Aucun
+    lien assez net… » au lieu de la piste verrouillée du 9/11 : les données de démo d'Android (`scripts/visual/
+    demoData.mjs`) dépendent de la date. Pas une régression d'une version ; à regarder si la capture de la fiche App
+    Store doit montrer une piste (relais à Android par `DEMANDES.md` si c'est leur générateur).
 
 - [ ] **POLISH — mode polish dès le 9/11** (décision du propriétaire du 07/11 au soir, `POUR-IOS.md` 08/11 00:35) : à
   partir de la version envoyée aux testeurs le dimanche 8/11 au soir, plus de nouvelle fonction sur iPhone ; bugs,
