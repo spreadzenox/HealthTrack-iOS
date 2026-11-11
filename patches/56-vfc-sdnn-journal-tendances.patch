@@ -1,8 +1,8 @@
 diff --git a/app/src/components/TodayBySource.jsx b/app/src/components/TodayBySource.jsx
-index 291545bd..371bec5b 100644
+index c46a727..329af7f 100644
 --- a/app/src/components/TodayBySource.jsx
 +++ b/app/src/components/TodayBySource.jsx
-@@ -78,10 +78,12 @@ export default function TodayBySource({
+@@ -82,10 +82,12 @@ export default function TodayBySource({
        <div className="today-data">
          <ul className="today-data-items">
            {items.map((i) => {
@@ -18,10 +18,10 @@ index 291545bd..371bec5b 100644
                  <span className="today-data-label">
                    {i.label}
 diff --git a/app/src/services/journalChips.js b/app/src/services/journalChips.js
-index 871e0f0..5433704 100644
+index 72d90ce..b23f312 100644
 --- a/app/src/services/journalChips.js
 +++ b/app/src/services/journalChips.js
-@@ -21,6 +21,7 @@ const CHIP_KEYS = {
+@@ -22,6 +22,7 @@ const CHIP_KEYS = {
    'FC au repos': 'restingHr',
    'VFC nuit': 'hrv',
    'VFC jour': 'hrvDay',
@@ -30,11 +30,11 @@ index 871e0f0..5433704 100644
    Respiration: 'respiratoryRate',
    Température: 'temperatureC',
 diff --git a/app/src/services/trendsData.js b/app/src/services/trendsData.js
-index ad8d291..4a605bd 100644
+index eb0b9c9..c102e1d 100644
 --- a/app/src/services/trendsData.js
 +++ b/app/src/services/trendsData.js
-@@ -31,6 +31,9 @@ export const TREND_MEASURES = [
-   { key: 'steps', label: 'Pas', unit: 'pas', tone: 'lilac', field: 'steps', fmt: (v) => n0(v) },
+@@ -33,6 +33,9 @@ export const TREND_MEASURES = [
+   { key: 'weight', label: 'Poids', unit: 'kg', tone: 'rose', field: 'weightKg', fmt: (v) => `${n1(v)} kg` },
    { key: 'hrv', label: 'VFC nuit', unit: 'ms', tone: 'rose', field: 'hrv', fmt: (v) => `${n0(v)} ms`,
      gloss: 'variabilité de la fréquence cardiaque pendant la nuit, en millisecondes' },
 +  // Version iOS (HealthTrack-iOS) : la VFC de l'app Santé, en SDNN, sa propre courbe, jamais mêlée à la RMSSD (correctif 56)
