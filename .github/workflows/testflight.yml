@@ -213,6 +213,9 @@ jobs:
           echo "Traitement par Apple : 10 à 30 min, puis la build apparaît dans App Store Connect › TestFlight." >> "$GITHUB_STEP_SUMMARY"
       - name: Journaux (sans secret)
         if: always()
+        # 11/11 : panne du service d'artefacts de GitHub ; la build 1000.477 était envoyée, mais le run a fini en échec
+        # et bloqué le déploiement continu. Les journaux ne décident pas du résultat.
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: testflight-logs
