@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v988 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **986.462 chez les testeurs externes** (11/11, 06:12 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (986.462 depuis le 11/11, 06:12) |
+| Dernière version | v988 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **988.464 chez les testeurs externes** (11/11, 07:58 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (988.464 depuis le 11/11, 07:58) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -138,7 +138,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 11/11 04:00 | 984.460 chez les testeurs | La 983.459 (symptômes du cycle en un geste) est arrivée chez les testeurs à 03:15, puis la **984.460** (« Hier » dans « Mes règles ») à 04:08 ; les anciennes builds expirées ; restent 844.344 et 984.460. Android n'a rien publié depuis. Parité : 67 % (31/46) | journal |
 | 11/11 05:00 | suivi d'Android v986 | Android v985 : la 2e carte de l'accueil dit « Trois usages » (Journal, Analyses, Agir). v986 : une seule durée d'essai (réintroduction 3 jours, piste deux semaines). Les testeurs ont la 984.460 ; la 986 suivra. Parité : 67 % (31/46) | #448 (mergée) |
 | 11/11 06:00 | suivi d'Android v987 | Android v987 : l'app renvoie à « Réglages › Paramètres » (la roue en haut à droite). Sur iPhone, « Réglages » est aussi l'app d'Apple : proposition à Android d'écrire « la roue en haut à droite › Paramètres ». La 986 part chez les testeurs. Parité : 67 % (31/46) | #449 (mergée) |
-| 11/11 07:00 | suivi d'Android v988 | La 986.462 est chez les testeurs depuis 06:12. Android v988 : « Autre chose » ne note plus une cigarette par erreur ; il propose « Je fume : compter mes cigarettes ». La 987 part chez les testeurs. Parité : 67 % (31/46) | PR v988 |
+| 11/11 07:00 | suivi d'Android v988 | La 986.462 est chez les testeurs depuis 06:12. Android v988 : « Autre chose » ne note plus une cigarette par erreur ; il propose « Je fume : compter mes cigarettes ». La 987 part chez les testeurs. Parité : 67 % (31/46) | #450 (mergée) |
+| 11/11 08:00 | personas du jour | Les testeurs ont la 988.464 depuis 07:58. Passage des personas sur cette version, avec la femme atteinte d'endométriose d'hier (iPhone seul, 14e jour) : elle note maintenant ses règles, ses crampes, la veille, corrige le flux, et retrouve tout dans le Journal (5 tâches sur 6, contre 3 hier). Ce qui manque encore : que les analyses de la digestion tiennent compte du cycle (prévu chez Android), et un mot du cycle sur l'Accueil. Relayé à Android. Parité : 67 % (31/46) | journal |
 
 ---
 
