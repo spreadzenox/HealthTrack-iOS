@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1000 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1000.477 chez les testeurs externes** (11/11, 22:10 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v1002 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1000.477 chez les testeurs externes** (11/11, 22:10 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1000.477 depuis le 11/11, 22:10) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
@@ -152,7 +152,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 11/11 18:00 | 997.474 chez les testeurs | Les testeurs ont eu la 996.473 à 17:48 (Analyses : un lien flou est dit), puis la **997.474** à 18:39 (accueil : « Ce que vous noterez » suit votre objectif) ; anciennes builds expirées, restent 844.344 et 997.474. Android v998 ne touche que son outil de personas : rien dans l'app, suivie avec la prochaine version. Parité : 67 % (31/46) | #461 (mergée) |
 | 11/11 19:00 | suivi d'Android v999 | Android v999 : « Voir un exemple » part de l'écran où vous êtes (Analyses › Digestion montre l'exemple de la digestion) ; Vos données dit que la sauvegarde est un fichier JSON. Sur iPhone, la ligne dit aussi où la retrouver : l'app Fichiers › Sur mon iPhone › Halcya (au lieu de « Documents », qui n'existe pas dans Fichiers). Parité : 67 % (31/46) | #462 (mergée) |
 | 11/11 20:00 | suivi d'Android v1000 | Les testeurs ont la **999.476** depuis 20:23 (« Voir un exemple » part de l'écran où vous êtes ; la sauvegarde dit où la retrouver dans l'app Fichiers) ; la 997.474 expirée, restent 844.344 et 999.476. Android v1000 : l'exemple de la digestion n'affiche plus un bandeau « masqué » en trop. Parité : 67 % (31/46) | #463 (mergée) |
-| 11/11 22:00 | 1000.477 chez les testeurs | Les testeurs ont la **1000.477** depuis 22:10 (l'exemple de la digestion sans bandeau en trop), avec une heure de retard : une panne de GitHub a laissé la build « en cours » alors qu'elle était déjà chez Apple ; j'ai repris le déploiement à la main. La 999.476 expirée, restent 844.344 et 1000.477. Android n'a rien publié de plus. Parité : 67 % (31/46) | PR du journal |
+| 11/11 22:00 | 1000.477 chez les testeurs | Les testeurs ont la **1000.477** depuis 22:10 (l'exemple de la digestion sans bandeau en trop), avec une heure de retard : une panne de GitHub a laissé la build « en cours » alors qu'elle était déjà chez Apple ; j'ai repris le déploiement à la main. La 999.476 expirée, restent 844.344 et 1000.477. Android n'a rien publié de plus. Parité : 67 % (31/46) | #464 (mergée) |
+| 11/11 23:00 | suivi d'Android v1002 | Android v1001 : dans la visite guidée, l'étiquette « Exemple » ne cache plus le nom de l'app. v1002 : le compteur de la digestion dit « pas forcément d'affilée » (un jour oublié ne remet rien à zéro). La panne de GitHub de ce soir avait aussi mis la build de contrôle en rouge (alors que l'app était bonne) : corrigé comme pour TestFlight. Parité : 67 % (31/46) | PR v1002 |
 
 ---
 

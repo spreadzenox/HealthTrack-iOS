@@ -242,6 +242,10 @@ jobs:
           echo "Captures : branche $BRANCH" >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()
+        # 11/11 : panne du service d'artefacts de GitHub ; build et captures bons (captures publiées sur leur branche),
+        # mais l'échec ici sautait « Tests d'interface construits » et mettait main en rouge. Les artefacts ne décident
+        # pas du résultat.
+        continue-on-error: true
         with:
           name: ios-captures
           path: |
