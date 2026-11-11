@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v990 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **988.464 chez les testeurs externes** (11/11, 07:58 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v991 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **988.464 chez les testeurs externes** (11/11, 07:58 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (988.464 depuis le 11/11, 07:58) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
@@ -141,7 +141,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 11/11 07:00 | suivi d'Android v988 | La 986.462 est chez les testeurs depuis 06:12. Android v988 : « Autre chose » ne note plus une cigarette par erreur ; il propose « Je fume : compter mes cigarettes ». La 987 part chez les testeurs. Parité : 67 % (31/46) | #450 (mergée) |
 | 11/11 08:00 | personas du jour | Les testeurs ont la 988.464 depuis 07:58. Passage des personas sur cette version, avec la femme atteinte d'endométriose d'hier (iPhone seul, 14e jour) : elle note maintenant ses règles, ses crampes, la veille, corrige le flux, et retrouve tout dans le Journal (5 tâches sur 6, contre 3 hier). Ce qui manque encore : que les analyses de la digestion tiennent compte du cycle (prévu chez Android), et un mot du cycle sur l'Accueil. Relayé à Android. Parité : 67 % (31/46) | journal |
 | 11/11 09:00 | rien de neuf | Android v989 ne touche que son outil des personas, pas l'app : reprise avec sa prochaine version qui change l'app. Les testeurs ont la 988.464. Rien n'attend de vous. Parité : 67 % (31/46) | journal |
-| 11/11 10:00 | suivi d'Android v990 | Android v990 : le soir, la fenêtre « Ma digestion » ne pose plus qu'une question à la fois (le bilan de la journée, ou un moment précis). Les testeurs ont la 988.464 ; la 990 suivra. Parité : 67 % (31/46) | PR v990 |
+| 11/11 10:00 | suivi d'Android v990 | Android v990 : le soir, la fenêtre « Ma digestion » ne pose plus qu'une question à la fois (le bilan de la journée, ou un moment précis). Les testeurs ont la 988.464 ; la 990 suivra. Parité : 67 % (31/46) | #453 (mergée) |
+| 11/11 11:00 | suivi d'Android v991 | Android v991 : sur Aujourd'hui, la note de bien-être n'est plus répétée dans « Vos données du jour ». La 990 part chez les testeurs. Parité : 67 % (31/46) | PR v991 |
 
 ---
 
