@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v996 (commit `56b519a`, 11/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v997 (commit `02f8c62`, 11/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 11/11 17:00 | #918 (v997) | #918 (POLISH-SIM-51) : à l'accueil, sans source de santé reliée, « Ce que vous noterez » suit les objectifs (poids avec « Prendre soin de moi », règles avec « Mon cycle », digestion avec le ventre ; `handNotes` de `settings/onboarding.js`). Code partagé, valable sur iPhone (l'écran y dit « Sans l'app Santé »). Sa note de Nouveautés commence par « Sans Health Connect » : cachée sur iPhone (correctif 28), note iPhone équivalente, demande dans `DEMANDES.md`. 51 correctifs (le 28 refait) | ✅ |
 | 11/11 16:00 | #917 (v996) | #917 (POLISH-SIM-50) : dans Analyses, un facteur qui va dans un sens à court terme et dans l'autre plus tard, sans que ce soit net, est dit en une ligne (rien à en tirer pour l'instant) ; une phrase en haut de la liste quand aucun lien n'est encore net (`Recommendations.jsx`, `resultsView.js`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
 | 11/11 15:00 | #916 (v995) | #916 (POLISH-SIM-49) : le nom proposé par l'analyse d'un repas devient un champ « Nom » modifiable (vide pour un repas sans nom), aussi dans « Modifier » d'un repas enregistré (`MealNameField.jsx`, `NewMealForm.jsx`, `SavedMealEditor.jsx`, `Food.jsx`, `mealEditing.js`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
 | 11/11 14:00 | #915 (v994) | #915 (POLISH-SIM-47) : le poids (à la main ou balance) a sa courbe dans Journal › Tendances dès 3 pesées ; graduations non arrondies à tort (`trendsData.js`, `trendsMeasureDays.js`, `dailyJournal.js`, `Trends.jsx`, `TrendsViewer.jsx`). Code partagé, note pour tous, valable sur iPhone (les pesées de l'app Santé comprises). **Correctif 56 refait** (Android a inséré « Poids » juste avant « VFC nuit » dans `TREND_MEASURES` : la VFC (SDNN) reste juste après « VFC nuit »). 51 correctifs | ✅ |
