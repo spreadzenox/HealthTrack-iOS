@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v981 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **981.457 chez les testeurs externes** (11/11, 01:39 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v983 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **981.457 chez les testeurs externes** (11/11, 01:39 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (981.457 depuis le 11/11, 01:39) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
@@ -133,6 +133,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 23:20 | cycle dans Sources | Dans Sources, « cycle » apparaît parmi ce que Santé envoie ; et une carte « Suivi du cycle (Santé) » propose, une fois, de lire le cycle à qui avait déjà coché « Mon cycle » avant ce soir (les testeurs actuels). Parité : 67 % (31/46) | #442 (mergée) |
 | 11/11 00:00 | suivi d'Android v981 | La 980.455 est chez les testeurs depuis 23:57 (règles notées depuis Aujourd'hui). Android v981 : dans le Journal, une règle notée à la main se corrige ou se supprime ; celles qui viennent de Santé restent telles que Santé les donne. Parité : 67 % (31/46) | #443 (mergée) |
 | 11/11 01:00 | 981.457 chez les testeurs | Les testeurs ont eu la 980.456 à 00:48 (cycle dans Sources), puis la **981.457** à 01:39 (règles notées à la main corrigeables dans le Journal). Chaque envoi : accord d'Apple en une minute, ancienne build expirée ; restent 844.344 et 981.457. Android n'a rien publié depuis. Parité : 67 % (31/46) | journal |
+| 11/11 02:00 | suivi d'Android v983 | Android v982 : dans « Mes règles », les symptômes du cycle se notent en un geste (crampes, ballonnements, fatigue…) ; sur iPhone, ils s'ajoutent à ceux lus dans Santé. v983 : un test d'Android réparé. Les testeurs ont la 981.457 ; la 983 suit. Parité : 67 % (31/46) | PR v983 |
 
 ---
 
