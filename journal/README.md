@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v986 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **984.460 chez les testeurs externes** (11/11, 04:08 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v987 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **984.460 chez les testeurs externes** (11/11, 04:08 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (984.460 depuis le 11/11, 04:08) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
@@ -136,7 +136,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 11/11 02:00 | suivi d'Android v983 | Android v982 : dans « Mes règles », les symptômes du cycle se notent en un geste (crampes, ballonnements, fatigue…) ; sur iPhone, ils s'ajoutent à ceux lus dans Santé. v983 : un test d'Android réparé. Les testeurs ont la 981.457 ; la 983 suit. Parité : 67 % (31/46) | #445 (mergée) |
 | 11/11 03:00 | suivi d'Android v984 | Android v984 : dans « Mes règles », « Hier » pour noter les règles et symptômes de la veille. La 983 part chez les testeurs. Parité : 67 % (31/46) | #446 (mergée) |
 | 11/11 04:00 | 984.460 chez les testeurs | La 983.459 (symptômes du cycle en un geste) est arrivée chez les testeurs à 03:15, puis la **984.460** (« Hier » dans « Mes règles ») à 04:08 ; les anciennes builds expirées ; restent 844.344 et 984.460. Android n'a rien publié depuis. Parité : 67 % (31/46) | journal |
-| 11/11 05:00 | suivi d'Android v986 | Android v985 : la 2e carte de l'accueil dit « Trois usages » (Journal, Analyses, Agir). v986 : une seule durée d'essai (réintroduction 3 jours, piste deux semaines). Les testeurs ont la 984.460 ; la 986 suivra. Parité : 67 % (31/46) | PR v986 |
+| 11/11 05:00 | suivi d'Android v986 | Android v985 : la 2e carte de l'accueil dit « Trois usages » (Journal, Analyses, Agir). v986 : une seule durée d'essai (réintroduction 3 jours, piste deux semaines). Les testeurs ont la 984.460 ; la 986 suivra. Parité : 67 % (31/46) | #448 (mergée) |
+| 11/11 06:00 | suivi d'Android v987 | Android v987 : l'app renvoie à « Réglages › Paramètres » (la roue en haut à droite). Sur iPhone, « Réglages » est aussi l'app d'Apple : proposition à Android d'écrire « la roue en haut à droite › Paramètres ». La 986 part chez les testeurs. Parité : 67 % (31/46) | PR v987 |
 
 ---
 
