@@ -10,13 +10,13 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v995 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **994.471 chez les testeurs externes** (11/11, 14:57 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (994.471 depuis le 11/11, 14:57) |
+| Dernière version | v996 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **995.472 chez les testeurs externes** (11/11, 16:22 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (995.472 depuis le 11/11, 16:22) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
-- Aucune pour l'instant. Votre « Ok cycle » (10/11, 18:50) est noté : Android fait d'abord la brique partagée, puis
-  je branche la lecture du cycle de l'app Santé.
+- Aucune pour l'instant. Votre « Ok cycle » (10/11, 18:50) est fait sur iPhone : règles et symptômes lus dans Santé,
+  carte « Suivi du cycle (Santé) » dans Sources ; la suite (le cycle dans les analyses) attend Android (CYCLE-4).
 - Fait : déploiement continu en place (chaque nouvelle build part chez les testeurs) ; nettoyage après chaque envoi
   (restent 844.344 et la build des testeurs).
 
@@ -146,7 +146,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 11/11 12:00 | suivi d'Android v992 | La 990.467 est chez les testeurs depuis 11:15. Android v992 : dans « Mes règles », un symptôme touché se coche et la fenêtre dit « Noté » (ce que la persona d'hier ne voyait pas). La 991 part chez les testeurs. Parité : 67 % (31/46) | #455 (mergée) |
 | 11/11 13:00 | suivi d'Android v993 | La 991.468 est chez les testeurs depuis 12:15 ; la 992 suit. Android v993 : un aliment que la base ne connaît pas est nommé dans le total du repas (« ≈ 592 kcal, sans Sauce maison ») au lieu d'être ignoré. Parité : 67 % (31/46) | #456 (mergée) |
 | 11/11 14:00 | suivi d'Android v994 | La 992.469 est chez les testeurs depuis 13:16 ; la 993 suit. Android v994 : votre poids a sa courbe dans Journal › Tendances (sur iPhone, les pesées de l'app Santé comprises) ; une retouche iPhone refaite pour garder la VFC de Santé à sa place. Parité : 67 % (31/46) | #457 (mergée) |
-| 11/11 15:00 | suivi d'Android v995 | Les testeurs ont eu la 993.470 à 14:16 puis la **994.471** à 14:57 (courbe du poids). Android v995 : le nom d'un repas se modifie (après l'analyse ou plus tard). Parité : 67 % (31/46) | PR v995 |
+| 11/11 15:00 | suivi d'Android v995 | Les testeurs ont eu la 993.470 à 14:16 puis la **994.471** à 14:57 (courbe du poids). Android v995 : le nom d'un repas se modifie (après l'analyse ou plus tard). Parité : 67 % (31/46) | #458 (mergée) |
+| 11/11 16:00 | suivi d'Android v996 | Les testeurs ont la **995.472** depuis 16:22 (le nom d'un repas se modifie) ; la 994.471 expirée. Android v996 : dans Analyses, un lien qui change de sens selon le délai, sans être net, est dit en une ligne (rien à en tirer pour l'instant). Parité : 67 % (31/46) | PR v996 |
 
 ---
 
