@@ -519,6 +519,9 @@
     lancé (975.451 sur TestFlight).
   - [x] **10/11 18:00** : v973 et v974 (Analyses sur Digestion ; tuiles du Journal → courbes, correctif 57 complété pour
     la VFC de l'app Santé) ; #436 mergée à 19:05 après captures (Journal clair, sombre et Santé), déploiement lancé.
+  - [x] **11/11 11:15** : 990.467 (v990, #453) chez les testeurs ; 988.464 expirée ; restent 844.344 et 990.467.
+  - [ ] Captures : une notification du simulateur (« Prêt pour Apple Intelligence ») recouvrait l'en-tête de l'Accueil
+    sur la capture de #454 (iPhone 16e, une fois) ; à surveiller, à fermer dans le workflow si elle revient.
   - [x] **11/11 07:58** : 988.464 (v988, #450) chez les testeurs ; avant, 987.463 (v987, #449) à 07:14 ; 986.462 et
     987.463 expirées ; restent 844.344 et 988.464.
   - [x] **11/11 07:00, personas du jour** (version 988) : reprise de la persona 4 Endométriose, iPhone seul, J14, après
