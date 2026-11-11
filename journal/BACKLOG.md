@@ -519,6 +519,11 @@
     lancé (975.451 sur TestFlight).
   - [x] **10/11 18:00** : v973 et v974 (Analyses sur Digestion ; tuiles du Journal → courbes, correctif 57 complété pour
     la VFC de l'app Santé) ; #436 mergée à 19:05 après captures (Journal clair, sombre et Santé), déploiement lancé.
+  - [x] **11/11 07:58** : 988.464 (v988, #450) chez les testeurs ; avant, 987.463 (v987, #449) à 07:14 ; 986.462 et
+    987.463 expirées ; restent 844.344 et 988.464.
+  - [x] **11/11 07:00, personas du jour** (version 988) : reprise de la persona 4 Endométriose, iPhone seul, J14, après
+    l'arrivée du cycle : 5 tâches sur 6 réussies (la veille 3), la ratée : le cycle relié aux douleurs (CYCLE-4
+    d'Android) ; constats partagés relayés (`DEMANDES.md`, 11/11) ; aucun défaut propre à l'iPhone.
   - [x] **11/11 06:12** : 986.462 (v986, #448) chez les testeurs ; 984.460 expirée ; restent 844.344 et 986.462.
   - [x] **11/11 04:08** : 984.460 (v984, #446) chez les testeurs ; avant, 983.459 (v983, #445) à 03:15 ; 981.457 et
     983.459 expirées ; restent 844.344 et 984.460.
