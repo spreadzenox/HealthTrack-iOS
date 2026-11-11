@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v991 (commit `e50adde`, 11/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v992 (commit `b6a56ea`, 11/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 11/11 12:00 | #913 (v992) | #913 (POLISH-SIM-46) : dans « Mes règles », un symptôme touché porte une coche et « Noté : Crampes » ; un second toucher le retire (« Retiré ») (`PeriodSheet.jsx`). Code partagé, note pour tous, valable sur iPhone (répond au « pas de confirmation » du passage des personas du 11/11). 51 correctifs sans retouche | ✅ |
 | 11/11 11:00 | #912 (v991) | #912 (POLISH-SIM-40) : « Vos données du jour » ne répète plus la note de bien-être, déjà dans la carte « Bien-être aujourd'hui » (`TodayBySource.jsx`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche (le correctif 56, VFC de Santé, touche le même fichier ; son test iPhone passe) | ✅ |
 | 11/11 10:00 | #911 et #910 (v989, v990) | #911 : outil des personas seulement. #910 (POLISH-SIM-41) : la fenêtre « Ma digestion » ne montre plus deux rangées Calme / Gêne / Douleur le soir ; le bilan de la journée, ou le moment précis sur « Noter un moment précis » (`TodayCards.jsx`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
 | 11/11 07:00 | #909 (v988) | #909 (POLISH-SIM-42) : « Autre chose » ne note plus une cigarette d'un seul toucher ; il propose « Je fume : compter mes cigarettes », qui place « + 1 cigarette » dans le bandeau d'ajout (`AddStrip.jsx`, `Dashboard.jsx`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
