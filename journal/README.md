@@ -10,7 +10,7 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v997 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **997.474 chez les testeurs externes** (11/11, 18:39 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Dernière version | v999 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **997.474 chez les testeurs externes** (11/11, 18:39 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (997.474 depuis le 11/11, 18:39) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
@@ -149,7 +149,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 11/11 15:00 | suivi d'Android v995 | Les testeurs ont eu la 993.470 à 14:16 puis la **994.471** à 14:57 (courbe du poids). Android v995 : le nom d'un repas se modifie (après l'analyse ou plus tard). Parité : 67 % (31/46) | #458 (mergée) |
 | 11/11 16:00 | suivi d'Android v996 | Les testeurs ont la **995.472** depuis 16:22 (le nom d'un repas se modifie) ; la 994.471 expirée. Android v996 : dans Analyses, un lien qui change de sens selon le délai, sans être net, est dit en une ligne (rien à en tirer pour l'instant). Parité : 67 % (31/46) | #459 (mergée) |
 | 11/11 17:00 | suivi d'Android v997 | Android v997 : à l'accueil, sans l'app Santé, « Ce que vous noterez » suit votre objectif (poids, règles, digestion). Sa note de Nouveautés parlait de « Health Connect » : remplacée sur iPhone par « Sans l'app Santé… ». La v996 (#459) part chez les testeurs. Parité : 67 % (31/46) | #460 (mergée) |
-| 11/11 18:00 | 997.474 chez les testeurs | Les testeurs ont eu la 996.473 à 17:48 (Analyses : un lien flou est dit), puis la **997.474** à 18:39 (accueil : « Ce que vous noterez » suit votre objectif) ; anciennes builds expirées, restent 844.344 et 997.474. Android v998 ne touche que son outil de personas : rien dans l'app, suivie avec la prochaine version. Parité : 67 % (31/46) | PR du journal |
+| 11/11 18:00 | 997.474 chez les testeurs | Les testeurs ont eu la 996.473 à 17:48 (Analyses : un lien flou est dit), puis la **997.474** à 18:39 (accueil : « Ce que vous noterez » suit votre objectif) ; anciennes builds expirées, restent 844.344 et 997.474. Android v998 ne touche que son outil de personas : rien dans l'app, suivie avec la prochaine version. Parité : 67 % (31/46) | #461 (mergée) |
+| 11/11 19:00 | suivi d'Android v999 | Android v999 : « Voir un exemple » part de l'écran où vous êtes (Analyses › Digestion montre l'exemple de la digestion) ; Vos données dit que la sauvegarde est un fichier JSON. Sur iPhone, la ligne dit aussi où la retrouver : l'app Fichiers › Sur mon iPhone › Halcya (au lieu de « Documents », qui n'existe pas dans Fichiers). Parité : 67 % (31/46) | PR v999 |
 
 ---
 

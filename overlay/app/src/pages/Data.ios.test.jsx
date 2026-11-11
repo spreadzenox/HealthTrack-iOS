@@ -30,7 +30,7 @@ vi.mock('../services/deleteAllData', () => ({ deleteAllMyData: vi.fn() }))
 
 import { Filesystem } from '@capacitor/filesystem'
 import { Share } from '@capacitor/share'
-import { parseBackup } from '../storage/localHealthStorage'
+import { parseBackup, countAllEntries } from '../storage/localHealthStorage'
 import Data from './Data'
 
 describe('Sauvegarde sur iPhone', () => {
@@ -55,5 +55,16 @@ describe('Restauration de la copie de secours sur iPhone', () => {
     fireEvent.click(await screen.findByRole('button', { name: 'Restaurer la copie de secours (il y a 2 h)' }))
     expect(await screen.findByText('Halcya-copie-de-secours.json')).toBeInTheDocument()
     expect(parseBackup).toHaveBeenCalledWith('{"copie":true}')
+  })
+})
+
+// Android v999 (#920) : « Un fichier JSON, rangé dans Documents. » sous le bouton ; l'app Fichiers d'Apple n'a pas de
+// dossier « Documents » : la ligne dit où la retrouver, comme le message après la sauvegarde
+describe('Où retrouver la sauvegarde sur iPhone', () => {
+  it('la ligne sous le bouton nomme l’app Fichiers, pas « Documents »', async () => {
+    countAllEntries.mockResolvedValue(12)
+    render(<MemoryRouter><Data /></MemoryRouter>)
+    expect(await screen.findByText('Un fichier JSON, rangé dans l’app Fichiers › Sur mon iPhone › Halcya.')).toBeInTheDocument()
+    expect(screen.queryByText(/rangé dans Documents/)).toBeNull()
   })
 })
