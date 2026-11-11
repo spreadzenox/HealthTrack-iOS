@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v995 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **994.471 chez les testeurs externes** (11/11, 14:57 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (994.471 depuis le 11/11, 14:57) |
+| Dernière version | v996 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **995.472 chez les testeurs externes** (11/11, 16:22 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (995.472 depuis le 11/11, 16:22) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -147,6 +147,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 11/11 13:00 | suivi d'Android v993 | La 991.468 est chez les testeurs depuis 12:15 ; la 992 suit. Android v993 : un aliment que la base ne connaît pas est nommé dans le total du repas (« ≈ 592 kcal, sans Sauce maison ») au lieu d'être ignoré. Parité : 67 % (31/46) | #456 (mergée) |
 | 11/11 14:00 | suivi d'Android v994 | La 992.469 est chez les testeurs depuis 13:16 ; la 993 suit. Android v994 : votre poids a sa courbe dans Journal › Tendances (sur iPhone, les pesées de l'app Santé comprises) ; une retouche iPhone refaite pour garder la VFC de Santé à sa place. Parité : 67 % (31/46) | #457 (mergée) |
 | 11/11 15:00 | suivi d'Android v995 | Les testeurs ont eu la 993.470 à 14:16 puis la **994.471** à 14:57 (courbe du poids). Android v995 : le nom d'un repas se modifie (après l'analyse ou plus tard). Parité : 67 % (31/46) | #458 (mergée) |
+| 11/11 16:00 | suivi d'Android v996 | Les testeurs ont la **995.472** depuis 16:22 (le nom d'un repas se modifie) ; la 994.471 expirée. Android v996 : dans Analyses, un lien qui change de sens selon le délai, sans être net, est dit en une ligne (rien à en tirer pour l'instant). Parité : 67 % (31/46) | PR v996 |
 
 ---
 
