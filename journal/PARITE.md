@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v987 (commit `428c0d7`, 11/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v988 (commit `72f3c7c`, 11/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 11/11 07:00 | #909 (v988) | #909 (POLISH-SIM-42) : « Autre chose » ne note plus une cigarette d'un seul toucher ; il propose « Je fume : compter mes cigarettes », qui place « + 1 cigarette » dans le bandeau d'ajout (`AddStrip.jsx`, `Dashboard.jsx`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
 | 11/11 06:00 | #908 (v987) | #908 (POLISH-SIM-44) : « Réglages › Paramètres » partout où l'app renvoie aux Paramètres (accueil, rappel du soir, Analyses). Code partagé, note pour tous, valable sur iPhone ; « Réglages » y est aussi l'app d'Apple (le rappel du soir iPhone renvoie à « Réglages › Notifications ») : proposition à Android dans `DEMANDES.md`. 51 correctifs sans retouche | ✅ |
 | 11/11 05:00 | #906 et #907 (v985, v986) | #906 (POLISH-SIM-38) : 2e carte de l'accueil, « Trois usages » (Journal, Analyses, Agir) au lieu de « Trois onglets » (`Onboarding.jsx`). #907 (POLISH-SIM-43) : une seule durée d'essai (Agir : réintroduction 3 jours, piste deux semaines ; l'accueil ne donne plus de durée ; `Act.jsx`, `Onboarding.jsx`). Code partagé, notes pour tous, valables sur iPhone. 51 correctifs sans retouche (le correctif 45 touche aussi `Onboarding.jsx`, ailleurs) | ✅ |
 | 11/11 03:00 | #905 (v984) | #905 (CYCLE-2d) : dans « Mes règles », « Hier » pour noter le flux et les symptômes de la veille (`PeriodSheet.jsx`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
