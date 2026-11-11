@@ -1,0 +1,52 @@
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild test-without-building -xctestrun /Users/runner/work/_temp/dd-tests/Build/Products/HalcyaUITests_iphonesimulator26.5-arm64-x86_64.xctestrun -destination id=73903A6E-DECF-4552-ADBB-B4B1F348F51F "-only-testing:HalcyaUITests/NotificationsUITests/testAutoriserLesNotifications"
+
+2026-11-11 11:29:01.284 xcodebuild[41083:115762] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-11-11 11:29:01.302 xcodebuild[41083:115762] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, arch:arm64, id:73903A6E-DECF-4552-ADBB-B4B1F348F51F, OS:26.2, name:iPhone 16e }
+{ platform:iOS Simulator, arch:x86_64, id:73903A6E-DECF-4552-ADBB-B4B1F348F51F, OS:26.2, name:iPhone 16e }
+2026-11-11 11:29:04.987 xcodebuild[41083:115762] [MT] IDERunDestination: Supported platforms for the buildables in the current scheme is empty.
+2026-11-11 11:29:08.953838+0000 HalcyaUITests-Runner[41554:116955] [Default] Running tests...
+2026-11-11 11:29:09.085022+0000 HalcyaUITests-Runner[41554:117275] [General] Failed to send CA Event for app launch measurements for ca_event_type: 0 event_name: com.apple.app_launch_measurement.FirstFramePresentationMetric
+    t =      nans Interface orientation changed to Portrait
+2026-11-11 11:29:10.288910+0000 HalcyaUITests-Runner[41554:117273] [General] Failed to send CA Event for app launch measurements for ca_event_type: 1 event_name: com.apple.app_launch_measurement.ExtendedLaunchMetrics
+Test Suite 'Selected tests' started at 2026-11-11 11:29:10.323.
+Test Suite 'HalcyaUITests.xctest' started at 2026-11-11 11:29:10.324.
+Test Suite 'NotificationsUITests' started at 2026-11-11 11:29:10.324.
+Test Case '-[HalcyaUITests.NotificationsUITests testAutoriserLesNotifications]' started.
+    t =     0.00s Start Test at 2026-11-11 11:29:10.328
+    t =     0.08s Set Up
+    t =     0.08s Open fr.jpesquet.sante
+    t =     0.08s     Activate fr.jpesquet.sante
+    t =     0.11s         Wait for fr.jpesquet.sante to idle
+    t =     0.15s Waiting 20.0s for "Autoriser" Button to exist
+    t =     1.17s     Checking `Expect predicate `existsNoRetry == 1` for object "Autoriser" Button`
+    t =     1.18s         Checking existence of `"Autoriser" Button`
+    t =     1.47s Checking existence of `"Autoriser" Button`
+    t =     1.53s Tap "Autoriser" Button
+    t =     1.53s     Wait for com.apple.springboard to idle
+    t =     1.53s     Find the "Autoriser" Button
+    t =     1.60s     Check for interrupting elements affecting "Autoriser" Button
+    t =     1.69s     Synthesize event
+    t =     2.19s     Wait for com.apple.springboard to idle
+    t =     3.39s Checking `Expect predicate `exists == 0` for object "Autoriser" Button`
+    t =     3.40s     Checking existence of `"Autoriser" Button`
+    t =     3.45s Tear Down
+Test Case '-[HalcyaUITests.NotificationsUITests testAutoriserLesNotifications]' passed (3.504 seconds).
+Test Suite 'NotificationsUITests' passed at 2026-11-11 11:29:13.833.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.504 (3.509) seconds
+Test Suite 'HalcyaUITests.xctest' passed at 2026-11-11 11:29:13.835.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.504 (3.511) seconds
+Test Suite 'Selected tests' passed at 2026-11-11 11:29:13.836.
+	 Executed 1 test, with 0 failures (0 unexpected) in 3.504 (3.512) seconds
+2026-11-11 11:29:14.441 xcodebuild[41083:115762] [MT] IDETestOperationsObserverDebug: 9.444 elapsed -- Testing started completed.
+2026-11-11 11:29:14.441 xcodebuild[41083:115762] [MT] IDETestOperationsObserverDebug: 0.000 sec, +0.000 sec -- start
+2026-11-11 11:29:14.441 xcodebuild[41083:115762] [MT] IDETestOperationsObserverDebug: 9.444 sec, +9.444 sec -- end
+
+Test session results, code coverage, and logs:
+	/Users/runner/Library/Developer/Xcode/DerivedData/HalcyaUITests-czwcurtmyqrrrrbeleuylyuylpqe/Logs/Test/Test-HalcyaUITests-2026.11.11_11-29-01-+0000.xcresult
+
+** TEST EXECUTE SUCCEEDED **
+
+Testing started
