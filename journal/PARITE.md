@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v983 (commit `489526f`, 11/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v984 (commit `625d914`, 11/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 11/11 03:00 | #905 (v984) | #905 (CYCLE-2d) : dans « Mes règles », « Hier » pour noter le flux et les symptômes de la veille (`PeriodSheet.jsx`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
 | 11/11 02:00 | #903 et #904 (v982, v983) | #903 (CYCLE-2c) : dans « Mes règles » (bouton « Règles » d'Aujourd'hui), les symptômes du cycle en un geste (Crampes, Ballonnements, Fatigue…), affichés dans le Journal à côté de la ligne « Règles » (`PeriodSheet.jsx`, `cycle.js`). Code partagé, note pour tous, valable sur iPhone (s'ajoute aux symptômes lus dans Santé). #904 : test daté du « 1er » du mois réparé (CI d'Android). 51 correctifs sans retouche | ✅ |
 | 11/11 00:00 | #902 (v981) | #902 (CYCLE-2b) : Journal › Jours, le « … » de la ligne « Règles » propose « Modifier » (flux sur place) et « Supprimer », seulement pour les règles notées dans l'app (`CYCLE_SOURCE`) : celles lues dans Santé n'ont pas de « … » (Santé fait foi), comme voulu sur iPhone. Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
 | 10/11 23:00 | #901 (v980) | #901 (CYCLE-2) : avec « Mon cycle », bouton « Règles » dans le bandeau d'ajout d'Aujourd'hui (`AddStrip.jsx`, `PeriodSheet.jsx` : Léger, Moyen, Abondant, « Retirer »), source `app_cycle`. Code partagé, note pour tous, valable sur iPhone (s'ajoute à la lecture de Santé : la saisie la plus récente d'un jour gagne). Page de confidentialité d'Android : « règles et symptômes du cycle si vous les notez » parmi les données gardées, repris sur la page iPhone (empreinte relue). 49 correctifs sans retouche | ✅ |
