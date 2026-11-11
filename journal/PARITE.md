@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v984 (commit `625d914`, 11/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v986 (commit `e5415fd`, 11/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 11/11 05:00 | #906 et #907 (v985, v986) | #906 (POLISH-SIM-38) : 2e carte de l'accueil, « Trois usages » (Journal, Analyses, Agir) au lieu de « Trois onglets » (`Onboarding.jsx`). #907 (POLISH-SIM-43) : une seule durée d'essai (Agir : réintroduction 3 jours, piste deux semaines ; l'accueil ne donne plus de durée ; `Act.jsx`, `Onboarding.jsx`). Code partagé, notes pour tous, valables sur iPhone. 51 correctifs sans retouche (le correctif 45 touche aussi `Onboarding.jsx`, ailleurs) | ✅ |
 | 11/11 03:00 | #905 (v984) | #905 (CYCLE-2d) : dans « Mes règles », « Hier » pour noter le flux et les symptômes de la veille (`PeriodSheet.jsx`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
 | 11/11 02:00 | #903 et #904 (v982, v983) | #903 (CYCLE-2c) : dans « Mes règles » (bouton « Règles » d'Aujourd'hui), les symptômes du cycle en un geste (Crampes, Ballonnements, Fatigue…), affichés dans le Journal à côté de la ligne « Règles » (`PeriodSheet.jsx`, `cycle.js`). Code partagé, note pour tous, valable sur iPhone (s'ajoute aux symptômes lus dans Santé). #904 : test daté du « 1er » du mois réparé (CI d'Android). 51 correctifs sans retouche | ✅ |
 | 11/11 00:00 | #902 (v981) | #902 (CYCLE-2b) : Journal › Jours, le « … » de la ligne « Règles » propose « Modifier » (flux sur place) et « Supprimer », seulement pour les règles notées dans l'app (`CYCLE_SOURCE`) : celles lues dans Santé n'ont pas de « … » (Santé fait foi), comme voulu sur iPhone. Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
