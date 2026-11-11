@@ -126,3 +126,14 @@ test('lecture : builds avec examen et état externe inclus, groupe, build de la 
   assert.ok(seen.some((p) => p.includes('filter[expired]=false') && p.includes('include=betaAppReviewSubmission,buildBetaDetail')))
   assert.equal(fromPage({}).length, 0)
 })
+
+test('nettoyage : Android v1000 (11/11) : la 1000.477 passe après la 999.476 (numéros comparés en nombres, pas en texte)', () => {
+  const builds = [
+    b('844.344'),
+    b('999.476', { inGroup: true, review: 'APPROVED', external: 'IN_BETA_TESTING' }),
+    b('1000.477', { inGroup: true, review: 'APPROVED', external: 'IN_BETA_TESTING' }),
+  ]
+  assert.equal(distributed(builds).version, '1000.477')
+  const plan = cleanupPlan({ builds, attached: ['844.344'] })
+  assert.deepEqual(plan.expire.map((x) => x.version), ['999.476'])
+})

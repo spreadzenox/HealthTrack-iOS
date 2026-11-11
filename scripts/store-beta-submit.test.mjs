@@ -97,3 +97,7 @@ test('build pas encore traitée par Apple : rien n’est écrit, à refaire au r
   assert.ok(calls.every((c) => c.method === 'GET'))
   assert.match(lines.join('\n'), /pas encore traitée/)
 })
+
+test('la build : Android v1000 (11/11) : la 1000.477 est plus récente que la 999.476', () => {
+  assert.equal(pickBuild([build('a', '999.476'), build('b', '1000.477'), build('c', '998.475')]).version, '1000.477')
+})

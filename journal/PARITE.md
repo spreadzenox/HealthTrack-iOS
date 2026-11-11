@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v999 (commit `a51c47e`, 11/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v1000 (commit `13532ac`, 11/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 11/11 20:00 | #921 (v1000) | #921 (POLISH-SIM-37b) : sans l'objectif « Ma digestion », l'exemple de la digestion n'affiche plus « Le suivi digestif est masqué » au-dessus des données fictives ; le bandeau revient à la fin de l'exemple (`Recommendations.jsx`). Code partagé, valable sur iPhone. Première version à quatre chiffres : builds 1000.x comparées en nombres dans nos scripts de TestFlight (tests ajoutés). 52 correctifs sans retouche | ✅ |
 | 11/11 19:00 | #919, #920 (v998, v999) | #920 (POLISH-SIM-37) : « Voir un exemple » part de l'écran touché (Analyses › Digestion ouvre l'exemple de la digestion ; Agir et Journal, la visite depuis cet écran ; `SeeExample.jsx`, `tour.js`, `TourHost.jsx`) ; Vos données : « Un fichier JSON, rangé dans Documents. ». Code partagé, valable sur iPhone, sauf « Documents » : l'app Fichiers d'Apple n'a pas ce dossier ; nouveau correctif 62 : « Un fichier JSON, rangé dans l'app Fichiers › Sur mon iPhone › Halcya. » (comme le message après la sauvegarde), note iPhone. #919 (v998) : outil des personas seulement. 52 correctifs | ✅ |
 | 11/11 17:00 | #918 (v997) | #918 (POLISH-SIM-51) : à l'accueil, sans source de santé reliée, « Ce que vous noterez » suit les objectifs (poids avec « Prendre soin de moi », règles avec « Mon cycle », digestion avec le ventre ; `handNotes` de `settings/onboarding.js`). Code partagé, valable sur iPhone (l'écran y dit « Sans Santé »). Sa note de Nouveautés commence par « Sans Health Connect » : cachée sur iPhone (correctif 28), note iPhone équivalente, demande dans `DEMANDES.md`. 51 correctifs (le 28 refait) | ✅ |
 | 11/11 16:00 | #917 (v996) | #917 (POLISH-SIM-50) : dans Analyses, un facteur qui va dans un sens à court terme et dans l'autre plus tard, sans que ce soit net, est dit en une ligne (rien à en tirer pour l'instant) ; une phrase en haut de la liste quand aucun lien n'est encore net (`Recommendations.jsx`, `resultsView.js`). Code partagé, note pour tous, valable sur iPhone. 51 correctifs sans retouche | ✅ |
