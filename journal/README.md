@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v992 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **990.467 chez les testeurs externes** (11/11, 11:15 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (990.467 depuis le 11/11, 11:15) |
+| Dernière version | v993 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **991.468 chez les testeurs externes** (11/11, 12:15 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (991.468 depuis le 11/11, 12:15) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -143,7 +143,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 11/11 09:00 | rien de neuf | Android v989 ne touche que son outil des personas, pas l'app : reprise avec sa prochaine version qui change l'app. Les testeurs ont la 988.464. Rien n'attend de vous. Parité : 67 % (31/46) | journal |
 | 11/11 10:00 | suivi d'Android v990 | Android v990 : le soir, la fenêtre « Ma digestion » ne pose plus qu'une question à la fois (le bilan de la journée, ou un moment précis). Les testeurs ont la 988.464 ; la 990 suivra. Parité : 67 % (31/46) | #453 (mergée) |
 | 11/11 11:00 | suivi d'Android v991 | Android v991 : sur Aujourd'hui, la note de bien-être n'est plus répétée dans « Vos données du jour ». La 990 part chez les testeurs. Parité : 67 % (31/46) | #454 (mergée) |
-| 11/11 12:00 | suivi d'Android v992 | La 990.467 est chez les testeurs depuis 11:15. Android v992 : dans « Mes règles », un symptôme touché se coche et la fenêtre dit « Noté » (ce que la persona d'hier ne voyait pas). La 991 part chez les testeurs. Parité : 67 % (31/46) | PR v992 |
+| 11/11 12:00 | suivi d'Android v992 | La 990.467 est chez les testeurs depuis 11:15. Android v992 : dans « Mes règles », un symptôme touché se coche et la fenêtre dit « Noté » (ce que la persona d'hier ne voyait pas). La 991 part chez les testeurs. Parité : 67 % (31/46) | #455 (mergée) |
+| 11/11 13:00 | suivi d'Android v993 | La 991.468 est chez les testeurs depuis 12:15 ; la 992 suit. Android v993 : un aliment que la base ne connaît pas est nommé dans le total du repas (« ≈ 592 kcal, sans Sauce maison ») au lieu d'être ignoré. Parité : 67 % (31/46) | PR v993 |
 
 ---
 
