@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v981 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **980.455 chez les testeurs externes** (10/11, 23:57 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (980.455 depuis le 10/11, 23:57) |
+| Dernière version | v981 suivie (11/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **981.457 chez les testeurs externes** (11/11, 01:39 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (981.457 depuis le 11/11, 01:39) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -131,7 +131,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 10/11 22:00 | cycle visible sur iPhone | Android affiche maintenant le cycle dans le Journal (« Règles · 2e jour · flux moyen », jour du cycle) et a ajouté constipation et diarrhée à notre demande. Sur iPhone, avec « Mon cycle », les règles et symptômes notés dans Santé s'y affichent ; note de Nouveautés. La 1re étape iPhone (#439) avait un blocage trouvé par la build (la synchro de Santé s'arrêtait au cycle) : corrigé, testé. Parité : 67 % | #439 (mergée), #440 (mergée) |
 | 10/11 23:00 | règles notées à la main | Android v980 : avec « Mon cycle », un bouton « Règles » dans le bandeau d'ajout d'Aujourd'hui (Léger, Moyen, Abondant). Sur iPhone, il s'ajoute à la lecture de Santé. La v979 (#440, cycle de Santé dans le Journal) est mergée et part chez les testeurs. Parité : 67 % | #440 (mergée), #441 (mergée) |
 | 10/11 23:20 | cycle dans Sources | Dans Sources, « cycle » apparaît parmi ce que Santé envoie ; et une carte « Suivi du cycle (Santé) » propose, une fois, de lire le cycle à qui avait déjà coché « Mon cycle » avant ce soir (les testeurs actuels). Parité : 67 % (31/46) | #442 (mergée) |
-| 11/11 00:00 | suivi d'Android v981 | La 980.455 est chez les testeurs depuis 23:57 (règles notées depuis Aujourd'hui). Android v981 : dans le Journal, une règle notée à la main se corrige ou se supprime ; celles qui viennent de Santé restent telles que Santé les donne. Parité : 67 % (31/46) | PR v981 |
+| 11/11 00:00 | suivi d'Android v981 | La 980.455 est chez les testeurs depuis 23:57 (règles notées depuis Aujourd'hui). Android v981 : dans le Journal, une règle notée à la main se corrige ou se supprime ; celles qui viennent de Santé restent telles que Santé les donne. Parité : 67 % (31/46) | #443 (mergée) |
+| 11/11 01:00 | 981.457 chez les testeurs | Les testeurs ont eu la 980.456 à 00:48 (cycle dans Sources), puis la **981.457** à 01:39 (règles notées à la main corrigeables dans le Journal). Chaque envoi : accord d'Apple en une minute, ancienne build expirée ; restent 844.344 et 981.457. Android n'a rien publié depuis. Parité : 67 % (31/46) | journal |
 
 ---
 
