@@ -519,6 +519,10 @@
     lancé (975.451 sur TestFlight).
   - [x] **10/11 18:00** : v973 et v974 (Analyses sur Digestion ; tuiles du Journal → courbes, correctif 57 complété pour
     la VFC de l'app Santé) ; #436 mergée à 19:05 après captures (Journal clair, sombre et Santé), déploiement lancé.
+  - [x] **12/11 vers 02:00** : 1003.480 (v1003, #466) chez les testeurs (relevé de 02:04, examen accepté, distribuée) ;
+    1002.479 expirée ; restent 844.344 et 1003.480. Disque de la session plein pendant ce déploiement : le script ne
+    lisait plus les journaux des runs et a relancé l'envoi toutes les 5 min (8 fois, sans effet : « rien à faire, tout
+    était fait ») ; arrêté, relevé et nettoyage relancés à part. Disque libéré (captures lues par l'API désormais).
   - [x] **12/11 00:17** : 1002.479 (v1002, #465) chez les testeurs ; 1000.477 expirée ; restent 844.344 et 1002.479.
   - [x] **11/11 22:10** : 1000.477 (v1000, #463) chez les testeurs ; 999.476 expirée ; restent 844.344 et 1000.477
     (première build à quatre chiffres : bien classée après la 999.476). Le run TestFlight était resté « en cours »
