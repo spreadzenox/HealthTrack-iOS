@@ -519,6 +519,8 @@
     lancé (975.451 sur TestFlight).
   - [x] **10/11 18:00** : v973 et v974 (Analyses sur Digestion ; tuiles du Journal → courbes, correctif 57 complété pour
     la VFC de l'app Santé) ; #436 mergée à 19:05 après captures (Journal clair, sombre et Santé), déploiement lancé.
+  - [x] **12/11 09:27** : 1009.488 (v1009 et correctif 24, #474) chez les testeurs ; 1009.487 expirée ; restent 844.344
+    et 1009.488.
   - [x] **12/11 08:28** : 1009.487 (v1009, #473) chez les testeurs ; 1008.485 expirée ; restent 844.344 et 1009.487.
   - [x] **12/11 07:17** : 1008.485 (v1008, #471) chez les testeurs ; 1007.484 expirée ; restent 844.344 et 1008.485.
   - [x] **12/11 06:11** : 1007.484 (v1007, #470) chez les testeurs ; 1006.483 expirée ; restent 844.344 et 1007.484.
