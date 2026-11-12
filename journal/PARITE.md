@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v1017 (commit `75bd95d`, 12/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v1019 (commit `340bbe1`, 12/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 12/11 18:00 | #940, #941 (v1018, v1019) | #941 (POLISH-SIM-57, 56) : Données, le rapport PDF ne propose plus d'inclure le bien-être estimé tant qu'aucune lecture du visage n'existe (`DoctorReportCard.jsx`) ; la sauvegarde dit où est le fichier une seule fois, après l'export (« Un fichier JSON, à garder en lieu sûr. » avant ; `Data.jsx`) ; Analyses, « Long terme (de 7 à 27 jours avant) : encore 12 jours avec votre digestion notée » (`resultsView.js`). Code partagé, valable sur iPhone. Correctif 09 refait (contexte) ; correctif 62 retiré : la ligne sous le bouton ne nomme plus de dossier, et sur iPhone l'endroit reste dit après l'export (« … est aussi dans l'app Fichiers › Sur mon iPhone › Halcya. », correctif 09) ; test iPhone mis à jour. #940 (v1018) : journal d'Android (missions navigateur). 52 correctifs | ✅ |
 | 12/11 16:00 | #938 (v1017) | #938 (POLISH-SIM-55) : Analyses, sous « Lactose », « Fructanes » ou « GOS », la ligne dit « repas riche en lactose (FODMAP) » (`analysisResults.js`). Code partagé, valable sur iPhone. 53 correctifs sans retouche | ✅ |
 | 12/11 14:00 | #937 (v1016) | #937 (POLISH-SIM-54) : Tendances, sous la courbe du confort digestif, une ligne donne la note de chaque niveau (Calme 5, Gêne 3, Douleur 1 ; `trendsData.js`). Code partagé, valable sur iPhone. 53 correctifs sans retouche (dont 56, mesures de Tendances) | ✅ |
 | 12/11 13:00 | #936 (v1015) | #936 (POLISH-SIM-59) : Journal, le temps de charger la table des aliments, la tuile Repas affiche « ≈ … kcal » au lieu du nombre de repas (« 1 ») (`dailyJournal.js`, `journalChips.js`). Code partagé, valable sur iPhone. Le reste (outil des personas) ne change pas l'app. 53 correctifs sans retouche (dont 57, Journal, et 49, outil des personas) | ✅ |
