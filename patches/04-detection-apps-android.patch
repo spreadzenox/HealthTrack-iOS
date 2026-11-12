@@ -1,9 +1,9 @@
 diff --git a/app/src/devices/phoneApps.js b/app/src/devices/phoneApps.js
-index e1bbf9e..72881be 100644
+index e917117..54a3bb5 100644
 --- a/app/src/devices/phoneApps.js
 +++ b/app/src/devices/phoneApps.js
-@@ -17,7 +17,8 @@ export const DETECT_TIMEOUT_MS = 6_000
- const NativeAppManager = registerPlugin('AppManager')
+@@ -18,7 +18,8 @@ export const DETECT_TIMEOUT_MS = 6_000
+ export const NativeAppManager = registerPlugin('AppManager')
  
  function isNative() {
 -  return typeof window !== 'undefined' && window?.Capacitor?.isNativePlatform?.() === true

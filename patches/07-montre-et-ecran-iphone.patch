@@ -20,18 +20,18 @@ index 38f974c..1205994 100644
  
        {available && !on && (
 diff --git a/app/src/components/WatchDiagnostic.jsx b/app/src/components/WatchDiagnostic.jsx
-index a0fa31b..a698820 100644
+index f5ff0a2..ca0cfa7 100644
 --- a/app/src/components/WatchDiagnostic.jsx
 +++ b/app/src/components/WatchDiagnostic.jsx
-@@ -9,6 +9,7 @@ import { useState } from 'react'
- import { registerPlugin } from '@capacitor/core'
+@@ -8,6 +8,7 @@
+ import { useState } from 'react'
  import { Link, useInRouterContext } from 'react-router-dom'
  import { getClient, isBleAvailable, ready } from '../devices/ble/bleService'
 +import { FEATURES } from '../config/distribution'
  import { runHuaweiDiagnostic, STEPS } from '../devices/huawei/diagnostic'
- import { detectPhoneApps } from '../devices/phoneApps'
+ import { detectPhoneApps, NativeAppManager } from '../devices/phoneApps'
  import { CURRENT_VERSION } from '../services/updateCheck'
-@@ -110,7 +111,7 @@ async function defaultBackground() {
+@@ -107,7 +108,7 @@ async function defaultBackground() {
    return watch ? getBackgroundSync({ deviceId: watch.deviceId }) : null
  }
  
@@ -40,7 +40,7 @@ index a0fa31b..a698820 100644
    const connectFn = connect === undefined ? (classicPlugin() ? defaultConnect : null) : connect
    const setupDeps = setup === undefined ? { detectApps: detectPhoneApps, classic: classicPlugin(), appManager: appManagerPlugin() } : setup
    const [report, setReport] = useState(loadLast)
-@@ -183,7 +184,9 @@ export default function WatchDiagnostic({ run = defaultRun, available = isBleAva
+@@ -180,7 +181,9 @@ export default function WatchDiagnostic({ run = defaultRun, available = isBleAva
      <>
        {!available ? (
          <p className="my-devices-intro">
