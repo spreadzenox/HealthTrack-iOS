@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v1014 (commit `7ce6a43`, 12/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v1015 (commit `7f23a50`, 12/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 12/11 13:00 | #936 (v1015) | #936 (POLISH-SIM-59) : Journal, le temps de charger la table des aliments, la tuile Repas affiche « ≈ … kcal » au lieu du nombre de repas (« 1 ») (`dailyJournal.js`, `journalChips.js`). Code partagé, valable sur iPhone. Le reste (outil des personas) ne change pas l'app. 53 correctifs sans retouche (dont 57, Journal, et 49, outil des personas) | ✅ |
 | 12/11 12:00 | #935 (v1014) | #935 (POLISH-SIM-53) : Analyses, sous « Ce qui va avec… », la ligne de l'unité dit que « + » veut dire un meilleur bien-être ou plus de confort digestif, et donne la note de chaque niveau de digestion (Calme 5, Gêne 3, Douleur 1 ; `Recommendations.jsx`). Code partagé, valable sur iPhone. 53 correctifs sans retouche | ✅ |
 | 12/11 11:00 | #934 (v1013) | #934 (POLISH-SIM-60) : Sources, une app qui ne partage pas une mesure (Samsung Health et la VFC) le dit au lieu de proposer de l'activer (`healthApps.js` : `notShared`, `unsharedWatchMetrics` ; `MyDevices.jsx`). Note d'Android marquée play/sideload (Samsung Health n'écrit pas dans Santé). Correctifs 14, 19 et 25 refaits (Android a scindé `missingWatchMetrics` : la règle iPhone « la VFC SDNN de Santé en tient lieu » passe dans `neverReceivedWatch`) ; la nouvelle phrase dit « avec l'app Santé » sur iPhone (correctif 14, test). 53 correctifs | ✅ |
 | 12/11 10:00 | #932, #933 (v1011, v1012) | #933 (POLISH-SIM-52) : sur Aujourd'hui, le bloc digestion n'annonce plus « Vos analyses digestives sont prêtes » tant qu'aucun lien net n'est trouvé (`DigestBlock.jsx`). Code partagé, valable sur iPhone. #932 (v1011) : journal d'Android seulement. 53 correctifs sans retouche | ✅ |
