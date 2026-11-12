@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1012 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1009.488 chez les testeurs externes** (12/11, 09:27 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1009.488 depuis le 12/11, 09:27) |
+| Dernière version | v1013 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1012.490 chez les testeurs externes** (12/11, 11:22 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1012.490 depuis le 12/11, 11:22) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -165,7 +165,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 12/11 07:05 | suivi d'Android v1009 | Android v1009 : un réglage interne (un module natif déclaré deux fois) ; rien de visible. Le nouveau contrôle d'Android a trouvé le même défaut dans nos outils de captures iPhone : corrigé. La v1008 (#471) part chez les testeurs. Parité : 67 % (31/46) | #473 (mergée) |
 | 12/11 08:00 | un plugin enregistré une fois | Les testeurs ont la **1008.485** depuis 07:17 ; la v1009 (#473) part à son tour. La console de la build de captures montrait encore l'abonnement de l'App Store déclaré deux fois : corrigé (rien de visible pour vous) ; un autre doublon, dans le code partagé, signalé à Android. Parité : 67 % (31/46) | #474 (mergée) |
 | 12/11 09:00 | suivi d'Android v1010 | Les testeurs ont la **1009.487** depuis 08:28 ; la build avec l'abonnement corrigé (#474) suit. Android v1010 : dans un Journal encore vide, « Noter ma digestion » ouvre directement la note. Parité : 67 % (31/46) | #475 (mergée) |
-| 12/11 10:00 | suivi d'Android v1012 | Les testeurs ont la **1009.488** depuis 09:27 (abonnement corrigé) ; la v1010 (#475) part à son tour. Android v1012 : le bloc digestion d'Aujourd'hui n'annonce plus « analyses prêtes » tant qu'aucun lien net n'est trouvé. Parité : 67 % (31/46) | PR v1012 |
+| 12/11 10:00 | suivi d'Android v1012 | Les testeurs ont la **1009.488** depuis 09:27 (abonnement corrigé) ; la v1010 (#475) part à son tour. Android v1012 : le bloc digestion d'Aujourd'hui n'annonce plus « analyses prêtes » tant qu'aucun lien net n'est trouvé. Parité : 67 % (31/46) | #476 (mergée) |
+| 12/11 11:00 | suivi d'Android v1013 | Les testeurs ont eu la 1010.489 à 10:21 (Journal vide), puis la **1012.490** à 11:22 (bloc digestion honnête). Android v1013 : dans Sources, une app qui ne partage pas une mesure le dit au lieu de proposer de l'activer ; trois correctifs iPhone refaits pour cette version, sans changement pour vous. Parité : 67 % (31/46) | PR v1013 |
 
 ---
 

@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v1012 (commit `10a6023`, 12/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v1013 (commit `3bf17de`, 12/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 12/11 11:00 | #934 (v1013) | #934 (POLISH-SIM-60) : Sources, une app qui ne partage pas une mesure (Samsung Health et la VFC) le dit au lieu de proposer de l'activer (`healthApps.js` : `notShared`, `unsharedWatchMetrics` ; `MyDevices.jsx`). Note d'Android marquée play/sideload (Samsung Health n'écrit pas dans Santé). Correctifs 14, 19 et 25 refaits (Android a scindé `missingWatchMetrics` : la règle iPhone « la VFC SDNN de Santé en tient lieu » passe dans `neverReceivedWatch`) ; la nouvelle phrase dit « avec l'app Santé » sur iPhone (correctif 14, test). 53 correctifs | ✅ |
 | 12/11 10:00 | #932, #933 (v1011, v1012) | #933 (POLISH-SIM-52) : sur Aujourd'hui, le bloc digestion n'annonce plus « Vos analyses digestives sont prêtes » tant qu'aucun lien net n'est trouvé (`DigestBlock.jsx`). Code partagé, valable sur iPhone. #932 (v1011) : journal d'Android seulement. 53 correctifs sans retouche | ✅ |
 | 12/11 09:00 | #931 (v1010) | #931 (POLISH-JOURNAL-VIDE) : dans un Journal encore vide, la tuile « Noter ma digestion » ouvre directement la fenêtre de la digestion d'Aujourd'hui (`JournalEmpty.jsx`, `PastelTiles.jsx`). Code partagé, valable sur iPhone. #932 : journal d'Android seulement. 53 correctifs sans retouche | ✅ |
 | 12/11 07:05 | #930 (v1009) | #930 (POLISH-AUDIT-3) : le plugin natif AppManager n'est plus enregistré qu'une fois (`phoneApps.js` l'exporte, `WatchDiagnostic.jsx` l'importe) ; nouveau test d'Android : un seul `registerPlugin` par plugin dans `src/`. Rien de visible. Sur iPhone : correctifs 04 et 07 refaits (contexte) ; le test a trouvé nos propres doublons dans les sondes de la build de captures (`GutEvening`, `EveningNote`, `PortionReminder` déjà enregistrés par leurs services) : nouveau correctif 63 (les trois services exportent leur plugin) et `captureMode.js` les importe ; demande dans `DEMANDES.md`. 53 correctifs | ✅ |

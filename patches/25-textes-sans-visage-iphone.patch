@@ -1,8 +1,8 @@
 diff --git a/app/src/components/MyDevices.jsx b/app/src/components/MyDevices.jsx
-index b4c662a..c7bfb75 100644
+index cc8413f..eab6929 100644
 --- a/app/src/components/MyDevices.jsx
 +++ b/app/src/components/MyDevices.jsx
-@@ -105,8 +105,10 @@ export default function MyDevices({ detect = detectPhoneApps, loadEntries = defa
+@@ -106,8 +106,10 @@ export default function MyDevices({ detect = detectPhoneApps, loadEntries = defa
                    ))}
                    {missing.length > 0 && (
                      <p className="my-device-meta">
@@ -14,4 +14,4 @@ index b4c662a..c7bfb75 100644
 +                        : `Si votre montre en est capable, activez ce partage vers ${FEATURES.iosStore ? 'l’app Santé' : 'Health Connect'} dans ${row.name}.`}
                      </p>
                    )}
-                   {(showGuide || showOpen) && (
+                   {unshared.length > 0 && (
