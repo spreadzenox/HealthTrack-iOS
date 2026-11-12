@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1007 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1005.482 chez les testeurs externes** (12/11, 04:05 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1005.482 depuis le 12/11, 04:05) |
+| Dernière version | v1008 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1006.483 chez les testeurs externes** (12/11, 05:15 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1006.483 depuis le 12/11, 05:15) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -159,7 +159,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 12/11 02:00 | suivi d'Android v1004 | Android v1004 : dans Tendances, le détail d'un jour suit la mesure affichée (pas de lectures du visage sous Sommeil ou Pas) ; un lien pas assez net est hachuré, comme dans Analyses. La session a manqué de place disque cette nuit (copies des captures accumulées) : nettoyée, rien de perdu. Parité : 67 % (31/46) | #467 (mergée) |
 | 12/11 03:00 | suivi d'Android v1005 | La v1004 (#467) part chez les testeurs. Android v1005 : sur Aujourd'hui, toucher « Bien-être aujourd'hui » ouvre Tendances sur la journée, heure par heure. Parité : 67 % (31/46) | #468 (mergée) |
 | 12/11 04:00 | suivi d'Android v1006 | Les testeurs ont eu la 1004.481 à 03:17 (Tendances), puis la **1005.482** à 04:05 (« Bien-être aujourd'hui » ouvre la journée) ; restent 844.344 et 1005.482. Android v1006 : dans Sources, l'heure des dernières mesures d'un total de pas est juste ; valable aussi sur iPhone (note ajoutée). Parité : 67 % (31/46) | #469 (mergée) |
-| 12/11 05:00 | suivi d'Android v1007 | La v1006 (#469) part chez les testeurs. Android v1007 : dans Nutrition, la carte du profil dit à quoi il sert (sexe, âge, taille, poids règlent vos repères). Un correctif iPhone (le poids lu dans Santé) refait pour cette version, sans changement pour vous. Parité : 67 % (31/46) | PR v1007 |
+| 12/11 05:00 | suivi d'Android v1007 | La v1006 (#469) part chez les testeurs. Android v1007 : dans Nutrition, la carte du profil dit à quoi il sert (sexe, âge, taille, poids règlent vos repères). Un correctif iPhone (le poids lu dans Santé) refait pour cette version, sans changement pour vous. Parité : 67 % (31/46) | #470 (mergée) |
+| 12/11 06:00 | suivi d'Android v1008 | Les testeurs ont la **1006.483** depuis 05:15 (Sources : l'heure des dernières mesures) ; la v1007 (#470) est en route. Android v1008 : les champs de saisie des réglages et du profil à 44 px de haut, la cible au doigt que recommande aussi Apple. Parité : 67 % (31/46) | PR v1008 |
 
 ---
 
