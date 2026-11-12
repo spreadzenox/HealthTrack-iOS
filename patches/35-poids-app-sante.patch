@@ -1,5 +1,5 @@
 diff --git a/app/src/components/BodyProfileCard.jsx b/app/src/components/BodyProfileCard.jsx
-index ed3e466..5918d64 100644
+index bdc460d..1e632c7 100644
 --- a/app/src/components/BodyProfileCard.jsx
 +++ b/app/src/components/BodyProfileCard.jsx
 @@ -7,6 +7,7 @@ import { computeDailyEnergyKcal, ACTIVITY_LEVELS, activityLevel } from '../servi
@@ -22,7 +22,7 @@ index ed3e466..5918d64 100644
    if (!payload) return []
    return COMPOSITION_FIELDS
 @@ -225,7 +230,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
-           Complétez votre profil pour des repères ajustés à vous.
+           Sexe, âge, taille, poids : vos repères d’apports en tiennent compte.
          </p>
          {compositionLine.length > 0 && (
 -          <p className="nutrition-profile-line"><Sourced value={compositionLine.join(SEP)} hint="(Withings)" /></p>
@@ -46,7 +46,7 @@ index ed3e466..5918d64 100644
      details && bmi != null && <span>IMC{'\u00a0'}{formatNumber(bmi)}</span>,
    ])
    const energyParts = join([
-@@ -260,7 +267,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
+@@ -263,7 +270,7 @@ export default function BodyProfileCard({ profile, composition, onSaved }) {
        {head}
        {bodyParts.length > 0 && <p className="nutrition-profile-line">{bodyParts}</p>}
        {compositionLine.length > 0 && (
