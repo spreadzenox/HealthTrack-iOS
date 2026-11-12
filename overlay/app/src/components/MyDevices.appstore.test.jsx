@@ -31,4 +31,13 @@ describe('Mes appareils sur iPhone (variante appstore)', () => {
     expect(await screen.findByText(/Si votre montre en est capable, activez cette mesure dans l’app Watch de l’iPhone\./)).toBeInTheDocument()
     expect(screen.queryByText(/dans Apple Watch/)).not.toBeInTheDocument()
   })
+
+  // Android v1013 (#934) : « Samsung Health ne partage pas la VFC avec Health Connect » ; sur iPhone, l'app Santé
+  it('mesure jamais partagée par l’app source : dit l’app Santé, pas Health Connect', async () => {
+    const at = new Date(Date.now() - 3600 * 1000).toISOString()
+    const hc = (type) => ({ source: 'health_connect', at, type, payload: { sourceName: 'Samsung Health' } })
+    render(<MyDevices detect={async () => null} loadEntries={async () => [hc('sleep'), hc('heart_rate')]} />)
+    expect(await screen.findByText(/Samsung Health ne partage pas la variabilité cardiaque avec l’app Santé\./)).toBeInTheDocument()
+    expect(screen.queryByText(/Health Connect/)).not.toBeInTheDocument()
+  })
 })
