@@ -411,6 +411,9 @@
     sous-onglets d'Analyses (Android v786, 5/11) : l'écran « Vos analyses » (capture 2) n'y a pas la rangée Bien-être,
     Ventre, FODMAP, Tendances. Rien d'obligatoire pour Apple (les captures montrent l'app, pas une version exacte) ;
     à refaire seulement si la build finale change l'allure d'un écran montré ;
+  - [ ] **12/11 : mission PI1** (`journal/missions/PI1.md`, lecture seule dans App Store Connect par Claude dans Chrome,
+    décision du propriétaire de 16:15) : relever ce que la page de chaque abonnement signale ; puis corriger par l'API
+    (`store-subscriptions.yml`). Soumission préparée par la mission PI2, arrêt avant « Ajouter pour examen ».
   - [ ] (6/11 10:10 et 16:05, Paris) toujours `MISSING_METADATA` ; forum d'Apple (fils 815654, 820990) : cause la plus
     citée, la localisation du **groupe** (la nôtre existe, fr-FR « Halcya ») ; question au propriétaire précisée
     (`POUR-ORCHESTRATEUR.md`, 16:10).
