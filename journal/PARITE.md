@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v1007 (commit `0f44c08`, 12/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v1008 (commit `79f228f`, 12/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 12/11 06:00 | #929 (v1008) | #929 (POLISH-AUDIT-2) : les champs de saisie des réglages et du profil passent à 44 px de haut (`Food.css`) : c'est aussi la cible minimale d'Apple (44 points, Human Interface Guidelines). Code partagé, valable sur iPhone. 52 correctifs sans retouche | ✅ |
 | 12/11 05:00 | #928 (v1007) | #928 (POLISH-AUDIT-1) : Nutrition, sous « Compléter mon profil », la carte dit à quoi sert le profil (« Sexe, âge, taille, poids : vos repères d'apports en tiennent compte. » ; `BodyProfileCard.jsx`). Code partagé, valable sur iPhone. Correctif 35 (poids de l'app Santé) refait : la ligne changée était son contexte, mêmes changements | ✅ |
 | 12/11 04:00 | #927 (v1006) | #927 (POLISH-SIM-35) : Sources, un total du jour (pas, dépense) compte jusqu'à sa dernière mise à jour pour « Dernières mesures » (`healthApps.js`, `measuredUntil`). Code partagé, valable sur iPhone (les totaux de Santé passent par le même connecteur, avec `endDate`) ; la note d'Android est marquée play/sideload : note iPhone équivalente. Le reste (outil des personas) ne change pas l'app. 52 correctifs sans retouche (dont 60, cycle dans `healthApps.js`) | ✅ |
 | 12/11 03:00 | #925 (v1005) | #925 (POLISH-SIM-31) : sur Aujourd'hui, toucher « Bien-être aujourd'hui » ouvre Tendances sur la journée, heure par heure (lectures du visage et notes ; `DayStatusCard.jsx`). Code partagé, valable sur iPhone. 52 correctifs sans retouche | ✅ |
