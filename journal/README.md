@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1009 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1007.484 chez les testeurs externes** (12/11, 06:11 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1007.484 depuis le 12/11, 06:11) |
+| Dernière version | v1009 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1008.485 chez les testeurs externes** (12/11, 07:17 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1008.485 depuis le 12/11, 07:17) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -162,7 +162,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 12/11 05:00 | suivi d'Android v1007 | La v1006 (#469) part chez les testeurs. Android v1007 : dans Nutrition, la carte du profil dit à quoi il sert (sexe, âge, taille, poids règlent vos repères). Un correctif iPhone (le poids lu dans Santé) refait pour cette version, sans changement pour vous. Parité : 67 % (31/46) | #470 (mergée) |
 | 12/11 06:00 | suivi d'Android v1008 | Les testeurs ont la **1006.483** depuis 05:15 (Sources : l'heure des dernières mesures) ; la v1007 (#470) est en route. Android v1008 : les champs de saisie des réglages et du profil à 44 px de haut, la cible au doigt que recommande aussi Apple. Parité : 67 % (31/46) | #471 (mergée) |
 | 12/11 07:00 | personas du jour | Les testeurs ont la **1007.484** depuis 06:11 ; la v1008 (#471) part à son tour. Passage des personas sur iPhone : une femme qui veut maigrir, iPhone + Apple Watch, 14e jour. Rien de propre à l'iPhone ; elle cherche le poids sur l'Accueil (absent, seulement dans le profil de Nutrition), un objectif et un repère de calories, et trouve Analyses décevant au 14e jour : relayé à Android. Parité : 67 % (31/46) | #472 (mergée) |
-| 12/11 07:05 | suivi d'Android v1009 | Android v1009 : un réglage interne (un module natif déclaré deux fois) ; rien de visible. Le nouveau contrôle d'Android a trouvé le même défaut dans nos outils de captures iPhone : corrigé. La v1008 (#471) part chez les testeurs. Parité : 67 % (31/46) | PR v1009 |
+| 12/11 07:05 | suivi d'Android v1009 | Android v1009 : un réglage interne (un module natif déclaré deux fois) ; rien de visible. Le nouveau contrôle d'Android a trouvé le même défaut dans nos outils de captures iPhone : corrigé. La v1008 (#471) part chez les testeurs. Parité : 67 % (31/46) | #473 (mergée) |
+| 12/11 08:00 | un plugin enregistré une fois | Les testeurs ont la **1008.485** depuis 07:17 ; la v1009 (#473) part à son tour. La console de la build de captures montrait encore l'abonnement de l'App Store déclaré deux fois : corrigé (rien de visible pour vous) ; un autre doublon, dans le code partagé, signalé à Android. Parité : 67 % (31/46) | PR du correctif |
 
 ---
 
