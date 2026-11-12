@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v1016 (commit `d113859`, 12/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v1017 (commit `75bd95d`, 12/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 12/11 16:00 | #938 (v1017) | #938 (POLISH-SIM-55) : Analyses, sous « Lactose », « Fructanes » ou « GOS », la ligne dit « repas riche en lactose (FODMAP) » (`analysisResults.js`). Code partagé, valable sur iPhone. 53 correctifs sans retouche | ✅ |
 | 12/11 14:00 | #937 (v1016) | #937 (POLISH-SIM-54) : Tendances, sous la courbe du confort digestif, une ligne donne la note de chaque niveau (Calme 5, Gêne 3, Douleur 1 ; `trendsData.js`). Code partagé, valable sur iPhone. 53 correctifs sans retouche (dont 56, mesures de Tendances) | ✅ |
 | 12/11 13:00 | #936 (v1015) | #936 (POLISH-SIM-59) : Journal, le temps de charger la table des aliments, la tuile Repas affiche « ≈ … kcal » au lieu du nombre de repas (« 1 ») (`dailyJournal.js`, `journalChips.js`). Code partagé, valable sur iPhone. Le reste (outil des personas) ne change pas l'app. 53 correctifs sans retouche (dont 57, Journal, et 49, outil des personas) | ✅ |
 | 12/11 12:00 | #935 (v1014) | #935 (POLISH-SIM-53) : Analyses, sous « Ce qui va avec… », la ligne de l'unité dit que « + » veut dire un meilleur bien-être ou plus de confort digestif, et donne la note de chaque niveau de digestion (Calme 5, Gêne 3, Douleur 1 ; `Recommendations.jsx`). Code partagé, valable sur iPhone. 53 correctifs sans retouche | ✅ |

@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1016 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1015.493 chez les testeurs externes** (12/11, 14:24 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1015.493 depuis le 12/11, 14:24) |
+| Dernière version | v1017 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1016.494 chez les testeurs externes** (12/11, 15:27 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1016.494 depuis le 12/11, 15:27) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -177,7 +177,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 12/11 12:00 | suivi d'Android v1014 | La v1013 (#477) part chez les testeurs (Sources vérifié : la VFC de Santé compte, phrase de l'Apple Watch juste). Android v1014 : dans Analyses, la ligne de l'unité dit ce que veut dire le « + » (meilleur bien-être, plus de confort digestif) et la note de chaque niveau de digestion. Parité : 67 % (31/46) | #478 (mergée) |
 | 12/11 13:00 | suivi d'Android v1015 | Les testeurs ont la **1013.491** depuis 12:17 ; la v1014 (#478) part à son tour. Android v1015 : à l'ouverture du Journal, la tuile Repas n'affiche plus un faux « 1 » le temps de calculer les kcal. Parité : 67 % (31/46) | #479 (mergée) |
 | 12/11 14:00 | suivi d'Android v1016 | Les testeurs ont la **1014.492** depuis 13:19 (sens du « + » dans Analyses) ; la v1015 (#479) part à son tour. Android v1016 : dans Tendances, la note de chaque niveau de digestion sous la courbe. Parité : 67 % (31/46) | #480 (mergée) |
-| 12/11 15:00 | 1015.493 chez les testeurs | Les testeurs ont la **1015.493** depuis 14:24 (tuile Repas sans faux « 1 ») ; la v1016 (#480) part à son tour. Android n'a rien publié de plus. Parité : 67 % (31/46) | PR du journal |
+| 12/11 15:00 | 1015.493 chez les testeurs | Les testeurs ont la **1015.493** depuis 14:24 (tuile Repas sans faux « 1 ») ; la v1016 (#480) part à son tour. Android n'a rien publié de plus. Parité : 67 % (31/46) | #481 (mergée) |
+| 12/11 16:00 | suivi d'Android v1017 | Les testeurs ont la **1016.494** depuis 15:27 (échelle de la digestion dans Tendances). Android v1017 : dans Analyses, « Lactose », « Fructanes » ou « GOS » sont dits groupes FODMAP. Parité : 67 % (31/46) | PR v1017 |
 | 12/11 17:00 | missions navigateur | Votre décision de 16:15 est appliquée sur iPhone : vos actions classées et deux missions pour Claude dans Chrome, PI1 (relevé des abonnements, lecture seule) et PI2 (soumission préparée jusqu'au dernier bouton). La v1017 (#482) attendait un Mac libre chez GitHub : build relancée. Parité : 67 % (31/46) | PR des missions |
 
 ---
