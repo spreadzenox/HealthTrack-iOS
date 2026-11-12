@@ -470,7 +470,8 @@ export async function probeHealthKit({ signal, waitAck, wait, log, health, conne
 export async function probeGutEvening({ signal, waitAck, wait, log, plugin, importInbox }) {
   const say = (what, value) => log(`[notification] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   try {
-    const GutEvening = plugin ?? (await import('@capacitor/core')).registerPlugin('GutEvening')
+    // Plugin enregistré par le service (correctif 63) : un second registerPlugin fait écrire « already registered »
+    const GutEvening = plugin ?? (await import('../services/gutEvening')).NativeGutEvening
     let answer = null
     GutEvening.requestNotifications().then(
       (r) => { answer = r ?? {} },
@@ -519,7 +520,7 @@ export async function probeGutEvening({ signal, waitAck, wait, log, plugin, impo
 export async function probeEveningNote({ signal, waitAck, wait, log, plugin, importInbox }) {
   const say = (what, value) => log(`[note] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   try {
-    const EveningNote = plugin ?? (await import('@capacitor/core')).registerPlugin('EveningNote')
+    const EveningNote = plugin ?? (await import('../services/eveningNote')).NativeEveningNote
     if (!(await EveningNote.status())?.notifications) return say('essai', 'notifications non autorisées : pas de notification d’essai')
     // même délai que le bilan du ventre : le test d'interface, lancé dès le signal, attend déjà la bannière
     await EveningNote.testNotification({ delay: 45, banner: true })
@@ -558,7 +559,7 @@ export async function probePortionReminder({ signal, waitAck, wait, log, plugin,
   const say = (what, value) => log(`[portion] ${what} ${typeof value === 'string' ? value : JSON.stringify(value)}`)
   let PortionReminder = plugin
   try {
-    PortionReminder ??= (await import('@capacitor/core')).registerPlugin('PortionReminder')
+    PortionReminder ??= (await import('../services/fodmapReminder')).NativePortionReminder
     const items = [{ at: now() + 45_000, title: 'Votre portion du jour', body: 'Essai de la build de captures.' }]
     const scheduled = await PortionReminder.schedule({ items })
     say('schedule', scheduled)
