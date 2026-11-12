@@ -58,13 +58,14 @@ describe('Restauration de la copie de secours sur iPhone', () => {
   })
 })
 
-// Android v999 (#920) : « Un fichier JSON, rangé dans Documents. » sous le bouton ; l'app Fichiers d'Apple n'a pas de
-// dossier « Documents » : la ligne dit où la retrouver, comme le message après la sauvegarde
+// Android v999 (#920) disait « rangé dans Documents » sous le bouton (dossier absent de l'app Fichiers ; correctif 62).
+// Android v1019 (#941) : « Un fichier JSON, à garder en lieu sûr. », l'endroit n'est dit qu'une fois, après l'export
+// (sur iPhone : « … est aussi dans l'app Fichiers › Sur mon iPhone › Halcya. », correctif 09) ; correctif 62 retiré
 describe('Où retrouver la sauvegarde sur iPhone', () => {
-  it('la ligne sous le bouton nomme l’app Fichiers, pas « Documents »', async () => {
+  it('la ligne sous le bouton ne nomme aucun dossier, jamais « Documents »', async () => {
     countAllEntries.mockResolvedValue(12)
     render(<MemoryRouter><Data /></MemoryRouter>)
-    expect(await screen.findByText('Un fichier JSON, rangé dans l’app Fichiers › Sur mon iPhone › Halcya.')).toBeInTheDocument()
+    expect(await screen.findByText('Un fichier JSON, à garder en lieu sûr.')).toBeInTheDocument()
     expect(screen.queryByText(/rangé dans Documents/)).toBeNull()
   })
 })

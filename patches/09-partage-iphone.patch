@@ -1,5 +1,5 @@
 diff --git a/app/src/components/DoctorReportCard.jsx b/app/src/components/DoctorReportCard.jsx
-index 52c8d193..b4750bd9 100644
+index 7490991..775407b 100644
 --- a/app/src/components/DoctorReportCard.jsx
 +++ b/app/src/components/DoctorReportCard.jsx
 @@ -1,6 +1,7 @@
@@ -10,8 +10,8 @@ index 52c8d193..b4750bd9 100644
  import { useEntitlement } from '../hooks/useEntitlement'
  import { REPORT_DEFAULT_WEEKS, REPORT_PERIODS, defaultReportWeeks } from '../services/report/buildReport'
  import { createReportPdf, saveAndShareReport } from '../services/report/createReportPdf'
-@@ -69,7 +70,9 @@ export default function DoctorReportCard({
-       const pdf = await create({ weeks, includeWellbeing: wellbeing })
+@@ -81,7 +82,9 @@ export default function DoctorReportCard({
+       const pdf = await create({ weeks, includeWellbeing: hasFace && wellbeing })
        const { saved } = await save(pdf)
        setStatus(saved === 'documents'
 -        ? `${pdf.fileName} est dans Documents (app Fichiers › Documents).`
@@ -22,10 +22,10 @@ index 52c8d193..b4750bd9 100644
      } catch (e) {
        setStatus('Le rapport n’a pas pu être créé : ' + (e?.message || 'erreur inconnue') + '.')
 diff --git a/app/src/pages/Data.jsx b/app/src/pages/Data.jsx
-index 2dde780a..de6b2ec3 100644
+index f52c91c..dfb5fea 100644
 --- a/app/src/pages/Data.jsx
 +++ b/app/src/pages/Data.jsx
-@@ -13,7 +13,8 @@ import { appLocale, localeDate } from '../i18n/locale.js'
+@@ -14,7 +14,8 @@ import { monoDigits } from '../utils/monoDigits'
  async function isAndroidNative() {
    try {
      const { Capacitor } = await import('@capacitor/core')
@@ -35,7 +35,7 @@ index 2dde780a..de6b2ec3 100644
    } catch {
      return false
    }
-@@ -96,12 +97,23 @@ export default function Data() {
+@@ -98,12 +99,23 @@ export default function Data() {
          const { Filesystem, Directory } = await import('@capacitor/filesystem')
          // Convert JSON string to base64 for Filesystem.writeFile
          const base64 = btoa(unescape(encodeURIComponent(json)))
@@ -62,7 +62,7 @@ index 2dde780a..de6b2ec3 100644
          const blob = new Blob([json], { type: 'application/json' })
          const url = URL.createObjectURL(blob)
 diff --git a/app/src/services/report/createReportPdf.js b/app/src/services/report/createReportPdf.js
-index 8a84d6d8..82701e18 100644
+index 8a84d6d..82701e1 100644
 --- a/app/src/services/report/createReportPdf.js
 +++ b/app/src/services/report/createReportPdf.js
 @@ -43,7 +43,8 @@ export function bytesToBase64(bytes) {
