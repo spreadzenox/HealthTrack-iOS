@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1015 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1013.491 chez les testeurs externes** (12/11, 12:17 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1013.491 depuis le 12/11, 12:17) |
+| Dernière version | v1016 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1014.492 chez les testeurs externes** (12/11, 13:19 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1014.492 depuis le 12/11, 13:19) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -168,7 +168,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 12/11 10:00 | suivi d'Android v1012 | Les testeurs ont la **1009.488** depuis 09:27 (abonnement corrigé) ; la v1010 (#475) part à son tour. Android v1012 : le bloc digestion d'Aujourd'hui n'annonce plus « analyses prêtes » tant qu'aucun lien net n'est trouvé. Parité : 67 % (31/46) | #476 (mergée) |
 | 12/11 11:00 | suivi d'Android v1013 | Les testeurs ont eu la 1010.489 à 10:21 (Journal vide), puis la **1012.490** à 11:22 (bloc digestion honnête). Android v1013 : dans Sources, une app qui ne partage pas une mesure le dit au lieu de proposer de l'activer ; trois correctifs iPhone refaits pour cette version, sans changement pour vous. Parité : 67 % (31/46) | #477 (mergée) |
 | 12/11 12:00 | suivi d'Android v1014 | La v1013 (#477) part chez les testeurs (Sources vérifié : la VFC de Santé compte, phrase de l'Apple Watch juste). Android v1014 : dans Analyses, la ligne de l'unité dit ce que veut dire le « + » (meilleur bien-être, plus de confort digestif) et la note de chaque niveau de digestion. Parité : 67 % (31/46) | #478 (mergée) |
-| 12/11 13:00 | suivi d'Android v1015 | Les testeurs ont la **1013.491** depuis 12:17 ; la v1014 (#478) part à son tour. Android v1015 : à l'ouverture du Journal, la tuile Repas n'affiche plus un faux « 1 » le temps de calculer les kcal. Parité : 67 % (31/46) | PR v1015 |
+| 12/11 13:00 | suivi d'Android v1015 | Les testeurs ont la **1013.491** depuis 12:17 ; la v1014 (#478) part à son tour. Android v1015 : à l'ouverture du Journal, la tuile Repas n'affiche plus un faux « 1 » le temps de calculer les kcal. Parité : 67 % (31/46) | #479 (mergée) |
+| 12/11 14:00 | suivi d'Android v1016 | Les testeurs ont la **1014.492** depuis 13:19 (sens du « + » dans Analyses) ; la v1015 (#479) part à son tour. Android v1016 : dans Tendances, la note de chaque niveau de digestion sous la courbe. Parité : 67 % (31/46) | PR v1016 |
 
 ---
 
