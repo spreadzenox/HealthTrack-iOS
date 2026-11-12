@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v1009 (commit `c853444`, 12/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v1010 (commit `e518d32`, 12/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 12/11 09:00 | #931 (v1010) | #931 (POLISH-JOURNAL-VIDE) : dans un Journal encore vide, la tuile « Noter ma digestion » ouvre directement la fenêtre de la digestion d'Aujourd'hui (`JournalEmpty.jsx`, `PastelTiles.jsx`). Code partagé, valable sur iPhone. #932 : journal d'Android seulement. 53 correctifs sans retouche | ✅ |
 | 12/11 07:05 | #930 (v1009) | #930 (POLISH-AUDIT-3) : le plugin natif AppManager n'est plus enregistré qu'une fois (`phoneApps.js` l'exporte, `WatchDiagnostic.jsx` l'importe) ; nouveau test d'Android : un seul `registerPlugin` par plugin dans `src/`. Rien de visible. Sur iPhone : correctifs 04 et 07 refaits (contexte) ; le test a trouvé nos propres doublons dans les sondes de la build de captures (`GutEvening`, `EveningNote`, `PortionReminder` déjà enregistrés par leurs services) : nouveau correctif 63 (les trois services exportent leur plugin) et `captureMode.js` les importe ; demande dans `DEMANDES.md`. 53 correctifs | ✅ |
 | 12/11 06:00 | #929 (v1008) | #929 (POLISH-AUDIT-2) : les champs de saisie des réglages et du profil passent à 44 px de haut (`Food.css`) : c'est aussi la cible minimale d'Apple (44 points, Human Interface Guidelines). Code partagé, valable sur iPhone. 52 correctifs sans retouche | ✅ |
 | 12/11 05:00 | #928 (v1007) | #928 (POLISH-AUDIT-1) : Nutrition, sous « Compléter mon profil », la carte dit à quoi sert le profil (« Sexe, âge, taille, poids : vos repères d'apports en tiennent compte. » ; `BodyProfileCard.jsx`). Code partagé, valable sur iPhone. Correctif 35 (poids de l'app Santé) refait : la ligne changée était son contexte, mêmes changements | ✅ |
