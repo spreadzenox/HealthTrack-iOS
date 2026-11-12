@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1019 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1016.494 chez les testeurs externes** (12/11, 15:27 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1016.494 depuis le 12/11, 15:27) |
+| Dernière version | v1019 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1017.497 chez les testeurs externes** (12/11, 18:46 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1017.497 depuis le 12/11, 18:46) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -180,7 +180,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 12/11 15:00 | 1015.493 chez les testeurs | Les testeurs ont la **1015.493** depuis 14:24 (tuile Repas sans faux « 1 ») ; la v1016 (#480) part à son tour. Android n'a rien publié de plus. Parité : 67 % (31/46) | #481 (mergée) |
 | 12/11 16:00 | suivi d'Android v1017 | Les testeurs ont la **1016.494** depuis 15:27 (échelle de la digestion dans Tendances). Android v1017 : dans Analyses, « Lactose », « Fructanes » ou « GOS » sont dits groupes FODMAP. Parité : 67 % (31/46) | #482 (mergée) |
 | 12/11 17:00 | missions navigateur | Votre décision de 16:15 est appliquée sur iPhone : vos actions classées et deux missions pour Claude dans Chrome, PI1 (relevé des abonnements, lecture seule) et PI2 (soumission préparée jusqu'au dernier bouton). La v1017 (#482) attendait un Mac libre chez GitHub : build relancée. Parité : 67 % (31/46) | #483 (mergée) |
-| 12/11 18:00 | suivi d'Android v1019 | La v1017 (#482) part chez les testeurs (deux machines Mac introuvables chez GitHub, relancées). Android v1019 : dans Données, le rapport PDF ne propose plus le bien-être de la caméra sans lecture du visage, et la sauvegarde ne dit où est le fichier qu'après l'export ; dans Analyses, ce qui reste à noter pour le long terme. Parité : 67 % (31/46) | PR v1019 |
+| 12/11 18:00 | suivi d'Android v1019 | La v1017 (#482) part chez les testeurs (deux machines Mac introuvables chez GitHub, relancées). Android v1019 : dans Données, le rapport PDF ne propose plus le bien-être de la caméra sans lecture du visage, et la sauvegarde ne dit où est le fichier qu'après l'export ; dans Analyses, ce qui reste à noter pour le long terme. Parité : 67 % (31/46) | #484 (mergée) |
+| 12/11 19:00 | 1017.497 chez les testeurs | Les testeurs ont la **1017.497** depuis 18:46 (groupes FODMAP nommés dans Analyses) ; la v1019 (#484) part à son tour (Données vérifié : « Un fichier JSON, à garder en lieu sûr. »). Android n'a rien changé de plus dans l'app. Parité : 67 % (31/46) | PR du journal |
 
 ---
 
