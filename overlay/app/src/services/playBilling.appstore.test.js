@@ -75,4 +75,26 @@ describe('plugin natif sur iPhone', () => {
     vi.doUnmock('@capacitor/core')
     vi.doUnmock('../config/distribution')
   })
+
+  // Build de captures de la PR #473 : un registerPlugin('AppStoreBilling') à chaque appel faisait écrire à Capacitor
+  // « plugin "AppStoreBilling" already registered » (Premium, Réglages, l'abonnement relu au retour dans l'app)
+  it('le plugin StoreKit 2 n’est enregistré qu’une fois, quel que soit le nombre d’appels', async () => {
+    vi.resetModules()
+    vi.doMock('../config/distribution', async (orig) => ({ ...(await orig()), FEATURES: { billing: true } }))
+    const registered = []
+    vi.doMock('@capacitor/core', () => ({
+      Capacitor: { isNativePlatform: () => true, getPlatform: () => 'ios', isPluginAvailable: (n) => n === 'AppStoreBilling' },
+      registerPlugin: (name) => {
+        registered.push(name)
+        return { getProducts: async () => ({ products: fromStoreKit }) }
+      },
+    }))
+    const { loadBillingPlugin } = await import('./playBilling')
+    const first = await loadBillingPlugin()
+    const second = await loadBillingPlugin()
+    expect(registered).toEqual(['AppStoreBilling'])
+    expect(second).toBe(first)
+    vi.doUnmock('@capacitor/core')
+    vi.doUnmock('../config/distribution')
+  })
 })

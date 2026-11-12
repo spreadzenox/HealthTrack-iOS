@@ -1,8 +1,15 @@
 diff --git a/app/src/services/playBilling.js b/app/src/services/playBilling.js
-index 129e8ff..772b437 100644
+index 92bfa49..3f8108f 100644
 --- a/app/src/services/playBilling.js
 +++ b/app/src/services/playBilling.js
-@@ -119,10 +119,14 @@ export function annualSavingPercent(plans) {
+@@ -115,14 +115,21 @@ export function annualSavingPercent(plans) {
+   return pct >= 5 ? pct : null
+ }
+ 
++/** Version iOS (HealthTrack-iOS) : le plugin StoreKit 2, enregistré une seule fois (« already registered » sinon). */
++let appStoreBilling = null
++
+ /** Le plugin natif, dans la seule variante play sur Android ; sinon null (sideload, navigateur, tests). */
  export async function loadBillingPlugin() {
    if (!FEATURES.billing) return null
    // Captures (npm run visual -- --play --billing) : faux plugin, jamais en production
@@ -14,7 +21,7 @@ index 129e8ff..772b437 100644
 -    if (!Capacitor?.isNativePlatform?.() || Capacitor.getPlatform?.() !== 'android') return null
 +    if (!Capacitor?.isNativePlatform?.()) return null
 +    // Version iOS (HealthTrack-iOS) : StoreKit 2, même forme que PlayBilling (ios/App/App/AppStoreBillingPlugin.swift)
-+    if (Capacitor.getPlatform?.() === 'ios') return Capacitor.isPluginAvailable?.('AppStoreBilling') ? notThenable(registerPlugin('AppStoreBilling')) : null
++    if (Capacitor.getPlatform?.() === 'ios') return Capacitor.isPluginAvailable?.('AppStoreBilling') ? (appStoreBilling ??= notThenable(registerPlugin('AppStoreBilling'))) : null
 +    if (Capacitor.getPlatform?.() !== 'android') return null
      if (Capacitor.isPluginAvailable && !Capacitor.isPluginAvailable('PlayBilling')) return null
      return notThenable(registerPlugin('PlayBilling'))
