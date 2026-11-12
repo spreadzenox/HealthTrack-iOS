@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1003 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1002.479 chez les testeurs externes** (12/11, 00:17 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1002.479 depuis le 12/11, 00:17) |
+| Dernière version | v1004 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1003.480 chez les testeurs externes** (12/11, vers 02:00 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1003.480 depuis le 12/11, vers 02:00) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -154,7 +154,9 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 11/11 20:00 | suivi d'Android v1000 | Les testeurs ont la **999.476** depuis 20:23 (« Voir un exemple » part de l'écran où vous êtes ; la sauvegarde dit où la retrouver dans l'app Fichiers) ; la 997.474 expirée, restent 844.344 et 999.476. Android v1000 : l'exemple de la digestion n'affiche plus un bandeau « masqué » en trop. Parité : 67 % (31/46) | #463 (mergée) |
 | 11/11 22:00 | 1000.477 chez les testeurs | Les testeurs ont la **1000.477** depuis 22:10 (l'exemple de la digestion sans bandeau en trop), avec une heure de retard : une panne de GitHub a laissé la build « en cours » alors qu'elle était déjà chez Apple ; j'ai repris le déploiement à la main. La 999.476 expirée, restent 844.344 et 1000.477. Android n'a rien publié de plus. Parité : 67 % (31/46) | #464 (mergée) |
 | 11/11 23:00 | suivi d'Android v1002 | Android v1001 : dans la visite guidée, l'étiquette « Exemple » ne cache plus le nom de l'app. v1002 : le compteur de la digestion dit « pas forcément d'affilée » (un jour oublié ne remet rien à zéro). La panne de GitHub de ce soir avait aussi mis la build de contrôle en rouge (alors que l'app était bonne) : corrigé comme pour TestFlight. Parité : 67 % (31/46) | #465 (mergée) |
-| 12/11 00:00 | suivi d'Android v1003 | Les testeurs ont la **1002.479** depuis 00:17 (compteur de la digestion « pas forcément d'affilée ») ; la 1000.477 expirée. Android v1003 : dans la visite, le bouton dit « Exemple au jour 14 ». Parité : 67 % (31/46) | PR v1003 |
+| 12/11 00:00 | suivi d'Android v1003 | Les testeurs ont la **1002.479** depuis 00:17 (compteur de la digestion « pas forcément d'affilée ») ; la 1000.477 expirée. Android v1003 : dans la visite, le bouton dit « Exemple au jour 14 ». Parité : 67 % (31/46) | #466 (mergée) |
+| 12/11 01:00 | 1003.480 chez les testeurs | La **1003.480** (« Exemple au jour 14 » dans la visite, dernière version d'Android du 11/11) est chez les testeurs, examen accepté ; la 1002.479 expirée, restent 844.344 et 1003.480. Elle tient lieu d'examen bêta de la nuit. | — |
+| 12/11 02:00 | suivi d'Android v1004 | Android v1004 : dans Tendances, le détail d'un jour suit la mesure affichée (pas de lectures du visage sous Sommeil ou Pas) ; un lien pas assez net est hachuré, comme dans Analyses. La session a manqué de place disque cette nuit (copies des captures accumulées) : nettoyée, rien de perdu. Parité : 67 % (31/46) | PR v1004 |
 
 ---
 
@@ -423,9 +425,13 @@ chaque étape pas à pas, avec les valeurs exactes à saisir, au moment où elle
 
 - **GitHub** : outils `mcp__github__*` s'ils sont présents, sinon `gh api` en REST (pas de GraphQL). Artefacts d'un
   run : `gh api repos/spreadzenox/HealthTrack-iOS/actions/runs/<id>/artifacts` puis `…/artifacts/<id>/zip`.
-- **Captures iOS** : le workflow les pousse sur la branche `captures/pr-<N>` (PR) ou `captures/main` ; les lire avec
-  `git fetch origin captures/pr-<N>:refs/remotes/origin/captures/pr-<N>` puis `git show origin/captures/pr-<N>:<fichier>`
-  (le téléchargement des artefacts peut être bloqué par le réseau de la session).
+- **Captures iOS** : le workflow les pousse sur la branche `captures/pr-<N>` (PR) ou `captures/main` ; les lire **fichier
+  par fichier par l'API**, sans `git fetch` : liste avec `gh api repos/spreadzenox/HealthTrack-iOS/git/trees/captures/pr-<N>
+  -q '.tree[].path'`, fichier avec `gh api "repos/spreadzenox/HealthTrack-iOS/contents/<fichier>?ref=captures/pr-<N>" -H
+  "Accept: application/vnd.github.raw" > <copie>` (le téléchargement des artefacts peut être bloqué par le réseau de la
+  session). 12/11 : les `git fetch` de ces branches, réécrites à chaque build, avaient rempli le disque de la session
+  (15 Go d'objets, dont 6,6 Go d'un envoi interrompu) ; nettoyé (`git gc`), et les copies de captures du bloc-notes
+  effacées après lecture.
 - **Attendre la CI** sans boucle active : outil Monitor (`until` sur les check-runs) ou abonnement à la PR.
 - **Vérification visuelle web** : dans `upstream/app`, `npm run visual` (options en tête de
   `scripts/visual/visual-check.mjs`), avec `VITE_DISTRIBUTION=appstore` ; pour iOS, captures du simulateur produites

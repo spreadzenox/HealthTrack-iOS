@@ -14,7 +14,7 @@ sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pa
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
-**Dernière version Android suivie** : v1003 (commit `f77151f`, 12/11/2026), voir `upstream.json`.
+**Dernière version Android suivie** : v1004 (commit `5d7d0cf`, 12/11/2026), voir `upstream.json`.
 
 ## 1. Socle
 
@@ -104,6 +104,7 @@ Une ligne par livraison Android reportée ici (date, PR `[Auto]`, ce que ça cha
 
 | Date | PR Android | Ce que ça demande côté iOS | État |
 |---|---|---|---|
+| 12/11 02:00 | #926 (v1004) | #926 (POLISH-SIM-34) : Tendances, sous Sommeil ou Pas seuls, le détail d'un jour ne montre plus les lectures du visage ni « Ce qui a pu peser » ; dans « Ce qui a pu peser », un lien pas assez net est hachuré, chiffre en gris, comme dans Analyses (`TrendsDayDetail.jsx`, `TrendsViewer.jsx`, `Trends.jsx`, `analysisResults.js`). Code partagé, valable sur iPhone. 52 correctifs sans retouche (dont 56, mesures de Tendances) | ✅ |
 | 12/11 00:00 | #924 (v1003) | #924 (POLISH-SIM-39) : dans la visite, le bouton dit « Exemple au jour 14 », et l'exemple compte 14 jours notés pour la digestion (`GuidedTour.jsx`, `tour.js`, `tourData.js`). Code partagé, valable sur iPhone. 52 correctifs sans retouche (dont celui de l'outil des personas) | ✅ |
 | 11/11 23:00 | #922, #923 (v1001, v1002) | #922 (POLISH-SIM-37c) : visite guidée, l'étiquette « Exemple · données fictives » passe en tête de la bulle au lieu de recouvrir le haut de l'écran (`GuidedTour.jsx`, `.css`). #923 (POLISH-SIM-32) : le compteur des jours de digestion dit « pas forcément d'affilée », et Aujourd'hui compte tous les jours notés comme Analyses (`gutNotes.js`, `DigestBlock.jsx`, `Recommendations.jsx`). Code partagé, valable sur iPhone. 52 correctifs sans retouche | ✅ |
 | 11/11 20:00 | #921 (v1000) | #921 (POLISH-SIM-37b) : sans l'objectif « Ma digestion », l'exemple de la digestion n'affiche plus « Le suivi digestif est masqué » au-dessus des données fictives ; le bandeau revient à la fin de l'exemple (`Recommendations.jsx`). Code partagé, valable sur iPhone. Première version à quatre chiffres : builds 1000.x comparées en nombres dans nos scripts de TestFlight (tests ajoutés). 52 correctifs sans retouche | ✅ |
