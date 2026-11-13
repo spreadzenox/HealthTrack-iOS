@@ -112,6 +112,23 @@ export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = S
   ]
 }
 
+// Taille du texte d'iOS agrandie (3e passage de scripts/ios-captures.sh, `simctl ui content_size`) : le natif agrandit
+// la police de <html> avant le premier rendu (TextSize.swift) ; l'accueil vierge puis quelques pages de démo, sans sondes
+export const LARGE_TEXT_ROUTES = ['/', '/journal', '/tendances', '/recommendations', '/agir', '/connectors', '/settings']
+
+export function textSizeAdjusted(doc = document) {
+  const style = doc?.documentElement?.style
+  const percent = parseFloat(style?.getPropertyValue?.('font-size'))
+  return Number.isFinite(percent) && percent > 100
+}
+
+export function largeTextPlan(routes = LARGE_TEXT_ROUTES) {
+  return [
+    { name: 'vierge-onboarding', route: null, data: null, theme: null },
+    ...routes.map((route) => ({ name: `demo-clair-${pageName(route)}`, route, data: 'demo', theme: 'light' })),
+  ]
+}
+
 async function prepare(step, { storage, demoEntries, latestChangelogId, localStorage }) {
   if (step.onboarding) localStorage.setItem('healthtrack_onboarding', JSON.stringify(step.onboarding))
   // Comme au sortir de l'onboarding : fait, Nouveautés vues
@@ -325,7 +342,8 @@ export async function installCaptureMode() {
     ])
     const file = { directory: Directory.Documents, encoding: Encoding.UTF8 }
     const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
-    const plan = buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS)
+    const largeText = textSizeAdjusted()
+    const plan = largeText ? largeTextPlan() : buildPlan(ROUTES, DARK_ROUTES, SCROLLS, REVEALS, MORE_ONBOARDING, EMPTY_ROUTES, EMPTY_SCROLLS)
     const step = plan[Number(window.localStorage.getItem(STEP_KEY) ?? 0)]
     if (step?.data === 'demo') installPhoneUsageFake()
     if (needsBillingFake(step)) installBillingFake()
@@ -346,7 +364,7 @@ export async function installCaptureMode() {
       readText: () => (document.body ? pageText(document.body) : ''),
       wait: sleep,
       signal: (name) => Filesystem.writeFile({ ...file, path: READY, data: name, recursive: true }),
-      probe: async (d) => {
+      probe: largeText ? null : async (d) => {
         await probeHealthKit(d)
         await probeGutEvening(d)
         await probeEveningNote(d)

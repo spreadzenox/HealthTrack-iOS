@@ -3,6 +3,8 @@ import Capacitor
 /// Vue principale de l'app (désignée par `Main.storyboard`) : enregistre les plugins écrits dans ce dépôt pour
 /// l'iPhone, qui remplacent ceux d'Android sous le même nom (`src/ios/nativePlugins.js` › `missingOnIos`).
 class HalcyaBridgeViewController: CAPBridgeViewController {
+    private var textSizeObserver: NSObjectProtocol?
+
     override func capacitorDidLoad() {
         bridge?.registerPluginInstance(GutEveningPlugin())
         bridge?.registerPluginInstance(EveningNotePlugin())
@@ -22,6 +24,8 @@ class HalcyaBridgeViewController: CAPBridgeViewController {
         // retour d'Android (Capacitor, sans écouteur `backButton` : `goBack()`). Persona du 13/11 : sans lui, Réglages,
         // Paramètres et Données n'avaient aucun moyen de revenir, hors roue dentée et onglets (`BackGestureTests`).
         webView?.allowsBackForwardNavigationGestures = true
+        // Taille du texte de l'iPhone suivie par la vue web, comme la taille de police d'Android (`TextSize`)
+        textSizeObserver = TextSize.follow(webView)
         // Capacitor devient le délégué des notifications : il relaie les gestes à ce gestionnaire
         bridge?.notificationRouter.localNotificationHandler = HalcyaNotificationHandler.shared
     }
