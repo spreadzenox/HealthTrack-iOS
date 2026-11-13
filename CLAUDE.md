@@ -1,5 +1,9 @@
 # HealthTrack-iOS — consignes pour toute session
 
+**Depuis le 13/11/2026, la version iPhone de Halcya vit dans `spreadzenox/HealthTrack`, dossier `iphone/`, avec une
+seule routine pour Android et l'iPhone. Ne rien développer ici** : ce dépôt ne reste ouvert que pour les tickets
+« Votre avis » de l'iPhone et pour les pages de la fiche App Store. Ce qui suit décrit l'ancien montage.
+
 Ce dépôt est la version iOS de Halcya. L'app elle-même (React + Vite + Capacitor) vit dans
 `spreadzenox/HealthTrack`, la version Android, que ce dépôt suit.
 

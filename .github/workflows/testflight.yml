@@ -11,10 +11,10 @@ name: iOS — TestFlight
 # TestFlight sans geste de personne, comme Android vers Alpha. Toute PR passe ses vérifications (dont la build iOS et les
 # captures) avant son merge sur main ; le journal, la fiche et le site n'envoient rien. Les testeurs internes la
 # reçoivent ; l'App Store reste le clic du propriétaire, jamais automatisé.
+# Depuis le 13/11/2026, les builds TestFlight partent de spreadzenox/HealthTrack (dossier iphone/, workflow
+# ios-testflight.yml) : plus de déclenchement sur un merge ici. Le lancement manuel reste possible pour un retour
+# arrière (iphone/fusion/BASCULE.md là-bas), tant que l'environnement « appstore » de ce dépôt garde ses secrets.
 on:
-  push:
-    branches: [main]
-    paths: ["upstream.json", "patches/**", "overlay/**", "ios/**", "scripts/upstream.sh", "scripts/face-models.sh"]
   workflow_dispatch:
 
 permissions:
