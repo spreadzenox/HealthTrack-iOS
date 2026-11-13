@@ -667,6 +667,17 @@
   - [x] **« d'habitude » de la SDNN dans le Journal** (même run, correctif 57) : la tuile « VFC (SDNN) » (clé `hrvDay`
     pour l'icône et la couleur) prend la norme `hrvSdnn` (`DailyJournal.jsx`, une ligne) ; « ↑ d'habitude » quand
     l'écart est net, comme la VFC nuit d'Android. Test `DailyJournal.ios.test.jsx` (échoue sans le correctif).
+  - [x] **13/11 06:00, geste de retour** (passage des personas du 13/11, persona 7 « Stressé et pressé ») : Réglages,
+    Paramètres et Données n'avaient aucun moyen de revenir sur iPhone hors roue dentée et onglets (pas de bouton retour
+    comme sur Android, pas de balayage dans la vue web) ; `allowsBackForwardNavigationGestures` dans
+    `HalcyaBridgeViewController` (balayage depuis le bord gauche = `goBack()`, comme le bouton retour d'Android),
+    XCTest `BackGestureTests` (vert sur #496), note de Nouveautés iPhone ; à essayer sur l'iPhone 12.
+  - [ ] « Autre moyen : un ticket GitHub » sous « Votre avis » (correctif 27) : mot technique pour un testeur d'iPhone
+    (persona 7) ; à la sortie sur l'App Store, le remplacer par la page de l'app sur l'App Store (« Noter »), ou le
+    retirer si le formulaire suffit.
+  - [ ] Contrôles « façon Android » relevés par la persona 7 (onglets soulignés, boutons radio et cases carrées,
+    fenêtres au milieu de l'écran plutôt qu'en feuille) : identité visuelle commune ; proposition avec maquette au
+    propriétaire seulement s'il le souhaite, jamais codé sans accord.
 - [ ] **INTÉGRATIONS (seule exception au mode polish)** — 8/11 09:00 : Android a commencé par Garmin et Samsung (INTEG-1,
   étude dans `journal/protocoles/garmin-samsung.md` d'Android) ; côté iPhone, Garmin arrive déjà par l'app Santé (configuration 9) ;
   à relire quand Android choisira une voie d'accès directe.
