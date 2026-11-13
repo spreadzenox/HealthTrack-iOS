@@ -67,9 +67,9 @@ run_ui_steps() { # <udid> <préfixe des fichiers> <page>
   done <<< "$steps"
 }
 
-run_device() { # <udid> <nom>
-  local udid="$1" name="$2" dev log pid seen=0 deadline
-  dev="$(echo "$name" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')"
+run_device() { # <udid> <nom> [taille du texte d'iOS, pour le passage en grand texte]
+  local udid="$1" name="$2" size="${3:-}" dev log pid seen=0 deadline
+  dev="$(echo "$name" | tr ' ' '-' | tr '[:upper:]' '[:lower:]')${size:+-grand-texte}"
   log="$OUT/$dev-console.txt"
   echo "== $name ($udid)"
   xcrun simctl boot "$udid" 2>/dev/null || true
@@ -82,11 +82,15 @@ run_device() { # <udid> <nom>
   xcrun simctl boot "$udid"
   xcrun simctl bootstatus "$udid" -b >/dev/null
   xcrun simctl ui "$udid" appearance light
+  # Taille du texte d'iOS (la vue web la suit, TextSize.swift) : par défaut (« Grand »), sauf au passage en grand texte
+  xcrun simctl ui "$udid" content_size "${size:-large}" || true
   # Fiche App Store : barre d'état propre, comme sur les captures d'Apple (9:41, batterie pleine, réseau plein)
   if [ -n "${CAPTURE_DEVICES:-}" ]; then
     xcrun simctl status_bar "$udid" override --time "9:41" --batteryState charged --batteryLevel 100 \
       --wifiMode active --wifiBars 3 --cellularMode active --cellularBars 4 || true
   fi
+  # Passage en grand texte : app neuve, le plan des captures repart de zéro (largeTextPlan de captureMode.js)
+  [ -z "$size" ] || xcrun simctl uninstall "$udid" "$BUNDLE" 2>/dev/null || true
   xcrun simctl install "$udid" "$APP"
   # Écran d'accueil de l'iPhone juste après l'installation : icône et nom « Halcya » (I1, à vérifier sur l'accueil)
   sleep 3
@@ -128,11 +132,14 @@ run_device() { # <udid> <nom>
   # Données (I3) : la copie de secours s'écrit 10 s après le dernier chargement ; où WKWebView range IndexedDB
   sleep 12
   { echo "== Documents"; ls -la "$data/Documents"; echo "== Documents/Copie de secours"; ls -la "$data/Documents/Copie de secours"; echo "== Library/WebKit"; find "$data/Library/WebKit" -maxdepth 6 2>/dev/null | sed "s|$data/||" | head -60; } > "$OUT/$dev-donnees.txt" 2>&1
-  # La copie est vue par la sonde [sauvegarde], avant « Supprimer toutes mes données » qui l'efface (dossier vide ensuite)
-  if grep -a '\[sauvegarde\] Documents/Copie de secours {' "$log" | grep -qE '"files":[1-9]'; then echo "copie de secours : présente (sonde [sauvegarde])"
+  # La copie est vue par la sonde [sauvegarde], avant « Supprimer toutes mes données » qui l'efface (dossier vide ensuite) ;
+  # pas de sonde au passage en grand texte
+  if [ -n "$size" ]; then :
+  elif grep -a '\[sauvegarde\] Documents/Copie de secours {' "$log" | grep -qE '"files":[1-9]'; then echo "copie de secours : présente (sonde [sauvegarde])"
   else echo "::warning::$name : pas de copie de secours dans Documents/Copie de secours (sonde [sauvegarde])"; fi
   # Copie de secours hors de la sauvegarde iCloud (directive 5.1.3 (ii), décision du 1/11) : dossier marqué exclu
-  if grep -a '\[sauvegarde\] Documents/Copie de secours {' "$log" | grep -q '"excluded":true'; then echo "copie de secours : exclue de la sauvegarde iCloud"
+  if [ -n "$size" ]; then :
+  elif grep -a '\[sauvegarde\] Documents/Copie de secours {' "$log" | grep -q '"excluded":true'; then echo "copie de secours : exclue de la sauvegarde iCloud"
   else echo "::error::$name : le dossier de la copie de secours n'est pas exclu de la sauvegarde iCloud (sonde [sauvegarde])"; fi
   xcrun simctl terminate "$udid" "$BUNDLE" 2>/dev/null || true
   sleep 1; kill "$pid" 2>/dev/null || true
@@ -141,6 +148,9 @@ run_device() { # <udid> <nom>
 
 [ -z "$SMALL" ] || run_device "${SMALL%% *}" "${SMALL#* }"
 [ -z "$LARGE" ] || run_device "${LARGE%% *}" "${LARGE#* }"
+# Taille du texte d'iOS en très grand (« extra-extra-extra-large », la plus grande hors accessibilité : texte × 1,35),
+# sur le petit iPhone (390 points, comme l'iPhone 12) : quelques pages, hors captures de la fiche
+[ -n "${CAPTURE_DEVICES:-}" ] || [ -z "$SMALL" ] || run_device "${SMALL%% *}" "${SMALL#* }" extra-extra-extra-large
 
 # Erreurs JavaScript relayées par Capacitor (« ⚡️  [error] - … ») et exceptions non rattrapées
 grep -hE "\[error\]|Unhandled|TypeError|ReferenceError|SyntaxError|JS ERROR" "$OUT"/*-console.txt > "$OUT/js-errors.txt" || true
