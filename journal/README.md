@@ -81,7 +81,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
   nouvel accueil ; premiers passages des personas sur iPhone ; panne de GitHub du 8/11 surmontée (paquets gardés en
   cache) ; examen bêta de la 918 bloqué par la 896 (détail dans `semaines/2026-S45.md`).
 - **Cette semaine, polish sur iPhone** : temps d'écran pas proposé à l'accueil avant iOS 26.4 ; la VFC de l'app Santé
-  (Apple Watch) a sa couleur dans le Journal, sa courbe dans Tendances et son « d'habitude » sur Aujourd'hui ; l'iPhone
+  (Apple Watch) a sa couleur dans le Journal, sa courbe dans Tendances et son « d'habitude » sur Aujourd'hui ; on revient
+  en arrière en balayant depuis le bord gauche de l'écran, comme ailleurs sur l'iPhone (13/11, trouvé par une persona) ; l'iPhone
   a suivi Android jusqu'à la v937.
 
 **Runs de la semaine**
@@ -192,6 +193,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 13/11 03:00 | attente | Rien de neuf chez Android ; l'iPhone reste au même niveau (**1019.498** chez les testeurs). Parité : 67 % (31/46) | PR du journal |
 | 13/11 04:00 | attente | Rien de neuf chez Android ; l'iPhone reste au même niveau (**1019.498** chez les testeurs). Parité : 67 % (31/46) | PR du journal |
 | 13/11 05:00 | attente | Rien de neuf chez Android depuis hier 18:06 (11 h, inhabituel : signalé à l'orchestrateur) ; l'iPhone reste au même niveau (**1019.498** chez les testeurs). Parité : 67 % (31/46) | PR du journal |
+| 13/11 06:00 | personas du jour ; geste de retour | une persona « stressée et pressée » (iPhone + Apple Watch, 14e jour) a joué la version des testeurs : la note du jour en 4 touchers lui plaît, mais l'app ne lui dit ni comment elle va ni quoi faire contre le stress (9 constats transmis à Android). Propre à l'iPhone : aucun moyen de revenir depuis Réglages, Paramètres et Données → corrigé : on revient en balayant depuis le bord gauche de l'écran (test sur simulateur vert). Parité : 67 % (31/46) | #496 |
 
 ---
 
