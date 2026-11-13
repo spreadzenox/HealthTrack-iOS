@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1019 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1019.510 chez les testeurs externes** (13/11, 07:21 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1019.510 depuis le 13/11, 07:21) |
+| Dernière version | v1019 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1019.513 chez les testeurs externes** (13/11, 10:29 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1019.513 depuis le 13/11, 10:29) |
 | Parité des fonctions | référence | **68 %** (32 fonctions vérifiées sur 47 faisables ; taille du texte ajoutée le 13/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -196,7 +196,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 13/11 07:00 | geste de retour livré | le retour par balayage est mergé et chez les testeurs : **1019.510** depuis 07:21 (accord d'Apple immédiat), l'ancienne 1019.498 expirée ; restent 844.344 (votre soumission) et 1019.510. Android n'a toujours rien publié depuis hier 18:06. Parité : 67 % (31/46) | #496, PR du journal |
 | 13/11 08:00 | taille du texte de l'iPhone | Android n'a toujours rien publié ; j'ai repris un écart connu depuis le 4/11 : sur Android, Halcya suit la taille du texte choisie dans le téléphone, sur iPhone non. Correction en cours de vérification sur simulateur (captures en très grand texte) ; elle partira aux testeurs ensuite. Parité : 67 % (31/46) | #499 (en cours) |
 | 13/11 09:00 | taille du texte, 2e essai | les captures en très grand texte montraient deux onglets du Journal qui se chevauchent et « Aujourd'hui » coupé dans la barre du bas : j'agrandis maintenant le texte de la même façon qu'Android, pour que ses réglages de mise en page jouent aussi sur iPhone. Nouvelle vérification sur simulateur en cours. Parité : 67 % (31/46) | #499 (en cours) |
-| 13/11 10:00 | taille du texte livrée | vérifiée sur simulateur en très grand texte (onglets, barre du bas, réglages : tout tient) et mergée ; elle part chez les testeurs. Halcya suit maintenant la taille du texte réglée dans l'iPhone, comme sur Android. Android n'a toujours rien publié. Parité : 68 % (32/47) | #499 |
+| 13/11 10:00 | taille du texte livrée | vérifiée sur simulateur en très grand texte (onglets, barre du bas, réglages : tout tient) et mergée ; chez les testeurs depuis 10:29 (**1019.513**, l'ancienne 1019.510 expirée). Halcya suit maintenant la taille du texte réglée dans l'iPhone, comme sur Android. Android n'a toujours rien publié. Parité : 68 % (32/47) | #499 |
 
 ---
 
