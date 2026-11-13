@@ -112,13 +112,13 @@ export function buildPlan(routes = ROUTES, darkRoutes = DARK_ROUTES, scrolls = S
   ]
 }
 
-// Taille du texte d'iOS agrandie (3e passage de scripts/ios-captures.sh, `simctl ui content_size`) : le natif la pose
-// sur <html> avant le premier rendu (TextSize.swift) ; l'accueil vierge puis quelques pages de démo, sans sondes
+// Taille du texte d'iOS agrandie (3e passage de scripts/ios-captures.sh, `simctl ui content_size`) : le natif agrandit
+// la police de <html> avant le premier rendu (TextSize.swift) ; l'accueil vierge puis quelques pages de démo, sans sondes
 export const LARGE_TEXT_ROUTES = ['/', '/journal', '/tendances', '/recommendations', '/agir', '/connectors', '/settings']
 
 export function textSizeAdjusted(doc = document) {
   const style = doc?.documentElement?.style
-  const percent = parseFloat(style?.getPropertyValue?.('-webkit-text-size-adjust') || style?.webkitTextSizeAdjust)
+  const percent = parseFloat(style?.getPropertyValue?.('font-size'))
   return Number.isFinite(percent) && percent > 100
 }
 

@@ -3,7 +3,9 @@ import WebKit
 
 /// Taille du texte choisie dans l'iPhone (Réglages › Luminosité et affichage › Taille du texte, ou Accessibilité ›
 /// Affichage et taille du texte) : la vue web la suit, comme la WebView d'Android suit la taille de police du système.
-/// Seul le texte grandit (`-webkit-text-size-adjust` sur `<html>`, comme le zoom du texte d'Android), pas les marges.
+/// Comme le zoom du texte d'Android, qui agrandit le rem (`useNarrowBox.js` d'Android), la taille de police de `<html>`
+/// est multipliée : les plafonds des mises en page communes (`min(1em, 17cqi)` des onglets…) jouent pareil.
+/// (`-webkit-text-size-adjust`, essayé d'abord, multipliait le texte après ces plafonds : onglets qui se chevauchent.)
 enum TextSize {
     /// Corps de texte d'iOS à la taille par défaut (« Grand ») : 17 pt.
     static let defaultBody: CGFloat = 17
@@ -16,10 +18,10 @@ enum TextSize {
         return min(body / defaultBody, maximum)
     }
 
-    /// Pourcentage entier sur `<html>`, hérité par tout le texte (fenêtres et feuilles comprises).
+    /// Pourcentage entier de la taille de police de `<html>` (16 px par défaut, aucune taille fixée par l'app).
     static func script(for category: UIContentSizeCategory) -> String {
         let percent = Int((scale(for: category) * 100).rounded())
-        return "document.documentElement.style.setProperty('-webkit-text-size-adjust', '\(percent)%')"
+        return "document.documentElement.style.setProperty('font-size', '\(percent)%')"
     }
 
     /// Avant le premier rendu de chaque chargement (rien à la taille par défaut), puis à chaque changement dans les

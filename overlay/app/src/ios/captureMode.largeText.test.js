@@ -2,11 +2,11 @@ import { describe, it, expect } from 'vitest'
 import { largeTextPlan, LARGE_TEXT_ROUTES, textSizeAdjusted } from './captureMode'
 
 // 3e passage de scripts/ios-captures.sh : taille du texte d'iOS agrandie (`simctl ui content_size`), appliquée par le
-// natif (TextSize.swift) avant le premier rendu ; quelques pages de démo, sans sondes ni tests d'interface
+// natif (TextSize.swift, police de <html>) avant le premier rendu ; quelques pages de démo, sans sondes
 describe('captures en grand texte', () => {
-  it('reconnaît la taille agrandie posée par le natif sur <html>', () => {
+  it('reconnaît la police agrandie posée par le natif sur <html>', () => {
     // Comme dans WebKit : la propriété lue par getPropertyValue (posée par setProperty côté natif)
-    const doc = (value) => ({ documentElement: { style: { getPropertyValue: (name) => (name === '-webkit-text-size-adjust' ? value ?? '' : '') } } })
+    const doc = (value) => ({ documentElement: { style: { getPropertyValue: (name) => (name === 'font-size' ? value ?? '' : '') } } })
     expect(textSizeAdjusted(doc('135%'))).toBe(true)
     expect(textSizeAdjusted(doc('100%'))).toBe(false)
     expect(textSizeAdjusted(doc(''))).toBe(false)
