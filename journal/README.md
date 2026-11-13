@@ -190,6 +190,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 13/11 01:00 | attente | Android n'a rien publié depuis la v1019 (12/11) ; l'iPhone est au même niveau (**1019.498** chez les testeurs). Rien à faire cette heure. Parité : 67 % (31/46) | PR du journal |
 | 13/11 02:00 | attente | Rien de neuf chez Android ; l'iPhone reste au même niveau (**1019.498** chez les testeurs). Parité : 67 % (31/46) | PR du journal |
 | 13/11 03:00 | attente | Rien de neuf chez Android ; l'iPhone reste au même niveau (**1019.498** chez les testeurs). Parité : 67 % (31/46) | PR du journal |
+| 13/11 04:00 | attente | Rien de neuf chez Android ; l'iPhone reste au même niveau (**1019.498** chez les testeurs). Parité : 67 % (31/46) | PR du journal |
 
 ---
 
