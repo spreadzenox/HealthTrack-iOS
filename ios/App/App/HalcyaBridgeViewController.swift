@@ -18,6 +18,10 @@ class HalcyaBridgeViewController: CAPBridgeViewController {
         #if DEBUG
         bridge?.registerPluginInstance(CaptureProbePlugin()) // build de captures seulement
         #endif
+        // Geste de retour de l'iPhone : balayer depuis le bord gauche remonte l'historique de la vue web, comme le bouton
+        // retour d'Android (Capacitor, sans écouteur `backButton` : `goBack()`). Persona du 13/11 : sans lui, Réglages,
+        // Paramètres et Données n'avaient aucun moyen de revenir, hors roue dentée et onglets (`BackGestureTests`).
+        webView?.allowsBackForwardNavigationGestures = true
         // Capacitor devient le délégué des notifications : il relaie les gestes à ce gestionnaire
         bridge?.notificationRouter.localNotificationHandler = HalcyaNotificationHandler.shared
     }
