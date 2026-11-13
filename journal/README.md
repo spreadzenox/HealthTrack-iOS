@@ -12,7 +12,7 @@
 |---|---|---|
 | Dernière version | v1019 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1019.510 chez les testeurs externes** (13/11, 07:21 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1019.510 depuis le 13/11, 07:21) |
-| Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
+| Parité des fonctions | référence | **68 %** (32 fonctions vérifiées sur 47 faisables ; taille du texte ajoutée le 13/11) |
 
 **👉 Prochaine action du propriétaire**
 - **Quand vous voulez (3 min)** : dans Chrome, connecté à App Store Connect, dites à Claude **« fais la mission PI1 »**
@@ -59,8 +59,6 @@
 https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 
 **Ce qui ne pourra pas marcher pareil sur iPhone** (à confirmer, détail dans `PARITE.md`)
-- **Taille du texte réglée dans iOS** : Halcya ne la suit pas encore (Android, si) ; possible sur iPhone, prévu après
-  la soumission.
 - Lecture du visage **au déverrouillage** : iOS ne laisse pas une app utiliser la caméra en arrière-plan → lecture à
   l'ouverture de l'app (comme la version Google Play actuelle), raccourci ou widget à étudier.
 - **Temps d'écran** du téléphone : possible seulement **dans l'Union européenne, avec iOS 26.4 ou plus** (règle
@@ -82,7 +80,8 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
   cache) ; examen bêta de la 918 bloqué par la 896 (détail dans `semaines/2026-S45.md`).
 - **Cette semaine, polish sur iPhone** : temps d'écran pas proposé à l'accueil avant iOS 26.4 ; la VFC de l'app Santé
   (Apple Watch) a sa couleur dans le Journal, sa courbe dans Tendances et son « d'habitude » sur Aujourd'hui ; on revient
-  en arrière en balayant depuis le bord gauche de l'écran, comme ailleurs sur l'iPhone (13/11, trouvé par une persona) ; l'iPhone
+  en arrière en balayant depuis le bord gauche de l'écran, comme ailleurs sur l'iPhone (13/11, trouvé par une persona) ; Halcya suit la
+  taille du texte réglée dans l'iPhone, comme sur Android (13/11) ; l'iPhone
   a suivi Android jusqu'à la v937.
 
 **Runs de la semaine**
@@ -197,6 +196,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 13/11 07:00 | geste de retour livré | le retour par balayage est mergé et chez les testeurs : **1019.510** depuis 07:21 (accord d'Apple immédiat), l'ancienne 1019.498 expirée ; restent 844.344 (votre soumission) et 1019.510. Android n'a toujours rien publié depuis hier 18:06. Parité : 67 % (31/46) | #496, PR du journal |
 | 13/11 08:00 | taille du texte de l'iPhone | Android n'a toujours rien publié ; j'ai repris un écart connu depuis le 4/11 : sur Android, Halcya suit la taille du texte choisie dans le téléphone, sur iPhone non. Correction en cours de vérification sur simulateur (captures en très grand texte) ; elle partira aux testeurs ensuite. Parité : 67 % (31/46) | #499 (en cours) |
 | 13/11 09:00 | taille du texte, 2e essai | les captures en très grand texte montraient deux onglets du Journal qui se chevauchent et « Aujourd'hui » coupé dans la barre du bas : j'agrandis maintenant le texte de la même façon qu'Android, pour que ses réglages de mise en page jouent aussi sur iPhone. Nouvelle vérification sur simulateur en cours. Parité : 67 % (31/46) | #499 (en cours) |
+| 13/11 10:00 | taille du texte livrée | vérifiée sur simulateur en très grand texte (onglets, barre du bas, réglages : tout tient) et mergée ; elle part chez les testeurs. Halcya suit maintenant la taille du texte réglée dans l'iPhone, comme sur Android. Android n'a toujours rien publié. Parité : 68 % (32/47) | #499 |
 
 ---
 

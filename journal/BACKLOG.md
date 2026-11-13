@@ -778,12 +778,13 @@
   Depuis Android v784 (AVIS-RELAIS-3), le résumé anonyme quotidien (`journal/AVIS.md` d'Android, lu sans y toucher)
   compte les avis par variante : la ligne `ios` dira si les avis de l'iPhone arrivent. Relais déployé (bilan
   d'Android du 5/11, #702) : 0 avis au premier résumé.
-- **Taille du texte d'iOS** (écart vu avec Android v771, FONT-SCALE-1) : sur Android, la WebView suit la taille de
-  police du système ; sur iPhone, la WebView ne suit ni Dynamic Type ni « Taille du texte » (Réglages → Luminosité et
-  affichage). Pistes : plugin officiel `@capacitor/text-zoom` (licence MIT, à vérifier) qui applique la préférence
-  d'iOS, ou police `-apple-system-body` à la racine. Touche toutes les mises en page : après la soumission, avec des
-  captures en grande taille sur l'iPhone 12 simulé ; ensuite, la note d'Android du 4/11 (`grande-police`) pourra
-  revenir sur iPhone.
+- [x] **Taille du texte d'iOS** (écart vu avec Android v771, FONT-SCALE-1) — **fait le 13/11 (#499)** : la police de
+  `<html>` suit la taille du texte d'iOS (`TextSize.swift`, plafond × 2 comme Android, suivie sans relancer l'app), comme
+  la WebView d'Android agrandit le rem ; XCTest `TextSizeTests` ; 3e passage de captures en très grand texte (× 1,35)
+  sur le petit iPhone à chaque build (+12 min). Écarté : `-webkit-text-size-adjust` (texte multiplié après les plafonds
+  `min(1em, …cqi)` d'Android). Les notes « grande police » d'Android
+  (4, 6 et 9/11) restent masquées sur iPhone (correctif 28 : antérieures) ; la note iPhone du 13/11 les résume. À essayer
+  sur l'iPhone 12 (Réglages › Luminosité et affichage › Taille du texte).
 - « FC nuit » sur iPhone (Android v746, MONTRE-SCORE) : Android l'affiche dans « Vos derniers jours » à partir du
   résumé de nuit de la montre Huawei en direct ; sur iPhone, la même pastille pourrait se calculer avec les mesures de
   cœur de l'app Santé prises pendant la nuit (Apple Watch, Huawei Santé). Ce serait un calcul propre à l'iPhone (une

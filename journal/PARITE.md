@@ -8,12 +8,13 @@
 Légende : ✅ fait et vérifié sur iOS (preuve : capture, test ou workflow) · 🟡 partiel ou pas encore vérifié ·
 ❌ manquant · ⛔ impossible sur iOS (raison + source datée + alternative) · — sans objet sur iOS.
 
-**Parité** : **67 %** au 2/11 05:00 (30 ✅ sur 45 lignes faisables des sections 1 à 4 ; 53 lignes, dont 1 ⛔ et 7 —
+**Parité** : **68 %** au 13/11 ; 67 % au 2/11 05:00 (30 ✅ sur 45 lignes faisables des sections 1 à 4 ; 53 lignes, dont 1 ⛔ et 7 —
 exclues ; 8 🟡, 3 🔬, 2 ❌ et 2 « dépend » comptent parmi les faisables) = ✅ / (toutes les lignes des sections 1 à 4
 sauf ⛔ et —). Calcul : compter la colonne « État » ; un 🟡 ne compte pas tant qu'il n'est pas vérifié sur iOS. Le 2/11,
 recompte ligne par ligne (l'ancien total, 48 %, datait du 31/10 et ne suivait plus les lignes) et dix lignes remises
 à jour avec leur preuve : achat ouvert (#184), A5 fait, TestFlight à chaque version, fiche complète ; rappel d'essai
 sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision « Ok cycle ») : 31 sur 46, toujours 67 %.
+13/11 : ligne « Taille du texte du système » ajoutée (✅, #499) : 32 sur 47, **68 %**.
 **Dernière version Android suivie** : v1019 (commit `340bbe1`, 12/11/2026), voir `upstream.json`.
 
 ## 1. Socle
@@ -26,6 +27,7 @@ sans objet (Android #612). 10/11 : ligne « Cycle » ajoutée (✅, décision «
 | Nom « Halcya », icône « H nuit », écran de démarrage | ✅ | `CFBundleDisplayName` Halcya, AppIcon 1024 opaque et écran de démarrage encre générés depuis le glyphe d'Android (`scripts/ios-icons.mjs`) | ✅ | à vérifier sur l'écran d'accueil d'un simulateur ; 29/10 (PR #56) : **icône et nom « Halcya » vus sur l'écran d'accueil** des deux iPhone simulés (capture après l'installation) ; l'écran de démarrage, pris à 0,6 s, montrait encore l'accueil d'iOS : prises à 1,2 et 2 s (PR #57) ; écran de démarrage : prises à 1,2 et 2 s (PR #57), l'accueil d'iOS encore affiché au premier lancement ; l'image de démarrage (`Splash`, le H sur fond encre #10231D) regardée dans le projet dont l'app est construite ; captures du démarrage retirées |
 | Variante de distribution | `play` | `appstore` (`patches/01-variante-appstore.patch`) | ✅ | comme play (relais IA, visage à l'ouverture, pas d'auto-mise à jour), sans abonnement jusqu'à I6 ; tests `overlay/…/distribution.appstore.test.js` |
 | Zones sûres, barres système | `SystemBarsPlugin`, `--safe-top/--safe-bottom` | encoche / Dynamic Island / indicateur d'accueil | ✅ | onboarding et Accueil corrects sur 16e et 17 Pro (27/10) ; bas de l'onboarding sur 390 × 844 à revoir (I2). Thème : clair par défaut comme Android, le sombre est un réglage de l'app (pas un défaut) ; 27/10 : en-tête sous la barre d'état et la Dynamic Island, barre d'onglets au-dessus de l'indicateur d'accueil, icônes de la barre d'état lisibles en sombre (captures iPhone 16e et 17 Pro, PR #5) ; 13/11 : retour par balayage depuis le bord gauche, comme le bouton retour d'Android (`allowsBackForwardNavigationGestures`, PR #496, XCTest `BackGestureTests`), à essayer sur l'iPhone 12 |
+| Taille du texte du système | WebView : la police suit celle d'Android (le rem grandit, `useNarrowBox.js`) | `TextSize.swift` : la police de `<html>` suit la taille du texte d'iOS (Dynamic Type), plafond × 2 comme Android, suivie sans relancer l'app | ✅ | écart noté le 4/11 (Android v771, FONT-SCALE-1) ; 13/11 : #499, XCTest `TextSizeTests`, captures en très grand texte (× 1,35, iPhone 16e) : onglets du Journal, barre du bas, Paramètres, Sources, Tendances, accueil vierge corrects ; 1er essai avec `-webkit-text-size-adjust` écarté (texte multiplié après les plafonds `min(1em, …cqi)` d'Android : onglets qui se chevauchaient) |
 | Mise à jour de l'app | Play Store | App Store | — | pas de bandeau de mise à jour |
 
 ## 2. Écrans (code web partagé : arrivent avec le socle, à vérifier en captures)
