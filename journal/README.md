@@ -12,7 +12,7 @@
 |---|---|---|
 | Dernière version | v1019 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1019.513 chez les testeurs externes** (13/11, 10:29 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
 | Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1019.513 depuis le 13/11, 10:29) |
-| Parité des fonctions | référence | **68 %** (32 fonctions vérifiées sur 47 faisables ; taille du texte ajoutée le 13/11) |
+| Parité des fonctions | référence | **70 %** (33 fonctions vérifiées sur 47 faisables ; 13/11 : taille du texte, test fermé TestFlight recompté) |
 
 **👉 Prochaine action du propriétaire**
 - **Quand vous voulez (3 min)** : dans Chrome, connecté à App Store Connect, dites à Claude **« fais la mission PI1 »**
@@ -197,6 +197,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 13/11 08:00 | taille du texte de l'iPhone | Android n'a toujours rien publié ; j'ai repris un écart connu depuis le 4/11 : sur Android, Halcya suit la taille du texte choisie dans le téléphone, sur iPhone non. Correction en cours de vérification sur simulateur (captures en très grand texte) ; elle partira aux testeurs ensuite. Parité : 67 % (31/46) | #499 (en cours) |
 | 13/11 09:00 | taille du texte, 2e essai | les captures en très grand texte montraient deux onglets du Journal qui se chevauchent et « Aujourd'hui » coupé dans la barre du bas : j'agrandis maintenant le texte de la même façon qu'Android, pour que ses réglages de mise en page jouent aussi sur iPhone. Nouvelle vérification sur simulateur en cours. Parité : 67 % (31/46) | #499 (en cours) |
 | 13/11 10:00 | taille du texte livrée | vérifiée sur simulateur en très grand texte (onglets, barre du bas, réglages : tout tient) et mergée ; chez les testeurs depuis 10:29 (**1019.513**, l'ancienne 1019.510 expirée). Halcya suit maintenant la taille du texte réglée dans l'iPhone, comme sur Android. Android n'a toujours rien publié. Parité : 68 % (32/47) | #499 |
+| 13/11 11:00 | parité recomptée | deux lignes du tableau de parité étaient en retard : le test externe sur TestFlight (en place depuis le 9/11) compte maintenant comme fait ; la protection des crédits IA de l'iPhone est prête mais reste à essayer sur un vrai iPhone. Parité : **70 %** (33/47). Android n'a toujours rien publié | PR du journal |
 
 ---
 
