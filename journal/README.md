@@ -10,8 +10,8 @@
 
 | | Android (Google Play) | iOS (App Store) |
 |---|---|---|
-| Dernière version | v1019 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1019.498 chez les testeurs externes** (12/11, 19:34 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
-| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1019.498 depuis le 12/11, 19:34) |
+| Dernière version | v1019 suivie (12/11) ; Alpha 100918 (nouvel accueil) chez les testeurs, en examen chez Google | **1019.510 chez les testeurs externes** (13/11, 07:21 ; déploiement continu) ; **844.344 reste attachée à la version 844 pour votre soumission** |
+| Où l'installer | Play Store, test fermé | **TestFlight** : groupe interne, et lien public du groupe « Testeurs Halcya » (1019.510 depuis le 13/11, 07:21) |
 | Parité des fonctions | référence | **67 %** (31 fonctions vérifiées sur 46 faisables ; cycle ajouté le 10/11) |
 
 **👉 Prochaine action du propriétaire**
@@ -194,6 +194,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 13/11 04:00 | attente | Rien de neuf chez Android ; l'iPhone reste au même niveau (**1019.498** chez les testeurs). Parité : 67 % (31/46) | PR du journal |
 | 13/11 05:00 | attente | Rien de neuf chez Android depuis hier 18:06 (11 h, inhabituel : signalé à l'orchestrateur) ; l'iPhone reste au même niveau (**1019.498** chez les testeurs). Parité : 67 % (31/46) | PR du journal |
 | 13/11 06:00 | personas du jour ; geste de retour | une persona « stressée et pressée » (iPhone + Apple Watch, 14e jour) a joué la version des testeurs : la note du jour en 4 touchers lui plaît, mais l'app ne lui dit ni comment elle va ni quoi faire contre le stress (9 constats transmis à Android). Propre à l'iPhone : aucun moyen de revenir depuis Réglages, Paramètres et Données → corrigé : on revient en balayant depuis le bord gauche de l'écran (test sur simulateur vert). Parité : 67 % (31/46) | #496 |
+| 13/11 07:00 | geste de retour livré | le retour par balayage est mergé et chez les testeurs : **1019.510** depuis 07:21 (accord d'Apple immédiat), l'ancienne 1019.498 expirée ; restent 844.344 (votre soumission) et 1019.510. Android n'a toujours rien publié depuis hier 18:06. Parité : 67 % (31/46) | #496, PR du journal |
 
 ---
 
