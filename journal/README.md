@@ -199,6 +199,7 @@ https://github.com/spreadzenox/HealthTrack-iOS/tree/captures/main
 | 13/11 10:00 | taille du texte livrée | vérifiée sur simulateur en très grand texte (onglets, barre du bas, réglages : tout tient) et mergée ; chez les testeurs depuis 10:29 (**1019.513**, l'ancienne 1019.510 expirée). Halcya suit maintenant la taille du texte réglée dans l'iPhone, comme sur Android. Android n'a toujours rien publié. Parité : 68 % (32/47) | #499 |
 | 13/11 11:00 | parité recomptée | deux lignes du tableau de parité étaient en retard : le test externe sur TestFlight (en place depuis le 9/11) compte maintenant comme fait ; la protection des crédits IA de l'iPhone est prête mais reste à essayer sur un vrai iPhone. Parité : **70 %** (33/47). Android n'a toujours rien publié | PR du journal |
 | 13/11 12:00 | attente | Android n'a toujours rien publié depuis hier 18:06 ; l'iPhone est à jour (**1019.513** chez les testeurs, avec le retour par balayage et la taille du texte). Ce qui reste à essayer demande un vrai iPhone. Parité : 70 % (33/47) | PR du journal |
+| 13/11 13:00 | attente | Rien de neuf chez Android depuis hier 18:06 ; l'iPhone est à jour (**1019.513** chez les testeurs). Parité : 70 % (33/47) | PR du journal |
 
 ---
 
